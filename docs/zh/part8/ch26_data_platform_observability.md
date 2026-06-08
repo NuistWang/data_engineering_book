@@ -670,7 +670,7 @@ Beyer 等人编写的《Site Reliability Engineering》（Google SRE Book）是 
 
 **开源数据质量工具**
 
-Great Expectations 是目前最成熟的数据质量测试框架，支持定义"数据期望"（Data Expectations）并在管线中自动运行检查，与 Airflow、dbt 等工具集成良好。Apache Griffin 是专为大数据场景设计的数据质量工具，支持批处理和流处理两种模式的质量监控。Evidently AI 是专注于 ML 数据和模型监控的开源库，提供了数据漂移检测和模型性能监控的开箱即用组件。
+Great Expectations 是目前最成熟的数据质量测试框架，支持定义"数据期望"（Data Expectations）并在管线中自动运行检查，与 Airflow、dbt 等工具集成良好。Apache Griffin 是专为大数据场景设计的数据质量工具，支持批处理和流处理两种模式的质量监控。Evidently AI 是专注于 ML 数据和模型监控的开源库，提供了可直接接入的数据漂移检测和模型性能监控组件。
 
 **事故管理工具**
 

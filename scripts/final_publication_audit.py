@@ -27,7 +27,7 @@ STYLE_PATTERNS: list[tuple[str, str]] = [
     ("weak-booster", r"真正|很容易|显然|毫无疑问"),
     ("blog-transition", r"换句话说|简单来说|说白了|最怕"),
     ("rhetorical-not-but", r"不是.{0,18}而是"),
-    ("slang", r"踩坑|搞定|一把梭|玄学|爽点|杀手锏"),
+    ("slang", r"踩坑|搞定|一把梭|玄学|爽点|杀手锏|混合面糊|面糊|数据食谱|一锅烩|深水炸弹|翻车|拉垮|拉挂|裸用|词穷|冰冷的账本题|魔咒|毁灭性|无所遁形|骨子里|联姻|极其壮烈|翻天覆地|甘于|开箱即用|小股试错|对撞实验|宣告胜利|无感热切|滚雪球式"),
 ]
 
 REVIEW_TARGETS: list[tuple[str, str, str]] = [
