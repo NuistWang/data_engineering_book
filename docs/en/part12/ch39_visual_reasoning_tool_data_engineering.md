@@ -10,6 +10,16 @@ visual reasoning; chart question answering; medical images; tool calling; ROI; m
 
 ## Case A: Multi-Chart Infographics: Cross-Chart Evidence Aggregation and Multi-Step Reasoning
 
+### Case A.0: Learning Objectives
+
+After studying this case, readers should be able to:
+
+- Distinguish the one-image, one-question paradigm of traditional single-chart VQA from the data-design requirements of real compound infographic reasoning.
+- Explain why compound infographics naturally require cross-chart data aggregation, serial multi-step calculation, and joint visual-context reasoning.
+- Understand the sample organization built from 354 native infographics and 1,917 chained subquestions, including the decision to preserve whole-image multi-subchart layouts.
+- Identify how random combinations of 23 subchart types and 13 question types increase the difficulty of cross-format data reading and multi-step reasoning.
+- Analyze typical model failures such as legend misreading, cross-chart data confusion, and cascading errors from earlier calculations.
+
 ### Case A.1: Problem Scenario: Limits of Single-Chart VQA
 
 #### Case A.1.1 Boundary of Traditional Single-Chart VQA
@@ -113,11 +123,15 @@ Q1-Q2-Q3 form a three-step cross-subchart calculation path. Q4 is visual-context
 
 #### Case A.3.3 Evidence Localization and Reasoning Path
 
+#### Case A.3.3.1 Cross-Chart Evidence Localization
+
 Evidence localization uses several rules:
 
 - **Keyword linkage:** Q1 outputs Volusia, Florida; “Florida” becomes a retrieval label for Subchart B.
 - **Region semantic matching:** “fatal,” “2018,” and “Massachusetts” match side timeline annotation rather than numeric charts.
 - **Topic-region matching:** “falling from bed” and “cat deaths” match the accidental-death chart.
+
+#### Case A.3.3.2 Full Chained Reasoning Path
 
 The full path is: Subchart A county maximum -> extract state keyword -> Subchart B ten-year state data -> extract Hawaii value -> difference calculation; side annotation for Q4; Subchart D for Q5/Q6. The model must segment subcharts, retrieve across views, store numbers, perform arithmetic, and interpret legends.
 
@@ -206,6 +220,16 @@ The project currently has annotations but no released baseline algorithm or trai
 The multi-chart infographic reasoning dataset starts from real compound infographics and breaks away from the single-chart QA paradigm. It reconstructs chart VQA evaluation around cross-chart aggregation, serial calculation, and visual-context reasoning. The structure of 354 multi-subchart images and 1,917 chained subquestions reflects how people actually read compound data visualizations. The shark-attack example shows that real infographic reasoning requires region-specific evidence retrieval, stepwise calculation, and symbol interpretation. Although the dataset currently lacks companion baselines, it fills an important benchmark gap and can support future cross-modal chart reasoning research.
 
 ## Case B: MedImage-ToolVQA: Medical Image Local Evidence and Tool-Call Trajectories
+
+### Case B.0: Learning Objectives
+
+After studying this case, readers should be able to:
+
+- Explain how medical image VQA differs from ordinary VQA in evidence scale, professional semantics, safety boundaries, and evaluation objects.
+- Understand why medical image QA should be extended from answer supervision to tool-behavior supervision, and why this matters for auditability and reinforcement-learning interfaces.
+- Describe the sample structure built from BiomedParse region-level information, including original images, ROI, masks, bounding boxes, target descriptions, and tool observations.
+- Distinguish the boundaries of tools such as zoom-in and segmentation, and explain how tool calls, parameters, and observations become multi-turn training trajectories.
+- Assess noise introduced by tool trajectories and design quality-control and human-review rules under medical privacy, compliance, and safety constraints.
 
 ### Case B.1: Medical Image VQA vs. Ordinary VQA
 
@@ -668,19 +692,17 @@ The core remains stable: define evidence objects, define tool actions, and write
 
 This chapter connects Part 3's multimodal cleaning and grounding, Part 6's Tool-Use and Agent data, Part 10's discussion of data engineering agents, Part 11's privacy and compliance boundary, and Part 13/14's training recipes and project practice. Its real topic is not only medical images, but how data engineering should record evidence, action, feedback, and risk when models actively gather visual evidence.
 
-### Case B.13: Summary
+### Case B: Summary
 
 MedImage-ToolVQA extends medical image VQA from single-step answer supervision to multi-turn supervision containing local visual evidence and tool-use behavior. It organizes ROI, mask, bbox, target description, tool observations, and multiple-choice answers into one evidence chain, so models learn not only what to answer, but how to obtain and use visual evidence.
 
 The advantage is stronger interpretability and auditability: tool parameters, observation images, and final answers can be checked together. The cost is higher data-engineering burden: each stage needs validation, each tool needs a boundary, and each derived image needs tracing and de-identification. In a high-risk setting such as medical imaging, the dataset also encodes behavioral rules: when to inspect directly, when to call tools, how to update after observation, and which answers require quality control, privacy protection, and human review.
 
-### Case B: Summary
+## Chapter Summary
 
-This chapter reviewed MedImage-ToolVQA as a specialized dataset case in large-model data engineering. Its main contribution is to place concepts, data objects, quality signals, and engineering deliverables into one narrative, so readers can distinguish which process signals need explicit recording and which outputs require sampling, evaluation, or audit.
+This chapter placed multi-chart infographic reasoning and medical-image tool calling in the same line of visual reasoning data engineering. Multi-chart infographic tasks emphasize cross-chart evidence aggregation, multi-step calculation, and question-structure control. Medical-image tool-calling tasks emphasize local evidence, tool behavior, derived observations, and audit boundaries in high-risk settings. Both cases show that the key to a visual reasoning dataset is not merely having images, questions, and answers, but organizing evidence sources, reasoning steps, tool actions, and quality controls explicitly.
 
-The method should be applied with attention to data source, business goal, model capability, cost budget, and compliance requirements. For scenarios involving sensitive information, cross-system calls, automated decisions, or public release, human review, version freezing, permission control, and exception rollback should remain part of the workflow rather than optional additions.
-
-Within the structure of this book, this chapter sits at the specialized-dataset validation layer. It connects earlier concepts to later open-model data recipes and project case studies. Readers can use its framework together with figures, references, and appendix checklists to turn the method into a reproducible, inspectable, and deliverable engineering process.
+The main method in this chapter is to decompose visual reasoning tasks into annotatable, trainable, and evaluable data interfaces. Chart-based scenarios require controlled question types, evidence chains, and calculation paths; medical scenarios require controlled regions of interest, tool parameters, observation results, and compliance review. Such structured design helps models move from passive recognition toward active evidence gathering, and it provides reusable engineering templates for VLM instruction data, agent data, and multimodal reinforcement-learning data.
 
 ## References
 

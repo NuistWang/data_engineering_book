@@ -683,6 +683,12 @@ The core contribution of SparseTable-Bench is that it transforms the problem of 
 
 When using this dataset, relying on a single overall TEDS score is insufficient. TEDS, TEDS-S, bounding box inspection, empty-cell recall, and per-mask-type error analysis should be used in combination to distinguish text errors, structural errors, and spatial errors. The value of STB is not simply providing a "harder" table dataset, but transforming the failure patterns of sparse tables into objects that are annotatable, trainable, and evaluable. For large model data engineering, the lesson of STB is this: the value of a complex document dataset comes not only from sample scale, but from whether real failure patterns have been encoded into the schema, the construction workflow, and the evaluation protocol.
 
+## Chapter Summary
+
+This chapter examined invoice and bill understanding together with sparse-table structure recovery as two branches of visual document data engineering. The former emphasizes business fields, layout evidence, and logical consistency; the latter emphasizes table topology, empty cells, occlusion robustness, and structural evaluation. Together they show that visual document datasets cannot remain at the level of image-text pairs or OCR text alone. They must encode field schemas, spatial grounding, structural constraints, failure modes, and quality audit mechanisms as part of the data design.
+
+For subsequent multimodal model training, the core lesson is that the publication-grade and production-grade value of document data depends on whether the data can reliably express traceable relationships among image regions, textual content, structural objects, and business semantics. Only when these relationships are encoded clearly can the dataset support reproducible training, interpretable evaluation, and continuous improvement in real application settings.
+
 ## References
 
 Bai, S., Chen, K., Liu, X., et al. (2025). Qwen2.5-VL Technical Report. *arXiv preprint arXiv:2502.13923*.

@@ -887,6 +887,12 @@ Latent-Switch-69K illustrates an important shift in reasoning data engineering: 
 
 This design transforms the dataset from a text collection into a training interface that includes structure, budget, masks, and quality reports. For subsequent reasoning models and RL data engineering, the value of Latent-Switch-69K lies precisely here: it turns "writing less reasoning" into an auditable, verifiable, and iterative data engineering problem.
 
+## Chapter Summary
+
+This chapter focused on interaction data and reasoning-trace data through two examples: voice style-control data and latent reasoning supervision data. The former examines how semantic content and style attributes can be separated, annotated, and evaluated in interactive settings. The latter examines how explicit CoT, compressed reasoning, latent budgets, training masks, and teacher signals jointly define a learnable reasoning interface. The shared point is that the dataset is no longer merely a set of inputs and outputs; it defines the process structure of model behavior.
+
+For data engineering of large foundation models, this chapter emphasizes three principles. First, interaction data should preserve state changes, constraints, and feedback signals. Second, reasoning-trace data should make the boundaries among visible reasoning, hidden planning, and answer supervision explicit. Third, any compressed or implicit reasoning design must be accompanied by quality reports and interpretable evaluation. Only with these conditions can datasets support a shift from generating more content to training more controllable and efficient model behavior.
+
 ## References
 
 An K, Chen Q, Deng C, Du Z, Gao C, Gao Z, Gu Y, He T, Hu H, Hu K, others (2024) FunAudioLLM: Voice Understanding and Generation Foundation Models for Natural Interaction Between Humans and LLMs. arXiv preprint arXiv:2407.04051.

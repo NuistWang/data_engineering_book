@@ -454,6 +454,21 @@ A complete filtering decision can be written with the following fields:
 
 This explicit decision record allows the team to reuse old trajectories when adjusting thresholds later. For example, the first pass selects only samples with `quality_score >= 0.85`; if more data is needed in a subsequent pass, samples scoring 0.75 to 0.85 can be re-selected without resampling all tasks.
 
+### 46.5.1 Interface Mapping to Part XIV Project 12
+
+Chapter 46 defines the theory and paradigm, while Part XIV Project 12 turns the paradigm into a runnable project. To avoid mixing the chapter explanation with the project implementation, the core objects are mapped as follows.
+
+| Chapter object | P12 asset | Interface meaning |
+| --- | --- | --- |
+| Cold-start SFT | `data/processed/cold_start_5k.jsonl`, `cold_start_summary.json` | Organizes Long-CoT seeds into first-round trainable samples |
+| Sampled traces | `data/sampled_traces/*.jsonl` | Stores `prompt_id`, `sample_idx`, `raw_trace`, and `generation_params` |
+| Verifier | `verifier_pool.py`, `data/verified_candidates/*.jsonl` | Runs math, code, and format verification and persists each candidate result |
+| Rejection sampling | `rejection_sampling.py`, `data/processed/rejection_selected_10k_30k.jsonl` | Selects high-scoring candidate traces for feedback into training |
+| Feedback interface | `merge_sft_data.py`, `merged_sft_data.jsonl`, `training_manifest.json` | Merges cold-start samples and feedback samples as second-round SFT input |
+| Evaluation loop | `eval_gsm8k_math.py`, `data/reports/eval_results_gsm8k_math.json` | Verifies pre- and post-training changes and supports rollback diagnosis |
+
+The mapping table clarifies that this chapter describes objects, relationships, and contracts, while P12 describes scripts, files, and deliverables. Once the object mapping is clear, the project can continue along the same interface even when the model, verifier, or task pool changes.
+
 ---
 
 ## 46.6 Common Failure Patterns
