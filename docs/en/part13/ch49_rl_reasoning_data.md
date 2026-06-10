@@ -1,4 +1,4 @@
-# Chapter 46: Reasoning Models and RL Data Engineering: The R1/QwQ Paradigm
+# Chapter 49: Reasoning Models and RL Data Engineering: The R1/QwQ Paradigm
 
 ## Abstract
 The previous chapter discussed SFT, preference alignment, reward models, and RLVR data interfaces in the post-training stage. This chapter moves further forward, focusing on the most significant shift in the open-source community since 2025: reasoning models no longer rely solely on manually written long chain-of-thought samples. Instead, they actively expand their reasoning trajectory space through Reinforcement Learning (RL) and verifiable rewards.
@@ -547,7 +547,7 @@ Three key conclusions emerge from this chapter.
 
 Mapping this chapter to a project implementation, the minimum deliverable is not a "reasoning model" but a set of data assets: a task pool, a verifier pool, a trajectory archive, a rejection-sampled training set, a failure sample library, and an evaluation report. The model is merely one consumption result of these assets. As long as these assets are continuously updated, the team can swap between different base models, different training algorithms, and different deployment budgets.
 
-The next chapter turns to data engineering for multimodal understanding models. Unlike text-based reasoning, multimodal models must also handle images, pages, video frames, OCR, spatial positions, and multi-image relationships. Chapter 47 will discuss how these visual inputs enter pre-training, multi-task alignment, and multimodal SFT data recipes.
+The next chapter turns to data engineering for multimodal understanding models. Unlike text-based reasoning, multimodal models must also handle images, pages, video frames, OCR, spatial positions, and multi-image relationships. Chapter 50 will discuss how these visual inputs enter pre-training, multi-task alignment, and multimodal SFT data recipes.
 
 ## References
 

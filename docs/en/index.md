@@ -144,17 +144,20 @@ This part uses representative specialized datasets to show how data engineering 
 - [Chapter 41: MedImage-ToolVQA Medical Image Tool-Use VQA Data Engineering](part12/ch41_medimage_tool_vqa_dataset.md)
 - [Chapter 42: VoiceStyleControl Controllable Voice Interaction Data Engineering](part12/ch42_voice_style_control_dataset.md)
 - [Chapter 43: Latent-Switch-69K Implicit/Explicit Reasoning Data Engineering](part12/ch43_latent_switch_69k.md)
+- [Chapter 44: FineWeb Pre-training Corpus Data Engineering](part12/ch44_fineweb_redpajama_dclm.md)
+- [Chapter 45: Dolma Pre-training Corpus Transparent Ledger](part12/ch45_dolma_olmo_transparent_corpus.md)
+- [Chapter 46: LAION-5B Image-Text Candidate Pool and Filtering Channels](part12/ch46_laion_datacomp_image_text.md)
 
 ## Part 13: Open-Source Large-Model Data Engineering Recipes and Paradigms
 
 This part focuses on data recipes, training paradigms, and engineering organization for open-source large models, covering pre-training, post-training, reasoning RL, VLMs, and T2I/T2V generation.
 
 - [Part Contents](part13/index.md)
-- [Chapter 44: LLM Pre-training Data Engineering in Practice: From Recipes to Delivery](part13/ch44_pretrain_recipes.md)
-- [Chapter 45: LLM Post-training Data Engineering: SFT and Preference Alignment](part13/ch45_posttrain_recipes.md)
-- [Chapter 46: Reasoning Models and RL Data Engineering: R1 / QwQ Paradigms](part13/ch46_rl_reasoning_data.md)
-- [Chapter 47: VLM Data Recipes: From Pre-training to Visual Alignment](part13/ch47_vlm_data_recipes.md)
-- [Chapter 48: Multimodal Generative Model Data Engineering: T2I and T2V Data Pipelines](part13/ch48_t2i_t2v.md)
+- [Chapter 47: LLM Pre-training Data Engineering in Practice: From Recipes to Delivery](part13/ch47_pretrain_recipes.md)
+- [Chapter 48: LLM Post-training Data Engineering: SFT and Preference Alignment](part13/ch48_posttrain_recipes.md)
+- [Chapter 49: Reasoning Models and RL Data Engineering: R1 / QwQ Paradigms](part13/ch49_rl_reasoning_data.md)
+- [Chapter 50: VLM Data Recipes: From Pre-training to Visual Alignment](part13/ch50_vlm_data_recipes.md)
+- [Chapter 51: Multimodal Generative Model Data Engineering: T2I and T2V Data Pipelines](part13/ch51_t2i_t2v.md)
 
 ## Part 14: Hands-on Projects
 

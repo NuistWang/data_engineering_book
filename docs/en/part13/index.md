@@ -14,11 +14,11 @@ Throughout this part, "data recipe" is used consistently to describe the combina
 
 ## Table of Contents for This Part
 
-- [Chapter 44: LLM Pretraining Data Engineering in Practice: From Recipe to Production](ch44_pretrain_recipes.md)
-- [Chapter 45: LLM Post-Training Data Engineering in Practice: SFT and Preference Alignment](ch45_posttrain_recipes.md)
-- [Chapter 46: Reasoning Models and RL Data Engineering: The R1 / QwQ Paradigm](ch46_rl_reasoning_data.md)
-- [Chapter 47: Multimodal Large Model (VLM) Data Recipes: From Pretraining to Visual Alignment](ch47_vlm_data_recipes.md)
-- [Chapter 48: Generative Multimodal Model Data Engineering: T2I and T2V Data Pipelines](ch48_t2i_t2v.md)
+- [Chapter 47: LLM Pretraining Data Engineering in Practice: From Recipe to Production](ch47_pretrain_recipes.md)
+- [Chapter 48: LLM Post-Training Data Engineering in Practice: SFT and Preference Alignment](ch48_posttrain_recipes.md)
+- [Chapter 49: Reasoning Models and RL Data Engineering: The R1 / QwQ Paradigm](ch49_rl_reasoning_data.md)
+- [Chapter 50: Multimodal Large Model (VLM) Data Recipes: From Pretraining to Visual Alignment](ch50_vlm_data_recipes.md)
+- [Chapter 51: Generative Multimodal Model Data Engineering: T2I and T2V Data Pipelines](ch51_t2i_t2v.md)
 
 ## Recipe Paradigms
 
@@ -34,6 +34,6 @@ T2I/T2V recipes focus on images, video, captions, motion information, quality sc
 
 ## Recommended Reading Order
 
-It is recommended to read Chapters 44 and 45 first to establish baseline data recipes for pretraining and post-training, then proceed to Chapter 46 to understand the divergence between reasoning models and RL data engineering, and finally read Chapters 47 and 48 to enter the data recipes for VLMs and generative multimodal models.
+It is recommended to read Chapters 47 and 48 first to establish baseline data recipes for pretraining and post-training, then proceed to Chapter 49 to understand the divergence between reasoning models and RL data engineering, and finally read Chapters 50 and 51 to enter the data recipes for VLMs and generative multimodal models.
 
 For further reproduction work, readers may proceed to Part XIV (P11–P15) and cross-reference the recipes abstracted in this part against the resource constraints, acceptance metrics, and failure patterns found in the project case studies.

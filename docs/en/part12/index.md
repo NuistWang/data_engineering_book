@@ -20,6 +20,9 @@ Throughout this part, "specialized dataset" consistently refers to data assets c
 - [Chapter 41: MedImage-ToolVQA Medical Image Tool-Calling Data Engineering](ch41_medimage_tool_vqa_dataset.md)
 - [Chapter 42: VoiceStyleControl Controllable Speech Interaction Data Engineering](ch42_voice_style_control_dataset.md)
 - [Chapter 43: Latent-Switch-69K Implicit/Explicit Reasoning Data Engineering](ch43_latent_switch_69k.md)
+- [Chapter 44: FineWeb Pre-training Corpus Data Engineering](ch44_fineweb_redpajama_dclm.md)
+- [Chapter 45: Dolma Pre-training Corpus Transparent Ledger](ch45_dolma_olmo_transparent_corpus.md)
+- [Chapter 46: LAION-5B Image-Text Candidate Pool and Filtering Channels](ch46_laion_datacomp_image_text.md)
 
 ## Reading Order
 
@@ -28,6 +31,8 @@ Chapters 38 through 40 revolve around visual documents, sparse tables, and compo
 Chapters 41 and 42 move into medical image tool-calling and controllable speech interaction respectively, and are best connected with Part VI's Agent data, Part X's Data Engineering Agent, and Part XI's privacy compliance.
 
 Chapter 43 concludes with implicit/explicit reasoning switching and reasoning trace compression, leading naturally into Part XIII's reasoning models, RL data engineering, and the R1 reasoning flywheel case study in Part XIV.
+
+Chapters 44 through 46 shift to industry-scale data engineering datasets and open data assets. FineWeb, Dolma, and LAION/DataComp are read as production-facing references for source transparency, processing manifests, license boundaries, filtering protocols, and public release forms.
 
 ## Unified Review Criteria
 
