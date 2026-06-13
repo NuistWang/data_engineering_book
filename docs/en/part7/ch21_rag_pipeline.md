@@ -1,5 +1,7 @@
 # Chapter 21: The RAG Data Pipeline
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Chapter Abstract
 
 The quality ceiling of a retrieval-augmented generation (RAG) system is often fixed by the upstream data-processing chain before the query ever reaches the model. This chapter reframes RAG as a document engineering problem: the system does not operate on raw documents, but on data representations that have been parsed, cleaned, structured, and chunked. Information loss in any stage is amplified downstream. The chapter follows the actual data pipeline: it first argues that RAG is grounded in document engineering rather than terminal generation; then explains stable multi-source knowledge ingestion, heterogeneous format parsing, and structured cleaning; then discusses how knowledge units become multi-route retrieval infrastructure combining vectors, keywords, structured fields, and parent-child hierarchy; then builds evaluation, error attribution, feedback, and knowledge-update loops for the whole chain; and finally uses an enterprise complex-document case and engineering checklist to show how these methods converge into a traceable, verifiable, deliverable production pipeline.

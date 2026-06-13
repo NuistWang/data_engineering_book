@@ -1,5 +1,7 @@
 # Appendix E: Common Data-Engineering Bug Debugging Manual
 
+<div class="chapter-authors">ZhiLi Wang</div>
+
 ## E.1 Purpose of This Appendix
 
 This appendix addresses one of the most common and time-consuming problem types in data engineering: the pipeline "looks right," but the result is wrong. It is not a generic incident catalog. It is a debugging manual written for the context of this book, helping readers turn common problems from experience-driven troubleshooting into objects that can be located, classified, and regression-tested.

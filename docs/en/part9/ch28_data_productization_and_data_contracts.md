@@ -1,5 +1,7 @@
 # Chapter 28: Data Productization and Data Contracts
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Chapter Abstract
 
 A dataset registered in a catalog may still have field semantics changed silently upstream or stop updating, and those changes can be amplified along the data chain into model degradation or online incidents. This chapter explains how to upgrade data from static datasets into data products that consumers can rely on over time, and how to use data contracts to constrain the rights and obligations of producers and consumers. It first draws on data mesh thinking and introduces a data product canvas covering inputs, outputs, service-level agreement (SLA), owner, and change policy. It then decomposes contracts into five machine-readable, verifiable, versioned clauses: schema, quality, freshness, privacy, and compatibility, while defining bidirectional responsibility boundaries. Next, it discusses change-compatibility categories and consumer governance, showing how field changes, distribution drift, index rebuilds, and evaluation-set refreshes can evolve through advance notice and canary validation. Finally, it reviews an incident in which splitting the `interaction_type` enum caused both training and retrieval degradation, showing how schema validation, distribution monitoring, and versioned rollback can catch silent failures before release.

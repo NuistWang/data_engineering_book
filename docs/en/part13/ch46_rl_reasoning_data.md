@@ -1,5 +1,7 @@
 # Chapter 46: Reasoning Models and RL Data Engineering: The R1/QwQ Paradigm
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## Abstract
 The previous chapter discussed SFT, preference alignment, reward models, and RLVR data interfaces in the post-training stage. This chapter moves further forward, focusing on the most significant shift in the open-source community since 2025: reasoning models no longer rely solely on manually written long chain-of-thought samples. Instead, they actively expand their reasoning trajectory space through Reinforcement Learning (RL) and verifiable rewards.
 

@@ -1,5 +1,7 @@
 # Chapter 24: The DataOps Flywheel and Team Organization
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ---
 
 ## Abstract

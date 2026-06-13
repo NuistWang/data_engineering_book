@@ -1,5 +1,7 @@
 # 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线
 
+<div class="chapter-authors">徐鑫（Xin Xu）</div>
+
 ## 摘要
 P01 聚焦从 Common Crawl shard 构建 Mini-C4 训练数据集的工程过程。章节重点不在单次抓取结果，而在把网页归档、正文抽取、去重过滤、训练封装和结果验证组织成一条可复现的数据生产线。
 

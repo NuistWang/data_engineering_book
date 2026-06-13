@@ -1,5 +1,7 @@
 # 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐
 
+<div class="chapter-authors">徐鑫（Xin Xu）</div>
+
 ## 摘要
 
 监督微调（Supervised Fine-Tuning，SFT）与偏好对齐（Preference Alignment）是大语言模型（Large Language Model，LLM）后训练阶段的两个核心数据工程入口，但二者承担的目标截然不同：前者通过极大似然估计（Maximum Likelihood Estimation，MLE）为模型建立行为模板，后者通过 chosen/rejected 对比信号塑造模型的奖励曲面。本章以"配方"视角拆解开源模型的后训练数据工程实践。内容首先提出 SFT、偏好对齐与在线持续优化的三段论流水线，界定各层的数据形状、优化目标与 manifest 治理要求；继而以 Tülu-3、Llama-3、Qwen2.5 与 Nemotron-4/HelpSteer2 为代表横向对照后训练数据的透明度与规模，并区分直接披露、合理推断与教学估算三类信息可信度；随后比较 Self-Instruct、Evol-Instruct 与 Magpie 三类指令合成流派在种子依赖、难度校准与分布过滤上的工程差异，并延伸至拒绝采样（Rejection Sampling，RS）、奖励模型（Reward Model，RM）与直接偏好优化等范式的数据生产方法。本章强调后训练数据工程的成熟度不在于产出样本，而在于每条样本能否追溯来源、隔离评测、说明用途并支持回滚。

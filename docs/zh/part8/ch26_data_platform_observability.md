@@ -1,5 +1,7 @@
 # 第26章：数据平台可观测性
 
+<div class="chapter-authors">杜文卓（Wenzhuo Du）</div>
+
 ---
 
 ## 摘要

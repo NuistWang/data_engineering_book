@@ -1,5 +1,7 @@
 # Project 8: Building an Enterprise DataOps Platform: From Data Projects to Organizational Governance
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## Abstract
 
 P08 focuses on turning scattered data-engineering actions into DataOps platform capabilities that are governable, traceable, reversible, and measurable.

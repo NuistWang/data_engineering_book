@@ -1,5 +1,7 @@
 # Chapter 35: Security, Permissions, and Human-AI Collaboration for Data Engineering Agents
 
+<div class="chapter-authors">ZhiLi Wang</div>
+
 ## Chapter Abstract
 
 As agents receive more autonomy to call tools, modify data, trigger pipelines, and generate rules, security stops being an optional enhancement. It becomes core infrastructure. One unauthorized tool call can pollute terabytes of training data in seconds. One hidden prompt injection instruction inside a PDF can cause unpredictable behavior. One unaudited operation can leave compliance teams with no traceable evidence.

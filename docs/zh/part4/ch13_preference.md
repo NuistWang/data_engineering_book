@@ -1,5 +1,6 @@
-
 # 第13章：偏好数据与奖励信号
+
+<div class="chapter-authors">张然（Ran Zhang）</div>
 
 ## 摘要
 

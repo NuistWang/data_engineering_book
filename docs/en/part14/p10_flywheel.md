@@ -1,5 +1,7 @@
 # Project 10: End-to-End LLM Data Flywheel
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## Abstract
 
 P10 focuses on organizing data, supervision, training, applications, platform governance, and feedback reflux into a continuously operating end-to-end LLM data flywheel.

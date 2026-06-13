@@ -1,5 +1,7 @@
 # Chapter 32: Automated Collection, Parsing, and Cleaning Agents
 
+<div class="chapter-authors">ZhiLi Wang</div>
+
 ## Chapter Abstract
 
 The most tedious and time-consuming work in data engineering often happens at the moment data enters the system: how to collect it, how to handle unusual formats during parsing, who maintains cleaning rules, and who decides whether quality is acceptable. When data sources grow from dozens to hundreds, manual collection strategies and cleaning rules collapse. Rule-maintenance backlogs grow without bound, or quality gates become decorative.

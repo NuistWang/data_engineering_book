@@ -1,5 +1,7 @@
 # Chapter 38: Visual Document and Structured Table Data Engineering
 
+<div class="chapter-authors">Guanjun Liu; Yuefeng Zou</div>
+
 ## Abstract
 
 This chapter discusses how visual documents become trainable, evaluable, and auditable data objects from images, layouts, tables, and business fields through two specialized cases: invoice document understanding and sparse table structure recognition. StructBill-CN emphasizes high-risk bill fields, hierarchical JSON, and arithmetic consistency, while SparseTable-Bench emphasizes table topology, empty cells, and structural robustness. Together they show that visual document data engineering is not merely OCR; it binds page structure, business semantics, and evaluation protocols into stable sample schemas.

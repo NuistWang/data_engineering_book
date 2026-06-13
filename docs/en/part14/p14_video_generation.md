@@ -1,5 +1,7 @@
 # Project 14: Video Generation Dataset — From Video Sources to a T2V-Training-Ready Data Pipeline
 
+<div class="chapter-authors">Ran Zhang</div>
+
 ## Abstract
 
 This project constructs a reproducible data engineering case study around "Video Generation Dataset: From Video Sources to a T2V-Training-Ready Data Pipeline," with emphasis on business objectives, data boundaries, architectural decisions, core implementation, acceptance metrics, and risk controls. Installation commands and script details are consolidated into an engineering retrospective perspective, highlighting the relationships among sample schemas, data flows, failure modes, and deliverables — helping readers translate the methods presented earlier in this book into auditable, extensible project assets.

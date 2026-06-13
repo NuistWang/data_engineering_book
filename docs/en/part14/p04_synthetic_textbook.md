@@ -1,5 +1,7 @@
 # Project 4: Synthetic Mathematics and Code Textbook Factory
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## Abstract
 P04 focuses on organizing mathematics problems, coding problems, and programmatic solution processes into trainable, verifiable, and packageable textbook-grade data assets. The chapter emphasis is not on single-instance problem generation, but on the engineering closed loop among generation, execution validation, textbook organization, and training interfaces.
 

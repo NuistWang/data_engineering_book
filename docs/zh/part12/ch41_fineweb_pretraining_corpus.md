@@ -1,5 +1,7 @@
 # 第41章：FineWeb 预训练语料数据工程
 
+<div class="chapter-authors">穆冠霖（Guanlin Mu）</div>
+
 ## 摘要
 
 FineWeb 是 Hugging Face 团队基于 Common Crawl 构建的大规模英文 Web 预训练语料。它的价值不只在于规模，而在于把“如何把网页快照变成训练数据”这件事拆成了可复现的工程链路：从 WARC 原始网页读取、URL 风险过滤、Trafilatura 正文抽取、FastText 语言识别、Gopher/C4/FineWeb 质量过滤，到按 crawl 独立 MinHash 去重、PII 格式化和版本发布。FineWeb 论文同时公开了处理代码、DataTrove 处理库和消融模型，使数据处理选择可以被训练结果回验，而不是停留在人工抽检或经验判断上。

@@ -1,5 +1,7 @@
 # Chapter 40: Interaction Control and Reasoning Trace Data Engineering
 
+<div class="chapter-authors">Fengxin Chen; Xuan Li</div>
+
 ## Abstract
 
 This chapter combines controllable voice interaction and implicit/explicit reasoning traces into one specialized-dataset chapter. VoiceStyleControl focuses on dual-channel supervision for semantic content and voice style, while Latent-Switch-69K focuses on long-CoT compression, latent placeholders, and supervision masks. Together they show that interaction-oriented data engineering must preserve not only inputs and outputs, but also control variables, hidden states, and verifiable boundaries.
