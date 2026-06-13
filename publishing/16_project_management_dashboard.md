@@ -59,12 +59,12 @@
 | Ch35 | 第十篇：智能化数据工程与 Data Engineering Agent | 第35章：数据工程 Agent 的安全、权限与人机协同 | `docs/zh/part10/ch35_security_permission_collaboration.md` | 已补摘要/关键词 | 已补 | 3 图 / 6 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
 | Ch36 | 第十一篇：隐私合规与数据安全 | 第36章：数据合规框架与治理 | `docs/zh/part11/ch36_compliance_framework_and_governance.md` | 已补摘要/关键词 | 已补 | 8 图 / 0 表；已入台账 | 常规终稿复核 | 可交付 | 常规 | 终稿抽检语言、图源、alt text 与代码长度 |
 | Ch37 | 第十一篇：隐私合规与数据安全 | 第37章：联邦学习与隐私保护技术 | `docs/zh/part11/ch37_federated_learning_and_privacy_preserving_technologies.md` | 已补摘要/关键词 | 已补 | 12 图 / 0 表；已入台账 | 常规终稿复核 | 可交付 | 常规 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch38 | 第十二篇：专项数据集与数据工程实践 | 第38章：StructBill-CN 票据文档理解数据工程 | `docs/zh/part12/ch38_structbill_cn_dataset.md` | 已补摘要/关键词 | 已补 | 0 图 / 3 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch39 | 第十二篇：专项数据集与数据工程实践 | 第39章：SparseTable-Bench 表格结构鲁棒性数据工程 | `docs/zh/part12/ch39_sparse_table_bench_dataset.md` | 已补摘要/关键词 | 已补 | 3 图 / 0 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch40 | 第十二篇：专项数据集与数据工程实践 | 第40章：多图表信息图推理数据工程 | `docs/zh/part12/ch40_multi_chart_infographic_reasoning_dataset.md` | 已补摘要/关键词 | 已补 | 5 图 / 0 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch41 | 第十二篇：专项数据集与数据工程实践 | 第41章：MedImage-ToolVQA 医学图像工具调用数据工程 | `docs/zh/part12/ch41_medimage_tool_vqa_dataset.md` | 已补摘要/关键词 | 已补 | 5 图 / 0 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch42 | 第十二篇：专项数据集与数据工程实践 | 第42章：VoiceStyleControl 可控语音交互数据工程 | `docs/zh/part12/ch42_voice_style_control_dataset.md` | 已补摘要/关键词 | 已补 | 3 图 / 4 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
-| Ch43 | 第十二篇：专项数据集与数据工程实践 | 第43章：Latent-Switch-69K 隐式/显式推理数据工程 | `docs/zh/part12/ch43_latent_switch_69k.md` | 已补摘要/关键词 | 已补 | 5 图 / 0 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch38 | 第十二篇：专项数据集与多模态数据工程实践 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | `docs/zh/part12/ch38_text_corpora_transparent_ledger.md` | 已补摘要/关键词 | 已补 | 4 图 / 表格随正文保留；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch39 | 第十二篇：专项数据集与多模态数据工程实践 | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md` | 已补摘要/关键词 | 已补 | 2 图 / 表格随正文保留；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch40 | 第十二篇：专项数据集与多模态数据工程实践 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | `docs/zh/part12/ch40_visual_document_table_data_engineering.md` | 已补摘要/关键词 | 已补 | 6 图 / 3 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch41 | 第十二篇：专项数据集与多模态数据工程实践 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 已补摘要/关键词 | 已补 | 9 图 / 表格随正文保留；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch42 | 第十二篇：专项数据集与多模态数据工程实践 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 已补摘要/关键词 | 已补 | 3 图 / 4 表；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
+| Ch43 | 第十二篇：专项数据集与多模态数据工程实践 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 已补摘要/关键词 | 已补 | 5 图 / 表格随正文保留；已入台账 | 高优先级复核 | 可交付 | 高 | 终稿抽检语言、图源、alt text 与代码长度 |
 | Ch44 | 第十三篇：开源大模型数据工程配方与范式 | 第44章：LLM 预训练数据工程实战：从配方到落地 | `docs/zh/part13/ch44_pretrain_recipes.md` | 已补摘要/关键词 | 已补 | 5 图 / 5 表；已入台账 | 常规终稿复核 | 可交付 | 常规 | 终稿抽检语言、图源、alt text 与代码长度 |
 | Ch45 | 第十三篇：开源大模型数据工程配方与范式 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | `docs/zh/part13/ch45_posttrain_recipes.md` | 已补摘要/关键词 | 已补 | 3 图 / 3 表；已入台账 | 常规终稿复核 | 可交付 | 常规 | 终稿抽检语言、图源、alt text 与代码长度 |
 | Ch46 | 第十三篇：开源大模型数据工程配方与范式 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | `docs/zh/part13/ch46_rl_reasoning_data.md` | 已补摘要/关键词 | 已补 | 3 图 / 2 表；已入台账 | 常规终稿复核 | 可交付 | 常规 | 终稿抽检语言、图源、alt text 与代码长度 |

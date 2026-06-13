@@ -119,17 +119,7 @@ This chapter uses DataAgent as a reference for how the six-layer architecture la
 
 Task boundaries must be constrained through layering. Each layer owns one type of responsibility, communicates through structured protocols, and does not share internal mutable state with other layers. Multi-agent conversation frameworks and surveys of autonomous agents both emphasize that complex agent systems need role separation, message protocols, and state isolation to reduce runaway risk (Wu et al. 2023; Wang et al. 2023; Xi et al. 2023).
 
-```mermaid
-flowchart LR
-    U["User intent / data event"] --> P["Planner<br/>task decomposition and risk estimation"]
-    P --> E["Tool Executor<br/>tool registry and safe calls"]
-    E --> V["Verifier<br/>format, statistical, semantic checks"]
-    V -->|low risk pass| L["Lineage<br/>operation audit and lineage records"]
-    V -->|medium/high risk or block| H["Human Gate<br/>approval, escalation, rollback decision"]
-    H --> E
-    L --> M["Memory<br/>state, experience, preference persistence"]
-    M --> P
-```
+![Six-layer architecture for data engineering agents](../../images/part10/ai_agent_decision_workflow_ch31_01.png)
 
 *Figure 31-1: Six-layer architecture for data engineering agents*
 
@@ -341,18 +331,7 @@ The following steps must retain human review at any automation level:
 
 ### 31.3.3 Human-AI Collaboration Flow
 
-```mermaid
-flowchart LR
-    T["Agent generates operation plan"] --> R{"Risk level"}
-    R -->|L1 read-only suggestion| S["Output recommendation<br/>human decides"]
-    R -->|L2 low-risk write| D["Generate diff report<br/>single-person confirmation"]
-    R -->|L3 high-risk change| A["Sandbox validation<br/>multi-person approval"]
-    R -->|L4 bounded autonomy| X["Automatic execution<br/>post-hoc sampling"]
-    D --> L["Write to Lineage"]
-    A --> L
-    X --> L
-    L --> O["Audit, rollback, retrospective"]
-```
+![Human-AI collaboration flow by risk level](../../images/part10/ai_agent_decision_workflow_ch31_02.png)
 
 *Figure 31-2: Human-AI collaboration flow by risk level*
 

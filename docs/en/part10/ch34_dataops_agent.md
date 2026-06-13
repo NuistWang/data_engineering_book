@@ -49,16 +49,7 @@ The on-call engineer wakes up and starts checking alerts one by one. The alerts 
 
 The first capability of a DataOps Agent is intelligent alert aggregation. The agent reads four data categories and turns scattered alerts into root-cause candidates.
 
-```mermaid
-flowchart LR
-    M["Metrics"] --> A["Alert aggregation"]
-    L["Logs"] --> A
-    G["Lineage graph"] --> A
-    C["Change records"] --> A
-    A --> R["Root cause candidates"]
-    R --> E["Evidence package"]
-    E --> H["Engineer verification<br/>or repair suggestion"]
-```
+![Alert-to-root-cause agent flow](../../images/part10/ai_agent_decision_workflow_ch34_01.png)
 
 *Figure 34-1: Alert-to-root-cause agent flow*
 
@@ -150,18 +141,7 @@ Rollback plan generation:
 
 Rollback is high risk and requires approval.
 
-```mermaid
-flowchart TD
-    I["Confirmed data issue"] --> A["Impact analysis"]
-    A --> C["Rollback candidates"]
-    C --> D{"Risk level"}
-    D -->|Low| O["Owner review"]
-    D -->|High| M["Multi-level approval"]
-    O --> X["Execute repair or rollback"]
-    M --> X
-    X --> V["Consistency validation"]
-    V --> N["Notify downstream consumers"]
-```
+![Rollback approval workflow](../../images/part10/ai_agent_decision_workflow_ch34_02.png)
 
 *Figure 34-2: Rollback approval workflow*
 
@@ -193,19 +173,7 @@ Self-healing is bounded. The agent may only execute operations in a predefined s
 | Field-level data repair | Automatic | Approval | Approval | Not allowed |
 | Scale compute resources | Automatic with quota | Approval | Approval | Approval |
 
-```mermaid
-flowchart TD
-    F["Pipeline failure detected"] --> K{"Known failure pattern?"}
-    K -->|No| H["Escalate to human"]
-    K -->|Yes| S{"Inside safe operation set?"}
-    S -->|No| H
-    S -->|Yes| R{"Data level permits auto action?"}
-    R -->|Yes| A["Run bounded self-healing action"]
-    R -->|No| P["Request approval"]
-    A --> V["Verify recovery"]
-    V -->|success| L["Write knowledge base"]
-    V -->|fail| H
-```
+![Pipeline self-healing decision flow](../../images/part10/ai_agent_decision_workflow_ch34_03.png)
 
 *Figure 34-3: Pipeline self-healing decision flow*
 

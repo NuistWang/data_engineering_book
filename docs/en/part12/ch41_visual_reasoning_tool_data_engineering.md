@@ -1,4 +1,4 @@
-# Chapter 39: Visual Reasoning and Tool-Calling Data Engineering
+# Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories
 
 <div class="chapter-authors">Lin Xu; Xinyu Chen</div>
 
@@ -63,9 +63,9 @@ The dataset samples across 28 vertical fields covering public life, industry, re
 
 Multi-domain design reduces overfitting to a single theme. Chart conventions, legends, and domain abbreviations differ across fields, raising the difficulty of visual-context reasoning.
 
-![Figure 39-1: Domain distribution in the multi-chart infographic reasoning dataset](../../images/part12/ch39_01_domain_distribution_en.png)
+![Figure 41-1: Domain distribution in the multi-chart infographic reasoning dataset](../../images/part12/ch39_01_domain_distribution_en.png)
 
-*Figure 39-1. Distribution of domain coverage in the Multi-Chart Infographic Reasoning Dataset, spanning 28 fine-grained domains.*
+*Figure 41-1. Distribution of domain coverage in the Multi-Chart Infographic Reasoning Dataset, spanning 28 fine-grained domains.*
 
 #### Case A.2.3 Chart Types and Layout Features
 
@@ -73,9 +73,9 @@ The dataset contains more than 20 common visualization styles, including bar cha
 
 Each infographic uses whatever mixed layout the original creator used, such as “map + tabular + stacked bar + pictogram” or “pie + ranking card + line.” Different chart types store data differently: tables use rows and columns, maps use geographic regions, pictograms use icon counts, and line charts use temporal sequences. The model must adapt reading rules across formats and then aggregate across them.
 
-![Figure 39-2: Chart type distribution](../../images/part12/ch39_02_chart_type_distribution_en.png)
+![Figure 41-2: Chart type distribution](../../images/part12/ch39_02_chart_type_distribution_en.png)
 
-*Figure 39-2. Distribution of sub-chart types in the Multi-Chart Infographic Reasoning Dataset, covering 23 distinct chart categories.*
+*Figure 41-2. Distribution of sub-chart types in the Multi-Chart Infographic Reasoning Dataset, covering 23 distinct chart categories.*
 
 #### Case A.2.4 Question Types
 
@@ -83,9 +83,9 @@ The subquestions are not limited to one extraction style. They cover 17 mainstre
 
 Questions within one infographic are randomly mixed across types, creating chains such as “maximum lookup + difference calculation + conditional reasoning” or “counting + ratio calculation + visual reasoning.” Extraction questions focus on reading; calculation questions combine multiple values; conditional questions use legends and filters; visual questions use symbols and visual context.
 
-![Figure 39-3: Question type distribution](../../images/part12/ch39_03_question_type_distribution_en.png)
+![Figure 41-3: Question type distribution](../../images/part12/ch39_03_question_type_distribution_en.png)
 
-*Figure 39-3. Distribution of sub-question types in the Multi-Chart Infographic Reasoning Dataset, comprising 13 question categories.*
+*Figure 41-3. Distribution of sub-question types in the Multi-Chart Infographic Reasoning Dataset, comprising 13 question categories.*
 
 #### Case A.2.5 Standardized Core Tasks
 
@@ -101,9 +101,9 @@ The dataset's shark-attack example illustrates subchart partitioning, question c
 
 #### Case A.3.1 Physical Layers of One Compound Infographic
 
-![Figure 39-4: Shark-attack compound infographic example](../../images/part12/ch39_04_shark_attack_infographic.jpg)
+![Figure 41-4: Shark-attack compound infographic example](../../images/part12/ch39_04_shark_attack_infographic.jpg)
 
-*Figure 39-4. Example of a multi-chart infographic sample from the dataset (Shark Attacks).*
+*Figure 41-4. Example of a multi-chart infographic sample from the dataset (Shark Attacks).*
 
 The example is one integrated science infographic. Its internal regions belong to different chart types, statistical scopes, and data dimensions, while sharing the page title and side annotations:
 
@@ -147,9 +147,9 @@ Each infographic includes one question that cannot be answered from the image, s
 
 The dataset construction process has four core stages: collecting and filtering real compound infographics, manually partitioning subchart regions, designing layered question chains, and cross-checking answers. No synthetic charts are generated. Large models can help propose questions, but humans verify and revise them.
 
-![Figure 39-5: Multi-chart infographic dataset construction pipeline](../../images/part12/ch39_05_multichart_dataset_pipeline_en.png)
+![Figure 41-5: Multi-chart infographic dataset construction pipeline](../../images/part12/ch39_05_multichart_dataset_pipeline_en.png)
 
-*Figure 39-5. Overview of the four-stage data construction pipeline for the Multi-Chart Infographic Reasoning Dataset.*
+*Figure 41-5. Overview of the four-stage data construction pipeline for the Multi-Chart Infographic Reasoning Dataset.*
 
 #### Case A.4.1 Collecting and Filtering Real Infographics
 
@@ -439,9 +439,9 @@ writer.commit()
 train_ds = ds.MindDataset("tool_sft.mindrecord").shuffle(4096).batch(8)
 ```
 
-![Figure 39-6: MedImage-ToolVQA conceptual construction flow](../../images/part12/ch39_06_medimage_tool_vqa_pipeline_en.svg)
+![Figure 41-6: MedImage-ToolVQA conceptual construction flow](../../images/part12/ch41_02_medimage_tool_vqa_pipeline_en.svg)
 
-*Figure 39-2: Conceptual construction flow for MedImage-ToolVQA. The key point is not script order, but how the evidence chain and behavior chain are preserved across stages.*
+*Figure 41-6: Conceptual construction flow for MedImage-ToolVQA. The key point is not script order, but how the evidence chain and behavior chain are preserved across stages.*
 
 The first stage is region-sample organization. Region-level results from medical image parsing tools need to be merged, deduplicated, and normalized. A single medical image may contain multiple candidate regions, and the same region may appear repeatedly in different intermediate results. Data engineering should deduplicate by region identifier rather than simply by image identifier; otherwise, multiple findings or structures in the same image may be mistakenly removed.
 
@@ -481,9 +481,9 @@ Tool boundaries must also be stated clearly in system prompts and dataset docume
 
 The core of a tool trajectory is multi-turn structure. It is not a matter of writing a tool call into the same text paragraph; it separates the tool action from the tool observation so the model experiences an "act, observe, continue judging" process during training (Yao et al. 2023).
 
-![Figure 39-7: Multi-turn structure of tool-call trajectories](../../images/part12/ch39_07_tool_trajectory_structure_en.svg)
+![Figure 41-7: Multi-turn structure of tool-call trajectories](../../images/part12/ch41_03_tool_trajectory_structure_en.svg)
 
-*Figure 39-3: Multi-turn structure of a tool-call trajectory. Tool observations return as new image inputs; the model must continue reasoning from the observation image rather than merely produce a formally correct call.*
+*Figure 41-7: Multi-turn structure of a tool-call trajectory. Tool observations return as new image inputs; the model must continue reasoning from the observation image rather than merely produce a formally correct call.*
 
 A simplified trajectory has four steps. The user provides the original image, question, and options. The assistant decides local evidence is needed and outputs a structured tool call. The environment returns a new observation image. The assistant uses both original and observation images to answer.
 
@@ -558,9 +558,9 @@ In SFT, clarity and stability matter most. The model must learn that `<tool_call
 
 Medical image SFT records should also keep an imaging-task schema. Here “diagnosis” means structuring the training task, candidate labels, evidence region, and safety boundary; it does not ask the model to provide clinical conclusions.
 
-![Figure 39-8: Real image and bbox evidence in the SFT schema](../../images/part12/ch39_08_sft_bbox_evidence_en.svg)
+![Figure 41-8: Real image and bbox evidence in the SFT schema](../../images/part12/ch41_05_sft_schema_real_bbox_example_en.svg)
 
-*Figure 39-5: Bbox is a structured field and should be recoverable as reviewable visual evidence.*
+*Figure 41-8: Bbox is a structured field and should be recoverable as reviewable visual evidence.*
 
 Image source: VQA-RAD test split, Hugging Face dataset [flaviagiammarino/vqa-rad](https://huggingface.co/datasets/flaviagiammarino/vqa-rad), [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/). The figure is a resampled derived image used to illustrate correspondence among original image, bbox overlay, and local crop.
 
@@ -693,9 +693,9 @@ These failure modes show that tool-use data quality is not determined by answer 
 
 Quality control for medical image tool-use data should be layered, rather than postponed until final packaging. A more reasonable approach is to set gates separately at question generation, region validation, tool-observation generation, trajectory synthesis, and training packaging.
 
-![Figure 39-9: Quality-control and human-review gates](../../images/part12/ch39_09_quality_review_gate_en.svg)
+![Figure 41-9: Quality-control and human-review gates](../../images/part12/ch41_04_quality_review_gate_en.svg)
 
-*Figure 39-4: Quality-control and human-review gates. Medical image tool-use data needs to check answer, evidence, and behavior together; automated validation and human review should complement each other.*
+*Figure 41-9: Quality-control and human-review gates. Medical image tool-use data needs to check answer, evidence, and behavior together; automated validation and human review should complement each other.*
 
 The first layer is **structure validation**: prompt, options, answer, image references, region fields, and tool parameters must be complete and parseable. Tool names must come from a whitelist; bbox coordinates must be in bounds.
 

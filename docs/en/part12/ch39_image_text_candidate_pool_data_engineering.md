@@ -1,4 +1,4 @@
-# Chapter 43: LAION-5B Image-Text Candidate Pool and Filtering Channels
+# Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation
 
 <div class="chapter-authors">Guanlin Mu</div>
 
@@ -24,7 +24,7 @@ After completing this chapter, readers should be able to:
 - Compare image-text filtering strategies using DataComp-style fixed training protocols.
 - Identify risks involving public URLs, copyright, faces, children, NSFW content, watermarks, and link decay.
 
-## 43.1 Opening Problem Scenario: Image-Text Pairs Need Channelized Filtering
+## 39.1 Opening Problem Scenario: Image-Text Pairs Need Channelized Filtering
 
 A multimodal team is preparing to train a vision-language model. It extracts billions of `<image_url, alt_text>` pairs from Web pages and then asks a download script to fetch images by URL. The first round of sampling quickly exposes problems: many URLs have already expired; many alt texts are filenames, advertising phrases, SEO keywords, or unrelated paragraphs; some images are too low-resolution, contain watermarks, include adult content, faces, children's photos, medical images, or copyright marks. More importantly, image and text appearing related does not mean the pair is suitable for training. A product image captioned "click to buy" contributes little to learning visual concepts; a personal photo paired with a name, address, or social account introduces privacy risk into the model.
 
@@ -34,7 +34,7 @@ Ordinary image datasets usually center on image files and human labels, and samp
 
 This relationship has at least three kinds of fragility. The first is temporal fragility: URLs expire, images update, and pages redirect. The second is semantic fragility: alt text may serve accessibility, SEO, or template display rather than image description. The third is governance fragility: a publicly accessible URL does not imply clear authorization, nor does it imply the absence of faces, children, medical content, trademarks, or watermark risk.
 
-### 43.1.2 CLIP Scores Solve Only Part of Image-Text Relevance
+### 39.1.2 CLIP Scores Solve Only Part of Image-Text Relevance
 
 LAION-5B's core filtering signal comes from cosine similarity between image and text embeddings. Let the image encoder be $f_I$, the text encoder be $f_T$, the image be $i$, and the text be $t$. The image-text similarity can be written as:
 
@@ -50,11 +50,11 @@ $$
 
 where $\tau_{\ell}$ can be set by language or subset. This filtering improves image-text relevance, but it is not proof of factual correctness, safety, or authorization compliance. A high-CLIP-score image may still contain watermarks, faces, adult content, private information, or copyright risk; a low-CLIP-score sample may still be valuable for certain tasks such as charts, document pages, or medical images.
 
-## 43.2 Dataset Overview: Subset Scale and Public Form
+## 39.2 Dataset Overview: Subset Scale and Public Form
 
 The LAION-5B paper reports 5.85B CLIP-filtered image-text pairs, including approximately 2.32B English pairs, 2.26B multilingual pairs, and 1.27B pairs with uncertain language. This split matters because language identification, CLIP models, filtering thresholds, and downstream tasks all affect sample value.
 
-*Table 43-1 Public Subset Structure of LAION-5B*
+*Table 39-1 Public Subset Structure of LAION-5B*
 
 | Subset | Scale | Text-language Form | Engineering Meaning | Typical Use |
 | --- | ---: | --- | --- | --- |
@@ -69,15 +69,15 @@ From a data-engineering perspective, LAION-5B is closer to a candidate pool than
 
 The final training sample is not a direct copy of the Web trace, but a structured view rendered for a target task. LAION-5B candidate records are similar: during training, they must be projected into concrete views rather than treating the full candidate pool as an undifferentiated input.
 
-## 43.3 Sample Schema: Recording Five Channels Separately
+## 39.3 Sample Schema: Recording Five Channels Separately
 
 Image-text candidate pools should also be modeled by channel. The Parquet metadata fields listed in the LAION-5B paper include a 64-bit integer id, image URL, text, image height and width, cosine similarity between image and text embeddings, and NSFW and watermark-detection scores. When reusing such corpora, engineering teams usually need to add governance fields such as download status, hash, authorization hints, and removal status.
 
-![Figure 43-1 Multi-channel schema for LAION-5B image-text candidate records](../../images/part12/ch43_01_laion_multichannel_schema_en.svg)
+![Figure 39-1 Multi-channel schema for LAION-5B image-text candidate records](../../images/part12/ch43_01_laion_multichannel_schema_en.svg)
 
-*Figure 43-1 Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec.*
+*Figure 39-1 Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec.*
 
-*Table 43-2 Image-text Candidate Record Schema*
+*Table 39-2 Image-text Candidate Record Schema*
 
 | Channel | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
@@ -113,11 +113,11 @@ A sample record for an internal training set can be written as follows:
 
 Channelized modeling locates failure sources. If generated text does not match the image, the issue usually lies in the alignment channel. If many samples cannot be downloaded during training, the issue lies in the visual channel or release view. If the model outputs watermark-like textures, the issue may lie in the risk channel. If evaluation contamination is hard to check, the issue lies in text hashes, image hashes, and version manifests.
 
-## 43.4 From Common Crawl to Candidate Records
+## 39.4 From Common Crawl to Candidate Records
 
 LAION-5B construction can be divided into six stages: extract candidates from Common Crawl, download and parse images, identify language, compute image-text similarity, add risk labels, and publish metadata and indexes. This process is more like rendering Web traces into structured image-text records than simply downloading images.
 
-*Table 43-3 LAION-5B Construction Flow*
+*Table 39-3 LAION-5B Construction Flow*
 
 | Stage | Input | Processing Action | Output | Corresponding Channel |
 | ---: | --- | --- | --- | --- |
@@ -130,7 +130,7 @@ LAION-5B construction can be divided into six stages: extract candidates from Co
 
 The LAION-5B paper describes a CLIP cosine-similarity threshold of 0.28 for English filtering and a multilingual CLIP threshold of 0.26 for non-English image-text pairs. It also states that content filtering removes about 90% of raw image candidates, leaving close to 6B image-text pairs. This number shows that raw open Web candidate pools are enormous, but only a small share can enter the training candidate pool.
 
-### 43.4.1 Code-like Expression of Filtering Gates
+### 39.4.1 Code-like Expression of Filtering Gates
 
 The following pseudocode shows the core of a LAION-5B-like image-text processing flow. It is not the official implementation; it rewrites the paper process as a data-engineering task:
 
@@ -178,7 +178,7 @@ Common image-text data distribution formats in the LAION ecosystem include Parqu
 
 This leads to a practical principle: candidate pools and training sets must be managed in layers. The candidate pool retains as much filterable metadata as possible; the training set stores only samples that were actually selected and successfully downloaded for a given experiment. A stable mapping between the two is required, otherwise experiment metrics cannot be traced back to specific filtering rules.
 
-## 43.5 Three Views: Training, Evaluation, and Governance
+## 39.5 Three Views: Training, Evaluation, and Governance
 
 After training samples enter a dataloader, they are projected from the candidate-pool schema into different task views. An image-text retrieval view may be `image + text -> contrastive pair`; a T2I data-filtering view may be `text + image + aesthetic/risk filters -> generation subset`; and a safety-governance view may read only `image_url + hash + risk scores + removal_status`. This "stable candidate record, variable task view" design serves multimodal data reuse, rather than treating LAION-5B as a single training set.
 
@@ -190,15 +190,15 @@ $$
 
 where $c$ is the filtering configuration, $r$ is the sampling random seed, and $s$ is the sharding strategy. A change in any of the three should create a new data version.
 
-### 43.5.1 Quality Evaluation and Closed-loop Repair
+### 39.5.1 Quality Evaluation and Closed-loop Repair
 
 Controllable speech data must validate semantics, style, and audio quality simultaneously; LAION-5B-like image-text data must likewise validate text, vision, alignment, risk, and reproducibility simultaneously. Looking only at CLIP scores is insufficient, and so is looking only at manual sampling. The quality system should combine automatic metrics with human review in a closed loop, sending problematic samples into redownload, refiltering, downweighting, isolation, or removal queues.
 
-![Figure 43-2 Image-text candidate-pool quality evaluation and closed-loop repair](../../images/part12/ch43_02_laion_quality_datacomp_loop_en.svg)
+![Figure 39-2 Image-text candidate-pool quality evaluation and closed-loop repair](../../images/part12/ch43_02_laion_quality_datacomp_loop_en.svg)
 
-*Figure 43-2 Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design.*
+*Figure 39-2 Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design.*
 
-*Table 43-4 Quality-evaluation Metrics for Image-text Candidate Pools*
+*Table 39-4 Quality-evaluation Metrics for Image-text Candidate Pools*
 
 | Channel | Core Question | Automatic Metrics | Human-review Focus | Handling of Failed Samples |
 | --- | --- | --- | --- | --- |
@@ -208,7 +208,7 @@ Controllable speech data must validate semantics, style, and audio quality simul
 | Risk channel | Is there high-risk content? | NSFW, watermark, toxicity, face or privacy labels | Children, medical content, trademarks, copyright, and watermark risks | Isolation, human review, disablement |
 | Release channel | Is it reproducible and removable? | Manifest coverage, URL status, hash coverage | Whether removal requests can be located | Freeze version, add hashes, build ledger |
 
-### 43.5.2 DataComp Provides a Protocol for Comparing Filtering Strategies
+### 39.5.2 DataComp Provides a Protocol for Comparing Filtering Strategies
 
 The LAION-5B paper demonstrates dataset usability by training and reproducing models such as CLIP, GLIDE, and Stable Diffusion, and also discusses test-set overlap, data bias, and safety/ethics issues. For engineering teams, a more actionable evaluation method is to compare data filters under a fixed training protocol. DataComp provides exactly this idea: it fixes the model architecture, training hyperparameters, and downstream evaluations, and mainly changes dataset design.
 
@@ -220,11 +220,11 @@ $$
 
 This formula shifts the question from "do samples look clean" to "under the same training budget, does this strategy produce a better model." For LAION-5B users, this means threshold choices should not be made by intuition based only on CLIP scores or aesthetic scores; they should be placed into reproducible small-scale training experiments.
 
-## 43.6 Risk Governance and Reuse Boundaries
+## 39.6 Risk Governance and Reuse Boundaries
 
 Risks in image-text data are easier for the public to perceive and harder to fully automate. Images may contain faces, children, license plates, home environments, medical images, identity documents, trademarks, artworks, and watermarks. Even if the caption does not contain PII, the image itself may leak privacy. A public URL does not mean authorization is clear; a high CLIP score does not mean the content is safe; and a low NSFW score does not mean risk is zero.
 
-*Table 43-5 Risk-control Checklist for LAION-5B-like Image-text Data*
+*Table 39-5 Risk-control Checklist for LAION-5B-like Image-text Data*
 
 | Risk Type | Trigger Scenario | Control Measures | Audit Evidence |
 | --- | --- | --- | --- |
@@ -235,7 +235,7 @@ Risks in image-text data are easier for the public to perceive and harder to ful
 | Faces and privacy | Personal photos, medical images, identity documents | Face detection, privacy labels, removal channel | Removal ledger |
 | Evaluation contamination | Benchmark images or answers enter the candidate pool | Image hash, caption n-gram, URL-overlap checks | Eval isolation report |
 
-Table 43-5 turns risk governance into data gates. High-risk samples should not be handled only by post-training safety strategies; they should be isolated, downweighted, or removed during candidate-pool filtering. For generative-model training, watermark, copyright, face, and child-related risks require especially conservative handling.
+Table 39-5 turns risk governance into data gates. High-risk samples should not be handled only by post-training safety strategies; they should be isolated, downweighted, or removed during candidate-pool filtering. For generative-model training, watermark, copyright, face, and child-related risks require especially conservative handling.
 
 When enterprises reuse LAION-5B methods internally, they should first retain five kinds of evidence:
 

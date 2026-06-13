@@ -36,7 +36,7 @@ REVIEW_TARGETS: list[tuple[str, str, str]] = [
     ("sample-long", "Ch21", "docs/zh/part7/ch21_rag_pipeline.md"),
     ("sample-long", "Ch24", "docs/zh/part8/ch24_dataops_flywheel_team.md"),
     ("sample-long", "Ch29", "docs/zh/part9/ch29_data_valuation_and_reuse.md"),
-    ("sample-risk", "Ch40", "docs/zh/part12/ch40_multi_chart_infographic_reasoning_dataset.md"),
+    ("sample-risk", "Ch43", "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md"),
     ("sample-project", "P11", "docs/zh/part14/p11_mini_deepseek.md"),
     ("sample-project", "P12", "docs/zh/part14/p12_r1_reasoning_flywheel.md"),
     ("sample-project", "P13", "docs/zh/part14/p13_multimodal_instruction_factory.md"),

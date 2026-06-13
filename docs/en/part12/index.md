@@ -1,12 +1,12 @@
-# Part XII: Specialized Datasets and Data Engineering Practice
+# Part XII: Specialized Datasets and Multimodal Data Engineering Practice
 
 ## Positioning of This Part
 
-Part XII serves as the methodology validation function for the book as a whole. The preceding eleven parts have established frameworks covering the data lifecycle, text and multimodal processing, alignment data, reasoning data, RAG, DataOps, data asset management, Agent automation, and compliance governance. This part grounds those frameworks in concrete data objects, examining their applicability to visual documents, visual reasoning, interaction control, open Web corpora, transparent pre-training corpora, and image-text candidate pools.
+Part XII serves as the method validation layer of the book. The first eleven parts establish frameworks for data lifecycle management, text pre-training, multimodal processing, alignment data, reasoning data, RAG, DataOps, data assetization, agent automation, and compliance governance. This part applies those methods to concrete data objects through a modality-explicit path: text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio interaction, and reasoning traces.
 
-This part does not aim to enumerate dataset names; rather, its thread is "how specialized datasets and industry-scale data engineering datasets are defined, constructed, evaluated, published, and reproduced." The first three chapters consolidate six specialized cases into three method-oriented chapters; the final three chapters retain FineWeb, Dolma, and LAION-5B as industry data engineering references for Part XIII, with DataComp used as an evaluation-protocol reference for image-text filtering.
+The goal of this part is not to list dataset names. Its main thread is how specialized datasets and industry data-engineering datasets become reviewable assets under different modalities and data forms. Chapter 38 and Chapter 39 begin with open Web text corpora and image-text candidate pools, connecting back to text pre-training data engineering and image-text multimodal data engineering. Chapter 40 and Chapter 41 move into visual documents, tables, charts, medical images, and tool-call trajectories. Chapter 42 treats speech and audio interaction data as its own data-engineering object. Chapter 43 closes with reasoning-trace compression, connecting to reasoning data, reasoning models, RL data engineering, and project practice.
 
-Looking backward, this part builds on Part III (multimodal data), Part V (synthetic data), Part VI (tool and reasoning data), Part VIII (data operations), and Part XI (compliance governance). Looking forward, it provides citable engineering evidence for Part XIII (open-source model data recipes) and Part XIV (project case studies).
+Looking backward, this part connects to Part II on text corpora, Part III on multimodal data, Part V on synthetic data, Part VI on tool-use and reasoning data, Part VIII on data operations, and Part XI on compliance governance. Looking forward, it provides engineering evidence for the open-source model data recipes in Part XIII and the project case studies in Part XIV.
 
 ## Terminology Conventions
 
@@ -14,19 +14,23 @@ Throughout this part, "specialized dataset" consistently refers to data assets c
 
 ## Table of Contents for This Part
 
-- [Chapter 38: Visual Document and Structured Table Data Engineering](ch38_visual_document_table_data_engineering.md)
-- [Chapter 39: Visual Reasoning and Tool-Calling Data Engineering](ch39_visual_reasoning_tool_data_engineering.md)
-- [Chapter 40: Interaction Control and Reasoning Trace Data Engineering](ch40_interaction_reasoning_trace_data_engineering.md)
-- [Chapter 41: FineWeb Pre-training Corpus Data Engineering](ch41_fineweb_pretraining_corpus.md)
-- [Chapter 42: Dolma Pre-training Corpus Transparent Ledger](ch42_dolma_pretraining_corpus_ledger.md)
-- [Chapter 43: LAION-5B Image-Text Candidate Pool and Filtering Channels](ch43_laion5b_image_text_candidate_pool.md)
+- [Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers](ch38_text_corpora_transparent_ledger.md)
+- [Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation](ch39_image_text_candidate_pool_data_engineering.md)
+- [Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints](ch40_visual_document_table_data_engineering.md)
+- [Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories](ch41_visual_reasoning_tool_data_engineering.md)
+- [Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries](ch42_speech_audio_interaction_data_engineering.md)
+- [Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks](ch43_reasoning_trace_compression_data_engineering.md)
 
 ## Reading Order
 
-Chapter 38 combines StructBill-CN and SparseTable-Bench around visual documents, bill fields, table structure, and robustness to empty cells. It is best read in conjunction with Part III's coverage of OCR, multimodal imagery, and cross-modal alignment.
+Chapter 38 combines FineWeb and Dolma, focusing on open Web text extraction, filtering and deduplication, privacy processing, source ledgers, and attributable evaluation. It is best read together with Part II on text pre-training data engineering and Part XIII on pre-training recipes.
 
-Chapter 39 combines multi-chart infographics and MedImage-ToolVQA around visual evidence, cross-chart reasoning, medical-image ROI, and tool-call trajectories. It connects to Part VI's Agent data, Part X's Data Engineering Agent, and Part XI's privacy compliance.
+Chapter 39 focuses on LAION-5B and DataComp, covering image-text candidate pools, multimodal filtering channels, quality evaluation, and governance boundaries. It extends the open Web source discussion from Chapter 38 and transitions toward image-text multimodal data engineering in Part III.
 
-Chapter 40 combines VoiceStyleControl and Latent-Switch-69K around voice-style control, interaction state, long-CoT compression, and supervision masks. It leads naturally into Part XIII's post-training, reasoning models, RL data engineering, and the R1 reasoning flywheel case study in Part XIV.
+Chapter 40 combines StructBill-CN and SparseTable-Bench, focusing on visual documents, bill fields, table structures, and robustness to empty cells. It is best read together with Part III on OCR, multimodal images, and cross-modal alignment.
 
-Chapters 41 through 43 shift to industry-scale data engineering datasets and open data assets. FineWeb, Dolma, and LAION-5B are read as production-facing references for source transparency, processing manifests, license boundaries, filtering protocols, and public release forms, while DataComp is introduced as a protocol for comparing image-text filtering strategies.
+Chapter 41 combines multi-chart infographics and MedImage-ToolVQA, focusing on visual evidence, cross-chart reasoning, medical image ROI, and tool-call trajectories. It connects naturally to Part VI on agent data, Part X on Data Engineering Agents, and Part XI on privacy and compliance.
+
+Chapter 42 treats VoiceStyleControl as a focused speech and audio interaction case, covering S2S, TTS, style labels, authorization status, and misuse-risk governance. It echoes Part III's discussion of video and audio data engineering.
+
+Chapter 43 treats Latent-Switch-69K as a focused reasoning-trace case, covering Long-CoT compression, latent budgets, student sequences, and supervision masks. It connects forward to Part XIII on post-training, reasoning models, RL data engineering, and the R1 reasoning flywheel case in Part XIV.

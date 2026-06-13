@@ -22,12 +22,12 @@
 | `docs/zh/part10/ch35_security_permission_collaboration.md` | 第35章：数据工程 Agent 的安全、权限与人机协同 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch36_compliance_framework_and_governance.md` | 第36章：数据合规框架与治理 | 30 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch37_federated_learning_and_privacy_preserving_technologies.md` | 第37章：联邦学习与隐私保护技术 | 44 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch38_visual_document_table_data_engineering.md` | 第38章：视觉文档与结构化表格数据工程 | 28 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md` | 第39章：视觉推理与工具调用数据工程 | 38 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md` | 第40章：交互控制与推理轨迹数据工程 | 28 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch41_fineweb_pretraining_corpus.md` | 第41章：FineWeb 预训练语料数据工程 | 15 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md` | 第42章：Dolma 预训练语料透明账本 | 9 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md` | 第43章：LAION-5B 图文候选池与筛选通道 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch38_text_corpora_transparent_ledger.md` | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 24 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md` | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch40_visual_document_table_data_engineering.md` | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 28 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 38 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 16 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程实战：从配方到落地 | 11 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch45_posttrain_recipes.md` | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch46_rl_reasoning_data.md` | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 23 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -68,10 +68,10 @@
 | `docs/zh/part7/ch21_rag_pipeline.md` | 第21章：RAG 数据流水线 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part7/ch22_multimodal_rag_visual_retrieval.md` | 第22章：多模态 RAG 与视觉检索 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part7/ch23_online_feedback_knowledge_update.md` | 第23章：在线反馈闭环与知识更新 | 44 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part8/ch24_dataops_flywheel_team.md` | 第24章：DataOps 飞轮与团队组织 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part8/ch24_dataops_flywheel_team.md` | 第24章：DataOps 飞轮与团队组织 | 36 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part8/ch25_data_versioning_experiment_tracking.md` | 第25章：数据版本管理与实验追踪 | 21 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part8/ch26_data_platform_observability.md` | 第26章：数据平台可观测性 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part9/ch27_data_catalog_and_metadata_governance.md` | 第27章：数据资产目录与元数据治理 | 11 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part9/ch28_data_productization_and_data_contracts.md` | 第28章：数据产品化与数据契约 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part9/ch29_data_valuation_and_reuse.md` | 第29章：数据资产价值评估与复用机制 | 28 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part9/ch29_data_valuation_and_reuse.md` | 第29章：数据资产价值评估与复用机制 | 29 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part9/ch30_internal_data_market_and_sharing_governance.md` | 第30章：企业内部数据市场与共享治理 | 33 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |

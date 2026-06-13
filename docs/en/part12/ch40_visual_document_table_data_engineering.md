@@ -1,4 +1,4 @@
-# Chapter 38: Visual Document and Structured Table Data Engineering
+# Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints
 
 <div class="chapter-authors">Guanjun Liu; Yuefeng Zou</div>
 
@@ -49,7 +49,7 @@ The third and most easily missed layer is **logic consistency**. Bills contain d
 
 This is why the problem is data engineering, not only modeling. To make a model learn semantic layout and arithmetic constraints, the dataset must explicitly encode image, schema, hierarchical JSON, table fields, and logic constraints in a trainable, evaluable, and reviewable asset.
 
-#### 38.1.1 Pipeline vs. End-to-End Extraction
+#### 40.1.1 Pipeline vs. End-to-End Extraction
 
 Two technical routes dominate document extraction. The **pipeline paradigm** separates text detection, OCR recognition, and information extraction. It is modular and interpretable, but its fatal weakness is error accumulation. A wrong detection box propagates irreversibly to downstream extraction.
 
@@ -57,7 +57,7 @@ The **end-to-end generative paradigm** asks one multimodal model to generate str
 
 StructBill-CN takes the end-to-end side, but uses schema constraints to force fluent description back into strict records and logic constraints to force plausible outputs into arithmetic correctness. The dataset itself must carry both constraints; otherwise the model has no signal to learn. This is its fundamental difference from datasets such as FUNSD and DocVQA that mainly label key-value pairs or physical boxes.
 
-#### 38.1.2 How One Drift Cascades into an Invalid Record
+#### 40.1.2 How One Drift Cascades into an Invalid Record
 
 Bill errors are not isolated. Imagine a borderless expense list with sparse empty values. Without grid lines, the model shifts one row and assigns the amount in row 3 to row 2. Every digit may be recognized correctly, and ANLS may remain high. But row-level “unit price x quantity = amount” fails, and document-level “sum of items = total” also fails. A record that looks almost perfect at the character level becomes unusable for the business.
 
@@ -65,11 +65,11 @@ This is why arithmetic self-consistency must be a first-class object. In high-ri
 
 ### Case A.2: Dataset Overview: Scale, Sources, Schema, and Task Definition
 
-#### 38.2.1 Scale and Sources
+#### 40.2.1 Scale and Sources
 
 StructBill-CN contains **2,300 high-resolution bill images** across **six business schemas**, all from two public medical datasets: CHIP-2022 and SIBR-Med. The mixture intentionally includes wired-grid tables, text-dense records, and borderless tables so the model cannot simply memorize one layout.
 
-*Table 38-1: StructBill-CN composition and characteristics*
+*Table 40-1: StructBill-CN composition and characteristics*
 
 | Source Subset | Document Type | Count | Table Form |
 | --- | --- | ---: | --- |
@@ -85,13 +85,13 @@ Using public academic sources is a deliberate compliance choice. A publishable b
 
 **Code and data resources.** The StructBill-CN dataset, schema definitions, annotation tools, and SRPO training code are available at [github.com/vanvan6992/StructBill-CN](https://github.com/vanvan6992/StructBill-CN). The SRPO algorithm implementation (including MindSpore-based GRPO and SCL-Reward) is available at [github.com/Yuefeng-Zou/SRPO_CODE](https://github.com/Yuefeng-Zou/SRPO_CODE). 
 
-#### 38.2.2 Task Definition
+#### 40.2.2 Task Definition
 
 Given a document image $X$ and a schema $S=\{K,T,C\}$, where $K$ is the set of global key fields, $T$ is the table definition, and $C$ is the set of deterministic constraints, the goal is to learn a policy that generates a structured sequence $Y$ maximizing $P(Y\,|\,X,S)$.
 
 Unlike ordinary end-to-end text generation, this task requires output that strictly follows predefined structure and business logic. It must be correct in content, legal in structure, and self-consistent in arithmetic. The three parts of $S$ turn an OCR/extraction task into a structure-and-logic constrained extraction task.
 
-#### 38.2.3 Three Core Challenges
+#### 40.2.3 Three Core Challenges
 
 StructBill-CN deliberately keeps three types of difficulty.
 
@@ -107,7 +107,7 @@ The image forms of different schemas also carry different emphases, and this mat
 
 ### Case A.3: Sample Schema: Key-Value, Line-Item Tables, Hierarchical JSON, and Logic Constraints
 
-#### 38.3.1 Three Supervision Signals
+#### 40.3.1 Three Supervision Signals
 
 Each StructBill-CN sample pairs one bill image with a predefined schema and carries three complementary supervision signals:
 
@@ -121,19 +121,19 @@ Hierarchical JSON is used because it maps directly to real database schema: glob
 
 In practice, semantic-ownership annotation can be counterintuitive. If a line is visually shifted under a neighboring column because of printing drift, annotators should label it according to the business field it belongs to, not according to the line it happens to sit beneath in pixels. This shifts the basis of judgment from geometry to logic. The cost is higher annotation difficulty and greater reliance on domain understanding, but the benefit is that models are forced to learn content logic rather than visual projection. In borderless tables, this is the only reliable alignment strategy, and it explains why later quality control and evaluation must be designed around semantic correctness rather than purely positional correctness.
 
-#### 38.3.2 Mapping Schema to Hierarchical JSON
+#### 40.3.2 Mapping Schema to Hierarchical JSON
 
 The three schema parts map to the final JSON as follows: $K$ becomes the global `key_information` object, $T$ becomes the `Fee_List` array and its row fields, and $C$ becomes validation relationships attached to numeric fields rather than visible JSON nodes.
 
-![Figure 38-1: ch38_Figure_38-1](../../images/part12/ch38_01_schema_decomposition_en.png)
+![Figure 40-1: Schema-to-JSON mapping](../../images/part12/ch38_01_schema_decomposition_en.png)
 
-*Figure 38-1: Schema-to-JSON mapping. Key fields and table structure become visible JSON nodes; constraints remain verifiable relationships attached to numeric fields.*
+*Figure 40-1: Schema-to-JSON mapping. Key fields and table structure become visible JSON nodes; constraints remain verifiable relationships attached to numeric fields.*
 
 This “constraints as relationships, not fields” design lets the same JSON serve training and evaluation. Constraints do not change the output format, but they are instantiated during validation as equations. A future schema can add a new rule such as discounted amount = amount x discount rate without changing historical fields.
 
 This design is also the basis for backward-compatible data-contract evolution. A schema can add a new rule in $C$ without changing existing fields or historical annotations. The constraint remains outside the JSON node set but becomes active during construction-time validation and evaluation-time scoring.
 
-#### 38.3.3 Complete Sample Structure
+#### 40.3.3 Complete Sample Structure
 
 ```json
 {
@@ -188,9 +188,9 @@ expense_schema = Schema(
 )
 ```
 
-#### 38.3.4 Field Types, Annotation Rules, and Metrics
+#### 40.3.4 Field Types, Annotation Rules, and Metrics
 
-*Table 38-2: Field type, annotation rule, and metric mapping*
+*Table 40-2: Field type, annotation rule, and metric mapping*
 
 | Field Type | Representative Fields | Annotation Rule | Main Metric |
 | --- | --- | --- | --- |
@@ -206,11 +206,11 @@ This table acts as a contract between annotation rules and evaluation scripts.
 
 StructBill-CN uses a multi-stage pipeline whose goal is to preserve semantic content and business-logic topology while creating traceable quality gates.
 
-![Figure 38-2: ch38_Figure_38-2](../../images/part12/ch38_02_dataset_construction_pipeline_en.png)
+![Figure 40-2: StructBill-CN construction pipeline](../../images/part12/ch38_02_dataset_construction_pipeline_en.png)
 
 
 
-*Figure 38-2: StructBill-CN construction pipeline. Samples that fail logic validation return to annotation rather than entering the training set.*
+*Figure 40-2: StructBill-CN construction pipeline. Samples that fail logic validation return to annotation rather than entering the training set.*
 
 **1. Acquisition.** Images come from CHIP-2022 and SIBR-Med and intentionally include borderless tables, sparse layouts, and long expense lists.
 
@@ -224,11 +224,11 @@ StructBill-CN uses a multi-stage pipeline whose goal is to preserve semantic con
 
 **6. Logic consistency validation.** The core step checks whether annotations are arithmetically self-consistent: row by row, unit price x quantity approximately equals amount; at document level, line-item amounts approximately sum to total. Tolerance $\varepsilon$ absorbs OCR and floating-point noise.
 
-![Figure 38-3: ch38_Figure_38-3](../../images/part12/ch38_03_structural_consistency_validation_en.png)
+![Figure 40-3: Logic-consistency validation](../../images/part12/ch38_03_structural_consistency_validation_en.png)
 
-*Figure 38-3: Logic-consistency validation. The same gate is reused during construction to block inconsistent labels and during evaluation/training to score model output.*
+*Figure 40-3: Logic-consistency validation. The same gate is reused during construction to block inconsistent labels and during evaluation/training to score model output.*
 
-**Code Example 2: Logic-consistency validation gate.** This function implements the structure gate ($I_{gate}$), row-level check (Row-ACR), and document-level check (Doc-ACR) from Figure 38-3. The same code is reused in both the construction pipeline (to block inconsistent labels) and the evaluation pipeline (to score model outputs). It takes the `Schema` defined in Code Example 1.
+**Code Example 2: Logic-consistency validation gate.** This function implements the structure gate ($I_{gate}$), row-level check (Row-ACR), and document-level check (Doc-ACR) from Figure 40-3. The same code is reused in both the construction pipeline (to block inconsistent labels) and the evaluation pipeline (to score model outputs). It takes the `Schema` defined in Code Example 1.
 
 ```python
 def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
@@ -277,7 +277,7 @@ def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
 
 **7. Version split.** The dataset uses an 8:2 train-test split. In practice, the split should preserve the six schema distributions, reserve true cross-layout test samples, and attach data fingerprints and statistics to each version.
 
-#### 38.4.1 Lineage and Metadata
+#### 40.4.1 Lineage and Metadata
 
 Producing only images and JSON is not enough. Each sample should carry lineage metadata: source subset and original file ID, schema version, image-quality grade, annotator and reviewer, pass/fail results and tolerances for each logic check, and final split.
 
@@ -295,9 +295,9 @@ StructBill-CN evaluates **extraction accuracy**, **structural quality**, and **l
 
 These metrics must coexist. F1 says whether fields were found, but not whether numbers add up. ANLS tolerates long-text noise but does not guarantee arithmetic. TEDS captures structural collapse but not numeric correctness. Row-ACR and Doc-ACR directly answer whether the numbers reconcile.
 
-#### 38.5.1 Schema Constraint Violation Rate
+#### 40.5.1 Schema Constraint Violation Rate
 
-Academic metrics tend to be positive: how much is correct. Production monitoring often needs the negative view: how much violates constraints. From the gate in Section 38.4, we can derive **SCVR (Schema Constraint Violation Rate)**: the proportion of outputs that fail the structure gate or logic validation. SCVR complements Row-ACR and Doc-ACR by answering how many records cannot be inserted directly, including structural failures.
+Academic metrics tend to be positive: how much is correct. Production monitoring often needs the negative view: how much violates constraints. From the gate in Section 40.4, we can derive **SCVR (Schema Constraint Violation Rate)**: the proportion of outputs that fail the structure gate or logic validation. SCVR complements Row-ACR and Doc-ACR by answering how many records cannot be inserted directly, including structural failures.
 
 SCVR adds no new labels. It reuses the existing structure and logic validation flow.
 
@@ -336,13 +336,13 @@ def compute_scvr(predictions: list, schema: Schema,
 # print(f"SCVR={metrics['scvr']:.1%}, ingestible={metrics['ingestible_rate']:.1%}")
 ```
 
-#### 38.5.2 Engineering Conventions for Reproducible Evaluation
+#### 40.5.2 Engineering Conventions for Reproducible Evaluation
 
 Reproducible evaluation requires a fixed test split fingerprint, fixed schema version, fixed metric implementation, and controlled random seeds. For generative models, decoding parameters and repeated runs matter. The source setting uses `temperature=0.9`, `top_p=1.0`, and reports the average over **8 independent runs** per model to absorb decoding variance. Engineering teams should archive decoding parameters, run count, and seeds with the results.
 
-#### 38.5.3 Error Attribution and Repair Actions
+#### 40.5.3 Error Attribution and Repair Actions
 
-*Table 38-3: Common errors and repair actions*
+*Table 40-3: Common errors and repair actions*
 
 | Error Type | Symptom | Root Cause | Data-Engineering Repair |
 | --- | --- | --- | --- |
@@ -357,21 +357,21 @@ The engineering value of attribution is speed. When a metric regresses, teams ca
 
 ### Case A.6: Engineering Review
 
-#### 38.6.1 How the Data Asset Supports SRPO
+#### 40.6.1 How the Data Asset Supports SRPO
 
 This chapter does not detail the model. From the data-consumption perspective:
 
-- **Data becomes reward.** SRPO converts the discrete schema rules in Section 38.3 into dense, verifiable SCL-Reward: $R_{total}=I_{gate}\cdot[\lambda\cdot R_{content}+(1-\lambda)\cdot R_{logic}]$. The structure gate, content alignment, and logic validation all read the dataset's hierarchical JSON and constraints.
+- **Data becomes reward.** SRPO converts the discrete schema rules in Section 40.3 into dense, verifiable SCL-Reward: $R_{total}=I_{gate}\cdot[\lambda\cdot R_{content}+(1-\lambda)\cdot R_{logic}]$. The structure gate, content alignment, and logic validation all read the dataset's hierarchical JSON and constraints.
 - **Training use.** SRPO first uses the data for SFT warm start so the model can output legal JSON, then uses GRPO (Shao et al., 2024) with group sampling and SCL-Reward. The reported configuration is SFT for 10 epochs, learning rate 1e-5, batch size 128; GRPO group size G=8, reward coefficients $\lambda=0.4$ and $\gamma=0.6$; hardware 8 x NVIDIA A800 (80GB).
 - **Qualitative effect.** The source material reports that standard SFT saturates near 84% on logic scores, while adding logic reward improves Row/Doc-ACR by about 10 percentage points. The point is that logic annotation turns arithmetic consistency into an optimizable target.
 
 Hungarian matching is used for row-level one-to-one alignment because generated row order may differ from ground truth or include missing/spurious rows. That, in turn, requires each row to contain sufficiently discriminative fields such as item name, unit price, and quantity. Algorithm design and annotation rules must be co-designed.
 
-#### 38.6.2 What the Dataset Is Suitable For
+#### 40.6.2 What the Dataset Is Suitable For
 
 It is suitable for training **schema-constrained Chinese vertical-document extraction models**, especially small multimodal document models around the 3B scale that need robust alignment on borderless tables and sparse layouts. It is also suitable for evaluating logic consistency and structural fidelity, not merely character recognition.
 
-#### 38.6.3 Privacy, Compliance, and Audit in High-Risk Scenarios
+#### 40.6.3 Privacy, Compliance, and Audit in High-Risk Scenarios
 
 Medical-expense documents are high-risk data. Even though this benchmark uses public academic sources, any production extension must follow these baselines:
 
@@ -387,7 +387,7 @@ Regarding the benchmark data, all images in StructBill-CN **come exclusively fro
 
 Regarding production extension, when this chapter's methodology is applied to real private bills or medical records, field-level masking must be performed at the earliest stage of the pipeline. The table below provides concrete masking rules for each sensitive-field type in medical-expense documents.
 
-*Table 38-4: Field-level de-identification rules for medical-expense documents (for production extension)*
+*Table 40-4: Field-level de-identification rules for medical-expense documents (for production extension)*
 
 | Sensitive Field Type | Example | Masking Rule | Notes |
 |---|---|---|---|
@@ -401,9 +401,9 @@ Regarding production extension, when this chapter's methodology is applied to re
 | Diagnosis / item name | Penicillin injection | **Retain in public benchmark** (medical terminology is not personal information); for highly sensitive diseases (e.g., HIV, psychiatric), replace with a superordinate category | Grade-based treatment by sensitivity |
 | Date | 2024-01-15 | Shift by a fixed random number of days per document (preserving inter-row temporal order) | Shift rather than delete to keep business-temporal semantics |
 
-An engineering point often overlooked in this table is the **tension between amount de-identification and logic constraints**. Randomly perturbing amounts breaks row-level "unit price × quantity = amount" and document-level "Σ line items = total," turning the downstream SCL-Reward logic-verification signal dirty. The recommended approach is **uniform scaling**: multiply all amounts by a single random factor per document, then recompute and overwrite `Total_Cost` to maintain arithmetic self-consistency while masking actual values. This operation must be performed before §38.4 step ⑥ (logic-consistency validation) and the scaling factor must be recorded in the lineage metadata for audit traceability.
+An engineering point often overlooked in this table is the **tension between amount de-identification and logic constraints**. Randomly perturbing amounts breaks row-level "unit price × quantity = amount" and document-level "Σ line items = total," turning the downstream SCL-Reward logic-verification signal dirty. The recommended approach is **uniform scaling**: multiply all amounts by a single random factor per document, then recompute and overwrite `Total_Cost` to maintain arithmetic self-consistency while masking actual values. This operation must be performed before Step 6 in Section 40.4 (logic-consistency validation), and the scaling factor must be recorded in the lineage metadata for audit traceability.
 
-#### 38.6.4 Where Not to Use It
+#### 40.6.4 Where Not to Use It
 
 This dataset should not be used:
 
@@ -412,7 +412,7 @@ This dataset should not be used:
 - in cross-language or cross-domain settings without redesigning schema and logic validation
 - as the sole dataset mixed blindly with classification tasks, because arithmetic extraction and semantic classification can create negative transfer
 
-#### 38.6.5 Evolution from a Data Perspective
+#### 40.6.5 Evolution from a Data Perspective
 
 Two directions are important. First, **multi-task negative transfer**: mixing arithmetic extraction and semantic classification may create conflicting gradients and degrade numeric fields. Data mixtures, sampling temperature, and curriculum order must be tracked as hyperparameters. Second, **from deterministic constraints to adaptive reward**: current logic reward depends on hand-written arithmetic rules, but future systems may use data-driven adaptive rewards. The schema should therefore include a rule-version dimension so constraints can evolve while evaluation remains reproducible.
 
@@ -500,9 +500,9 @@ A core design principle of SparseTable-Bench is to represent each table image as
 }
 ```
 
-The `[EMPTY_CELL]` token here is not ordinary text; it is a placeholder expressing "structure exists, content is absent." It decouples a cell's structural identity from its semantic content: even if the corresponding image region contains no readable characters, that position still has row-column coordinates, a bounding box, and contextual relationships. For sparse tables, this placeholder prevents the model from treating blank regions as non-existent during generation, thereby reducing the probability of column collapse and left-shift errors. Figure 38-4 summarizes the synchronized relationship among the three supervision signals — HTML, text, and bounding boxes — within the same table sample.
+The `[EMPTY_CELL]` token here is not ordinary text; it is a placeholder expressing "structure exists, content is absent." It decouples a cell's structural identity from its semantic content: even if the corresponding image region contains no readable characters, that position still has row-column coordinates, a bounding box, and contextual relationships. For sparse tables, this placeholder prevents the model from treating blank regions as non-existent during generation, thereby reducing the probability of column collapse and left-shift errors. Figure 40-4 summarizes the synchronized relationship among the three supervision signals — HTML, text, and bounding boxes — within the same table sample.
 
-![Figure 38-4: Three synchronized supervision signals in a table sample](../../images/part12/ch38_04_supervision_schema.png)
+![Figure 40-4: Three synchronized supervision signals in a table sample](../../images/part12/ch38_04_supervision_schema.png)
 
 From a data engineering perspective, the sample schema of STB includes at least the following fields and validation rules.
 
@@ -521,9 +521,9 @@ It is important to note that the specific notation for the empty-cell token must
 
 ### Case B.4: Four-Stage Construction Pipeline
 
-The construction of SparseTable-Bench can be organized into four stages: table collection, structure extraction, spatial annotation, and sparse topology augmentation. These four stages are not a simple serial file transformation; rather, they involve repeated validation of consistency among structure, text, and geometry, as illustrated in Figure 38-5.
+The construction of SparseTable-Bench can be organized into four stages: table collection, structure extraction, spatial annotation, and sparse topology augmentation. These four stages are not a simple serial file transformation; rather, they involve repeated validation of consistency among structure, text, and geometry, as illustrated in Figure 40-5.
 
-![Figure 38-5: Four-stage SparseTable-Bench construction pipeline](../../images/part12/ch38_05_stb_pipeline.png)
+![Figure 40-5: Four-stage SparseTable-Bench construction pipeline](../../images/part12/ch38_05_stb_pipeline.png)
 
 #### Case B.4.1 Table Collection
 
@@ -575,9 +575,9 @@ These errors demonstrate that the value of SparseTable-Bench is not simply provi
 
 STB-Mask-Stress is the robustness evaluation split within SparseTable-Bench, dedicated specifically to pressure testing. Its design philosophy is to systematically reduce text cues — while preserving table topology — and to observe whether the model can still recover row-column structure and empty cell positions. Unlike ordinary data augmentation, the goal of STB-Mask-Stress is not to increase training set diversity, but to construct an evaluation environment that more closely resembles a "structural understanding stress test." This chapter follows the dataset documentation in using the name STB-Mask-Stress; in related experimental contexts, it can also be understood as a masked table evaluation setting oriented toward column-level occlusion, suitable for use with pressure-test metrics such as Masked-TEDS.
 
-Figure 38-6 illustrates the basic workflow of STB-Mask-Stress, from column-level occlusion generation to evaluation interpretation.
+Figure 40-6 illustrates the basic workflow of STB-Mask-Stress, from column-level occlusion generation to evaluation interpretation.
 
-![Figure 38-6: STB-Mask-Stress occlusion generation and evaluation workflow](../../images/part12/ch38_06_mask_stress_flow.png)
+![Figure 40-6: STB-Mask-Stress occlusion generation and evaluation workflow](../../images/part12/ch38_06_mask_stress_flow.png)
 
 The occlusion strategy of STB-Mask-Stress is column-aware. The workflow can be summarized as follows.
 
@@ -677,9 +677,9 @@ SparseTable-Bench connects naturally to multiple parts of this book.
 
 With respect to the document understanding and cross-modal alignment topics in Part III, STB provides a stricter example than ordinary OCR: visual regions, text content, and structure tokens must be simultaneously aligned. The OCR and document structure re-annotation discussed in Chapter 9 is concretely instantiated here as the synchronization of cell-level text, bounding boxes, and HTML. The cross-modal alignment discussed in Chapter 11 is concretely instantiated here as the alignment of table image regions with logical cell nodes. This chapter can therefore be viewed as a specialized case study advancing from "page text recognition" toward "structured visual object recovery."
 
-Compared with Chapter 38 on invoice document understanding, StructBill-CN places greater emphasis on business schemas, field extraction, and logical consistency, while SparseTable-Bench places greater emphasis on intra-table topology, empty cells, and sparse layouts. Both belong to visual document data engineering, but one targets high-risk invoice fields and the other targets general table structure robustness.
+Compared with Chapter 40 on invoice document understanding, StructBill-CN places greater emphasis on business schemas, field extraction, and logical consistency, while SparseTable-Bench places greater emphasis on intra-table topology, empty cells, and sparse layouts. Both belong to visual document data engineering, but one targets high-risk invoice fields and the other targets general table structure robustness.
 
-Compared with Chapter 39 on multi-chart infographic reasoning, STB focuses on structural recovery within a single table object, while multi-chart infographic reasoning focuses on cross-chart evidence aggregation and multi-step computation. The former provides foundational capability for the latter: if a model cannot stably recover column positions within a single table, numerical reading and evidence localization in cross-chart reasoning will lose their reliable basis.
+Compared with Chapter 41 on multi-chart infographic reasoning, STB focuses on structural recovery within a single table object, while multi-chart infographic reasoning focuses on cross-chart evidence aggregation and multi-step computation. The former provides foundational capability for the latter: if a model cannot stably recover column positions within a single table, numerical reading and evidence localization in cross-chart reasoning will lose their reliable basis.
 
 Looking ahead, STB connects directly to Chapter 47 on VLM data recipes. Chapter 47 examines how multimodal training data organizes images, text, coordinates, and instruction signals; STB provides exactly such a structured visual supervision example: the input is a table image, and the output simultaneously includes HTML structure, cell text, bounding boxes, and empty-cell placeholders. It can serve as a document-table slice in VLM data recipes, demonstrating why general image-caption pairs are insufficient for training stable table structure capability.
 

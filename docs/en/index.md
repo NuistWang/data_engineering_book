@@ -21,7 +21,7 @@ The current Chinese mainline uses the 2026 Springer-size publication structure. 
 - [Part 9: Data Assets, Data Products, and Data Contracts](part9/index.md)
 - [Part 10: Agentic Data Engineering and Data Engineering Agents](part10/index.md)
 - [Part 11: Privacy, Compliance, and Data Security](part11/index.md)
-- [Part 12: Specialized Datasets and Data Engineering Practice](part12/index.md)
+- [Part 12: Specialized Datasets and Multimodal Data Engineering Practice](part12/index.md)
 - [Part 13: Open-Source Large-Model Data Engineering Recipes and Paradigms](part13/index.md)
 - [Part 14: Hands-on Projects](part14/index.md)
 - [Appendix A: Tools and Frameworks Quick Reference](appendix_a_tools_and_frameworks_quick_reference.md)
@@ -138,17 +138,17 @@ This part focuses on compliance frameworks, privacy protection, federated learni
 - [Chapter 36: Data Compliance Frameworks and Governance](part11/ch36_compliance_framework_and_governance.md)
 - [Chapter 37: Federated Learning and Privacy-Preserving Technologies](part11/ch37_federated_learning_and_privacy_preserving_technologies.md)
 
-## Part 12: Specialized Datasets and Data Engineering Practice
+## Part 12: Specialized Datasets and Multimodal Data Engineering Practice
 
-This part uses representative specialized datasets to show how data engineering methods are organized around task definitions, schemas, build pipelines, quality control, evaluation protocols, and compliance risks.
+Part 12 follows a modality-explicit path across text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio, and reasoning traces. It explains how specialized datasets are defined, constructed, evaluated, released, governed, and reproduced, while connecting project case studies with open-source model data recipes.
 
 - [Part Contents](part12/index.md)
-- [Chapter 38: Visual Document and Structured Table Data Engineering](part12/ch38_visual_document_table_data_engineering.md)
-- [Chapter 39: Visual Reasoning and Tool-Calling Data Engineering](part12/ch39_visual_reasoning_tool_data_engineering.md)
-- [Chapter 40: Interaction Control and Reasoning Trace Data Engineering](part12/ch40_interaction_reasoning_trace_data_engineering.md)
-- [Chapter 41: FineWeb Pre-training Corpus Data Engineering](part12/ch41_fineweb_pretraining_corpus.md)
-- [Chapter 42: Dolma Pre-training Corpus Transparent Ledger](part12/ch42_dolma_pretraining_corpus_ledger.md)
-- [Chapter 43: LAION-5B Image-Text Candidate Pool and Filtering Channels](part12/ch43_laion5b_image_text_candidate_pool.md)
+- [Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers](part12/ch38_text_corpora_transparent_ledger.md)
+- [Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation](part12/ch39_image_text_candidate_pool_data_engineering.md)
+- [Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints](part12/ch40_visual_document_table_data_engineering.md)
+- [Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories](part12/ch41_visual_reasoning_tool_data_engineering.md)
+- [Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries](part12/ch42_speech_audio_interaction_data_engineering.md)
+- [Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks](part12/ch43_reasoning_trace_compression_data_engineering.md)
 
 ## Part 13: Open-Source Large-Model Data Engineering Recipes and Paradigms
 

@@ -136,14 +136,14 @@ plugins:
                 - 本篇目录: part11/index.md
                 - 第36章：数据合规框架与治理: part11/ch36_compliance_framework_and_governance.md
                 - 第37章：联邦学习与隐私保护技术: part11/ch37_federated_learning_and_privacy_preserving_technologies.md
-            - 第十二篇：专项数据集与数据工程实践:
+            - 第十二篇：专项数据集与多模态数据工程实践:
                 - 本篇目录: part12/index.md
-                - 第38章：视觉文档与结构化表格数据工程: part12/ch38_visual_document_table_data_engineering.md
-                - 第39章：视觉推理与工具调用数据工程: part12/ch39_visual_reasoning_tool_data_engineering.md
-                - 第40章：交互控制与推理轨迹数据工程: part12/ch40_interaction_reasoning_trace_data_engineering.md
-                - 第41章：FineWeb 预训练语料数据工程: part12/ch41_fineweb_pretraining_corpus.md
-                - 第42章：Dolma 预训练语料透明账本: part12/ch42_dolma_pretraining_corpus_ledger.md
-                - 第43章：LAION-5B 图文候选池与筛选通道: part12/ch43_laion5b_image_text_candidate_pool.md
+                - 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本: part12/ch38_text_corpora_transparent_ledger.md
+                - 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估: part12/ch39_image_text_candidate_pool_data_engineering.md
+                - 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束: part12/ch40_visual_document_table_data_engineering.md
+                - 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹: part12/ch41_visual_reasoning_tool_data_engineering.md
+                - 第42章：语音与音频数据工程：交互控制、风格标签与安全边界: part12/ch42_speech_audio_interaction_data_engineering.md
+                - 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码: part12/ch43_reasoning_trace_compression_data_engineering.md
             - 第十三篇：开源大模型数据工程配方与范式:
                 - 本篇目录: part13/index.md
                 - 第44章：LLM 预训练数据工程实战：从配方到落地: part13/ch44_pretrain_recipes.md
@@ -266,14 +266,14 @@ plugins:
                 - "Part Overview": part11/index.md
                 - "Chapter 36: Data Compliance Framework and Governance": part11/ch36_compliance_framework_and_governance.md
                 - "Chapter 37: Federated Learning and Privacy-Preserving Technologies": part11/ch37_federated_learning_and_privacy_preserving_technologies.md
-            - "Part 12: Specialized Datasets and Data Engineering Practice":
+            - "Part 12: Specialized Datasets and Multimodal Data Engineering Practice":
                 - "Part Overview": part12/index.md
-                - "Chapter 38: Visual Document and Structured Table Data Engineering": part12/ch38_visual_document_table_data_engineering.md
-                - "Chapter 39: Visual Reasoning and Tool-Calling Data Engineering": part12/ch39_visual_reasoning_tool_data_engineering.md
-                - "Chapter 40: Interaction Control and Reasoning Trace Data Engineering": part12/ch40_interaction_reasoning_trace_data_engineering.md
-                - "Chapter 41: FineWeb Pre-training Corpus Data Engineering": part12/ch41_fineweb_pretraining_corpus.md
-                - "Chapter 42: Dolma Pre-training Corpus Transparent Ledger": part12/ch42_dolma_pretraining_corpus_ledger.md
-                - "Chapter 43: LAION-5B Image-Text Candidate Pool and Filtering Channels": part12/ch43_laion5b_image_text_candidate_pool.md
+                - "Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers": part12/ch38_text_corpora_transparent_ledger.md
+                - "Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation": part12/ch39_image_text_candidate_pool_data_engineering.md
+                - "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints": part12/ch40_visual_document_table_data_engineering.md
+                - "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories": part12/ch41_visual_reasoning_tool_data_engineering.md
+                - "Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries": part12/ch42_speech_audio_interaction_data_engineering.md
+                - "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks": part12/ch43_reasoning_trace_compression_data_engineering.md
             - "Part 13: Open-source LLM Data Engineering Recipes and Paradigms":
                 - "Part Overview": part13/index.md
                 - "Chapter 44: LLM Pre-training Data Engineering in Practice": part13/ch44_pretrain_recipes.md

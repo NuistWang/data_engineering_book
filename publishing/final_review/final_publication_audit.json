@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-13T10:48:24.938782+00:00",
+  "generated_at_utc": "2026-06-13T17:29:31.272470+00:00",
   "scanned_files": 71,
   "style_hits": [
     {
@@ -1816,900 +1816,907 @@
       "context": "首先，不要为低敏感、单主体、低风险数据过度设计。若数据本身并不敏感，且完全在单组织内部受控环境中使用，那么直接引入联邦学习或 MPC 往往只会增加复杂度，未必带来真实收益。第二，不要把联邦学习当作“天然安全”。联邦学习解决的是数据位置..."
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 7,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是单纯 OCR，而是",
-      "context": "本章讨论视觉文档如何从图像、版式、表格和业务字段中形成可训练、可评测、可审计的数据对象，有票据文档理解与稀疏表格结构识别两个专项案例。StructBill-CN 强调高风险票据字段、层级 JSON 和算术一致性，SparseTable..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 42,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "医疗票据、费用结算单、药房发票这类文档，处于一个典型的「高风险 × 高密度 × 弱视觉线索」的交叉地带。它们既不是可以随意改写的自由文本，也不是结构规整、网格清晰的电子表格，而是要被直接灌入下游业务系统（财务审计、保险理赔、ERP）的..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 42,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是结构规整、网格清晰的电子表格，而是",
-      "context": "医疗票据、费用结算单、药房发票这类文档，处于一个典型的「高风险 × 高密度 × 弱视觉线索」的交叉地带。它们既不是可以随意改写的自由文本，也不是结构规整、网格清晰的电子表格，而是要被直接灌入下游业务系统（财务审计、保险理赔、ERP）的..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 64,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是字符，而是",
-      "context": "这正是为什么本章反复强调\"算术自洽\"必须成为一等公民：在高风险结构化抽取里，**衡量数据质量的单位不是字符，而是可入库的记录**。一份只看字符级指标的数据集，无法暴露这种级联失效；而 StructBill-CN 通过显式的逻辑约束与 ..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 98,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "StructBill-CN 在选材与标注上刻意保留了三类\"难\"，使它成为一个真正的压力测试基准，而不是规整票据的\"舒适区\"。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 106,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是缺陷，而是",
-      "context": "这三类挑战不是缺陷，而是设计目标：它们决定了 §38.4 流水线里\"为什么要有逻辑门禁、为什么要做质量分级、为什么标注要语义优先\"。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 134,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是节点，而是",
-      "context": "*图 38-1：Schema 到层级 JSON 的结构示意 —— 键字段与表结构构成可见的 JSON 节点；约束规则不是节点，而是贴附在金额、总额等数值字段上的可验证关系。*"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 288,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "**⑦ 版本切分。** 数据集按训练 : 测试 = **8:2** 切分。工程实践上建议：切分时保证 6 类 schema 在两侧的分布可控、留出真正的跨布局测试样本；并可从训练集再切出一个小验证子集用于调参，但不污染测试集。每一个版..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 294,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是附属品，而是",
-      "context": "这组元数据有三重作用。**第一，错误归因。** 当某指标回归时，可据此区分是图像质量、标注口径还是模型能力的问题。**第二，审计合规。** 高风险数据要求\"谁、在哪个版本、为什么改\"全程可追溯（详见 §38.6.3）。**第三，可复现..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 312,
-      "kind": "blog-transition",
-      "phrase": "换句话说",
-      "context": "把这些指标与 §38.3 的字段类型对齐，就构成了一个**评测闭环**：文本字段看 ANLS / Entity-F1，编号看精确匹配，数值字段看 F1 并叠加 Row-ACR，全局总额看 Doc-ACR，整体结构看 TEDS / Ta..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 392,
-      "kind": "blog-transition",
-      "phrase": "换句话说",
-      "context": "从数据消费的角度还能看出一个常被忽视的细节：内容对齐 $R_{content}$ 之所以要用 Hungarian 匹配(Kuhn, 1955) 做\"行级一对一对齐\"，正是因为模型生成的行序可能与 ground truth 不一致，或存..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 445,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是一个一次性产物，而是",
-      "context": "这两点共同说明：StructBill-CN 不是一个一次性产物，而是一个**可演进的数据契约**——schema、约束、切分都带版本，能随下游 VLM 与 RAG 项目的需求持续生长。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 451,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是字符，而是",
-      "context": "本章用一条带逻辑一致性门禁的构建流水线、一套字段—标注—逻辑—指标对齐的评测闭环、一份可读的样本结构示例，以及隐私/合规/审计的底线约束，把这个问题讲成了一个可复现的工程范式。核心结论有三点。第一，在高风险结构化抽取里，衡量数据质量的..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 467,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "在视觉文档理解任务中，表格经常被简化为“图像中的文字块集合”。这种简化在密集表格中有时可以工作，因为每个行列位置都有显著文本，文本本身能够充当隐式锚点；但在边框弱、留白多、空列多或单元格合并频繁的场景中，文本锚点会迅速失效。模型看到的..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 469,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是格式瑕疵，而是",
-      "context": "传统 TSR 评测更关注最终 HTML 树是否接近参考结构，或者关注单元格文本是否被正确填入。问题在于：如果数据标注没有显式保留空单元格，模型跳过空列也可能得到看似合理的文本序列；如果评测只比较非空文本，模型可能把第三列内容左移到第二..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 477,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这三层必须同步存在。只有 HTML 而没有 bbox，数据集无法约束模型是否真正学会空间对齐；只有 bbox 而没有 HTML，模型无法学习行列拓扑和跨行跨列结构；只有非空文本而没有空单元格占位，评测会系统性低估稀疏布局带来的结构难度。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 499,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是把图像中所有文字读出来，而是",
-      "context": "第一类是表格结构识别。模型需要恢复 `<table>`、`<tr>`、`<td>` 等结构标签，并处理行列组织、空位、合并单元格和局部对齐。此处的重点不是把图像中所有文字读出来，而是把文字放回正确的网格位置。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 503,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是制造更难的 OCR，而是",
-      "context": "第三类是掩码压力测试。STB-Mask-Stress 通过列级和局部遮挡主动减少文本线索，模拟严重稀疏或不完整视觉条件。它的目标不是制造更难的 OCR，而是测试模型能否在部分内容不可见时仍保留表格拓扑，尤其是空列、空单元格和跨列关系。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 529,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是普通文本，而是",
-      "context": "这里的 `[EMPTY_CELL]` 不是普通文本，而是用于表达“结构存在、内容为空”的占位符。它把单元格的结构身份和语义内容解耦：即使图像区域没有可读字符，该位置仍然有行列坐标、边界框和上下文关系。对于稀疏表格，这种占位符可以防止模..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 550,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单串行的文件转换，而是",
-      "context": "SparseTable-Bench 的构建可整理为四个阶段：表格收集、结构抽取、空间标注和稀疏拓扑增强。四个阶段之间不是简单串行的文件转换，而是围绕“结构、文本、几何三者一致”反复校验，如图 38-5 所示。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 558,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是盲目增加图像数量，而是",
-      "context": "采集阶段的关键不是盲目增加图像数量，而是覆盖稀疏结构的多样性。数据工程人员需要关注至少四类样本：边框缺失但行列对齐明显的表格，大面积空白或空列的表格，存在复杂 `rowspan`/`colspan` 的表格，以及文本密度在不同区域变化..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 574,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单随机遮挡图像，而是",
-      "context": "稀疏拓扑增强阶段用于构造压力测试和补充鲁棒性信号。它不是简单随机遮挡图像，而是基于列、表头、正文和单元格拓扑进行可控 mask。遮挡后，图像中的对应区域被统一背景色覆盖，标注中的文本 token 也同步置空或移除，但单元格节点、行列位..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 576,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "构建流水线最终应产出三类可复查对象：标准训练/验证/测试样本，STB-Mask-Stress 压力测试样本，以及记录数据版本、来源域、切分策略和转换脚本的数据说明。没有这些元信息，benchmark 很容易变成一次性实验材料，难以支持..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 580,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是“空白太多所以信息少”这么简单，而是",
-      "context": "稀疏表格的核心难点不是“空白太多所以信息少”这么简单，而是空白本身携带结构意义。空白区域可能代表一个空单元格、一整列缺失值、一个跨行单元格占据的区域，也可能只是页面排版留白。模型若不能区分这些情况，就会出现结构幻觉。"
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 602,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是提升训练集多样性，而是",
-      "context": "STB-Mask-Stress 是 SparseTable-Bench 中专门用于鲁棒性评估的压力测试切分。它的设计思想是：在保留表格拓扑的前提下，系统性减少文本线索，观察模型是否还能恢复行列结构和空单元格位置。与普通数据增强不同，S..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 674,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "对于 VLM 或文档模型训练，STB 可以承担两种不同角色。作为训练数据时，它提供的是结构化视觉监督，适合帮助模型学习“视觉区域到逻辑单元格”的对齐关系；作为评测数据时，它更适合作为鲁棒性切片，用来检验模型是否只是依赖文本密度和局部 ..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 698,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单复刻论文实验，而是",
-      "context": "需要注意，代码仓库的作用不是简单复刻论文实验，而是支持本章描述的数据工程流程复现：读取样本、验证 schema、构造遮挡、运行评测并解释错误。只要这些接口稳定，后续无论替换为 SA-Table、OCRFlux、Qwen-VL 或其他表..."
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 718,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单提供一个“更难”的表格数据集，而是",
-      "context": "使用该数据集时，不能只看一个总体 TEDS 分数。TEDS、TEDS-S、bbox 检查、空单元格召回和分 mask 类型错误分析应结合使用，才能区分文本错误、结构错误和空间错误。STB 的价值不是简单提供一个“更难”的表格数据集，而..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 245,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "这种差异首先体现在证据尺度上。自然图像中的主体通常占据较大比例，而医学图像中的关键区域可能很小。一个肺结节、视网膜微出血点或病理切片中的局部核异型性，往往只占整幅图像的几个像素块。如果模型只能在压缩后的全图表示上回答问题，很容易忽略这..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 259,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是要求模型直接暴露完整思维过程，而是",
-      "context": "工具行为监督试图补上这一层。它不是要求模型直接暴露完整思维过程，而是把可执行的行为节点写进样本结构。例如：模型先判断需要局部放大，调用 `Zoom-in`；工具返回一张局部 crop；模型再根据局部 crop 继续判断。这里的训练信号..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 263,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是制造“看起来更复杂”的样本，而是",
-      "context": "当然，工具行为监督也不是万能的。它会引入新的数据噪声：工具可能分割错误，bbox 可能偏离目标，模型可能为了迎合格式而过度调用工具。数据工程必须承认这些风险，并通过校验和复核降低其影响。工具调用数据的目标不是制造“看起来更复杂”的样本..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 287,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这张表不应被理解为单纯的规模展示。它真正提示的是三个工程问题。第一，答案选项并不完全均衡，训练和评测都需要关注选项偏置。第二，多图记录占比较高，说明工具观察已成为数据结构的一部分。第三，区域级来源决定了样本质量高度依赖 ROI、mas..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 306,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "#### 案例B.4.1 问题与选项设计：让题目真正依赖图像"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 308,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "医学图像工具调用数据的质量，很大程度上取决于问题本身是否设计得合理。工具轨迹再完整，如果题目不需要局部视觉证据，模型也不会真正学会取证。一个好的医学图像 VQA 问题，应当同时满足三个条件：与图像中的具体区域相关；不直接泄漏区域标注；..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 312,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "第二点是避免定位泄漏。构建者手里有 bbox 和 mask，很容易在题目中写出“框选区域”“标注处”“mask 内”这类表达。这些题目看似清楚，实则破坏了工具调用数据的目标——模型已被题干告知要看哪里，后续工具调用只是照着题干执行，而..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 318,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "还需要注意的是，医学图像问题不应鼓励模型作出超出数据任务范围的临床判断。多选题可以要求模型在给定选项中选择最符合图像表现的一项，但题干和解释不应扩展为“患者应当如何治疗”或“可以确诊为某疾病”。这种边界对医学数据尤其重要，因为读者和使..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 320,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "因此，问题与选项设计可以看作 MedImage-ToolVQA 的第一道质量门槛。它决定样本是否值得进入后续工具轨迹合成。若题目本身没有图像依赖性，后续再精细的工具调用也只是形式上的复杂化；若题目合理，工具轨迹才可能成为真正的行为监督。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 338,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是孤立步骤，而是",
-      "context": "MedImage-ToolVQA 的构建流程可以概括为六个阶段：区域样本整理、问题生成、质量校验、工具观察生成、轨迹合成和训练封装。每个阶段都不是孤立步骤，而是在维护同一条证据链。为了让读者看到这些阶段如何进入 MindSpore 工..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 415,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是生成更长的解释，而是",
-      "context": "`makereasoning` 的核心不是生成更长的解释，而是把工具调用和工具返回图像变成下一轮上下文。若样本不需要局部证据，则保留直接视觉推理路径。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 451,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是脚本顺序，而是",
-      "context": "*图39-2：MedImage-ToolVQA 数据构建概念流程。流程的重点不是脚本顺序，而是证据链和行为链如何在各阶段被保留下来。*"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 457,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是传统目标检测意义上的“框是否准”，而是",
-      "context": "第三阶段是质量校验。系统需要检查问题结构、选项质量、答案一致性和区域 grounding。这里的 grounding 并不是传统目标检测意义上的“框是否准”，而是问题、答案和目标区域之间是否存在合理关系。若问题与 ROI 无关，即使答..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 459,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是装饰，而是",
-      "context": "第四阶段是工具观察生成。对于需要工具增强的样本，构建流程会生成局部 crop、mask overlay 或分割观察图。这些图像不是装饰，而是后续多轮轨迹中的新输入。模型在训练时会看到工具调用之后出现的观察图，从而学习如何消费工具返回结果。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 463,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单拼接文本，而是",
-      "context": "第六阶段是训练封装。轨迹会被整理为 SFT 对话记录和可用于 RL 的环境输入。SFT 强调格式和示范，RL 强调策略优化和奖励反馈。二者使用相近的样本基础，但训练目标不同，封装方式也不同。训练封装的关键不是简单拼接文本，而是将 as..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 489,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是把工具调用写在同一段文本中，而是",
-      "context": "工具调用轨迹的核心是多轮结构。它不是把工具调用写在同一段文本中，而是将工具动作和工具观察分开，让模型在训练时经历一个“行动—观察—继续判断”的过程 (Yao et al. 2023)。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 535,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "因此，MedImage-ToolVQA 中保留一部分直接视觉推理样本是合理的。直接样本告诉模型：工具不是必须动作，而是按需动作。一个成熟的医学图像 Agent 不应为了展示工具能力而调用工具，而应在全图信息不足、局部细节关键、区域边界..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 535,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是必须动作，而是",
-      "context": "因此，MedImage-ToolVQA 中保留一部分直接视觉推理样本是合理的。直接样本告诉模型：工具不是必须动作，而是按需动作。一个成熟的医学图像 Agent 不应为了展示工具能力而调用工具，而应在全图信息不足、局部细节关键、区域边界..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 542,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "如果只读题目层，MedImage-ToolVQA 与普通 VQA 的区别并不明显。读者看到的仍然是一张医学图像和一道多选题。这也是许多数据集介绍容易停留在表面的原因：只展示题目和答案，看不出数据范式的变化。真正的差异要到证据层和行为层..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 542,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是一次性回答，而是",
-      "context": "如果只读题目层，MedImage-ToolVQA 与普通 VQA 的区别并不明显。读者看到的仍然是一张医学图像和一道多选题。这也是许多数据集介绍容易停留在表面的原因：只展示题目和答案，看不出数据范式的变化。真正的差异要到证据层和行为层..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 544,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "三层读法也有助于排查样本质量。若题目层合理，但证据层缺失，那么样本可能只是普通 VQA；若证据层存在，但行为层没有使用工具观察，那么样本可能只是附带标注的 VQA；若行为层完整，但题目层本身文本可答，那么工具调用又会变成形式化动作。只..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 548,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "从数据治理角度看，三层也对应不同责任人。医学内容专家更适合审查题目和答案是否合理；视觉数据工程师更适合审查 ROI、mask 和观察图是否一致；Agent 或训练工程师更适合审查工具格式、轨迹结构和奖励接口是否稳定。把这些层次分清楚，..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 554,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这一差异在医学图像中尤其重要。若模型只生成一段文字推理，它可能写出“需要观察局部区域”，但实际上并没有获得新的局部图像——推理可能语言上合理，却没有改变视觉输入。工具轨迹则要求模型真正调用放大或分割工具，并把返回图像纳入后续上下文。此..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 570,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是要求模型给出临床结论，而是",
-      "context": "在医学图像场景中，SFT 多轮记录还应显式保存一个影像诊断相关 schema。这里的“诊断”不是要求模型给出临床结论，而是把训练题目中的医学影像任务、候选标签、证据区域和安全边界结构化。图39-5给出了一组来自 VQA-RAD 测试集..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 670,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是让模型学习“胸片异常应当如何诊断”，而是",
-      "context": "这个 schema 的重点不是让模型学习“胸片异常应当如何诊断”，而是让训练记录能够同时回答五个工程问题：这是什么医学影像任务，候选标签边界在哪里，视觉证据来自哪一个 ROI，工具调用是否可执行，最终答案是否只落在题目允许的候选范围内..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 688,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是附加步骤，而是",
-      "context": "第四类失败是工具调用无效。模型或合成器生成的工具参数可能不合法，例如 bbox 越界、图像索引不存在、工具名拼写不一致、参数字段缺失。这类错误会直接影响训练和环境交互。对于工具调用数据，schema 校验不是附加步骤，而是必要步骤。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 717,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是只看 bbox 是否存在，而是",
-      "context": "区域一致性校验是第三层。问题与答案必须和目标区域相关，工具观察也应来自同一证据链。区域一致性不是只看 bbox 是否存在，而是看题干所问、选项差异、目标描述和局部图像是否共同指向同一视觉对象。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 721,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是把所有判断都交给人工，而是",
-      "context": "人工复核是第五层。不是所有样本都需要专家逐条审核，但高风险或低置信样本应进入人工复核队列。复核队列可由四类触发条件建立：一是自动校验分数低或多项规则冲突的样本；二是 bbox、mask 与题目目标存在弱一致性的样本；三是涉及疑似恶性病..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 734,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "更合理的评测应至少分成四层。第一层是答案层，检查模型是否选对答案。这一层可以使用规则匹配，因为多选题答案通常以 A、B、C、D 等形式呈现。第二层是格式层，检查模型是否输出合法工具调用，包括工具名、JSON 结构、参数类型和必填字段。..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 742,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "证据层指标最难，但也最有价值。它需要判断模型在观察图返回后，是否根据新视觉证据更新了判断。简单做法是检查回答文本中是否引用了局部观察；更严格的做法是比较有无观察图时的模型输出差异；再进一步，可以让评审模型或人工标注员判断模型解释是否与..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 750,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是附加说明，而是",
-      "context": "专项数据集如果只停留在样本文件层面，很难被后续团队稳定复用。尤其是医学图像工具调用数据，它同时包含图像、区域证据、工具轨迹、答案和安全边界，更需要配套的数据卡与版本说明。数据卡不是附加说明，而是数据集可维护性的组成部分 (Gebru ..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 784,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是一个单纯的医学数据集介绍，而是",
-      "context": "这些原则也解释了为什么 MedImage-ToolVQA 适合放在专项数据集与数据工程实践这一篇中讨论。它不是一个单纯的医学数据集介绍，而是一个将多模态数据、工具使用、Agent 轨迹和合规治理连接起来的案例。它向前连接图文对齐、视觉..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 786,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "对于读者而言，本章真正需要带走的不是某个具体工具名，而是一种思考方式：当模型面对的问题需要主动获取证据时，数据集就不能只记录问题和答案。它还需要记录证据从哪里来、动作如何产生、观察如何返回、答案如何被更新，以及整个过程如何被校验。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 786,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是某个具体工具名，而是",
-      "context": "对于读者而言，本章真正需要带走的不是某个具体工具名，而是一种思考方式：当模型面对的问题需要主动获取证据时，数据集就不能只记录问题和答案。它还需要记录证据从哪里来、动作如何产生、观察如何返回、答案如何被更新，以及整个过程如何被校验。"
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 797,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "第三是观察消费。工具返回结果必须改变后续可见信息，并被模型用于下一步判断。如果工具调用只是轨迹中的形式片段，而观察结果没有进入上下文，那么它对训练行为策略的帮助有限。读者在迁移本章方法时，最应检查的不是工具名是否足够丰富，而是“工具返..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 797,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是工具名是否足够丰富，而是",
-      "context": "第三是观察消费。工具返回结果必须改变后续可见信息，并被模型用于下一步判断。如果工具调用只是轨迹中的形式片段，而观察结果没有进入上下文，那么它对训练行为策略的帮助有限。读者在迁移本章方法时，最应检查的不是工具名是否足够丰富，而是“工具返..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 809,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是某个项目的复现说明，而是",
-      "context": "第十三篇和第十四篇则更偏训练配方和项目实践。本章提供的医学图像工具轨迹，可作为 VLM 指令数据、Agent Tool-Use 工厂和多模态 RL 数据的前置案例。读者如果后续要设计自己的多模态工具调用项目，可以把本章当作一个中间桥梁..."
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 811,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这种跨章节关系也提醒我们，专项数据集的意义不只是介绍一个数据对象。更重要的是，它帮助读者把前面学过的方法重新组合起来。医学图像只是载体；真正的主题是：当模型需要在视觉环境中主动取证时，数据工程应该怎样记录证据、行动、反馈和风险。"
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 29,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是字段数量更多，而是",
-      "context": "因此，可控语音交互数据和普通 ASR/TTS 语料的差异，首先不是字段数量更多，而是问题定义变了。ASR 关心“这段声音对应哪段文字”，普通 TTS 关心“这段文字能否被自然读出来”；可控语音交互还要关心“这段回答应当以什么声音、什么..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 35,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "第三，语音对话需要把情绪从“文本描述”落实到“声音表现”。开心、愤怒、害怕、中性、悲伤这些状态不只是标签，它们会体现在音高、能量、语速、停顿和韵律上。对模型来说，真正的学习目标不是记住某个情绪词，而是在给定目标表达状态时，生成与之相符..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 35,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是记住某个情绪词，而是",
-      "context": "第三，语音对话需要把情绪从“文本描述”落实到“声音表现”。开心、愤怒、害怕、中性、悲伤这些状态不只是标签，它们会体现在音高、能量、语速、停顿和韵律上。对模型来说，真正的学习目标不是记住某个情绪词，而是在给定目标表达状态时，生成与之相符..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 107,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是给句子随机贴 mood，而是",
-      "context": "TTSSpeakerControl 则把控制能力集中到 text-to-speech 形态。输入文本被拆成两部分：`text` 描述声音应该如何表达，`answer` 才是要读出的内容。例如 `text` 为“女，有点害怕，手心冒汗，..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 142,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "在 VoiceStyleControl 中，emotion 分布只是第一层配平信息。真正进入训练和评测时，样本还会沿着输入侧与输出侧拆开：`query_gender × query_mood` 描述用户语音的状态分布，`answer_..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 265,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "联合 schema 将训练入口拆成三部分：语义输入是 `query`、`text` 或 `answer` 文本 token，风格输入是 `query_gender`、`answer_gender`、`query_mood`、`answ..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 277,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是简单的顺序生产线，而是",
-      "context": "这条流水线不是简单的顺序生产线，而是一组连续的数据门禁。文本内容生成之后，要判断语义是否适合指定情绪；参考语音选择之后，要判断授权是否覆盖当前任务；语音合成之后，要判断音频、文本、声音条件和 emotion 是否同时通过。任何一步发现..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 283,
-      "kind": "weak-booster",
-      "phrase": "很容易",
-      "context": "第二步是分配风格属性。S2S 需要分别为 query 侧和 answer 侧赋予 gender 与 mood，TTS 则为回答侧赋予 gender 与 mood，并在 `text` 中写出自然语言风格描述。分配策略要同时考虑均衡和组合..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 287,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是“克隆得越像越好”，而是",
-      "context": "第三步是准备参考语音池。VoiceStyleControl 使用多说话人、多情绪参考池，并通过 CosyVoice2 以 zero-shot voice cloning 方式合成指定风格语音。工程关键不是“克隆得越像越好”，而是“可授..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 329,
-      "kind": "blog-transition",
-      "phrase": "最怕",
-      "context": "第五步是离散语音标记。语音生成训练需要把声学目标整理为离散 speech token，使生成任务可以被组织为序列建模问题。通用做法是对已有波形用 S3Tokenizer 等 tokenizer 编码；VoiceStyleControl..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 355,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这个示例对应的是“自然语言风格描述如何变成可训练语音监督”的核心链路：`instruction_text` 进入合成函数，`speech_token` 成为后续训练可以直接建模的离散目标，`speech_audio` 用于听感质检、反..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 406,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "评测结果还应回写到数据版本，而不是只保存在模型报告里。若某一版模型在 fearful 上情绪分类准确率高但人工舒适度低，说明数据可能把 fearful 构造成过强、过戏剧化的表达；若参考声音条件越做越像某个可识别真人而合规风险上升，说..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 423,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是上线前最后一层过滤，而是",
-      "context": "表42-4将风险治理落实为数据门禁。授权缺失的 reference 不能进入合成队列；撤回授权的 reference 必须能追溯到所有派生音频和 token；高风险情绪操控样本不能只靠训练后安全策略兜底，而要在数据构建阶段就被拦截或降..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 471,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "第一，长 CoT 的 token 成本很高。数学、代码和科学问题中的推导往往占据输出的大部分长度，真正的最终答案只占很小一段。如果所有中间推理都以可见文本形式进入训练和推理，模型需要在大量重复、展开、试探和自我修正的文字上消耗上下文窗..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 518,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是直接筛选短答案，而是",
-      "context": "Latent-Switch-69K 的构建起点是 Dolci-Think-SFT-32B 中采样得到的推理轨迹。原始轨迹可以理解为 source reasoning traces：它们包含问题、一个或多个 assistant 输出、可..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 559,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是“把原文变短”，而是",
-      "context": "第二阶段是生成压缩显式 CoT。teacher 在原始问题和 solution intuition 的条件下继续解题，输出较短的推理过程和最终答案。由于 teacher 已经拿到高层计划，它不需要重新展开全部探索过程，也不需要重复原始..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 648,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是训练模型“照着这段文字说”，而是",
-      "context": "第二阶段是 high-level intuition distillation。提示词明确要求 teacher 返回 JSON，并限制 correct_insight 只能描述粗粒度计划，不提供最终答案，不写成完整 CoT。这个约束很..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 662,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是随意加的 padding，而是",
-      "context": "这个预算规则有两个含义。第一，latent steps 不是随意加的 padding，而是与被压缩的高层推理内容相关。intuition 越长，说明这道题的高层规划可能越复杂，模型需要更多隐藏计算槽位。第二，latent steps ..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 748,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是这段文本看起来像不像自然对话，而是",
-      "context": "这条示例里，`<latent_think>` 和 `</latent_think>` 是结构边界；中间四个 `<|endoftext|>` 只是占位符，真实样本中的数量由 `n_latent_steps` 决定；`<think>` 到..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 760,
-      "kind": "blog-transition",
-      "phrase": "换句话说",
-      "context": "teacher-reference conversation 是另一条容易被忽视的序列。它不是 student sequence 的副本，而是省略 latent placeholder 后的参考对话。teacher 输入中包含原始问题..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 766,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是为了可视化方便，而是",
-      "context": "在代码实现中，一条样本会构造多个 mask：`prompt_mask`、`latent_internal_mask`、`latent_boundary_mask`、`cot_mask`、`answer_mask`、`teacher_k..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 806,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是重新推导损失函数，而是",
-      "context": "对于数据工程师来说，最实用的检查不是重新推导损失函数，而是确认每条样本的 mask 是否满足几条不变量。第一，prompt 区间所有 labels 都应为 `-100`。第二，latent interior 区间所有 labels 都..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 810,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是要删除显式推理，而是",
-      "context": "还有一个细节是显式 CoT 的权重。Latent-Switch-69K 不是要删除显式推理，而是要降低对完整长 CoT 的依赖。若 CoT 权重过高，模型会更倾向于把能力用在复现可见推理文字上；若 CoT 权重过低，模型可能只学会结构..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 838,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "为了让这些报告真正可用，可以为 Latent-Switch-69K 建立一套发布前验收清单。长度层面，检查 source CoT、distilled CoT、intuition、answer 和 total sequence 的分布，..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 854,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是放弃可解释性，而是",
-      "context": "对第六篇来说，它提供了 CoT 数据工程的下一步。第18章中的 CoT 样本通常把推理过程直接作为文本监督；第19章的工具数据强调动作、观察和结果；第20章的 Agent 数据强调状态和轨迹。Latent-Switch-69K 则说明..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 865,
-      "kind": "rhetorical-not-but",
-      "phrase": "不是删掉推理，而是",
-      "context": "4. 数据压缩的目标不是删掉推理，而是把高层意图、隐藏计算和显式验证重新分配到更合适的通道中。"
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 867,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "如果一个团队只复用 Latent-Switch-69K 的文本输出，而忽略 `n_latent_steps`、latent boundary 和 supervision masks，它得到的只是一个较短的 CoT SFT 数据集。只有..."
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 877,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "第四步是谨慎解释效果。若模型使用更少 visible tokens 得到相近答案，不一定说明 latent reasoning 已经学好；它也可能只是学会直接回答。真正的验收应同时查看答案正确率、显式验证链质量、格式闭合率、laten..."
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 32,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 30,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "这三个问题说明，Common Crawl 只是网页快照，不是训练集。真正的数据工程任务不是“下载更多网页”，而是把每个网页样本转化为一条可追溯、可过滤、可去重、可评估、可撤回的训练记录。FineWeb 正是围绕这个问题建立的公开案例。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 32,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 30,
       "kind": "rhetorical-not-but",
       "phrase": "不是“下载更多网页”，而是",
       "context": "这三个问题说明，Common Crawl 只是网页快照，不是训练集。真正的数据工程任务不是“下载更多网页”，而是把每个网页样本转化为一条可追溯、可过滤、可去重、可评估、可撤回的训练记录。FineWeb 正是围绕这个问题建立的公开案例。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 52,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 50,
       "kind": "rhetorical-not-but",
       "phrase": "不是“清洗脚本集合”，而是",
       "context": "这些步骤构成的不是“清洗脚本集合”，而是一组训练前的数据契约。每一步都应有输入、输出、失败记录和可复查的参数。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 58,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 56,
       "kind": "rhetorical-not-but",
       "phrase": "不是越严格越好，而是",
       "context": "过滤太少时，模型会吸收模板、乱码、广告、重复页面和非自然语言。它们可能在 token 统计上贡献很大，但对下游任务没有帮助，甚至会损伤语言分布。过滤太多时，语料规模下降，内容覆盖面变窄，一些长尾知识、论坛问答和非标准写作会被误删。对预..."
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 66,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 64,
       "kind": "rhetorical-not-but",
       "phrase": "不是 FineWeb 论文中的原始公式，而是",
       "context": "其中，$F$ 表示过滤策略，$D_F$ 是过滤后数据集，$S_{eval}$ 是固定评测协议下的模型得分，$R_{risk}$ 是隐私、版权、毒性和污染风险，$T_F$ 是保留 token 数，$T_{target}$ 是训练预算需要..."
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 86,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 84,
       "kind": "rhetorical-not-but",
       "phrase": "不是标注一个监督学习标签，而是",
       "context": "FineWeb 的任务不是标注一个监督学习标签，而是为自回归语言模型构建预训练 token stream。给定 Common Crawl 的网页快照集合 $C=\\{c_i\\}$，目标是学习一条数据处理函数："
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 108,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 106,
       "kind": "rhetorical-not-but",
       "phrase": "不是最大限度删除重复，而是",
       "context": "第二类是去重粒度问题。全局去重看起来更彻底，但 FineWeb 的消融结果显示，对所有 crawl 做全局 MinHash 去重并不一定更好；按 crawl 独立去重反而表现更强。这提醒数据工程团队，去重目标不是最大限度删除重复，而是..."
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 132,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 130,
       "kind": "rhetorical-not-but",
       "phrase": "不是 FineWeb 原始样本，而是",
       "context": "下面是一条抽象化的 FineWeb 类文档记录。它不是 FineWeb 原始样本，而是根据 FineWeb 数据卡和 DataTrove 管线整理的工程示例。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 165,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 163,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "这个例子展示了 FineWeb 类语料的基本思想：`text` 是训练入口，但它不能单独解释样本质量。真正支撑复查的是来源、语言分数、过滤状态、去重范围和隐私处理记录。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 169,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 167,
       "kind": "rhetorical-not-but",
       "phrase": "不是直接评估单条样本，而是",
       "context": "FineWeb 的评估不是直接评估单条样本，而是评估由某个处理策略生成的数据版本。设某个处理版本 $v$ 对应数据集 $D_v$，训练得到模型 $M_v$。若评测集合为 $B=\\{b_1,\\ldots,b_k\\}$，每个任务得分为 $..."
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 243,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 241,
       "kind": "rhetorical-not-but",
       "phrase": "不是数学上越彻底越好，而是",
       "context": "这个结果对工程实践很重要。去重不是数学上越彻底越好，而是要看它如何改变数据分布。全局去重会让新旧 crawl 之间的时间分布、站点覆盖和重复簇结构发生复杂变化；如果只看“删除了多少重复”，可能误删更有价值的样本，保留低质量长尾。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 277,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 275,
       "kind": "rhetorical-not-but",
       "phrase": "不是单个样本，而是",
       "context": "这个公式同样是对 FineWeb 评估协议的工程化表达。它强调评估对象不是单个样本，而是“处理策略生成的数据版本”。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 289,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 287,
       "kind": "rhetorical-not-but",
       "phrase": "不是 FineWeb 官方表格，而是",
       "context": "FineWeb 的经验可以转化为一张 Web 预训练语料错误归因表。它不是 FineWeb 官方表格，而是本章根据 FineWeb 论文和数据卡整理的工程复盘。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 310,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 308,
       "kind": "rhetorical-not-but",
       "phrase": "不是某个固定阈值，而是",
       "context": "企业复刻 FineWeb 思路时，最值得迁移的不是某个固定阈值，而是四类工程对象。"
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 324,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 322,
       "kind": "rhetorical-not-but",
       "phrase": "不是照搬某个 token 规模，而是",
       "context": "对本书读者而言，FineWeb 最值得学习的不是照搬某个 token 规模，而是把预训练语料工程做成一套可追溯、可复现、可评估、可审计的系统。"
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 32,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 343,
       "kind": "rhetorical-not-but",
       "phrase": "不是并列主角，而是",
       "context": "Dolma 要解决的正是这个问题。它把英文预训练语料从不可见的数据配方，变成一组可下载、可统计、可处理、可撤回、可审计的 source。OLMo 在本章中不是并列主角，而是 Dolma 被透明训练链路消费的下游例子：它提醒我们，开放模..."
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 36,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 347,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "“开放”有不同层次。只发布权重，可以让用户运行模型，却不能让研究者解释模型。发布训练代码，可以让用户复现训练框架，却仍然不能说明模型实际看过什么。真正支撑科学研究的数据透明，至少需要回答六类问题。"
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 55,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 366,
       "kind": "rhetorical-not-but",
       "phrase": "不是单一静态文件，而是",
       "context": "Dolma 不是单一静态文件，而是带版本演进的语料资产。Hugging Face 数据卡列出 `v1`、`v1_5`、`v1_5-sample`、`v1_6`、`v1_6-sample` 和 `v1_7` 等版本；其中 `v1_7` ..."
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 99,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 410,
       "kind": "rhetorical-not-but",
       "phrase": "不是一张图或一道题，而是",
       "context": "本节不从单条文本开讲，而是从 Dolma 的 source 账本拆解透明预训练语料的链路。这里的“样本”不是一张图或一道题，而是一条从 source 到文档、再到训练 manifest 的证据路径。"
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 103,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 414,
       "kind": "rhetorical-not-but",
       "phrase": "不是给每条文本标注监督标签，而是",
       "context": "Dolma 的任务不是给每条文本标注监督标签，而是让训练消费记录可以被复原。设 source 集合为 $S=\\{s_1,\\ldots,s_m\\}$，每个 source 经过处理函数 $P_s$ 后得到文档集合 $D_s$："
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 188,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 499,
       "kind": "rhetorical-not-but",
       "phrase": "不是孤立脚本，而是",
       "context": "Dolma Toolkit 文档把数据整理概括为四个动作：tag、dedup、mix、tokenize。它们不是孤立脚本，而是证据链的生成器：tag 记录文档属性，dedup 记录保留和删除，mix 记录采样比例，tokenize 记..."
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 211,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 522,
       "kind": "rhetorical-not-but",
       "phrase": "不是“最高分”，而是",
       "context": "透明语料的评估重点不是“最高分”，而是“分数变化能不能解释”。Dolma 这类 source-level 语料让模型评估不再停在 leaderboard 上，而是能顺着训练日志回到 source、版本和采样比例。"
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 274,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 585,
       "kind": "rhetorical-not-but",
       "phrase": "不是单条 `text`，而是",
       "context": "第一，透明预训练语料的基本单位不是单条 `text`，而是能连接 source、处理配置、采样比例和训练 manifest 的文档记录。第二，source mix 必须用 token accounting 解释，不能只报告原始规模。第..."
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 276,
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 587,
       "kind": "rhetorical-not-but",
       "phrase": "不是三万亿 token 的规模，而是",
       "context": "对本书读者而言，Dolma 最值得迁移的不是某个具体 source，也不是三万亿 token 的规模，而是把训练数据留下证据的方式。只要 source、处理动作、采样比例、训练 manifest 和治理记录能连成链，预训练语料才具备继..."
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 31,
       "kind": "rhetorical-not-but",
       "phrase": "不是把网页图片简单打包，而是",
       "context": "如果把这类数据压成一个自由文本 prompt，后续几乎无法定位问题。模型生成水印，是视觉通道的问题；模型学到广告模板，是文本通道的问题；图文检索能力差，是对齐通道的问题；训练后出现人脸、儿童或版权争议，是风险通道和治理通道的问题。LA..."
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 33,
       "kind": "rhetorical-not-but",
       "phrase": "不是一个静态对象，而是",
       "context": "普通图片数据集通常以图像文件和人工标签为中心，样本边界相对稳定。图文候选池则不同。图片可能随 URL 失效或被替换，alt text 可能不是 caption，网页上下文可能和图片弱相关，安全标签可能随检测器版本变化。样本不是一个静态..."
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 66,
       "kind": "rhetorical-not-but",
       "phrase": "不是把所有图片文件集中托管起来，而是",
       "context": "LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是发布元数据和工具链。下游使用者根据 URL、文本、图像尺寸、相似度分数、安全标签和索引信息筛选，再自行下载或重建子集。"
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 70,
       "kind": "rhetorical-not-but",
       "phrase": "不是网页 trace 的直接复制，而是",
       "context": "最终训练样本不是网页 trace 的直接复制，而是按目标任务渲染出来的结构化视图。LAION-5B 的候选记录也一样，训练时要投影成具体视图，不能把全量候选池当成一个无差别输入。"
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 131,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "LAION-5B 论文描述的英文过滤阈值为 CLIP 余弦相似度 0.28，非英文图文对使用多语言 CLIP 阈值 0.26。论文也指出，内容过滤会移除约 90% 的原始图片候选，最后保留下接近 6B 的图文对。这个数字说明，开放网页..."
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 135,
       "kind": "rhetorical-not-but",
       "phrase": "不是官方实现，而是",
       "context": "下面的伪代码展示了 LAION-5B 类图文处理流程的核心。它不是官方实现，而是把论文流程改写为数据工程任务："
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 179,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "这带来一个实际原则：候选池和训练集要分层管理。候选池保留尽可能多的可筛选元数据，训练集只保存某次实验真正选择并下载成功的样本。两者之间必须有稳定映射，否则实验指标无法回查到具体过滤规则。"
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 207,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "| 对齐通道 | 图文是否相关 | CLIP 分数、近邻检索、人工通过率 | 文本是否真正描述图片 | 阈值调整、样本剔除 |"
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 252,
       "kind": "rhetorical-not-but",
       "phrase": "不是整库吸收，而是",
       "context": "如果目标是训练生产级生成模型，推荐流程不是整库吸收，而是先定义任务边界和风险边界，再从 LAION-5B 类候选池中构造可解释子集。高收益但高风险的样本，应优先通过授权采买、人工重标注、合成替代或内部合规来源补齐。"
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 260,
       "kind": "rhetorical-not-but",
       "phrase": "不是直接下载更多图片，而是",
       "context": "对本书读者而言，LAION-5B 最值得学习的不是直接下载更多图片，而是把开放网页图文关系拆成可检查通道，再用质量闭环、风险门禁和固定评测协议把候选池变成可复用的多模态训练资产。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 7,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是单纯 OCR，而是",
+      "context": "本章讨论视觉文档如何从图像、版式、表格和业务字段中形成可训练、可评测、可审计的数据对象，有票据文档理解与稀疏表格结构识别两个专项案例。StructBill-CN 强调高风险票据字段、层级 JSON 和算术一致性，SparseTable..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 42,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "医疗票据、费用结算单、药房发票这类文档，处于一个典型的「高风险 × 高密度 × 弱视觉线索」的交叉地带。它们既不是可以随意改写的自由文本，也不是结构规整、网格清晰的电子表格，而是要被直接灌入下游业务系统（财务审计、保险理赔、ERP）的..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 42,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是结构规整、网格清晰的电子表格，而是",
+      "context": "医疗票据、费用结算单、药房发票这类文档，处于一个典型的「高风险 × 高密度 × 弱视觉线索」的交叉地带。它们既不是可以随意改写的自由文本，也不是结构规整、网格清晰的电子表格，而是要被直接灌入下游业务系统（财务审计、保险理赔、ERP）的..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 64,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是字符，而是",
+      "context": "这正是为什么本章反复强调\"算术自洽\"必须成为一等公民：在高风险结构化抽取里，**衡量数据质量的单位不是字符，而是可入库的记录**。一份只看字符级指标的数据集，无法暴露这种级联失效；而 StructBill-CN 通过显式的逻辑约束与 ..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 98,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "StructBill-CN 在选材与标注上刻意保留了三类\"难\"，使它成为一个真正的压力测试基准，而不是规整票据的\"舒适区\"。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 106,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是缺陷，而是",
+      "context": "这三类挑战不是缺陷，而是设计目标：它们决定了 §40.4 流水线里\"为什么要有逻辑门禁、为什么要做质量分级、为什么标注要语义优先\"。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 134,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是节点，而是",
+      "context": "*图 40-1：Schema 到层级 JSON 的结构示意 —— 键字段与表结构构成可见的 JSON 节点；约束规则不是节点，而是贴附在金额、总额等数值字段上的可验证关系。*"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 288,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "**⑦ 版本切分。** 数据集按训练 : 测试 = **8:2** 切分。工程实践上建议：切分时保证 6 类 schema 在两侧的分布可控、留出真正的跨布局测试样本；并可从训练集再切出一个小验证子集用于调参，但不污染测试集。每一个版..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 294,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是附属品，而是",
+      "context": "这组元数据有三重作用。**第一，错误归因。** 当某指标回归时，可据此区分是图像质量、标注口径还是模型能力的问题。**第二，审计合规。** 高风险数据要求\"谁、在哪个版本、为什么改\"全程可追溯（详见 §40.6.3）。**第三，可复现..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 312,
+      "kind": "blog-transition",
+      "phrase": "换句话说",
+      "context": "把这些指标与 §40.3 的字段类型对齐，就构成了一个**评测闭环**：文本字段看 ANLS / Entity-F1，编号看精确匹配，数值字段看 F1 并叠加 Row-ACR，全局总额看 Doc-ACR，整体结构看 TEDS / Ta..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 392,
+      "kind": "blog-transition",
+      "phrase": "换句话说",
+      "context": "从数据消费的角度还能看出一个常被忽视的细节：内容对齐 $R_{content}$ 之所以要用 Hungarian 匹配(Kuhn, 1955) 做\"行级一对一对齐\"，正是因为模型生成的行序可能与 ground truth 不一致，或存..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 445,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是一个一次性产物，而是",
+      "context": "这两点共同说明：StructBill-CN 不是一个一次性产物，而是一个**可演进的数据契约**——schema、约束、切分都带版本，能随下游 VLM 与 RAG 项目的需求持续生长。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 451,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是字符，而是",
+      "context": "本章用一条带逻辑一致性门禁的构建流水线、一套字段—标注—逻辑—指标对齐的评测闭环、一份可读的样本结构示例，以及隐私/合规/审计的底线约束，把这个问题讲成了一个可复现的工程范式。核心结论有三点。第一，在高风险结构化抽取里，衡量数据质量的..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 467,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "在视觉文档理解任务中，表格经常被简化为“图像中的文字块集合”。这种简化在密集表格中有时可以工作，因为每个行列位置都有显著文本，文本本身能够充当隐式锚点；但在边框弱、留白多、空列多或单元格合并频繁的场景中，文本锚点会迅速失效。模型看到的..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 469,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是格式瑕疵，而是",
+      "context": "传统 TSR 评测更关注最终 HTML 树是否接近参考结构，或者关注单元格文本是否被正确填入。问题在于：如果数据标注没有显式保留空单元格，模型跳过空列也可能得到看似合理的文本序列；如果评测只比较非空文本，模型可能把第三列内容左移到第二..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 477,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "这三层必须同步存在。只有 HTML 而没有 bbox，数据集无法约束模型是否真正学会空间对齐；只有 bbox 而没有 HTML，模型无法学习行列拓扑和跨行跨列结构；只有非空文本而没有空单元格占位，评测会系统性低估稀疏布局带来的结构难度。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 499,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是把图像中所有文字读出来，而是",
+      "context": "第一类是表格结构识别。模型需要恢复 `<table>`、`<tr>`、`<td>` 等结构标签，并处理行列组织、空位、合并单元格和局部对齐。此处的重点不是把图像中所有文字读出来，而是把文字放回正确的网格位置。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 503,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是制造更难的 OCR，而是",
+      "context": "第三类是掩码压力测试。STB-Mask-Stress 通过列级和局部遮挡主动减少文本线索，模拟严重稀疏或不完整视觉条件。它的目标不是制造更难的 OCR，而是测试模型能否在部分内容不可见时仍保留表格拓扑，尤其是空列、空单元格和跨列关系。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 529,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是普通文本，而是",
+      "context": "这里的 `[EMPTY_CELL]` 不是普通文本，而是用于表达“结构存在、内容为空”的占位符。它把单元格的结构身份和语义内容解耦：即使图像区域没有可读字符，该位置仍然有行列坐标、边界框和上下文关系。对于稀疏表格，这种占位符可以防止模..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 550,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单串行的文件转换，而是",
+      "context": "SparseTable-Bench 的构建可整理为四个阶段：表格收集、结构抽取、空间标注和稀疏拓扑增强。四个阶段之间不是简单串行的文件转换，而是围绕“结构、文本、几何三者一致”反复校验，如图 40-5 所示。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 558,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是盲目增加图像数量，而是",
+      "context": "采集阶段的关键不是盲目增加图像数量，而是覆盖稀疏结构的多样性。数据工程人员需要关注至少四类样本：边框缺失但行列对齐明显的表格，大面积空白或空列的表格，存在复杂 `rowspan`/`colspan` 的表格，以及文本密度在不同区域变化..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 574,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单随机遮挡图像，而是",
+      "context": "稀疏拓扑增强阶段用于构造压力测试和补充鲁棒性信号。它不是简单随机遮挡图像，而是基于列、表头、正文和单元格拓扑进行可控 mask。遮挡后，图像中的对应区域被统一背景色覆盖，标注中的文本 token 也同步置空或移除，但单元格节点、行列位..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 576,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "构建流水线最终应产出三类可复查对象：标准训练/验证/测试样本，STB-Mask-Stress 压力测试样本，以及记录数据版本、来源域、切分策略和转换脚本的数据说明。没有这些元信息，benchmark 很容易变成一次性实验材料，难以支持..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 580,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是“空白太多所以信息少”这么简单，而是",
+      "context": "稀疏表格的核心难点不是“空白太多所以信息少”这么简单，而是空白本身携带结构意义。空白区域可能代表一个空单元格、一整列缺失值、一个跨行单元格占据的区域，也可能只是页面排版留白。模型若不能区分这些情况，就会出现结构幻觉。"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 602,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是提升训练集多样性，而是",
+      "context": "STB-Mask-Stress 是 SparseTable-Bench 中专门用于鲁棒性评估的压力测试切分。它的设计思想是：在保留表格拓扑的前提下，系统性减少文本线索，观察模型是否还能恢复行列结构和空单元格位置。与普通数据增强不同，S..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 674,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "对于 VLM 或文档模型训练，STB 可以承担两种不同角色。作为训练数据时，它提供的是结构化视觉监督，适合帮助模型学习“视觉区域到逻辑单元格”的对齐关系；作为评测数据时，它更适合作为鲁棒性切片，用来检验模型是否只是依赖文本密度和局部 ..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 698,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单复刻论文实验，而是",
+      "context": "需要注意，代码仓库的作用不是简单复刻论文实验，而是支持本章描述的数据工程流程复现：读取样本、验证 schema、构造遮挡、运行评测并解释错误。只要这些接口稳定，后续无论替换为 SA-Table、OCRFlux、Qwen-VL 或其他表..."
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 718,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单提供一个“更难”的表格数据集，而是",
+      "context": "使用该数据集时，不能只看一个总体 TEDS 分数。TEDS、TEDS-S、bbox 检查、空单元格召回和分 mask 类型错误分析应结合使用，才能区分文本错误、结构错误和空间错误。STB 的价值不是简单提供一个“更难”的表格数据集，而..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 245,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "这种差异首先体现在证据尺度上。自然图像中的主体通常占据较大比例，而医学图像中的关键区域可能很小。一个肺结节、视网膜微出血点或病理切片中的局部核异型性，往往只占整幅图像的几个像素块。如果模型只能在压缩后的全图表示上回答问题，很容易忽略这..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 259,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是要求模型直接暴露完整思维过程，而是",
+      "context": "工具行为监督试图补上这一层。它不是要求模型直接暴露完整思维过程，而是把可执行的行为节点写进样本结构。例如：模型先判断需要局部放大，调用 `Zoom-in`；工具返回一张局部 crop；模型再根据局部 crop 继续判断。这里的训练信号..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 263,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是制造“看起来更复杂”的样本，而是",
+      "context": "当然，工具行为监督也不是万能的。它会引入新的数据噪声：工具可能分割错误，bbox 可能偏离目标，模型可能为了迎合格式而过度调用工具。数据工程必须承认这些风险，并通过校验和复核降低其影响。工具调用数据的目标不是制造“看起来更复杂”的样本..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 287,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "这张表不应被理解为单纯的规模展示。它真正提示的是三个工程问题。第一，答案选项并不完全均衡，训练和评测都需要关注选项偏置。第二，多图记录占比较高，说明工具观察已成为数据结构的一部分。第三，区域级来源决定了样本质量高度依赖 ROI、mas..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 306,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "#### 案例B.4.1 问题与选项设计：让题目真正依赖图像"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 308,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "医学图像工具调用数据的质量，很大程度上取决于问题本身是否设计得合理。工具轨迹再完整，如果题目不需要局部视觉证据，模型也不会真正学会取证。一个好的医学图像 VQA 问题，应当同时满足三个条件：与图像中的具体区域相关；不直接泄漏区域标注；..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 312,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "第二点是避免定位泄漏。构建者手里有 bbox 和 mask，很容易在题目中写出“框选区域”“标注处”“mask 内”这类表达。这些题目看似清楚，实则破坏了工具调用数据的目标——模型已被题干告知要看哪里，后续工具调用只是照着题干执行，而..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 318,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "还需要注意的是，医学图像问题不应鼓励模型作出超出数据任务范围的临床判断。多选题可以要求模型在给定选项中选择最符合图像表现的一项，但题干和解释不应扩展为“患者应当如何治疗”或“可以确诊为某疾病”。这种边界对医学数据尤其重要，因为读者和使..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 320,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "因此，问题与选项设计可以看作 MedImage-ToolVQA 的第一道质量门槛。它决定样本是否值得进入后续工具轨迹合成。若题目本身没有图像依赖性，后续再精细的工具调用也只是形式上的复杂化；若题目合理，工具轨迹才可能成为真正的行为监督。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 338,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是孤立步骤，而是",
+      "context": "MedImage-ToolVQA 的构建流程可以概括为六个阶段：区域样本整理、问题生成、质量校验、工具观察生成、轨迹合成和训练封装。每个阶段都不是孤立步骤，而是在维护同一条证据链。为了让读者看到这些阶段如何进入 MindSpore 工..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 415,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是生成更长的解释，而是",
+      "context": "`makereasoning` 的核心不是生成更长的解释，而是把工具调用和工具返回图像变成下一轮上下文。若样本不需要局部证据，则保留直接视觉推理路径。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 451,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是脚本顺序，而是",
+      "context": "*图41-6：MedImage-ToolVQA 数据构建概念流程。流程的重点不是脚本顺序，而是证据链和行为链如何在各阶段被保留下来。*"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 457,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是传统目标检测意义上的“框是否准”，而是",
+      "context": "第三阶段是质量校验。系统需要检查问题结构、选项质量、答案一致性和区域 grounding。这里的 grounding 并不是传统目标检测意义上的“框是否准”，而是问题、答案和目标区域之间是否存在合理关系。若问题与 ROI 无关，即使答..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 459,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是装饰，而是",
+      "context": "第四阶段是工具观察生成。对于需要工具增强的样本，构建流程会生成局部 crop、mask overlay 或分割观察图。这些图像不是装饰，而是后续多轮轨迹中的新输入。模型在训练时会看到工具调用之后出现的观察图，从而学习如何消费工具返回结果。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 463,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单拼接文本，而是",
+      "context": "第六阶段是训练封装。轨迹会被整理为 SFT 对话记录和可用于 RL 的环境输入。SFT 强调格式和示范，RL 强调策略优化和奖励反馈。二者使用相近的样本基础，但训练目标不同，封装方式也不同。训练封装的关键不是简单拼接文本，而是将 as..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 489,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是把工具调用写在同一段文本中，而是",
+      "context": "工具调用轨迹的核心是多轮结构。它不是把工具调用写在同一段文本中，而是将工具动作和工具观察分开，让模型在训练时经历一个“行动—观察—继续判断”的过程 (Yao et al. 2023)。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 535,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "因此，MedImage-ToolVQA 中保留一部分直接视觉推理样本是合理的。直接样本告诉模型：工具不是必须动作，而是按需动作。一个成熟的医学图像 Agent 不应为了展示工具能力而调用工具，而应在全图信息不足、局部细节关键、区域边界..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 535,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是必须动作，而是",
+      "context": "因此，MedImage-ToolVQA 中保留一部分直接视觉推理样本是合理的。直接样本告诉模型：工具不是必须动作，而是按需动作。一个成熟的医学图像 Agent 不应为了展示工具能力而调用工具，而应在全图信息不足、局部细节关键、区域边界..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 542,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "如果只读题目层，MedImage-ToolVQA 与普通 VQA 的区别并不明显。读者看到的仍然是一张医学图像和一道多选题。这也是许多数据集介绍容易停留在表面的原因：只展示题目和答案，看不出数据范式的变化。真正的差异要到证据层和行为层..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 542,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是一次性回答，而是",
+      "context": "如果只读题目层，MedImage-ToolVQA 与普通 VQA 的区别并不明显。读者看到的仍然是一张医学图像和一道多选题。这也是许多数据集介绍容易停留在表面的原因：只展示题目和答案，看不出数据范式的变化。真正的差异要到证据层和行为层..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 544,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "三层读法也有助于排查样本质量。若题目层合理，但证据层缺失，那么样本可能只是普通 VQA；若证据层存在，但行为层没有使用工具观察，那么样本可能只是附带标注的 VQA；若行为层完整，但题目层本身文本可答，那么工具调用又会变成形式化动作。只..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 548,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "从数据治理角度看，三层也对应不同责任人。医学内容专家更适合审查题目和答案是否合理；视觉数据工程师更适合审查 ROI、mask 和观察图是否一致；Agent 或训练工程师更适合审查工具格式、轨迹结构和奖励接口是否稳定。把这些层次分清楚，..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 554,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "这一差异在医学图像中尤其重要。若模型只生成一段文字推理，它可能写出“需要观察局部区域”，但实际上并没有获得新的局部图像——推理可能语言上合理，却没有改变视觉输入。工具轨迹则要求模型真正调用放大或分割工具，并把返回图像纳入后续上下文。此..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 570,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是要求模型给出临床结论，而是",
+      "context": "在医学图像场景中，SFT 多轮记录还应显式保存一个影像诊断相关 schema。这里的“诊断”不是要求模型给出临床结论，而是把训练题目中的医学影像任务、候选标签、证据区域和安全边界结构化。图41-8给出了一组来自 VQA-RAD 测试集..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 670,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是让模型学习“胸片异常应当如何诊断”，而是",
+      "context": "这个 schema 的重点不是让模型学习“胸片异常应当如何诊断”，而是让训练记录能够同时回答五个工程问题：这是什么医学影像任务，候选标签边界在哪里，视觉证据来自哪一个 ROI，工具调用是否可执行，最终答案是否只落在题目允许的候选范围内..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 688,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是附加步骤，而是",
+      "context": "第四类失败是工具调用无效。模型或合成器生成的工具参数可能不合法，例如 bbox 越界、图像索引不存在、工具名拼写不一致、参数字段缺失。这类错误会直接影响训练和环境交互。对于工具调用数据，schema 校验不是附加步骤，而是必要步骤。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 717,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是只看 bbox 是否存在，而是",
+      "context": "区域一致性校验是第三层。问题与答案必须和目标区域相关，工具观察也应来自同一证据链。区域一致性不是只看 bbox 是否存在，而是看题干所问、选项差异、目标描述和局部图像是否共同指向同一视觉对象。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 721,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是把所有判断都交给人工，而是",
+      "context": "人工复核是第五层。不是所有样本都需要专家逐条审核，但高风险或低置信样本应进入人工复核队列。复核队列可由四类触发条件建立：一是自动校验分数低或多项规则冲突的样本；二是 bbox、mask 与题目目标存在弱一致性的样本；三是涉及疑似恶性病..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 734,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "更合理的评测应至少分成四层。第一层是答案层，检查模型是否选对答案。这一层可以使用规则匹配，因为多选题答案通常以 A、B、C、D 等形式呈现。第二层是格式层，检查模型是否输出合法工具调用，包括工具名、JSON 结构、参数类型和必填字段。..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 742,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "证据层指标最难，但也最有价值。它需要判断模型在观察图返回后，是否根据新视觉证据更新了判断。简单做法是检查回答文本中是否引用了局部观察；更严格的做法是比较有无观察图时的模型输出差异；再进一步，可以让评审模型或人工标注员判断模型解释是否与..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 750,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是附加说明，而是",
+      "context": "专项数据集如果只停留在样本文件层面，很难被后续团队稳定复用。尤其是医学图像工具调用数据，它同时包含图像、区域证据、工具轨迹、答案和安全边界，更需要配套的数据卡与版本说明。数据卡不是附加说明，而是数据集可维护性的组成部分 (Gebru ..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 784,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是一个单纯的医学数据集介绍，而是",
+      "context": "这些原则也解释了为什么 MedImage-ToolVQA 适合放在专项数据集与数据工程实践这一篇中讨论。它不是一个单纯的医学数据集介绍，而是一个将多模态数据、工具使用、Agent 轨迹和合规治理连接起来的案例。它向前连接图文对齐、视觉..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 786,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "对于读者而言，本章真正需要带走的不是某个具体工具名，而是一种思考方式：当模型面对的问题需要主动获取证据时，数据集就不能只记录问题和答案。它还需要记录证据从哪里来、动作如何产生、观察如何返回、答案如何被更新，以及整个过程如何被校验。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 786,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是某个具体工具名，而是",
+      "context": "对于读者而言，本章真正需要带走的不是某个具体工具名，而是一种思考方式：当模型面对的问题需要主动获取证据时，数据集就不能只记录问题和答案。它还需要记录证据从哪里来、动作如何产生、观察如何返回、答案如何被更新，以及整个过程如何被校验。"
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 797,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "第三是观察消费。工具返回结果必须改变后续可见信息，并被模型用于下一步判断。如果工具调用只是轨迹中的形式片段，而观察结果没有进入上下文，那么它对训练行为策略的帮助有限。读者在迁移本章方法时，最应检查的不是工具名是否足够丰富，而是“工具返..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 797,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是工具名是否足够丰富，而是",
+      "context": "第三是观察消费。工具返回结果必须改变后续可见信息，并被模型用于下一步判断。如果工具调用只是轨迹中的形式片段，而观察结果没有进入上下文，那么它对训练行为策略的帮助有限。读者在迁移本章方法时，最应检查的不是工具名是否足够丰富，而是“工具返..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 809,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是某个项目的复现说明，而是",
+      "context": "第十三篇和第十四篇则更偏训练配方和项目实践。本章提供的医学图像工具轨迹，可作为 VLM 指令数据、Agent Tool-Use 工厂和多模态 RL 数据的前置案例。读者如果后续要设计自己的多模态工具调用项目，可以把本章当作一个中间桥梁..."
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 811,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "这种跨章节关系也提醒我们，专项数据集的意义不只是介绍一个数据对象。更重要的是，它帮助读者把前面学过的方法重新组合起来。医学图像只是载体；真正的主题是：当模型需要在视觉环境中主动取证时，数据工程应该怎样记录证据、行动、反馈和风险。"
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 27,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是字段数量更多，而是",
+      "context": "因此，可控语音交互数据和普通 ASR/TTS 语料的差异，首先不是字段数量更多，而是问题定义变了。ASR 关心“这段声音对应哪段文字”，普通 TTS 关心“这段文字能否被自然读出来”；可控语音交互还要关心“这段回答应当以什么声音、什么..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 33,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "第三，语音对话需要把情绪从“文本描述”落实到“声音表现”。开心、愤怒、害怕、中性、悲伤这些状态不只是标签，它们会体现在音高、能量、语速、停顿和韵律上。对模型来说，真正的学习目标不是记住某个情绪词，而是在给定目标表达状态时，生成与之相符..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 33,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是记住某个情绪词，而是",
+      "context": "第三，语音对话需要把情绪从“文本描述”落实到“声音表现”。开心、愤怒、害怕、中性、悲伤这些状态不只是标签，它们会体现在音高、能量、语速、停顿和韵律上。对模型来说，真正的学习目标不是记住某个情绪词，而是在给定目标表达状态时，生成与之相符..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 105,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是给句子随机贴 mood，而是",
+      "context": "TTSSpeakerControl 则把控制能力集中到 text-to-speech 形态。输入文本被拆成两部分：`text` 描述声音应该如何表达，`answer` 才是要读出的内容。例如 `text` 为“女，有点害怕，手心冒汗，..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 140,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "在 VoiceStyleControl 中，emotion 分布只是第一层配平信息。真正进入训练和评测时，样本还会沿着输入侧与输出侧拆开：`query_gender × query_mood` 描述用户语音的状态分布，`answer_..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 263,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "联合 schema 将训练入口拆成三部分：语义输入是 `query`、`text` 或 `answer` 文本 token，风格输入是 `query_gender`、`answer_gender`、`query_mood`、`answ..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 275,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是简单的顺序生产线，而是",
+      "context": "这条流水线不是简单的顺序生产线，而是一组连续的数据门禁。文本内容生成之后，要判断语义是否适合指定情绪；参考语音选择之后，要判断授权是否覆盖当前任务；语音合成之后，要判断音频、文本、声音条件和 emotion 是否同时通过。任何一步发现..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 281,
+      "kind": "weak-booster",
+      "phrase": "很容易",
+      "context": "第二步是分配风格属性。S2S 需要分别为 query 侧和 answer 侧赋予 gender 与 mood，TTS 则为回答侧赋予 gender 与 mood，并在 `text` 中写出自然语言风格描述。分配策略要同时考虑均衡和组合..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 285,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是“克隆得越像越好”，而是",
+      "context": "第三步是准备参考语音池。VoiceStyleControl 使用多说话人、多情绪参考池，并通过 CosyVoice2 以 zero-shot voice cloning 方式合成指定风格语音。工程关键不是“克隆得越像越好”，而是“可授..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 327,
+      "kind": "blog-transition",
+      "phrase": "最怕",
+      "context": "第五步是离散语音标记。语音生成训练需要把声学目标整理为离散 speech token，使生成任务可以被组织为序列建模问题。通用做法是对已有波形用 S3Tokenizer 等 tokenizer 编码；VoiceStyleControl..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 353,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "这个示例对应的是“自然语言风格描述如何变成可训练语音监督”的核心链路：`instruction_text` 进入合成函数，`speech_token` 成为后续训练可以直接建模的离散目标，`speech_audio` 用于听感质检、反..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 404,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "评测结果还应回写到数据版本，而不是只保存在模型报告里。若某一版模型在 fearful 上情绪分类准确率高但人工舒适度低，说明数据可能把 fearful 构造成过强、过戏剧化的表达；若参考声音条件越做越像某个可识别真人而合规风险上升，说..."
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 421,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是上线前最后一层过滤，而是",
+      "context": "表42-4将风险治理落实为数据门禁。授权缺失的 reference 不能进入合成队列；撤回授权的 reference 必须能追溯到所有派生音频和 token；高风险情绪操控样本不能只靠训练后安全策略兜底，而要在数据构建阶段就被拦截或降..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 5,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是普通文本字段，而是",
+      "context": "本章以 Latent-Switch-69K 为案例，讨论推理轨迹数据如何从显式 Long-CoT 转向可压缩、可监督、可迁移的隐式计算记录。章节重点关注 teacher trace、latent budget、student sequ..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 27,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "第一，长 CoT 的 token 成本很高。数学、代码和科学问题中的推导往往占据输出的大部分长度，真正的最终答案只占很小一段。如果所有中间推理都以可见文本形式进入训练和推理，模型需要在大量重复、展开、试探和自我修正的文字上消耗上下文窗..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 74,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是直接筛选短答案，而是",
+      "context": "Latent-Switch-69K 的构建起点是 Dolci-Think-SFT-32B 中采样得到的推理轨迹。原始轨迹可以理解为 source reasoning traces：它们包含问题、一个或多个 assistant 输出、可..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 115,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是“把原文变短”，而是",
+      "context": "第二阶段是生成压缩显式 CoT。teacher 在原始问题和 solution intuition 的条件下继续解题，输出较短的推理过程和最终答案。由于 teacher 已经拿到高层计划，它不需要重新展开全部探索过程，也不需要重复原始..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 204,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是训练模型“照着这段文字说”，而是",
+      "context": "第二阶段是 high-level intuition distillation。提示词明确要求 teacher 返回 JSON，并限制 correct_insight 只能描述粗粒度计划，不提供最终答案，不写成完整 CoT。这个约束很..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 218,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是随意加的 padding，而是",
+      "context": "这个预算规则有两个含义。第一，latent steps 不是随意加的 padding，而是与被压缩的高层推理内容相关。intuition 越长，说明这道题的高层规划可能越复杂，模型需要更多隐藏计算槽位。第二，latent steps ..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 304,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是这段文本看起来像不像自然对话，而是",
+      "context": "这条示例里，`<latent_think>` 和 `</latent_think>` 是结构边界；中间四个 `<|endoftext|>` 只是占位符，真实样本中的数量由 `n_latent_steps` 决定；`<think>` 到..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 316,
+      "kind": "blog-transition",
+      "phrase": "换句话说",
+      "context": "teacher-reference conversation 是另一条容易被忽视的序列。它不是 student sequence 的副本，而是省略 latent placeholder 后的参考对话。teacher 输入中包含原始问题..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 322,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是为了可视化方便，而是",
+      "context": "在代码实现中，一条样本会构造多个 mask：`prompt_mask`、`latent_internal_mask`、`latent_boundary_mask`、`cot_mask`、`answer_mask`、`teacher_k..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 362,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是重新推导损失函数，而是",
+      "context": "对于数据工程师来说，最实用的检查不是重新推导损失函数，而是确认每条样本的 mask 是否满足几条不变量。第一，prompt 区间所有 labels 都应为 `-100`。第二，latent interior 区间所有 labels 都..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 366,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是要删除显式推理，而是",
+      "context": "还有一个细节是显式 CoT 的权重。Latent-Switch-69K 不是要删除显式推理，而是要降低对完整长 CoT 的依赖。若 CoT 权重过高，模型会更倾向于把能力用在复现可见推理文字上；若 CoT 权重过低，模型可能只学会结构..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 394,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "为了让这些报告真正可用，可以为 Latent-Switch-69K 建立一套发布前验收清单。长度层面，检查 source CoT、distilled CoT、intuition、answer 和 total sequence 的分布，..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 410,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是放弃可解释性，而是",
+      "context": "对第六篇来说，它提供了 CoT 数据工程的下一步。第18章中的 CoT 样本通常把推理过程直接作为文本监督；第19章的工具数据强调动作、观察和结果；第20章的 Agent 数据强调状态和轨迹。Latent-Switch-69K 则说明..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 421,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是删掉推理，而是",
+      "context": "4. 数据压缩的目标不是删掉推理，而是把高层意图、隐藏计算和显式验证重新分配到更合适的通道中。"
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 423,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "如果一个团队只复用 Latent-Switch-69K 的文本输出，而忽略 `n_latent_steps`、latent boundary 和 supervision masks，它得到的只是一个较短的 CoT SFT 数据集。只有..."
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 433,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "第四步是谨慎解释效果。若模型使用更少 visible tokens 得到相近答案，不一定说明 latent reasoning 已经学好；它也可能只是学会直接回答。真正的验收应同时查看答案正确率、显式验证链质量、格式闭合率、laten..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
@@ -8705,6 +8712,13 @@
     },
     {
       "file": "docs/zh/part8/ch24_dataops_flywheel_team.md",
+      "line": 303,
+      "kind": "rhetorical-not-but",
+      "phrase": "不是要求所有活动都在一周内完整闭环，而是",
+      "context": "飞轮的运转逻辑是：需求池产生任务 → 任务驱动数据生产，更新数据池 → 算法从数据池取数做实验，结果进入实验池 → 实验结果中发现的问题进入问题池 → 问题被修复后，更新的数据重新进入数据池，同时对需求池里的优先级做调整。其中，需求对..."
+    },
+    {
+      "file": "docs/zh/part8/ch24_dataops_flywheel_team.md",
       "line": 305,
       "kind": "weak-booster",
       "phrase": "真正",
@@ -8791,8 +8805,8 @@
       "file": "docs/zh/part8/ch24_dataops_flywheel_team.md",
       "line": 633,
       "kind": "rhetorical-not-but",
-      "phrase": "不是\"上工具\"，而是",
-      "context": "第二阶段的核心并不是\"上工具\"，而是让工具承载已经明确的流程。团队最初尝试直接上线标注平台，但很快发现，如果没有统一字段、统一任务命名和统一验收规则，平台只是把混乱从线下搬到了线上。因此，团队先统一了数据格式和任务模板，再把任务分发、..."
+      "phrase": "不是使用工具，而是",
+      "context": "第二阶段的核心并不是使用工具，而是让工具承载已经明确的流程。团队最初尝试直接上线标注平台，但很快发现，如果没有统一字段、统一任务命名和统一验收规则，平台只是把混乱从线下搬到了线上。因此，团队先统一了数据格式和任务模板，再把任务分发、标..."
     },
     {
       "file": "docs/zh/part8/ch24_dataops_flywheel_team.md",
@@ -8883,7 +8897,7 @@
       "line": 59,
       "kind": "rhetorical-not-but",
       "phrase": "不是不记录，而是",
-      "context": "大多数数据团队的版本管理起点是\"文件夹管理\"：用日期命名文件夹，新数据放新文件夹，遇到问题就去翻历史文件夹。这种方式的问题不是不记录，而是记录的信息不够。日期告诉你\"什么时候\"，但无法告诉你："
+      "context": "大多数数据团队的版本管理起点是\"文件夹管理\"：用日期命名文件夹，新数据放新文件夹，遇到问题就去历史文件夹中逐条确认。这种方式的问题不是不记录，而是记录的信息不够。日期告诉你\"什么时候\"，但无法告诉你："
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
@@ -8964,49 +8978,49 @@
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 490,
+      "line": 491,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "治理规则的执行方式也应分层。低风险操作可以通过系统提示和自动记录完成；中风险操作需要轻量审批；高风险操作需要正式审批和审计；禁止操作应由系统直接阻断。仅靠制度文字无法保证执行，因为人在高压项目中容易绕过流程。把规则嵌入工具，例如冻结版..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 506,
+      "line": 507,
       "kind": "rhetorical-not-but",
       "phrase": "不是因为规则数量多，而是",
       "context": "最后，治理规则应保持可解释性。团队成员愿意遵守规则，往往不是因为规则数量多，而是因为他们理解规则背后的风险。如果数据负责人能够说明某条规则如何帮助复现、回滚或合规，执行阻力会显著降低。相反，如果规则只表现为额外审批和表单，团队就可能把..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 564,
+      "line": 565,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "审核记录中还保留了当时的判断依据：新版客服知识库已经替换退款流程说明，质量审核指南中写有\"过时流程不进入正式训练集\"。从单条规则看，审核人员并没有违反流程；真正的问题在于指南没有区分\"已经失效且不应回答的流程\"与\"仍需解释的历史流程\"..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 605,
+      "line": 606,
       "kind": "rhetorical-not-but",
       "phrase": "不是\"错误删除样本\"，而是",
       "context": "从治理角度看，案例中的根因不是\"错误删除样本\"，而是\"质量规则没有表达业务时间维度\"。因此，修复方案不能停留在恢复样本，还应更新标注和审核指南：对历史流程、过渡流程、已废弃流程和仍需解释的旧流程进行分类；为每类流程设定不同处理策略；在..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 609,
+      "line": 610,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "最后，案例也提醒团队建立\"业务时效性数据\"的特殊治理规则。客服、政策、金融、教育、医疗和企业知识库等场景中，数据是否过时并不是简单的是非问题。某些旧信息必须删除，某些旧信息必须保留但加上时间边界，某些旧信息只能用于解释历史而不能指导当..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 619,
+      "line": 620,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "还需要注意，版本管理并不天然保证正确性。一个错误的数据版本也可以被完整记录，一个质量不足的实验也可以被准确追踪。版本体系提供的是可解释性和可追溯性，而不是自动判断所有决策正确。因此，它必须与质量评估、实验设计、合规审查和业务专家判断结..."
     },
     {
       "file": "docs/zh/part8/ch25_data_versioning_experiment_tracking.md",
-      "line": 623,
+      "line": 624,
       "kind": "rhetorical-not-but",
       "phrase": "不是推荐某一种具体工具，而是",
       "context": "因此，本章的核心并不是推荐某一种具体工具，而是强调一种工程化原则：凡是会影响模型结果、合规边界和组织决策的数据变化，都应当留下可查询、可解释、可验证的记录。工具可以不同，平台形态可以不同，但这个原则不能缺席。"
@@ -9191,7 +9205,7 @@
       "line": 28,
       "kind": "weak-booster",
       "phrase": "真正",
-      "context": "这并不是一个可以凭直觉回答的问题。在大量组织中，数据价值的判断长期停留在朴素而经不起推敲的代理指标上——数据量越大越有价值、采购花的钱越多越重要、能让模型某个指标涨一点就值得保留。这些判断方式看似合理，却频繁导致严重的资源错配：组织在..."
+      "context": "这并不是一个可以凭直觉回答的问题。在大量组织中，数据价值的判断长期停留在朴素而经不起推敲的代理指标上——数据量越大越有价值、采购投入越高越值得优先保障、能让模型某个指标涨一点就值得保留。这些判断方式看似合理，却频繁导致严重的资源错配：..."
     },
     {
       "file": "docs/zh/part9/ch29_data_valuation_and_reuse.md",
@@ -9199,6 +9213,13 @@
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "在讨论如何正确评估数据价值之前，有必要先厘清那些被广泛使用、却系统性地高估或低估数据价值的判断方式。把信息当作一种需要被度量、管理和变现的资产，这一思想本身并不新鲜（Moody and Walsh 1999; Laney 2017），..."
+    },
+    {
+      "file": "docs/zh/part9/ch29_data_valuation_and_reuse.md",
+      "line": 101,
+      "kind": "weak-booster",
+      "phrase": "真正",
+      "context": "一个实用的价值指标体系应当满足三个要求。其一是**可度量**：每个指标都应有明确的计算口径与数据来源，能够被流水线自动采集，而非依赖主观打分。其二是**可比较**：指标应当在不同数据资产之间可比，从而支持横向排序与组合管理。其三是**..."
     },
     {
       "file": "docs/zh/part9/ch29_data_valuation_and_reuse.md",
@@ -9380,7 +9401,7 @@
       "line": 664,
       "kind": "weak-booster",
       "phrase": "真正",
-      "context": "归根结底，数据价值评估与复用所追求的，是让组织对自己的数据资产心中有数——知道哪些值得投入、哪些应当复用、哪些需要退役。它与前两章一脉相承：如果说数据目录解决的是数据能否被找到和理解，数据产品与契约解决的是数据能否被长期可靠依赖，那么..."
+      "context": "归根结底，数据价值评估与复用所追求的，是让组织对自身数据资产形成清晰认知——知道哪些值得投入、哪些应当复用、哪些需要退役。它与前两章一脉相承：如果说数据目录解决的是数据能否被找到和理解，数据产品与契约解决的是数据能否被长期可靠依赖，那..."
     },
     {
       "file": "docs/zh/part9/ch30_internal_data_market_and_sharing_governance.md",
@@ -10256,377 +10277,9 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 132,
-      "alt": "图38-1：Figure 38-1",
-      "src": "../../images/part12/ch38_01_schema_decomposition.png",
-      "resolved": "docs/images/part12/ch38_01_schema_decomposition.png",
-      "exists": true,
-      "size_kb": 3526.634765625,
-      "dimensions": "2816x1536",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 219,
-      "alt": "图38-2：Figure 38-2",
-      "src": "../../images/part12/ch38_02_dataset_construction_pipeline.png",
-      "resolved": "docs/images/part12/ch38_02_dataset_construction_pipeline.png",
-      "exists": true,
-      "size_kb": 3172.6845703125,
-      "dimensions": "2816x1536",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 237,
-      "alt": "图38-3：Figure 38-3",
-      "src": "../../images/part12/ch38_03_structural_consistency_validation.png",
-      "resolved": "docs/images/part12/ch38_03_structural_consistency_validation.png",
-      "exists": true,
-      "size_kb": 3923.0615234375,
-      "dimensions": "2816x1536",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 531,
-      "alt": "图38-4：表格样本三类监督信号结构图",
-      "src": "../../images/part12/ch38_04_supervision_schema.png",
-      "resolved": "docs/images/part12/ch38_04_supervision_schema.png",
-      "exists": true,
-      "size_kb": 1030.1025390625,
-      "dimensions": "1653x952",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 552,
-      "alt": "图38-5：SparseTable-Bench 四阶段构建流水线图",
-      "src": "../../images/part12/ch38_05_stb_pipeline.png",
-      "resolved": "docs/images/part12/ch38_05_stb_pipeline.png",
-      "exists": true,
-      "size_kb": 1008.173828125,
-      "dimensions": "1672x941",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
-      "line": 606,
-      "alt": "图38-6：STB-Mask-Stress 遮挡生成与评测流程图",
-      "src": "../../images/part12/ch38_06_mask_stress_flow.png",
-      "resolved": "docs/images/part12/ch38_06_mask_stress_flow.png",
-      "exists": true,
-      "size_kb": 1165.36328125,
-      "dimensions": "1672x941",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 65,
-      "alt": "图39-1：多图表信息图推理数据集领域覆盖分布",
-      "src": "../../images/part12/ch39_01_domain_distribution.png",
-      "resolved": "docs/images/part12/ch39_01_domain_distribution.png",
-      "exists": true,
-      "size_kb": 1274.5888671875,
-      "dimensions": "5572x4596",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 75,
-      "alt": "图39-2：多图表信息图推理数据集子图表类型分布",
-      "src": "../../images/part12/ch39_02_chart_type_distribution.png",
-      "resolved": "docs/images/part12/ch39_02_chart_type_distribution.png",
-      "exists": true,
-      "size_kb": 1149.0771484375,
-      "dimensions": "5332x4596",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 85,
-      "alt": "图39-3：多图表信息图推理数据集子问题类型分布",
-      "src": "../../images/part12/ch39_03_question_type_distribution.png",
-      "resolved": "docs/images/part12/ch39_03_question_type_distribution.png",
-      "exists": true,
-      "size_kb": 878.4580078125,
-      "dimensions": "5215x4608",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 101,
-      "alt": "图39-4：多图表信息图样本（鲨鱼袭击）",
-      "src": "../../images/part12/ch39_04_shark_attack_infographic.jpg",
-      "resolved": "docs/images/part12/ch39_04_shark_attack_infographic.jpg",
-      "exists": true,
-      "size_kb": 394.4853515625,
-      "dimensions": "800x4073",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 151,
-      "alt": "图39-5：多图标信息图推理数据集四阶段构建流水线图",
-      "src": "../../images/part12/ch39_05_multichart_dataset_pipeline.png",
-      "resolved": "docs/images/part12/ch39_05_multichart_dataset_pipeline.png",
-      "exists": true,
-      "size_kb": 284.2236328125,
-      "dimensions": "2109x1399",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 449,
-      "alt": "图39-6：MedImage-ToolVQA 数据构建概念流程",
-      "src": "../../images/part12/ch39_06_medimage_tool_vqa_pipeline.svg",
-      "resolved": "docs/images/part12/ch39_06_medimage_tool_vqa_pipeline.svg",
-      "exists": true,
-      "size_kb": 5.439453125,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 491,
-      "alt": "图39-7：工具调用多轮轨迹结构",
-      "src": "../../images/part12/ch39_07_tool_trajectory_structure.svg",
-      "resolved": "docs/images/part12/ch39_07_tool_trajectory_structure.svg",
-      "exists": true,
-      "size_kb": 6.2900390625,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 572,
-      "alt": "图39-8：SFT schema 中的真实图像与 bbox 证据",
-      "src": "../../images/part12/ch39_08_sft_bbox_evidence.svg",
-      "resolved": "docs/images/part12/ch39_08_sft_bbox_evidence.svg",
-      "exists": true,
-      "size_kb": 961.669921875,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
-      "line": 709,
-      "alt": "图39-9：质量控制与人工复核门禁",
-      "src": "../../images/part12/ch39_09_quality_review_gate.svg",
-      "resolved": "docs/images/part12/ch39_09_quality_review_gate.svg",
-      "exists": true,
-      "size_kb": 7.97265625,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 70,
-      "alt": "图40-1：语义响应与风格控制双通道 schema",
-      "src": "../../images/part12/ch40_01_dual_channel_schema.svg",
-      "resolved": "docs/images/part12/ch40_01_dual_channel_schema.svg",
-      "exists": true,
-      "size_kb": 3.4345703125,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 271,
-      "alt": "图40-2：VoiceStyleControl 数据构建流水线",
-      "src": "../../images/part12/ch40_02_voice_style_data_pipeline.svg",
-      "resolved": "docs/images/part12/ch40_02_voice_style_data_pipeline.svg",
-      "exists": true,
-      "size_kb": 3.87109375,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 365,
-      "alt": "图40-3：质量评估与数据飞轮闭环",
-      "src": "../../images/part12/ch40_03_quality_loop.svg",
-      "resolved": "docs/images/part12/ch40_03_quality_loop.svg",
-      "exists": true,
-      "size_kb": 3.0830078125,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 475,
-      "alt": "图40-4：Latent-Switch-69K 构建流水线图",
-      "src": "../../images/part12/ch40_04_latent_switch_pipeline.svg",
-      "resolved": "docs/images/part12/ch40_04_latent_switch_pipeline.svg",
-      "exists": true,
-      "size_kb": 10.7060546875,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 500,
-      "alt": "图40-5：Latent-Switch-69K 数据来源与领域组成",
-      "src": "../../images/part12/ch40_05_dataset_composition.png",
-      "resolved": "docs/images/part12/ch40_05_dataset_composition.png",
-      "exists": true,
-      "size_kb": 259.822265625,
-      "dimensions": "2304x1052",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 625,
-      "alt": "图40-6：原始 CoT、压缩 CoT 与 latent placeholder 对比",
-      "src": "../../images/part12/ch40_06_cot_latent_comparison.svg",
-      "resolved": "docs/images/part12/ch40_06_cot_latent_comparison.svg",
-      "exists": true,
-      "size_kb": 45.099609375,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 638,
-      "alt": "图40-7：原始与蒸馏后推理长度及压缩率统计",
-      "src": "../../images/part12/ch40_07_token_compression_distribution.png",
-      "resolved": "docs/images/part12/ch40_07_token_compression_distribution.png",
-      "exists": true,
-      "size_kb": 88.8984375,
-      "dimensions": "2304x422",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 780,
-      "alt": "图40-8：Supervision mask 示意图",
-      "src": "../../images/part12/ch40_08_supervision_mask.svg",
-      "resolved": "docs/images/part12/ch40_08_supervision_mask.svg",
-      "exists": true,
-      "size_kb": 22.7548828125,
-      "dimensions": "unknown",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
-      "issues": [
-        "needs-rights-ai-review",
-        "needs-high-res-confirmation"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 235,
-      "alt": "图41-1 FineWeb MinHash 去重和 PII 处理流程",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 233,
+      "alt": "图38-1 FineWeb MinHash 去重和 PII 处理流程",
       "src": "../../images/part12/ch41_01_fineweb_minhash_pii_flow.svg",
       "resolved": "docs/images/part12/ch41_01_fineweb_minhash_pii_flow.svg",
       "exists": true,
@@ -10640,9 +10293,9 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 245,
-      "alt": "图41-2 FineWeb 数据处理选择的消融评估回路",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 243,
+      "alt": "图38-2 FineWeb 数据处理选择的消融评估回路",
       "src": "../../images/part12/ch41_02_fineweb_ablation_loop.svg",
       "resolved": "docs/images/part12/ch41_02_fineweb_ablation_loop.svg",
       "exists": true,
@@ -10656,9 +10309,9 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 201,
-      "alt": "图42-1 Dolma 透明语料证据链",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 512,
+      "alt": "图38-3 Dolma 透明语料证据链",
       "src": "../../images/part12/ch42_01_dolma_evidence_chain.svg",
       "resolved": "docs/images/part12/ch42_01_dolma_evidence_chain.svg",
       "exists": true,
@@ -10672,9 +10325,9 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 223,
-      "alt": "图42-2 Dolma source mix 与训练诊断回路",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 534,
+      "alt": "图38-4 Dolma source mix 与训练诊断回路",
       "src": "../../images/part12/ch42_02_dolma_source_mix_diagnosis.svg",
       "resolved": "docs/images/part12/ch42_02_dolma_source_mix_diagnosis.svg",
       "exists": true,
@@ -10688,9 +10341,9 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 76,
-      "alt": "图43-1 LAION-5B 图文候选记录的多通道 schema",
+      "alt": "图39-1 LAION-5B 图文候选记录的多通道 schema",
       "src": "../../images/part12/ch43_01_laion_multichannel_schema.svg",
       "resolved": "docs/images/part12/ch43_01_laion_multichannel_schema.svg",
       "exists": true,
@@ -10704,13 +10357,381 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
       "line": 197,
-      "alt": "图43-2 图文候选池质量评估与闭环修复",
+      "alt": "图39-2 图文候选池质量评估与闭环修复",
       "src": "../../images/part12/ch43_02_laion_quality_datacomp_loop.svg",
       "resolved": "docs/images/part12/ch43_02_laion_quality_datacomp_loop.svg",
       "exists": true,
       "size_kb": 29.26953125,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 132,
+      "alt": "图40-1：Schema 到 JSON 的结构化映射",
+      "src": "../../images/part12/ch38_01_schema_decomposition.png",
+      "resolved": "docs/images/part12/ch38_01_schema_decomposition.png",
+      "exists": true,
+      "size_kb": 3526.634765625,
+      "dimensions": "2816x1536",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 219,
+      "alt": "图40-2：StructBill-CN 数据集构建流水线",
+      "src": "../../images/part12/ch38_02_dataset_construction_pipeline.png",
+      "resolved": "docs/images/part12/ch38_02_dataset_construction_pipeline.png",
+      "exists": true,
+      "size_kb": 3172.6845703125,
+      "dimensions": "2816x1536",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 237,
+      "alt": "图40-3：结构一致性校验门禁",
+      "src": "../../images/part12/ch38_03_structural_consistency_validation.png",
+      "resolved": "docs/images/part12/ch38_03_structural_consistency_validation.png",
+      "exists": true,
+      "size_kb": 3923.0615234375,
+      "dimensions": "2816x1536",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 531,
+      "alt": "图40-4：表格样本三类监督信号结构图",
+      "src": "../../images/part12/ch38_04_supervision_schema.png",
+      "resolved": "docs/images/part12/ch38_04_supervision_schema.png",
+      "exists": true,
+      "size_kb": 1030.1025390625,
+      "dimensions": "1653x952",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 552,
+      "alt": "图40-5：SparseTable-Bench 四阶段构建流水线图",
+      "src": "../../images/part12/ch38_05_stb_pipeline.png",
+      "resolved": "docs/images/part12/ch38_05_stb_pipeline.png",
+      "exists": true,
+      "size_kb": 1008.173828125,
+      "dimensions": "1672x941",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
+      "line": 606,
+      "alt": "图40-6：STB-Mask-Stress 遮挡生成与评测流程图",
+      "src": "../../images/part12/ch38_06_mask_stress_flow.png",
+      "resolved": "docs/images/part12/ch38_06_mask_stress_flow.png",
+      "exists": true,
+      "size_kb": 1165.36328125,
+      "dimensions": "1672x941",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 65,
+      "alt": "图41-1：多图表信息图推理数据集领域覆盖分布",
+      "src": "../../images/part12/ch39_01_domain_distribution.png",
+      "resolved": "docs/images/part12/ch39_01_domain_distribution.png",
+      "exists": true,
+      "size_kb": 1274.5888671875,
+      "dimensions": "5572x4596",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 75,
+      "alt": "图41-2：多图表信息图推理数据集子图表类型分布",
+      "src": "../../images/part12/ch39_02_chart_type_distribution.png",
+      "resolved": "docs/images/part12/ch39_02_chart_type_distribution.png",
+      "exists": true,
+      "size_kb": 1149.0771484375,
+      "dimensions": "5332x4596",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 85,
+      "alt": "图41-3：多图表信息图推理数据集子问题类型分布",
+      "src": "../../images/part12/ch39_03_question_type_distribution.png",
+      "resolved": "docs/images/part12/ch39_03_question_type_distribution.png",
+      "exists": true,
+      "size_kb": 878.4580078125,
+      "dimensions": "5215x4608",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 101,
+      "alt": "图41-4：多图表信息图样本（鲨鱼袭击）",
+      "src": "../../images/part12/ch39_04_shark_attack_infographic.jpg",
+      "resolved": "docs/images/part12/ch39_04_shark_attack_infographic.jpg",
+      "exists": true,
+      "size_kb": 394.4853515625,
+      "dimensions": "800x4073",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 151,
+      "alt": "图41-5：多图标信息图推理数据集四阶段构建流水线图",
+      "src": "../../images/part12/ch39_05_multichart_dataset_pipeline.png",
+      "resolved": "docs/images/part12/ch39_05_multichart_dataset_pipeline.png",
+      "exists": true,
+      "size_kb": 284.2236328125,
+      "dimensions": "2109x1399",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 449,
+      "alt": "图41-6：MedImage-ToolVQA 数据构建概念流程",
+      "src": "../../images/part12/ch41_02_medimage_tool_vqa_pipeline.svg",
+      "resolved": "docs/images/part12/ch41_02_medimage_tool_vqa_pipeline.svg",
+      "exists": true,
+      "size_kb": 5.439453125,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 491,
+      "alt": "图41-7：工具调用多轮轨迹结构",
+      "src": "../../images/part12/ch41_03_tool_trajectory_structure.svg",
+      "resolved": "docs/images/part12/ch41_03_tool_trajectory_structure.svg",
+      "exists": true,
+      "size_kb": 6.2900390625,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 572,
+      "alt": "图41-8：SFT schema 中的真实图像与 bbox 证据",
+      "src": "../../images/part12/ch41_05_sft_schema_real_bbox_example.svg",
+      "resolved": "docs/images/part12/ch41_05_sft_schema_real_bbox_example.svg",
+      "exists": true,
+      "size_kb": 961.669921875,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
+      "line": 709,
+      "alt": "图41-9：质量控制与人工复核门禁",
+      "src": "../../images/part12/ch41_04_quality_review_gate.svg",
+      "resolved": "docs/images/part12/ch41_04_quality_review_gate.svg",
+      "exists": true,
+      "size_kb": 7.97265625,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 68,
+      "alt": "图42-1：语义响应与风格控制双通道 schema",
+      "src": "../../images/part12/ch42_fig02_dual_channel_schema.svg",
+      "resolved": "docs/images/part12/ch42_fig02_dual_channel_schema.svg",
+      "exists": true,
+      "size_kb": 3.4345703125,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 269,
+      "alt": "图42-2：VoiceStyleControl 数据构建流水线",
+      "src": "../../images/part12/ch42_fig01_data_pipeline.svg",
+      "resolved": "docs/images/part12/ch42_fig01_data_pipeline.svg",
+      "exists": true,
+      "size_kb": 3.87109375,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 363,
+      "alt": "图42-3：质量评估与数据飞轮闭环",
+      "src": "../../images/part12/ch42_fig03_quality_loop.svg",
+      "resolved": "docs/images/part12/ch42_fig03_quality_loop.svg",
+      "exists": true,
+      "size_kb": 3.0830078125,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 31,
+      "alt": "图43-1：Latent-Switch-69K 构建流水线图",
+      "src": "../../images/part12/ch43_latent_switch_pipeline.svg",
+      "resolved": "docs/images/part12/ch43_latent_switch_pipeline.svg",
+      "exists": true,
+      "size_kb": 10.7060546875,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 56,
+      "alt": "图43-2：Latent-Switch-69K 数据来源与领域组成",
+      "src": "../../images/part12/ch40_05_dataset_composition.png",
+      "resolved": "docs/images/part12/ch40_05_dataset_composition.png",
+      "exists": true,
+      "size_kb": 259.822265625,
+      "dimensions": "2304x1052",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 181,
+      "alt": "图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比",
+      "src": "../../images/part12/ch43_cot_latent_comparison.svg",
+      "resolved": "docs/images/part12/ch43_cot_latent_comparison.svg",
+      "exists": true,
+      "size_kb": 45.099609375,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 194,
+      "alt": "图43-4：原始与蒸馏后推理长度及压缩率统计",
+      "src": "../../images/part12/ch40_07_token_compression_distribution.png",
+      "resolved": "docs/images/part12/ch40_07_token_compression_distribution.png",
+      "exists": true,
+      "size_kb": 88.8984375,
+      "dimensions": "2304x422",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 336,
+      "alt": "图43-5：Supervision mask 示意图",
+      "src": "../../images/part12/ch43_supervision_mask.svg",
+      "resolved": "docs/images/part12/ch43_supervision_mask.svg",
+      "exists": true,
+      "size_kb": 22.7548828125,
       "dimensions": "unknown",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
@@ -13328,6 +13349,22 @@
       ]
     },
     {
+      "file": "docs/zh/part4/ch12_sft.md",
+      "line": 589,
+      "alt": "图12-2：样本生成与验收的闭环示意图",
+      "src": "../../images/part4/图12_2.svg",
+      "resolved": "docs/images/part4/图12_2.svg",
+      "exists": true,
+      "size_kb": 1621.2060546875,
+      "dimensions": "unknown",
+      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
+      "high_res_status": "是",
+      "issues": [
+        "needs-rights-ai-review",
+        "needs-high-res-confirmation"
+      ]
+    },
+    {
       "file": "docs/zh/part4/ch13_preference.md",
       "line": 85,
       "alt": "图13-1：偏好数据到奖励信号流程图",
@@ -14549,6 +14586,30 @@
       "issues": [
         "needs-authenticity-review",
         "missing-doi-url-arxiv"
+      ]
+    },
+    {
+      "file": "docs/zh/appendix_g_datagallery_note.md",
+      "entry_no": 1,
+      "entry": "DataGallery Contributors (2026a) DataGallery organization page. Available at: https://gitcode.com/datagallery.",
+      "year": "",
+      "doi": "",
+      "url": "https://gitcode.com/datagallery.",
+      "issues": [
+        "needs-authenticity-review",
+        "missing-year"
+      ]
+    },
+    {
+      "file": "docs/zh/appendix_g_datagallery_note.md",
+      "entry_no": 2,
+      "entry": "DataGallery Contributors (2026b) DataAgent source repository. Available at: https://gitcode.com/datagallery/DataAgent.",
+      "year": "",
+      "doi": "",
+      "url": "https://gitcode.com/datagallery/DataAgent.",
+      "issues": [
+        "needs-authenticity-review",
+        "missing-year"
       ]
     },
     {
@@ -16812,7 +16873,194 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 1,
+      "entry": "1. - Penedo, G., Kydlíček, H., Allal, L. B., Lozhkov, A., Mitchell, M., Raffel, C., von Werra, L., & Wolf, T. (2024). The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. NeurIPS 2024 Datasets and Benchmarks Track. https://arxiv.org/abs/2406.17557.",
+      "year": "2024",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2406.17557.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 2,
+      "entry": "Hugging Face. (2026). HuggingFaceFW/fineweb Dataset Card. https://huggingface.co/datasets/HuggingFaceFW/fineweb.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 3,
+      "entry": "Hugging Face. (2026). DataTrove FineWeb Processing Script. https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 4,
+      "entry": "Penedo, G., Kydlíček, H., Cappelli, A., Sasko, M., & Wolf, T. (2024). DataTrove large scale data processing. https://github.com/huggingface/datatrove.",
+      "year": "2024",
+      "doi": "",
+      "url": "https://github.com/huggingface/datatrove.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 5,
+      "entry": "Luccioni, S., & Viviano, J. (2021). What's in the Box? A Preliminary Analysis of Undesirable Content in the Common Crawl Corpus. https://arxiv.org/abs/2105.02732.",
+      "year": "2021",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2105.02732.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 6,
+      "entry": "2. - Soldaini, L., Kinney, R., Bhagia, A., Schwenk, D., Atkinson, D., Authur, R., et al. (2024). Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research. ACL 2024. https://arxiv.org/abs/2402.00159.",
+      "year": "2024",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2402.00159.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 7,
+      "entry": "Allen Institute for AI. (2023). Ai2 Dolma: 3 trillion token open corpus for language model pretraining. https://allenai.org/blog/dolma-3-trillion-tokens-open-llm-corpus-9a0ff4b8da64.",
+      "year": "2023",
+      "doi": "",
+      "url": "https://allenai.org/blog/dolma-3-trillion-tokens-open-llm-corpus-9a0ff4b8da64.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 8,
+      "entry": "AllenAI. (2026). allenai/dolma Dataset Card. https://huggingface.co/datasets/allenai/dolma.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://huggingface.co/datasets/allenai/dolma.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 9,
+      "entry": "AllenAI. (2026). Dolma Dataset and Toolkit Repository. https://github.com/allenai/dolma.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://github.com/allenai/dolma.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 10,
+      "entry": "AllenAI. (2026). Dolma Toolkit Documentation. https://github.com/allenai/dolma/blob/main/docs/README.md.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://github.com/allenai/dolma/blob/main/docs/README.md.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "entry_no": 11,
+      "entry": "Groeneveld, D., Beltagy, I., Walsh, P., Bhagia, A., Kinney, R., Tafjord, O., et al. (2024). OLMo: Accelerating the Science of Language Models. https://arxiv.org/abs/2402.00838.",
+      "year": "2024",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2402.00838.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 1,
+      "entry": "Schuhmann, C., Beaumont, R., Vencu, R., Gordon, C., Wightman, R., Cherti, M., et al. (2022). LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.",
+      "year": "2022",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2210.08402.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 2,
+      "entry": "LAION. (2022). LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.",
+      "year": "2022",
+      "doi": "",
+      "url": "https://laion.ai/blog/laion-5b/.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 3,
+      "entry": "LAION-AI. (2022). dataset-spec. https://github.com/LAION-AI/dataset-spec.",
+      "year": "2022",
+      "doi": "",
+      "url": "https://github.com/LAION-AI/dataset-spec.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 4,
+      "entry": "Gadre, S. Y., Ilharco, G., Fang, A., Hayase, J., Smyrnis, G., Nguyen, T., et al. (2023). DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.",
+      "year": "2023",
+      "doi": "",
+      "url": "https://arxiv.org/abs/2304.14108.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 5,
+      "entry": "DataComp Team. (2026). DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.",
+      "year": "2026",
+      "doi": "",
+      "url": "https://www.datacomp.ai/dcclip/.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "entry_no": 6,
+      "entry": "ML Foundations. (2023). DataComp codebase. https://github.com/mlfoundations/datacomp.",
+      "year": "2023",
+      "doi": "",
+      "url": "https://github.com/mlfoundations/datacomp.",
+      "issues": [
+        "needs-authenticity-review"
+      ]
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 1,
       "entry": "Bai, S., Chen, K., Liu, X., et al. (2025). Qwen2.5-VL Technical Report. *arXiv preprint arXiv:2502.13923*.",
       "year": "2025",
@@ -16823,7 +17071,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 2,
       "entry": "Blecher, L., Cucurull, G., Scialom, T., and Stojnic, R. (2023). Nougat: Neural Optical Understanding for Academic Documents. *arXiv preprint arXiv:2308.13418*.",
       "year": "2023",
@@ -16834,7 +17082,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 3,
       "entry": "Huang, Y., Lv, T., Cui, L., Lu, Y., and Wei, F. (2022). LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking. *Proc. ACM Multimedia*.",
       "year": "2022",
@@ -16846,7 +17094,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 4,
       "entry": "Huang, Z., Chen, K., He, J., Bai, X., Karatzas, D., Lu, S., and Jawahar, C.V. (2019). ICDAR2019 Competition on Scanned Receipt OCR and Information Extraction. *Proc. ICDAR*, pp. 1516–1520.",
       "year": "2019",
@@ -16858,7 +17106,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 5,
       "entry": "Hu, E.J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., and Chen, W. (2021). LoRA: Low-Rank Adaptation of Large Language Models. *arXiv preprint arXiv:2106.09685*.",
       "year": "2021",
@@ -16869,7 +17117,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 6,
       "entry": "Jaume, G., Ekenel, H.K., and Thiran, J.-P. (2019). FUNSD: A Dataset for Form Understanding in Noisy Scanned Documents. *ICDAR Workshop*.",
       "year": "2019",
@@ -16881,7 +17129,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 7,
       "entry": "Kuhn, H.W. (1955). The Hungarian Method for the Assignment Problem. *Naval Research Logistics Quarterly*, 2(1–2), pp. 83–97.",
       "year": "1955",
@@ -16893,7 +17141,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 8,
       "entry": "Levenshtein, V.I. (1965). Binary Codes Capable of Correcting Deletions, Insertions and Reversals. *Soviet Physics Doklady*, 10, pp. 707–710.",
       "year": "1965",
@@ -16905,7 +17153,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 9,
       "entry": "Liu, H., Xue, W., Chen, Y., et al. (2024). A Survey on Hallucination in Large Vision-Language Models. *arXiv preprint arXiv:2402.00253*.",
       "year": "2024",
@@ -16916,7 +17164,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 10,
       "entry": "Mathew, M., Karatzas, D., and Jawahar, C.V. (2021). DocVQA: A Dataset for VQA on Document Images. *Proc. WACV*.",
       "year": "2021",
@@ -16928,7 +17176,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 11,
       "entry": "Niu, J., Liu, Z., Gu, Z., et al. (2025). MinerU 2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing. *arXiv preprint*.",
       "year": "2025",
@@ -16940,7 +17188,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 12,
       "entry": "Park, S., Shin, S., Lee, B., et al. (2019). CORD: A Consolidated Receipt Dataset for Post-OCR Parsing. *NeurIPS Workshop on Document Intelligence*.",
       "year": "2019",
@@ -16952,7 +17200,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 13,
       "entry": "Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C.D., and Finn, C. (2024). Direct Preference Optimization: Your Language Model Is Secretly a Reward Model. *Proc. NeurIPS*.",
       "year": "2024",
@@ -16964,7 +17212,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 14,
       "entry": "Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O. (2017). Proximal Policy Optimization Algorithms. *arXiv preprint arXiv:1707.06347*.",
       "year": "2017",
@@ -16975,7 +17223,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 15,
       "entry": "Shao, Z., Wang, P., et al. (2024). DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. *arXiv preprint arXiv:2402.03300*.",
       "year": "2024",
@@ -16986,7 +17234,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 16,
       "entry": "Tianchi, A. and CHIP Committee (2022). CHIP 2022 Shared Task: Medical Invoice OCR Element Extraction Dataset. *Aliyun Tianchi Platform*.",
       "year": "2022",
@@ -16998,7 +17246,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 17,
       "entry": "Xu, Y., Li, M., Cui, L., Huang, S., Wei, F., and Zhou, M. (2020). LayoutLM: Pre-training of Text and Layout for Document Image Understanding. *Proc. ACM SIGKDD*, pp. 1192–1200.",
       "year": "2020",
@@ -17010,7 +17258,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 18,
       "entry": "Xue, W., Yu, B., Wang, W., Tao, D., and Li, Q. (2021). TGRNet: A Table Graph Reconstruction Network for Table Structure Recognition. *arXiv preprint arXiv:2106.10598*.",
       "year": "2021",
@@ -17021,7 +17269,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 19,
       "entry": "Yang, Z., Long, R., Wang, P., et al. (2023). Modeling Entities as Semantic Points for Visual Information Extraction in the Wild. *Proc. CVPR*.",
       "year": "2023",
@@ -17033,7 +17281,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 20,
       "entry": "Zhang, N., Chen, M., Bi, Z., et al. (2022). CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark. *Proc. ACL*, pp. 7888–7915.",
       "year": "2022",
@@ -17045,7 +17293,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 21,
       "entry": "Zhong, X., ShafieiBavani, E., and Jimeno Yepes, A. (2020). Image-based Table Recognition: Data, Model, and Evaluation. *arXiv preprint arXiv:1911.10683*.",
       "year": "2020",
@@ -17056,7 +17304,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 22,
       "entry": "Bai, S., Cai, Y., Chen, R., et al. (2025a). Qwen3-VL Technical Report. *arXiv preprint*.",
       "year": "",
@@ -17069,7 +17317,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 23,
       "entry": "ChatDOC (2025). OCRFlux-3B: A Multimodal Large Language Model for Document Parsing. *Hugging Face Model Card*.",
       "year": "2025",
@@ -17081,7 +17329,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 24,
       "entry": "Cui, C., Sun, T., Liang, S., et al. (2025). PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model. *arXiv preprint*.",
       "year": "2025",
@@ -17093,7 +17341,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 25,
       "entry": "Guo, D., Yang, D., Zhang, H., et al. (2025). DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. *arXiv preprint arXiv:2501.12948*.",
       "year": "2025",
@@ -17104,7 +17352,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 26,
       "entry": "Hunyuan Vision Team, Lyu, P., Wan, X., et al. (2025). HunyuanOCR Technical Report. *arXiv preprint*.",
       "year": "2025",
@@ -17116,7 +17364,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 27,
       "entry": "Li, Y., Yang, G., Liu, H., Wang, B., and Zhang, C. (2025a). Dots.OCR: Multilingual Document Layout Parsing in a Single Vision-Language Model. *arXiv preprint*.",
       "year": "",
@@ -17129,7 +17377,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 28,
       "entry": "Poznanski, J., Soldaini, L., and Lo, K. (2025). olmOCR 2: Unit Test Rewards for Document OCR. *arXiv preprint arXiv:2510.19817*.",
       "year": "2025",
@@ -17140,7 +17388,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 29,
       "entry": "Smock, B., Faucon-Morin, V., Sokolov, M., et al. (2025). PubTables-v2: A New Large-Scale Dataset for Full-Page and Multi-Page Table Extraction. *arXiv preprint arXiv:2512.10888*.",
       "year": "2025",
@@ -17151,7 +17399,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 30,
       "entry": "Wang, W., Gao, Z., Gu, L., et al. (2025). InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency. *arXiv preprint arXiv:2508.18265*.",
       "year": "2025",
@@ -17162,7 +17410,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 31,
       "entry": "Zhang, J., Liu, Y., Wu, Z., et al. (2025). MonkeyOCR v1.5 Technical Report: Unlocking Robust Document Parsing for Complex Patterns. *arXiv preprint*.",
       "year": "2025",
@@ -17174,7 +17422,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 32,
       "entry": "Smock, B., Pesala, R., and Abraham, R. (2022). PubTables-1M: Towards Comprehensive Table Extraction From Unstructured Documents. *Proc. CVPR*.",
       "year": "2022",
@@ -17186,7 +17434,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 33,
       "entry": "Zhu, F., Lei, W., Huang, Y., Wang, C., Zhang, S., Lv, J., Feng, F., and Chua, T.-S. (2021). TAT-QA: A Question Answering Benchmark on a Hybrid of Tabular and Textual Content in Finance. *Proc. ACL*.",
       "year": "2021",
@@ -17198,7 +17446,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 34,
       "entry": "Pandas Development Team. (2026). pandas Documentation. https://pandas.pydata.org/docs/.",
       "year": "2026",
@@ -17209,7 +17457,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "entry_no": 35,
       "entry": "Apache Arrow Contributors. (2026). Apache Arrow Documentation. https://arrow.apache.org/docs/.",
       "year": "2026",
@@ -17220,7 +17468,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 1,
       "entry": "Masry, A., Long, D. X., Tan, J. Q., Joty, S., & Hoque, E. (2022). ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022.",
       "year": "2022",
@@ -17232,7 +17480,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 2,
       "entry": "Methani, N., Ganguly, P., Khapra, M. M., & Kumar, P. (2020). PlotQA: Reasoning over Scientific Plots. WACV 2020.",
       "year": "2020",
@@ -17244,7 +17492,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 3,
       "entry": "Kahou, S. E., Michalski, V., Atkinson, A., Kádár, Á., Trischler, A., & Bengio, Y. (2017). FigureQA: An Annotated Figure Dataset for Visual Reasoning. arXiv:1710.07300.",
       "year": "2017",
@@ -17255,7 +17503,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 4,
       "entry": "Kafle, K., Price, B., Cohen, S., & Kanan, C. (2018). DVQA: Understanding Data Visualizations via Question Answering. CVPR 2018.",
       "year": "2018",
@@ -17267,7 +17515,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 5,
       "entry": "Mathew, M., Karatzas, D., & Jawahar, C. V. (2021). DocVQA: A Dataset for VQA on Document Images. WACV 2021.",
       "year": "2021",
@@ -17279,7 +17527,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 6,
       "entry": "Masry, A., Islam, M. S., Ahmed, M., Bajaj, A., Kabir, F., Kartha, A., ... & Joty, S. (2025, July). Chartqapro: A more diverse and challenging benchmark for chart question answering. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 19123-19151).",
       "year": "2025",
@@ -17291,7 +17539,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 7,
       "entry": "Xie, T., Lin, M., Liu, M., Ye, Y., Chen, C., & Liu, S. (2026). Infochartqa: A benchmark for multimodal question answering on infographic charts. Advances in Neural Information Processing Systems, 38.",
       "year": "2026",
@@ -17303,7 +17551,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 8,
       "entry": "Foroutan, N., Romanou, A., Ansaripour, M., Eisenschlos, J. M., Aberer, K., & Lebret, R. (2025, July). Wikimixqa: a multimodal benchmark for question answering over tables and charts. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 24941-24958).",
       "year": "2025",
@@ -17315,7 +17563,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 9,
       "entry": "Zhu, Z., Jia, M., Zhang, Z., Li, L., & Jiang, M. (2025, April). MultiChartQA: Benchmarking vision-language models on multi-chart problems. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) (pp. 11341-11359).",
       "year": "2025",
@@ -17327,7 +17575,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 10,
       "entry": "Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425–2433. https://doi.org/10.1109/ICCV.2015.279.",
       "year": "2015",
@@ -17338,7 +17586,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 11,
       "entry": "Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251.",
       "year": "2018",
@@ -17349,7 +17597,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 12,
       "entry": "He, X., Zhang, Y., Mou, L., Xing, E., & Xie, P. (2020). PathVQA: 30000+ Questions for Medical Visual Question Answering. arXiv:2003.10286.",
       "year": "2020",
@@ -17360,7 +17608,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 13,
       "entry": "Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010.",
       "year": "2021",
@@ -17371,7 +17619,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 14,
       "entry": "Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations.",
       "year": "2023",
@@ -17383,7 +17631,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 15,
       "entry": "Schick, T., Dwivedi-Yu, J., Dessì, R., et al. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36.",
       "year": "2023",
@@ -17395,7 +17643,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 16,
       "entry": "Kirillov, A., Mintun, E., Ravi, N., et al. (2023). Segment Anything. Proceedings of the IEEE/CVF International Conference on Computer Vision, 4015–4026.",
       "year": "2023",
@@ -17407,7 +17655,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 17,
       "entry": "Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., et al. (2025). SAM 2: Segment Anything in Images and Videos. International Conference on Learning Representations.",
       "year": "2025",
@@ -17419,7 +17667,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 18,
       "entry": "Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z.",
       "year": "2024",
@@ -17430,7 +17678,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 19,
       "entry": "Zhao, T., Gu, Y., Yang, J., et al. (2025). A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities. Nature Methods, 22, 166–176. https://doi.org/10.1038/s41592-024-02499-w.",
       "year": "2025",
@@ -17441,7 +17689,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 20,
       "entry": "Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723.",
       "year": "2021",
@@ -17452,7 +17700,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "entry_no": 21,
       "entry": "Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220–229. https://doi.org/10.1145/3287560.3287596.",
       "year": "2019",
@@ -17463,7 +17711,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 1,
       "entry": "An K, Chen Q, Deng C, Du Z, Gao C, Gao Z, Gu Y, He T, Hu H, Hu K, others (2024) FunAudioLLM: Voice Understanding and Generation Foundation Models for Natural Interaction Between Humans and LLMs. arXiv preprint arXiv:2407.04051.",
       "year": "2024",
@@ -17474,7 +17722,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 2,
       "entry": "Chanfungjan (2026) VoiceStyleControl. GitHub repository. https://github.com/Chanfungjan/VoiceStyleControl.",
       "year": "2026",
@@ -17485,7 +17733,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 3,
       "entry": "Du Z, Chen Q, Zhang S, Hu K, Lu H, Yang Y, Hu H, Zheng S, Gu Y, Ma Z, Gao Z, Yan Z (2024) CosyVoice: A Scalable Multilingual Zero-shot Text-to-speech Synthesizer based on Supervised Semantic Tokens. arXiv preprint arXiv:2407.05407.",
       "year": "2024",
@@ -17496,7 +17744,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 4,
       "entry": "Du Z, Wang Y, Chen Q, Shi X, Lv X, Zhao T, Gao Z, Yang Y, Gao C, Wang H, others (2024) CosyVoice 2: Scalable Streaming Speech Synthesis with Large Language Models. arXiv preprint arXiv:2412.10117.",
       "year": "2024",
@@ -17507,7 +17755,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 5,
       "entry": "Mittag G, Naderi B, Chehadi A, Möller S (2021) NISQA: A Deep CNN-Self-Attention Model for Multidimensional Speech Quality Prediction with Crowdsourced Datasets. In: Interspeech 2021, pp 2127-2131.",
       "year": "2021",
@@ -17519,7 +17767,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 6,
       "entry": "Song X (2026) S3Tokenizer: Reverse Engineering of Supervised Semantic Speech Tokenizer proposed in CosyVoice. GitHub repository. https://github.com/xingchensong/S3Tokenizer.",
       "year": "2026",
@@ -17530,7 +17778,7 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
       "entry_no": 7,
       "entry": "Yang A, Li A, Yang B, Zhang B, Hui B, Zheng B, Yu B, Gao C, Huang C, Lv C, others (2025) Qwen3 Technical Report. arXiv preprint arXiv:2505.09388.",
       "year": "2025",
@@ -17541,8 +17789,8 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "entry_no": 8,
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "entry_no": 1,
       "entry": "1. Wei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., Le, Q. V., & Zhou, D. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022.",
       "year": "2022",
       "doi": "",
@@ -17553,8 +17801,8 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "entry_no": 9,
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "entry_no": 2,
       "entry": "2. Lightman, H., Kosaraju, V., Burda, Y., Edwards, H., Baker, B., Lee, T., Leike, J., Schulman, J., Sutskever, I., & Cobbe, K. (2023). Let's Verify Step by Step. arXiv:2305.20050.",
       "year": "2023",
       "doi": "",
@@ -17564,8 +17812,8 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "entry_no": 10,
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "entry_no": 3,
       "entry": "3. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.",
       "year": "2023",
       "doi": "",
@@ -17575,8 +17823,8 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "entry_no": 11,
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "entry_no": 4,
       "entry": "4. DeepSeek-AI. (2025). DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.",
       "year": "2025",
       "doi": "",
@@ -17587,8 +17835,8 @@
       ]
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "entry_no": 12,
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "entry_no": 5,
       "entry": "5. Hendrycks, D., Burns, C., Kadavath, S., Arora, A., Basart, S., Tang, E., Song, D., & Steinhardt, J. (2021). Measuring Mathematical Problem Solving With the MATH Dataset. NeurIPS 2021.",
       "year": "2021",
       "doi": "",
@@ -17596,193 +17844,6 @@
       "issues": [
         "needs-authenticity-review",
         "missing-doi-url-arxiv"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "entry_no": 1,
-      "entry": "Penedo, G., Kydlíček, H., Allal, L. B., Lozhkov, A., Mitchell, M., Raffel, C., von Werra, L., & Wolf, T. (2024). The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. NeurIPS 2024 Datasets and Benchmarks Track. https://arxiv.org/abs/2406.17557.",
-      "year": "2024",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2406.17557.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "entry_no": 2,
-      "entry": "Hugging Face. (2026). HuggingFaceFW/fineweb Dataset Card. https://huggingface.co/datasets/HuggingFaceFW/fineweb.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "entry_no": 3,
-      "entry": "Hugging Face. (2026). DataTrove FineWeb Processing Script. https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "entry_no": 4,
-      "entry": "Penedo, G., Kydlíček, H., Cappelli, A., Sasko, M., & Wolf, T. (2024). DataTrove large scale data processing. https://github.com/huggingface/datatrove.",
-      "year": "2024",
-      "doi": "",
-      "url": "https://github.com/huggingface/datatrove.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "entry_no": 5,
-      "entry": "Luccioni, S., & Viviano, J. (2021). What's in the Box? A Preliminary Analysis of Undesirable Content in the Common Crawl Corpus. https://arxiv.org/abs/2105.02732.",
-      "year": "2021",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2105.02732.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 1,
-      "entry": "Soldaini, L., Kinney, R., Bhagia, A., Schwenk, D., Atkinson, D., Authur, R., et al. (2024). Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research. ACL 2024. https://arxiv.org/abs/2402.00159.",
-      "year": "2024",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2402.00159.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 2,
-      "entry": "Allen Institute for AI. (2023). Ai2 Dolma: 3 trillion token open corpus for language model pretraining. https://allenai.org/blog/dolma-3-trillion-tokens-open-llm-corpus-9a0ff4b8da64.",
-      "year": "2023",
-      "doi": "",
-      "url": "https://allenai.org/blog/dolma-3-trillion-tokens-open-llm-corpus-9a0ff4b8da64.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 3,
-      "entry": "AllenAI. (2026). allenai/dolma Dataset Card. https://huggingface.co/datasets/allenai/dolma.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://huggingface.co/datasets/allenai/dolma.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 4,
-      "entry": "AllenAI. (2026). Dolma Dataset and Toolkit Repository. https://github.com/allenai/dolma.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://github.com/allenai/dolma.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 5,
-      "entry": "AllenAI. (2026). Dolma Toolkit Documentation. https://github.com/allenai/dolma/blob/main/docs/README.md.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://github.com/allenai/dolma/blob/main/docs/README.md.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "entry_no": 6,
-      "entry": "Groeneveld, D., Beltagy, I., Walsh, P., Bhagia, A., Kinney, R., Tafjord, O., et al. (2024). OLMo: Accelerating the Science of Language Models. https://arxiv.org/abs/2402.00838.",
-      "year": "2024",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2402.00838.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 1,
-      "entry": "Schuhmann, C., Beaumont, R., Vencu, R., Gordon, C., Wightman, R., Cherti, M., et al. (2022). LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.",
-      "year": "2022",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2210.08402.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 2,
-      "entry": "LAION. (2022). LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.",
-      "year": "2022",
-      "doi": "",
-      "url": "https://laion.ai/blog/laion-5b/.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 3,
-      "entry": "LAION-AI. (2022). dataset-spec. https://github.com/LAION-AI/dataset-spec.",
-      "year": "2022",
-      "doi": "",
-      "url": "https://github.com/LAION-AI/dataset-spec.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 4,
-      "entry": "Gadre, S. Y., Ilharco, G., Fang, A., Hayase, J., Smyrnis, G., Nguyen, T., et al. (2023). DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.",
-      "year": "2023",
-      "doi": "",
-      "url": "https://arxiv.org/abs/2304.14108.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 5,
-      "entry": "DataComp Team. (2026). DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.",
-      "year": "2026",
-      "doi": "",
-      "url": "https://www.datacomp.ai/dcclip/.",
-      "issues": [
-        "needs-authenticity-review"
-      ]
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "entry_no": 6,
-      "entry": "ML Foundations. (2023). DataComp codebase. https://github.com/mlfoundations/datacomp.",
-      "year": "2023",
-      "doi": "",
-      "url": "https://github.com/mlfoundations/datacomp.",
-      "issues": [
-        "needs-authenticity-review"
       ]
     },
     {
@@ -24618,7 +24679,7 @@
     {
       "file": "docs/zh/part9/ch27_data_catalog_and_metadata_governance.md",
       "entry_no": 4,
-      "entry": "Cai L, Zhu Y (2015) The Challenges of Data Quality and Data Quality Metrics. Journal of Data and Information Quality 6(2-3):1–10.",
+      "entry": "Cai L, Zhu Y (2015) The challenges of data quality and data quality assessment in the big data era. Data science journal, 2015, 14: 2-2.",
       "year": "2015",
       "doi": "",
       "url": "",
@@ -25502,16 +25563,14 @@
       ]
     }
   ],
-  "missing_reference_files": [
-    "docs/zh/appendix_g_datagallery_note.md"
-  ],
+  "missing_reference_files": [],
   "summary": {
-    "style_hits": 1373,
-    "figures": 286,
-    "figures_needing_review": 286,
+    "style_hits": 1376,
+    "figures": 287,
+    "figures_needing_review": 287,
     "broken_figures": 0,
-    "references": 970,
-    "reference_issue_rows": 630,
-    "missing_reference_files": 1
+    "references": 972,
+    "reference_issue_rows": 632,
+    "missing_reference_files": 0
   }
 }

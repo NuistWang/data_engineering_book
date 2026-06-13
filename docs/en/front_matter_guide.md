@@ -36,7 +36,7 @@ Parts 4 to 6 form the training-signal layer. They cover instruction fine-tuning,
 
 Parts 7 to 11 form the systems and governance layer. They cover RAG, multimodal retrieval, online feedback, DataOps, version tracking, data products, internal data markets, Data Engineering Agents, privacy compliance, and federated learning. This layer places data engineering inside real systems, organizational collaboration, and risk boundaries.
 
-Part 12 is the specialized dataset validation layer. Through cases involving receipt documents, sparse tables, compound charts, medical-image tool use, controllable speech, and reasoning data, it tests how earlier methods apply to concrete data objects.
+Part 12 is the specialized-dataset and multimodal data-engineering validation layer. It follows text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio, and reasoning traces to test how earlier methods apply to concrete data objects.
 
 Part 13 is the open-source model data-recipe layer. Around paradigms such as pre-training, post-training, RL/reasoning, VLM, and T2I/T2V, it abstracts long-term transferable data organization methods instead of remaining at the level of experience around one hot model.
 

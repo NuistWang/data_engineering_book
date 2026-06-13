@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-13T10:48:24.946547+00:00",
+  "generated_at_utc": "2026-06-13T15:48:43.534130+00:00",
   "scanned_files": 71,
   "claims": [
     {
@@ -4016,7 +4016,851 @@
       "context": "### 37.7.4 为什么这条衔接很重要"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 26,
+      "section": "案例A：场景引入",
+      "numbers": [
+        "7B"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "一个团队准备训练 7B 参数级英文基础模型。第一版数据方案很直接：下载最近几年的 Common Crawl WET 文件，过滤掉非英文网页，做一次简单去重，然后把文本送进 tokenizer。离线抽样看起来还不错，很多页面确实是自然语言，token 数量也足够大。团队据此启动小模型预训练，却在几周后遇到三个难解释的问题。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 44,
+      "section": "案例A.1.1 网页快照到训练文本的处理层",
+      "numbers": [
+        "0.65"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "第三层是语言识别。FineWeb 是英文语料，因此使用 FastText 语言过滤，保留英文得分达到阈值的文档。官方数据卡说明，FineWeb 移除 `en` language score 低于 0.65 的文档。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 61,
+      "section": "案例A.1.2 过滤强度决定训练信号",
+      "numbers": [
+        "0"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "U(F)=S_{eval}(D_F)-\\lambda \\cdot R_{risk}(D_F)-\\mu \\cdot \\max(0, T_{target}-T_F)"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 68,
+      "section": "案例A.2：FineWeb 的数据定义和公开形态",
+      "numbers": [
+        "350B",
+        "100B",
+        "10B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "FineWeb 的公开形态包括完整数据集、按 Common Crawl dump 切分的数据配置，以及较小的 sample 版本。官方数据卡说明，可以加载全量数据，也可以指定某个 crawl/dump；dump 名称采用 `CC-MAIN-(year)-(week number)` 格式。样本版本包括约 350B、100B 和 10B GPT-2 tokens 的随机子集，便于研究者在较低成本下复现实验或调试处理代码。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 74,
+      "section": "案例A.2：FineWeb 的数据定义和公开形态",
+      "numbers": [
+        "15T"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| FineWeb full dataset \\| 论文初版报告 15T tokens，官方数据卡持续列出后续 dump \\| 大规模英文 Web 预训练、数据消融、过滤策略研究 \\| 数据持续更新，引用规模时要说明数据卡访问时间和口径 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 76,
+      "section": "案例A.2：FineWeb 的数据定义和公开形态",
+      "numbers": [
+        "约 350B"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| `sample-350BT` \\| 约 350B GPT-2 tokens \\| 中等规模数据实验、去重和过滤策略验证 \\| 适合较大 ablation，不等于完整 FineWeb \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 77,
+      "section": "案例A.2：FineWeb 的数据定义和公开形态",
+      "numbers": [
+        "约 100B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "\\| `sample-100BT` \\| 约 100B GPT-2 tokens \\| 原型训练、快速评估、成本受限实验 \\| 需要记录抽样来源和随机性 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 78,
+      "section": "案例A.2：FineWeb 的数据定义和公开形态",
+      "numbers": [
+        "约 10B"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| `sample-10BT` \\| 约 10B GPT-2 tokens \\| 管线调试、字段检查、读写性能测试 \\| 不适合得出最终数据质量结论 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 170,
+      "section": "案例A.3.2 schema 与训练评估的关系",
+      "numbers": [
+        "1",
+        "1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "S(M_v)=\\frac{1}{k}\\sum_{i=1}^{k}s(M_v,b_i)"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 194,
+      "section": "案例A.4.1 主处理流水线",
+      "numbers": [
+        "2"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| 2 \\| `URLFilter` \\| URL 和原始文档 \\| 保留或移除文档 \\| 移除恶意、NSFW 或 block-list 命中的来源 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 197,
+      "section": "案例A.4.1 主处理流水线",
+      "numbers": [
+        "5"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "\\| 5 \\| `GopherRepetitionFilter` \\| 英文文本 \\| 重复模式过滤结果 \\| 移除重复 n-gram 和异常重复内容 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 199,
+      "section": "案例A.4.1 主处理流水线",
+      "numbers": [
+        "7"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "\\| 7 \\| `C4QualityFilter` \\| 文本统计 \\| C4 规则过滤结果 \\| 应用 FineWeb 采用的 C4 规则子集 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 225,
+      "section": "案例A.4.2 去重和隐私处理流水线",
+      "numbers": [
+        "5"
+      ],
+      "category": "internal-target-or-threshold",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "FineWeb 使用 MinHash 做近似去重。MinHash 的目标是近似估计两个文档的 Jaccard 相似度。若文档 $A$ 和 $B$ 被表示为 5-gram 集合，则相似度可写为："
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 231,
+      "section": "案例A.4.2 去重和隐私处理流水线",
+      "numbers": [
+        "5",
+        "112 个",
+        "14 个",
+        "8 个",
+        "8 个",
+        "5",
+        "14",
+        "8"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去重参数为 5-grams、112 个哈希函数，拆成 14 个 bucket，每个 bucket 8 个 hash；任一 bucket 的 8 个 MinHash 相同即可判为重复候选。DataTrove 示例脚本中的 `MinhashConfig` 也对应 `n_grams=5`、`num_buckets=14`、`hashes_per_bucket=8`。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 239,
+      "section": "案例A.4.3 FineWeb 按 crawl 独立去重的判断",
+      "numbers": [
+        "96 个",
+        "10%",
+        "90%"
+      ],
+      "category": "performance-or-percentage",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "直觉上，全局去重似乎更彻底：把 96 个 crawl 放在一起，删除所有近似重复文档。FineWeb 的消融实验却给了相反信号。论文描述了一个关键现象：从最新 crawl 开始向旧 crawl 做全局去重时，旧 crawl 会被大量删除；在某个旧 snapshot 中，保留下来的 10% 数据反而比被删除的 90% 更差，包含更多广告、关键词列表和格式异常文本。最终，FineWeb 选择对每个 crawl 独立 MinHash 去重。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 245,
+      "section": "案例A.4.3 FineWeb 按 crawl 独立去重的判断",
+      "numbers": [
+        "3.1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "*图38-2 FineWeb 数据处理选择的消融评估回路。Source: original illustration based on FineWeb paper Section 3.1.*"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 259,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "1.82B"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| 模型规模 \\| ablation 模型为 1.82B 参数，Llama 架构 \\| 避免模型规模变化掩盖数据差异 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 261,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "28B",
+        "350B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "\\| 训练预算 \\| 过滤消融约 28B tokens，部分去重和累计改进实验为 350B tokens \\| 区分快速筛选和高成本验证 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 267,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "3.1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "数据来源 FineWeb paper Section 3.1 Experimental setup。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 269,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "1",
+        "2"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "若第 $v$ 个数据版本训练两次，得到模型 $M_{v,1}$ 和 $M_{v,2}$，每个模型在 $k$ 个任务上得分，则版本得分可以写为："
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 272,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "1",
+        "2",
+        "1",
+        "2",
+        "1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\bar{S}_v=\\frac{1}{2k}\\sum_{r=1}^{2}\\sum_{i=1}^{k}s(M_{v,r},b_i)"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 279,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "96 个",
+        "36T"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "第一步，建立基础过滤。FineWeb 从 WARC 抽取文本后，先做 URL block-list、英文语言识别和 Gopher/MassiveText 风格质量过滤。论文报告，在对 96 个 snapshot 的 WARC 抽取文本应用这些基础步骤后，得到约 36T GPT-2 tokens 的数据。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 281,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "30%"
+      ],
+      "category": "performance-or-percentage",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "第二步，比较已有规则。FineWeb 研究 C4 规则时发现，terminal punctuation 规则单独带来明显提升，但会删除约 30% tokens；最终 FineWeb 采用除 terminal punctuation 外的 C4 规则子集，因为后者删除更少数据并取得更合适的训练收益。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 283,
+      "section": "案例A.5.1 固定变量",
+      "numbers": [
+        "50",
+        "28B"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "第三步，设计自定义过滤器。FineWeb 收集 50 多个文档级和跨文档统计指标，比较“较高质量”和“较低质量”数据分布，选择能区分两者的阈值，再用 28B token ablation runs 验证。最终被采用的自定义过滤器关注三类问题：行尾标点比例过低、重复行字符比例过高、短行比例异常。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 339,
+      "section": "案例B.1：问题场景：权重开放后仍然无法解释模型",
+      "numbers": [
+        "7B"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "两个团队都拿到了同一个 7B 开放模型权重。第一个团队想继续预训练，让模型增强代码和科学问答能力；第二个团队想分析模型为什么在若干事实题上给出过时答案。权重、推理代码和部分评测脚本都能下载，但他们很快遇到同一个问题：模型到底见过什么数据，没人能回答。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 366,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "7B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "Dolma 不是单一静态文件，而是带版本演进的语料资产。Hugging Face 数据卡列出 `v1`、`v1_5`、`v1_5-sample`、`v1_6`、`v1_6-sample` 和 `v1_7` 等版本；其中 `v1_7` 用于训练 OLMo 7B-v1.7，并引入新来源、更多质量过滤和 fuzzy deduplication。"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 372,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2023",
+        "6.0 T"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "\\| `v1` \\| 2023-08-18 \\| 6.0 TB \\| Dolma 第一版 \\| 追溯最早公开语料形态 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 373,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2023",
+        "6.4 T",
+        "约 3T"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "\\| `v1_5` \\| 2023-10-31 \\| 6.4 TB \\| 用于训练 OLMo-1B，约 3T tokens \\| 复查 OLMo 早期训练语料 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 374,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2023",
+        "2.9 T",
+        "约 1.9T"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "\\| `v1_5-sample` \\| 2023-10-31 \\| 2.9 TB \\| 约 1.9T tokens 的样本，用于 OLMo-7B \\| 低于 full 版本的训练样本追踪 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 375,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2024",
+        "5.4 T"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| `v1_6` \\| 2024-01-31 \\| 5.4 TB \\| 在 v1.5 基础上增加部分去重和重复 n-gram 过滤 \\| 研究过滤和去重演进 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 376,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2024",
+        "16.4 GB",
+        "约 10B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
+      "context": "\\| `v1_6-sample` \\| 2024-01-31 \\| 16.4 GB \\| 约 10B tokens 的探索样本 \\| 快速调试和数据浏览 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 377,
+      "section": "案例B.2：数据集概览：版本、规模与来源结构",
+      "numbers": [
+        "2024",
+        "4.5 T",
+        "7B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| `v1_7` \\| 2024-04-15 \\| 4.5 TB \\| 用于训练 OLMo 7B-v1.7，新来源、更多质量过滤、fuzzy deduplication \\| 当前默认版本和透明训练参照 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 389,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "9,022 GB",
+        "3,370M",
+        "1,775B",
+        "2,281B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| Common Crawl \\| web pages \\| 9,022 GB \\| 3,370M \\| 1,775B \\| 2,281B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 390,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "1,043 GB",
+        "210M",
+        "260B",
+        "411B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| The Stack \\| code \\| 1,043 GB \\| 210M \\| 260B \\| 411B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 391,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "790 GB",
+        "364M",
+        "153B",
+        "198B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| C4 \\| web pages \\| 790 GB \\| 364M \\| 153B \\| 198B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 392,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "339 GB",
+        "377M",
+        "72B",
+        "89B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| Reddit \\| social media \\| 339 GB \\| 377M \\| 72B \\| 89B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 393,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "268 GB",
+        "38.8M",
+        "50B",
+        "70B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| PeS2o \\| STEM papers \\| 268 GB \\| 38.8M \\| 50B \\| 70B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 394,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "20.4 GB",
+        "0.056M",
+        "4.0B",
+        "6.0B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| Project Gutenberg \\| books \\| 20.4 GB \\| 0.056M \\| 4.0B \\| 6.0B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 395,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "16.2 GB",
+        "6.2M",
+        "3.7B",
+        "4.3B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| Wikipedia and Wikibooks \\| encyclopedic \\| 16.2 GB \\| 6.2M \\| 3.7B \\| 4.3B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 396,
+      "section": "案例B.2.1 v1.6 来源结构",
+      "numbers": [
+        "11,519 GB",
+        "4,367M",
+        "2,318B",
+        "3,059B"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| Total \\| mixed \\| 11,519 GB \\| 4,367M \\| 2,318B \\| 3,059B \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 507,
+      "section": "案例B.4.1 四个动作对应四类证据",
+      "numbers": [
+        "3"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| 3 \\| Mixer \\| 根据属性值移除、过滤或混合文档 \\| sample proportion、source mix、数据版本 \\| sample proportion 不透明会导致 token accounting 错误 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 508,
+      "section": "案例B.4.1 四个动作对应四类证据",
+      "numbers": [
+        "4"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| 4 \\| Tokenization \\| 使用 Hugging Face 兼容 tokenizer \\| token 计数、tokenizer 版本、训练流 \\| tokenizer 变化会改变 token 数和训练预算 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch38_text_corpora_transparent_ledger.md",
+      "line": 529,
+      "section": "案例B.5.1 source ablation 定位能力来源",
+      "numbers": [
+        "1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\Delta_s=\\frac{1}{\\|B\\|}\\sum_{b \\in B} \\left[score(M_{all}, b)-score(M_{-s}, b)\\right]"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 27,
+      "section": "39.1 开篇问题场景：图文对需要通道化筛选",
+      "numbers": [
+        "39.1"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "## 39.1 开篇问题场景：图文对需要通道化筛选"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 48,
+      "section": "39.1.2 CLIP 分数只解决图文相关性的一部分",
+      "numbers": [
+        "1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\operatorname{keep}(i,t)=\\mathbb{1}[\\operatorname{sim}(i,t)\\ge \\tau_{\\ell}]"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 53,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "39.2"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "## 39.2 数据集概览：子集规模与公开形态"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 55,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "5.85B",
+        "2.32B",
+        "2.26B",
+        "1.27B"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "LAION-5B 论文报告它包含 5.85B 个 CLIP 过滤后的图文对，其中英文子集约 2.32B，多语言子集约 2.26B，语言不确定子集约 1.27B。这个拆分很重要，因为语言识别、CLIP 模型、过滤阈值和下游任务都会影响样本价值。"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 61,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "2.32B"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| LAION-2B-en \\| 2.32B \\| 英文 \\| 语言识别置信度较高，使用英文 CLIP 过滤 \\| 英文 CLIP、图文检索、英文 T2I 数据候选 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 62,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "2.26B",
+        "100"
+      ],
+      "category": "model-or-token-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "medium",
+      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
+      "context": "\\| LAION-2B-multi \\| 2.26B \\| 100 多种非英文语言 \\| 使用多语言模型处理图文相似度 \\| 多语言图文检索、多语言视觉语言预训练 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 63,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "1.27B"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| LAION-1B-nolang \\| 1.27B \\| 语言不明确或低置信度 \\| 常见商品、地点、短文本和 SEO 噪声 \\| 特定任务再筛选、商品和地点类候选池 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 64,
+      "section": "39.2 数据集概览：子集规模与公开形态",
+      "numbers": [
+        "5.85B"
+      ],
+      "category": "other-quantitative",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| Total \\| 5.85B \\| 混合 \\| 开放网页图文候选池 \\| 大规模图文训练和数据研究 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 72,
+      "section": "39.3 样本 schema：五条通道分开记录",
+      "numbers": [
+        "39.3 样本"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "## 39.3 样本 schema：五条通道分开记录"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 74,
+      "section": "39.3 样本 schema：五条通道分开记录",
+      "numbers": [
+        "64"
+      ],
+      "category": "performance-or-percentage",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "图文候选池也应分通道建模。LAION-5B 论文列出的 Parquet 元数据字段包括 64 位整数 id、图片 URL、文本、图片高宽、图文 embedding 的余弦相似度，以及 NSFW 和水印检测分数。工程团队在复用这类语料时，通常还需要补充下载、hash、授权线索和撤回状态等治理字段。"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 124,
+      "section": "39.4 从 Common Crawl 到候选记录",
+      "numbers": [
+        "1"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| 1 \\| Common Crawl WAT 元数据 \\| 解析 HTML IMG 标签，保留带 alt text 的图片候选 \\| `<url, text>` 候选对 \\| 文本通道、视觉通道 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 125,
+      "section": "39.4 从 Common Crawl 到候选记录",
+      "numbers": [
+        "2"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| 2 \\| 图片 URL 和文本 \\| 分布式下载、解码、基础质量检查 \\| 可读取图片和失败日志 \\| 视觉通道 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 127,
+      "section": "39.4 从 Common Crawl 到候选记录",
+      "numbers": [
+        "4"
+      ],
+      "category": "cost-resource-or-scale",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "\\| 4 \\| 图片和文本 \\| 计算 CLIP 或多语言 CLIP embedding 与相似度 \\| 带 `clip_score` 的候选对 \\| 对齐通道 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 129,
+      "section": "39.4 从 Common Crawl 到候选记录",
+      "numbers": [
+        "6"
+      ],
+      "category": "dataset-size-or-composition",
+      "source_status": "nearby-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "\\| 6 \\| 元数据 \\| 发布 Parquet、近邻索引和探索接口 \\| 可查询、可筛选语料 \\| 发布通道 \\|"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 131,
+      "section": "39.4 从 Common Crawl 到候选记录",
+      "numbers": [
+        "0.28",
+        "0.26",
+        "90%",
+        "6B"
+      ],
+      "category": "performance-or-percentage",
+      "source_status": "inline-source-signal",
+      "risk": "low",
+      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
+      "context": "LAION-5B 论文描述的英文过滤阈值为 CLIP 余弦相似度 0.28，非英文图文对使用多语言 CLIP 阈值 0.26。论文也指出，内容过滤会移除约 90% 的原始图片候选，最后保留下接近 6B 的图文对。这个数字说明，开放网页候选池的原始规模很大，但真正能进入训练候选池的比例并不高。"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 177,
+      "section": "39.4.1 筛选闸门的代码化表达",
+      "numbers": [
+        "10",
+        "0",
+        "0",
+        "0"
+      ],
+      "category": "performance-or-percentage",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "LAION 生态中常见的图文数据分发方式包括 Parquet 元数据和 WebDataset 分片。Parquet 适合保存 URL、文本、分数和标签；WebDataset 则把图片、caption 和 json 元数据放入 tar 分片，方便训练程序顺序读取。一个 10k 样本的 shard 可以包含 `0.jpg`、`0.txt`、`0.json` 这样的文件组合，json 中记录 URL、原始尺寸和安全标签等字段。"
+    },
+    {
+      "file": "docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md",
+      "line": 218,
+      "section": "39.5.2 DataComp 提供筛选策略比较协议",
+      "numbers": [
+        "1"
+      ],
+      "category": "other-quantitative",
+      "source_status": "chapter-reference-section-only",
+      "risk": "low",
+      "action": "人工抽检即可。",
+      "context": "S(g)=\\sum_{j=1}^{k}w_j\\cdot b_j(T(g(D)))"
+    },
+    {
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 30,
       "section": "案例A：场景引入",
       "numbers": [
@@ -4030,7 +4874,7 @@
       "context": "某省级医保中心的信息化团队历时两个月训练了一个基于 Qwen2.5-VL(Bai et al., 2025) 的端到端票据抽取系统。离线评测显示，系统在测试集上的字符识别准确率（ANLS）超过 92%，字段级 F1 也接近 90%。团队对此充满信心，准备接入结算对账流水线。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 32,
       "section": "案例A：场景引入",
       "numbers": [
@@ -4045,22 +4889,22 @@
       "context": "然而，在上线前的业务验收中，财务核算组随机抽取了 200 张无线表费用清单做交叉校验，结果令人意外：近 15% 的记录无法通过\"明细金额求和 = 总额\"的对账规则，其中多数并非字符识别错误——数字本身都\"读对了\"——而是行列错位导致金额归属到了错误的行。更严重的是，大约 5% 的清单中出现了\"凭空多出的表行\"：模型把出院记录中的自由文本段落\"编造\"成了表格行项目，生成了看似合法实则不存在的费用明细。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 60,
-      "section": "38.1.2 一次错位如何级联成一条废记录",
+      "section": "40.1.2 一次错位如何级联成一条废记录",
       "numbers": [
-        "38.1"
+        "40.1"
       ],
       "category": "dataset-size-or-composition",
       "source_status": "chapter-reference-section-only",
       "risk": "low",
       "action": "人工抽检即可。",
-      "context": "#### 38.1.2 一次错位如何级联成一条废记录"
+      "context": "#### 40.1.2 一次错位如何级联成一条废记录"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 62,
-      "section": "38.1.2 一次错位如何级联成一条废记录",
+      "section": "40.1.2 一次错位如何级联成一条废记录",
       "numbers": [
         "3",
         "2"
@@ -4072,22 +4916,22 @@
       "context": "逻辑约束之所以重要，是因为票据数据的错误**不是孤立的**。设想一张无线费用清单，其中某一列存在稀疏空值。模型在缺少网格线的情况下发生了行错位：把第 3 行的金额读到了第 2 行。单看字符识别，每个数字都\"读对了\"，ANLS 甚至很高；但行级「单价 × 数量 = 金额」会在错位行失败，文档级「Σ 明细 = 总额」也会失衡。结果是：一条字符识别近乎完美的记录，在业务上彻底不可用——它既不能入库，也不能用于理赔核算。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 70,
-      "section": "38.2.1 规模与来源",
+      "section": "40.2.1 规模与来源",
       "numbers": [
-        "38.2"
+        "40.2"
       ],
       "category": "other-quantitative",
       "source_status": "chapter-reference-section-only",
       "risk": "low",
       "action": "人工抽检即可。",
-      "context": "#### 38.2.1 规模与来源"
+      "context": "#### 40.2.1 规模与来源"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 72,
-      "section": "38.2.1 规模与来源",
+      "section": "40.2.1 规模与来源",
       "numbers": [
         "2,300 张",
         "6"
@@ -4096,12 +4940,12 @@
       "source_status": "chapter-reference-section-only",
       "risk": "medium",
       "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "StructBill-CN 共包含 **2,300 张**高分辨率票据图像，覆盖 **6 类不同的业务 schema**，全部来自两个公开医疗数据集：CHIP-2022与 SIBR-Med。这一组合刻意混合了有线网格表、文本密集型记录与无线表三种形态，使模型必须跨越不同分布，而不是在单一文档样式上做模式匹配。数据组成如表 38-1。"
+      "context": "StructBill-CN 共包含 **2,300 张**高分辨率票据图像，覆盖 **6 类不同的业务 schema**，全部来自两个公开医疗数据集：CHIP-2022与 SIBR-Med。这一组合刻意混合了有线网格表、文本密集型记录与无线表三种形态，使模型必须跨越不同分布，而不是在单一文档样式上做模式匹配。数据组成如表 40-1。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 83,
-      "section": "38.2.1 规模与来源",
+      "section": "40.2.1 规模与来源",
       "numbers": [
         "200"
       ],
@@ -4112,9 +4956,9 @@
       "context": "\\| SIBR-Med \\| 通知单 \\| 200 \\| 无表格 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 84,
-      "section": "38.2.1 规模与来源",
+      "section": "40.2.1 规模与来源",
       "numbers": [
         "2,300"
       ],
@@ -4125,35 +4969,35 @@
       "context": "\\| **合计** \\| **6 类 schema** \\| **2,300** \\| **混合** \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 96,
-      "section": "38.2.3 数据集刻意暴露的三类核心挑战",
+      "section": "40.2.3 数据集刻意暴露的三类核心挑战",
       "numbers": [
-        "38.2"
+        "40.2"
       ],
       "category": "dataset-size-or-composition",
       "source_status": "chapter-reference-section-only",
       "risk": "medium",
       "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "#### 38.2.3 数据集刻意暴露的三类核心挑战"
+      "context": "#### 40.2.3 数据集刻意暴露的三类核心挑战"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 138,
-      "section": "38.3.3 完整样本结构示例",
+      "section": "40.3.3 完整样本结构示例",
       "numbers": [
-        "38.3"
+        "40.3"
       ],
       "category": "dataset-size-or-composition",
       "source_status": "chapter-reference-section-only",
       "risk": "medium",
       "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "#### 38.3.3 完整样本结构示例"
+      "context": "#### 40.3.3 完整样本结构示例"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 170,
-      "section": "38.3.3 完整样本结构示例",
+      "section": "40.3.3 完整样本结构示例",
       "numbers": [
         "1"
       ],
@@ -4164,7 +5008,7 @@
       "context": "**代码示例 1：Schema 的 Python 数据类定义。** 下面的代码展示了 schema $S=\\{K, T, C\\}$ 的程序化表示。每种业务文档类型对应一个 `Schema` 实例；三个约束字段（`price_field`、`qty_field`、`amount_field`）加上 `total_field` 在不改变 JSON 输出格式的前提下编码了算术规则 $C$。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 288,
       "section": "案例A.4：构建流水线：采集、去噪、标注、Schema 对齐、逻辑校验、版本切分",
       "numbers": [
@@ -4179,20 +5023,20 @@
       "context": "**⑦ 版本切分。** 数据集按训练 : 测试 = **8:2** 切分。工程实践上建议：切分时保证 6 类 schema 在两侧的分布可控、留出真正的跨布局测试样本；并可从训练集再切出一个小验证子集用于调参，但不污染测试集。每一个版本都应带上数据指纹与统计快照，接入数据版本与实验追踪体系。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 290,
-      "section": "38.4.1 数据血缘与元数据：让每条记录都可回溯",
+      "section": "40.4.1 数据血缘与元数据：让每条记录都可回溯",
       "numbers": [
-        "38.4"
+        "40.4"
       ],
       "category": "dataset-size-or-composition",
       "source_status": "chapter-reference-section-only",
       "risk": "low",
       "action": "人工抽检即可。",
-      "context": "#### 38.4.1 数据血缘与元数据：让每条记录都可回溯"
+      "context": "#### 40.4.1 数据血缘与元数据：让每条记录都可回溯"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 310,
       "section": "案例A.5：评测协议：字段、结构、表格、算术一致性与错误归因",
       "numbers": [
@@ -4206,9 +5050,9 @@
       "context": "这些指标之所以要**分维度并存**，是因为它们彼此无法替代：F1 衡量\"抓没抓到、抓得对不对\"，但对一个数字是 54.76 还是 54.67 并不敏感（两者编辑距离很小）；ANLS 对长文本的轻微噪声宽容，却不能保证算术正确；TEDS 关注的是 JSON 树的拓扑——行列对齐、嵌套层级、合并单元格的恢复——它能抓住\"结构塌了\"的问题，却管不了\"内容错了\"；只有 Row-ACR 与 Doc-ACR 直接回答最关键的问题：\"这些数字加得起来吗？\"一个健康的评测必须同时盯住这四类指标，因为任何单一指标都可能给出\"虚高\"的..."
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 359,
-      "section": "38.5.2 可复现评测的工程约定",
+      "section": "40.5.2 可复现评测的工程约定",
       "numbers": [
         "0.9",
         "1.0",
@@ -4221,9 +5065,9 @@
       "context": "**为吸收大模型解码方差，在评测时采用 temperature=0.9、top_p=1.0，并对每个模型取 **8 次独立运行**的平均后再报告指标。单次运行的分数在高温采样下波动较大，多次平均才能得到稳定可比的结论。工程上建议把\"解码参数 + 运行次数 + 随机种子\"一并写入评测配置并随结果归档。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 371,
-      "section": "38.5.3 错误归因与修复动作",
+      "section": "40.5.3 错误归因与修复动作",
       "numbers": [
         "=0"
       ],
@@ -4234,9 +5078,9 @@
       "context": "\\| 捏造表行 \\| 把正文文字编造成表格行 \\| 非结构文本块诱导 \\| 幻觉过滤门禁（$I_{gate}=0$）；为相应 schema 打 `anti_hallucination` 标记 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 388,
-      "section": "38.6.1 数据资产支撑的算法：SRPO（点到为止）",
+      "section": "40.6.1 数据资产支撑的算法：SRPO（点到为止）",
       "numbers": [
         "1"
       ],
@@ -4244,12 +5088,12 @@
       "source_status": "chapter-reference-section-only",
       "risk": "medium",
       "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "- **数据 → 奖励信号。** SRPO 的核心是把 §38.3 的离散 schema 规则，转成稠密、可验证的奖励——即 **SCL-Reward**：$R_{total}=I_{gate}\\cdot[\\lambda\\cdot R_{content}+(1-\\lambda)\\cdot R_{logic}]$。其中结构门禁 $I_{gate}$、内容对齐 $R_{content}$（用 Hungarian 匹配解决表行乱序）、逻辑校验 $R_{logic}$（即图 38-3 的行级/文档级一致性）三者，全部直接读..."
+      "context": "- **数据 → 奖励信号。** SRPO 的核心是把 §40.3 的离散 schema 规则，转成稠密、可验证的奖励——即 **SCL-Reward**：$R_{total}=I_{gate}\\cdot[\\lambda\\cdot R_{content}+(1-\\lambda)\\cdot R_{logic}]$。其中结构门禁 $I_{gate}$、内容对齐 $R_{content}$（用 Hungarian 匹配解决表行乱序）、逻辑校验 $R_{logic}$（即图 40-3 的行级/文档级一致性）三者，全部直接读..."
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 389,
-      "section": "38.6.1 数据资产支撑的算法：SRPO（点到为止）",
+      "section": "40.6.1 数据资产支撑的算法：SRPO（点到为止）",
       "numbers": [
         "10",
         "1",
@@ -4268,9 +5112,9 @@
       "context": "- **训练消费方式。** SRPO 分两段消费数据：先用数据做 SFT 暖启，得到能产出合法 JSON 的参考策略；再用 GRPO(Shao et al., 2024) 做强化学习，按组采样多个候选、用 SCL-Reward 打分、以组内相对优势更新。原始材料给出的训练配置为：SFT 10 epochs、学习率 1e−5、batch size 128；GRPO 组大小 G=8、奖励系数 $\\lambda=0.4$、$\\gamma=0.6$；硬件为 8× NVIDIA A800（80GB）。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 390,
-      "section": "38.6.1 数据资产支撑的算法：SRPO（点到为止）",
+      "section": "40.6.1 数据资产支撑的算法：SRPO（点到为止）",
       "numbers": [
         "84%",
         "10 个"
@@ -4282,9 +5126,9 @@
       "context": "- **效果（定性）。** 原始材料表明，标准 SFT 的逻辑分会在 84% 附近\"封顶\"，而引入逻辑奖励后 Row/Doc-ACR 有约 10 个百分点的提升——说明本数据集的逻辑标注确实把\"算术一致性\"变成了可优化的目标。本章不复述完整榜单，避免写成模型综述。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 396,
-      "section": "38.6.2 适合训练什么、评估什么",
+      "section": "40.6.2 适合训练什么、评估什么",
       "numbers": [
         "3B"
       ],
@@ -4295,9 +5139,9 @@
       "context": "适合训练：**schema 受约束的中文垂直文档抽取小模型**。本数据集天然适配\"SFT 暖启 + 规则奖励 RL\"的配方——它既提供合法结构的监督，又提供可验证的逻辑监督，因此适合训练 3B 级别的多模态文档模型在无线表、稀疏布局上的稳健对齐能力。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 426,
-      "section": "38.6.3 高风险场景下的隐私、合规与审计",
+      "section": "40.6.3 高风险场景下的隐私、合规与审计",
       "numbers": [
         "54.76",
         "1.00"
@@ -4309,7 +5153,7 @@
       "context": "\\| 金额 / 单价 / 数量 \\| 54.76 / 1.00 \\| **保留原值**——算术约束校验（P×Q=A / Σ=T）依赖真实数值 \\| 若高风险场景要求金额脱敏，可对全单做等比例缩放后**重算一致性**以保证逻辑约束不被破坏 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 487,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4323,7 +5167,7 @@
       "context": "从规模上看，数据集说明中通常以“约 11,000 张表格图像”概括 STB；按切分统计，具体样本数为 10,983 张。为了避免混淆，本章以切分表中的数字为准。"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 491,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4336,7 +5180,7 @@
       "context": "\\| STB-Train \\| 8,000 \\| HTML + 单元格 bbox \\| 多任务监督训练 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 492,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4349,7 +5193,7 @@
       "context": "\\| STB-Val \\| 1,000 \\| HTML + 单元格 bbox \\| 超参数选择与开发集评估 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 493,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4362,7 +5206,7 @@
       "context": "\\| STB-Standard-Test \\| 1,000 \\| HTML + 单元格 bbox \\| 标准泛化评测 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 494,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4375,7 +5219,7 @@
       "context": "\\| STB-Mask-Stress \\| 983 \\| 遮挡表格 + 拓扑标签 \\| 稀疏和信息缺失条件下的鲁棒性评测 \\|"
     },
     {
-      "file": "docs/zh/part12/ch38_visual_document_table_data_engineering.md",
+      "file": "docs/zh/part12/ch40_visual_document_table_data_engineering.md",
       "line": 495,
       "section": "案例B.2：数据集概览与任务边界",
       "numbers": [
@@ -4388,7 +5232,7 @@
       "context": "\\| 合计 \\| 10,983 \\| - \\| 训练、验证、标准测试与压力测试 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 21,
       "section": "案例A.0：学习目标",
       "numbers": [
@@ -4402,7 +5246,7 @@
       "context": "- 掌握以 354 份原生信息图、1917 条链式子问题为基础的样本组织方式，理解整图单文件、保留原生多子图布局的标注取舍。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 55,
       "section": "案例A.2.1 数据集基础量化指标",
       "numbers": [
@@ -4415,7 +5259,7 @@
       "context": "- 图像样本总量：数据集收录 354 份经过筛选的真实世界复合信息图。受限于互联网高质量原生多子图信息图资源稀缺的客观现状，文档明确标注当前样本体量偏小，项目团队预留后续迭代扩容规划，未来将持续扩充原图样本池。所有图像均为完整一体化信息图，整图单文件存储，内部内嵌多个独立子图，不做人工切分拆图处理，完整保留原图排版布局、图例共享规则、文本注释位置，最大限度还原人类阅读信息图时的视觉浏览逻辑。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 57,
       "section": "案例A.2.1 数据集基础量化指标",
       "numbers": [
@@ -4431,7 +5275,7 @@
       "context": "- 问答样本总量：全数据集配套 1917 条具备逻辑关联性的多阶子问题，单张复合信息图配套多条前后依赖的链式子问题，问题和答案（大模型辅助生成后人工标注核验）；额外针对每张信息图追加 1 道无法依托图内现有信息作答的无效问题，用于测试模型拒答能力与鲁棒性，规避模型强行编造数据作答的过拟合缺陷。 从单图平均配比测算：单张信息图平均配套 5.41 条有效推理子问题 + 1 道不可作答测试题，问答密度贴合真实场景人类分步提问习惯。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 71,
       "section": "案例A.2.3 子图表全类型清单与布局特征",
       "numbers": [
@@ -4444,7 +5288,7 @@
       "context": "该数据集包含20 余种常见可视化图表类型，包括：柱状图、地图图、表格图、卡片图、环形图、饼图、气泡图、排名图、堆叠柱状图、折线图、分组柱状图、象形图、树形图、排名卡片图、和弦图、树状图、径向图、径向柱状图、瓦片图、甘特图、散点图、3D 柱状图以及时间轴图表。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 81,
       "section": "案例A.2.4 子问题全题型清单与组合特征",
       "numbers": [
@@ -4457,7 +5301,7 @@
       "context": "数据集配套子问题脱离单一抽取题型限制，囊括 17 类主流推理设问类型，涵盖数值、分类、求和、均值、中位数、极值、计数、排名、占比、趋势、差值、异常值、假设、可视化、条件、计算及其他类型。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 92,
       "section": "案例A.2.5 三大核心任务标准化定义",
       "numbers": [
@@ -4472,7 +5316,7 @@
       "context": "- 多步骤串行运算：子问题按照前后依赖链式排布，前序问题输出答案作为后序问题的计算输入参数，需要依次执行查找、提取、加减、求差、平均、占比等串行算术操作，单条最终答案无法一步算出。鲨鱼样本子问题完整呈现该特征：问题 1 极值查找锁定县域→问题 2 依托县域所属州调取全州总量→问题 3 双州数值做差值运算，三步环环相扣。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 93,
       "section": "案例A.2.5 三大核心任务标准化定义",
       "numbers": [
@@ -4485,7 +5329,7 @@
       "context": "- 视觉与上下文推理：综合图例符号、图标标记、页面注释、自然语言正文信息完成非数值类推理，关键信息不直接以数字形式展示在坐标轴中。如样本中 2018 马萨诸塞州致命鲨鱼袭击物种答案（大白鲨），数据来源是图标图例标注（致命袭击图标 + 鲨鱼物种备注），无法通过纯数字读取获得，必须结合视觉符号 + 文本备注综合推导。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 108,
       "section": "案例A.3.1 单张复合信息图的子图分层结构",
       "numbers": [
@@ -4502,7 +5346,7 @@
       "context": "- 子图 B（Map Chart）：美国近 10 年各州鲨鱼袭击汇总统计；关键数据：佛罗里达州 242 起、夏威夷 71 起；支撑子问题 2、子问题 3 数值来源。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 114,
       "section": "案例A.3.2 链式子问题全链路拆解",
       "numbers": [
@@ -4517,7 +5361,7 @@
       "context": "本案例单图配套 5 道逻辑递进有效子问题 + 1 道不可作答附加题，5 个子问题依次覆盖极值、计数、差值、条件筛选等推理题型，问题前后强依赖，完整复刻人类分步提问逻辑，逐条拆分推理逻辑与证据来源："
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 119,
       "section": "案例A.3.2 链式子问题全链路拆解",
       "numbers": [
@@ -4531,7 +5375,7 @@
       "context": "\\| Q2 \\| 计数 \\| Q1 锁定县域所属州近 10 年鲨鱼袭击合计总数？ \\| 242 \\| 子图 B \\| 必须以 Q1 答案（佛罗里达州）作为筛选关键词 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 120,
       "section": "案例A.3.2 链式子问题全链路拆解",
       "numbers": [
@@ -4548,7 +5392,7 @@
       "context": "\\| Q3 \\| 差值 \\| 近十年佛罗里达比夏威夷鲨鱼袭击多多少起？ \\| 171 \\| 子图 B（FL=242、HI=71，242-71=171） \\| Q2 确定佛罗里达数值后，再提取夏威夷数据做运算 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 121,
       "section": "案例A.3.2 链式子问题全链路拆解",
       "numbers": [
@@ -4561,7 +5405,7 @@
       "context": "\\| Q4 \\| 条件推理 \\| 2018 年马萨诸塞州高风险鲨鱼袭击涉事物种？ \\| Presumed Great White \\| 子图 C \\| 无数值运算，依托符号与文本上下文推理 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 122,
       "section": "案例A.3.2 链式子问题全链路拆解",
       "numbers": [
@@ -4574,7 +5418,7 @@
       "context": "\\| Q5 \\| 计数 \\| 每年坠床意外致死人数？ \\| 450 \\| 子图 D \\| 切换第四张子图数据源 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 145,
       "section": "案例A.3.4 不可作答题目设计目的",
       "numbers": [
@@ -4587,7 +5431,7 @@
       "context": "按照数据集统一规范，本张鲨鱼信息图额外附带 1 道无图内依据的不可作答问题，例如 “每年多少人出现意外是因为猫？”，原图中并没有这方面的数据，模型无法作答。该设计用于检验模型幻觉抑制能力，避免大模型无依据编造数字，提升评测鲁棒性。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 159,
       "section": "案例A.4.1 第一步：真实复合信息图素材收集与初筛",
       "numbers": [
@@ -4602,7 +5446,7 @@
       "context": "筛选规则：①整图包含≥2 种不同类型子图，满足复合信息图定义；②跨子图存在统计关联指标，具备设计跨图问答的基础条件；③图例、注释、分类标签完整，剔除模糊残缺、关键信息被裁切的劣质图片；④跨 28 大领域均衡抽样，避免单一主题素材扎堆。初筛后保留 354 张有效原图进入下一环节。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 167,
       "section": "案例A.4.3 第三步：多阶链式子问题分层设计",
       "numbers": [
@@ -4616,7 +5460,7 @@
       "context": "针对单张复合信息图，采用类型随机选定 + 模型初生成 + 人工精修校验的半自动化出题方案：标注人员先从极值提取、计数统计、差值运算、条件推理、趋势分析、异常判定等全题型池内，随机选取三类目标题型；再依托大模型，以选定题型为约束、以原图多子图分布结构为依据，批量生成一组具备前后关联的链式候选子问题，强制候选题目覆盖预先选定的三类题型。模型初稿生成完成后，由标注人员逐张对照原图图文、图例与分区数据人工审改：优化问题自然语言表述、修正跨图表逻辑漏洞、剔除脱离图表内容的无效设问，同时逐条读图核算、校准标准答案。全样本经该流..."
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 183,
       "section": "案例A.5.2 全链路链式正确率",
       "numbers": [
@@ -4629,7 +5473,7 @@
       "context": "定义：针对一套前后关联的问题链，全部子问题答案 100% 正确才算整条链路命中，任意前置子问题出错即判定整条链路失败。该指标是本数据集最关键评测维度，精准考核多步推理、跨图联动稳定性，直接反映模型连续推理过程中错误传播程度。例如 Q1 县域识别错误，即便 Q2、Q3 计算公式无误，整条链路直接判定错误。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 215,
       "section": "案例A.7.1 当前硬性局限",
       "numbers": [
@@ -4642,7 +5486,7 @@
       "context": "- 样本体量约束：受全球高质量原生复合信息图稀缺限制，现有 354 张原图规模偏小，难以支撑超大规模预训练，官方标注后续持续扩充样本库；"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 227,
       "section": "案例A：小结",
       "numbers": [
@@ -4656,7 +5500,7 @@
       "context": "多图表信息图推理数据集立足于真实世界复合信息图原生形态，跳出单图表问答固有范式，通过跨图表聚合、多步串行计算、视觉上下文推理三大任务重构图表 VQA 评测体系；354 张多子图原图 + 1917 条链式子问题的样本架构，搭配分层评测指标，精准还原人类阅读复合型数据可视化内容的认知逻辑。鲨鱼袭击链式问答案例直观验证：真实信息图推理是多分区数据调取、分步计算、符号释义的复合任务，现有单图优化型 VQA 模型存在明显能力短板。受制于研发进度，数据集目前仅完成标注落地、暂无配套算法，但其填补真实多子图信息图推理基准空白的价..."
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 269,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4669,7 +5513,7 @@
       "context": "MedImage-ToolVQA 面向的是医学图像多选问答。样本以 BiomedParse 提供的区域级视觉信息为基础 (Zhao et al. 2025)，包含原始医学图像、目标区域、mask、bbox、目标描述、问题、候选选项、正确答案，以及可能由工具返回的局部观察图像。最终整理后的训练数据共有 24,992 条记录，任务形态以多选医学图像 VQA 为主。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 271,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4689,7 +5533,7 @@
       "context": "在这些记录中，多图样本占有重要比例。统计显示：19,945 条记录包含 3 张原始或工具相关图像，2,471 条包含 1 张图像，1,383 条包含 4 张图像，1,193 条包含 2 张图像。这一分布说明，数据集中相当多的样本并非单纯的“原图加问题”，而是保存了工具链产生的观察图像——局部 crop、mask overlay 或分割结果会作为新的视觉证据进入轨迹。"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 275,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4702,7 +5546,7 @@
       "context": "\\| 总记录数 \\| 24,992 \\| 可用于训练与评测的医学图像工具调用样本规模 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 278,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4716,7 +5560,7 @@
       "context": "\\| `raw_images = 3` \\| 19,945 \\| 最常见的工具增强轨迹形态 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 279,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4730,7 +5574,7 @@
       "context": "\\| `raw_images = 1` \\| 2,471 \\| 直接视觉推理或单图样本 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 280,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4744,7 +5588,7 @@
       "context": "\\| `raw_images = 4` \\| 1,383 \\| 可能包含额外工具观察或多步轨迹 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 281,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4758,7 +5602,7 @@
       "context": "\\| `raw_images = 2` \\| 1,193 \\| 原图加单个工具观察的形态 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 282,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4771,7 +5615,7 @@
       "context": "\\| 答案 A \\| 9,986 \\| 正确选项分布，需要关注选项偏置 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 283,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4784,7 +5628,7 @@
       "context": "\\| 答案 B \\| 7,177 \\| 正确选项分布，需要关注选项偏置 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 284,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4797,7 +5641,7 @@
       "context": "\\| 答案 C \\| 5,473 \\| 正确选项分布，需要关注选项偏置 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 285,
       "section": "案例B.3：数据对象与规模概览",
       "numbers": [
@@ -4810,7 +5654,7 @@
       "context": "\\| 答案 D/E \\| 2,356 \\| 长尾选项，评测时不宜只看总体准确率 \\|"
     },
     {
-      "file": "docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md",
+      "file": "docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md",
       "line": 461,
       "section": "案例B.5.6 SFT 封装：训练记录继续写入 MindRecord",
       "numbers": [
@@ -4824,9 +5668,9 @@
       "context": "第五阶段是轨迹合成。经过校验的样本被组织成多轮结构：模型先观察原图和问题，决定是否调用工具；工具返回观察图；模型继续推理并输出答案。约 90% 的样本采用工具增强路径，约 10% 保留为直接视觉推理样本。保留直接样本是必要的，因为并非所有问题都应调用工具。若训练数据暗示“每题都必须调用工具”，模型会学到低效甚至错误的行为策略。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 47,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 45,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "154,906 条",
         "20,117 条",
@@ -4841,9 +5685,9 @@
       "context": "VoiceStyleControl 共包含 154,906 条样本。其中，S2SEmoControl 包含 20,117 条样本，占全量约 13.0%，面向 style-controllable speech-to-speech dialogue generation；TTSSpeakerControl 包含 134,789 条样本，占全量约 87.0%，面向 controllable text-to-speech generation。前者更接近真实语音助手场景：模型要理解用户说出的请求，再生成助手侧语音回答；后..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 53,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 51,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "4,050",
         "38,500",
@@ -4857,9 +5701,9 @@
       "context": "\\| happy \\| 4,050 \\| 38,500 \\| 42,550 \\| 27.5% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 54,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 52,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "4,104",
         "38,054",
@@ -4873,9 +5717,9 @@
       "context": "\\| angry \\| 4,104 \\| 38,054 \\| 42,158 \\| 27.2% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 55,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 53,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "4,010",
         "24,925",
@@ -4889,9 +5733,9 @@
       "context": "\\| fearful \\| 4,010 \\| 24,925 \\| 28,935 \\| 18.7% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 56,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 54,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "3,825",
         "0",
@@ -4905,9 +5749,9 @@
       "context": "\\| neutral \\| 3,825 \\| 0 \\| 3,825 \\| 2.5% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 57,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 55,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "4,128",
         "33,310",
@@ -4921,9 +5765,9 @@
       "context": "\\| sad \\| 4,128 \\| 33,310 \\| 37,438 \\| 24.2% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 58,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 56,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "20,117",
         "134,789",
@@ -4937,9 +5781,9 @@
       "context": "\\| **Total** \\| **20,117** \\| **134,789** \\| **154,906** \\| **100.0%** \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 60,
-      "section": "案例A.2：数据集概览：S2S 与 TTS 两个互补子集",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 58,
+      "section": "VoiceStyleControl.2：数据集概览：S2S 与 TTS 两个互补子集",
       "numbers": [
         "3.8",
         "至 4.1"
@@ -4951,9 +5795,9 @@
       "context": "表42-1显示，S2SEmoControl 的五类情绪接近均衡，每类约 3.8k 至 4.1k；TTSSpeakerControl 则覆盖 happy、angry、fearful、sad 四类表达性情绪，不显式包含 neutral。这个设计并不是偶然的。S2S 对话需要 neutral 作为稳定基准，否则模型容易把所有回答都学成高强度情绪表达；TTS 可控生成子集样本更多，则把容量集中在“开心地说”“愤怒地说”“有点害怕”“伤心地说”等更需要声学变化的表达上。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 144,
-      "section": "案例A.3：样本 schema：语义通道与风格通道分开建模",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 142,
+      "section": "VoiceStyleControl.3：样本 schema：语义通道与风格通道分开建模",
       "numbers": [
         "42.4"
       ],
@@ -4964,9 +5808,9 @@
       "context": "落到数据合成阶段，上述字段差异会体现为两套条件组织方式：S2SEmoControl 需要同时处理 query/answer 两侧的参考语音选择与情绪注入，TTSSpeakerControl 则把风格描述与待朗读内容拆开后再合成回答侧语音。具体合成逻辑见 42.4 第四步与第五步；本节先把字段契约固定下来。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 329,
-      "section": "案例A.4：构建流水线：从文本对话到可控语音记录",
+      "file": "docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md",
+      "line": 327,
+      "section": "VoiceStyleControl.4：构建流水线：从文本对话到可控语音记录",
       "numbers": [
         "25"
       ],
@@ -4977,9 +5821,9 @@
       "context": "第五步是离散语音标记。语音生成训练需要把声学目标整理为离散 speech token，使生成任务可以被组织为序列建模问题。通用做法是对已有波形用 S3Tokenizer 等 tokenizer 编码；VoiceStyleControl 则走 CosyVoice 生成式路径——合成时同步产出 speech token 并解码为可播放音频，因此本仓库并不存在单独的「先合成、再标记」后处理步骤。S2S 记录写入 `query_token_25hz` 和 `answer_token_25hz`，TTS 记录写入回答侧 `a..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 483,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 39,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "69,745 条"
       ],
@@ -4990,9 +5834,9 @@
       "context": "[Latent-Switch-69K 数据集](https://huggingface.co/datasets/Tioe/LATENT-SWITCH-69K)的最终训练 split 包含 69,745 条样本。每条保留样本包含一个用户问题、一个蒸馏出的 solution intuition、一段缩短后的显式 CoT、最终答案、latent-step 元数据，以及用于决定不同 token 区间监督方式的 mask。这个结构决定了它与普通 CoT/SFT 数据的差异：普通 SFT 记录通常只需要 prompt 和 as..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 485,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 41,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "45,650 条",
         "65.5%",
@@ -5008,9 +5852,9 @@
       "context": "难度分布上，数据集并没有追求完全均匀。中等难度样本占主要部分，共 45,650 条，占 65.5%；困难样本 17,428 条，占 25.0%；简单样本 6,667 条，占 9.5%。这种分布对 latent-switch 训练有明确意义。中等难度问题通常需要真实推理，不是模板化问答，但又不至于让蒸馏过程过度不稳定。困难样本提供更长、更复杂的推理链，让模型接触更高预算的隐式规划场景。简单样本则帮助模型保留短回答和直接验证的能力，避免所有样本都被塑造成长推理任务。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 489,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 45,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "69,745",
         "100.0%"
@@ -5022,9 +5866,9 @@
       "context": "\\| Total examples \\| 69,745 \\| 100.0% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 490,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 46,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "6,667",
         "9.5%"
@@ -5036,9 +5880,9 @@
       "context": "\\| Easy \\| 6,667 \\| 9.5% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 491,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 47,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "45,650",
         "65.5%"
@@ -5050,9 +5894,9 @@
       "context": "\\| Medium \\| 45,650 \\| 65.5% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 492,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 48,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "17,428",
         "25.0%"
@@ -5064,9 +5908,9 @@
       "context": "\\| Hard \\| 17,428 \\| 25.0% \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 494,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 50,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "0.569",
         "56.9%"
@@ -5078,9 +5922,9 @@
       "context": "\\| Compression ratio median \\| 0.569 \\| 中位样本保留约 56.9% 的显式推理长度 \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 495,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 51,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "41.49"
       ],
@@ -5091,9 +5935,9 @@
       "context": "\\| Latent steps mean \\| 41.49 \\| 每条样本平均 latent placeholder 数量 \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 496,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 52,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "40.00",
         "40 个"
@@ -5105,9 +5949,9 @@
       "context": "\\| Latent steps median \\| 40.00 \\| 中位样本约 40 个 latent steps \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 498,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 54,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "37%",
         "34%",
@@ -5120,9 +5964,9 @@
       "context": "领域构成上，Latent-Switch-69K 明显偏向 reasoning-intensive 任务。数学问题约占 37%，代码问题约占 34%，science-oriented questions 约占 5%，剩余部分主要来自 instruction-following 和 general knowledge prompts。这个比例不是偶然的。latent-then-explicit reasoning 最需要解决的是“有高层解题计划，但不希望把所有推导都展开”的任务；数学和代码恰好具有强验证性、强步骤性和较..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 502,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 58,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "69,745 条"
       ],
@@ -5130,12 +5974,12 @@
       "source_status": "chapter-reference-section-only",
       "risk": "low",
       "action": "人工抽检即可。",
-      "context": "*图40-2：最终训练集包含 69,745 条样本，来源中数学、代码和精确指令类数据占比较高。*"
+      "context": "*图43-2：最终训练集包含 69,745 条样本，来源中数学、代码和精确指令类数据占比较高。*"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 512,
-      "section": "案例B.1：数据集概览：规模、难度与领域构成",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 68,
+      "section": "Latent-Switch.2：数据集概览：规模、难度与领域构成",
       "numbers": [
         "0.3"
       ],
@@ -5146,9 +5990,9 @@
       "context": "第三组是长度与预算字段，包括 source CoT length、distilled CoT length、insight length、compression ratio 和 `n_latent_steps`。这些字段直接服务于成本控制和预算诊断。如果某个数据版本的平均压缩率突然下降到 0.3，表面上看 token 成本更低，但它可能意味着显式验证链被压得太短。如果 `n_latent_steps` 均值突然升高，模型训练时的有效序列长度和推理时的隐藏计算成本也会随之变化。没有这些长度字段，团队很难在“效率提升”..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 636,
-      "section": "案例B.2：蒸馏与记录形成：从 teacher trace 到压缩推理记录",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 192,
+      "section": "Latent-Switch.3：蒸馏与记录形成：从 teacher trace 到压缩推理记录",
       "numbers": [
         "0.612",
         "0.569",
@@ -5162,9 +6006,9 @@
       "context": "最终语料的压缩率均值为 0.612，中位数为 0.569。这说明蒸馏后的可见 CoT 通常只保留原始推理长度的 57% 到 61% 左右。注意，这个数字不应被解释为“删除了四成推理信息”。更准确的理解是：一部分细节被压缩进 solution intuition 所代表的高层计划，并进一步映射到 latent placeholder 预算；另一部分必要推导仍保留在 `<think>` 中，用于显式验证和监督模型的可见推理风格。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 660,
-      "section": "案例B.3：Latent budget 与 student sequence：样本如何被渲染",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 216,
+      "section": "Latent-Switch.4：Latent budget 与 student sequence：样本如何被渲染",
       "numbers": [
         "41.49",
         "40.00"
@@ -5176,9 +6020,9 @@
       "context": "Latent-Switch-69K 的关键字段之一是 `n_latent_steps`。它决定了 student sequence 中 `<latent_think>` 和 `</latent_think>` 之间放置多少个 latent placeholder。论文和代码中采用的基本启发式是：如果保留的 solution intuition 含有 \\(L\\) 个 token，则 latent budget 约为 \\(L/2\\)，再受最大 latent 长度和 tokenizer 约束裁剪。最终数据中 latent..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 662,
-      "section": "案例B.3：Latent budget 与 student sequence：样本如何被渲染",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 218,
+      "section": "Latent-Switch.4：Latent budget 与 student sequence：样本如何被渲染",
       "numbers": [
         "40",
         "50 步"
@@ -5190,9 +6034,9 @@
       "context": "这个预算规则有两个含义。第一，latent steps 不是随意加的 padding，而是与被压缩的高层推理内容相关。intuition 越长，说明这道题的高层规划可能越复杂，模型需要更多隐藏计算槽位。第二，latent steps 也不是越多越好。过长的 latent 区间会增加训练和推理成本，也可能让模型在隐藏状态中漂移。LaTER 的训练自由度实验曾观察到 40 到 50 步附近有较好的准确率和 token 效率折中，因此最终样本的 latent-step 分布被集中在这个范围附近。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 766,
-      "section": "案例B.4：Supervision masks：哪些 token 参与 loss",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 322,
+      "section": "Latent-Switch.5：Supervision masks：哪些 token 参与 loss",
       "numbers": [
         "-100"
       ],
@@ -5203,9 +6047,9 @@
       "context": "在代码实现中，一条样本会构造多个 mask：`prompt_mask`、`latent_internal_mask`、`latent_boundary_mask`、`cot_mask`、`answer_mask`、`teacher_kl_mask`。这些 mask 不是为了可视化方便，而是直接决定不同 objective 的作用位置。普通 labels 初始化为 student token ids，然后对 prompt 区间和 latent interior 区间置为 `-100`，表示这些位置被 cross-en..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 778,
-      "section": "案例B.4：Supervision masks：哪些 token 参与 loss",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 334,
+      "section": "Latent-Switch.5：Supervision masks：哪些 token 参与 loss",
       "numbers": [
         "-100"
       ],
@@ -5216,9 +6060,9 @@
       "context": "其中 $\\mathcal{S}_{prompt}$ 表示用户 prompt 与 assistant prefix 之前的上下文位置，$\\mathcal{S}_{lat}^{int}$ 表示 `<latent_think>` 和 `</latent_think>` 之间的内部 placeholder 位置。被置为 `-100` 的 token 不被普通 CE 直接拟合。这样做避免了一个错误目标：要求模型在 latent 内部位置预测某个固定文本 token。对 LaTER 来说，latent 内部位置的价值不是输出 ..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 794,
-      "section": "案例B.4：Supervision masks：哪些 token 参与 loss",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 350,
+      "section": "Latent-Switch.5：Supervision masks：哪些 token 参与 loss",
       "numbers": [
         "-100"
       ],
@@ -5229,9 +6073,9 @@
       "context": "\\| Prompt 与 assistant prefix \\| user question `<\\\\|im_start\\\\|>assistant` \\| `-100` \\| `prompt_mask` \\| 作为条件，不作为输出目标 \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 796,
-      "section": "案例B.4：Supervision masks：哪些 token 参与 loss",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 352,
+      "section": "Latent-Switch.5：Supervision masks：哪些 token 参与 loss",
       "numbers": [
         "-100"
       ],
@@ -5242,9 +6086,9 @@
       "context": "\\| Latent 内部槽位 \\| `l_1 ... l_m` \\| `-100` \\| `latent_internal_mask` \\| 隐藏计算槽位，不拟合占位文本 \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 806,
-      "section": "案例B.4：Supervision masks：哪些 token 参与 loss",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 362,
+      "section": "Latent-Switch.5：Supervision masks：哪些 token 参与 loss",
       "numbers": [
         "-100",
         "-100"
@@ -5256,9 +6100,9 @@
       "context": "对于数据工程师来说，最实用的检查不是重新推导损失函数，而是确认每条样本的 mask 是否满足几条不变量。第一，prompt 区间所有 labels 都应为 `-100`。第二，latent interior 区间所有 labels 都应为 `-100`，但 latent boundary token 不应被当作普通 prompt mask。第三，`cot_mask` 应覆盖 `<think>` 到 `</think>` 相关位置，且 answer_start 必须在 think_end 之后。第四，`answer_..."
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 823,
-      "section": "案例B.5：质量控制：压缩、边界与偏置的五类风险",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 379,
+      "section": "Latent-Switch.6：质量控制：压缩、边界与偏置的五类风险",
       "numbers": [
         "为 0"
       ],
@@ -5269,9 +6113,9 @@
       "context": "\\| latent budget 异常 \\| `n_latent_steps` 为 0、过大或与 intuition 长度不匹配 \\| 隐式规划预算失真，推理成本不可控 \\| 对预算设上下限；监控均值、中位数和长尾 \\|"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 826,
-      "section": "案例B.5：质量控制：压缩、边界与偏置的五类风险",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 382,
+      "section": "Latent-Switch.6：质量控制：压缩、边界与偏置的五类风险",
       "numbers": [
         "0.612",
         "0.569",
@@ -5285,9 +6129,9 @@
       "context": "第一类风险是压缩过度。压缩率均值 0.612 和中位数 0.569 表明语料确实显著缩短了可见 CoT，但工程上不能把压缩率越低越好作为目标。如果一个样本从 1,000 个推理 token 压缩到 50 个 token，却失去关键等式、状态转移或代码不变量，那么它虽然节省 token，却破坏了监督质量。更稳妥的指标是组合式的：压缩后长度下降、答案仍一致、可见推理仍能解释最终答案。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 834,
-      "section": "案例B.5：质量控制：压缩、边界与偏置的五类风险",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 390,
+      "section": "Latent-Switch.6：质量控制：压缩、边界与偏置的五类风险",
       "numbers": [
         "约 37%",
         "约 34%",
@@ -5300,9 +6144,9 @@
       "context": "第五类风险是领域偏置。Latent-Switch-69K 的 math 约 37%、code 约 34%、science 约 5%，这使它非常适合 reasoning-heavy 训练，但也意味着它不是通用助手语料的完整替代品。如果把它和普通 SFT 数据混合，应明确训练目的：是强化数学代码推理、压缩可见 CoT，还是改善所有用户问题的回答效率。不同目标对应不同采样权重和评估集。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 846,
-      "section": "案例B.5：质量控制：压缩、边界与偏置的五类风险",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 402,
+      "section": "Latent-Switch.6：质量控制：压缩、边界与偏置的五类风险",
       "numbers": [
         "38 个"
       ],
@@ -5313,9 +6157,9 @@
       "context": "版本层面，每次发布都应给出数据版本号、构建脚本版本、teacher 模型版本、tokenizer 版本、special-token contract、过滤规则和统计报告。Latent-Switch-69K 这种数据集的可复查性来自“文本加结构加配置”的组合。如果只保存最终文本，几年后很难解释为什么某个样本有 38 个 latent steps，为什么某个 CoT 被降权，为什么某些 teacher KL 位置被跳过。"
     },
     {
-      "file": "docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md",
-      "line": 871,
-      "section": "案例B.7：复用建议：把 Latent-Switch 思路迁移到自有数据",
+      "file": "docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md",
+      "line": 427,
+      "section": "Latent-Switch.8：复用建议：把 Latent-Switch 思路迁移到自有数据",
       "numbers": [
         "32 s"
       ],
@@ -5324,1032 +6168,6 @@
       "risk": "medium",
       "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
       "context": "如果团队希望在自己的数学、代码或业务推理数据上复用 Latent-Switch-69K 的思路，不建议第一步就改模型结构。更稳妥的路线是先把数据 schema 做出来。团队可以从现有 Long-CoT 样本中抽取一小批高质量问题，人工或用 teacher 模型生成 solution intuition，再生成压缩 CoT 和最终答案。随后，按 intuition 长度分配一个保守的 latent budget，例如从 \\(L/3\\)、\\(L/2\\) 和固定 32 steps 三种方案中选择一到两个版本做对照。这样做..."
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 9,
-      "section": "摘要",
-      "numbers": [
-        "15T"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "FineWeb 这一章的主线是 Web 预训练语料的“炼制过程”。Common Crawl 给出的只是网页快照，离可训练 token stream 还差正文抽取、语言识别、质量过滤、去重、隐私处理和评估消融。FineWeb 的价值不只在 15T tokens 的规模，而在它把这些选择做成可执行代码和可比较实验：正文抽取和过滤要由下游训练结果验证，去重范围要看分布影响而不是只看删除比例，公开语料要同时交代数据、代码、字段注释和使用边界。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 28,
-      "section": "场景引入",
-      "numbers": [
-        "7B"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "一个团队准备训练 7B 参数级英文基础模型。第一版数据方案很直接：下载最近几年的 Common Crawl WET 文件，过滤掉非英文网页，做一次简单去重，然后把文本送进 tokenizer。离线抽样看起来还不错，很多页面确实是自然语言，token 数量也足够大。团队据此启动小模型预训练，却在几周后遇到三个难解释的问题。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 34,
-      "section": "41.1 Common Crawl 是网页快照，不是训练语料",
-      "numbers": [
-        "41.1"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "## 41.1 Common Crawl 是网页快照，不是训练语料"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 46,
-      "section": "41.1.1 网页快照到训练文本的处理层",
-      "numbers": [
-        "0.65"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "第三层是语言识别。FineWeb 是英文语料，因此使用 FastText 语言过滤，保留英文得分达到阈值的文档。官方数据卡说明，FineWeb 移除 `en` language score 低于 0.65 的文档。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 63,
-      "section": "41.1.2 过滤强度决定训练信号",
-      "numbers": [
-        "0"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "U(F)=S_{eval}(D_F)-\\lambda \\cdot R_{risk}(D_F)-\\mu \\cdot \\max(0, T_{target}-T_F)"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 68,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "41.2"
-      ],
-      "category": "other-quantitative",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "## 41.2 FineWeb 的数据定义和公开形态"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 70,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "350B",
-        "100B",
-        "10B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "FineWeb 的公开形态包括完整数据集、按 Common Crawl dump 切分的数据配置，以及较小的 sample 版本。官方数据卡说明，可以加载全量数据，也可以指定某个 crawl/dump；dump 名称采用 `CC-MAIN-(year)-(week number)` 格式。样本版本包括约 350B、100B 和 10B GPT-2 tokens 的随机子集，便于研究者在较低成本下复现实验或调试处理代码。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 76,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "15T"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| FineWeb full dataset \\| 论文初版报告 15T tokens，官方数据卡持续列出后续 dump \\| 大规模英文 Web 预训练、数据消融、过滤策略研究 \\| 数据持续更新，引用规模时要说明数据卡访问时间和口径 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 78,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "约 350B"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| `sample-350BT` \\| 约 350B GPT-2 tokens \\| 中等规模数据实验、去重和过滤策略验证 \\| 适合较大 ablation，不等于完整 FineWeb \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 79,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "约 100B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "\\| `sample-100BT` \\| 约 100B GPT-2 tokens \\| 原型训练、快速评估、成本受限实验 \\| 需要记录抽样来源和随机性 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 80,
-      "section": "41.2 FineWeb 的数据定义和公开形态",
-      "numbers": [
-        "约 10B"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| `sample-10BT` \\| 约 10B GPT-2 tokens \\| 管线调试、字段检查、读写性能测试 \\| 不适合得出最终数据质量结论 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 112,
-      "section": "41.3 FineWeb 文档记录的关键字段",
-      "numbers": [
-        "41.3"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "## 41.3 FineWeb 文档记录的关键字段"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 130,
-      "section": "41.3.1 一条样本不能只保存 text",
-      "numbers": [
-        "41.3"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "### 41.3.1 一条样本不能只保存 text"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 172,
-      "section": "41.3.2 schema 与训练评估的关系",
-      "numbers": [
-        "1",
-        "1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "S(M_v)=\\frac{1}{k}\\sum_{i=1}^{k}s(M_v,b_i)"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 183,
-      "section": "41.4 FineWeb 的代码化处理流程",
-      "numbers": [
-        "41.4"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "## 41.4 FineWeb 的代码化处理流程"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 196,
-      "section": "41.4.1 主处理流水线",
-      "numbers": [
-        "2"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| 2 \\| `URLFilter` \\| URL 和原始文档 \\| 保留或移除文档 \\| 移除恶意、NSFW 或 block-list 命中的来源 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 199,
-      "section": "41.4.1 主处理流水线",
-      "numbers": [
-        "5"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "\\| 5 \\| `GopherRepetitionFilter` \\| 英文文本 \\| 重复模式过滤结果 \\| 移除重复 n-gram 和异常重复内容 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 201,
-      "section": "41.4.1 主处理流水线",
-      "numbers": [
-        "7"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "\\| 7 \\| `C4QualityFilter` \\| 文本统计 \\| C4 规则过滤结果 \\| 应用 FineWeb 采用的 C4 规则子集 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 227,
-      "section": "41.4.2 去重和隐私处理流水线",
-      "numbers": [
-        "5"
-      ],
-      "category": "internal-target-or-threshold",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "FineWeb 使用 MinHash 做近似去重。MinHash 的目标是近似估计两个文档的 Jaccard 相似度。若文档 $A$ 和 $B$ 被表示为 5-gram 集合，则相似度可写为："
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 233,
-      "section": "41.4.2 去重和隐私处理流水线",
-      "numbers": [
-        "5",
-        "112 个",
-        "14 个",
-        "8 个",
-        "8 个",
-        "5",
-        "14",
-        "8"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去重参数为 5-grams、112 个哈希函数，拆成 14 个 bucket，每个 bucket 8 个 hash；任一 bucket 的 8 个 MinHash 相同即可判为重复候选。DataTrove 示例脚本中的 `MinhashConfig` 也对应 `n_grams=5`、`num_buckets=14`、`hashes_per_bucket=8`。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 239,
-      "section": "41.4.3 FineWeb 按 crawl 独立去重的判断",
-      "numbers": [
-        "41.4"
-      ],
-      "category": "other-quantitative",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "### 41.4.3 FineWeb 按 crawl 独立去重的判断"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 241,
-      "section": "41.4.3 FineWeb 按 crawl 独立去重的判断",
-      "numbers": [
-        "96 个",
-        "10%",
-        "90%"
-      ],
-      "category": "performance-or-percentage",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "直觉上，全局去重似乎更彻底：把 96 个 crawl 放在一起，删除所有近似重复文档。FineWeb 的消融实验却给了相反信号。论文描述了一个关键现象：从最新 crawl 开始向旧 crawl 做全局去重时，旧 crawl 会被大量删除；在某个旧 snapshot 中，保留下来的 10% 数据反而比被删除的 90% 更差，包含更多广告、关键词列表和格式异常文本。最终，FineWeb 选择对每个 crawl 独立 MinHash 去重。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 247,
-      "section": "41.4.3 FineWeb 按 crawl 独立去重的判断",
-      "numbers": [
-        "3.1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "*图41-2 FineWeb 数据处理选择的消融评估回路。Source: original illustration based on FineWeb paper Section 3.1.*"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 249,
-      "section": "41.5 FineWeb 的数据处理选择评估",
-      "numbers": [
-        "41.5"
-      ],
-      "category": "other-quantitative",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "## 41.5 FineWeb 的数据处理选择评估"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 261,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "1.82B"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| 模型规模 \\| ablation 模型为 1.82B 参数，Llama 架构 \\| 避免模型规模变化掩盖数据差异 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 263,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "28B",
-        "350B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "\\| 训练预算 \\| 过滤消融约 28B tokens，部分去重和累计改进实验为 350B tokens \\| 区分快速筛选和高成本验证 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 269,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "3.1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "数据来源 FineWeb paper Section 3.1 Experimental setup。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 271,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "1",
-        "2"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "若第 $v$ 个数据版本训练两次，得到模型 $M_{v,1}$ 和 $M_{v,2}$，每个模型在 $k$ 个任务上得分，则版本得分可以写为："
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 274,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "1",
-        "2",
-        "1",
-        "2",
-        "1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\bar{S}_v=\\frac{1}{2k}\\sum_{r=1}^{2}\\sum_{i=1}^{k}s(M_{v,r},b_i)"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 281,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "96 个",
-        "36T"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "第一步，建立基础过滤。FineWeb 从 WARC 抽取文本后，先做 URL block-list、英文语言识别和 Gopher/MassiveText 风格质量过滤。论文报告，在对 96 个 snapshot 的 WARC 抽取文本应用这些基础步骤后，得到约 36T GPT-2 tokens 的数据。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 283,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "30%"
-      ],
-      "category": "performance-or-percentage",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "第二步，比较已有规则。FineWeb 研究 C4 规则时发现，terminal punctuation 规则单独带来明显提升，但会删除约 30% tokens；最终 FineWeb 采用除 terminal punctuation 外的 C4 规则子集，因为后者删除更少数据并取得更合适的训练收益。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 285,
-      "section": "41.5.1 固定变量",
-      "numbers": [
-        "50",
-        "28B"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "第三步，设计自定义过滤器。FineWeb 收集 50 多个文档级和跨文档统计指标，比较“较高质量”和“较低质量”数据分布，选择能区分两者的阈值，再用 28B token ablation runs 验证。最终被采用的自定义过滤器关注三类问题：行尾标点比例过低、重复行字符比例过高、短行比例异常。"
-    },
-    {
-      "file": "docs/zh/part12/ch41_fineweb_pretraining_corpus.md",
-      "line": 302,
-      "section": "41.6 公开 Web 语料的使用边界",
-      "numbers": [
-        "41.6"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "## 41.6 公开 Web 语料的使用边界"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 28,
-      "section": "42.1 问题场景：权重开放后仍然无法解释模型",
-      "numbers": [
-        "7B"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "两个团队都拿到了同一个 7B 开放模型权重。第一个团队想继续预训练，让模型增强代码和科学问答能力；第二个团队想分析模型为什么在若干事实题上给出过时答案。权重、推理代码和部分评测脚本都能下载，但他们很快遇到同一个问题：模型到底见过什么数据，没人能回答。"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 53,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "42.2"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "## 42.2 数据集概览：版本、规模与来源结构"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 55,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "7B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "Dolma 不是单一静态文件，而是带版本演进的语料资产。Hugging Face 数据卡列出 `v1`、`v1_5`、`v1_5-sample`、`v1_6`、`v1_6-sample` 和 `v1_7` 等版本；其中 `v1_7` 用于训练 OLMo 7B-v1.7，并引入新来源、更多质量过滤和 fuzzy deduplication。"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 61,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2023",
-        "6.0 T"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "\\| `v1` \\| 2023-08-18 \\| 6.0 TB \\| Dolma 第一版 \\| 追溯最早公开语料形态 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 62,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2023",
-        "6.4 T",
-        "约 3T"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "\\| `v1_5` \\| 2023-10-31 \\| 6.4 TB \\| 用于训练 OLMo-1B，约 3T tokens \\| 复查 OLMo 早期训练语料 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 63,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2023",
-        "2.9 T",
-        "约 1.9T"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "\\| `v1_5-sample` \\| 2023-10-31 \\| 2.9 TB \\| 约 1.9T tokens 的样本，用于 OLMo-7B \\| 低于 full 版本的训练样本追踪 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 64,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2024",
-        "5.4 T"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| `v1_6` \\| 2024-01-31 \\| 5.4 TB \\| 在 v1.5 基础上增加部分去重和重复 n-gram 过滤 \\| 研究过滤和去重演进 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 65,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2024",
-        "16.4 GB",
-        "约 10B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "已按示例/匿名化案例口径处理；出版前确认不会被误读为真实统计。",
-      "context": "\\| `v1_6-sample` \\| 2024-01-31 \\| 16.4 GB \\| 约 10B tokens 的探索样本 \\| 快速调试和数据浏览 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 66,
-      "section": "42.2 数据集概览：版本、规模与来源结构",
-      "numbers": [
-        "2024",
-        "4.5 T",
-        "7B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| `v1_7` \\| 2024-04-15 \\| 4.5 TB \\| 用于训练 OLMo 7B-v1.7，新来源、更多质量过滤、fuzzy deduplication \\| 当前默认版本和透明训练参照 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 78,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "9,022 GB",
-        "3,370M",
-        "1,775B",
-        "2,281B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| Common Crawl \\| web pages \\| 9,022 GB \\| 3,370M \\| 1,775B \\| 2,281B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 79,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "1,043 GB",
-        "210M",
-        "260B",
-        "411B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| The Stack \\| code \\| 1,043 GB \\| 210M \\| 260B \\| 411B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 80,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "790 GB",
-        "364M",
-        "153B",
-        "198B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| C4 \\| web pages \\| 790 GB \\| 364M \\| 153B \\| 198B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 81,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "339 GB",
-        "377M",
-        "72B",
-        "89B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| Reddit \\| social media \\| 339 GB \\| 377M \\| 72B \\| 89B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 82,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "268 GB",
-        "38.8M",
-        "50B",
-        "70B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| PeS2o \\| STEM papers \\| 268 GB \\| 38.8M \\| 50B \\| 70B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 83,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "20.4 GB",
-        "0.056M",
-        "4.0B",
-        "6.0B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| Project Gutenberg \\| books \\| 20.4 GB \\| 0.056M \\| 4.0B \\| 6.0B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 84,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "16.2 GB",
-        "6.2M",
-        "3.7B",
-        "4.3B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| Wikipedia and Wikibooks \\| encyclopedic \\| 16.2 GB \\| 6.2M \\| 3.7B \\| 4.3B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 85,
-      "section": "42.2.1 v1.6 来源结构",
-      "numbers": [
-        "11,519 GB",
-        "4,367M",
-        "2,318B",
-        "3,059B"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| Total \\| mixed \\| 11,519 GB \\| 4,367M \\| 2,318B \\| 3,059B \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 97,
-      "section": "42.3 以 source 账本拆解一条透明链路",
-      "numbers": [
-        "42.3"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "## 42.3 以 source 账本拆解一条透明链路"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 117,
-      "section": "42.3.2 token 账要看训练实际消费量",
-      "numbers": [
-        "42.3"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "### 42.3.2 token 账要看训练实际消费量"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 135,
-      "section": "42.3.3 一条文档的三层读法",
-      "numbers": [
-        "42.3"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "### 42.3.3 一条文档的三层读法"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 196,
-      "section": "42.4.1 四个动作对应四类证据",
-      "numbers": [
-        "3"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| 3 \\| Mixer \\| 根据属性值移除、过滤或混合文档 \\| sample proportion、source mix、数据版本 \\| sample proportion 不透明会导致 token accounting 错误 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 197,
-      "section": "42.4.1 四个动作对应四类证据",
-      "numbers": [
-        "4"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| 4 \\| Tokenization \\| 使用 Hugging Face 兼容 tokenizer \\| token 计数、tokenizer 版本、训练流 \\| tokenizer 变化会改变 token 数和训练预算 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 218,
-      "section": "42.5.1 source ablation 定位能力来源",
-      "numbers": [
-        "1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\Delta_s=\\frac{1}{\\|B\\|}\\sum_{b \\in B} \\left[score(M_{all}, b)-score(M_{-s}, b)\\right]"
-    },
-    {
-      "file": "docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md",
-      "line": 254,
-      "section": "42.6 透明语料的复用边界",
-      "numbers": [
-        "42.6"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "## 42.6 透明语料的复用边界"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 27,
-      "section": "43.1 开篇问题场景：图文对需要通道化筛选",
-      "numbers": [
-        "43.1"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "## 43.1 开篇问题场景：图文对需要通道化筛选"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 48,
-      "section": "43.1.2 CLIP 分数只解决图文相关性的一部分",
-      "numbers": [
-        "1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\operatorname{keep}(i,t)=\\mathbb{1}[\\operatorname{sim}(i,t)\\ge \\tau_{\\ell}]"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 53,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "43.2"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "## 43.2 数据集概览：子集规模与公开形态"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 55,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "5.85B",
-        "2.32B",
-        "2.26B",
-        "1.27B"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "LAION-5B 论文报告它包含 5.85B 个 CLIP 过滤后的图文对，其中英文子集约 2.32B，多语言子集约 2.26B，语言不确定子集约 1.27B。这个拆分很重要，因为语言识别、CLIP 模型、过滤阈值和下游任务都会影响样本价值。"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 61,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "2.32B"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| LAION-2B-en \\| 2.32B \\| 英文 \\| 语言识别置信度较高，使用英文 CLIP 过滤 \\| 英文 CLIP、图文检索、英文 T2I 数据候选 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 62,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "2.26B",
-        "100"
-      ],
-      "category": "model-or-token-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "medium",
-      "action": "核对本节数值是否能对应到参考文献；必要时补内联来源或脚注。",
-      "context": "\\| LAION-2B-multi \\| 2.26B \\| 100 多种非英文语言 \\| 使用多语言模型处理图文相似度 \\| 多语言图文检索、多语言视觉语言预训练 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 63,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "1.27B"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| LAION-1B-nolang \\| 1.27B \\| 语言不明确或低置信度 \\| 常见商品、地点、短文本和 SEO 噪声 \\| 特定任务再筛选、商品和地点类候选池 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 64,
-      "section": "43.2 数据集概览：子集规模与公开形态",
-      "numbers": [
-        "5.85B"
-      ],
-      "category": "other-quantitative",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| Total \\| 5.85B \\| 混合 \\| 开放网页图文候选池 \\| 大规模图文训练和数据研究 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 72,
-      "section": "43.3 样本 schema：五条通道分开记录",
-      "numbers": [
-        "43.3 样本"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "## 43.3 样本 schema：五条通道分开记录"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 74,
-      "section": "43.3 样本 schema：五条通道分开记录",
-      "numbers": [
-        "64"
-      ],
-      "category": "performance-or-percentage",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "图文候选池也应分通道建模。LAION-5B 论文列出的 Parquet 元数据字段包括 64 位整数 id、图片 URL、文本、图片高宽、图文 embedding 的余弦相似度，以及 NSFW 和水印检测分数。工程团队在复用这类语料时，通常还需要补充下载、hash、授权线索和撤回状态等治理字段。"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 124,
-      "section": "43.4 从 Common Crawl 到候选记录",
-      "numbers": [
-        "1"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| 1 \\| Common Crawl WAT 元数据 \\| 解析 HTML IMG 标签，保留带 alt text 的图片候选 \\| `<url, text>` 候选对 \\| 文本通道、视觉通道 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 125,
-      "section": "43.4 从 Common Crawl 到候选记录",
-      "numbers": [
-        "2"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| 2 \\| 图片 URL 和文本 \\| 分布式下载、解码、基础质量检查 \\| 可读取图片和失败日志 \\| 视觉通道 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 127,
-      "section": "43.4 从 Common Crawl 到候选记录",
-      "numbers": [
-        "4"
-      ],
-      "category": "cost-resource-or-scale",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "\\| 4 \\| 图片和文本 \\| 计算 CLIP 或多语言 CLIP embedding 与相似度 \\| 带 `clip_score` 的候选对 \\| 对齐通道 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 129,
-      "section": "43.4 从 Common Crawl 到候选记录",
-      "numbers": [
-        "6"
-      ],
-      "category": "dataset-size-or-composition",
-      "source_status": "nearby-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "\\| 6 \\| 元数据 \\| 发布 Parquet、近邻索引和探索接口 \\| 可查询、可筛选语料 \\| 发布通道 \\|"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 131,
-      "section": "43.4 从 Common Crawl 到候选记录",
-      "numbers": [
-        "0.28",
-        "0.26",
-        "90%",
-        "6B"
-      ],
-      "category": "performance-or-percentage",
-      "source_status": "inline-source-signal",
-      "risk": "low",
-      "action": "保留；出版终稿阶段核对引用条目格式和 DOI/URL。",
-      "context": "LAION-5B 论文描述的英文过滤阈值为 CLIP 余弦相似度 0.28，非英文图文对使用多语言 CLIP 阈值 0.26。论文也指出，内容过滤会移除约 90% 的原始图片候选，最后保留下接近 6B 的图文对。这个数字说明，开放网页候选池的原始规模很大，但真正能进入训练候选池的比例并不高。"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 177,
-      "section": "43.4.1 筛选闸门的代码化表达",
-      "numbers": [
-        "10",
-        "0",
-        "0",
-        "0"
-      ],
-      "category": "performance-or-percentage",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "LAION 生态中常见的图文数据分发方式包括 Parquet 元数据和 WebDataset 分片。Parquet 适合保存 URL、文本、分数和标签；WebDataset 则把图片、caption 和 json 元数据放入 tar 分片，方便训练程序顺序读取。一个 10k 样本的 shard 可以包含 `0.jpg`、`0.txt`、`0.json` 这样的文件组合，json 中记录 URL、原始尺寸和安全标签等字段。"
-    },
-    {
-      "file": "docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md",
-      "line": 218,
-      "section": "43.5.2 DataComp 提供筛选策略比较协议",
-      "numbers": [
-        "1"
-      ],
-      "category": "other-quantitative",
-      "source_status": "chapter-reference-section-only",
-      "risk": "low",
-      "action": "人工抽检即可。",
-      "context": "S(g)=\\sum_{j=1}^{k}w_j\\cdot b_j(T(g(D)))"
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
@@ -21202,22 +21020,22 @@
     }
   ],
   "summary": {
-    "claims": 1534,
+    "claims": 1520,
     "by_risk": {
-      "low": 884,
-      "medium": 650
+      "low": 875,
+      "medium": 645
     },
     "by_category": {
-      "dataset-size-or-composition": 528,
+      "dataset-size-or-composition": 520,
       "performance-or-percentage": 452,
       "cost-resource-or-scale": 259,
-      "other-quantitative": 190,
-      "model-or-token-scale": 89,
+      "other-quantitative": 185,
+      "model-or-token-scale": 88,
       "internal-target-or-threshold": 16
     },
     "by_source_status": {
-      "chapter-reference-section-only": 1223,
-      "nearby-source-signal": 160,
+      "chapter-reference-section-only": 1214,
+      "nearby-source-signal": 155,
       "inline-source-signal": 151
     }
   }

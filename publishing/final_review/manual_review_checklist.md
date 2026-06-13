@@ -9,7 +9,7 @@
 | sample-long | Ch21 | `docs/zh/part7/ch21_rag_pipeline.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-long | Ch24 | `docs/zh/part8/ch24_dataops_flywheel_team.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-long | Ch29 | `docs/zh/part9/ch29_data_valuation_and_reuse.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
-| sample-risk | Ch40 | `docs/zh/part12/ch40_multi_chart_infographic_reasoning_dataset.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
+| sample-risk | Ch43 | `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-project | P11 | `docs/zh/part14/p11_mini_deepseek.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-project | P12 | `docs/zh/part14/p12_r1_reasoning_flywheel.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-project | P13 | `docs/zh/part14/p13_multimodal_instruction_factory.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
@@ -25,12 +25,12 @@
 - [ ] `docs/zh/part10/ch35_security_permission_collaboration.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 
 ### Part 12
-- [ ] `docs/zh/part12/ch38_visual_document_table_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
-- [ ] `docs/zh/part12/ch39_visual_reasoning_tool_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
-- [ ] `docs/zh/part12/ch40_interaction_reasoning_trace_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
-- [ ] `docs/zh/part12/ch41_fineweb_pretraining_corpus.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
-- [ ] `docs/zh/part12/ch42_dolma_pretraining_corpus_ledger.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
-- [ ] `docs/zh/part12/ch43_laion5b_image_text_candidate_pool.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch38_text_corpora_transparent_ledger.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch40_visual_document_table_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
+- [ ] `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 
 ### Part 14
 - [ ] `docs/zh/part14/p01_mini_c4.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。

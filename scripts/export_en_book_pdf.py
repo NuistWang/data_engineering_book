@@ -41,6 +41,7 @@ FRONT_PDF = PARTS_DIR / "00-book-front-matter.pdf"
 OPENING_FRONT_PDF = PARTS_DIR / "00a-opening-front-matter.pdf"
 CONTENTS_PDF = PARTS_DIR / "00b-contents.pdf"
 SUBMISSION_PDF_DIR = OUT_DIR / "data_engineering_book_en_16k_compact_submission_pdfs"
+PDF_TEXT_CACHE: dict[str, dict[int, str]] = {}
 
 EXCLUDED_FROM_FORMAL_PDF = {"title_page.md", "index.md", "translation-status.md", "front_matter_guide.md"}
 PRE_CONTENTS_FRONT_PATHS = {"preface.md", "acknowledgments.md"}
@@ -75,12 +76,12 @@ SECTION_AUTHORS = {
     **{f"part10/ch{chapter:02d}_": "ZhiLi Wang" for chapter in range(31, 36)},
     "part11/ch36_": "ZhiLi Wang; Xin Xu",
     "part11/ch37_": "ZhiLi Wang; Xin Xu",
-    "part12/ch38_": "Guanjun Liu; Yuefeng Zou",
-    "part12/ch39_": "Lin Xu; Xinyu Chen",
-    "part12/ch40_": "Fengxin Chen; Xuan Li",
-    "part12/ch41_": "Guanlin Mu",
-    "part12/ch42_": "Guanlin Mu",
-    "part12/ch43_": "Guanlin Mu",
+    "part12/ch38_": "Guanlin Mu",
+    "part12/ch39_": "Guanlin Mu",
+    "part12/ch40_": "Guanjun Liu; Yuefeng Zou",
+    "part12/ch41_": "Lin Xu; Xinyu Chen",
+    "part12/ch42_": "Fengxin Chen; Xuan Li",
+    "part12/ch43_": "Fengxin Chen; Xuan Li",
     "part13/ch44_": "Ke Wang",
     "part13/ch45_": "Xin Xu",
     "part13/ch46_": "Xin Xu",
@@ -1228,6 +1229,11 @@ def merge_formal_book_pdf(
     print(f"[ok] merged formal PDF written: {output} ({output.stat().st_size / 1024 / 1024:.1f} MB)")
 
 
+def pdf_text_cache_key(path: Path) -> str:
+    stat = path.stat()
+    return f"{path.resolve()}:{stat.st_size}:{stat.st_mtime_ns}"
+
+
 def add_formal_bookmarks(
     writer: Any,
     opening_pdf: Path,
@@ -1249,7 +1255,12 @@ def add_formal_bookmarks(
     for (_, title, grouped), part, offset in zip(groups, parts, offsets):
         part_reader = __import__("pypdf").PdfReader(str(part))
         parent = writer.add_outline_item(title, offset)
-        local_pages = locate_item_pages(part_reader, grouped, start_after_toc=False)
+        local_pages = locate_item_pages(
+            part_reader,
+            grouped,
+            start_after_toc=False,
+            cache_key=pdf_text_cache_key(part),
+        )
         for item in grouped:
             local_page = local_pages.get(item.path, 0)
             writer.add_outline_item(item.title, offset + local_page, parent=parent)
@@ -1310,35 +1321,86 @@ def add_bookmarks(writer: Any, parts: list[Path], offsets: list[int], items: lis
         except Exception:
             part_reader = None
         parent = writer.add_outline_item(title, offset)
-        local_pages = locate_item_pages(part_reader, grouped, start_after_toc=index == 1) if part_reader else {}
+        local_pages = (
+            locate_item_pages(
+                part_reader,
+                grouped,
+                start_after_toc=index == 1,
+                cache_key=pdf_text_cache_key(part),
+            )
+            if part_reader
+            else {}
+        )
         for item in grouped:
             local_page = local_pages.get(item.path, 0)
             writer.add_outline_item(item.title, offset + local_page, parent=parent)
 
 
-def locate_item_pages(reader: Any, items: list[NavItem], start_after_toc: bool = False) -> dict[str, int]:
+def locate_item_pages(
+    reader: Any,
+    items: list[NavItem],
+    start_after_toc: bool = False,
+    cache_key: str | None = None,
+) -> dict[str, int]:
     def normalize(text: str) -> str:
         import unicodedata
 
         text = unicodedata.normalize("NFKC", text or "")
         return re.sub(r"[\W_]+", "", text)
 
+    def is_part_overview(item: NavItem) -> bool:
+        return bool(re.search(r"part\d+/index\.md$", item.path))
+
+    def title_needles(title: str) -> list[str]:
+        candidates = [title]
+        stripped = re.sub(r"^(?:Chapter|Project)\s+\d+\s*:\s*", "", title)
+        stripped = re.sub(r"^Appendix\s+[A-Z]\s*:\s*", "", stripped)
+        if stripped != title:
+            candidates.append(stripped)
+        needles: list[str] = []
+        for candidate in candidates:
+            needle = normalize(candidate)
+            if needle and needle not in needles:
+                needles.append(needle)
+        return needles
+
     result: dict[str, int] = {}
     if reader is None:
         return result
-    texts = [normalize(page.extract_text() or "") for page in reader.pages]
-    current = 3 if start_after_toc and len(texts) > 3 else 0
+    pages = list(reader.pages)
+    page_count = len(pages)
+    reader_name = cache_key or str(getattr(getattr(reader, "stream", None), "name", "") or "")
+    if reader_name:
+        text_cache = PDF_TEXT_CACHE.setdefault(reader_name, {})
+    else:
+        text_cache = getattr(reader, "_data_engineering_text_cache", {})
+        try:
+            setattr(reader, "_data_engineering_text_cache", text_cache)
+        except Exception:
+            pass
+
+    def page_text(index: int) -> str:
+        if index not in text_cache:
+            text_cache[index] = normalize(pages[index].extract_text() or "")
+        return text_cache[index]
+
+    current = 3 if start_after_toc and page_count > 3 else 0
     for item in items:
-        needle = normalize(item.title)
+        if is_part_overview(item):
+            result[item.path] = min(current, max(0, page_count - 1))
+            current = min(current + 1, max(0, page_count - 1))
+            continue
+        needles = title_needles(item.title)
         found = None
-        for idx in range(current, len(texts)):
-            if needle and needle in texts[idx]:
+        for idx in range(current, page_count):
+            text = page_text(idx)
+            if any(needle in text for needle in needles):
                 found = idx
                 break
         if found is None:
-            found = min(current, max(0, len(texts) - 1))
+            found = min(current, max(0, page_count - 1))
         result[item.path] = found
-        current = min(found + 1, max(0, len(texts) - 1))
+        current = min(found + 1, max(0, page_count - 1))
     return result
 
 
@@ -1357,7 +1419,12 @@ def compute_toc_entries(
     for (_, title, grouped), part in zip(groups, parts):
         reader = PdfReader(str(part))
         entries.append((title, 1, build_page_number_label(content_offset + 1, first_body_page)))
-        local_pages = locate_item_pages(reader, grouped, start_after_toc=False)
+        local_pages = locate_item_pages(
+            reader,
+            grouped,
+            start_after_toc=False,
+            cache_key=pdf_text_cache_key(part),
+        )
         for item in grouped:
             local_page = local_pages.get(item.path, 0)
             absolute_page = content_offset + local_page + 1
@@ -1384,7 +1451,12 @@ def compute_formal_toc_entries(
         is_artificial_front_group = title in {"Front Matter Before Contents", "Front Matter After Contents"}
         if not is_artificial_front_group:
             entries.append((title, 1, build_page_number_label(content_offset + 1, first_body_page)))
-        local_pages = locate_item_pages(reader, grouped, start_after_toc=False)
+        local_pages = locate_item_pages(
+            reader,
+            grouped,
+            start_after_toc=False,
+            cache_key=pdf_text_cache_key(part),
+        )
         for item in grouped:
             local_page = local_pages.get(item.path, 0)
             absolute_page = content_offset + local_page + 1

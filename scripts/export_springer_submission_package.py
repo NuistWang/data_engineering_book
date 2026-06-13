@@ -29,6 +29,7 @@ SUBMISSION_PDF_DIR = PDF_DIR / "data_engineering_book_en_16k_compact_submission_
 LATEX_PARTS_DIR = PDF_DIR / "data_engineering_book_en_16k_latex_parts"
 LATEX_CHAPTERS_DIR = PDF_DIR / "data_engineering_book_en_16k_latex_chapters"
 LATEX_ASSETS_DIR = PDF_DIR / "latex_assets_en"
+ACCESSIBILITY_DIR = ROOT / "publishing" / "accessibility"
 
 
 @dataclass
@@ -103,6 +104,10 @@ def copy_permissions_and_audits(package_dir: Path) -> None:
     copy_tree(ROOT / "publishing" / "final_review", package_dir / "Audit_Reports")
 
 
+def copy_accessibility(package_dir: Path) -> None:
+    copy_tree(ACCESSIBILITY_DIR, package_dir / "Accessibility")
+
+
 def copy_pdfs(package_dir: Path) -> None:
     full_dir = package_dir / "Full_PDF"
     chapter_dir = package_dir / "Chapter_PDFs"
@@ -141,6 +146,7 @@ This folder is the publisher-facing Springer submission package generated from t
 | `Full_PDF` | Complete paginated review PDF. Current PDF count: {full_pdf_count}. |
 | `Chapter_PDFs` | Springer reference PDF set: front matter PDF, chapter/project/appendix PDFs, and back matter PDF when applicable. Current PDF count: {chapter_pdf_count}. |
 | `Figures` | Figure files referenced by the English manuscript, with `figures_manifest.csv`. |
+| `Accessibility` | Springer alt-text Excel workbook plus CSV/JSON sidecars for all manuscript images. |
 | `Permissions` | Author/editor-provided third-party permission evidence copied as-is. |
 | `Declarations` | Declaration and metadata templates for publisher workflow completion. |
 | `Audit_Reports` | Machine audit reports plus human signoff/exception notes. |
@@ -151,6 +157,7 @@ This folder is the publisher-facing Springer submission package generated from t
 - Submit `Source_Files/LaTeX`, especially `Source_Files/LaTeX/chapters`, and the referenced figures/assets as the editable source package when LaTeX source is requested.
 - Submit `Full_PDF` for whole-book layout review.
 - Submit `Chapter_PDFs` as the individual PDF set requested by Springer guidelines: front matter, chapters/contributions, appendices, and back matter when applicable.
+- Submit `Accessibility/springer_alt_text_inventory.xlsx` with the final manuscript to satisfy Springer Nature's alt-text accessibility requirement for figures, illustrations, and images.
 - Keep `Permissions` with the package. The export script does not fabricate permission letters or publisher forms.
 
 ## Human-Only Items
@@ -265,6 +272,7 @@ def export_package(output_root: Path = DEFAULT_OUTPUT_ROOT, *, include_pdfs: boo
         "Chapter_PDFs",
         "Full_PDF",
         "Figures",
+        "Accessibility",
         "Permissions",
         "Declarations",
         "Checksums",
@@ -274,6 +282,7 @@ def export_package(output_root: Path = DEFAULT_OUTPUT_ROOT, *, include_pdfs: boo
     copy_metadata(package_dir)
     copy_markdown_sources(package_dir)
     copy_permissions_and_audits(package_dir)
+    copy_accessibility(package_dir)
     if include_pdfs:
         copy_pdfs(package_dir)
     if include_figures:

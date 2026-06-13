@@ -64,7 +64,7 @@ DataGallery 与本书多处内容有自然连接。第六篇讨论推理与 Agen
 
 第四，持续同步仓库变化。开源项目更新后，应比较配置字段、服务接口、依赖版本和示例路径的变化，并更新本书配套复现说明或教学材料。
 
-## References
+## 参考文献
 
 DataGallery Contributors (2026a) DataGallery organization page. Available at: https://gitcode.com/datagallery.
 

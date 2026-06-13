@@ -47,17 +47,7 @@ A conversational model team labels 5,000 new samples every week and maintains a 
 
 The labeling-assistance agent is an intelligent co-pilot for annotators. It does not replace judgment; it reduces cognitive load and improves consistency.
 
-```mermaid
-flowchart TD
-    A["Labeling-assistance agent"] --> T["Task explanation"]
-    A --> E["Example recommendation"]
-    A --> G["Gray-zone support"]
-    A --> C["Conflict arbitration suggestions"]
-    T --> L["Annotator"]
-    E --> L
-    G --> L
-    C --> R["Reviewer"]
-```
+![Four dimensions of labeling-assistance agents](../../images/part10/ai_agent_decision_workflow_ch33_01.png)
 
 *Figure 33-1: Four dimensions of labeling-assistance agents*
 
@@ -127,17 +117,7 @@ Each batch should also include calibration samples with known answers. If an ann
 
 The core loop is a controlled generate-verify-filter pipeline.
 
-```mermaid
-flowchart LR
-    S["High-quality seed data"] --> P["Seed expansion plan"]
-    P --> G["Prompt generation"]
-    G --> D["Synthetic samples"]
-    D --> V["Multi-layer validation"]
-    V -->|pass| B["Synthetic data bank"]
-    V -->|fail| F["Reject or regenerate"]
-    B --> M["Distribution and collapse monitoring"]
-    M --> P
-```
+![Synthetic data agent closed-loop pipeline](../../images/part10/ai_agent_decision_workflow_ch33_02.png)
 
 *Figure 33-2: Synthetic data agent closed-loop pipeline*
 

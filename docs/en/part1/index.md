@@ -36,7 +36,7 @@ Chapter 1 introduces the book's core proposition: data quality, data scale, and 
 9. [Part 9: Data Assets, Data Products, and Data Contracts](../part9/index.md)
 10. [Part 10: Intelligent Data Engineering and Data Engineering Agents](../part10/index.md)
 11. [Part 11: Privacy Compliance and Data Security](../part11/index.md)
-12. [Part 12: Specialized Datasets and Data Engineering Practice](../part12/index.md)
+12. [Part 12: Specialized Datasets and Multimodal Data Engineering Practice](../part12/index.md)
 13. [Part 13: Open-source LLM Data Engineering Recipes and Paradigms](../part13/index.md)
 14. [Part 14: Practical Projects](../part14/index.md)
 

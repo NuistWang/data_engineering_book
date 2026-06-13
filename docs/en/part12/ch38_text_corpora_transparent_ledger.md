@@ -1,18 +1,16 @@
-# Chapter 41: FineWeb Pre-training Corpus Data Engineering
-
-<div class="chapter-authors">Guanlin Mu</div>
+# Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers
 
 ## Abstract
 
-FineWeb is a large-scale English Web pre-training corpus built by the Hugging Face team from Common Crawl. Its value lies not only in scale, but also in turning "how to transform Web snapshots into training data" into a reproducible engineering chain: reading raw WARC pages, filtering risky URLs, extracting main text with Trafilatura, identifying language with FastText, applying Gopher/C4/FineWeb quality filters, performing per-crawl MinHash deduplication, formatting PII, and publishing data versions. The FineWeb paper also releases the processing code, the DataTrove processing library, and ablation models, allowing data-processing choices to be validated through training outcomes rather than only through manual inspection or heuristic judgment.
-
-The central thread of this chapter is the "refining process" of Web pre-training corpora. Common Crawl provides Web snapshots, but a trainable token stream still requires main-text extraction, language identification, quality filtering, deduplication, privacy processing, and evaluation ablations. FineWeb's value is not only its 15T-token scale, but also the fact that these choices are made executable and experimentally comparable: text extraction and filtering should be validated through downstream training results; the deduplication scope should be judged by its distributional impact rather than only by the deletion ratio; and public corpora should explain data, code, field annotations, and usage boundaries together.
+This chapter uses FineWeb and Dolma as complementary cases to explain how text-corpus data engineering turns open Web snapshots into trainable, traceable, and diagnosable data assets. FineWeb emphasizes Common Crawl extraction, filtering, deduplication, privacy processing, and processing-choice evaluation. Dolma emphasizes source ledgers, token consumption, source ablation, and transparent release. Together they show that pre-training corpora are not defined by scale alone, but by provenance, processing, versions, evidence chains, and reproducibility conditions.
 
 ## Keywords
 
-FineWeb; Common Crawl; DataTrove; WARC; Trafilatura; FastText; MinHash; quality filtering; pre-training corpus; data ablation
+text corpora; open Web; FineWeb; Dolma; filtering and deduplication; transparent ledger; pre-training data
 
-## Learning Objectives
+## Case A: FineWeb: Open Web Text Corpora, Filtering, Deduplication, and Processing Choices
+
+### Case A.0: Learning Objectives
 
 After completing this chapter, readers should be able to:
 
@@ -23,7 +21,7 @@ After completing this chapter, readers should be able to:
 - Compare different data-processing strategies under fixed model scale, fixed token budget, fixed evaluation sets, and repeated random seeds.
 - Identify copyright, privacy, removal, evaluation-contamination, and cross-lingual transfer boundaries when adapting FineWeb-style processing to enterprise or research projects.
 
-## Opening Scenario
+### Case A: Opening Scenario
 
 A team is preparing to train an English foundation model at the 7B-parameter scale. The first data plan is straightforward: download recent Common Crawl WET files, filter non-English pages, run simple deduplication, and send the text into the tokenizer. Offline samples look decent: many pages are indeed natural language, and the token volume is large enough. The team starts small-model pre-training, but after several weeks it encounters three hard-to-explain problems.
 
@@ -31,11 +29,11 @@ First, the model does not improve stably on several commonsense tasks as trainin
 
 These three problems show that Common Crawl is a Web snapshot, not a training set. The real data-engineering task is not to "download more Web pages," but to transform each Web sample into a traceable, filterable, deduplicable, evaluable, and removable training record. FineWeb is a public case study built around exactly this problem.
 
-## 41.1 Common Crawl Is a Web Snapshot, Not a Training Corpus
+### Case A.1: Common Crawl Is a Web Snapshot, Not a Training Corpus
 
 Common Crawl WARC files preserve the original responses captured during Web crawling, including HTML, request metadata, and page structure. WET files are Common Crawl's extracted text version. For pre-training data engineering, WET is attractive: it avoids HTML parsing cost and has a size closer to the text needed for model training. However, FineWeb's experiments found that directly using WET leaves too much boilerplate, menu text, and page noise, so FineWeb re-extracts main text from WARC.
 
-### 41.1.1 Processing Layers from Web Snapshot to Training Text
+#### Case A.1.1 Processing Layers from Web Snapshot to Training Text
 
 At least five transformation layers separate Web snapshots from training text.
 
@@ -51,7 +49,7 @@ The fifth layer is deduplication and privacy processing. FineWeb performs MinHas
 
 Together, these steps are not merely a collection of cleaning scripts, but a set of pre-training data contracts. Each step should have inputs, outputs, failure records, and reviewable parameters.
 
-### 41.1.2 Filtering Strength Determines the Training Signal
+#### Case A.1.2 Filtering Strength Determines the Training Signal
 
 Web-corpus cleaning most easily produces two opposite errors.
 
@@ -65,7 +63,7 @@ $$
 
 Here, $F$ denotes the filtering strategy, $D_F$ is the filtered dataset, $S_{eval}$ is the model score under a fixed evaluation protocol, $R_{risk}$ is privacy, copyright, toxicity, and contamination risk, $T_F$ is the retained token count, and $T_{target}$ is the lower token bound required by the training budget. This is not an original formula from the FineWeb paper; it is an engineering abstraction of the FineWeb experimental logic: when selecting filters, one cannot look only at whether samples appear "clean"; one must also evaluate whether the model improves under a fixed training budget and whether risk decreases.
 
-## 41.2 FineWeb Data Definition and Public Form
+### Case A.2: FineWeb Data Definition and Public Form
 
 FineWeb is publicly available as a full dataset, configurations split by Common Crawl dump, and smaller sample versions. The official dataset card states that users can load the full dataset or specify a particular crawl/dump; dump names follow the `CC-MAIN-(year)-(week number)` format. Sample versions include random subsets of approximately 350B, 100B, and 10B GPT-2 tokens, enabling researchers to reproduce experiments or debug processing code at lower cost.
 
@@ -81,7 +79,7 @@ FineWeb is publicly available as a full dataset, configurations split by Common 
 
 Sources: Hugging Face FineWeb dataset card download configurations, sample-version descriptions, and dump naming convention; initial scale reported by the FineWeb paper.
 
-### 41.2.1 Task Definition
+#### Case A.2.1 Task Definition
 
 FineWeb's task is not to annotate supervised-learning labels, but to build a pre-training token stream for autoregressive language models. Given a collection of Common Crawl Web snapshots $C=\{c_i\}$, the goal is to learn a data-processing function:
 
@@ -109,7 +107,7 @@ The second concerns deduplication granularity. Global deduplication appears more
 
 The third concerns filter validation. FineWeb does not choose filters solely from manual rules. Instead, it trains multiple data-ablation models and compares scores on fixed evaluation sets. Filter thresholds, C4-rule choices, and custom heuristics are determined through training validation.
 
-## 41.3 Key Fields in FineWeb Document Records
+### Case A.3: Key Fields in FineWeb Document Records
 
 The official FineWeb dataset card states that samples include `language`, `language_score`, and `token_count` annotations, derived respectively from the language filter and GPT-2 tokenizer statistics. When reproducing a FineWeb-like pipeline inside an enterprise, processing status, provenance, deduplication, and risk fields should also be retained. Otherwise, when training results become abnormal, it is impossible to determine whether the issue came from extraction, filtering, deduplication, or sampling.
 
@@ -127,7 +125,7 @@ The official FineWeb dataset card states that samples include `language`, `langu
 
 Fields such as `gopher_flags`, `c4_flags`, and `fineweb_flags` are field groups added by the author to explain the engineering structure; they do not imply that the official FineWeb dataset card publishes each of these columns. The official annotations explicitly published by FineWeb include `language`, `language_score`, and `token_count`.
 
-### 41.3.1 A Sample Cannot Store Only `text`
+#### Case A.3.1 A Sample Cannot Store Only `text`
 
 The following is an abstract FineWeb-like document record. It is not an original FineWeb sample; it is an engineering example organized from the FineWeb dataset card and the DataTrove pipeline.
 
@@ -164,7 +162,7 @@ The following is an abstract FineWeb-like document record. It is not an original
 
 This example illustrates the basic idea of a FineWeb-like corpus: `text` is the training entry point, but by itself it cannot explain sample quality. What supports review is the combination of provenance, language score, filtering status, deduplication scope, and privacy-processing records.
 
-### 41.3.2 Relationship Between Schema and Training Evaluation
+#### Case A.3.2 Relationship Between Schema and Training Evaluation
 
 FineWeb does not evaluate individual samples directly; it evaluates data versions generated by processing strategies. Let a processing version $v$ correspond to dataset $D_v$, which is used to train model $M_v$. If the evaluation suite is $B=\{b_1,\ldots,b_k\}$ and each task score is $s(M_v,b_i)$, an aggregate score can be defined as:
 
@@ -180,11 +178,11 @@ $$
 
 Without this manifest, even if the evaluation script is reproduced, one cannot reproduce "which exact data version was trained."
 
-## 41.4 FineWeb's Code-based Processing Flow
+### Case A.4: FineWeb's Code-based Processing Flow
 
 One important feature of FineWeb is that its processing pipeline has a public script. `examples/fineweb.py` in the DataTrove repository states that it is used to process and create the FineWeb dataset. The script has two major parts: first, it performs the main processing for each dump; then it applies MinHash deduplication and PII formatting to the processed output.
 
-### 41.4.1 Main Processing Pipeline
+#### Case A.4.1 Main Processing Pipeline
 
 The main processing pipeline can be abstracted in the following order. Class names come from the DataTrove FineWeb example script; explanations are organized by this chapter.
 
@@ -222,7 +220,7 @@ pipeline = [
 
 This is conceptual pseudocode used to explain the module order in the FineWeb example script. Real parameters, log directories, S3 paths, task counts, and Slurm resource configurations should follow the DataTrove repository script.
 
-### 41.4.2 Deduplication and Privacy-processing Pipeline
+#### Case A.4.2 Deduplication and Privacy-processing Pipeline
 
 FineWeb uses MinHash for approximate deduplication. The goal of MinHash is to estimate the Jaccard similarity between two documents. If documents $A$ and $B$ are represented as sets of 5-grams, their similarity is:
 
@@ -232,25 +230,25 @@ $$
 
 MinHash approximates this similarity with multiple hash functions. The FineWeb paper states that its deduplication parameters are 5-grams and 112 hash functions, split into 14 buckets with 8 hashes per bucket; if the 8 MinHash values in any bucket match, the pair is considered a duplicate candidate. The `MinhashConfig` in the DataTrove example script also corresponds to `n_grams=5`, `num_buckets=14`, and `hashes_per_bucket=8`.
 
-![Figure 41-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/ch41_01_fineweb_minhash_pii_flow_en.svg)
+![Figure 38-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/ch41_01_fineweb_minhash_pii_flow_en.svg)
 
-*Figure 41-1 FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
+*Figure 38-1 FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
 
-### 41.4.3 FineWeb's Per-crawl Deduplication Judgment
+#### Case A.4.3 FineWeb's Per-crawl Deduplication Judgment
 
 Intuitively, global deduplication seems more thorough: put all 96 crawls together and remove all near-duplicate documents. FineWeb's ablation experiments, however, produce the opposite signal. The paper describes a key phenomenon: when global deduplication is performed from the newest crawls toward older crawls, older crawls are heavily removed; in one older snapshot, the retained 10% of the data is actually worse than the removed 90%, containing more advertisements, keyword lists, and abnormally formatted text. FineWeb ultimately chooses to run MinHash deduplication independently for each crawl.
 
 This result matters for engineering practice. Deduplication is not mathematically better simply because it is more exhaustive; what matters is how it changes the data distribution. Global deduplication can alter the time distribution, site coverage, and duplicate-cluster structure across old and new crawls in complex ways. If one looks only at "how much duplication was removed," valuable samples may be removed while low-quality long-tail samples remain.
 
-![Figure 41-2 FineWeb data-processing-choice ablation loop](../../images/part12/ch41_02_fineweb_ablation_loop_en.svg)
+![Figure 38-2 FineWeb data-processing-choice ablation loop](../../images/part12/ch41_02_fineweb_ablation_loop_en.svg)
 
-*Figure 41-2 FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
+*Figure 38-2 FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
 
-## 41.5 Evaluating FineWeb Data-processing Choices
+### Case A.5: Evaluating FineWeb Data-processing Choices
 
 FineWeb's evaluation method differs from a typical dataset introduction. It treats data-processing steps as experimental variables and trains ablation models to compare different data versions. The paper states that ablation models keep model parameters, architecture hyperparameters, training token count, and training steps consistent. To reduce random-sampling effects, each data version is used to train two models with different random subsets and different initialization seeds, and their average scores are compared.
 
-### 41.5.1 Fixed Variables
+#### Case A.5.1 Fixed Variables
 
 FineWeb's evaluation protocol can be summarized in Table 41-4.
 
@@ -284,7 +282,7 @@ Second, compare existing rules. When studying C4 rules, FineWeb finds that the t
 
 Third, design custom filters. FineWeb collects more than 50 document-level and cross-document statistical indicators, compares distributions between "higher-quality" and "lower-quality" data, chooses thresholds that distinguish the two, and validates them with 28B-token ablation runs. The adopted custom filters focus on three issues: low ratio of lines ending in punctuation, high ratio of repeated-line characters, and abnormal ratio of short lines.
 
-### 41.5.3 Common Failures and Repair Actions
+#### Case A.5.3 Common Failures and Repair Actions
 
 FineWeb's experience can be converted into an error-attribution table for Web pre-training corpora. This is not an official FineWeb table, but an engineering retrospective organized by this chapter from the FineWeb paper and dataset card.
 
@@ -299,7 +297,7 @@ FineWeb's experience can be converted into an error-attribution table for Web pr
 | Overly strict filters | Token scale drops and long-tail knowledge is removed | A single rule removes too many tokens | Record token-removal rate per filter and decide thresholds through ablation |
 | Residual privacy samples | Emails, public IPs, or other identifiable information enter release data | Missing PII processing or false negatives | Use `PIIFormatter` or similar rules and record replacement strategy and boundaries |
 
-## 41.6 Usage Boundaries of Public Web Corpora
+### Case A.6: Usage Boundaries of Public Web Corpora
 
 FineWeb is a strong public case for open Web pre-training corpus engineering, but it should not be understood simply as "all Web text that can be used directly for commercial training." Public datasets, open code, and the ODC-By license reduce the barrier to research reproduction, but they do not automatically remove copyright, privacy, safety, or removal responsibilities in the user's jurisdiction, business scenario, or downstream model release.
 
@@ -315,7 +313,7 @@ FineWeb should not be used as an unreviewed commercial training corpus. Commerci
 
 For Chinese or multilingual training, one cannot directly copy FineWeb's English FastText threshold, English tokenizer statistics, or assumptions about English page formats. Migration requires recalibrating language identification, simplified/traditional Chinese handling, site templates, domain distributions, low-quality-page rules, and evaluation tasks.
 
-## Chapter Summary
+### Case A: Summary
 
 FineWeb clarifies an often underestimated issue: a Web pre-training corpus is not the result of downloading Common Crawl; it is a data asset jointly formed by code, filters, deduplication strategy, evaluation protocol, and release documentation. This chapter's core conclusions are threefold.
 
@@ -323,10 +321,286 @@ First, Web main-text extraction is a model-capability variable. FineWeb re-extra
 
 For readers of this book, what is most worth learning from FineWeb is not copying a particular token scale, but turning pre-training corpus engineering into a traceable, reproducible, evaluable, and auditable system.
 
+## Case B: Dolma: Transparent Pre-training Corpus Ledgers and Attributable Evaluation
+
+### Case B.0: Learning Objectives
+
+After completing this chapter, readers should be able to:
+
+- Explain why open weights cannot substitute for training-data transparency.
+- Read Dolma's versions, source statistics, sampling proportions, and ODC-BY usage boundaries.
+- Distinguish the roles of document records, source cards, and training manifests in audits.
+- Use token-accounting formulas to describe the relationship among raw tokens, filtered tokens, sample proportions, and seen tokens.
+- Understand the evidence chain of transparent corpora through the four Dolma Toolkit actions: tag, dedup, mix, and tokenize.
+- Design source ledgers, removal ledgers, contamination checks, and version-freezing mechanisms for internal enterprise pre-training corpora.
+
+### Case B.1: Problem Scenario: Open Weights Still Cannot Explain the Model
+
+Two teams obtain the same 7B open-model weights. The first team wants to continue pre-training the model to improve code and scientific-question-answering capabilities. The second team wants to analyze why the model gives outdated answers on several factual questions. The weights, inference code, and part of the evaluation scripts are downloadable, but they quickly encounter the same problem: no one can answer what data the model actually saw.
+
+The continued-pretraining team needs to know how much code, papers, encyclopedic content, Web text, and social media were present in the original model corpus, so that it does not repeatedly oversample the same data types. The bias-analysis team needs to know whether certain Web pages, papers, forum discussions, or benchmark solutions entered training, so it can judge whether a problem comes from knowledge gaps, sampling weights, contamination, or model training itself. Without training corpora and processing records, every explanation remains guesswork.
+
+Dolma is designed to solve exactly this problem. It turns an English pre-training corpus from an invisible data recipe into a set of downloadable, measurable, processable, removable, and auditable sources. OLMo is not a parallel protagonist in this chapter, but a downstream example of Dolma being consumed by a transparent training chain. It reminds us that open model research should not only open weights; it should open training data, processing tools, and evaluation code as far as possible.
+
+#### Case B.1.1 Open-model Research Needs Data Evidence
+
+"Open" has different levels. Releasing only weights allows users to run a model, but does not allow researchers to explain it. Releasing training code allows users to reproduce the training framework, but still does not explain what the model actually saw. Data transparency that supports scientific research must answer at least six classes of questions.
+
+- Source: Does each document come from Common Crawl, code repositories, papers, books, encyclopedias, or social platforms?
+- Version: What were the source acquisition time, processing-script version, and filtering rules?
+- Scale: Are raw tokens, filtered tokens, sampled tokens, and seen tokens consistent?
+- Contamination: Did evaluation sets, solutions, or customer test sets overlap with the training corpus?
+- License: How do the dataset release license and original-source terms jointly constrain users?
+- Removal: If a user requests removal of personal data, can the corresponding document be located and handled?
+
+The Dolma dataset card directly reflects this design orientation: it lists versions, summary statistics, download methods, license information, and a personal-data removal entry point. The Dolma GitHub repository further provides data and tools, so transparency is not limited to paper descriptions.
+
+For corpora like Dolma, the core object of transparency is a ledger; a single `text` field is not the only object. More important are three ledgers formed around `text`.
+
+The first is the source ledger, recording where each data type comes from, how large it is, what cutoff date it uses, and how it was processed. The second is the processing ledger, recording how taggers, filters, deduplication strategies, mixers, and tokenizers changed raw documents. The third is the training ledger, recording which sources a training run actually sampled, what the sampling proportions were, and how seen tokens were distributed across training steps.
+
+If these three ledgers are disconnected, transparency degrades into "downloadability." The data can be downloaded, but cannot explain the model; the model can be trained, but cannot be audited; versions can be updated, but cannot be compared.
+
+### Case B.2: Dataset Overview: Versions, Scale, and Source Structure
+
+Dolma is not a single static file, but a corpus asset with version evolution. The Hugging Face dataset card lists versions such as `v1`, `v1_5`, `v1_5-sample`, `v1_6`, `v1_6-sample`, and `v1_7`. Among them, `v1_7` is used to train OLMo 7B-v1.7 and introduces new sources, more quality filtering, and fuzzy deduplication.
+
+*Table 42-1 Public Dolma Versions and Uses*
+
+| Version | Release Date | Compressed Size | Dataset-card Description | Engineering Use |
+| --- | --- | ---: | --- | --- |
+| `v1` | 2023-08-18 | 6.0 TB | First Dolma release | Trace the earliest public corpus form |
+| `v1_5` | 2023-10-31 | 6.4 TB | Used to train OLMo-1B, about 3T tokens | Review early OLMo training corpus |
+| `v1_5-sample` | 2023-10-31 | 2.9 TB | Sample of about 1.9T tokens, used for OLMo-7B | Track training samples below full scale |
+| `v1_6` | 2024-01-31 | 5.4 TB | Adds partial deduplication and repeated n-gram filtering on top of v1.5 | Study filtering and deduplication evolution |
+| `v1_6-sample` | 2024-01-31 | 16.4 GB | Exploratory sample of about 10B tokens | Quick debugging and data browsing |
+| `v1_7` | 2024-04-15 | 4.5 TB | Used to train OLMo 7B-v1.7, with new sources, more quality filtering, and fuzzy deduplication | Current default version and transparent-training reference |
+
+Source: Versions section of the Hugging Face `allenai/dolma` dataset card.
+
+#### Case B.2.1 v1.6 Source Structure
+
+Dolma covers Web, code, papers, social media, books, and encyclopedic sources. To avoid mixing versions, Table 42-2 uses the coarse-grained statistics from the dataset card's v1.6 summary statistics. The v1.7 sources are more fine-grained, adding Refined Web, StarCoder, arXiv, StackExchange, Flan, OpenWebMath, Algebraic Stack, MegaWika, and other sources. Subsequent writing or experiments should explicitly state which version is used.
+
+*Table 42-2 Dolma v1.6 Source Statistics*
+
+| Source | Document Type | UTF-8 Bytes | Documents | Unicode Words | Llama Tokens |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Common Crawl | web pages | 9,022 GB | 3,370M | 1,775B | 2,281B |
+| The Stack | code | 1,043 GB | 210M | 260B | 411B |
+| C4 | web pages | 790 GB | 364M | 153B | 198B |
+| Reddit | social media | 339 GB | 377M | 72B | 89B |
+| PeS2o | STEM papers | 268 GB | 38.8M | 50B | 70B |
+| Project Gutenberg | books | 20.4 GB | 0.056M | 4.0B | 6.0B |
+| Wikipedia and Wikibooks | encyclopedic | 16.2 GB | 6.2M | 3.7B | 4.3B |
+| Total | mixed | 11,519 GB | 4,367M | 2,318B | 3,059B |
+
+Source: Hugging Face `allenai/dolma` dataset card, Summary Statistics v1.6. GB, M, and B follow the dataset-card convention.
+
+Table 42-2 should not be read only as a scale display. It reveals three engineering facts.
+
+First, Dolma is a source mix, not a single Web dump. Common Crawl accounts for a large share, but code, papers, social media, books, and encyclopedic content all enter the corpus in different forms. Changes in model capability cannot be vaguely attributed to "more Web data."
+
+Second, different statistical conventions serve different questions. UTF-8 bytes help estimate storage and processing cost, document count helps observe sample granularity, while Unicode words and Llama tokens are closer to the training budget. Mixing these conventions distorts discussions of data scale.
+
+Third, versions cannot be directly compared without care. v1.6 and v1.7 differ in source decomposition, filtering rules, and sample proportions. If a model is trained with v1.7, one cannot explain its training behavior using only the v1.6 coarse table.
+
+### Case B.3: Decomposing a Transparent Chain Through the Source Ledger
+
+This section does not begin from an individual text, but from Dolma's source ledger to decompose the chain of a transparent pre-training corpus. The "sample" here is not an image or a question, but an evidence path from source to document and then to the training manifest.
+
+#### Case B.3.1 From Source to Document
+
+Dolma's task is not to annotate supervised labels for each text, but to make records consumed by training reconstructable. Let the source set be $S=\{s_1,\ldots,s_m\}$. Each source is processed by a function $P_s$ into a document set $D_s$:
+
+$$
+D_s=P_s(R_s, C_s)
+$$
+
+Here, $R_s$ is the raw source, and $C_s$ is the processing configuration for that source, including taggers, filters, deduplication strategy, sampling proportion, and tokenizer. The final training corpus is a mixture of multiple sources:
+
+$$
+D=\bigcup_{s \in S} Sample(D_s, r_s)
+$$
+
+Dolma's transparency lies in recording $S$, $R_s$, $C_s$, $r_s$, and version information as publicly as possible. Model training is no longer just "used three trillion tokens"; it can be traced to which sources contributed how much, how they were processed, and how they were sampled.
+
+#### Case B.3.2 Token Accounting Should Track Actual Training Consumption
+
+The easiest part of a multi-source corpus to misread is token scale. A source with many raw tokens does not necessarily contribute the same proportion during training; filtering, deduplication, sample proportion, and multiple epochs all change the final seen tokens.
+
+The actual contribution of a source $s$ during training can be written as:
+
+$$
+T^{seen}_s = T^{filtered}_s \times r_s \times e_s
+$$
+
+where $T^{filtered}_s$ is the number of filtered tokens, $r_s$ is the sampling proportion, and $e_s$ is the epoch count or equivalent sampling count during training. The proportion of that source in the training mix is:
+
+$$
+p_s=\frac{T^{seen}_s}{\sum_j T^{seen}_j}
+$$
+
+The Dolma v1.7 dataset card lists both source token counts and sample proportions precisely so that users can distinguish "what is in the dataset" from "how much the model actually saw."
+
+#### Case B.3.3 Three Ways to Read a Document
+
+Transparent corpora do not end with packaging and uploading `text`. At least three layers of records are needed: an individual document record, a source card, and a training-version manifest. The document record supports training and location; the source card explains data origin and processing rules; the training manifest reproduces the data actually consumed by a model run.
+
+*Table 42-3 Dolma-like Transparent Corpus Record Schema*
+
+| Layer | Typical Fields | Source or Generation Method | Engineering Use |
+| --- | --- | --- | --- |
+| Document level | `id`, `source`, `text`, `text_hash` | Data reader and hash computation | Locate samples, deduplicate, read during training |
+| Document level | `created_at`, `url_or_origin`, `license_hint` | Original source metadata | License review and time tracking |
+| Document level | `language_tag`, `toxicity_tag`, `perplexity_score` | Dolma Toolkit taggers or custom taggers | Quality filtering and risk bucketing |
+| Source level | `source_name`, `source_version`, `raw_size`, `filtered_size` | Source card and statistics scripts | Explain data composition |
+| Source level | `dedup_policy`, `filter_config`, `sample_proportion` | Dolma mixer and processing configs | Reproduce source mix |
+| Training level | `dolma_version`, `tokenizer`, `sample_seed`, `seen_tokens` | Training manifest | Reproduce experiments and explain metric changes |
+| Governance level | `removal_status`, `known_limitations`, `release_constraints` | Dataset card and governance records | Handle removal, bias, and usage boundaries |
+
+These fields are an engineering schema organized by the author from the Dolma dataset card, Dolma Toolkit documentation, and transparent-training audit needs. They do not imply that Dolma officially publishes each field exactly as listed.
+
+The following is an abstract Dolma-like document record showing how a transparent corpus connects samples, sources, and training versions.
+
+```json
+{
+  "id": "dolma-v1_7/common-crawl/doc-000001",
+  "source": "Dolma's CC",
+  "source_version": "v1_7",
+  "text": "<document text>",
+  "text_hash": "sha256:...",
+  "tags": {
+    "language": "en",
+    "toxicity_bucket": "low",
+    "perplexity_bucket": "normal"
+  },
+  "processing": {
+    "tagger_config": "dolma-toolkit-config-x",
+    "dedup_policy": "fuzzy_dedup",
+    "sample_proportion": 0.5
+  },
+  "training_manifest": {
+    "tokenizer": "OLMo tokenizer version",
+    "dolma_version": "v1_7",
+    "included_in_run": true
+  }
+}
+```
+
+This record cannot be read at only one layer. In Dolma, the document layer, source layer, and training layer must point back to one another. If a document has a `source` but no source card, it can locate a sample but cannot explain the origin. If a source card has statistics but no training manifest, it can explain what is in the dataset but not what the model actually saw. If a manifest has sampling proportions but no document hash, removal and contamination checks break.
+
+### Case B.4: Dolma Toolkit Makes the Evidence Chain Executable
+
+The Dolma GitHub repository states that Dolma is both a dataset and a toolkit. Dolma Toolkit supports single-machine, cluster, and cloud environments. It includes language detection, toxicity detection, perplexity scoring, and common filtering recipes such as Gopher, C4, and OpenWebText; its deduplication component uses a Rust Bloom filter for acceleration.
+
+#### Case B.4.1 Four Actions Correspond to Four Kinds of Evidence
+
+Dolma Toolkit documentation summarizes data organization as four actions: tag, dedup, mix, and tokenize. They are not isolated scripts, but evidence-chain generators: tag records document attributes, dedup records what is retained and removed, mix records sampling proportions, and tokenize records the token convention that enters training.
+
+*Table 42-4 Dolma Toolkit Processing Actions and Evidence Outputs*
+
+| Order | Action | Official Documentation Description | Evidence Output | Main Risk |
+| ---: | --- | --- | --- | --- |
+| 1 | Taggers | Assign language, toxicity, perplexity, and other attribute tags to document spans | Document quality labels and risk labels | Tagger-version changes alter filtering results |
+| 2 | Deduplication | Deduplicate documents by content or metadata | Deduplication strategy, retention priority, deletion records | Cross-source deduplication changes source mix |
+| 3 | Mixer | Remove, filter, or mix documents based on attribute values | Sample proportion, source mix, data version | Opaque sample proportions cause token-accounting errors |
+| 4 | Tokenization | Use Hugging Face-compatible tokenizers | Token counts, tokenizer version, training stream | Tokenizer changes alter token counts and training budget |
+
+Source: Dolma Toolkit documentation README.
+
+![Figure 38-3 Dolma transparent-corpus evidence chain](../../images/part12/ch42_01_dolma_evidence_chain_en.svg)
+
+*Figure 38-3 Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation.*
+
+The boundary between toolchains and manual audits matters. A toolchain can stably generate statistics, tags, hashes, and manifests, but it cannot replace all audits. License boundaries, PII removal, evaluation contamination, and source representativeness still require human rules, sample review, or dedicated detection tasks.
+
+This is also the difference between a Dolma-like transparent corpus and an ordinary "collection of cleaning scripts." Ordinary scripts only answer "what did I delete"; a transparent toolchain must also answer "why was it deleted, how did the post-deletion distribution change, did training actually benefit, and can it be removed later." If a processing action cannot leave interpretable evidence, it is hard for it to support transparent training.
+
+### Case B.5: Evaluation Shifts from Highest Score to Attribution
+
+The evaluation focus of transparent corpora is not the "highest score," but whether score changes can be explained. Dolma-like source-level corpora let model evaluation move beyond leaderboards and trace training logs back to sources, versions, and sampling proportions.
+
+#### Case B.5.1 Source Ablation Locates Capability Sources
+
+To judge whether a source affects model capability, one can run source ablation. Let full training produce model $M_{all}$, and training with source $s$ removed produce model $M_{-s}$. The average difference over task set $B$ is:
+
+$$
+\Delta_s=\frac{1}{|B|}\sum_{b \in B} \left[score(M_{all}, b)-score(M_{-s}, b)\right]
+$$
+
+When $\Delta_s$ changes clearly on code tasks, scientific QA, or long-context tasks, the data team can trace capability changes back to source mix instead of vaguely attributing them to "model parameters."
+
+![Figure 38-4 Dolma source mix and training-diagnosis loop](../../images/part12/ch42_02_dolma_source_mix_diagnosis_en.svg)
+
+*Figure 38-4 Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use.*
+
+#### Case B.5.2 Diagnosis Checklist
+
+*Table 42-5 Dolma-like Transparent Corpus Evaluation and Diagnosis Table*
+
+| Evaluation Question | Required Records | Metric or Evidence | Possible Action |
+| --- | --- | --- | --- |
+| Which source drives a capability | Source mix, sample proportion, seen tokens | Source ablation, task-score difference $\Delta_s$ | Adjust source weight or add data |
+| Whether an evaluation set is contaminated | Document hash, n-gram index, eval-set hash | Overlap rate, contamination span | Remove contaminated samples and freeze a new version |
+| Training loss fluctuates abnormally | Batch source records, tokenizer version | Source-specific loss, token distribution | Inspect sampler and source shards |
+| Social-media risk increases | Toxicity tag, PII tag, source card | Risk-tag rate, manual sample review | Tighten filtering or reduce sampling proportion |
+| Versions are incomparable | `dolma_version`, `filter_config`, `dedup_policy` | Manifest diff | Freeze version or rerun controlled experiments |
+
+#### Case B.5.3 Common Failure Modes
+
+*Table 42-6 Common Failures and Repair Actions for Dolma-like Transparent Corpora*
+
+| Failure Mode | Symptom | Possible Root Cause | Governance Action |
+| --- | --- | --- | --- |
+| Source-mix drift | A task category suddenly regresses in a new version | Sample proportion or filtering rules changed | Compare manifest diff, roll back, or resample by strata |
+| Inconsistent token accounting | Reported scale does not match training seen tokens | Raw, filtered, and sampled tokens are mixed | Report raw, filtered, sampled, and seen tokens together |
+| Cross-source duplication | Paper abstracts, encyclopedia mirrors, or code fragments repeat | Deduplication only within source | Add cross-source deduplication and record retention priority |
+| Evaluation contamination | Benchmark scores become abnormally high | Web or forum data contains questions and solutions | Build eval hash/n-gram decontamination index |
+| Removal cannot be located | PII removal request cannot be handled | Missing source/id/hash mapping | Build removal ledger and shard reverse index |
+| Ambiguous license boundary | ODC-BY is mistaken for authorization from original sources | Original source terms are ignored | Preserve original terms and restrictions in source cards |
+
+These failure modes show that transparent-corpus quality is not only about whether text is clean. A transparent training sample must pass three kinds of checks simultaneously: whether the source is explainable, whether the processing actions are reproducible, and whether training consumption is traceable. Missing any one of these checks can turn data into a corpus that is public but not auditable.
+
+### Case B.6: Reuse Boundaries of Transparent Corpora
+
+Dolma is suitable for open language-model pre-training research, source-mix experiments, transparent data-governance teaching, training-data audit method validation, and internal enterprise manifest design. It is especially suitable for research questions such as "how does training data affect model capabilities and limitations," because it opens data, dataset cards, and processing tools together.
+
+Dolma should not be understood as meaning that all sources are unconditionally usable for commercial purposes. The Hugging Face dataset card states that Dolma is released under ODC-BY, while users are still bound by the licenses and terms of use of the original data sources. In other words, Dolma's release license does not automatically erase the boundaries of Common Crawl, Reddit, code, papers, books, and other original sources.
+
+Enterprises usually cannot publish training data, but they can transfer Dolma's transparency practices. A minimum viable version includes:
+
+- Build a source card for each source, recording origin, version, license, acquisition time, filtering rules, and limitations.
+- Freeze a manifest for each training version, recording source mix, sample proportion, tokenizer, `filter_config`, `dedup_policy`, and `sample_seed`.
+- Build validation splits for major sources to support source-specific loss and source ablation.
+- Build decontamination indexes for evaluation sets, customer test sets, and online issue repositories.
+- Build a removal ledger so that URL, document id, or text hash can map to training shards.
+
+At the same time, Dolma is not suitable as a direct quality standard for Chinese, multilingual, or vertical-industry corpora. It is primarily an English pre-training corpus. Migration to Chinese, medical, legal, or financial scenarios requires redefining sources, licenses, filters, and evaluation tasks. Dolma should also not be used to prove that open corpora are inherently safe. The meaning of transparency is that defects are visible, locatable, and repairable, not that defects do not exist.
+
+### Case B: Summary
+
+Dolma moves pre-training corpora from invisible data recipes toward auditable data assets. This chapter's core conclusions are threefold.
+
+First, the basic unit of a transparent pre-training corpus is not a single `text` field, but a document record that connects source, processing configuration, sampling proportion, and training manifest. Second, source mix must be explained through token accounting rather than by reporting only raw scale. Third, the four Dolma Toolkit actions - tag, dedup, mix, and tokenize - provide a clear template for enterprises building reproducible training corpora internally.
+
+For readers of this book, what is most transferable from Dolma is not a particular source or the three-trillion-token scale, but the way it leaves evidence for training data. Only when sources, processing actions, sampling proportions, training manifests, and governance records form a connected chain does a pre-training corpus have a foundation for continued research, error attribution, and long-term maintenance.
+
+## Chapter Summary
+
+FineWeb shows how open Web text is transformed from snapshots into training corpora, while Dolma shows how pre-training data becomes an interpretable asset through source ledgers and diagnostic protocols. Together, they define two main lines of text-corpus data engineering: filtering, deduplication, privacy processing, and training effect on one side; source structure, token ledgers, version transparency, and attributable evaluation on the other.
+
 ## References
 
-- Penedo, G., Kydlíček, H., Allal, L. B., Lozhkov, A., Mitchell, M., Raffel, C., von Werra, L., & Wolf, T. (2024). The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. NeurIPS 2024 Datasets and Benchmarks Track. https://arxiv.org/abs/2406.17557
+1. - Penedo, G., Kydlíček, H., Allal, L. B., Lozhkov, A., Mitchell, M., Raffel, C., von Werra, L., & Wolf, T. (2024). The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. NeurIPS 2024 Datasets and Benchmarks Track. https://arxiv.org/abs/2406.17557
 - Hugging Face. (2026). HuggingFaceFW/fineweb Dataset Card. https://huggingface.co/datasets/HuggingFaceFW/fineweb
 - Hugging Face. (2026). DataTrove FineWeb Processing Script. https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py
 - Penedo, G., Kydlíček, H., Cappelli, A., Sasko, M., & Wolf, T. (2024). DataTrove large scale data processing. https://github.com/huggingface/datatrove
 - Luccioni, S., & Viviano, J. (2021). What's in the Box? A Preliminary Analysis of Undesirable Content in the Common Crawl Corpus. https://arxiv.org/abs/2105.02732
+
+2. - Soldaini, L., Kinney, R., Bhagia, A., Schwenk, D., Atkinson, D., Authur, R., et al. (2024). Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research. ACL 2024. https://arxiv.org/abs/2402.00159
+- Allen Institute for AI. (2023). Ai2 Dolma: 3 trillion token open corpus for language model pretraining. https://allenai.org/blog/dolma-3-trillion-tokens-open-llm-corpus-9a0ff4b8da64
+- AllenAI. (2026). allenai/dolma Dataset Card. https://huggingface.co/datasets/allenai/dolma
+- AllenAI. (2026). Dolma Dataset and Toolkit Repository. https://github.com/allenai/dolma
+- AllenAI. (2026). Dolma Toolkit Documentation. https://github.com/allenai/dolma/blob/main/docs/README.md
+- Groeneveld, D., Beltagy, I., Walsh, P., Bhagia, A., Kinney, R., Tafjord, O., et al. (2024). OLMo: Accelerating the Science of Language Models. https://arxiv.org/abs/2402.00838

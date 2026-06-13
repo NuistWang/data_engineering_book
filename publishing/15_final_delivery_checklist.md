@@ -25,7 +25,7 @@
 - [ ] 图题、表题完整，正文中有首次引用
 - [ ] 图表来源、自绘/改绘状态和权限已登记
 - [ ] 清晰度、字号、线条和色彩区分满足纸书要求
-- [ ] 每章图表均有 alt text 台账
+- [ ] 每章图表均已进入 `publishing/accessibility/springer_alt_text_inventory.xlsx`，且英文 alt text 已人工复核
 
 ## 四、引用与版权检查
 
@@ -68,7 +68,7 @@
 - [ ] `publishing/final_review/manual_review_checklist.md` 中第 12、16、21、24、29、40 章，P11、P12、P13、P15，以及 Part 10/12/14 高风险内容已签核
 - [ ] 作者信息清单
 - [ ] 配套资源说明
-- [ ] alt text 表
+- [ ] Springer alt text Excel：`publishing/accessibility/springer_alt_text_inventory.xlsx`
 - [ ] AI 使用声明
 - [ ] LaTeX 源文件、图片资源和 Markdown 参考源文件已进入 `Source_Files/`
 - [ ] 整书分页 PDF 已进入 `Full_PDF/`

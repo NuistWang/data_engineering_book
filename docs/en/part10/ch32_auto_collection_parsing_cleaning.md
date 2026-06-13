@@ -53,16 +53,7 @@ The problem is not that engineers are not working hard enough. The growth rate o
 
 Collection from all sources can be abstracted into three layers: **connection layer -> extraction layer -> structuring layer**. The agent plays different roles at each layer.
 
-```mermaid
-flowchart LR
-    W["Web pages"] --> C["Connection adapters<br/>connect, fetch, cache"]
-    P["PDF files"] --> C
-    A["APIs"] --> C
-    R["Code repositories"] --> C
-    C --> E["Extraction layer<br/>format detection, parsing, mapping"]
-    E --> S["Structuring layer<br/>source_id, timestamp, content, metadata, quality_score"]
-    S --> Q["Cleaning and quality agents"]
-```
+![Unified architecture for four-source collection agents](../../images/part10/ai_agent_decision_workflow_ch32_01.png)
 
 *Figure 32-1: Unified architecture for four-source collection agents*
 
@@ -138,18 +129,7 @@ Parsing exceptions fall into three types:
 
 **Semantic exceptions.** Parsed values are syntactically valid but semantically impossible, such as "month 13 day 45" or a negative amount in a business context where negative amounts cannot occur.
 
-```mermaid
-flowchart TD
-    F["Parsing failure"] --> T{"Exception type"}
-    T -->|Structural| R["Reprobe structure<br/>or generate extraction rule"]
-    T -->|Encoding| E["Detect encoding<br/>transcode or preserve raw bytes"]
-    T -->|Semantic| S["Run business rules<br/>mark semantic uncertainty"]
-    R --> C{"Confidence high?"}
-    E --> C
-    S --> C
-    C -->|Yes| V["Validate and write lineage"]
-    C -->|No| H["Escalate to human review"]
-```
+![Parsing exception handling decision flow](../../images/part10/ai_agent_decision_workflow_ch32_02.png)
 
 *Figure 32-2: Parsing exception handling decision flow*
 
@@ -260,18 +240,7 @@ The following conditions must trigger human review:
 
 Quality filtering should follow "wide entry, strict exit, tiered filtering." Each layer handles one quality dimension. Failed data is routed to the appropriate handling path rather than simply discarded.
 
-```mermaid
-flowchart LR
-    I["Incoming structured data"] --> F["Format validation"]
-    F --> C["Completeness validation"]
-    C --> S["Semantic validation"]
-    S --> X["Consistency validation"]
-    X --> P["Pass to downstream"]
-    F -->|fail| R1["Format repair queue"]
-    C -->|warn/fail| R2["Missingness handling queue"]
-    S -->|warn/fail| R3["Semantic review queue"]
-    X -->|drift/conflict| R4["Cross-source review queue"]
-```
+![Tiered quality filtering pipeline](../../images/part10/ai_agent_decision_workflow_ch32_03.png)
 
 *Figure 32-3: Tiered quality filtering pipeline*
 

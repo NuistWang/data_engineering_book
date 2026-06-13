@@ -174,6 +174,152 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
         self.assertNotIn("part10/ch31_agent_architecture.md", front_paths)
         self.assertNotIn("part10/ch31_agent_architecture.md", back_paths)
 
+    def test_locate_item_pages_stops_after_all_items_are_found(self):
+        exporter = load_exporter()
+
+        class Page:
+            def __init__(self, text: str):
+                self.text = text
+                self.calls = 0
+
+            def extract_text(self):
+                self.calls += 1
+                return self.text
+
+        class Reader:
+            def __init__(self):
+                self.pages = [
+                    Page("Chapter 1: The Data Revolution in the Era of Large Models"),
+                    Page("large image-only page"),
+                    Page("large image-only page"),
+                ]
+
+        reader = Reader()
+        item = exporter.NavItem(
+            title="Chapter 1: The Data Revolution in the Era of Large Models",
+            path="part1/ch01_data_change.md",
+            level=2,
+            group="Part 1",
+            group_slug="part-1",
+        )
+
+        self.assertEqual({"part1/ch01_data_change.md": 0}, exporter.locate_item_pages(reader, [item]))
+        self.assertEqual([1, 0, 0], [page.calls for page in reader.pages])
+
+    def test_locate_item_pages_does_not_scan_for_part_overview_pages(self):
+        exporter = load_exporter()
+
+        class Page:
+            def __init__(self, text: str):
+                self.text = text
+                self.calls = 0
+
+            def extract_text(self):
+                self.calls += 1
+                return self.text
+
+        class Reader:
+            def __init__(self):
+                self.pages = [
+                    Page("Part I: Overview and Infrastructure"),
+                    Page("Chapter 1: The Data Revolution in the Era of Large Models"),
+                    Page("image-heavy page"),
+                ]
+
+        reader = Reader()
+        items = [
+            exporter.NavItem(
+                title="Part Overview",
+                path="part1/index.md",
+                level=2,
+                group="Part 1",
+                group_slug="part-1",
+            ),
+            exporter.NavItem(
+                title="Chapter 1: The Data Revolution in the Era of Large Models",
+                path="part1/ch01_data_change.md",
+                level=2,
+                group="Part 1",
+                group_slug="part-1",
+            ),
+        ]
+
+        self.assertEqual(
+            {"part1/index.md": 0, "part1/ch01_data_change.md": 1},
+            exporter.locate_item_pages(reader, items),
+        )
+        self.assertEqual([0, 1, 0], [page.calls for page in reader.pages])
+
+    def test_locate_item_pages_matches_rendered_titles_without_number_prefix(self):
+        exporter = load_exporter()
+
+        class Page:
+            def __init__(self, text: str):
+                self.text = text
+                self.calls = 0
+
+            def extract_text(self):
+                self.calls += 1
+                return self.text
+
+        class Reader:
+            def __init__(self):
+                self.pages = [
+                    Page("The Data Revolution in the Era of Large Models"),
+                    Page("image-heavy page"),
+                    Page("image-heavy page"),
+                ]
+
+        reader = Reader()
+        item = exporter.NavItem(
+            title="Chapter 1: The Data Revolution in the Era of Large Models",
+            path="part1/ch01_data_change.md",
+            level=2,
+            group="Part 1",
+            group_slug="part-1",
+        )
+
+        self.assertEqual({"part1/ch01_data_change.md": 0}, exporter.locate_item_pages(reader, [item]))
+        self.assertEqual([1, 0, 0], [page.calls for page in reader.pages])
+
+    def test_locate_item_pages_reuses_text_cache_for_same_cache_key(self):
+        exporter = load_exporter()
+        exporter.PDF_TEXT_CACHE.clear()
+
+        class Page:
+            def __init__(self, text: str):
+                self.text = text
+                self.calls = 0
+
+            def extract_text(self):
+                self.calls += 1
+                return self.text
+
+        class Reader:
+            def __init__(self):
+                self.pages = [Page("The Data Revolution in the Era of Large Models")]
+
+        item = exporter.NavItem(
+            title="Chapter 1: The Data Revolution in the Era of Large Models",
+            path="part1/ch01_data_change.md",
+            level=2,
+            group="Part 1",
+            group_slug="part-1",
+        )
+        first = Reader()
+        second = Reader()
+
+        self.assertEqual(
+            {"part1/ch01_data_change.md": 0},
+            exporter.locate_item_pages(first, [item], cache_key="/tmp/same-part.pdf"),
+        )
+        self.assertEqual(
+            {"part1/ch01_data_change.md": 0},
+            exporter.locate_item_pages(second, [item], cache_key="/tmp/same-part.pdf"),
+        )
+        self.assertEqual([1], [page.calls for page in first.pages])
+        self.assertEqual([0], [page.calls for page in second.pages])
+
     def test_generated_pdf_front_matter_embeds_fonts(self):
         exporter = load_exporter()
 
