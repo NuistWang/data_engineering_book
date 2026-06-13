@@ -52,7 +52,7 @@ Minor defects in upstream data pipelines, accumulated through the gradient updat
 
 Faced with the problems above, industrial practice has demonstrated that no single technique can independently achieve high-quality data cleaning — an effective cleaning system must be a **collaborative combination of rule-based filtering, model-based filtering, and manual spot-checks**, with each method covering different defect types and having its own optimal use case.
 
-![Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline](../../images/part2/cleaning_pipeline_overview.png)
+![Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline](../../images/part2/cleaning_pipeline_overview.svg)
 
 *Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline — A multi-stage quality gate gradually refines raw corpus into candidate training corpus. The proportions in the figure are illustrative only; real retention rates depend on source quality, filtering thresholds, and compliance requirements. Source: original illustration from this book; Alt text: overview flowchart of the cleaning and decontamination pipeline, showing the sequential relationship among rule-based filtering, model scoring, deduplication, PII redaction, decontamination, and manual spot-checks.*
 
@@ -407,7 +407,7 @@ Stratified sampling strategy: High-tier data is given a 2x sampling weight durin
 
 The quality feedback loop is designed around **human-audit-driven rule iteration**, not "human processing of every record" (the latter is completely infeasible at PB-scale corpora).
 
-![Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop](../../images/part2/quality_filter_funnel_loop.png)
+![Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop](../../images/part2/quality_filter_funnel_loop.svg)
 
 *Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop — The funnel on the left shows the data retention rate at each stage; the feedback loop on the right shows how manual spot-checks drive continuous iterative optimization of filtering rules. Source: original illustration; Alt text: Quality filtering funnel and spot-check feedback loop diagram, showing the cyclic relationship among rule-based filtering, model scoring, deduplication, manual spot-checks, and rule write-back.*
 
@@ -446,7 +446,7 @@ Note: Table 5-2 is used to illustrate the correspondence between cleaning action
 
 ---
 
-## 5.8 Large-Scale Engineering Case Studies and Post-Mortem Analysis
+## 5.8 Large-Scale Engineering Case Studies and Issue Retrospectives
 
 All of the following cases are anonymized composite case studies. Data scales, proportions, and timelines are provided to illustrate engineering scope; as of June 2026, actual figures will vary with corpus source, cleaning rules, model scale, and evaluation methodology.
 
@@ -539,6 +539,4 @@ Cobbe K, Kosaraju V, Bavarian M, Chen M, Jun H, Kaiser L, Plappert M, Tworek J, 
 
 Hendrycks D, Burns C, Basart S, Zou A, Mazeika M, Song D, Steinhardt J (2021) Measuring Massive Multitask Language Understanding (MMLU). In: International Conference on Learning Representations.
 
-Chen M, Tworek J, Jun H, Yuan Q, Pinto H P d O, Kaplan J, Edwards H, Burda Y, Joseph N, Brockman G, others (2021) Evaluating Large Language Models Trained on Code (HumanEval). arXiv preprint arXiv:2107.03374.
-
-Nait Saada T, Bethune L, Klein M, Grangier D, Cuturi M, Ablin P (2025) The Data-Quality Illusion: Rethinking Classifier-Based Quality Filtering for LLM Pretraining. arXiv preprint arXiv:2510.00866.
+Chen M, Tworek J, Jun H, Yuan Q, Pinto H P d O, Kaplan J, Edwards H, Burda Y, Joseph N, Brockman G, Ray A, Puri R, Krueger G, Petrov M, Khlaaf H, Sastry G, Mishkin P, Chan B, Gray S, Ryder N, Pavlov M, Power A, Kaiser L, Bavarian M, Winter C, Tillet P, Such F P, Cummings D, Plappert M, Chantzis F, Barnes E, Herbert-Voss A, Guss W H, Nichol A, Paino A, Tezak N, Tang J, Babuschkin I, Balaji S, Jain S, Saunders W, Hesse C, Carr A N, Leike J, Achiam J, Misra V, Morikawa E, Radford A, Knight M, Brundage M, Murati M, Mayer K, Welinder P, McGrew B, Amodei D, Sutskever I, Zaremba W (2021) Evaluating Large Language Models Trained on Code (HumanEval). arXiv preprint arXiv:2107.03374.

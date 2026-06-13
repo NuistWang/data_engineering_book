@@ -18,7 +18,7 @@ LLM; data recipe; open-source large models; training data; phased scheduling
 - Design preference data production methods for paradigms including rejection sampling, reward models, DPO, GRPO, and RLVR.
 - Evaluate post-training data with respect to source traceability, evaluation isolation, use-case documentation, and rollback capability, and identify risks of Reward Hacking and data contamination.
 
-## 45.0 Opening Scenario: Why Alpaca Cannot Train a GPT-4-Style Model
+## Opening Scenario: Why Alpaca Cannot Train a GPT-4-Style Model
 
 From 2023 through early 2024, the open-source community intensively explored the instruction tuning route. Consider a common team scenario: a large model application team, aiming to build a vertical-domain assistant, uses an open-source base model and collects approximately 200K instruction data samples in the style of Alpaca, Dolly, and Self-Instruct, then applies Supervised Fine-Tuning (SFT).
 
@@ -59,7 +59,7 @@ After deployment, user upvotes and downvotes, system refusal logs, difficult sam
 **Why can high-quality SFT data not replace preference data?**
 This is because SFT uses Maximum Likelihood Estimation (MLE): during training, the model is primarily encouraged to "imitate" the given target tokens and has no awareness of the relative quality of other potential responses. For a complex question with multiple reasonable but varying-quality answers, SFT struggles to teach the model to choose, at generation time, the response that is more aligned with human intuition, safer, or more thorough. Preference data, by introducing chosen/rejected contrastive signals, can suppress the response space of answers that are grammatically correct but misaligned with values or logic. Therefore, post-training data engineering must simultaneously manage the behavioral shape molded by SFT and the feedback loop formed by preference alignment and continuous optimization.
 
-![Figure 45-1: Schematic of the LLM Three-Stage Post-Training Pipeline](../../images/part11/30_1_posttrain_three_stage_pipeline.png)
+![Figure 45-1: Schematic of the LLM Three-Stage Post-Training Pipeline](../../images/part13/ch45_01_posttrain_three_stage_pipeline.png)
 *Figure 45-1: Data flow relationships among SFT, Preference Alignment, and Online Continuous Optimization.*
 
 From an engineering implementation perspective, the three-stage framework also implies three entirely different modes of data asset management. SFT data resembles a "behavioral template library"—it must be stable, clean, cover common tasks, and maintain a simple field structure. Teams typically build a minimal schema around fields such as `messages`, `instruction`, `input`, `output`, `source`, `license`, and `quality_score`. As long as the schema is stable, SFT data can easily be consumed by different training frameworks and supports cross-version comparisons.
@@ -137,7 +137,7 @@ Another notable approach is Magpie. It minimizes dependency on manual seeds by d
 | **Evol-Instruct** | Medium | Rule-based complexity evolution | Complex instruction-following, multi-step reasoning | Logical contradictions, intent drift | Difficulty calibration, code-level answer verification | WizardLM project | Complexity-escalation approach |
 | **Magpie** | Low | Seed-free self-generation using priors | Large-scale, realistic conversational instructions | Amplified inherent biases, hallucinations, unsafe content | Distribution diversity filtering, rigorous safety filtering | Magpie paper | Emerging open-source post-training approach |
 
-![Figure 45-2: Pipeline Comparison of the Three SFT Synthesis Schools: Self-Instruct, Evol-Instruct, and Magpie](../../images/part11/30_2_sft_synthesis_pipelines.png)
+![Figure 45-2: Pipeline Comparison of the Three SFT Synthesis Schools: Self-Instruct, Evol-Instruct, and Magpie](../../images/part13/ch45_02_sft_synthesis_pipelines.png)
 *Figure 45-2: Data entry points, generation methods, and quality control checkpoints for the three SFT synthesis approaches.*
 
 Regardless of which synthesis school is adopted, SFT data should never flow directly from the generator into the training set. A more robust approach is to establish four gatekeeping checks. The first is a format gate, which verifies whether multi-turn dialogue roles are complete, whether fields are missing, whether JSON or ChatML is parseable, and whether truncation or garbled text exists. The second is a semantic gate, which checks whether the instruction is genuinely answerable, whether the answer covers the core of the question, and whether there are mismatches, non-sequiturs, or unexplained reasoning leaps. The third is a distribution gate, which checks whether task types, languages, lengths, domains, difficulty levels, and safety categories are overly concentrated. The fourth is a leakage gate, which checks whether any sample is near-duplicate to evaluation sets, benchmark questions, published answers, or internal holdout sets.
@@ -230,7 +230,7 @@ Finally, Tülu-3 introduces the RLVR stage.
 **Introducing a Verifier:** For problems that can be measured by clear correct/incorrect outcomes, human annotation is both expensive and error-prone. Tülu-3 constructs a rule-based Verifier module.
 **Applicable scope:** Not all tasks are suitable for RLVR. Tülu-3 primarily applies it to tasks from which a definitive terminal state can be extracted: the numerical value of the final step in a math problem, AST parsing of code, and unit test execution results. This section establishes the conceptual interface for RLVR; how to leverage rule-based verification signals to build an R1-style reasoning data flywheel will be elaborated in Ch46.
 
-![Figure 45-3: Tülu-3 Three-Stage Data Flow and Scale Schematic](../../images/part11/30_3_tulu3_posttrain_flow.png)
+![Figure 45-3: Tülu-3 Three-Stage Data Flow and Scale Schematic](../../images/part13/ch45_03_tulu3_posttrain_flow.png)
 *Figure 45-3: Data flow and stage relationships in Tülu-3 from SFT-Mix and DPO mix to RLVR.*
 
 When migrating Tülu-3 to a proprietary project, the process can be broken down into four steps. First, categorize the data sources in the public recipe into three types: "directly reusable," "structural reference only," and "must be replaced with domain data." Second, preserve the sequential order of SFT, DPO, and RLVR stages, but adjust the task composition ratio at each stage according to domain-specific risk considerations. Third, document the inputs, outputs, filtering rules, and evaluation sets for each stage in a manifest, rather than only retaining scripts without a means of retrospective review. Fourth, after migration, re-conduct contamination detection and safety boundary assessment, since passing a public recipe does not automatically guarantee suitability for industry-specific contexts.
@@ -394,6 +394,8 @@ Xu C, Sun Q, Zheng K, Geng X, Zhao P, Feng J, Tao C, Lin Q, Jiang D (2024) Wizar
 
 Xu Z, Jiang F, Niu L, Deng Y, Poovendran R, Choi Y, Lin B Y (2025) Magpie: Alignment Data Synthesis from Scratch by Prompting Aligned LLMs with Nothing. International Conference on Learning Representations.
 
+Shao Z, Wang P, Zhu Q, Xu R, Song J, Bi X, Zhang H, Zhang M, Li Y, Wu Y, Guo D (2024) DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. arXiv preprint arXiv:2402.03300.
+
 Liu A, Feng B, Xue B, Wang B, Wu B, Lu C, Zhao C, Deng C, Zhang C, Ruan C, others (2024a) DeepSeek-V3 Technical Report. arXiv preprint arXiv:2412.19437.
 
 Liu C Y, Zeng L, Liu J, Yan R, He J, Wang C, Yan S, Liu Y, Zhou Y (2024b) Skywork-Reward: Bag of Tricks for Reward Modeling in LLMs. arXiv preprint arXiv:2410.18451.
@@ -401,5 +403,7 @@ Liu C Y, Zeng L, Liu J, Yan R, He J, Wang C, Yan S, Liu Y, Zhou Y (2024b) Skywor
 Singhal P, Goyal T, Xu J, Durrett G (2024) A Long Way to Go: Investigating Length Correlations in RLHF. First Conference on Language Modeling.
 
 Zhou K, Zhu Y, Chen Z, Chen W, Zhao W X, Chen X, Lin Y, Wen J-R, Han J (2023) Don't Make Your LLM an Evaluation Benchmark Cheater. arXiv preprint arXiv:2311.01964.
+
+Zheng L, Chiang W-L, Sheng Y, Zhuang S, Wu Z, Zhuang Y, Lin Z, Li Z, Li D, Xing E, Zhang H, Gonzalez J, Stoica I (2023) Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36, 46595-46623.
 
 Lightman H, Kosaraju V, Burda Y, Edwards H, Baker B, Lee T, Leike J, Schulman J, Sutskever I, Cobbe K (2024) Let's Verify Step by Step. International Conference on Learning Representations.

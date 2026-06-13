@@ -42,7 +42,7 @@ Part 13 is the open-source model data-recipe layer. Around paradigms such as pre
 
 Part 14 is the project case-study layer. Fifteen projects correspond to key capabilities from the first thirteen parts. The project chapters use case-study writing and focus on scenario constraints, architecture decisions, sample schemas, acceptance metrics, cost risks, failure modes, and reproduction resources.
 
-Appendices A-G provide templates and notes for tools, compliance, cost, engineering conversion, debugging, terminology, and MindSpore overview. They support publication delivery, course reproduction, and team project management.
+Appendices A-H provide templates and notes for tools, compliance, cost, engineering conversion, debugging, terminology, the DataGallery open-source ecosystem, and MindSpore overview. They support publication delivery, course reproduction, and team project management.
 
 ## 4. Suggested Reading Paths
 

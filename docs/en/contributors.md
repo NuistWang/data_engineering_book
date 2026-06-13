@@ -17,17 +17,29 @@ Ran Zhang is currently pursuing the M.S. degree in Control Science and Engineeri
 **Wenzhuo Du**  
 Wenzhuo Du is currently pursuing the M.S. degree in Control Science and Engineering at the University of Science and Technology of China (USTC). Her research interests include multimedia computing and deep learning.
 
-**Guanlin Mu**  
-Guanlin Mu is currently working toward the M.S. degree in Computer Technology at the University of Science and Technology of China (USTC). His research interests include multimodal generation and system optimization.
-
-**ZhiLi Wang**  
-ZhiLi Wang is currently working toward the M.S. degree in Computer Technology at the University of Science and Technology of China (USTC). His research interests include multimodal large models and agents.
+**Xin Xu**  
+Xin Xu is currently pursuing the M.S. degree in Electronic Information at the University of Science and Technology of China (USTC). His research interests include multimedia computing and deep learning.
 
 **Ke Wang**  
 Ke Wang is currently pursuing the M.S. degree at the Institute of Advanced Technology, University of Science and Technology of China (USTC), Hefei, China. His research interests include AI infrastructure, multimodal large language models, and AI agents.
 
-**Xin Xu**  
-Xin Xu is currently pursuing the M.S. degree in Electronic Information at the University of Science and Technology of China (USTC). His research interests include multimedia computing and deep learning.
+**Cong Wang**  
+Biography to be added.
+
+**Yang Luo**  
+Yang Luo received his M.S. from the College of Information Science and Electronic Engineering, Zhejiang University. His work and research interests include deep learning frameworks, AI data processing, data synthesis, large language model post-training, and data-centric AI agents. He has contributed to MindSpore framework optimization, LLM post-training data preparation, and the research and development of intelligent data agents, with expertise in large-scale data processing systems and the practical deployment of data agent systems.
+
+**Zhongyi Liu**  
+Zhongyi Liu received his Ph.D. from the University of Illinois Urbana-Champaign (UIUC). His work and research interests include large language models, agent post-training, reinforcement learning, tool use, multimodal data synthesis, and data-centric AI agents. He has contributed to pre-training data preparation, multimodal data synthesis, and the training of intelligent data-querying agents, with experience across the full pipeline from data construction and training optimization to the practical deployment of AI agent systems.
+
+**Xuhong Cao**  
+Xuhong Cao graduated from Northwestern University. His work and research interests include high-performance distributed communication frameworks, distributed computing engines, AP database kernels, large language models, and data-centric AI agents. He has contributed to high-performance communication for microservices, the kernel development of storage-compute decoupled AP database systems, heterogeneous computing engines, and data agent systems, with experience across the full pipeline from low-level system architecture design, core engine development, and performance optimization to the practical deployment of LLM-powered data agents.
+
+**Zhili Wang**  
+Zhili Wang is currently working toward the M.S. degree in Computer Technology at the University of Science and Technology of China (USTC). His research interests include multimodal large models and agents.
+
+**Guanlin Mu**  
+Guanlin Mu is currently working toward the M.S. degree in Computer Technology at the University of Science and Technology of China (USTC). His research interests include multimodal generation and system optimization.
 
 **Guanjun Liu**  
 Guanjun Liu is currently a graduate student in the Department of Automation at the University of Science and Technology of China (USTC). His research interests include optical character recognition (OCR), document intelligence, multimodal large language models, and table understanding. He is currently working on OCR modeling and document parsing tasks.

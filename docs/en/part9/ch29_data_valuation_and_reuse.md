@@ -10,7 +10,7 @@ Once data can be found and trusted, a sharper question appears: how much is this
 
 Data asset valuation and reuse mechanisms; data assets; metadata governance; data products; data contracts
 
-## 29.0 Learning Objectives
+## Learning Objectives
 
 - Identify four common illusions in data valuation: scale, cost, model gain, and business value, and explain through scaling laws, data pruning, and deduplication why value depends on information density rather than size.
 - Build a value metric system covering reuse rate, coverage, training gain, retrieval hits, labeling savings, risk reduction, and maintenance cost, and unify them through net value.
@@ -164,7 +164,7 @@ Many organizations fail to capture this value. Data is collected for one task, u
 
 This section follows five typical large-model reuse paths: pre-training, post-training, RAG, evaluation, and compliance. Ideally, the same high-quality domain data asset can be reused along all five paths and multiply its value. Figure 29-1 shows the overall structure of this multi-path reuse pattern.
 
-![Multi-scenario data asset reuse paths](../../images/part9/ch29_fig01.png)
+![Multi-scenario data asset reuse paths](../../images/part9/图29_1.svg)
 
 *Figure 29-1: Data asset reuse paths*
 
@@ -300,7 +300,7 @@ Real organizations manage hundreds or thousands of data assets. Precise valuatio
 
 The value axis combines benefit-side and usage-side metrics: how much benefit the asset creates and how widely it is reused. The cost/risk axis combines maintenance cost and inherent risk: how much it costs to keep the asset and how much risk it carries. Placing each asset on these two dimensions yields a cost-benefit matrix.
 
-![Data asset cost-benefit matrix](../../images/part9/ch29_fig02.png)
+![Data asset cost-benefit matrix](../../images/part9/图29_2.svg)
 
 *Figure 29-2: Cost-benefit matrix*
 
@@ -334,7 +334,7 @@ Data value is not a static quantity that can be measured once and trusted foreve
 
 The final link in value governance is to turn valuation from a one-time action into a normal mechanism. The lightweight mechanism proposed here is an **asset review card**: a one-page periodic record of value, cost, risk, reuse, and recommended action. It condenses the tools introduced above, including value metrics, reuse paths, and the cost-benefit matrix, into an operational checklist.
 
-![Data asset review card](../../images/part9/ch29_fig03.png)
+![Data asset review card](../../images/part9/图29_3.svg)
 
 *Figure 29-3: Asset review card*
 

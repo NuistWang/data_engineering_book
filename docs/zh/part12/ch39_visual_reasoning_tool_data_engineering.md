@@ -62,7 +62,7 @@
 
 多领域的设计，可以规避数据集领域单一带来的模型过拟合问题，防止模型仅在单一主题样本上拟合最优，在陌生行业信息图上推理失效；多样化领域下图表表达习惯、图例规范、专业缩写各不相同，进一步拔高视觉上下文推理任务难度，贴近落地场景多变性。
 
-![图39-1：多图表信息图推理数据集领域覆盖分布](../../images/part12/ch40_domain_new.png)
+![图39-1：多图表信息图推理数据集领域覆盖分布](../../images/part12/ch39_01_domain_distribution.png)
 
 *图 39-1：多图表信息图推理数据集领域覆盖分布。该数据集具体包含28个细分领域。*
 
@@ -72,7 +72,7 @@
 
 单张复合信息图内部采用随机组合排布逻辑：无固定子图搭配规则，创作者原生排版是什么组合，数据集即保留什么组合，出现 “地图 + 表格 + 堆叠柱状 + 象形图”“饼图 + 排名卡片 + 折线时序图” 等任意混搭形式，也是跨图表聚合任务的天然来源。不同图表数据存储逻辑差异化：表格以行列结构化存储数值、地图依托地理分区标注指标、象形图以图标数量表征统计量、时序折线按年份排布变化数据，模型需要适配多格式数据读取规则，再跨格式汇总数据。
 
-![图39-2：多图表信息图推理数据集子图表类型分布](../../images/part12/ch40_chart_new.png)
+![图39-2：多图表信息图推理数据集子图表类型分布](../../images/part12/ch39_02_chart_type_distribution.png)
 
 *图 39-2：多图表信息图推理数据集子图表类型分布。该数据集具体包含23个子图表类型。*
 
@@ -82,7 +82,7 @@
 
 单张信息图内部采用题型随机组合设计逻辑：无固定题型搭配规则，每组问题随机选配多种推理类型，形成 “极值提取 + 差值运算 + 条件推理”、“数值统计 + 占比计算 + 视觉推理” 等多元混搭设问形式，是多步跨图推理任务的设计根基。不同题型推理逻辑差异化：提取类侧重图表定点读数、计算类依托多源数值列式运算、条件类结合图例与限定条件筛选数据、视觉类依靠符号与图文上下文推导结论，模型需要适配多类型推理范式，再串联多步骤完成综合作答。
 
-![图39-3：多图表信息图推理数据集子问题类型分布](../../images/part12/ch40_question_new.png)
+![图39-3：多图表信息图推理数据集子问题类型分布](../../images/part12/ch39_03_question_type_distribution.png)
 
 *图 39-3：多图表信息图推理数据集子问题类型分布。该数据集具体包含13个子问题类型。*
 
@@ -98,7 +98,7 @@
 
 #### 案例A.3.1 单张复合信息图的子图分层结构
 
-![图39-4：多图表信息图样本（鲨鱼袭击）](../../images/part12/ch40_where_the_most_shark_attacks_occur_in_the_united_states_1.jpg)
+![图39-4：多图表信息图样本（鲨鱼袭击）](../../images/part12/ch39_04_shark_attack_infographic.jpg)
 
 *图 39-4：多图表信息图样本（鲨鱼袭击）。*
 
@@ -148,7 +148,7 @@
 
 本数据集从原始素材到最终标注数据集落地分为四大标准化工序：原始信息图爬取筛选→多子图区域人工划分→链式问题分层设计→答案人工核验标注。全流程无自动生成图表，保障样本真实度，此外利用大模型辅助生成问答，并依托人工完成校验。
 
-![图39-5：多图标信息图推理数据集四阶段构建流水线图](../../images/part12/ch40_pipeline_new.png)
+![图39-5：多图标信息图推理数据集四阶段构建流水线图](../../images/part12/ch39_05_multichart_dataset_pipeline.png)
 
 *图 39-5：多图标信息图推理数据集四阶段构建流水线图。*
 
@@ -446,7 +446,7 @@ writer.commit()
 train_ds = ds.MindDataset("tool_sft.mindrecord").shuffle(4096).batch(8)
 ```
 
-![图39-6：MedImage-ToolVQA 数据构建概念流程](../../images/part12/ch41_02_medimage_tool_vqa_pipeline.svg)
+![图39-6：MedImage-ToolVQA 数据构建概念流程](../../images/part12/ch39_06_medimage_tool_vqa_pipeline.svg)
 
 *图39-2：MedImage-ToolVQA 数据构建概念流程。流程的重点不是脚本顺序，而是证据链和行为链如何在各阶段被保留下来。*
 
@@ -472,7 +472,7 @@ MedImage-ToolVQA 中涉及三类视觉工具：`Zoom-in`、`BiomedParse` 和 `SA
 
 `BiomedParse` 更偏医学语义分割。它接受目标图像和文本描述（例如“lung nodule”或“liver lesion”），返回与医学语义相关的分割结果。这类工具的优势是能将自然语言目标与医学图像区域联系起来，适合需要语义定位的场景。风险在于，医学图像模态差异很大，文本描述若不准确，工具可能返回错误区域，或将相似结构误分割为目标。
 
-`SAM2` 是 bbox prompt 驱动的通用分割工具 (Ravi et al. 2024)。它不依赖医学语义，而是根据几何提示在图像中生成更精细的 mask。对于已有候选框但需要更明确边界的样本，`SAM2` 可以提供补充观察。它的主要风险是过度依赖 bbox 质量：bbox 若覆盖背景或相邻结构，分割结果也会受到影响。
+`SAM2` 是 bbox prompt 驱动的通用分割工具 (Ravi et al. 2025)。它不依赖医学语义，而是根据几何提示在图像中生成更精细的 mask。对于已有候选框但需要更明确边界的样本，`SAM2` 可以提供补充观察。它的主要风险是过度依赖 bbox 质量：bbox 若覆盖背景或相邻结构，分割结果也会受到影响。
 
 | 工具 | 主要输入 | 返回结果 | 适合解决的问题 | 需要控制的风险 |
 |---|---|---|---|---|
@@ -488,7 +488,7 @@ MedImage-ToolVQA 中涉及三类视觉工具：`Zoom-in`、`BiomedParse` 和 `SA
 
 工具调用轨迹的核心是多轮结构。它不是把工具调用写在同一段文本中，而是将工具动作和工具观察分开，让模型在训练时经历一个“行动—观察—继续判断”的过程 (Yao et al. 2023)。
 
-![图39-7：工具调用多轮轨迹结构](../../images/part12/ch41_03_tool_trajectory_structure.svg)
+![图39-7：工具调用多轮轨迹结构](../../images/part12/ch39_07_tool_trajectory_structure.svg)
 
 *图39-3：工具调用多轮轨迹结构。工具观察以新的图像输入形式返回，模型必须基于观察图继续推理，而非仅生成一个形式正确的调用。*
 
@@ -569,7 +569,7 @@ Assistant:
 
 在医学图像场景中，SFT 多轮记录还应显式保存一个影像诊断相关 schema。这里的“诊断”不是要求模型给出临床结论，而是把训练题目中的医学影像任务、候选标签、证据区域和安全边界结构化。图39-5给出了一组来自 VQA-RAD 测试集的胸片样例：同一条记录不仅保存原始图像，还保存 bbox 坐标、框选可视化图和由工具返回的局部观察图。
 
-![图39-8：SFT schema 中的真实图像与 bbox 证据](../../images/part12/ch41_05_sft_schema_real_bbox_example.svg)
+![图39-8：SFT schema 中的真实图像与 bbox 证据](../../images/part12/ch39_08_sft_bbox_evidence.svg)
 
 *图39-5：SFT schema 中的真实图像与 bbox 证据。bbox 是训练记录中的结构化字段，同时也应能被还原为可复查的可视化证据。*
 
@@ -706,7 +706,7 @@ Assistant:
 
 医学图像工具调用数据的质量控制应当分层进行，而非等到最终数据封装后再一次性检查。更合理的方式，是在问题生成、区域校验、工具观察生成、轨迹合成和训练封装各阶段分别设置门禁。
 
-![图39-9：质量控制与人工复核门禁](../../images/part12/ch41_04_quality_review_gate.svg)
+![图39-9：质量控制与人工复核门禁](../../images/part12/ch39_09_quality_review_gate.svg)
 
 *图39-4：质量控制与人工复核门禁。医学图像工具调用数据需要同时检查答案、证据和行为，自动校验与人工复核应形成互补。*
 
@@ -842,13 +842,13 @@ Foroutan, N., Romanou, A., Ansaripour, M., Eisenschlos, J. M., Aberer, K., & Leb
 
 Zhu, Z., Jia, M., Zhang, Z., Li, L., & Jiang, M. (2025, April). MultiChartQA: Benchmarking vision-language models on multi-chart problems. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) (pp. 11341-11359).
 
-Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425–2433. https://doi.org/10.1109/ICCV.2015.279
+Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425–2433. https://doi.org/10.1109/ICCV.2015.279.
 
-Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251
+Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251.
 
 He, X., Zhang, Y., Mou, L., Xing, E., & Xie, P. (2020). PathVQA: 30000+ Questions for Medical Visual Question Answering. arXiv:2003.10286.
 
-Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010
+Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010.
 
 Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations.
 
@@ -858,10 +858,10 @@ Kirillov, A., Mintun, E., Ravi, N., et al. (2023). Segment Anything. Proceedings
 
 Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., et al. (2025). SAM 2: Segment Anything in Images and Videos. International Conference on Learning Representations.
 
-Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z
+Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z.
 
-Zhao, T., Gu, Y., Yang, J., et al. (2025). BiomedParse: A biomedical foundation model for image parsing of everything everywhere all at once. Nature Methods, 22, 166–176. https://doi.org/10.1038/s41592-024-02499-w
+Zhao, T., Gu, Y., Yang, J., et al. (2025). A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities. Nature Methods, 22, 166–176. https://doi.org/10.1038/s41592-024-02499-w.
 
-Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723
+Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723.
 
-Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220–229. https://doi.org/10.1145/3287560.3287596
+Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220–229. https://doi.org/10.1145/3287560.3287596.

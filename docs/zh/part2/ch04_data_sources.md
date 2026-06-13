@@ -1,4 +1,4 @@
-# 第4章：数据源、采集与版权
+# 第4章 数据源、采集与版权
 
 <div class="chapter-authors">王珂（Ke Wang）</div>
 
@@ -60,7 +60,7 @@ FineWeb 的论文（Penedo et al. 2024）提供了一个重要观察：在相同
 
 如果说第4章是一份大模型数据工程的"购物清单审计"，那么数据源地图就是这份审计的核心视图——它帮助工程师在动手采集任何数据之前，先回答一个关键问题：**我们的语料从哪里来，各占多少，质量和法律风险如何？**
 
-![图4-1：预训练数据源分层地图](../../images/part2/pretrain_data_source_map.png)
+![图4-1：预训练数据源分层地图](../../images/part2/pretrain_data_source_map.svg)
 
 *图4-1：预训练数据源分层地图 —— 三层分类体系按照处理复杂度、知识密度和许可风险对主流数据来源进行定位，并给出典型的配比参考区间。来源：本书自绘；Alt text：预训练数据源分层地图，展示开放网页、论坛问答、百科、代码、学术论文、书籍、企业内部数据和用户反馈数据的质量与合规位置。*
 
@@ -100,9 +100,9 @@ FineWeb 的论文（Penedo et al. 2024）提供了一个重要观察：在相同
 | 企业内部数据 | 知识库 / 文档系统 / 工单 | 私有（需内部授权） | ○ 极低（内部授权后） | ★★★★★ 极高 | ★☆☆☆☆ 项目相关 |
 | 用户在线对话 | 产品用户反馈 / 对话日志 | 隐私协议授权 | △ 中（PII脱敏要求高） | ★★★★☆ 高 | ★★★☆☆ 项目相关 |
 
-### 4.2.3 配比策略：从业务目标反推数据组合
+### 4.2.3 配比策略：从业务目标反推数据配比方案
 
-数据配比（Data Mix Ratio）是预训练数据工程中最具策略性的决策之一。没有一个放之四海而皆准的"黄金配方"，因为不同的业务目标需要不同的数据组合。以下是面向四类典型业务目标的配比策略参考：
+数据配比（Data Mix Ratio）是预训练数据工程中最具策略性的决策之一。没有一个放之四海而皆准的固定配比，因为不同的业务目标需要不同的数据组合。以下是面向四类典型业务目标的配比策略参考：
 
 *表4-2：数据配比策略与业务目标对应矩阵。来源：本书整理，配比建议为策略框架，生产环境应通过代理模型评测和消融实验校准。*
 
@@ -257,7 +257,7 @@ def parse_warc_to_clean_text(warc_path: str) -> list[dict]:
   "ingestion_time":  "2024-10-15T08:23:41+08:00",
   "license_type":    "cc-crawl-mixed",           // 采集时判定的许可类型
   "license_risk":    "medium",                   // low / medium / high
-  "language":        "zh",                       // fastText 识别结果 (Joulin et al. 2017)
+  "language":        "zh",                       // fastText 识别结果
   "raw_doc_count":   4280350,
   "raw_size_bytes":  18432000000,
   "parser_version":  "trafilatura==1.6.3",
@@ -267,7 +267,7 @@ def parse_warc_to_clean_text(warc_path: str) -> list[dict]:
 }
 ```
 
-![图4-2：数据采集与权属存证流程图](../../images/part2/data_ingestion_provenance_chain.png)
+![图4-2：数据采集与权属存证流程图](../../images/part2/data_ingestion_provenance_chain.svg)
 
 *图4-2：数据采集与权属存证流程——从数据源触达到最终归档，每个处理阶段均向"Provenance Ledger（权属账本）"追加元数据记录，形成完整的可审计数据血缘链路。来源：本书自绘；Alt text：数据采集与权属存证流程图，展示来源触达、采集、解析、清洗、入库和审计记录之间的链路。*
 
@@ -400,17 +400,19 @@ def classify_license(license_text: str) -> dict:
 
 ## 参考文献
 
-Barbaresi A (2021) Trafilatura: A Web Scraping Library and Command-Line Tool for Text Discovery and Extraction. In: Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics, pp 122-131.
+Barbaresi A (2021) Trafilatura: A Web Scraping Library and Command-Line Tool for Text Discovery and Extraction. In: Proceedings of the ACL-IJCNLP 2021 System Demonstrations, pp 122-131.
 
 Blecher L, Cucurull G, Scialom T, Stojnic R (2023) Nougat: Neural Optical Understanding for Academic Documents. arXiv preprint arXiv:2308.13418.
 
 Grattafiori A, Dubey A, Jauhri A, Pandey A, Kadian A, Al-Dahle A, Letman A, Mathur A, Schelten A, Vaughan A, others (2024) The Llama 3 Herd of Models. arXiv preprint arXiv:2407.21783.
 
+Joulin A, Grave E, Bojanowski P, Douze M, Jegou H, Mikolov T (2017) FastText.zip: Compressing Text Classification Models. arXiv preprint arXiv:1612.03651.
+
 
 Lopez P (2009) GROBID: Combining Automatic Bibliographic Data Recognition and Term Extraction for Scholarship Publications. In: Proceedings of the 13th European Conference on Digital Libraries, pp 473-474.
 
-Li J, Zhang Y, Yu H, Ma X, Chen Y, Jiang H, Dang K, Goyal T, Keh S, Sherborn M, others (2024) DataComp-LM: In search of the next generation of training sets for language models. arXiv preprint arXiv:2406.11794.
+Li J, Fang A, Smyrnis G, Ivgi M, Jordan M, Gadre S, Bansal H, Guha E, Keh S, Arora K, Garg S, Xin R, Muennighoff N, Heckel R, Mercat J, Chen M, Gururangan S, Wortsman M, Albalak A, Bitton Y, Nezhurina M, Abbas A, Hsieh C, Ghosh D, Gardner J, Kilian M, Zhang H, Shao R, Pratt S, Sanyal S, Ilharco G, Daras G, Marathe K, Gokaslan A, Zhang J, Chandu K, Nguyen T, Vasiljevic I, Kakade S, Song S, Sanghavi S, Faghri F, Oh S, Zettlemoyer L, Lo K, El-Nouby A, Pouransari H, Toshev A, Wang S, Groeneveld D, Soldaini L, Koh P W, Jitsev J, Kollar T, Dimakis A G, Carmon Y, Dave A, Schmidt L, Shankar V (2024) DataComp-LM: In search of the next generation of training sets for language models. arXiv preprint arXiv:2406.11794.
 
 Penedo G, Kydlíček H, Ben Allal L, Lozhkov A, Mitchell M, Raffel C, von Werra L, Wolf T (2024) The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. arXiv preprint arXiv:2406.17557.
 
-Yu S, Liu Z, Xiong C (2025) Craw4LLM: Efficient Web Crawling for LLM Pretraining. In: Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics. arXiv preprint arXiv:2502.13347.
+Yu S, Liu Z, Xiong C (2025) Craw4LLM: Efficient Web Crawling for LLM Pretraining. arXiv preprint arXiv:2502.13347.

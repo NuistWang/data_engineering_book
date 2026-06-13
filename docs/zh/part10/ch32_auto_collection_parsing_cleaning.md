@@ -383,7 +383,7 @@ Agent 在判断数据质量时，面临的最大挑战不是"判断对错"，而
 
 ### 采集伦理与合规边界
 
-Agent 驱动的自动化采集带来了传统手动采集没有的伦理和合规挑战——当采集速率提升 10 倍、覆盖数据源扩大 10 倍时，原本"微不足道"的问题可能被放大。训练语料文档化、许可审计和隐私泄露研究都提醒我们，数据采集不是单纯的技术吞吐问题，还涉及来源说明、授权边界和可被模型记忆的敏感内容（Dodge et al. 2021; Longpre et al. 2023; Carlini et al. 2021）。
+Agent 驱动的自动化采集带来了传统手动采集没有的伦理和合规挑战——当采集速率提升 10 倍、覆盖数据源扩大 10 倍时，原本"微不足道"的问题可能被放大。训练语料文档化、许可审计和隐私泄露研究都提醒我们，数据采集不是单纯的技术吞吐问题，还涉及来源说明、授权边界和可被模型记忆的敏感内容（Dodge et al. 2021; Longpre et al. 2024; Carlini et al. 2021）。
 
 **robots.txt 的自动遵守。** Agent 在采集网页数据前，必须自动检查目标网站的 robots.txt 文件，遵守其爬取规则。对于禁止爬取的路径，Agent 应自动跳过并记录。对于已获得明确授权的数据源，Agent 只能在授权范围内采集，并保留授权记录。
 
@@ -439,7 +439,7 @@ Laurençon H, Saulnier L, Wang T, Akiki C, del Moral A V, Le Scao T, Von Werra L
 
 Lee K, Ippolito D, Nystrom A, Zhang C, Eck D, Callison-Burch C, Carlini N (2022) Deduplicating Training Data Makes Language Models Better. In: Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics, pp 8424-8445.
 
-Longpre S, Mahari R, Lee A, et al. (2023) The Data Provenance Initiative: A Large Scale Audit of Dataset Licensing and Attribution in AI. arXiv preprint arXiv:2310.16787.
+Longpre S, Mahari R, Chen A, Obeng-Marnu N, Sileo D, Brannon W, Muennighoff N, Khazam N, Kabbara J, Perisetla K, Wu X, Shippole E, Bollacker K, Wu T, Villa L, Pentland S, Hooker S (2024) A large-scale audit of dataset licensing and attribution in AI. Nature Machine Intelligence 6(8):975-987.
 
 Nguyen T, et al. (2024) CulturaX: A Cleaned, Enormous, and Multilingual Dataset for Large Language Models in 167 Languages. In: Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation.
 

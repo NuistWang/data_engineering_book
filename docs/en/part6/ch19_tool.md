@@ -303,7 +303,7 @@ When referring to the tool field table, it should not be treated as a fixed fiel
 
 
 
-![Figure 19-1: Tool-Use Data Construction State Machine Diagram](../../images/part6/图19_1.png)
+![Figure 19-1: Tool-Use Data Construction State Machine Diagram](../../images/part6/图19_1.svg)
 
 *Figure 19-1: Tool-Use Data Construction State Machine Diagram*
 
@@ -440,7 +440,7 @@ In other words, log feedback cannot stop at the simple export layer—it is fund
 
 
 
-![Figure 19-2: Call Failure Recovery Process Diagram](../../images/part6/图19_2.png)
+![Figure 19-2: Call Failure Recovery Process Diagram](../../images/part6/图19_2.svg)
 
 *Figure 19-2: Call Failure Recovery Process Diagram*
 

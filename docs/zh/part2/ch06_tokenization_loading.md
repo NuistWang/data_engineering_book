@@ -1,4 +1,4 @@
-# 第6章：分词、序列化与高效加载
+# 第6章 分词、序列化与高效加载
 
 <div class="chapter-authors">王珂（Ke Wang）</div>
 
@@ -62,7 +62,7 @@
 
 目前主流大模型采用的分词算法以三种为主：
 
-**BPE（Byte Pair Encoding）** (Sennrich et al. 2016) 是最广泛使用的算法，GPT 系列（包括 GPT-3 (Brown et al. 2020)、ChatGPT、GPT-4）均基于此。其核心思想是从字符（或字节）级别出发，反复合并出现频率最高的相邻 token 对。
+**BPE（Byte Pair Encoding）** (Sennrich et al. 2016) 是最广泛使用的算法，GPT 系列（包括 ChatGPT、GPT-4）均基于此。其核心思想是从字符（或字节）级别出发，反复合并出现频率最高的相邻 token 对。
 
 代码清单6-1展示了 BPE 合并过程的简化伪代码。
 
@@ -321,7 +321,7 @@ class MemmapDataset(torch.utils.data.Dataset):
 
 当 GPU 利用率不达预期时，按以下系统化步骤排查（见图6-1）：
 
-![图6-1：吞吐瓶颈诊断流程图](../../images/part2/io_bottleneck_diagnosis_flow.png)
+![图6-1：吞吐瓶颈诊断流程图](../../images/part2/io_bottleneck_diagnosis_flow.svg)
 
 *图6-1：吞吐瓶颈诊断流程图 —— 从 GPU 利用率异常出发，通过三级决策树定位磁盘 I/O 瓶颈、CPU 预处理瓶颈和 PCIe 传输瓶颈，并给出对应的修复方案。来源：本书自绘；Alt text：吞吐瓶颈诊断流程图，展示从 GPU 利用率异常到磁盘 I/O、CPU 预处理和 PCIe 传输排查的决策路径。*
 
@@ -397,7 +397,7 @@ dataloader = DataLoader(
 
 ### 图与案例
 
-![图6-2：训练输入管道分层图](../../images/part2/training_input_pipeline_layers.png)
+![图6-2：训练输入管道分层图](../../images/part2/training_input_pipeline_layers.svg)
 
 *图6-2：LLM 训练输入管道分层架构 —— 从分词、序列化、数据混采、Packing 到 DataLoader GPU 馈送的五阶段完整路径，底部标注了两个最高频的瓶颈风险点（磁盘 I/O 和 CPU↔GPU 传输）。来源：本书自绘；Alt text：训练输入管道分层图，展示分词、序列化、混采、Packing、DataLoader 和 GPU 馈送之间的顺序关系。*
 
@@ -461,6 +461,8 @@ dataloader = DataLoader(
 ## 参考文献
 
 Bengio Y, Louradour J, Collobert R, Weston J (2009) Curriculum Learning. In: Proceedings of the 26th Annual International Conference on Machine Learning, pp 41-48.
+
+Brown T B, Mann B, Ryder N, Subbiah M, Kaplan J, Dhariwal P, Neelakantan A, Shyam P, Sastry G, Askell A, Agarwal S, Herbert-Voss A, Krueger G, Henighan T, Child R, Ramesh A, Ziegler D M, Wu J, Winter C, Hesse C, Chen M, Sigler E, Litwin M, Gray S, Chess B, Clark J, Berner C, McCandlish S, Radford A, Sutskever I, Amodei D (2020) Language Models are Few-Shot Learners. In: Advances in Neural Information Processing Systems 33, pp 1877-1901.
 
 Grattafiori A, Dubey A, Jauhri A, Pandey A, Kadian A, Al-Dahle A, Letman A, Mathur A, Schelten A, Vaughan A, others (2024) The Llama 3 Herd of Models. arXiv preprint arXiv:2407.21783.
 

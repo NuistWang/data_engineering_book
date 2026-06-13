@@ -268,7 +268,7 @@ Further, these four components each correspond to a distinct training meaning. s
 
 To help teams develop a unified understanding, Figure 12-1 provides an architecture diagram of the SFT instruction system.
 
-![Figure 12-1: Architecture Diagram of the SFT Instruction System](../../images/part4/图12_1.png)
+![Figure 12-1: Architecture Diagram of the SFT Instruction System](../../images/part4/图12_1.svg)
 
 *Figure 12-1: Architecture Diagram of the SFT Instruction System*
 
@@ -583,7 +583,7 @@ In practice, teams may set a weighted total score—for example, assigning highe
 
 To help teams understand the overall flow from generation to revision, Figure 12-2 provides a schematic of the sample generation and acceptance feedback loop.
 
-![Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop](../../images/part4/图12_2.png)
+![Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop](../../images/part4/图12_2.svg)
 
 *Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop*
 
@@ -679,7 +679,7 @@ Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et a
 
 Wei, J., Bosma, M., Zhao, V. Y., Guu, K., Yu, A. W., Lester, B., Du, N., Dai, A. M., & Le, Q. V. (2022). *Finetuned Language Models Are Zero-Shot Learners*. International Conference on Learning Representations. arXiv:2109.01652.
 
-Chung, H. W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., et al. (2024). *Scaling Instruction-Finetuned Language Models*. Journal of Machine Learning Research, 25(70), 1–53. arXiv:2210.11416.
+Chung, H. W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., et al. (2024). *Scaling Instruction-Finetuned Language Models*. Journal of Machine Learning Research, 25(70), 1–53. https://www.jmlr.org/papers/v25/23-0870.html.
 
 Zhou, C., Liu, P., Xu, P., Iyer, S., Sun, J., Mao, Y., et al. (2023). *LIMA: Less Is More for Alignment*. Advances in Neural Information Processing Systems, 36. arXiv:2305.11206.
 

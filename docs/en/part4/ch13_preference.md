@@ -82,7 +82,7 @@ Business preferences that do not enter annotation specifications cannot enter tr
 
 
 
-![Figure 13-1: Flowchart from preference data to reward signal](../../images/part4/图13_1.png)
+![Figure 13-1: Flowchart from preference data to reward signal](../../images/part4/图13_1.svg)
 
 *Figure 13-1: Flowchart from preference data to reward signal*
 
@@ -272,7 +272,7 @@ This evolutionary path is important because it illustrates that preference learn
 
 
 
-![Figure 13-2: Schematic of multi-objective preference trade-offs](../../images/part4/图13_2.png)
+![Figure 13-2: Schematic of multi-objective preference trade-offs](../../images/part4/图13_2.svg)
 
 *Figure 13-2: Schematic of multi-objective preference trade-offs*
 

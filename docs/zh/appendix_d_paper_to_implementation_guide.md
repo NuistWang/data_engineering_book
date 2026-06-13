@@ -57,7 +57,7 @@
 - 脱敏与授权状态。
 - 训练、验证、测试或评估的划分策略。
 
-对于依赖外部语料、公开网页或第三方数据的论文复现，数据与输入模板还应显式记录来源许可、归属信息和可追溯凭证；大规模数据溯源审计已经表明，缺少这些字段会让后续复用、发布和合规判断变得非常脆弱（Longpre et al. 2023）。
+对于依赖外部语料、公开网页或第三方数据的论文复现，数据与输入模板还应显式记录来源许可、归属信息和可追溯凭证；大规模数据溯源审计已经表明，缺少这些字段会让后续复用、发布和合规判断变得非常脆弱（Longpre et al. 2024）。
 
 ### D.4.3 架构与实现模板
 
@@ -380,7 +380,7 @@
 | 复用收益 | 能否沉淀成可复用模块、流程或教材 |
 | 迁移收益 | 是否能迁移到别的任务、课程或项目 |
 
-如果 ROI 只在论文分数上成立，但在工程成本上不成立，那么它更适合停留在研究原型层，而不是硬推到产品层。数据中心 AI 的近年基准和综述也提醒团队，很多收益并不来自“换一个更大的模型”，而来自更可控的数据选择、质量改进、溯源和持续维护（Mazumder et al. 2023; Zha et al. 2023; Longpre et al. 2023）。
+如果 ROI 只在论文分数上成立，但在工程成本上不成立，那么它更适合停留在研究原型层，而不是硬推到产品层。数据中心 AI 的近年基准和综述也提醒团队，很多收益并不来自“换一个更大的模型”，而来自更可控的数据选择、质量改进、溯源和持续维护（Mazumder et al. 2023; Zha et al. 2023; Longpre et al. 2024）。
 
 ## D.26 适合附录中保留的证据材料
 
@@ -400,7 +400,7 @@ Kapoor S, Narayanan A (2023) Leakage and the reproducibility crisis in machine-l
 
 Kreuzberger D, Kühl N, Hirschl S (2023) Machine Learning Operations (MLOps): Overview, Definition, and Architecture. IEEE Access 11:31866-31879.
 
-Longpre S, Mahari R, Lee A, et al. (2023) The Data Provenance Initiative: A Large Scale Audit of Dataset Licensing and Attribution in AI. arXiv preprint arXiv:2310.16787.
+Longpre S, Mahari R, Chen A, Obeng-Marnu N, Sileo D, Brannon W, Muennighoff N, Khazam N, Kabbara J, Perisetla K, Wu X, Shippole E, Bollacker K, Wu T, Villa L, Pentland S, Hooker S (2024) A large-scale audit of dataset licensing and attribution in AI. Nature Machine Intelligence 6(8):975-987.
 
 Mazumder M, Banbury C, Yao X, et al. (2023) DataPerf: Benchmarks for Data-Centric AI Development. In: Advances in Neural Information Processing Systems 36, Datasets and Benchmarks Track.
 

@@ -182,4 +182,5 @@
 - [附录D：论文到工程化转换指南](appendix_d_paper_to_implementation_guide.md)
 - [附录E：常见数据工程 Bug 调试手册](appendix_e_common_bug_debugging_manual.md)
 - [附录F：术语表与中英文对照](appendix_f_terminology_and_chinese_english_mapping.md)
-- [附录G：MindSpore 简介与致谢](appendix_g_mindspore_note.md)
+- [附录G：DataGallery 开源生态简介](appendix_g_datagallery_note.md)
+- [附录H：MindSpore 简介与致谢](appendix_h_mindspore_note.md)

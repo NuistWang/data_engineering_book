@@ -30,7 +30,8 @@ The current Chinese mainline uses the 2026 Springer-size publication structure. 
 - [Appendix D: From Paper to Implementation Guide](appendix_d_paper_to_implementation_guide.md)
 - [Appendix E: Common Data-Engineering Bug Debugging Manual](appendix_e_common_bug_debugging_manual.md)
 - [Appendix F: Terminology and Chinese-English Mapping](appendix_f_terminology_and_chinese_english_mapping.md)
-- [Appendix G: MindSpore Overview and Acknowledgments](appendix_g_mindspore_note.md)
+- [Appendix G: DataGallery Open-source Ecosystem Overview](appendix_g_datagallery_note.md)
+- [Appendix H: MindSpore Overview and Acknowledgments](appendix_h_mindspore_note.md)
 
 ## Part-by-Part Contents
 
@@ -189,4 +190,5 @@ This part connects acquisition, cleaning, synthesis, RAG, agents, DataOps, priva
 - [Appendix D: From Paper to Implementation Guide](appendix_d_paper_to_implementation_guide.md)
 - [Appendix E: Common Data-Engineering Bug Debugging Manual](appendix_e_common_bug_debugging_manual.md)
 - [Appendix F: Terminology and Chinese-English Mapping](appendix_f_terminology_and_chinese_english_mapping.md)
-- [Appendix G: MindSpore Overview and Acknowledgments](appendix_g_mindspore_note.md)
+- [Appendix G: DataGallery Open-source Ecosystem Overview](appendix_g_datagallery_note.md)
+- [Appendix H: MindSpore Overview and Acknowledgments](appendix_h_mindspore_note.md)

@@ -343,7 +343,7 @@ To present common collaboration modes and applicable tasks more clearly, Table 1
 In multi-model collaboration engineering implementations, timing and handoff points are equally important. Figure 16-1 illustrates the timing and handoff relationships in multi-model collaborative generation.
 
 
-![Figure 16-1: Multi-Model Collaborative Generation Timing Diagram](../../images/part5/图16_1.png)
+![Figure 16-1: Multi-Model Collaborative Generation Timing Diagram](../../images/part5/图16_1.svg)
 *Figure 16-1: Multi-Model Collaborative Generation Timing Diagram*
 
 ---
@@ -577,7 +577,7 @@ To make the validation pipeline more intuitive, Figure 16-2 illustrates the vali
 
 
 
-![Figure 16-2: Distillation Sample Validation Flow Diagram](../../images/part5/图16_2.png)
+![Figure 16-2: Distillation Sample Validation Flow Diagram](../../images/part5/图16_2.svg)
 
 *Figure 16-2: Distillation Sample Validation Flow Diagram*
 

@@ -63,7 +63,7 @@ The dataset samples across 28 vertical fields covering public life, industry, re
 
 Multi-domain design reduces overfitting to a single theme. Chart conventions, legends, and domain abbreviations differ across fields, raising the difficulty of visual-context reasoning.
 
-![Figure 39-1: Domain distribution in the multi-chart infographic reasoning dataset](../../images/part12/ch40_domain_en_new.png)
+![Figure 39-1: Domain distribution in the multi-chart infographic reasoning dataset](../../images/part12/ch39_01_domain_distribution_en.png)
 
 *Figure 39-1. Distribution of domain coverage in the Multi-Chart Infographic Reasoning Dataset, spanning 28 fine-grained domains.*
 
@@ -73,7 +73,7 @@ The dataset contains more than 20 common visualization styles, including bar cha
 
 Each infographic uses whatever mixed layout the original creator used, such as “map + tabular + stacked bar + pictogram” or “pie + ranking card + line.” Different chart types store data differently: tables use rows and columns, maps use geographic regions, pictograms use icon counts, and line charts use temporal sequences. The model must adapt reading rules across formats and then aggregate across them.
 
-![Figure 39-2: Chart type distribution](../../images/part12/ch40_chart_en_new.png)
+![Figure 39-2: Chart type distribution](../../images/part12/ch39_02_chart_type_distribution_en.png)
 
 *Figure 39-2. Distribution of sub-chart types in the Multi-Chart Infographic Reasoning Dataset, covering 23 distinct chart categories.*
 
@@ -83,7 +83,7 @@ The subquestions are not limited to one extraction style. They cover 17 mainstre
 
 Questions within one infographic are randomly mixed across types, creating chains such as “maximum lookup + difference calculation + conditional reasoning” or “counting + ratio calculation + visual reasoning.” Extraction questions focus on reading; calculation questions combine multiple values; conditional questions use legends and filters; visual questions use symbols and visual context.
 
-![Figure 39-3: Question type distribution](../../images/part12/ch40_question_en_new.png)
+![Figure 39-3: Question type distribution](../../images/part12/ch39_03_question_type_distribution_en.png)
 
 *Figure 39-3. Distribution of sub-question types in the Multi-Chart Infographic Reasoning Dataset, comprising 13 question categories.*
 
@@ -101,7 +101,7 @@ The dataset's shark-attack example illustrates subchart partitioning, question c
 
 #### Case A.3.1 Physical Layers of One Compound Infographic
 
-![Figure 39-4: Shark-attack compound infographic example](../../images/part12/ch40_where_the_most_shark_attacks_occur_in_the_united_states_1.jpg)
+![Figure 39-4: Shark-attack compound infographic example](../../images/part12/ch39_04_shark_attack_infographic.jpg)
 
 *Figure 39-4. Example of a multi-chart infographic sample from the dataset (Shark Attacks).*
 
@@ -147,7 +147,7 @@ Each infographic includes one question that cannot be answered from the image, s
 
 The dataset construction process has four core stages: collecting and filtering real compound infographics, manually partitioning subchart regions, designing layered question chains, and cross-checking answers. No synthetic charts are generated. Large models can help propose questions, but humans verify and revise them.
 
-![Figure 39-5: Multi-chart infographic dataset construction pipeline](../../images/part12/ch40_pipeline_en_new.png)
+![Figure 39-5: Multi-chart infographic dataset construction pipeline](../../images/part12/ch39_05_multichart_dataset_pipeline_en.png)
 
 *Figure 39-5. Overview of the four-stage data construction pipeline for the Multi-Chart Infographic Reasoning Dataset.*
 
@@ -439,7 +439,7 @@ writer.commit()
 train_ds = ds.MindDataset("tool_sft.mindrecord").shuffle(4096).batch(8)
 ```
 
-![Figure 39-6: MedImage-ToolVQA conceptual construction flow](../../images/part12/ch41_02_medimage_tool_vqa_pipeline_en.svg)
+![Figure 39-6: MedImage-ToolVQA conceptual construction flow](../../images/part12/ch39_06_medimage_tool_vqa_pipeline_en.svg)
 
 *Figure 39-2: Conceptual construction flow for MedImage-ToolVQA. The key point is not script order, but how the evidence chain and behavior chain are preserved across stages.*
 
@@ -465,7 +465,7 @@ MedImage-ToolVQA uses three visual tools: `Zoom-in`, `BiomedParse`, and `SAM2`. 
 
 `BiomedParse` is closer to medical semantic segmentation. It accepts a target image and a textual description such as "lung nodule" or "liver lesion" and returns segmentation results related to the medical semantic target. This tool can connect natural-language targets with medical image regions, making it suitable for semantic localization. Its risk is that medical imaging modalities vary widely: if the text description is inaccurate, the tool may return the wrong region or segment a similar structure as the target.
 
-`SAM2` is a general bbox-prompted segmentation tool (Ravi et al. 2024). It does not rely on medical semantics; instead, it generates a finer mask from a geometric prompt. For samples that already have a candidate box but need a clearer boundary, `SAM2` can provide supplementary observation. Its main risk is strong dependence on bbox quality: if the bbox covers background or adjacent structures, the segmentation result will also be affected.
+`SAM2` is a general bbox-prompted segmentation tool (Ravi et al. 2025). It does not rely on medical semantics; instead, it generates a finer mask from a geometric prompt. For samples that already have a candidate box but need a clearer boundary, `SAM2` can provide supplementary observation. Its main risk is strong dependence on bbox quality: if the bbox covers background or adjacent structures, the segmentation result will also be affected.
 
 | Tool | Main Input | Return | Best For | Risks to Control |
 | --- | --- | --- | --- | --- |
@@ -481,7 +481,7 @@ Tool boundaries must also be stated clearly in system prompts and dataset docume
 
 The core of a tool trajectory is multi-turn structure. It is not a matter of writing a tool call into the same text paragraph; it separates the tool action from the tool observation so the model experiences an "act, observe, continue judging" process during training (Yao et al. 2023).
 
-![Figure 39-7: Multi-turn structure of tool-call trajectories](../../images/part12/ch41_03_tool_trajectory_structure_en.svg)
+![Figure 39-7: Multi-turn structure of tool-call trajectories](../../images/part12/ch39_07_tool_trajectory_structure_en.svg)
 
 *Figure 39-3: Multi-turn structure of a tool-call trajectory. Tool observations return as new image inputs; the model must continue reasoning from the observation image rather than merely produce a formally correct call.*
 
@@ -558,7 +558,7 @@ In SFT, clarity and stability matter most. The model must learn that `<tool_call
 
 Medical image SFT records should also keep an imaging-task schema. Here “diagnosis” means structuring the training task, candidate labels, evidence region, and safety boundary; it does not ask the model to provide clinical conclusions.
 
-![Figure 39-8: Real image and bbox evidence in the SFT schema](../../images/part12/ch41_05_sft_schema_real_bbox_example_en.svg)
+![Figure 39-8: Real image and bbox evidence in the SFT schema](../../images/part12/ch39_08_sft_bbox_evidence_en.svg)
 
 *Figure 39-5: Bbox is a structured field and should be recoverable as reviewable visual evidence.*
 
@@ -693,7 +693,7 @@ These failure modes show that tool-use data quality is not determined by answer 
 
 Quality control for medical image tool-use data should be layered, rather than postponed until final packaging. A more reasonable approach is to set gates separately at question generation, region validation, tool-observation generation, trajectory synthesis, and training packaging.
 
-![Figure 39-9: Quality-control and human-review gates](../../images/part12/ch41_04_quality_review_gate_en.svg)
+![Figure 39-9: Quality-control and human-review gates](../../images/part12/ch39_09_quality_review_gate_en.svg)
 
 *Figure 39-4: Quality-control and human-review gates. Medical image tool-use data needs to check answer, evidence, and behavior together; automated validation and human review should complement each other.*
 
@@ -836,13 +836,13 @@ Foroutan, N., Romanou, A., Ansaripour, M., Eisenschlos, J. M., Aberer, K., & Leb
 
 Zhu, Z., Jia, M., Zhang, Z., Li, L., & Jiang, M. (2025, April). MultiChartQA: Benchmarking vision-language models on multi-chart problems. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) (pp. 11341-11359).
 
-Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425-2433. https://doi.org/10.1109/ICCV.2015.279
+Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425-2433. https://doi.org/10.1109/ICCV.2015.279.
 
-Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251
+Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251.
 
 He, X., Zhang, Y., Mou, L., Xing, E., & Xie, P. (2020). PathVQA: 30000+ Questions for Medical Visual Question Answering. arXiv:2003.10286.
 
-Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010
+Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010.
 
 Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations.
 
@@ -852,10 +852,10 @@ Kirillov, A., Mintun, E., Ravi, N., et al. (2023). Segment Anything. Proceedings
 
 Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., et al. (2025). SAM 2: Segment Anything in Images and Videos. International Conference on Learning Representations.
 
-Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z
+Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z.
 
-Zhao, T., Gu, Y., Yang, J., et al. (2025). BiomedParse: A biomedical foundation model for image parsing of everything everywhere all at once. Nature Methods, 22, 166-176. https://doi.org/10.1038/s41592-024-02499-w
+Zhao, T., Gu, Y., Yang, J., et al. (2025). A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities. Nature Methods, 22, 166-176. https://doi.org/10.1038/s41592-024-02499-w.
 
-Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daume III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86-92. https://doi.org/10.1145/3458723
+Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daume III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86-92. https://doi.org/10.1145/3458723.
 
-Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220-229. https://doi.org/10.1145/3287560.3287596
+Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220-229. https://doi.org/10.1145/3287560.3287596.

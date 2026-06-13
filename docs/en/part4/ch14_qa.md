@@ -371,7 +371,7 @@ This means that task modeling is never a static action but is continuously refin
 Therefore, the relationship between task modeling and workflow should not be understood as a one-time linear sequence of "model first, then execute," but as a continuously self-correcting production loop. Front-end design affects back-end quality; back-end quality signals in turn correct front-end design. Only when this closed loop is truly established will the platform, QA, and operations form a stable and coordinated whole.
 
 
-![Figure 14-1: LLM Annotation Platform Workflow Diagram](../../images/part4/图14_1.png)
+![Figure 14-1: LLM Annotation Platform Workflow Diagram](../../images/part4/图14_1.svg)
 
 *Figure 14-1: LLM Annotation Platform Workflow Diagram*
 
@@ -470,7 +470,7 @@ More importantly, this process should not stop at "the model takes a look first.
 From a management perspective, the core of human–machine collaborative QA lies not in automation rate but in observability and accountability boundaries. The system must be able to answer: was a given problem flagged by the model or actively discovered by a human; was a given rework triggered by a model false positive or a human missed judgment; why did a particular error tag suddenly increase—did a rule change, or did a model threshold change? Only when this information is traceable is human–machine collaboration under control; otherwise, it merely introduces a new opaque variable into the system.
 
 
-![Figure 14-2: Human–Machine Collaborative QA Loop Diagram](../../images/part4/图14_2.png)
+![Figure 14-2: Human–Machine Collaborative QA Loop Diagram](../../images/part4/图14_2.svg)
 
 *Figure 14-2: Human–Machine Collaborative QA Loop Diagram*
 
