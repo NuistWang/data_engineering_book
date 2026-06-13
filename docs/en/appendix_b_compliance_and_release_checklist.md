@@ -1,5 +1,7 @@
 # Appendix B: Compliance and Release Checklist
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## B.1 Purpose of This Appendix
 
 This appendix focuses on the checkpoints that determine whether a dataset can continue moving downstream. It is not a collection of abstract compliance slogans. It asks concrete engineering questions: can a batch of data enter annotation, enter training, be released externally, support a course experiment, or connect to an online system?

@@ -1,5 +1,7 @@
 # Chapter 39: Visual Reasoning and Tool-Calling Data Engineering
 
+<div class="chapter-authors">Lin Xu; Xinyu Chen</div>
+
 ## Abstract
 
 This chapter discusses how visual data moves from object recognition toward evidence organization and executable reasoning through two specialized cases: multi-chart infographic reasoning and medical image tool-calling. Multi-chart infographic reasoning emphasizes cross-chart evidence aggregation, numerical relations, and multi-step reasoning chains; MedImage-ToolVQA emphasizes ROI, masks, bounding boxes, and tool-call trajectories. Both cases require datasets to record visual evidence, question structure, reasoning processes, and human-review boundaries together.
@@ -40,9 +42,11 @@ A compound infographic is a nested visual carrier. It is one image file divided 
 
 #### Case A.1.3 Benchmark Gap and Dataset Significance
 
-Public multimodal chart-reasoning benchmarks have a supply gap. Synthetic chart datasets dominate, while native compound infographics from web pages, newspapers, and science publications are rare. Many datasets split compound infographics into independent images to reduce annotation difficulty, but this destroys spatial association and contextual logic.
+Current public multimodal chart-reasoning benchmark datasets worldwide show an obvious supply gap: there are many manually synthesized simulation chart datasets, while native real compound infographic samples crawled from web pages, newspapers, and popular-science publications remain scarce. To reduce annotation difficulty, most datasets manually split multi-subchart infographics into multiple independent images, destroying the original image's spatial associations and contextual logic.
 
-This dataset keeps the native structure: multiple subcharts on the same canvas, shared legends, interleaved notes, and original layout. It fills a gap in real-world cross-chart reasoning benchmarks. For algorithm research, it pushes VQA models beyond “single-chart reading” toward subchart segmentation, cross-view memory, and multi-step calculation.
+Against this background, the multi-chart infographic reasoning dataset starts from native real infographic crawling and preserves the original structure: multiple subcharts in the same on-screen layout, globally shared legends, and interleaved regional notes. Unlike the above construction methods that depend on web crawling, we use multimodal large models to automatically synthesize charts and question-answer pairs, filling the benchmark gap for real-scenario cross-chart reasoning evaluation. The self-built dataset is available on Hugging Face: <https://huggingface.co/datasets/ustc-lab/ChartQwen>.
+
+For algorithm research, this dataset pushes VQA models beyond “single-chart reading” toward subchart segmentation, cross-view memory storage, and multi-step calculation-chain reasoning, matching industrial scenarios such as financial data analysis, market-information interpretation, and public-health data assessment.
 
 ### Case A.2: Dataset Overview
 

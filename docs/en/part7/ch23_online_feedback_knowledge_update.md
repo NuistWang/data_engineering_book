@@ -1,5 +1,7 @@
 # Chapter 23: Online Feedback Loops and Knowledge Updates
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Abstract
 
 The deployment of a Retrieval-Augmented Generation (RAG) system marks the beginning of the data flywheel, not its end. Once live, the system faces real users who phrase queries non-standardly and omit necessary conditions, as well as a knowledge environment that shifts continuously as policies, products, and processes evolve. Reliability no longer depends on whether the initial knowledge base was complete; it depends on whether the system can continuously discover, fix, and update itself through real usage. This chapter focuses on the data feedback loop that operates after deployment, discussing how online signals—logs, clicks, ratings, corrections, tickets, and human handoffs—can be transformed into governable data assets. The chapter first argues for the necessity of the online feedback flywheel, then discusses how event collection and feedback routing extract usable failure samples and improvement signals from noisy data. It goes on to explain how knowledge updates, rollbacks, and version governance enable changes to be written safely without degrading existing capabilities, then establishes a metrics dashboard and operational cadence to sustain long-term operation. Finally, through post-incident reviews and Standard Operating Procedures (SOPs), the chapter shows how every failure can become an input for subsequent improvement.

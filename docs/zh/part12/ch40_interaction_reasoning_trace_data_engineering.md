@@ -1,5 +1,7 @@
 # 第40章：交互控制与推理轨迹数据工程
 
+<div class="chapter-authors">Fengxin Chen；Xuan Li</div>
+
 ## 摘要
 
 本章讨论非静态样本如何记录控制条件、状态迁移和推理预算，可控语音交互与隐式/显式推理轨迹两个专项案例。VoiceStyleControl 关注语义内容与声音风格的双通道监督，Latent-Switch-69K 关注长 CoT 压缩、latent placeholder 和 supervision mask。两者共同体现了交互式数据工程的重点：不仅要保存输入输出，还要保存控制变量、隐藏状态和可验证边界。

@@ -1,5 +1,7 @@
 # Chapter 31: Architecture and Task Boundaries for Data Engineering Agents
 
+<div class="chapter-authors">ZhiLi Wang</div>
+
 ## Chapter Abstract
 
 Traditional data engineering pipelines depend heavily on engineers writing DAGs, configuring schedulers, monitoring job state, and debugging data quality incidents by hand. As data sources multiply, cleaning rules become more complex, and labeling demand grows, the marginal cost of manual maintenance rises quickly. Data engineering agents attempt to change this pattern by assigning repetitive, rule-heavy, multi-step decisions to agent systems.

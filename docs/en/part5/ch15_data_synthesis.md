@@ -1,5 +1,7 @@
 # Chapter 15: The Synthetic Data Factory: From Seeds to Validation
 
+<div class="chapter-authors">Ran Zhang</div>
+
 ## Chapter Introduction
 
 As large model training enters a phase where refinement and scale advance in parallel, the data problem has shifted further from "do we have data?" to "how do we continuously, reliably, and cost-effectively manufacture high-quality training data?" Against a backdrop of high human annotation costs, limited coverage, and scarce samples for complex tasks, using models to generate training data has evolved from an auxiliary technique into one of the core capabilities in large model iteration. Synthetic data is no longer a handful of ad hoc prompt-driven tricks; it is becoming the mode of data production that sustains continuous model evolution (Honovich et al. 2023; Wang et al. 2023; Xu et al. 2024).

@@ -1,5 +1,7 @@
 # Chapter 14: Annotation Platforms, Quality Assurance Systems, and Data Operations
 
+<div class="chapter-authors">Ran Zhang</div>
+
 ## Abstract
 
 This chapter examines annotation platforms, Quality Assurance (QA) systems, and data operations, focusing on critical design challenges in large language model (LLM) data engineering. The discussion spans scenario constraints, data objects, pipeline design, quality assessment, and engineering governance, explaining how to converge disparate data-processing activities into a system methodology that is reviewable, verifiable, and deliverable—while establishing a unified analytical framework for subsequent chapters and practical projects.

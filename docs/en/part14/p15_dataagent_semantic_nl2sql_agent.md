@@ -1,5 +1,7 @@
 # Project 15: Building an Enterprise Semantic BI Assistant with DataAgent
 
+<div class="chapter-authors">caoxuhong</div>
+
 ## Abstract
 
 This project uses DataAgent to build a semantic BI assistant for enterprise structured data. The goal is not to let a model directly "guess SQL." Instead, the project organizes natural-language questions, the business semantic layer, database metadata, an NL2SQL sub-agent, result files, report generation, and runtime audit trails into a reusable data engineering chain.

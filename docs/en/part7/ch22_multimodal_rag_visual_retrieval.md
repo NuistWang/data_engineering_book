@@ -1,5 +1,7 @@
 # Chapter 22: Multimodal RAG and Visual Retrieval
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Abstract
 
 Real-world knowledge does not always exist in plain text: trends in financial reports are embedded in line charts, the steps in a manual depend on button positions in screenshots, and the signatures and annotations in contracts exist as image regions. When Retrieval-Augmented Generation (RAG) expands from text-centric scenarios to such visually complex documents, simply flattening documents into character strings via Optical Character Recognition (OCR) discards visual structure, spatial relationships, and image-text alignment information, leading to systematic failures. This chapter frames the core task of multimodal RAG not as appending OCR to text RAG, but as fundamentally redefining knowledge units, indexing strategies, and evidence organization. The chapter first analyzes why text RAG cannot cover visual knowledge, then discusses how visual chunking and object modeling organize pages, regions, tables, and images into locatable and citable knowledge assets, before explaining the implementation of cross-modal indexing, retrieval, and reranking. It concludes by establishing evaluation, error attribution, and online failure-sample replenishment mechanisms for visual retrieval, providing a methodological foundation for applications such as complex enterprise document understanding and financial report analysis.

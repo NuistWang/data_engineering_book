@@ -1,5 +1,7 @@
 # Chapter 27: Data Asset Catalog and Metadata Governance
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Abstract
 
 In large language model data engineering, enterprise data frequently exists in a state of being "visible but unreachable": data is scattered across disparate storage systems, and critical facts about that data—provenance, definitions, usage restrictions, and responsible parties—reside only in the memories of a few individuals or in ad hoc documents. This situation gives rise to data cascade failures and compliance risks. This chapter systematically addresses these issues through data asset catalogs and metadata governance. It begins by defining the six dimensions that distinguish a data asset from a mere file inventory—identity and ownership, structural schema, lineage and transformation, permissions and security, quality and confidence, and lifecycle—drawing on the documentation conventions of datasheets for datasets. It then discusses the layered metadata model of a dataset registry, along with mechanisms for automated collection and search-based discovery. Subsequent sections analyze data lineage, role- and attribute-based access control, and lifecycle management modeled as a state machine. The chapter concludes by examining governance maturity progression, organizational role responsibilities, and an actionable implementation checklist, explaining how to translate this methodology into sustainable day-to-day operations within a real organization.

@@ -1,5 +1,7 @@
 # 第6章：分词、序列化与高效加载
 
+<div class="chapter-authors">王珂（Ke Wang）</div>
+
 ## 摘要
 
 本章讨论清洗后的文本如何被转换为可供大模型高效训练的输入管道，覆盖分词器设计、数据格式选择、序列 Packing、多源混采、DataLoader 配置、缓存策略和分布式读取。章节首先通过匿名化复合案例说明 I/O 瓶颈如何导致 GPU 空转和训练成本浪费，随后比较 BPE、WordPiece 与 SentencePiece 的工程特性，并分析词表大小、领域词表扩充和多语言平衡对训练效率与能力分布的影响。序列化部分比较 JSONL、Parquet、Arrow、MDS、WebDataset 与 memmap 等格式，强调离线分词和二进制 shard 对吞吐的作用。后半章进一步讨论 Packing、温度采样、课程学习和 Smoke Test，并给出多节点读取的 rank-aware 配置。读者应能够为不同规模的预训练任务设计稳定、可诊断、成本可控的输入管道。

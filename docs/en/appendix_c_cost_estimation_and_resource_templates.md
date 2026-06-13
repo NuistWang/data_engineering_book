@@ -1,5 +1,7 @@
 # Appendix C: Cost Estimation and Resource Templates
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## C.1 Purpose of This Appendix
 
 The most underestimated part of a data-engineering project is often not technical complexity but cost structure. Many teams ask only how many GPUs are needed for training, while leaving unanswered questions such as: who collects and cleans samples, how many person-days annotation review requires, how much long-term evaluation and leaderboard maintenance costs, how much multimodal storage and egress traffic will cost, and whether teaching images need fixed resources for an entire semester. The resource consumption and carbon emissions of large-scale training have been discussed in dedicated studies, showing that training budgets should not be treated merely as temporary engineering expenses (Patterson et al. 2021).

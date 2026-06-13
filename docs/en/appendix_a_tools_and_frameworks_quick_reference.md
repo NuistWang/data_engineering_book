@@ -1,5 +1,7 @@
 # Appendix A: Tools and Frameworks Quick Reference
 
+<div class="chapter-authors">Xin Xu</div>
+
 ## A.1 Purpose of This Appendix
 
 This appendix supports the engineering implementation layer of the book. It is not trying to list every tool you may have heard of. It answers a more practical question: when a team has decided to collect data, clean it, evaluate it, track experiments, release assets, and support teaching reproduction, how should it choose tools at different stages and understand the responsibility boundaries between them?

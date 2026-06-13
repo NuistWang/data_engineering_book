@@ -1,5 +1,7 @@
 # Chapter 25: Data Version Management and Experiment Tracking
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Abstract
 "Our model performed worse last week than the week before, but the data team says nothing changed"—this complaint arises far more often in LLM projects than most teams expect. The insidious nature of data engineering lies in the fact that data changes tend to be cumulative and incremental rather than discrete and conspicuous. Without systematic version management, a team lacks the ability to answer even the most fundamental question—"what changed?"—let alone attribute causality to "why it changed."
 

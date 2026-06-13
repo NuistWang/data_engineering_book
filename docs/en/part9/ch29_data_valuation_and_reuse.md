@@ -1,5 +1,7 @@
 # Chapter 29: Data Valuation and Reuse Mechanisms
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ## Chapter Abstract
 
 Once data can be found and trusted, a sharper question appears: how much is this data actually worth? This chapter discusses valuation and reuse mechanisms for data assets. It first analyzes four illusions that often distort data value: scale, cost, model gain, and business value. It explains why data volume, acquisition cost, model metrics, and business outcomes are not equivalent, and uses scaling-law, data-pruning, and deduplication research to show that value depends on information density and quality rather than size. It then builds a metric system for data-asset value covering reuse rate, coverage, training gain, retrieval hits, labeling savings, risk reduction, and maintenance cost, unified through net value. It also draws on ideas such as Data Shapley to characterize the marginal contribution of an individual data asset. The chapter then explains how one data asset can be reused across pre-training, post-training, RAG, evaluation, and compliance paths, and records cross-path benefits through a full enterprise-domain corpus cost-benefit case. Finally, it provides practical governance tools such as a cost-benefit matrix, asset review card, and valuation pipeline.

@@ -1,5 +1,7 @@
 # Chapter 18: Chain-of-Thought and Reasoning Data Engineering
 
+<div class="chapter-authors">Ran Zhang</div>
+
 ## Chapter Overview
 
 As large language models evolve from "answering questions" toward "reasoning, invoking tools, and engaging in multi-turn collaboration," the priorities of data engineering are shifting accordingly. Chain-of-Thought (CoT) and the ReAct framework introduced intermediate reasoning steps and interleaved reasoning–action trajectories into the LLM task-solving paradigm (Yao et al. 2023b). In the past, much data work centered on outcomes—whether the model produced a correct answer. But in reasoning models and agent systems, outcome supervision alone is no longer sufficient to support real-world tasks. Whether the model can think step-by-step, correctly invoke tools, and maintain consistent state while leveraging memory across multi-turn interactions has become the new critical question.

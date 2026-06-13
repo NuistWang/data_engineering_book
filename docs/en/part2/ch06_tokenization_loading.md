@@ -1,5 +1,7 @@
 # Chapter 6: Tokenization, Serialization, and Efficient Data Loading
 
+<div class="chapter-authors">Ke Wang</div>
+
 ## Abstract
 
 This chapter discusses how cleaned text is transformed into an input pipeline suitable for efficient large-model training, covering tokenizer design, data format selection, sequence packing, multi-source mixing, DataLoader configuration, caching strategies, and distributed data reading. The chapter opens with an anonymized composite case study illustrating how I/O bottlenecks cause GPU idle time and wasted training cost. It then compares the engineering characteristics of BPE, WordPiece, and SentencePiece, and analyzes the effects of vocabulary size, domain vocabulary extension, and multilingual balancing on training efficiency and capability distribution. The serialization section compares formats such as JSONL, Parquet, Arrow, MDS, WebDataset, and memmap, emphasizing the role of offline tokenization and binary sharding on throughput. The latter half of the chapter further discusses packing, temperature sampling, curriculum learning, and smoke testing, and provides rank-aware configuration for multi-node data reading. Readers should be able to design stable, diagnosable, and cost-controlled input pipelines for pretraining tasks at different scales.

@@ -1,5 +1,7 @@
 # Chapter 26: Data Platform Observability
 
+<div class="chapter-authors">Wenzhuo Du</div>
+
 ---
 
 ## Abstract

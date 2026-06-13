@@ -1,5 +1,7 @@
 # Chapter 41: FineWeb Pre-training Corpus Data Engineering
 
+<div class="chapter-authors">Guanlin Mu</div>
+
 ## Abstract
 
 FineWeb is a large-scale English Web pre-training corpus built by the Hugging Face team from Common Crawl. Its value lies not only in scale, but also in turning "how to transform Web snapshots into training data" into a reproducible engineering chain: reading raw WARC pages, filtering risky URLs, extracting main text with Trafilatura, identifying language with FastText, applying Gopher/C4/FineWeb quality filters, performing per-crawl MinHash deduplication, formatting PII, and publishing data versions. The FineWeb paper also releases the processing code, the DataTrove processing library, and ablation models, allowing data-processing choices to be validated through training outcomes rather than only through manual inspection or heuristic judgment.

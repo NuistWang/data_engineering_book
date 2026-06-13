@@ -1,5 +1,7 @@
 # Chapter 12: SFT Data Design and Instruction Systems
 
+<div class="chapter-authors">Ran Zhang</div>
+
 ## Chapter Overview
 
 After pretraining, a large language model has acquired substantial language generation capability—but this does not mean it can reliably complete specific tasks. As the model enters the post-training stage, the more critical questions become: Can the model understand user requirements? Can it maintain consistent behavior across different scenarios? Can it produce outputs that conform to human usage conventions?

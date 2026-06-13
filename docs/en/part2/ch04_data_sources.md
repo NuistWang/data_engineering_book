@@ -1,5 +1,7 @@
 # Chapter 4: Data Sources, Acquisition, and Copyright
 
+<div class="chapter-authors">Ke Wang</div>
+
 ## Abstract
 
 This chapter examines source governance for text pre-training data. It answers three practical questions: which data may be collected, how it should be collected, and how the team can later prove the origin and license boundary of each batch. We first explain why source selection determines model capability, copyright exposure, and the ceiling of downstream cleaning. We then establish a source taxonomy covering open web pages, forums and Q&A, encyclopedic knowledge, code, academic papers, books, enterprise data, and user feedback. The chapter then turns to production ingestion: distributed crawling, heterogeneous parsing, metadata provenance, resumable jobs, and reliability. Finally, it introduces whitelist, graylist, blacklist, and license-classification mechanisms, followed by two anonymized composite cases on Common Crawl processing and internal financial-document governance. After this chapter, readers should be able to build an auditable source inventory, license-decision framework, and metadata standard before large-scale crawling or internal-data ingestion begins.
