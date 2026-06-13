@@ -11,9 +11,9 @@
 | `docs/zh/appendix_e_common_bug_debugging_manual.md` | 附录E：常见数据工程 Bug 调试手册 | 30 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/appendix_f_terminology_and_chinese_english_mapping.md` | 附录F：术语表与中英文对照 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/appendix_g_mindspore_note.md` | 附录G：MindSpore 简介与致谢 | 14 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part1/ch01_data_change.md` | 第1章：大模型时代的数据变革 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part1/ch01_data_change.md` | 第1章 大模型时代的数据变革 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part1/ch02_quality_framework.md` | 第2章：LLM数据生命周期与质量评估框架 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part1/ch03_data_stack.md` | 第3章：AI原生数据栈与成本治理 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part1/ch03_data_stack.md` | 第3章 AI原生数据栈与成本治理 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part10/ch31_agent_architecture.md` | 第31章：数据工程 Agent 的架构与任务边界 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part10/ch32_auto_collection_parsing_cleaning.md` | 第32章：自动化采集、解析与清洗 Agent | 7 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part10/ch33_labeling_synthesis_evaluation.md` | 第33章：标注、合成与评测 Agent | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -47,14 +47,14 @@
 | `docs/zh/part14/p13_multimodal_instruction_factory.md` | 项目十三：Qwen-VL 多模态指令工厂 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p14_video_generation.md` | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p15_dataagent_semantic_nl2sql_agent.md` | 项目十五：基于 DataAgent 构建企业级语义问数助手 | 9 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part2/ch04_data_sources.md` | 第4章：数据源、采集与版权 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part2/ch05_cleaning_dedup.md` | 第5章：清洗、去重与去污染 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part2/ch06_tokenization_loading.md` | 第6章：分词、序列化与高效加载 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part2/ch07_data_operations.md` | 第7章：数据评估、质量闭环与运营迭代 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part3/ch08_multimodal_image.md` | 第8章：图文对数据工程 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part3/ch09_recaptioning_ocr.md` | 第9章：重标注与文档理解 | 1 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part3/ch10_video_audio.md` | 第10章：视频与音频数据工程 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part3/ch11_cross_modal_alignment.md` | 第11章：跨模态对齐与融合 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part2/ch04_data_sources.md` | 第4章 数据源、采集与版权 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part2/ch05_cleaning_dedup.md` | 第5章 清洗、去重与去污染 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part2/ch06_tokenization_loading.md` | 第6章 分词、序列化与高效加载 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part2/ch07_data_operations.md` | 第7章 数据评估、质量闭环与运营迭代 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part3/ch08_multimodal_image.md` | 第8章 图文对数据工程 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part3/ch09_recaptioning_ocr.md` | 第9章 重标注与文档理解 | 1 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part3/ch10_video_audio.md` | 第10章 视频与音频数据工程 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part3/ch11_cross_modal_alignment.md` | 第11章 跨模态对齐与融合 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch12_sft.md` | 第12章：SFT数据设计与指令体系 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch13_preference.md` | 第13章：偏好数据与奖励信号 | 51 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch14_qa.md` | 第14章 标注平台、质量保障体系与数据运营 | 2 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
