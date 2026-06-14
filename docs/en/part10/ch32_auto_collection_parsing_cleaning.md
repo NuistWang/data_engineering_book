@@ -53,7 +53,7 @@ The problem is not that engineers are not working hard enough. The growth rate o
 
 Collection from all sources can be abstracted into three layers: **connection layer -> extraction layer -> structuring layer**. The agent plays different roles at each layer.
 
-![Unified architecture for four-source collection agents](../../images/part10/ai_agent_decision_workflow_ch32_01.png)
+![Unified architecture for four-source collection agents](../../images/part10/ai_agent_decision_workflow_ch32_01.svg)
 
 *Figure 32-1: Unified architecture for four-source collection agents*
 
@@ -129,7 +129,7 @@ Parsing exceptions fall into three types:
 
 **Semantic exceptions.** Parsed values are syntactically valid but semantically impossible, such as "month 13 day 45" or a negative amount in a business context where negative amounts cannot occur.
 
-![Parsing exception handling decision flow](../../images/part10/ai_agent_decision_workflow_ch32_02.png)
+![Parsing exception handling decision flow](../../images/part10/ai_agent_decision_workflow_ch32_02.svg)
 
 *Figure 32-2: Parsing exception handling decision flow*
 
@@ -240,7 +240,7 @@ The following conditions must trigger human review:
 
 Quality filtering should follow "wide entry, strict exit, tiered filtering." Each layer handles one quality dimension. Failed data is routed to the appropriate handling path rather than simply discarded.
 
-![Tiered quality filtering pipeline](../../images/part10/ai_agent_decision_workflow_ch32_03.png)
+![Tiered quality filtering pipeline](../../images/part10/ai_agent_decision_workflow_ch32_03.svg)
 
 *Figure 32-3: Tiered quality filtering pipeline*
 
