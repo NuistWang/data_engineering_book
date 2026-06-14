@@ -47,7 +47,7 @@ A conversational model team labels 5,000 new samples every week and maintains a 
 
 The labeling-assistance agent is an intelligent co-pilot for annotators. It does not replace judgment; it reduces cognitive load and improves consistency.
 
-![Four dimensions of labeling-assistance agents](../../images/part10/ai_agent_decision_workflow_ch33_01.png)
+![Four dimensions of labeling-assistance agents](../../images/part10/ai_agent_decision_workflow_ch33_01.svg)
 
 *Figure 33-1: Four dimensions of labeling-assistance agents*
 
@@ -117,7 +117,7 @@ Each batch should also include calibration samples with known answers. If an ann
 
 The core loop is a controlled generate-verify-filter pipeline.
 
-![Synthetic data agent closed-loop pipeline](../../images/part10/ai_agent_decision_workflow_ch33_02.png)
+![Synthetic data agent closed-loop pipeline](../../images/part10/ai_agent_decision_workflow_ch33_02.svg)
 
 *Figure 33-2: Synthetic data agent closed-loop pipeline*
 

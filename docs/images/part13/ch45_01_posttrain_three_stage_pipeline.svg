@@ -1,0 +1,209 @@
+<svg viewBox="0 0 1400 850" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .font-sys { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+            .title-white { font-weight: bold; font-size: 18px; fill: #ffffff; }
+            .box-title { font-weight: bold; font-size: 16px; fill: #1f2937; text-anchor: middle; }
+            .text-main { font-size: 14px; fill: #374151; }
+            .text-sm { font-size: 12px; fill: #4b5563; }
+            .text-bold { font-weight: bold; fill: #111827; }
+            .mid-title { font-weight: bold; font-size: 17px; fill: #000000; }
+            
+            /* 阴影效果 */
+            .shadow { filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.05)); }
+            .heavy-shadow { filter: drop-shadow(2px 6px 12px rgba(0, 0, 0, 0.15)); }
+            
+            /* 图标颜色 */
+            .icon-blue { fill: #60a5fa; }
+            .icon-gray { fill: #9ca3af; }
+        </style>
+
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c5a82" />
+        </marker>
+        <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+        </marker>
+    </defs>
+
+    <rect width="1400" height="850" fill="#ffffff" />
+
+    <path d="M 1200 560 L 1200 780 L 250 780 L 250 740 L 220 740 L 270 660 L 320 740 L 290 740 L 290 750 L 1150 750 L 1150 560 Z" fill="#75a5c7" opacity="0.8" />
+    <text x="730" y="805" class="font-sys text-bold" text-anchor="middle" font-size="16">Feedback &amp; Continuous Optimization Pipeline</text>
+    
+    <path d="M 1150 630 L 1150 490 L 1120 490 L 1175 420 L 1230 490 L 1200 490 L 1200 630 Z" fill="#75a5c7" opacity="0.8" />
+    <text x="1260" y="700" class="font-sys text-bold" text-anchor="middle" font-size="14">Feedback</text>
+    <text x="1260" y="720" class="font-sys text-bold" text-anchor="middle" font-size="14">Loop</text>
+
+    <path d="M 190 380 L 240 380 L 240 120 L 290 120 L 290 100 L 320 130 L 290 160 L 290 140 L 260 140 L 260 360 L 290 360 L 290 340 L 320 370 L 290 400 L 290 380 L 260 380 L 260 620 L 290 620 L 290 600 L 320 630 L 290 660 L 290 640 L 240 640 L 240 400 L 190 400 Z" fill="#b9d1e3" stroke="#4f7fa8" stroke-width="1.5" />
+    <path d="M 210 390 L 250 390 L 250 140 L 280 140 L 280 120 L 305 150 L 280 180 L 280 160 L 270 160 L 270 610 L 280 610 L 280 590 L 305 620 L 280 650 L 280 630 L 250 630 L 250 410 L 210 410 Z" fill="#d2ebd9" stroke="#4a826b" stroke-width="1.5" opacity="0.9"/>
+    
+    <path d="M 285 240 L 285 320" stroke="#2c5a82" stroke-width="5" marker-start="url(#arrow-blue)" marker-end="url(#arrow-blue)" />
+    <text x="270" y="275" class="font-sys text-bold" text-anchor="end" font-size="15" fill="#111827">Data</text>
+    <text x="270" y="295" class="font-sys text-bold" text-anchor="end" font-size="15" fill="#111827">Engineering</text>
+
+
+    <g transform="translate(60, 320)">
+        <path d="M 40 15 C 20 15 10 30 15 45 C 5 55 5 70 15 80 C 15 95 30 105 45 100 C 50 110 70 110 75 100 C 90 105 105 95 105 80 C 115 70 115 55 105 45 C 110 30 100 15 80 15 C 70 5 50 5 40 15 Z" fill="none" stroke="#2c5a82" stroke-width="3" />
+        <path d="M 60 10 L 60 105 M 40 15 C 50 30 50 50 40 60 M 80 15 C 70 30 70 50 80 60 M 20 40 C 30 50 30 70 20 80 M 100 40 C 90 50 90 70 100 80" fill="none" stroke="#60a5fa" stroke-width="2" />
+        <text x="60" y="130" class="font-sys text-bold" text-anchor="middle" font-size="16">Base Model</text>
+        <text x="60" y="150" class="font-sys text-main" text-anchor="middle" font-size="13">(Unconscious</text>
+        <text x="60" y="170" class="font-sys text-main" text-anchor="middle" font-size="13">Predictor)</text>
+    </g>
+
+
+    <g transform="translate(320, 30)">
+        <rect x="0" y="20" width="800" height="170" fill="none" stroke="#2c5a82" stroke-width="3" />
+        <rect x="0" y="0" width="800" height="35" fill="#2c5a82" />
+        <text x="15" y="24" class="font-sys title-white">Layer 1: SFT Data</text>
+
+        <rect x="15" y="55" width="280" height="115" fill="#e8eef4" rx="6" />
+        <text x="155" y="80" class="font-sys box-title">Optimization Goal</text>
+        <text x="155" y="110" class="font-sys text-main" text-anchor="middle">Imitation &amp; Formatting</text>
+        <text x="155" y="130" class="font-sys text-main" text-anchor="middle">(Maximum Likelihood Est, MLE)</text>
+        <circle cx="45" cy="115" r="14" fill="none" stroke="#2c5a82" stroke-width="2" />
+        <path d="M 45 95 L 45 100 M 45 130 L 45 135 M 25 115 L 30 115 M 60 115 L 65 115 M 31 101 L 35 105 M 55 125 L 59 129 M 59 101 L 55 105 M 31 129 L 35 125" stroke="#2c5a82" stroke-width="3" />
+
+        <rect x="310" y="55" width="210" height="115" fill="#e8eef4" rx="6" />
+        <text x="415" y="80" class="font-sys box-title">Typical Scale</text>
+        <text x="415" y="110" class="font-sys text-main" text-anchor="middle">Scale controlled at</text>
+        <text x="415" y="130" class="font-sys text-main" text-anchor="middle">10⁵ to 10⁶ samples</text>
+        <text x="415" y="150" class="font-sys text-main" text-anchor="middle">(Quality > Quantity)</text>
+        <path d="M 330 100 C 330 95 345 95 345 100 C 345 105 330 105 330 100 Z M 330 100 L 330 120 C 330 125 345 125 345 120 L 345 100 M 330 110 C 330 115 345 115 345 110" fill="none" stroke="#2c5a82" stroke-width="2" />
+        
+        <g class="shadow">
+            <rect x="540" y="10" width="240" height="160" fill="#e8eef4" stroke="#ffffff" stroke-width="2" rx="6" />
+            <text x="660" y="40" class="font-sys box-title">Core Data Functions</text>
+            <circle cx="560" cy="65" r="3" fill="#374151" />
+            <text x="575" y="70" class="font-sys text-main">Define basic response format</text>
+            <circle cx="560" cy="90" r="3" fill="#374151" />
+            <text x="575" y="95" class="font-sys text-main">Task domain boundaries</text>
+            <circle cx="560" cy="115" r="3" fill="#374151" />
+            <text x="575" y="120" class="font-sys text-main">Assistant persona &amp; tone</text>
+            <circle cx="560" cy="140" r="3" fill="#374151" />
+            <text x="575" y="145" class="font-sys text-main">Basic safety baselines</text>
+            <circle cx="560" cy="165" r="3" fill="#374151" />
+            <text x="575" y="170" class="font-sys text-main">Multi-turn dialogue structure</text>
+        </g>
+    </g>
+    
+    <path d="M 1120 120 L 1200 120" stroke="#111827" stroke-width="2" marker-end="url(#arrow-gray)" />
+    <g transform="translate(1220, 75)">
+        <path d="M 25 10 C 10 10 5 20 10 30 C 5 35 5 45 10 50 C 10 60 20 70 30 65 C 35 75 45 75 50 65 C 60 70 70 60 70 50 C 75 45 75 35 70 30 C 75 20 65 10 50 10 C 45 5 35 5 25 10 Z" fill="#b9d1e3" stroke="#2c5a82" stroke-width="1.5" />
+        <text x="38" y="90" class="font-sys text-bold" text-anchor="middle" font-size="15">SFT Model</text>
+    </g>
+
+
+    <g transform="translate(320, 225)">
+        <text x="400" y="15" class="font-sys mid-title" text-anchor="middle">Why High-Quality SFT Data Cannot Replace Preference Data?</text>
+        
+        <circle cx="20" cy="50" r="3" fill="#000000" />
+        <text x="35" y="55" class="font-sys text-main">
+            <tspan class="text-bold">SFT MLE Limitations:</tspan> Models are primarily encouraged to imitate target tokens without knowing
+        </text>
+        <text x="35" y="75" class="font-sys text-main">the pros and cons of other potential answers. For complex questions with multiple varying-quality</text>
+        <text x="35" y="95" class="font-sys text-main">answers, SFT struggles to teach the model to select safer, detailed, and human-intuitive responses.</text>
+
+        <circle cx="20" cy="130" r="3" fill="#000000" />
+        <text x="35" y="135" class="font-sys text-main">
+            <tspan class="text-bold">Preference Advantages:</tspan> Preference data introduces Chosen/Rejected contrastive signals
+        </text>
+        <text x="35" y="155" class="font-sys text-main">to suppress responses that are grammatically correct but violate human values or logic.</text>
+    </g>
+
+
+    <g transform="translate(320, 380)">
+        <rect x="0" y="20" width="800" height="110" fill="none" stroke="#4a826b" stroke-width="3" />
+        <rect x="0" y="0" width="800" height="30" fill="#4a826b" />
+        <text x="15" y="21" class="font-sys title-white">Layer 2: Preference Alignment Data</text>
+
+        <rect x="15" y="45" width="200" height="70" fill="#eaf3ef" rx="6" />
+        <text x="115" y="65" class="font-sys box-title">Optimization Goal</text>
+        <text x="115" y="85" class="font-sys text-main" text-anchor="middle">Establish Reward Surface,</text>
+        <text x="115" y="105" class="font-sys text-main" text-anchor="middle">to differentiate</text>
+        <text x="115" y="125" class="font-sys text-main" text-anchor="middle">"better" responses</text>
+
+        <rect x="225" y="45" width="140" height="70" fill="#eaf3ef" rx="6" />
+        <text x="295" y="65" class="font-sys box-title">Core Signals</text>
+        <text x="310" y="85" class="font-sys text-main" text-anchor="middle">Chosen /</text>
+        <text x="310" y="105" class="font-sys text-main" text-anchor="middle">Rejected</text>
+        <text x="310" y="125" class="font-sys text-main" text-anchor="middle">Pairs</text>
+        <path d="M 240 90 L 240 100 L 250 100 L 250 80 L 245 80 L 245 90 Z M 250 100 L 260 100 L 260 90 L 250 90 Z" fill="#4a826b" />
+        <path d="M 270 90 L 270 80 L 260 80 L 260 100 L 265 100 L 265 90 Z M 260 80 L 250 80 L 250 90 L 260 90 Z" fill="#9ca3af" />
+
+        <rect x="375" y="45" width="150" height="70" fill="#eaf3ef" rx="6" />
+        <text x="450" y="65" class="font-sys box-title">Data Scale</text>
+        <text x="450" y="95" class="font-sys text-main" text-anchor="middle">10⁵ ~ 10⁷ pairs</text>
+        <text x="450" y="115" class="font-sys text-main" text-anchor="middle">(Highly variable)</text>
+
+        <rect x="535" y="45" width="250" height="70" fill="#eaf3ef" rx="6" />
+        <text x="660" y="65" class="font-sys box-title">Training Paradigm</text>
+        <circle cx="550" cy="85" r="2.5" fill="#374151" />
+        <text x="560" y="90" class="font-sys text-main">Train RM to support RLHF</text>
+        <circle cx="550" cy="110" r="2.5" fill="#374151" />
+        <text x="560" y="115" class="font-sys text-main">Direct Pref. Opt. (DPO, IPO,</text>
+        <text x="560" y="135" class="font-sys text-main">KTO, GRPO, RLVR, etc.)</text>
+    </g>
+
+    <path d="M 1120 450 L 1150 450" stroke="#111827" stroke-width="2" marker-end="url(#arrow-gray)" />
+    <g transform="translate(1160, 420)">
+        <circle cx="35" cy="25" r="20" fill="none" stroke="#4a826b" stroke-width="3" />
+        <path d="M 35 0 L 35 50 M 10 25 L 60 25 M 17 7 L 53 43 M 17 43 L 53 7" stroke="#4a826b" stroke-width="3" />
+        <path d="M 35 15 C 25 15 20 25 25 35 C 35 40 45 40 45 35 C 50 25 45 15 35 15 Z" fill="#d2ebd9" />
+        <text x="35" y="70" class="font-sys text-bold" text-anchor="middle" font-size="14">Deployed &amp;</text>
+        <text x="35" y="90" class="font-sys text-bold" text-anchor="middle" font-size="14">Serving Model</text>
+    </g>
+
+
+    <g transform="translate(320, 540)">
+        <rect x="0" y="20" width="800" height="130" fill="none" stroke="#4f7fa8" stroke-width="3" />
+        <rect x="0" y="0" width="800" height="30" fill="#4f7fa8" />
+        <text x="15" y="21" class="font-sys title-white">Layer 3: Online Continuous Optimization Data</text>
+
+        <rect x="15" y="45" width="190" height="90" fill="#edf4f9" rx="6" />
+        <text x="110" y="70" class="font-sys box-title">Optimization Goal</text>
+        <text x="110" y="95" class="font-sys text-main" text-anchor="middle">Self-correction,</text>
+        <text x="110" y="115" class="font-sys text-main" text-anchor="middle">Evolve with real usage,</text>
+        <text x="110" y="135" class="font-sys text-main" text-anchor="middle">Avoid obsolescence</text>
+
+        <rect x="215" y="45" width="370" height="90" fill="#edf4f9" rx="6" />
+        <text x="400" y="70" class="font-sys box-title">Data Sources</text>
+        <circle cx="230" cy="90" r="2.5" fill="#374151" />
+        <text x="240" y="95" class="font-sys text-main" font-size="13">Upvote/downvote feedback</text>
+        <circle cx="410" cy="90" r="2.5" fill="#374151" />
+        <text x="420" y="95" class="font-sys text-main" font-size="13">Human review of red lines</text>
+        <circle cx="230" cy="115" r="2.5" fill="#374151" />
+        <text x="240" y="120" class="font-sys text-main" font-size="13">System refusal logs</text>
+        <circle cx="410" cy="115" r="2.5" fill="#374151" />
+        <text x="420" y="120" class="font-sys text-main" font-size="13">A/B testing results</text>
+        <circle cx="230" cy="140" r="2.5" fill="#374151" />
+        <text x="240" y="145" class="font-sys text-main" font-size="13">Hard samples</text>
+        <circle cx="410" cy="140" r="2.5" fill="#374151" />
+        <text x="420" y="145" class="font-sys text-main" font-size="13">Emergent safety incidents</text>
+
+        <rect x="595" y="45" width="190" height="90" fill="#edf4f9" rx="6" />
+        <text x="690" y="70" class="font-sys box-title">Data Input Methods</text>
+        
+        <path d="M 615 90 L 645 90 M 620 95 L 640 95 M 625 100 L 635 100" stroke="#4f7fa8" stroke-width="2" stroke-dasharray="3 2" />
+        <circle cx="655" cy="95" r="3" fill="#4f7fa8" />
+        <text x="635" y="125" class="font-sys text-main" text-anchor="middle" font-weight="bold">Streaming</text>
+
+        <rect x="720" y="85" width="20" height="25" fill="none" stroke="#4f7fa8" stroke-width="2" />
+        <path d="M 723 90 L 737 90 M 723 95 L 737 95 M 723 100 L 737 100 M 723 105 L 737 105" stroke="#4f7fa8" stroke-width="1.5" />
+        <text x="730" y="125" class="font-sys text-main" text-anchor="middle" font-weight="bold">Batching</text>
+    </g>
+
+
+    <path d="M 1240 450 L 1290 450" stroke="#111827" stroke-width="2" marker-end="url(#arrow-gray)" />
+    
+    <g transform="translate(1300, 370)">
+        <circle cx="20" cy="30" r="10" fill="none" stroke="#2c5a82" stroke-width="2" />
+        <path d="M 5 55 C 5 45 15 40 20 40 C 25 40 35 45 35 55" fill="none" stroke="#2c5a82" stroke-width="2" />
+        <path d="M 25 20 C 25 10 35 5 45 5 C 55 5 65 10 65 20 C 65 30 55 35 45 35 L 40 40 L 42 34 C 32 32 25 25 25 20 Z" fill="#b9d1e3" stroke="#2c5a82" stroke-width="1.5" />
+        <path d="M 35 15 L 55 15 M 35 23 L 50 23" stroke="#2c5a82" stroke-width="1.5" />
+        
+        <text x="35" y="80" class="font-sys text-bold" text-anchor="middle" font-size="14">LLM with Stable</text>
+        <text x="35" y="100" class="font-sys text-bold" text-anchor="middle" font-size="14">Interaction</text>
+    </g>
+
+</svg>

@@ -56,7 +56,7 @@
 
 所有数据源采集都可以抽象为三层结构：**连接层 → 提取层 → 结构化层**。Agent 在不同层扮演不同角色。
 
-![四源采集 Agent 统一架构](../../images/part10/ai_agent_decision_workflow_ch32_01.png)
+![四源采集 Agent 统一架构](../../images/part10/ai_agent_decision_workflow_ch32_01.svg)
 
 **图32-1：四源采集 Agent 统一架构**
 
@@ -155,7 +155,7 @@ Agent 的调度策略应支持三种模式：
 
 Agent 的异常处理决策树：
 
-![解析异常处理决策流程](../../images/part10/ai_agent_decision_workflow_ch32_02.png)
+![解析异常处理决策流程](../../images/part10/ai_agent_decision_workflow_ch32_02.svg)
 
 **图32-2：解析异常处理决策流程**
 
@@ -278,7 +278,7 @@ Agent 在判断数据质量时，面临的最大挑战不是"判断对错"，而
 
 质量过滤 Agent 的流水线设计应遵循"宽进严出、分级过滤"的原则。每一级过滤解决一个维度的质量问题，不合格的数据被分流到对应的处理管道，而非简单丢弃。
 
-![质量过滤分级流水线](../../images/part10/ai_agent_decision_workflow_ch32_03.png)
+![质量过滤分级流水线](../../images/part10/ai_agent_decision_workflow_ch32_03.svg)
 
 **图32-3：质量过滤分级流水线**
 
