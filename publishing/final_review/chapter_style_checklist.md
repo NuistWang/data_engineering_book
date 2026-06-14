@@ -28,7 +28,7 @@
 | `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 38 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 16 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程实战：从配方到落地 | 11 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程实战：从配方到落地 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch45_posttrain_recipes.md` | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch46_rl_reasoning_data.md` | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 23 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch47_vlm_data_recipes.md` | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |

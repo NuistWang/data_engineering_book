@@ -1,0 +1,219 @@
+<svg viewBox="0 0 1300 620" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .font-sys { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+            .main-title { font-size: 26px; font-weight: bold; fill: #111827; }
+            .col-header { font-size: 20px; font-weight: bold; fill: #111827; text-anchor: middle; }
+            .sub-header { font-size: 18px; font-weight: bold; fill: #111827; text-anchor: middle; }
+            .normal-text { font-size: 14px; fill: #1f2937; text-anchor: middle; }
+            .bold-text { font-size: 14px; font-weight: bold; fill: #111827; text-anchor: middle; }
+            .small-text { font-size: 12px; fill: #4b5563; text-anchor: middle; }
+            .box-text { font-size: 13px; font-weight: 500; fill: #111827; text-anchor: middle; }
+            .footer-text { font-size: 14px; fill: #374151; font-weight: 500; }
+            
+            /* Shadows */
+            .shadow { filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1)); }
+            .light-shadow { filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.05)); }
+        </style>
+
+        <marker id="arrow-black" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151" />
+        </marker>
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c6496" />
+        </marker>
+        <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32" />
+        </marker>
+        <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#6a1b9a" />
+        </marker>
+        <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280" />
+        </marker>
+        
+        <g id="block-arrow">
+            <path d="M 0 10 L 20 10 L 20 0 L 40 20 L 20 40 L 20 30 L 0 30 Z" />
+        </g>
+    </defs>
+
+    <rect width="1300" height="620" fill="#ffffff" />
+
+    <text x="650" y="45" class="font-sys main-title" text-anchor="middle">Comprehensive LLM Post-Training Flow Based on USI Logic</text>
+
+    <g transform="translate(60, 80)">
+        <rect x="0" y="0" width="340" height="40" fill="#e1f0fa" rx="4" />
+        <text x="170" y="26" class="font-sys col-header">Learning Patterns (SFT)</text>
+        
+        <rect x="0" y="45" width="340" height="390" fill="#e8f4fd" stroke="#4a90e2" stroke-width="2" rx="8" class="light-shadow" />
+        
+        <rect x="0" y="45" width="340" height="60" fill="#d0e7f9" stroke="#4a90e2" stroke-width="2" rx="8" />
+        <rect x="2" y="90" width="336" height="15" fill="#d0e7f9" />
+        <line x1="0" y1="105" x2="340" y2="105" stroke="#4a90e2" stroke-width="2" />
+        
+        <text x="170" y="70" class="font-sys sub-header">Phase 1: SFT-Mix</text>
+        <text x="170" y="92" class="font-sys normal-text">(Behavior Template Layer)</text>
+
+        <text x="170" y="135" class="font-sys bold-text">Approx. 939K Samples</text>
+
+        <g transform="translate(30, 160)">
+            <path d="M 0 110 A 50 15 0 0 0 100 110 L 100 130 A 50 15 0 0 1 0 130 Z" fill="#b39ddb" stroke="#333" stroke-width="1.5" />
+            <path d="M 0 85 A 50 15 0 0 0 100 85 L 100 110 A 50 15 0 0 1 0 110 Z" fill="#64b5f6" stroke="#333" stroke-width="1.5" />
+            <path d="M 0 60 A 50 15 0 0 0 100 60 L 100 85 A 50 15 0 0 1 0 85 Z" fill="#81c784" stroke="#333" stroke-width="1.5" />
+            <path d="M 0 35 A 50 15 0 0 0 100 35 L 100 60 A 50 15 0 0 1 0 60 Z" fill="#fff176" stroke="#333" stroke-width="1.5" />
+            <path d="M 0 10 A 50 15 0 0 0 100 10 L 100 35 A 50 15 0 0 1 0 35 Z" fill="#ffb74d" stroke="#333" stroke-width="1.5" />
+            <ellipse cx="50" cy="10" rx="50" ry="15" fill="#e57373" stroke="#333" stroke-width="1.5" />
+            
+            <text x="50" y="165" class="font-sys normal-text">Diversified</text>
+            <text x="50" y="185" class="font-sys normal-text">Data Sources</text>
+        </g>
+
+        <path d="M 140 210 Q 170 210 170 185 L 195 185" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+        <text x="230" y="190" class="font-sys normal-text" text-anchor="start">General Chat</text>
+
+        <path d="M 140 235 L 195 235" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+        <text x="215" y="230" class="font-sys normal-text" text-anchor="start">Reasoning &amp;</text>
+        <text x="215" y="250" class="font-sys normal-text" text-anchor="start">Code</text>
+
+        <path d="M 140 260 Q 170 260 170 295 L 195 295" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+        <text x="215" y="290" class="font-sys normal-text" text-anchor="start">Safety &amp;</text>
+        <text x="215" y="310" class="font-sys normal-text" text-anchor="start">Alignment</text>
+
+        <rect x="10" y="360" width="320" height="60" fill="#bbdefb" rx="4" />
+        <text x="170" y="385" class="font-sys box-text">Endows the model with instruction-following ability;</text>
+        <text x="170" y="405" class="font-sys box-text">establishes basic "interlocutor" behavior</text>
+    </g>
+
+    <use href="#block-arrow" x="415" y="260" fill="#9ca3af" />
+    <text x="435" y="240" class="font-sys bold-text">Model</text>
+    <text x="435" y="255" class="font-sys bold-text">Weight</text>
+    <text x="435" y="270" class="font-sys bold-text">Transfer</text>
+
+    <use href="#block-arrow" transform="translate(425, 80) scale(0.6)" fill="#6b7280" />
+
+    <g transform="translate(470, 80)">
+        <rect x="0" y="0" width="340" height="40" fill="#e8f5e9" rx="4" />
+        <text x="170" y="26" class="font-sys col-header">Distinguishing Good/Bad (DPO)</text>
+        
+        <rect x="0" y="45" width="340" height="390" fill="#f1f8e9" stroke="#689f38" stroke-width="2" rx="8" class="light-shadow" />
+        
+        <rect x="0" y="45" width="340" height="60" fill="#dcedc8" stroke="#689f38" stroke-width="2" rx="8" />
+        <rect x="2" y="90" width="336" height="15" fill="#dcedc8" />
+        <line x1="0" y1="105" x2="340" y2="105" stroke="#689f38" stroke-width="2" />
+        
+        <text x="170" y="70" class="font-sys sub-header">Phase 2: DPO Mix</text>
+        <text x="170" y="92" class="font-sys normal-text">(Preference Polishing Layer)</text>
+
+        <text x="60" y="130" class="font-sys bold-text">Actual outputs</text>
+        <text x="60" y="150" class="font-sys bold-text">generated by SFT</text>
+        <path d="M 60 160 L 60 215 L 125 215" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+
+        <g transform="translate(30, 260)">
+            <path d="M 0 40 A 30 10 0 0 0 60 40 L 60 60 A 30 10 0 0 1 0 60 Z" fill="#424242" stroke="#333" stroke-width="1.5" />
+            <path d="M 0 20 A 30 10 0 0 0 60 20 L 60 40 A 30 10 0 0 1 0 40 Z" fill="#616161" stroke="#333" stroke-width="1.5" />
+            <ellipse cx="30" cy="20" rx="30" ry="10" fill="#9e9e9e" stroke="#333" stroke-width="1.5" />
+            
+            <text x="30" y="90" class="font-sys normal-text">External Preference</text>
+            <text x="30" y="110" class="font-sys normal-text">Datasets</text>
+        </g>
+        <path d="M 95 280 L 125 280" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+
+        <g transform="translate(135, 235)">
+            <path d="M 0 0 C 15 0, 15 25, 30 25" fill="none" stroke="#333" stroke-width="3" marker-end="url(#arrow-black)" />
+            <path d="M 0 25 C 15 25, 15 0, 30 0" fill="none" stroke="#333" stroke-width="3" marker-end="url(#arrow-black)" />
+        </g>
+
+        <rect x="180" y="125" width="140" height="50" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="6" />
+        <text x="250" y="145" class="font-sys bold-text" font-style="italic">y<tspan baseline-shift="sub" font-size="10">chosen</tspan></text>
+        <text x="250" y="165" class="font-sys small-text">(Chosen Answer)</text>
+
+        <rect x="180" y="225" width="140" height="50" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.5" rx="6" />
+        <text x="250" y="245" class="font-sys bold-text" font-style="italic">y<tspan baseline-shift="sub" font-size="10">rejected</tspan></text>
+        <text x="250" y="265" class="font-sys small-text">(Rejected Answer)</text>
+
+        <path d="M 250 180 L 250 215" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+
+        <g transform="translate(160, 310)">
+            <path d="M 20 0 L 40 35 L 0 35 Z" fill="#ffebee" stroke="#d32f2f" stroke-width="2" />
+            <text x="20" y="27" font-size="18" font-family="sans-serif" font-weight="bold" fill="#d32f2f" text-anchor="middle">!</text>
+            
+            <text x="95" y="15" class="font-sys bold-text">Emphasize facts first</text>
+            <text x="95" y="35" class="font-sys bold-text" fill="#d32f2f">AVOID <tspan fill="#111827">length bias</tspan></text>
+        </g>
+
+        <rect x="10" y="360" width="320" height="60" fill="#c8e6c9" rx="4" />
+        <text x="170" y="385" class="font-sys box-text">Refines model output preferences via contrastive</text>
+        <text x="170" y="405" class="font-sys box-text">learning; corrects hallucinations</text>
+    </g>
+
+    <use href="#block-arrow" x="825" y="260" fill="#8b5cf6" />
+    <text x="845" y="240" class="font-sys bold-text">Model</text>
+    <text x="845" y="255" class="font-sys bold-text">Weight</text>
+    <text x="845" y="270" class="font-sys bold-text">Transfer</text>
+
+    <use href="#block-arrow" transform="translate(835, 80) scale(0.6)" fill="#6b7280" />
+
+    <g transform="translate(880, 80)">
+        <rect x="0" y="0" width="340" height="40" fill="#f3e5f5" rx="4" />
+        <text x="170" y="26" class="font-sys col-header">Seeking True Solutions (RLVR)</text>
+        
+        <rect x="0" y="45" width="340" height="390" fill="#fdf4ff" stroke="#8e24aa" stroke-width="2" rx="8" class="light-shadow" />
+        
+        <rect x="0" y="45" width="340" height="60" fill="#e1bee7" stroke="#8e24aa" stroke-width="2" rx="8" />
+        <rect x="2" y="90" width="336" height="15" fill="#e1bee7" />
+        <line x1="0" y1="105" x2="340" y2="105" stroke="#8e24aa" stroke-width="2" />
+        
+        <text x="170" y="70" class="font-sys sub-header">Phase 3: RLVR</text>
+        <text x="170" y="92" class="font-sys normal-text">(Verifiable Task Layer)</text>
+
+        <text x="170" y="135" class="font-sys bold-text">Closed-Loop Feedback System</text>
+
+        <text x="60" y="190" class="font-sys normal-text">Input</text>
+        <text x="60" y="210" class="font-sys normal-text">content:</text>
+        <text x="60" y="235" class="font-sys bold-text">Math</text>
+        <text x="60" y="255" class="font-sys bold-text">and</text>
+        <text x="60" y="275" class="font-sys bold-text">Code</text>
+        <text x="60" y="295" class="font-sys bold-text">tasks</text>
+
+        <path d="M 90 230 L 125 230" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrow-black)" />
+
+        <g transform="translate(170, 230)">
+            <path d="M -40 -30 A 45 45 0 0 1 40 -30" fill="none" stroke="#8e24aa" stroke-width="6" marker-end="url(#arrow-purple)" />
+            <path d="M 40 30 A 45 45 0 0 1 -40 30" fill="none" stroke="#8e24aa" stroke-width="6" marker-end="url(#arrow-purple)" />
+            
+            <rect x="-40" y="-20" width="80" height="40" fill="#e1bee7" stroke="#8e24aa" stroke-width="1.5" rx="4" />
+            <text x="0" y="-3" class="font-sys bold-text">Rule-based</text>
+            <text x="0" y="13" class="font-sys bold-text">Verifier</text>
+        </g>
+
+        <text x="270" y="170" class="font-sys normal-text">Compiler /</text>
+        <text x="270" y="190" class="font-sys normal-text">Interpreter</text>
+        <text x="270" y="210" class="font-sys small-text">(Execution Results)</text>
+
+        <text x="270" y="300" class="font-sys bold-text">Value Matching</text>
+
+        <rect x="10" y="360" width="320" height="60" fill="#e1bee7" rx="4" />
+        <text x="170" y="385" class="font-sys box-text">Uses verifiable ground-truth signals; surpasses</text>
+        <text x="170" y="405" class="font-sys box-text">the limitations of human annotation quality</text>
+    </g>
+
+    <path d="M 30 80 L 30 515 L 50 515" fill="none" stroke="#111827" stroke-width="2" marker-end="url(#arrow-black)" />
+    <path d="M 30 515 L 30 90" fill="none" stroke="#111827" stroke-width="2" marker-start="url(#arrow-black)" />
+    
+    <text x="210" y="520" class="font-sys bold-text">Data Flow: Learning Patterns (SFT)</text>
+    
+    <use href="#block-arrow" transform="translate(390, 500) scale(0.6)" fill="#6b7280" />
+    
+    <text x="630" y="520" class="font-sys bold-text">DPO Values/Quality Screening</text>
+    
+    <use href="#block-arrow" transform="translate(800, 500) scale(0.6)" fill="#6b7280" />
+    
+    <text x="1050" y="520" class="font-sys bold-text">Seeking True Solutions (RLVR)</text>
+
+
+    <rect x="50" y="550" width="1200" height="40" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1.5" rx="4" />
+    <text x="650" y="576" class="font-sys footer-text" text-anchor="middle">
+        <tspan font-weight="bold">Data Source:</tspan> Open Tülu-3 official dataset card by AI2 (Allen Institute for AI), fully transparent process
+    </text>
+
+</svg>

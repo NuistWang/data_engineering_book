@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-13T17:29:31.272470+00:00",
+  "generated_at_utc": "2026-06-14T08:36:41.732629+00:00",
   "scanned_files": 71,
   "style_hits": [
     {
@@ -1236,63 +1236,63 @@
     },
     {
       "file": "docs/zh/part10/ch34_dataops_agent.md",
-      "line": 120,
+      "line": 118,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "告警疲劳（Alert Fatigue）是数据平台运维中最常见的反模式——当告警过多时，工程师开始忽略告警，导致真正重要的告警被遗漏。Agent 的告警聚合能力直接服务于告警疲劳治理："
     },
     {
       "file": "docs/zh/part10/ch34_dataops_agent.md",
-      "line": 198,
+      "line": 196,
       "kind": "rhetorical-not-but",
       "phrase": "不是技术上的\"回退到某个快照\"，而是",
       "context": "数据回滚最大的挑战不是技术上的\"回退到某个快照\"，而是业务上的\"回滚后数据的一致性\"。假设回滚了表 A，但表 B（依赖于表 A）没有被回滚——表 B 中的数据就变成了\"孤儿数据\"，引用着已经不存在或已经变化的表 A 记录。模型与数据质..."
     },
     {
       "file": "docs/zh/part10/ch34_dataops_agent.md",
-      "line": 461,
+      "line": 459,
       "kind": "rhetorical-not-but",
       "phrase": "不是取代 DataOps，而是",
       "context": "AgentOps 不是取代 DataOps，而是在其之上增加一层——Agent 管理数据管道，AgentOps 管理 Agent。这要求运维体系同时追踪数据质量指标和 Agent 行为指标，将两个维度的可观测性融合为一套统一的运维仪表盘。"
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 182,
+      "line": 180,
       "kind": "rhetorical-not-but",
       "phrase": "不是一次性配置，而是",
       "context": "安全防护不是一次性配置，而是一个持续的攻防对抗过程。语言模型红队和越狱研究已经证明，攻击者会持续寻找新的表述、编码、角色扮演和生成策略绕过防线，因此 Agent 的安全团队应定期（至少每月一次）对 Agent 进行红队测试（Gangu..."
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 325,
+      "line": 323,
       "kind": "rhetorical-not-but",
       "phrase": "不是\"用 Agent 替代人\"，而是",
       "context": "**从\"替代人工\"到\"增强人工\"。** 人机协同的终极目标不是\"用 Agent 替代人\"，而是\"让 Agent 和人各自做自己最擅长的事\"——Agent 擅长规模化的规则执行和模式识别，人擅长模糊判断、价值权衡和创造性问题解决。最好的..."
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 384,
+      "line": 382,
       "kind": "rhetorical-not-but",
       "phrase": "不是二元的（信任 vs 不信任），而是",
       "context": "人机协同模式的成功取决于工程师对 Agent 的信任程度。信任不是二元的（信任 vs 不信任），而是可以量化的："
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 453,
+      "line": 451,
       "kind": "rhetorical-not-but",
       "phrase": "不是给工程师看的自然语言解释，而是",
       "context": "- Planner 的每次输出都附带\"决策理由\"——不是给工程师看的自然语言解释，而是结构化的决策依据（引用了哪些数据、应用了哪些规则、排除了哪些选项）。"
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 458,
+      "line": 456,
       "kind": "rhetorical-not-but",
       "phrase": "不是一劳永逸的配置，而是",
       "context": "Agent 安全不是一劳永逸的配置，而是一个需要持续演进的架构。LM Agent 风险识别、沙箱评测和 Agent 安全研究提示，未来安全架构需要同时覆盖环境模拟、权限隔离、工具调用审计和任务级风险评估（Tian et al. 202..."
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 472,
+      "line": 470,
       "kind": "rhetorical-not-but",
       "phrase": "不是对 Agent 的不信任，而是",
       "context": "这不是对 Agent 的不信任，而是对工程现实的尊重——在复杂系统中，任何组件都可能失效。安全的职责不是阻止失效，而是确保任何单一失效不会导致严重后果。"
@@ -1435,7 +1435,7 @@
       "line": 483,
       "kind": "rhetorical-not-but",
       "phrase": "不是单点动作，而是",
-      "context": "这一链路反映了一个关键事实：**合规不是单点动作，而是一条从策略生成、数据处理、告警响应到评估验证的流水线**。图36-3展示了隐私规格与策略的生成流程，是上述最小治理链路的起点环节。"
+      "context": "这一链路反映了一个关键事实：**合规不是单点动作，而是一条从策略生成、数据处理、告警响应到评估验证的流水线**。图36-4展示了隐私规格与策略的生成流程，是上述最小治理链路的起点环节。"
     },
     {
       "file": "docs/zh/part11/ch36_compliance_framework_and_governance.md",
@@ -2727,70 +2727,63 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 33,
-      "kind": "weak-booster",
-      "phrase": "真正",
-      "context": "这次失败给出的教训很直接：模型训练中的“配方”不能理解为静态比例表。比例只回答“有哪些数据、各占多少”，却没有回答“何时输入、以什么质量输入、按什么难度输入、用什么方式重复或降权”。真正影响训练效果的，是一条阶段化的数据流水线：从原始..."
-    },
-    {
-      "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 41,
+      "line": 37,
       "kind": "weak-booster",
       "phrase": "很容易",
       "context": "在探讨具体的预训练数据配方之前，首先需要建立一个信息可信度标尺。由于商业竞争加剧，当今“开源模型”在数据披露上的态度差异较大。如果不对技术报告中的表述进行降噪，工程师很容易将宣传性表述误读为数据工程的真实依据。为此，本章将主流开源大模..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 46,
+      "line": 42,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "如图44-1 所示，数据配方的漏斗从上到下逐层收窄。技术报告中披露的宏观数字（如 14.8T Tokens）仅是表层；能够推断出各领域的精确配比已经深入一层；而真正能够落地到工程动作的，是启发式过滤阈值与清洗脚本等细节。"
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 223,
+      "line": 219,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "Curriculum schedule 在大模型训练中并不是一个附加技巧，而是数据配方真正落地的方式。静态数据比例只能说明训练集中有哪些语料、各自大致占多少；schedule 进一步决定这些语料在什么阶段出现、以什么权重出现、配合怎样..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 223,
+      "line": 219,
       "kind": "rhetorical-not-but",
       "phrase": "不是一个附加技巧，而是",
       "context": "Curriculum schedule 在大模型训练中并不是一个附加技巧，而是数据配方真正落地的方式。静态数据比例只能说明训练集中有哪些语料、各自大致占多少；schedule 进一步决定这些语料在什么阶段出现、以什么权重出现、配合怎样..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 227,
+      "line": 223,
       "kind": "rhetorical-not-but",
       "phrase": "不是立即追求极长上下文，而是",
       "context": "Llama-3 系列中更值得观察的是 Llama-3.1 的训练节奏。基础预训练阶段仍以通用 next-token prediction 为主，模型先在 8K 上下文窗口下学习大规模语言、知识、代码和数学分布。这个阶段的目标不是立即追..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 229,
+      "line": 225,
       "kind": "rhetorical-not-but",
       "phrase": "不是简单把最大长度调大，而是",
       "context": "因此，Llama-3.1 在预训练后段才进入长上下文继续训练。其公开报告中说明，模型从原始 8K 上下文开始，分六个阶段逐步扩展到 128K。每一次扩展并不是简单把最大长度调大，而是先训练到模型适应该长度，再进入下一阶段。适应标准主要..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 237,
+      "line": 233,
       "kind": "rhetorical-not-but",
       "phrase": "不是“多训练几次”，而是",
       "context": "第二阶段转向更小但更高质量的数据，也就是 Dolmino Mix 1124。OLMo-2 仓库说明中给出了更具体的规模：1B 模型使用约 50B 高质量 tokens 训练多次；7B 模型也使用约 50B 高质量 tokens 进行多..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 251,
+      "line": 247,
       "kind": "rhetorical-not-but",
       "phrase": "不是静态比例表，而是",
       "context": "把 Llama-3、OLMo-2 和 Qwen2.5 放在一起看，可以得到一个清晰结论：有效的数据配方不是静态比例表，而是阶段化的数据流水线。第一阶段解决覆盖问题，第二阶段解决质量和领域能力问题，长上下文阶段解决输入长度和全局依赖问题..."
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 280,
+      "line": 276,
       "kind": "rhetorical-not-but",
       "phrase": "不是静态比例表，而是",
       "context": "本章从开篇的 1B tokens 复现失败场景出发，论证了预训练数据配方的本质不是静态比例表，而是一条阶段化的数据流水线。通过透明度光谱区分白盒、灰盒与黑盒披露后，本章横向对照了 DeepSeek-V3、Qwen2.5、Llama-3..."
@@ -3091,21 +3084,21 @@
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 211,
+      "line": 209,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "此外，数据流水线还会对原始图片施加高强度的色彩反转、灰度转换、噪点注入（Augmentation），甚至故意给文字打码或加上污渍。这种增强训练策略旨在降低视觉编码器对顶层大模型常识补全的依赖，使其真正学习从视觉特征中识别字符。一旦文档..."
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 265,
+      "line": 263,
       "kind": "weak-booster",
       "phrase": "真正",
       "context": "**关键发现**：通过社区复现实验 [E]，在同等参数量模型上，引入上述时空对齐 Caption 的长视频数据后，Video-MME（长视频子集）得分提升约 6-9 个百分点，而相同时间随机采帧策略仅提升 2-3 个百分点。**Cap..."
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 275,
+      "line": 273,
       "kind": "weak-booster",
       "phrase": "很容易",
       "context": "在合成数据工厂阶段，如果使用单一的教师模型去大规模生成合成 Caption，被训练的学生模型很容易陷入\"模式坍塌\"。例如，学生模型可能长期以\"The image shows...\"开头作答，甚至继承教师模型固有的偏见——一旦看到穿着白..."
@@ -9755,8 +9748,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch31_01.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch31_01.png",
       "exists": true,
-      "size_kb": 3118.958984375,
-      "dimensions": "2732x1534",
+      "size_kb": 74.3662109375,
+      "dimensions": "1020x631",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9771,8 +9764,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch31_02.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch31_02.png",
       "exists": true,
-      "size_kb": 3437.1484375,
-      "dimensions": "2732x1534",
+      "size_kb": 88.3720703125,
+      "dimensions": "1057x655",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9787,8 +9780,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch32_01.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch32_01.png",
       "exists": true,
-      "size_kb": 2968.0048828125,
-      "dimensions": "2732x1534",
+      "size_kb": 93.1318359375,
+      "dimensions": "1161x800",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9803,8 +9796,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch32_02.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch32_02.png",
       "exists": true,
-      "size_kb": 1892.6962890625,
-      "dimensions": "2732x1534",
+      "size_kb": 54.02734375,
+      "dimensions": "1187x642",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9819,8 +9812,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch32_03.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch32_03.png",
       "exists": true,
-      "size_kb": 2358.8251953125,
-      "dimensions": "2732x1534",
+      "size_kb": 50.7294921875,
+      "dimensions": "1067x622",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9835,8 +9828,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch33_01.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch33_01.png",
       "exists": true,
-      "size_kb": 2074.7763671875,
-      "dimensions": "2732x1534",
+      "size_kb": 60.1201171875,
+      "dimensions": "1191x658",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9851,8 +9844,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch33_02.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch33_02.png",
       "exists": true,
-      "size_kb": 2069.0029296875,
-      "dimensions": "2732x1534",
+      "size_kb": 59.939453125,
+      "dimensions": "1158x645",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9867,8 +9860,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch34_01.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch34_01.png",
       "exists": true,
-      "size_kb": 2225.578125,
-      "dimensions": "2732x1534",
+      "size_kb": 55.0048828125,
+      "dimensions": "1260x681",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9878,13 +9871,13 @@
     },
     {
       "file": "docs/zh/part10/ch34_dataops_agent.md",
-      "line": 153,
+      "line": 151,
       "alt": "回滚审批流程",
       "src": "../../images/part10/ai_agent_decision_workflow_ch34_02.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch34_02.png",
       "exists": true,
-      "size_kb": 2272.5869140625,
-      "dimensions": "2732x1534",
+      "size_kb": 67.9619140625,
+      "dimensions": "1210x647",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9894,13 +9887,13 @@
     },
     {
       "file": "docs/zh/part10/ch34_dataops_agent.md",
-      "line": 190,
+      "line": 188,
       "alt": "流水线自愈决策流程",
       "src": "../../images/part10/ai_agent_decision_workflow_ch34_03.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch34_03.png",
       "exists": true,
-      "size_kb": 3311.794921875,
-      "dimensions": "2732x1534",
+      "size_kb": 67.6650390625,
+      "dimensions": "1111x627",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9915,8 +9908,8 @@
       "src": "../../images/part10/ai_agent_decision_workflow_ch35_01.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch35_01.png",
       "exists": true,
-      "size_kb": 1878.466796875,
-      "dimensions": "2732x1534",
+      "size_kb": 84.8828125,
+      "dimensions": "1223x660",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9926,13 +9919,13 @@
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 133,
+      "line": 131,
       "alt": "提示注入分层防御流程",
       "src": "../../images/part10/ai_agent_decision_workflow_ch35_02.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch35_02.png",
       "exists": true,
-      "size_kb": 2704.0927734375,
-      "dimensions": "1773x2364",
+      "size_kb": 88.4423828125,
+      "dimensions": "1260x1860",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -9942,13 +9935,13 @@
     },
     {
       "file": "docs/zh/part10/ch35_security_permission_collaboration.md",
-      "line": 262,
+      "line": 260,
       "alt": "Agent 安全事件应急响应流程",
       "src": "../../images/part10/ai_agent_decision_workflow_ch35_03.png",
       "resolved": "docs/images/part10/ai_agent_decision_workflow_ch35_03.png",
       "exists": true,
-      "size_kb": 3264.435546875,
-      "dimensions": "1773x2364",
+      "size_kb": 90.240234375,
+      "dimensions": "1197x1846",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10742,7 +10735,7 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 43,
+      "line": 39,
       "alt": "图44-1：数据配方漏斗 (Data Recipe Funnel)",
       "src": "../../images/part13/ch44_01_data_recipe_funnel_en.png",
       "resolved": "docs/images/part13/ch44_01_data_recipe_funnel_en.png",
@@ -10758,7 +10751,7 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 55,
+      "line": 51,
       "alt": "图44-2：大模型数据透明度光谱 (Data Transparency Spectrum)",
       "src": "../../images/part13/ch44_02_data_transparency_spectrum_en.png",
       "resolved": "docs/images/part13/ch44_02_data_transparency_spectrum_en.png",
@@ -10774,7 +10767,7 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 60,
+      "line": 56,
       "alt": "图44-3：预训练数据源分层地图",
       "src": "../../images/part13/ch44_03_pretrain_data_source_map.png",
       "resolved": "docs/images/part13/ch44_03_pretrain_data_source_map.png",
@@ -10790,7 +10783,7 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 90,
+      "line": 86,
       "alt": "图44-4：三模型数据组成饼图对比 (Estimated Data Mixture Ratios)",
       "src": "../../images/part13/ch44_04_models_pie_chart_en.png",
       "resolved": "docs/images/part13/ch44_04_models_pie_chart_en.png",
@@ -10806,7 +10799,7 @@
     },
     {
       "file": "docs/zh/part13/ch44_pretrain_recipes.md",
-      "line": 255,
+      "line": 251,
       "alt": "图44-5：Llama-3 退火期数据组成时间轴 (Curriculum Learning Schedule)",
       "src": "../../images/part13/ch44_05_llama3_annealing_schedule_en.png",
       "resolved": "docs/images/part13/ch44_05_llama3_annealing_schedule_en.png",
@@ -10827,8 +10820,8 @@
       "src": "../../images/part13/ch45_01_posttrain_three_stage_pipeline.png",
       "resolved": "docs/images/part13/ch45_01_posttrain_three_stage_pipeline.png",
       "exists": true,
-      "size_kb": 4242.7392578125,
-      "dimensions": "2816x1425",
+      "size_kb": 130.3857421875,
+      "dimensions": "1456x871",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10843,8 +10836,8 @@
       "src": "../../images/part13/ch45_02_sft_synthesis_pipelines.png",
       "resolved": "docs/images/part13/ch45_02_sft_synthesis_pipelines.png",
       "exists": true,
-      "size_kb": 4796.40234375,
-      "dimensions": "2816x1454",
+      "size_kb": 135.8828125,
+      "dimensions": "1732x837",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10859,8 +10852,8 @@
       "src": "../../images/part13/ch45_03_tulu3_posttrain_flow.png",
       "resolved": "docs/images/part13/ch45_03_tulu3_posttrain_flow.png",
       "exists": true,
-      "size_kb": 4451.6259765625,
-      "dimensions": "2816x1536",
+      "size_kb": 209.7529296875,
+      "dimensions": "1870x872",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10875,8 +10868,8 @@
       "src": "../../images/part13/ch46_01_r1_reasoning_flywheel.png",
       "resolved": "docs/images/part13/ch46_01_r1_reasoning_flywheel.png",
       "exists": true,
-      "size_kb": 1868.5703125,
-      "dimensions": "2816x1536",
+      "size_kb": 159.60546875,
+      "dimensions": "1397x906",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10891,8 +10884,8 @@
       "src": "../../images/part13/ch46_02_reward_verifier_architecture.png",
       "resolved": "docs/images/part13/ch46_02_reward_verifier_architecture.png",
       "exists": true,
-      "size_kb": 3454.9755859375,
-      "dimensions": "2816x1349",
+      "size_kb": 148.373046875,
+      "dimensions": "1836x847",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10907,8 +10900,8 @@
       "src": "../../images/part13/ch46_03_long_cot_trace_patterns.png",
       "resolved": "docs/images/part13/ch46_03_long_cot_trace_patterns.png",
       "exists": true,
-      "size_kb": 4593.0283203125,
-      "dimensions": "2816x1395",
+      "size_kb": 118.6630859375,
+      "dimensions": "1650x870",
       "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
       "high_res_status": "是",
       "issues": [
@@ -10918,7 +10911,7 @@
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 39,
+      "line": 37,
       "alt": "图47-1：多模态数据工程全景图",
       "src": "../../images/part13/ch47_01_multimodal_data_panorama.png",
       "resolved": "docs/images/part13/ch47_01_multimodal_data_panorama.png",
@@ -10934,7 +10927,7 @@
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 49,
+      "line": 47,
       "alt": "图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)",
       "src": "../../images/part13/ch47_02_vlm_three_stages_en.png",
       "resolved": "docs/images/part13/ch47_02_vlm_three_stages_en.png",
@@ -10950,7 +10943,7 @@
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 116,
+      "line": 114,
       "alt": "图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)",
       "src": "../../images/part13/ch47_03_resolution_handling_en.png",
       "resolved": "docs/images/part13/ch47_03_resolution_handling_en.png",
@@ -10966,7 +10959,7 @@
     },
     {
       "file": "docs/zh/part13/ch47_vlm_data_recipes.md",
-      "line": 147,
+      "line": 145,
       "alt": "图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)",
       "src": "../../images/part13/ch47_04_instruction_synthesis_en.png",
       "resolved": "docs/images/part13/ch47_04_instruction_synthesis_en.png",
@@ -11208,15 +11201,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 171,
       "alt": "图 P02-1",
-      "src": "../../images/part14/p02_01_legal_sft_factory_overview.png",
-      "resolved": "docs/images/part14/p02_01_legal_sft_factory_overview.png",
+      "src": "../../images/part14/p02/p02_01_legal_sft_factory_overview.svg",
+      "resolved": "docs/images/part14/p02/p02_01_legal_sft_factory_overview.svg",
       "exists": true,
-      "size_kb": 640.90625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 81.8408203125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11224,15 +11217,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 249,
       "alt": "图 P02-2",
-      "src": "../../images/part14/p02_02_roles_and_responsibilities.png",
-      "resolved": "docs/images/part14/p02_02_roles_and_responsibilities.png",
+      "src": "../../images/part14/p02/p02_02_roles_and_responsibilities.svg",
+      "resolved": "docs/images/part14/p02/p02_02_roles_and_responsibilities.svg",
       "exists": true,
-      "size_kb": 562.0,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 68.9296875,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11240,15 +11233,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 367,
       "alt": "图 P02-3",
-      "src": "../../images/part14/p02_03_pdf_cleaning_pipeline.png",
-      "resolved": "docs/images/part14/p02_03_pdf_cleaning_pipeline.png",
+      "src": "../../images/part14/p02/p02_03_pdf_cleaning_pipeline.svg",
+      "resolved": "docs/images/part14/p02/p02_03_pdf_cleaning_pipeline.svg",
       "exists": true,
-      "size_kb": 595.728515625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 27.138671875,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11256,15 +11249,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 370,
       "alt": "图 P02-4",
-      "src": "../../images/part14/p02_04_cleaning_examples.png",
-      "resolved": "docs/images/part14/p02_04_cleaning_examples.png",
+      "src": "../../images/part14/p02/p02_04_cleaning_examples.svg",
+      "resolved": "docs/images/part14/p02/p02_04_cleaning_examples.svg",
       "exists": true,
-      "size_kb": 768.0947265625,
-      "dimensions": "1800x1344",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 7.2099609375,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11272,15 +11265,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 419,
       "alt": "图 P02-5",
-      "src": "../../images/part14/p02_05_seed_schema.png",
-      "resolved": "docs/images/part14/p02_05_seed_schema.png",
+      "src": "../../images/part14/p02/p02_05_seed_schema.svg",
+      "resolved": "docs/images/part14/p02/p02_05_seed_schema.svg",
       "exists": true,
-      "size_kb": 792.9169921875,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 170.857421875,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11288,15 +11281,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 475,
       "alt": "图 P02-6",
-      "src": "../../images/part14/p02_06_task_taxonomy.png",
-      "resolved": "docs/images/part14/p02_06_task_taxonomy.png",
+      "src": "../../images/part14/p02/p02_06_task_taxonomy.svg",
+      "resolved": "docs/images/part14/p02/p02_06_task_taxonomy.svg",
       "exists": true,
-      "size_kb": 854.6279296875,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 48.4453125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11304,15 +11297,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 500,
       "alt": "图 P02-7",
-      "src": "../../images/part14/p02_07_task_vs_domain_distribution.png",
-      "resolved": "docs/images/part14/p02_07_task_vs_domain_distribution.png",
+      "src": "../../images/part14/p02/p02_07_task_vs_domain_distribution.svg",
+      "resolved": "docs/images/part14/p02/p02_07_task_vs_domain_distribution.svg",
       "exists": true,
-      "size_kb": 479.6953125,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 22.48828125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11320,15 +11313,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 534,
       "alt": "图 P02-8",
-      "src": "../../images/part14/p02_08_weighted_task_sampling.png",
-      "resolved": "docs/images/part14/p02_08_weighted_task_sampling.png",
+      "src": "../../images/part14/p02/p02_08_weighted_task_sampling.svg",
+      "resolved": "docs/images/part14/p02/p02_08_weighted_task_sampling.svg",
       "exists": true,
-      "size_kb": 833.6181640625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 82.2783203125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11336,15 +11329,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 572,
       "alt": "图 P02-9",
-      "src": "../../images/part14/p02_09_cot_structure.png",
-      "resolved": "docs/images/part14/p02_09_cot_structure.png",
+      "src": "../../images/part14/p02/p02_09_cot_structure.svg",
+      "resolved": "docs/images/part14/p02/p02_09_cot_structure.svg",
       "exists": true,
-      "size_kb": 543.03515625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 105.01953125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11352,15 +11345,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 611,
       "alt": "图 P02-10",
-      "src": "../../images/part14/p02_10_preference_and_review.png",
-      "resolved": "docs/images/part14/p02_10_preference_and_review.png",
+      "src": "../../images/part14/p02/p02_10_preference_and_review.svg",
+      "resolved": "docs/images/part14/p02/p02_10_preference_and_review.svg",
       "exists": true,
-      "size_kb": 701.455078125,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 77.96484375,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11368,15 +11361,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 645,
       "alt": "图 P02-11",
-      "src": "../../images/part14/p02_11_risk_refusal_flow.png",
-      "resolved": "docs/images/part14/p02_11_risk_refusal_flow.png",
+      "src": "../../images/part14/p02/p02_11_risk_refusal_flow.svg",
+      "resolved": "docs/images/part14/p02/p02_11_risk_refusal_flow.svg",
       "exists": true,
-      "size_kb": 763.57421875,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 50.1220703125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11384,15 +11377,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 693,
       "alt": "图 P02-12",
-      "src": "../../images/part14/p02_12_qa_loop.png",
-      "resolved": "docs/images/part14/p02_12_qa_loop.png",
+      "src": "../../images/part14/p02/p02_12_qa_loop.svg",
+      "resolved": "docs/images/part14/p02/p02_12_qa_loop.svg",
       "exists": true,
-      "size_kb": 651.3212890625,
-      "dimensions": "1800x982",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 39.3125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11400,15 +11393,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 696,
       "alt": "图 P02-13",
-      "src": "../../images/part14/p02_13_qa_decision_table.png",
-      "resolved": "docs/images/part14/p02_13_qa_decision_table.png",
+      "src": "../../images/part14/p02/p02_13_qa_decision_table.svg",
+      "resolved": "docs/images/part14/p02/p02_13_qa_decision_table.svg",
       "exists": true,
-      "size_kb": 534.53125,
-      "dimensions": "1800x982",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 29.0400390625,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11416,15 +11409,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 732,
       "alt": "图 P02-14",
-      "src": "../../images/part14/p02_14_human_in_the_loop.png",
-      "resolved": "docs/images/part14/p02_14_human_in_the_loop.png",
+      "src": "../../images/part14/p02/p02_14_human_in_the_loop.svg",
+      "resolved": "docs/images/part14/p02/p02_14_human_in_the_loop.svg",
       "exists": true,
-      "size_kb": 693.1591796875,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 118.001953125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11432,15 +11425,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 769,
       "alt": "图 P02-15",
-      "src": "../../images/part14/p02_15_training_artifacts.png",
-      "resolved": "docs/images/part14/p02_15_training_artifacts.png",
+      "src": "../../images/part14/p02/p02_15_training_artifacts.svg",
+      "resolved": "docs/images/part14/p02/p02_15_training_artifacts.svg",
       "exists": true,
-      "size_kb": 688.01171875,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 24.8701171875,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11448,15 +11441,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 826,
       "alt": "图 P02-16",
-      "src": "../../images/part14/p02_16_metrics_dashboard.png",
-      "resolved": "docs/images/part14/p02_16_metrics_dashboard.png",
+      "src": "../../images/part14/p02/p02_16_metrics_dashboard.svg",
+      "resolved": "docs/images/part14/p02/p02_16_metrics_dashboard.svg",
       "exists": true,
-      "size_kb": 688.9345703125,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 42.7880859375,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11464,15 +11457,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 908,
       "alt": "图 P02-17",
-      "src": "../../images/part14/p02_17_eval_sampling_protocol.png",
-      "resolved": "docs/images/part14/p02_17_eval_sampling_protocol.png",
+      "src": "../../images/part14/p02/p02_17_eval_sampling_protocol.svg",
+      "resolved": "docs/images/part14/p02/p02_17_eval_sampling_protocol.svg",
       "exists": true,
-      "size_kb": 423.89453125,
-      "dimensions": "1800x982",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 69.8701171875,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11480,15 +11473,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 1007,
       "alt": "图 P02-18",
-      "src": "../../images/part14/p02_18_version_timeline.png",
-      "resolved": "docs/images/part14/p02_18_version_timeline.png",
+      "src": "../../images/part14/p02/p02_18_version_timeline.svg",
+      "resolved": "docs/images/part14/p02/p02_18_version_timeline.svg",
       "exists": true,
-      "size_kb": 696.0400390625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 83.017578125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11496,15 +11489,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 1068,
       "alt": "图 P02-19",
-      "src": "../../images/part14/p02_19_validation_chain.png",
-      "resolved": "docs/images/part14/p02_19_validation_chain.png",
+      "src": "../../images/part14/p02/p02_19_validation_chain.svg",
+      "resolved": "docs/images/part14/p02/p02_19_validation_chain.svg",
       "exists": true,
-      "size_kb": 759.078125,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 21.0712890625,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -11512,15 +11505,15 @@
       "file": "docs/zh/part14/p02_legal_sft.md",
       "line": 1128,
       "alt": "图 P02-20",
-      "src": "../../images/part14/p02_20_cross_domain_transfer.png",
-      "resolved": "docs/images/part14/p02_20_cross_domain_transfer.png",
+      "src": "../../images/part14/p02/p02_20_cross_domain_transfer.svg",
+      "resolved": "docs/images/part14/p02/p02_20_cross_domain_transfer.svg",
       "exists": true,
-      "size_kb": 772.822265625,
-      "dimensions": "1800x1005",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 61.3916015625,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -12888,15 +12881,15 @@
       "file": "docs/zh/part14/p11_mini_deepseek.md",
       "line": 79,
       "alt": "Mini-DeepSeek Data Pipeline",
-      "src": "../../images/part14/p11_mini_deepseek_arch_en.png",
-      "resolved": "docs/images/part14/p11_mini_deepseek_arch_en.png",
+      "src": "../../images/part14/p11_mini_deepseek_arch_en.svg",
+      "resolved": "docs/images/part14/p11_mini_deepseek_arch_en.svg",
       "exists": true,
-      "size_kb": 1070.876953125,
-      "dimensions": "1024x1024",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 10.912109375,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -12920,15 +12913,15 @@
       "file": "docs/zh/part14/p13_multimodal_instruction_factory.md",
       "line": 84,
       "alt": "Multimodal Instruction Factory",
-      "src": "../../images/part14/p13_mm_instruction_factory_arch_en.png",
-      "resolved": "docs/images/part14/p13_mm_instruction_factory_arch_en.png",
+      "src": "../../images/part14/p13_mm_instruction_factory_arch_en.svg",
+      "resolved": "docs/images/part14/p13_mm_instruction_factory_arch_en.svg",
       "exists": true,
-      "size_kb": 1358.7578125,
-      "dimensions": "1024x1024",
-      "registry_status": "内部自绘/改绘资源；终稿复核高清源与 AI 使用声明",
-      "high_res_status": "是",
+      "size_kb": 15.080078125,
+      "dimensions": "unknown",
+      "registry_status": "missing-register",
+      "high_res_status": "unknown",
       "issues": [
-        "needs-rights-ai-review",
+        "missing-figure-register",
         "needs-high-res-confirmation"
       ]
     },
@@ -25565,7 +25558,7 @@
   ],
   "missing_reference_files": [],
   "summary": {
-    "style_hits": 1376,
+    "style_hits": 1375,
     "figures": 287,
     "figures_needing_review": 287,
     "broken_figures": 0,

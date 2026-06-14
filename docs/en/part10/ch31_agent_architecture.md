@@ -119,7 +119,7 @@ This chapter uses DataAgent as a reference for how the six-layer architecture la
 
 Task boundaries must be constrained through layering. Each layer owns one type of responsibility, communicates through structured protocols, and does not share internal mutable state with other layers. Multi-agent conversation frameworks and surveys of autonomous agents both emphasize that complex agent systems need role separation, message protocols, and state isolation to reduce runaway risk (Wu et al. 2023; Wang et al. 2023; Xi et al. 2023).
 
-![Six-layer architecture for data engineering agents](../../images/part10/ai_agent_decision_workflow_ch31_01.png)
+![Six-layer architecture for data engineering agents](../../images/part10/ai_agent_decision_workflow_ch31_01.svg)
 
 *Figure 31-1: Six-layer architecture for data engineering agents*
 
@@ -331,7 +331,7 @@ The following steps must retain human review at any automation level:
 
 ### 31.3.3 Human-AI Collaboration Flow
 
-![Human-AI collaboration flow by risk level](../../images/part10/ai_agent_decision_workflow_ch31_02.png)
+![Human-AI collaboration flow by risk level](../../images/part10/ai_agent_decision_workflow_ch31_02.svg)
 
 *Figure 31-2: Human-AI collaboration flow by risk level*
 
