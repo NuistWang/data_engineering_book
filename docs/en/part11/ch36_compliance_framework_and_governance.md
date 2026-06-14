@@ -234,7 +234,7 @@ When the data level is high, the action is strong, and the impact scope is broad
 | C3 | Automated decision | Training / scoring | High | DPIA, legal approval, strong audit, release blocking |
 | C3 | Third-party sharing | Export / API call | Very high | DPA, masking gateway, minimum field set, dedicated assessment |
 
-![Figure 36-4: Risk matrix formed by data level, purpose, and processing action](../../images/part11/图36_4_数据分级用途和处理动作构成的风险矩阵图.svg)
+![Figure 36-2: Risk matrix formed by data level, purpose, and processing action](../../images/part11/图36_4_数据分级用途和处理动作构成的风险矩阵图.svg)
 *Figure 36-2: Risk matrix formed by data level, purpose, and processing action.*
 
 ### 36.2.6 Accountability Chain: RACI Matrix
@@ -437,7 +437,7 @@ Typical preflight checks include:
 
 When any high-risk item is missing, the pipeline should block build, deployment, or training-task execution.
 
-![Figure 36-5: Compliance gate flow from data onboarding to model training](../../images/part11/图36_5_从数据接入到模型训练的合规门禁流程图.svg)
+![Figure 36-3: Compliance gate flow from data onboarding to model training](../../images/part11/图36_5_从数据接入到模型训练的合规门禁流程图.svg)
 *Figure 36-3: Compliance gate flow from data onboarding to model training.*
 
 ### 36.3.7 Governance Pipeline: From Documents to System Execution
@@ -452,7 +452,7 @@ Once compliance requirements enter engineering, governance objects must become e
 
 This chain reflects a key fact: **compliance is not a single action. It is a pipeline from policy generation, data processing, alert response, to evaluation and verification**.
 
-![Figure 36-3: Privacy specification and policy generation flow](../../images/part11/图36_3_P09隐私规格与策略生成流程图.svg)
+![Figure 36-4: Privacy specification and policy generation flow](../../images/part11/图36_3_P09隐私规格与策略生成流程图.svg)
 *Figure 36-4: Privacy specification and policy generation flow.*
 
 ### 36.3.8 Translating Governance Metrics into Engineering Language
@@ -467,7 +467,7 @@ Governance metrics matter not because of large sample counts, but because they s
 
 The point is not the absolute value. These metrics turn governance from an abstract ideal into inspectable, reviewable, and repeatable system behavior.
 
-![Figure 36-2: Engineering approval flow for DPIA and RoPA](../../images/part11/图36_2_DPIA与RoPA工程化审批流.svg)
+![Figure 36-5: Engineering approval flow for DPIA and RoPA](../../images/part11/图36_2_DPIA与RoPA工程化审批流.svg)
 *Figure 36-5: Data compliance lifecycle from business initiation to automated blocking and audit.*
 
 ### 36.3.9 Example Compliance Release Gate Checklist
