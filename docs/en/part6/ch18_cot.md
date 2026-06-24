@@ -568,52 +568,52 @@ For tasks such as mathematics, logic, and code, truly high-value data should adv
 
 ## References
 
-Wei, J., Wang, X., Schuurmans, D., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. Advances in Neural Information Processing Systems, 35, 24824–24837. arXiv:2201.11903.
+Wei J, Wang X, Schuurmans D, et al. (2022) Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. Advances in Neural Information Processing Systems, 35, 24824–24837. arXiv:2201.11903.
 
-Nye, M., Andreassen, A. J., Gur-Ari, G., et al. (2021). Show Your Work: Scratchpads for Intermediate Computation with Language Models. arXiv:2112.00114.
+Nye M, Andreassen A J, Gur-Ari G, et al. (2021) Show Your Work: Scratchpads for Intermediate Computation with Language Models. arXiv:2112.00114.
 
-Wang, X., Wei, J., Schuurmans, D., et al. (2023). Self-Consistency Improves Chain of Thought Reasoning in Language Models. International Conference on Learning Representations. arXiv:2203.11171.
+Wang X, Wei J, Schuurmans D, et al. (2023) Self-Consistency Improves Chain of Thought Reasoning in Language Models. International Conference on Learning Representations. arXiv:2203.11171.
 
-Zhou, D., Schärli, N., Hou, L., et al. (2023). Least-to-Most Prompting Enables Complex Reasoning in Large Language Models. International Conference on Learning Representations. arXiv:2205.10625.
+Zhou D, Schärli N, Hou L, et al. (2023) Least-to-Most Prompting Enables Complex Reasoning in Large Language Models. International Conference on Learning Representations. arXiv:2205.10625.
 
-Yao, S., Yu, D., Zhao, J., et al. (2023a). Tree of Thoughts: Deliberate Problem Solving with Large Language Models. Advances in Neural Information Processing Systems, 36, 11809–11822. arXiv:2305.10601.
+Yao S, Yu D, Zhao J, et al. (2023a) Tree of Thoughts: Deliberate Problem Solving with Large Language Models. Advances in Neural Information Processing Systems, 36, 11809–11822. arXiv:2305.10601.
 
-Chen, W., Ma, X., Wang, X., & Cohen, W. W. (2023). Program of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks. Transactions on Machine Learning Research. arXiv:2211.12588.
+Chen W, Ma X, Wang X, Cohen W W (2023) Program of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks. Transactions on Machine Learning Research. arXiv:2211.12588.
 
-Gao, L., Madaan, A., Zhou, S., et al. (2023). PAL: Program-aided Language Models. International Conference on Machine Learning, 10764–10799. arXiv:2211.10435.
+Gao L, Madaan A, Zhou S, et al. (2023) PAL: Program-aided Language Models. International Conference on Machine Learning, 10764–10799. arXiv:2211.10435.
 
-Zelikman, E., Wu, Y., Mu, J., & Goodman, N. D. (2022). STaR: Bootstrapping Reasoning With Reasoning. Advances in Neural Information Processing Systems, 35, 15476–15488. arXiv:2203.14465.
+Zelikman E, Wu Y, Mu J, Goodman N D (2022) STaR: Bootstrapping Reasoning With Reasoning. Advances in Neural Information Processing Systems, 35, 15476–15488. arXiv:2203.14465.
 
-Cobbe, K., Kosaraju, V., Bavarian, M., et al. (2021). Training Verifiers to Solve Math Word Problems. arXiv:2110.14168.
+Cobbe K, Kosaraju V, Bavarian M, et al. (2021) Training Verifiers to Solve Math Word Problems. arXiv:2110.14168.
 
-Lightman, H., Kosaraju, V., Burda, Y., et al. (2024). Let's Verify Step by Step. International Conference on Learning Representations. arXiv:2305.20050.
+Lightman H, Kosaraju V, Burda Y, et al. (2024) Let's Verify Step by Step. International Conference on Learning Representations. arXiv:2305.20050.
 
-Hendrycks, D., Burns, C., Kadavath, S., et al. (2021a). Measuring Mathematical Problem Solving With the MATH Dataset. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2103.03874.
+Hendrycks D, Burns C, Kadavath S, et al. (2021a) Measuring Mathematical Problem Solving With the MATH Dataset. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2103.03874.
 
-Bengio, Y., Louradour, J., Collobert, R., & Weston, J. (2009). Curriculum Learning. Proceedings of the 26th Annual International Conference on Machine Learning, 41–48.
+Bengio Y, Louradour J, Collobert R, Weston J (2009) Curriculum Learning. Proceedings of the 26th Annual International Conference on Machine Learning, 41–48.
 
-Shinn, N., Cassano, F., Gopinath, A., et al. (2023). Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
+Shinn N, Cassano F, Gopinath A, et al. (2023) Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
 
-Madaan, A., Tandon, N., Gupta, P., et al. (2023). Self-Refine: Iterative Refinement with Self-Feedback. Advances in Neural Information Processing Systems, 36. arXiv:2303.17651.
+Madaan A, Tandon N, Gupta P, et al. (2023) Self-Refine: Iterative Refinement with Self-Feedback. Advances in Neural Information Processing Systems, 36. arXiv:2303.17651.
 
-Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36. arXiv:2306.05685.
+Zheng L, Chiang W-L, Sheng Y, et al. (2023) Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36. arXiv:2306.05685.
 
-Liu, Y., Iter, D., Xu, Y., et al. (2023). G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522. arXiv:2303.16634.
+Liu Y, Iter D, Xu Y, et al. (2023) G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522. arXiv:2303.16634.
 
-Hendrycks, D., Basart, S., Kadavath, S., et al. (2021b). Measuring Coding Challenge Competence With APPS. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2105.09938.
+Hendrycks D, Basart S, Kadavath S, et al. (2021b) Measuring Coding Challenge Competence With APPS. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2105.09938.
 
-Chen, M., Tworek, J., Jun, H., et al. (2021). Evaluating Large Language Models Trained on Code. arXiv:2107.03374.
+Chen M, Tworek J, Jun H, et al. (2021) Evaluating Large Language Models Trained on Code. arXiv:2107.03374.
 
-Austin, J., Odena, A., Nye, M., et al. (2021). Program Synthesis with Large Language Models. arXiv:2108.07732.
+Austin J, Odena A, Nye M, et al. (2021) Program Synthesis with Large Language Models. arXiv:2108.07732.
 
-Lu, S., Guo, D., Ren, S., et al. (2021). CodeXGLUE: A Machine Learning Benchmark Dataset for Code Understanding and Generation. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2102.04664.
+Lu S, Guo D, Ren S, et al. (2021) CodeXGLUE: A Machine Learning Benchmark Dataset for Code Understanding and Generation. Advances in Neural Information Processing Systems Datasets and Benchmarks Track. arXiv:2102.04664.
 
-Jimenez, C. E., Yang, J., Wettig, A., et al. (2024). SWE-bench: Can Language Models Resolve Real-world GitHub Issues? International Conference on Learning Representations. arXiv:2310.06770.
+Jimenez C E, Yang J, Wettig A, et al. (2024) SWE-bench: Can Language Models Resolve Real-world GitHub Issues? International Conference on Learning Representations. arXiv:2310.06770.
 
-Just, R., Jalali, D., & Ernst, M. D. (2014). Defects4J: A Database of Existing Faults to Enable Controlled Testing Studies for Java Programs. Proceedings of the 2014 International Symposium on Software Testing and Analysis, 437–440.
+Just R, Jalali D, Ernst M D (2014) Defects4J: A Database of Existing Faults to Enable Controlled Testing Studies for Java Programs. Proceedings of the 2014 International Symposium on Software Testing and Analysis, 437–440.
 
-Monperrus, M. (2018). Automatic Software Repair: A Bibliography. ACM Computing Surveys, 51(1), Article 17.
+Monperrus M (2018) Automatic Software Repair: A Bibliography. ACM Computing Surveys, 51(1), Article 17.
 
-Nijkamp, E., Pang, B., Hayashi, H., et al. (2023). CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis. International Conference on Learning Representations. arXiv:2203.13474.
+Nijkamp E, Pang B, Hayashi H, et al. (2023) CodeGen: An Open Large Language Model for Code with Multi-Turn Program Synthesis. International Conference on Learning Representations. arXiv:2203.13474.
 
-Yao, S., Zhao, J., Yu, D., et al. (2023b). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.
+Yao S, Zhao J, Yu D, et al. (2023b) ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.

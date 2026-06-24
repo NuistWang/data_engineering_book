@@ -759,72 +759,72 @@ For subsequent multimodal model training, the core lesson is that the publicatio
 
 ## References
 
-Bai, S., Chen, K., Liu, X., et al. (2025). Qwen2.5-VL Technical Report. *arXiv preprint arXiv:2502.13923*.
+Bai S, Chen K, Liu X, et al. (2025) Qwen2.5-VL Technical Report. *arXiv preprint arXiv:2502.13923*.
 
-Blecher, L., Cucurull, G., Scialom, T., and Stojnic, R. (2023). Nougat: Neural Optical Understanding for Academic Documents. *arXiv preprint arXiv:2308.13418*.
+Blecher L, Cucurull G, Scialom T, Stojnic R (2023) Nougat: Neural Optical Understanding for Academic Documents. *arXiv preprint arXiv:2308.13418*.
 
-Huang, Y., Lv, T., Cui, L., Lu, Y., and Wei, F. (2022). LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking. *Proc. ACM Multimedia*.
+Huang Y, Lv T, Cui L, Lu Y, Wei F (2022) LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking. *Proc. ACM Multimedia*.
 
-Huang, Z., Chen, K., He, J., Bai, X., Karatzas, D., Lu, S., and Jawahar, C.V. (2019). ICDAR2019 Competition on Scanned Receipt OCR and Information Extraction. *Proc. ICDAR*, pp. 1516-1520.
+Huang Z, Chen K, He J, Bai X, Karatzas D, Lu S, Jawahar CV (2019) ICDAR2019 Competition on Scanned Receipt OCR and Information Extraction. *Proc. ICDAR*, pp. 1516-1520.
 
-Hu, E.J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., and Chen, W. (2021). LoRA: Low-Rank Adaptation of Large Language Models. *arXiv preprint arXiv:2106.09685*.
+Hu EJ, Shen Y, Wallis P, Allen-Zhu Z, Li Y, Wang S, Wang L, Chen W (2021) LoRA: Low-Rank Adaptation of Large Language Models. *arXiv preprint arXiv:2106.09685*.
 
-Jaume, G., Ekenel, H.K., and Thiran, J.-P. (2019). FUNSD: A Dataset for Form Understanding in Noisy Scanned Documents. *ICDAR Workshop*.
+Jaume G, Ekenel HK, Thiran J-P (2019) FUNSD: A Dataset for Form Understanding in Noisy Scanned Documents. *ICDAR Workshop*.
 
-Kuhn, H.W. (1955). The Hungarian Method for the Assignment Problem. *Naval Research Logistics Quarterly*, 2(1-2), pp. 83-97. https://doi.org/10.1002/nav.3800020109.
+Kuhn HW (1955) The Hungarian Method for the Assignment Problem. *Naval Research Logistics Quarterly*, 2(1-2), pp. 83-97. https://doi.org/10.1002/nav.3800020109.
 
-Levenshtein, V.I. (1965). Binary Codes Capable of Correcting Deletions, Insertions and Reversals. *Soviet Physics Doklady*, 10, pp. 707-710.
+Levenshtein VI (1965) Binary Codes Capable of Correcting Deletions, Insertions and Reversals. *Soviet Physics Doklady*, 10, pp. 707-710.
 
-Liu, H., Xue, W., Chen, Y., et al. (2024). A Survey on Hallucination in Large Vision-Language Models. *arXiv preprint arXiv:2402.00253*.
+Liu H, Xue W, Chen Y, et al. (2024) A Survey on Hallucination in Large Vision-Language Models. *arXiv preprint arXiv:2402.00253*.
 
-Mathew, M., Karatzas, D., and Jawahar, C.V. (2021). DocVQA: A Dataset for VQA on Document Images. *Proc. WACV*. https://doi.org/10.1109/wacv48630.2021.00225.
+Mathew M, Karatzas D, Jawahar CV (2021) DocVQA: A Dataset for VQA on Document Images. *Proc. WACV*. https://doi.org/10.1109/wacv48630.2021.00225.
 
-Niu, J., Liu, Z., Gu, Z., et al. (2025). MinerU 2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing. *arXiv preprint*.
+Niu J, Liu Z, Gu Z, et al. (2025) MinerU 2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing. *arXiv preprint*.
 
-Park, S., Shin, S., Lee, B., et al. (2019). CORD: A Consolidated Receipt Dataset for Post-OCR Parsing. *NeurIPS Workshop on Document Intelligence*.
+Park S, Shin S, Lee B, et al. (2019) CORD: A Consolidated Receipt Dataset for Post-OCR Parsing. *NeurIPS Workshop on Document Intelligence*.
 
-Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C.D., and Finn, C. (2024). Direct Preference Optimization: Your Language Model Is Secretly a Reward Model. *Proc. NeurIPS*. arXiv:2305.18290.
+Rafailov R, Sharma A, Mitchell E, Ermon S, Manning CD, Finn C (2024) Direct Preference Optimization: Your Language Model Is Secretly a Reward Model. *Proc. NeurIPS*. arXiv:2305.18290.
 
-Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O. (2017). Proximal Policy Optimization Algorithms. *arXiv preprint arXiv:1707.06347*.
+Schulman J, Wolski F, Dhariwal P, Radford A, Klimov O (2017) Proximal Policy Optimization Algorithms. *arXiv preprint arXiv:1707.06347*.
 
-Shao, Z., Wang, P., et al. (2024). DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. *arXiv preprint arXiv:2402.03300*.
+Shao Z, Wang P, et al. (2024) DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. *arXiv preprint arXiv:2402.03300*.
 
-Tianchi, A. and CHIP Committee (2022). CHIP 2022 Shared Task: Medical Invoice OCR Element Extraction Dataset. *Aliyun Tianchi Platform*.
+Tianchi A, CHIP Committee (2022) CHIP 2022 Shared Task: Medical Invoice OCR Element Extraction Dataset. *Aliyun Tianchi Platform*.
 
-Xu, Y., Li, M., Cui, L., Huang, S., Wei, F., and Zhou, M. (2020). LayoutLM: Pre-training of Text and Layout for Document Image Understanding. *Proc. ACM SIGKDD*, pp. 1192-1200.
+Xu Y, Li M, Cui L, Huang S, Wei F, Zhou M (2020) LayoutLM: Pre-training of Text and Layout for Document Image Understanding. *Proc. ACM SIGKDD*, pp. 1192-1200.
 
-Xue, W., Yu, B., Wang, W., Tao, D., and Li, Q. (2021). TGRNet: A Table Graph Reconstruction Network for Table Structure Recognition. *arXiv preprint arXiv:2106.10598*.
+Xue W, Yu B, Wang W, Tao D, Li Q (2021) TGRNet: A Table Graph Reconstruction Network for Table Structure Recognition. *arXiv preprint arXiv:2106.10598*.
 
-Yang, Z., Long, R., Wang, P., et al. (2023). Modeling Entities as Semantic Points for Visual Information Extraction in the Wild. *Proc. CVPR*.
+Yang Z, Long R, Wang P, et al. (2023) Modeling Entities as Semantic Points for Visual Information Extraction in the Wild. *Proc. CVPR*.
 
-Zhang, N., Chen, M., Bi, Z., et al. (2022). CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark. *Proc. ACL*, pp. 7888-7915. https://doi.org/10.18653/v1/2022.acl-long.544.
+Zhang N, Chen M, Bi Z, et al. (2022) CBLUE: A Chinese Biomedical Language Understanding Evaluation Benchmark. *Proc. ACL*, pp. 7888-7915. https://doi.org/10.18653/v1/2022.acl-long.544.
 
-Zhong, X., ShafieiBavani, E., and Jimeno Yepes, A. (2020). Image-based Table Recognition: Data, Model, and Evaluation. *arXiv preprint arXiv:1911.10683*.
+Zhong X, ShafieiBavani E, Jimeno Yepes A (2020) Image-based Table Recognition: Data, Model, and Evaluation. *arXiv preprint arXiv:1911.10683*.
 
-Bai, S., Cai, Y., Chen, R., et al. (2025a). Qwen3-VL Technical Report. *arXiv preprint*.
+Bai S, Cai Y, Chen R, et al. (2025a) Qwen3-VL Technical Report. *arXiv preprint*.
 
-ChatDOC (2025). OCRFlux-3B: A Multimodal Large Language Model for Document Parsing. *Hugging Face Model Card*. 
+ChatDOC (2025). OCRFlux-3B: A Multimodal Large Language Model for Document Parsing. *Hugging Face Model Card*.
 
-Cui, C., Sun, T., Liang, S., et al. (2025). PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model. *arXiv preprint*.
+Cui C, Sun T, Liang S, et al. (2025) PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model. *arXiv preprint*.
 
-Guo, D., Yang, D., Zhang, H., et al. (2025). DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. *arXiv preprint arXiv:2501.12948*.
+Guo D, Yang D, Zhang H, et al. (2025) DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. *arXiv preprint arXiv:2501.12948*.
 
 Hunyuan Vision Team (2025). HunyuanOCR Technical Report. *arXiv preprint*.
 
-Li, Y., Yang, G., Liu, H., Wang, B., and Zhang, C. (2025a). Dots.OCR: Multilingual Document Layout Parsing in a Single Vision-Language Model. *arXiv preprint*. 
+Li Y, Yang G, Liu H, Wang B, Zhang C (2025a) Dots.OCR: Multilingual Document Layout Parsing in a Single Vision-Language Model. *arXiv preprint*.
 
-Poznanski, J., Soldaini, L., and Lo, K. (2025). olmOCR 2: Unit Test Rewards for Document OCR. *arXiv preprint arXiv:2510.19817*.
+Poznanski J, Soldaini L, Lo K (2025) olmOCR 2: Unit Test Rewards for Document OCR. *arXiv preprint arXiv:2510.19817*.
 
-Smock, B., Faucon-Morin, V., Sokolov, M., et al. (2025). PubTables-v2: A New Large-Scale Dataset for Full-Page and Multi-Page Table Extraction. *arXiv preprint arXiv:2512.10888*.
+Smock B, Faucon-Morin V, Sokolov M, et al. (2025) PubTables-v2: A New Large-Scale Dataset for Full-Page and Multi-Page Table Extraction. *arXiv preprint arXiv:2512.10888*.
 
-Wang, W., Gao, Z., Gu, L., et al. (2025). InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency. *arXiv preprint arXiv:2508.18265*.
+Wang W, Gao Z, Gu L, et al. (2025) InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency. *arXiv preprint arXiv:2508.18265*.
 
-Zhang, J., Liu, Y., Wu, Z., et al. (2025). MonkeyOCR v1.5 Technical Report: Unlocking Robust Document Parsing for Complex Patterns. *arXiv preprint*.
+Zhang J, Liu Y, Wu Z, et al. (2025) MonkeyOCR v1.5 Technical Report: Unlocking Robust Document Parsing for Complex Patterns. *arXiv preprint*.
 
-Smock, B., Pesala, R., and Abraham, R. (2022). PubTables-1M: Towards Comprehensive Table Extraction From Unstructured Documents. *Proc. CVPR*. https://doi.org/10.1109/cvpr52688.2022.00459.
+Smock B, Pesala R, Abraham R (2022) PubTables-1M: Towards Comprehensive Table Extraction From Unstructured Documents. *Proc. CVPR*. https://doi.org/10.1109/cvpr52688.2022.00459.
 
-Zhu, F., Lei, W., Huang, Y., Wang, C., Zhang, S., Lv, J., Feng, F., and Chua, T.-S. (2021). TAT-QA: A Question Answering Benchmark on a Hybrid of Tabular and Textual Content in Finance. *Proc. ACL*. https://doi.org/10.18653/v1/2021.acl-long.254.
+Zhu F, Lei W, Huang Y, Wang C, Zhang S, Lv J, Feng F, Chua T-S (2021) TAT-QA: A Question Answering Benchmark on a Hybrid of Tabular and Textual Content in Finance. *Proc. ACL*. https://doi.org/10.18653/v1/2021.acl-long.254.
 
-Pandas Development Team. (2026). pandas Documentation. https://pandas.pydata.org/docs/.
+Pandas Development Team (2026) pandas Documentation. https://pandas.pydata.org/docs/.
 
-Apache Arrow Contributors. (2026). Apache Arrow Documentation. https://arrow.apache.org/docs/.
+Apache Arrow Contributors (2026) Apache Arrow Documentation. https://arrow.apache.org/docs/.

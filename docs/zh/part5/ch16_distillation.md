@@ -633,52 +633,52 @@ if __name__ == "__main__":
 
 ## 参考文献
 
-Gou, J., Yu, B., Maybank, S. J., et al. (2021). Knowledge Distillation: A Survey. International Journal of Computer Vision, 129(6), 1789–1819.
+Gou J, Yu B, Maybank S J, et al. (2021) Knowledge Distillation: A Survey. International Journal of Computer Vision, 129(6), 1789–1819.
 
-Hinton, G., Vinyals, O., & Dean, J. (2015). Distilling the Knowledge in a Neural Network. arXiv preprint arXiv:1503.02531.
+Hinton G, Vinyals O, Dean J (2015) Distilling the Knowledge in a Neural Network. arXiv preprint arXiv:1503.02531.
 
-Bucila, C., Caruana, R., & Niculescu-Mizil, A. (2006). Model Compression. Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 535–541.
+Bucila C, Caruana R, Niculescu-Mizil A (2006) Model Compression. Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 535–541.
 
-Mukherjee, S., Mitra, A., Jawahar, G., et al. (2023). Orca: Progressive Learning from Complex Explanation Traces of GPT-4. arXiv preprint arXiv:2306.02707.
+Mukherjee S, Mitra A, Jawahar G, et al. (2023) Orca: Progressive Learning from Complex Explanation Traces of GPT-4. arXiv preprint arXiv:2306.02707.
 
-Ouyang, L., Wu, J., Jiang, X., et al. (2022). Training Language Models to Follow Instructions with Human Feedback. Advances in Neural Information Processing Systems, 35, 27730–27744.
+Ouyang L, Wu J, Jiang X, et al. (2022) Training Language Models to Follow Instructions with Human Feedback. Advances in Neural Information Processing Systems, 35, 27730–27744.
 
-Romero, A., Ballas, N., Ebrahimi Kahou, S., et al. (2015). FitNets: Hints for Thin Deep Nets. International Conference on Learning Representations.
+Romero A, Ballas N, Ebrahimi Kahou S, et al. (2015) FitNets: Hints for Thin Deep Nets. International Conference on Learning Representations.
 
-Zagoruyko, S., & Komodakis, N. (2017). Paying More Attention to Attention: Improving the Performance of Convolutional Neural Networks via Attention Transfer. International Conference on Learning Representations.
+Zagoruyko S, Komodakis N (2017) Paying More Attention to Attention: Improving the Performance of Convolutional Neural Networks via Attention Transfer. International Conference on Learning Representations.
 
-Wang, W., Wei, F., Dong, L., et al. (2020). MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers. Advances in Neural Information Processing Systems, 33, 5776–5788.
+Wang W, Wei F, Dong L, et al. (2020) MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers. Advances in Neural Information Processing Systems, 33, 5776–5788.
 
-Sanh, V., Debut, L., Chaumond, J., et al. (2019). DistilBERT, a Distilled Version of BERT: Smaller, Faster, Cheaper and Lighter. arXiv preprint arXiv:1910.01108.
+Sanh V, Debut L, Chaumond J, et al. (2019) DistilBERT, a Distilled Version of BERT: Smaller, Faster, Cheaper and Lighter. arXiv preprint arXiv:1910.01108.
 
-Jiao, X., Yin, Y., Shang, L., et al. (2020). TinyBERT: Distilling BERT for Natural Language Understanding. Findings of the Association for Computational Linguistics: EMNLP 2020, 4163–4174.
+Jiao X, Yin Y, Shang L, et al. (2020) TinyBERT: Distilling BERT for Natural Language Understanding. Findings of the Association for Computational Linguistics: EMNLP 2020, 4163–4174.
 
-Schick, T., Dwivedi-Yu, J., Dessì, R., et al. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36.
+Schick T, Dwivedi-Yu J, Dessì R, et al. (2023) Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36.
 
-Wang, Y., Kordi, Y., Mishra, S., et al. (2023). Self-Instruct: Aligning Language Models with Self-Generated Instructions. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 13484–13508.
+Wang Y, Kordi Y, Mishra S, et al. (2023) Self-Instruct: Aligning Language Models with Self-Generated Instructions. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 13484–13508.
 
-Xu, C., Sun, Q., Zheng, K., et al. (2024). WizardLM: Empowering Large Language Models to Follow Complex Instructions. International Conference on Learning Representations.
+Xu C, Sun Q, Zheng K, et al. (2024) WizardLM: Empowering Large Language Models to Follow Complex Instructions. International Conference on Learning Representations.
 
-Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations.
+Yao S, Zhao J, Yu D, et al. (2023) ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations.
 
-Patil, S. G., Zhang, T., Wang, X., et al. (2024). Gorilla: Large Language Model Connected with Massive APIs. Advances in Neural Information Processing Systems, 37.
+Patil S G, Zhang T, Wang X, et al. (2024) Gorilla: Large Language Model Connected with Massive APIs. Advances in Neural Information Processing Systems, 37.
 
-Shazeer, N., Mirhoseini, A., Maziarz, K., et al. (2017). Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. International Conference on Learning Representations.
+Shazeer N, Mirhoseini A, Maziarz K, et al. (2017) Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. International Conference on Learning Representations.
 
-Fedus, W., Zoph, B., & Shazeer, N. (2022). Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. Journal of Machine Learning Research, 23(120), 1–39.
+Fedus W, Zoph B, Shazeer N (2022) Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. Journal of Machine Learning Research, 23(120), 1–39.
 
-Du, N., Huang, Y., Dai, A. M., et al. (2022). GLaM: Efficient Scaling of Language Models with Mixture-of-Experts. Proceedings of the 39th International Conference on Machine Learning, 5547–5569.
+Du N, Huang Y, Dai A M, et al. (2022) GLaM: Efficient Scaling of Language Models with Mixture-of-Experts. Proceedings of the 39th International Conference on Machine Learning, 5547–5569.
 
-Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36.
+Zheng L, Chiang W-L, Sheng Y, et al. (2023) Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36.
 
-Liu, Y., Iter, D., Xu, Y., et al. (2023). G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522.
+Liu Y, Iter D, Xu Y, et al. (2023) G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522.
 
-Mirzadeh, S. I., Farajtabar, M., Li, A., et al. (2020). Improved Knowledge Distillation via Teacher Assistant. Proceedings of the AAAI Conference on Artificial Intelligence, 34(04), 5191–5198.
+Mirzadeh S I, Farajtabar M, Li A, et al. (2020) Improved Knowledge Distillation via Teacher Assistant. Proceedings of the AAAI Conference on Artificial Intelligence, 34(04), 5191–5198.
 
-Kim, Y., & Rush, A. M. (2016). Sequence-Level Knowledge Distillation. Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, 1317–1327.
+Kim Y, Rush A M (2016) Sequence-Level Knowledge Distillation. Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, 1317–1327.
 
-Lightman, H., Kosaraju, V., Burda, Y., et al. (2024). Let’s Verify Step by Step. International Conference on Learning Representations (ICLR 2024). arXiv:2305.20050.
+Lightman H, Kosaraju V, Burda Y, et al. (2024) Let’s Verify Step by Step. International Conference on Learning Representations (ICLR 2024). arXiv:2305.20050.
 
-Wei, J., Wang, X., Schuurmans, D., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. Advances in Neural Information Processing Systems, 35, 24824–24837.
+Wei J, Wang X, Schuurmans D, et al. (2022) Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. Advances in Neural Information Processing Systems, 35, 24824–24837.
 
-Bai, Y., Kadavath, S., Kundu, S., et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv preprint arXiv:2212.08073.
+Bai Y, Kadavath S, Kundu S, et al. (2022) Constitutional AI: Harmlessness from AI Feedback. arXiv preprint arXiv:2212.08073.

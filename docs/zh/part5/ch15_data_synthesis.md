@@ -564,48 +564,48 @@ if __name__ == "__main__":
 
 ## 参考文献
 
-Honovich, O., Scialom, T., Levy, O., et al. (2023). Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 14409–14428.
+Honovich O, Scialom T, Levy O, et al. (2023) Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 14409–14428.
 
-Wang, Y., Kordi, Y., Mishra, S., et al. (2023). Self-Instruct: Aligning Language Models with Self-Generated Instructions. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 13484–13508.
+Wang Y, Kordi Y, Mishra S, et al. (2023) Self-Instruct: Aligning Language Models with Self-Generated Instructions. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics, 13484–13508.
 
-Xu, C., Sun, Q., Zheng, K., et al. (2024). WizardLM: Empowering Large Language Models to Follow Complex Instructions. International Conference on Learning Representations (ICLR 2024). arXiv:2304.12244.
+Xu C, Sun Q, Zheng K, et al. (2024) WizardLM: Empowering Large Language Models to Follow Complex Instructions. International Conference on Learning Representations (ICLR 2024). arXiv:2304.12244.
 
-Alemohammad, S., Casco-Rodriguez, J., Luzi, L., et al. (2024). Self-Consuming Generative Models Go MAD. International Conference on Learning Representations (ICLR 2024). arXiv:2307.01850.
+Alemohammad S, Casco-Rodriguez J, Luzi L, et al. (2024) Self-Consuming Generative Models Go MAD. International Conference on Learning Representations (ICLR 2024). arXiv:2307.01850.
 
-Shumailov, I., Shumaylov, Z., Zhao, Y., et al. (2024). AI Models Collapse When Trained on Recursively Generated Data. Nature, 631(8022), 755–759.
+Shumailov I, Shumaylov Z, Zhao Y, et al. (2024) AI Models Collapse When Trained on Recursively Generated Data. Nature, 631(8022), 755–759.
 
-Polyzotis, N., Roy, S., Whang, S. E., & Zinkevich, M. (2017). Data Management Challenges in Production Machine Learning. Proceedings of the 2017 ACM International Conference on Management of Data (SIGMOD ’17), 1723–1726.
+Polyzotis N, Roy S, Whang S E, Zinkevich M (2017) Data Management Challenges in Production Machine Learning. Proceedings of the 2017 ACM International Conference on Management of Data (SIGMOD ’17), 1723–1726.
 
-Sculley, D., Holt, G., Golovin, D., et al. (2015). Hidden Technical Debt in Machine Learning Systems. Advances in Neural Information Processing Systems, 28, 2503–2511.
+Sculley D, Holt G, Golovin D, et al. (2015) Hidden Technical Debt in Machine Learning Systems. Advances in Neural Information Processing Systems, 28, 2503–2511.
 
-Gebru, T., Morgenstern, J., Vecchione, B., et al. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86–92.
+Gebru T, Morgenstern J, Vecchione B, et al. (2021) Datasheets for Datasets. Communications of the ACM, 64(12), 86–92.
 
-Pushkarna, M., Zaldivar, A., & Kjartansson, O. (2022). Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI. Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT ’22), 1776–1826.
+Pushkarna M, Zaldivar A, Kjartansson O (2022) Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI. Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (FAccT ’22), 1776–1826.
 
-Feng, S. Y., Gangal, V., Wei, J., et al. (2021). A Survey of Data Augmentation Approaches for NLP. Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, 968–988.
+Feng S Y, Gangal V, Wei J, et al. (2021) A Survey of Data Augmentation Approaches for NLP. Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, 968–988.
 
-Shorten, C., & Khoshgoftaar, T. M. (2019). A Survey on Image Data Augmentation for Deep Learning. Journal of Big Data, 6, Article 60.
+Shorten C, Khoshgoftaar T M (2019) A Survey on Image Data Augmentation for Deep Learning. Journal of Big Data, 6, Article 60.
 
-Mukherjee, S., Mitra, A., Jawahar, G., et al. (2023). Orca: Progressive Learning from Complex Explanation Traces of GPT-4. arXiv:2306.02707.
+Mukherjee S, Mitra A, Jawahar G, et al. (2023) Orca: Progressive Learning from Complex Explanation Traces of GPT-4. arXiv:2306.02707.
 
-Zhou, C., Liu, P., Xu, P., et al. (2023). LIMA: Less Is More for Alignment. Advances in Neural Information Processing Systems, 36. arXiv:2305.11206.
+Zhou C, Liu P, Xu P, et al. (2023) LIMA: Less Is More for Alignment. Advances in Neural Information Processing Systems, 36. arXiv:2305.11206.
 
-Chen, L., Li, S., Yan, J., et al. (2024). AlpaGasus: Training A Better Alpaca with Fewer Data. International Conference on Learning Representations (ICLR 2024). arXiv:2307.08701.
+Chen L, Li S, Yan J, et al. (2024) AlpaGasus: Training A Better Alpaca with Fewer Data. International Conference on Learning Representations (ICLR 2024). arXiv:2307.08701.
 
-Madaan, A., Tandon, N., Gupta, P., et al. (2023). Self-Refine: Iterative Refinement with Self-Feedback. Advances in Neural Information Processing Systems, 36.
+Madaan A, Tandon N, Gupta P, et al. (2023) Self-Refine: Iterative Refinement with Self-Feedback. Advances in Neural Information Processing Systems, 36.
 
-Chen, Z., Deng, Y., Yuan, H., et al. (2024). Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models. International Conference on Machine Learning (ICML 2024). arXiv:2401.01335.
+Chen Z, Deng Y, Yuan H, et al. (2024) Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models. International Conference on Machine Learning (ICML 2024). arXiv:2401.01335.
 
-Bai, Y., Kadavath, S., Kundu, S., et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv:2212.08073.
+Bai Y, Kadavath S, Kundu S, et al. (2022) Constitutional AI: Harmlessness from AI Feedback. arXiv:2212.08073.
 
-Liu, Y., Iter, D., Xu, Y., et al. (2023). G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522.
+Liu Y, Iter D, Xu Y, et al. (2023) G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 2511–2522.
 
-Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36.
+Zheng L, Chiang W-L, Sheng Y, et al. (2023) Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. Advances in Neural Information Processing Systems, 36.
 
-Lee, K., Ippolito, D., Nystrom, A., et al. (2022). Deduplicating Training Data Makes Language Models Better. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics, 8424–8445.
+Lee K, Ippolito D, Nystrom A, et al. (2022) Deduplicating Training Data Makes Language Models Better. Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics, 8424–8445.
 
-Wang, Y., Mishra, S., Alipoormolabashi, P., et al. (2022). Super-NaturalInstructions: Generalization via Declarative Instructions on 1600+ NLP Tasks. Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, 5085–5109.
+Wang Y, Mishra S, Alipoormolabashi P, et al. (2022) Super-NaturalInstructions: Generalization via Declarative Instructions on 1600+ NLP Tasks. Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, 5085–5109.
 
-Sambasivan, N., Kapania, S., Highfill, H., et al. (2021). “Everyone Wants to Do the Model Work, Not the Data Work”: Data Cascades in High-Stakes AI. Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems, Article 39.
+Sambasivan N, Kapania S, Highfill H, et al. (2021) “Everyone Wants to Do the Model Work, Not the Data Work”: Data Cascades in High-Stakes AI. Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems, Article 39.
 
-Shinn, N., Cassano, F., Gopinath, A., et al. (2023). Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36.
+Shinn N, Cassano F, Gopinath A, et al. (2023) Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36.

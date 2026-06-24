@@ -1072,7 +1072,11 @@ As part of Chapter 14, this chapter corresponds to the project-level empirical v
 ## References
 
 Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+
 Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+
 Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+
 MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+
 Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

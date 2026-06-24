@@ -415,28 +415,28 @@ Wang W, Lv Q, Yu W, Hong W, Qi J, Wang Y, Ji J, Yang Z, Zhao L, Song X, others (
 
 Wu X, Sun K, Zhu F, Zhao R, Li H (2023) Human Preference Score v2: A Solid Benchmark for Evaluating Human Preferences of Text-to-Image Synthesis (HPSv2). arXiv preprint arXiv:2306.09341.
 
-Betker, J., Goh, G., Jing, L., Brooks, T., Wang, J., Li, L., Ouyang, L., Zhuang, J., Lee, J., Guo, Y., Manassra, W., Dhariwal, P., Chu, C., Jiao, Y., Ramesh, A.: Improving Image Generation with Better Captions. OpenAI technical report (2023).
+Betker J, Goh G, Jing L, Brooks T, Wang J, Li L, Ouyang L, Zhuang J, Lee J, Guo Y, Manassra W, Dhariwal P, Chu C, Jiao Y, Ramesh A (2023) Improving Image Generation with Better Captions. OpenAI technical report.
 
 OpenAI: DALL·E 3 System Card. OpenAI system card (2023).
 
-Esser, P., Kulal, S., Blattmann, A., Entezari, R., Müller, J., Saini, H., Levi, Y., Lorenz, D., Sauer, A., Boesel, F., Podell, D., Dockhorn, T., English, Z., Lacey, K., Goodwin, A., Marek, Y., Rombach, R.: Scaling Rectified Flow Transformers for High-Resolution Image Synthesis. In: Proceedings of the 41st International Conference on Machine Learning, ICML 2024. arXiv:2403.03206 (2024).
+Esser P, Kulal S, Blattmann A, Entezari R, Müller J, Saini H, Levi Y, Lorenz D, Sauer A, Boesel F, Podell D, Dockhorn T, English Z, Lacey K, Goodwin A, Marek Y, Rombach R (2024) Scaling Rectified Flow Transformers for High-Resolution Image Synthesis. In: Proceedings of the 41st International Conference on Machine Learning, ICML 2024. arXiv:2403.03206.
 
 Black Forest Labs: FLUX.1 Kontext [dev] Model Card. Hugging Face model card (2025a).
 
 Black Forest Labs, Batifol, S., Blattmann, A., Boesel, F., Consul, S., Diagne, C., Dockhorn, T., English, J., English, Z., Esser, P., Kulal, S., Lacey, K., Levi, Y., Li, C., Lorenz, D., Müller, J., Podell, D., Rombach, R., Saini, H., Sauer, A., Smith, L.: FLUX.1 Kontext: Flow Matching for In-Context Image Generation and Editing in Latent Space. arXiv:2506.15742 (2025b).
 
-Kong, W., Tian, Q., Zhang, Z., Min, R., Dai, Z., Zhou, J., Xiong, J., Li, X., Wu, B., Zhang, J., et al.: HunyuanVideo: A Systematic Framework for Large Video Generative Models. arXiv:2412.03603 (2024).
+Kong W, Tian Q, Zhang Z, Min R, Dai Z, Zhou J, Xiong J, Li X, Wu B, Zhang J, et al. (2024) HunyuanVideo: A Systematic Framework for Large Video Generative Models. arXiv:2412.03603.
 
-Wan Team, Wang, A., Ai, B., Wen, B., Mao, C., Xie, C.-W., Chen, D., Yu, F., Zhao, H., Yang, J., et al.: Wan: Open and Advanced Large-Scale Video Generative Models. arXiv:2503.20314 (2025).
+Wan Team, Wang A, Ai B, Wen B, Mao C, Xie C-W, Chen D, Yu F, Zhao H, Yang J, et al. (2025) Wan: Open and Advanced Large-Scale Video Generative Models. arXiv:2503.20314.
 
 Wan-Video Team: Wan2.2: Wan: Open and Advanced Large-Scale Video Generative Models. GitHub repository and model documentation (2025).
 
-Peng, X., Zheng, Z., Shen, C., Young, T., Guo, X., Wang, B., Xu, H., Liu, H., Jiang, M., Li, W., et al.: Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k. arXiv:2503.09642 (2025).
+Peng X, Zheng Z, Shen C, Young T, Guo X, Wang B, Xu H, Liu H, Jiang M, Li W, et al. (2025) Open-Sora 2.0: Training a Commercial-Level Video Generation Model in $200k. arXiv:2503.09642.
 
-Lin, B., Ge, Y., Cheng, X., Li, Z., Zhu, B., Wang, S., He, X., Ye, Y., Yuan, S., Chen, L., et al.: Open-Sora Plan: Open-Source Large Video Generation Model. arXiv:2412.00131 (2024).
+Lin B, Ge Y, Cheng X, Li Z, Zhu B, Wang S, He X, Ye Y, Yuan S, Chen L, et al. (2024) Open-Sora Plan: Open-Source Large Video Generation Model. arXiv:2412.00131.
 
-Yang, Z., Teng, J., Zheng, W., Ding, M., Huang, S., Xu, J., Yang, Y., Hong, W., Zhang, X., Feng, G., et al.: CogVideoX: Text-to-Video Diffusion Models with An Expert Transformer. arXiv:2408.06072 (2024).
+Yang Z, Teng J, Zheng W, Ding M, Huang S, Xu J, Yang Y, Hong W, Zhang X, Feng G, et al. (2024) CogVideoX: Text-to-Video Diffusion Models with An Expert Transformer. arXiv:2408.06072.
 
 THUDM: CogVLM2-Caption for CogVideoX Training Data Captioning. CogVideo official tool documentation (2024).
 
-Hong, W., Wang, W., Ding, M., Yu, W., Lv, Q., Wang, Y., Cheng, Y., Huang, S., Ji, J., Xue, Z., et al.: CogVLM2: Visual Language Models for Image and Video Understanding. arXiv:2408.16500 (2024).
+Hong W, Wang W, Ding M, Yu W, Lv Q, Wang Y, Cheng Y, Huang S, Ji J, Xue Z, et al. (2024) CogVLM2: Visual Language Models for Image and Video Understanding. arXiv:2408.16500.
