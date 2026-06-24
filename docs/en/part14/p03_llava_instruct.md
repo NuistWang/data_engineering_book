@@ -59,14 +59,13 @@ The main text retains only the key implementation excerpts that illustrate desig
 
 Acceptance metrics include image-text consistency, task type coverage, OCR evidence usability, conversation turn distribution, format pass rate, and manual sampling quality. If the project enters a production, course, or public reproducibility environment, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample review records should also be documented.
 
+*Table P03-1: LLaVA Multimodal Instruction Data Factory Publication Acceptance Table.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Task boundary | Coverage records for LLaVA-style conversation templates, image descriptions, OCR, chart reading, bbox grounding, and multi-image comparison | State that this project is the classic LLaVA workflow baseline and does not include Qwen-VL factory-scale extension capabilities in project conclusions |
 | Image-text consistency | Visual spot-check samples, error sample attribution, image version and bbox replay records | Spot-checks must be traceable back to the original image, annotation boxes, OCR cues, and generated responses |
 | Training delivery | train/val/smoke splits, manifest, schema checks, and project inspection report | Training records must be stably consumable by downstream scripts, and report figures must match artifact counts |
 | Manual review | Sampling ratio, reviewer roles, failure sample handling status, and regeneration records | Grounding, OCR, and chart-type samples must not rely solely on automated rules for approval |
-
-*Table P03-1: LLaVA Multimodal Instruction Data Factory Publication Acceptance Table*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -306,14 +305,13 @@ Therefore, this project does not remain at COCO natural images but further deriv
 
 Table P03-2 summarizes the relationship between different asset types and their task mappings.
 
+*Table P03-2: Asset Types and Primary Risks Reference Table.*
 | Asset Type | Typical Source | Compatible Tasks | Primary Risks |
 | --- | --- | --- | --- |
 | `general_image` | COCO natural images, general scene photographs | Image description, counting, visual QA, local grounding | Hallucinated descriptions, missed objects, category confusion |
 | `document_image` | Document screenshots, receipts, policy pages, scanned documents | OCR summary, document QA, local reading | Missed text, layout misinterpretation, local region misalignment |
 | `chart_image` | Bar charts, line charts, report screenshots, dashboards | Chart reading, trend summarization, value comparison | Trend reversal, category relationship errors, missed values |
 | `interleaved_pair` | Multi-image pairs, cross-page samples, comparative screenshots | Multi-image comparison, shared feature summarization, difference identification | Order confusion, cross-image interference, pairing imbalance |
-
-*Table P03-2: Asset Types and Primary Risks Reference Table*
 
 ---
 
@@ -825,6 +823,7 @@ This indicates:
 
 Table P03-3 summarizes the relationships among task types, coverage capability, and engineering value.
 
+*Table P03-3: Task Types and Engineering Value Reference Table.*
 | Task Type | Primary Input | Primary Output | Coverage Capability | Engineering Value |
 | --- | --- | --- | --- | --- |
 | `image_description` | General images | Scene description | Whole-image understanding | Builds visual subject and scene expression capability |
@@ -834,8 +833,6 @@ Table P03-3 summarizes the relationships among task types, coverage capability, 
 | `chart_reading` | Chart images | Trend summary | Structural reading | Builds numerical relationship and structured interpretation capability |
 | `region_grounding` | Images + bounding boxes | Coordinate answers | Object alignment | Builds region-level supervision and grounding capability |
 | `multi_image_comparison` | Multi-image input | Comparative summary | Cross-image reasoning | Builds sequential awareness, difference identification, and information aggregation capability |
-
-*Table P03-3: Task Types and Engineering Value Reference Table*
 
 ### 17.3 Why a 100% Pass Rate Should Not Be Over-interpreted
 
@@ -862,6 +859,7 @@ These figures are modest, but they already reflect the cost structure of a small
 
 Table P03-4 summarizes the current project's costs, time investment, and manual effort.
 
+*Table P03-4: Project Items and Notes Reference Table.*
 | Item | Current Result | Notes |
 | --- | ---: | --- |
 | Total assets | 87 | Three asset categories, balanced at 29 each |
@@ -871,8 +869,6 @@ Table P03-4 summarizes the current project's costs, time investment, and manual 
 | External caption cost | $1.3 | Model cost for small-batch generation |
 | Manual review cost | 267 CNY | Demonstrates that multimodal QA is not a free step |
 | Project checks | 11 / 11 PASS | Code, data, and report closure established |
-
-*Table P03-4: Project Items and Notes Reference Table*
 
 ### 18.1 Why Manual Review Cost Deserves Separate Attention
 
@@ -927,6 +923,7 @@ These failure samples can be classified into at least the following types:
 
 Table P03-5 summarizes typical failure sample types and priority repair directions.
 
+*Table P03-5: Failure Types and Priority Repair Directions Reference Table.*
 | Failure Type | Typical Manifestation | Most Likely Source | Priority Repair Direction |
 | --- | --- | --- | --- |
 | Visual hallucination | Response describes objects or relationships not present in the image | Open-ended generation over-diverging, re-captioning too expansive | Tighten prompt, add constraints on salient objects |
@@ -934,8 +931,6 @@ Table P03-5 summarizes typical failure sample types and priority repair directio
 | Chart misinterpretation | Trend, category, or value relationships read in reverse | Unstable chart task templates, insufficient structural understanding | Tighten chart templates, add structural examples |
 | Grounding offset | Coordinates fall on adjacent target or box exceeds boundary | Bounding box conversion, normalization, or image version inconsistency | Back-render boxes for verification, check dimensions and clamping |
 | Multi-image confusion | Information from two images conflated into a single conclusion | Insufficient sequence control, unstable payload organization | Strengthen sequence identification, control multi-image sample complexity |
-
-*Table P03-5: Failure Types and Priority Repair Directions Reference Table*
 
 After aggregating these failure samples into a "failure attribution table," it can directly support the next round of template tightening, QA revision, and spot-check strategy adjustment.
 
@@ -1069,14 +1064,13 @@ As sample scale grows, pure manual spot-checking quickly becomes a bottleneck. T
 
 Table P03-6 summarizes the categories and roles of this project's deliverables.
 
+*Table P03-6: Categories and Roles Reference Table.*
 | Category | Representative Files | Role |
 | --- | --- | --- |
 | Assets and intermediate layer | `asset_manifest.jsonl`, `llava_alignment.jsonl`, `llava_interleaved.jsonl` | Records asset provenance, task derivation, and intermediate sample state |
 | Quality inspection and review layer | `quality_audit.jsonl`, `low_quality_flags.jsonl`, `qa_visual_audit.jsonl` | Accumulates rule check results, low-quality samples, and visual review outcomes |
 | Training delivery layer | `final_llava_dataset.jsonl`, `train.jsonl`, `val.jsonl`, `smoke_test.jsonl`, `training_manifest.json` | Provides entry points for training, validation, and connectivity checks |
 | Reports and verification layer | `p3_metrics.json`, `p3_report.md`, `p3_test_results.json`, `p3_test_report.md` | Records metrics, conclusions, and project-level inspection results |
-
-*Table P03-6: Categories and Roles Reference Table*
 
 ---
 
@@ -1136,8 +1130,12 @@ As part of Part 14, this chapter corresponds to the project-level validation of 
 
 ## References
 
-1. Liu, H., Li, C., Wu, Q., & Lee, Y. J. (2023). Visual Instruction Tuning. NeurIPS 2023. https://doi.org/10.52202/075280-1516.
-2. Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C. L. (2014). Microsoft COCO: Common Objects in Context. ECCV 2014. https://doi.org/10.1007/978-3-319-10602-1_48.
-3. Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., et al. (2021). Learning Transferable Visual Models From Natural Language Supervision. ICML 2021.
-4. Mathew, M., Karatzas, D., & Jawahar, C. V. (2021). DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
-5. Masry, A., Long, D. X., Tan, J. Q., Joty, S., & Hoque, E. (2022). ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.
+Liu H, Li C, Wu Q, Lee Y J (2023) Visual Instruction Tuning. NeurIPS 2023. https://doi.org/10.52202/075280-1516.
+
+Lin, T-Y, Maire M, Belongie S, Hays J, Perona P, Ramanan D, Dollár P, Zitnick C L (2014) Microsoft COCO: Common Objects in Context. ECCV 2014. https://doi.org/10.1007/978-3-319-10602-1_48.
+
+Radford A, Kim J W, Hallacy C, Ramesh A, Goh G, et al. (2021) Learning Transferable Visual Models From Natural Language Supervision. ICML 2021.
+
+Mathew M, Karatzas D, Jawahar C V (2021) DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
+
+Masry A, Long D X, Tan J Q, Joty S, Hoque E (2022) ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.

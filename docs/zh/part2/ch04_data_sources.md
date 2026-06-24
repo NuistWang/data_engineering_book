@@ -408,7 +408,6 @@ Grattafiori A, Dubey A, Jauhri A, Pandey A, Kadian A, Al-Dahle A, Letman A, Math
 
 Joulin A, Grave E, Bojanowski P, Douze M, Jegou H, Mikolov T (2017) FastText.zip: Compressing Text Classification Models. arXiv preprint arXiv:1612.03651.
 
-
 Lopez P (2009) GROBID: Combining Automatic Bibliographic Data Recognition and Term Extraction for Scholarship Publications. In: Proceedings of the 13th European Conference on Digital Libraries, pp 473-474.
 
 Li J, Fang A, Smyrnis G, Ivgi M, Jordan M, Gadre S, Bansal H, Guha E, Keh S, Arora K, Garg S, Xin R, Muennighoff N, Heckel R, Mercat J, Chen M, Gururangan S, Wortsman M, Albalak A, Bitton Y, Nezhurina M, Abbas A, Hsieh C, Ghosh D, Gardner J, Kilian M, Zhang H, Shao R, Pratt S, Sanyal S, Ilharco G, Daras G, Marathe K, Gokaslan A, Zhang J, Chandu K, Nguyen T, Vasiljevic I, Kakade S, Song S, Sanghavi S, Faghri F, Oh S, Zettlemoyer L, Lo K, El-Nouby A, Pouransari H, Toshev A, Wang S, Groeneveld D, Soldaini L, Koh P W, Jitsev J, Kollar T, Dimakis A G, Carmon Y, Dave A, Schmidt L, Shankar V (2024) DataComp-LM: In search of the next generation of training sets for language models. arXiv preprint arXiv:2406.11794.

@@ -250,10 +250,10 @@ MindSpore 的分布式训练能力通常可以从多个并行维度理解。数�
 
 ## 参考文献
 
-MindFace Contributors (2026) MindFace source repository. Available at: https://github.com/mindspore-lab/mindface.
+MindFace Contributors (2026) MindFace source repository. https://github.com/mindspore-lab/mindface.
 
-MindSpore Contributors (2026a) MindSpore Documentation. Available at: https://www.mindspore.cn/view/en.
+MindSpore Contributors (2026a) MindSpore Documentation. https://www.mindspore.cn/view/en.
 
-MindSpore Contributors (2026b) MindSpore source repository. Available at: https://github.com/mindspore-ai/mindspore.
+MindSpore Contributors (2026b) MindSpore source repository. https://github.com/mindspore-ai/mindspore.
 
-MindSpore Contributors (2026c) Automatic Differentiation, MindSpore Tutorials. Available at: https://www.mindspore.cn/tutorials/en/r2.9.0/beginner/autograd.html.
+MindSpore Contributors (2026c) Automatic Differentiation, MindSpore Tutorials. https://www.mindspore.cn/tutorials/en/r2.9.0/beginner/autograd.html.

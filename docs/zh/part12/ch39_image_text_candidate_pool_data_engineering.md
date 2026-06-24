@@ -261,14 +261,14 @@ LAION-5B 展示了开放图文候选池如何从网页 URL 和 alt text 变成�
 
 ## 参考文献
 
-Schuhmann, C., Beaumont, R., Vencu, R., Gordon, C., Wightman, R., Cherti, M., et al. (2022). LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.
+Schuhmann C, Beaumont R, Vencu R, Gordon C, Wightman R, Cherti M, et al. (2022) LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.
 
-LAION. (2022). LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.
+LAION (2022) LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.
 
-LAION-AI. (2022). dataset-spec. https://github.com/LAION-AI/dataset-spec.
+LAION-AI (2022) dataset-spec. https://github.com/LAION-AI/dataset-spec.
 
-Gadre, S. Y., Ilharco, G., Fang, A., Hayase, J., Smyrnis, G., Nguyen, T., et al. (2023). DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.
+Gadre S Y, Ilharco G, Fang A, Hayase J, Smyrnis G, Nguyen T, et al. (2023) DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.
 
-DataComp Team. (2026). DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.
+DataComp Team (2026) DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.
 
-ML Foundations. (2023). DataComp codebase. https://github.com/mlfoundations/datacomp.
+ML Foundations (2023) DataComp codebase. https://github.com/mlfoundations/datacomp.

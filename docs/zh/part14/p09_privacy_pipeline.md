@@ -1126,8 +1126,12 @@ P09 当前以规则、策略和运行流程为主，这很适合作为最小可�
 
 ## 参考文献
 
-1. European Union. (2016). Regulation (EU) 2016/679: General Data Protection Regulation. https://eur-lex.europa.eu/eli/reg/2016/679/oj.
-2. NIST. (2020). NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management, Version 1.0. https://doi.org/10.6028/nist.cswp.10.
-3. Dwork, C., & Roth, A. (2014). The Algorithmic Foundations of Differential Privacy. Foundations and Trends in Theoretical Computer Science.
-4. Kairouz, P., McMahan, H. B., Avent, B., Bellet, A., Bennis, M., Bhagoji, A. N., et al. (2021). Advances and Open Problems in Federated Learning. Foundations and Trends in Machine Learning.
-5. OWASP Foundation. (2025). OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.
+European Union (2016) Regulation (EU) 2016/679: General Data Protection Regulation. https://eur-lex.europa.eu/eli/reg/2016/679/oj.
+
+NIST (2020) NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management, Version 1.0. https://doi.org/10.6028/nist.cswp.10.
+
+Dwork C, Roth A (2014) The Algorithmic Foundations of Differential Privacy. Foundations and Trends in Theoretical Computer Science.
+
+Kairouz P, McMahan H B, Avent B, Bellet A, Bennis M, Bhagoji A N, et al. (2021) Advances and Open Problems in Federated Learning. Foundations and Trends in Machine Learning.
+
+OWASP Foundation (2025) OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.

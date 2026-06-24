@@ -4,6 +4,7 @@ This page lists high-frequency technical abbreviations used throughout the book 
 
 ## General Abbreviations
 
+*Table FM-1: General Abbreviations.*
 | Abbreviation | Full Name | Description | Main Locations |
 | --- | --- | --- | --- |
 | A100 | NVIDIA A100 GPU | NVIDIA A100 accelerator | Part 1, Part 10, Part 11 |
@@ -37,6 +38,7 @@ This page lists high-frequency technical abbreviations used throughout the book 
 
 ## Data Engineering and Platforms
 
+*Table FM-2: Data Engineering and Platforms.*
 | Abbreviation | Full Name | Description | Main Locations |
 | --- | --- | --- | --- |
 | DataOps | Data Operations | Data operations and data-engineering operations system | Part 2, Part 8, Part 10 |
@@ -58,6 +60,7 @@ This page lists high-frequency technical abbreviations used throughout the book 
 
 ## Training, Alignment, and Reasoning
 
+*Table FM-3: Training, Alignment, and Reasoning.*
 | Abbreviation | Full Name | Description | Main Locations |
 | --- | --- | --- | --- |
 | CoT | Chain-of-Thought | Chain-of-thought reasoning | Part 6, Part 10, Part 11 |
@@ -76,6 +79,7 @@ This page lists high-frequency technical abbreviations used throughout the book 
 
 ## Multimodality and Vision
 
+*Table FM-4: Multimodality and Vision.*
 | Abbreviation | Full Name | Description | Main Locations |
 | --- | --- | --- | --- |
 | BBox | Bounding Box | Bounding box | Part 3, Part 10, Part 11 |
@@ -99,6 +103,7 @@ This page lists high-frequency technical abbreviations used throughout the book 
 
 ## Evaluation, Compliance, and Governance
 
+*Table FM-5: Evaluation, Compliance, and Governance.*
 | Abbreviation | Full Name | Description | Main Locations |
 | --- | --- | --- | --- |
 | AGI-Eval | AGI Evaluation | Evaluation benchmark for general-intelligence capabilities | Part 11 |

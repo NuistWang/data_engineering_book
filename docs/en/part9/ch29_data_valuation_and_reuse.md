@@ -36,8 +36,7 @@ Before defining good valuation, it is useful to name the bad shortcuts. The idea
 
 The most common misjudgments can be summarized as four value illusions, corresponding to four different viewpoints across the data lifecycle. The first is the **scale illusion**: assuming that larger data volume means higher value and treating bytes, samples, or document counts as natural measures of value. The second is the **cost illusion**: assuming that data purchased or collected at higher cost must be more valuable, confusing input with output. The third is the **model-gain illusion**: assuming that any metric improvement caused by a dataset represents the asset's full value, equating local and short-term gains with durable asset value. The fourth is the **business-value illusion**: assuming that model-metric improvement automatically translates into equivalent business value. Table 29-1 summarizes these illusions and the reasons they fail.
 
-**Table 29-1: Four common illusions about data value**
-
+*Table 29-1: Four common illusions about data value.*
 | Illusion | Naive assumption | Why it fails |
 | --- | --- | --- |
 | Scale illusion | More data is more valuable | Marginal returns decline; redundancy and low quality can reduce performance |
@@ -135,8 +134,7 @@ Here $V_{train}$, $V_{retrieval}$, $V_{label}$, and $V_{risk}$ represent trainin
 
 Combining the preceding dimensions yields a data asset value metric table that can be used directly for evaluation and registration. Table 29-2 decomposes the abstract idea of "value" into concrete metrics that are measurable, comparable, and decision-oriented, and it marks each metric's view, calculation boundary, and main use.
 
-**Table 29-2: Data asset value metric table**
-
+*Table 29-2: Data asset value metric table.*
 | Metric | View | Calculation boundary | Main use |
 | --- | --- | --- | --- |
 | Reuse rate | Usage | Number of reuse scenarios or teams, optionally weighted | Identify core assets and leverage |
@@ -234,8 +232,7 @@ The corpus can potentially serve all five reuse paths from Section 29.3: improvi
 
 Input cost includes one-time acquisition cost and continuing maintenance cost.
 
-**Table 29-3: `fin_domain_corpus` input costs, annualized where applicable, in RMB 10k units**
-
+*Table 29-3: fin_domain_corpus input costs, annualized where applicable, in RMB 10k units.*
 | Cost item | Type | Amount | Description |
 | --- | --- | --- | --- |
 | Report licensing | One-time | 80 | Licensed industry research reports |
@@ -256,8 +253,7 @@ The corpus also reduces downstream risk because its provenance, review, anonymiz
 
 ### 29.4.4 Cross-Path Benefit Calculation
 
-**Table 29-4: Annual cross-path benefits for `fin_domain_corpus`, in RMB 10k units**
-
+*Table 29-4: Annual cross-path benefits for fin_domain_corpus, in RMB 10k units.*
 | Reuse path | Main value dimension | Annual benefit | Measurement basis |
 | --- | --- | --- | --- |
 | Pre-training | Training gain | 30 | Proxy-model financial capability uplift |
@@ -379,8 +375,7 @@ Without decision feedback, the pipeline is only another monitoring system.
 
 The first step in valuation is not calculation; it is forming a unified asset fact. Many organizations cannot value data not because they lack complex algorithms, but because they cannot answer basic questions: what is this asset, who owns it, who uses it, and can it be reused? Registration is the minimal fact table for valuation. It should connect the data catalog, lineage system, permission system, quality monitoring, and cost bills. If the organization has established data products and data contracts, the registration table should also reference the corresponding product ID and contract version.
 
-**Table 29-5: Example fields for data asset registration**
-
+*Table 29-5: Example fields for data asset registration.*
 | Field | Meaning | Valuation role |
 | --- | --- | --- |
 | asset_id | Unique data asset identifier | Primary key for attribution and cross-system joins |
@@ -410,8 +405,7 @@ Reuse rate cannot rely on manual forms forever. The pipeline should collect reus
 
 Each reuse event should record who used the asset, when, how, which version, and what result was observed.
 
-**Table 29-6: Example reuse event log fields**
-
+*Table 29-6: Example reuse event log fields.*
 | Field | Example | Description |
 | --- | --- | --- |
 | event_id | reuse_2026_0001 | Unique reuse event identifier |
@@ -448,8 +442,7 @@ Cost records should distinguish reducible and irreducible cost. Historical purch
 
 Valuation must become an actionable grade. One practical system is S/A/B/C/D:
 
-**Table 29-7: Example data asset value grades**
-
+*Table 29-7: Example data asset value grades.*
 | Grade | Criteria | Management action |
 | --- | --- | --- |
 | S | High benefit, high reuse, low or controlled risk | Protect, prioritize investment, strong SLA |
@@ -468,8 +461,7 @@ Ordinary monitoring asks what happened. Valuation also asks where resources shou
 
 ### 29.7.8 Engineering Checklist
 
-**Table 29-8: Data valuation engineering checklist**
-
+*Table 29-8: Data valuation engineering checklist.*
 | Check item | Passing standard |
 | --- | --- |
 | Asset registration | Key assets have unique ID, owner, source, compliance status, and version |
@@ -503,8 +495,7 @@ Mature value governance therefore needs cross-role collaboration. It does not ha
 
 RACI stands for Responsible, Accountable, Consulted, and Informed. It reduces ambiguity in value governance.
 
-**Table 29-9: Example RACI for data value governance**
-
+*Table 29-9: Example RACI for data value governance.*
 | Work item | R | A | C | I |
 | --- | --- | --- | --- | --- |
 | Asset registration | Data owner | Data domain lead | Platform team, compliance team | Downstream consumers |

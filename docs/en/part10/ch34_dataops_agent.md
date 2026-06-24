@@ -64,8 +64,7 @@ Data sources:
 
 The agent aligns timelines and uses causal signals to generate candidates.
 
-*Table 34-1: Root cause candidate types and detection logic*
-
+*Table 34-1: Root cause candidate types and detection logic.*
 | Root cause type | Pattern | Detection logic | Confidence |
 | --- | --- | --- | --- |
 | Upstream schema change | Change precedes first alert and affects all downstream tasks | Cross-check change records and alert timeline | 0.90 |
@@ -88,6 +87,7 @@ Calibration methods:
 
 *Confidence-to-action mapping*
 
+*Table 34-2: Confidence-to-action mapping.*
 | Raw confidence | Calibrated confidence | Automation action |
 | --- | --- | --- |
 | > 0.90 | Usually consistent | Push root cause and repair suggestion |
@@ -117,8 +117,7 @@ Aggregation strategies:
 2. **Time-window aggregation.** Merge repeated alerts of the same type within a window, such as five minutes, and attach count and trend.
 3. **Dynamic priority adjustment.** Adjust priority based on business impact and data volume. Low-priority 3 a.m. alerts can wait until working hours.
 
-*Table 34-2: Example alert aggregation effect*
-
+*Table 34-3: Example alert aggregation effect.*
 | Raw alerts | Aggregated alerts | Aggregation rate | Daily alerts handled by engineers |
 | --- | --- | --- | --- |
 | 200+ | 15-20 | ~90% | From 50+ to 12 |
@@ -145,8 +144,7 @@ Rollback is high risk and requires approval.
 
 *Figure 34-2: Rollback approval workflow.*
 
-*Table 34-3: Approval matrix for rollback and repair*
-
+*Table 34-4: Approval matrix for rollback and repair.*
 | Operation | Risk | Approval | Rollback plan |
 | --- | --- | --- | --- |
 | Field-level data repair | Low | Agent automatic plus post-hoc audit | Keep original values |
@@ -162,8 +160,7 @@ Beyond rollback and repair, a DataOps Agent can attempt limited self-healing aft
 
 Self-healing is bounded. The agent may only execute operations in a predefined safe operation set. Anything outside that set requires human approval.
 
-*Table 34-4: Self-healing permissions by data classification*
-
+*Table 34-5: Self-healing permissions by data classification.*
 | Self-healing operation | L0 public data | L1 internal data | L2 sensitive data | L3 confidential data |
 | --- | --- | --- | --- | --- |
 | Job rerun | Automatic | Automatic | Automatic, once | Approval |
@@ -192,8 +189,7 @@ Rollback plans must include:
 
 ### 34.2.5 Decision Support Matrix for Data Rollback
 
-*Table 34-5: Rollback versus repair decision support*
-
+*Table 34-6: Rollback versus repair decision support.*
 | Factor | Rollback option | Repair option | Agent analysis |
 | --- | --- | --- | --- |
 | Time cost | Snapshot restore plus downstream reruns | Script development plus validation | Estimate both using historical data |
@@ -219,8 +215,7 @@ Data platform cost is often ignored because billing is monthly. By the time the 
 
 ### 34.3.2 Automatic Optimization Suggestions
 
-*Table 34-6: Cost anomaly detection and optimization suggestions*
-
+*Table 34-7: Cost anomaly detection and optimization suggestions.*
 | Cost anomaly | Detection | Suggestion | Estimated saving |
 | --- | --- | --- | --- |
 | Intermediate table growth | Table size growth > daily mean by 5% | Set TTL and archive old partitions | 20-40% storage |
@@ -243,8 +238,7 @@ DataOps Agents should warn before resource exhaustion.
 
 Optimization requires knowing who spends what. Agents allocate platform cost by team, project, task type, and data source.
 
-*Table 34-7: Cost attribution dimensions*
-
+*Table 34-8: Cost attribution dimensions.*
 | Attribution dimension | Cost types | Attribution method |
 | --- | --- | --- |
 | Team | Storage, compute, labeling labor | Resource owner tags |
@@ -273,6 +267,7 @@ Postmortems are central to the DataOps flywheel, but engineers often skip them a
 
 *Postmortem draft template*
 
+*Table 34-9: Postmortem draft template.*
 | Element | Auto-fill source |
 | --- | --- |
 | Event timeline | Alert times, operation logs, approval records |
@@ -345,6 +340,7 @@ The rollout is gradual:
 
 ### Continuous MTTR Improvement
 
+*Table 34-10: Continuous MTTR Improvement.*
 | Stage | MTTR | Agent automation | Engineer satisfaction |
 | --- | --- | --- | --- |
 | Manual baseline | 45 min | 0% | 3.2/5, alert fatigue |
@@ -389,6 +385,7 @@ Technical path:
 
 *Reactive versus predictive operations*
 
+*Table 34-11: Reactive versus predictive operations.*
 | Dimension | Reactive operations | Predictive operations |
 | --- | --- | --- |
 | Trigger | After failure | Before failure |

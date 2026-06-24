@@ -56,8 +56,7 @@ As shown in Figure 44-1, the data recipe funnel narrows progressively from top t
 ![Figure 44-3: Hierarchical Map of Pretraining Data Sources](../../images/part13/ch44_03_pretrain_data_source_map.png)
 <div align="center"><b>Figure 44-3: Hierarchical Map of Pretraining Data Sources (redrawn from the foundational figure in Chapter 4)</b></div>
 
-**Table 44-1: Data Transparency Spectrum of Leading Open-Source LLMs (6 rows × 5 columns)**
-
+*Table 44-1: Data Transparency Spectrum of Leading Open-Source LLMs (6 rows × 5 columns).*
 | Model Family | Source Category Disclosure | Mixture Ratio Disclosure | Cleaning Rules / Code Disclosure | Pretraining Data Downloadable | Overall Transparency Rating |
 |---|---|---|---|---|---|
 | DeepSeek-V3 | Detailed high-level categories | Macro ratios disclosed | High-level strategy descriptions only | No | Grey-box (partially transparent) |
@@ -73,8 +72,7 @@ After filtering out promotional language in technical reports, the critical ques
 
 *(Note: Figures in the table follow the annotation convention: [D] = explicitly disclosed in the report; [I] = reasonable inference based on model behavior and known information; [E] = community or author estimate.)*
 
-**Table 44-2: Pretraining Data Composition Comparison for Leading Open-Source LLMs (6 rows × 8 columns)**
-
+*Table 44-2: Pretraining Data Composition Comparison for Leading Open-Source LLMs (6 rows × 8 columns).*
 | Data Category | Subcategory / Characteristics | Quality Requirements | DeepSeek-V3 (14.8T) | Qwen2.5 (18T) | Qwen3 (inferred) | Llama-3.1/3.3 (inferred) | OLMo-2 (inferred) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **General Web Text** | High-quality web pages | Very high; deduplicated, marketing content removed | ~50% [I] | ~55% [I] | ~50% [E] | ~50% [I], used in phased manner; high-frequency front-loaded | High proportion; strict deduplication, multi-tier filtering |
@@ -145,8 +143,7 @@ As a fully open-source project, OLMo-2's code data sources are more transparent,
 
 OLMo-2 emphasizes multi-language coverage and project structure preservation in its code data processing: each sample attempts to retain the original project's directory and file hierarchy so the model can learn modular design, dependency relationships, and naming conventions. Deduplication is strictly enforced to prevent the model from memorizing templated code patterns, while in mathematical derivation and algorithm implementation code, complete logic and comments are preserved to assist the model in learning higher-order logical reasoning.
 
-**Table 44-3: Code Data Sources and Scale for Leading Models (4 rows × 6 columns)**
-
+*Table 44-3: Code Data Sources and Scale for Leading Models (4 rows × 6 columns).*
 | Model Family | Estimated Total Code Scale | GitHub Source Code Share | Interactive Notebooks / Q&A Share | Cross-File Parsing (Repo-level) | Format Preservation Strategy |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **DeepSeek-V3** | ~2.5T tokens [E] | ~70% [E] | ~30% [E] | Strong support, topological sorting [D] | Indentation and directory tree preserved |
@@ -203,8 +200,7 @@ In practice, all three strategies—natural long-form text, synthetically genera
 
 This multi-strategy approach to long-text construction embodies the principle of "balancing quantity and quality, structure and coverage" in large model training. It provides a practical pathway for achieving stable and efficient long-context learning, and offers a replicable reference framework for downstream model transfer and data engineering design.
 
-**Table 44-4: Long-Context Data Strategies for Leading Models (4 rows × 6 columns)**
-
+*Table 44-4: Long-Context Data Strategies for Leading Models (4 rows × 6 columns).*
 | Model Family | Maximum Context Window | Long-Text Data Sources | Short-Document Packing Strategy | RoPE Scaling and Fine-Tuning Phase | Performance Penalty Control |
 |---|---:|---|---|---|---|
 | DeepSeek-V3 | 128K [D] | Long-form books / repo-level code | Cross-document packing with isolation | RoPE base frequency extended in final annealing phase [D] | YaRN (Peng et al. 2023); minimal precision loss |

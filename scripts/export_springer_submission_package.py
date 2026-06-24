@@ -68,12 +68,12 @@ def ignore_system_files(_dir: str, names: list[str]) -> set[str]:
     return {name for name in names if name == ".DS_Store" or name == "__MACOSX"}
 
 
-def copy_tree(src: Path, dst: Path) -> None:
+def copy_tree(src: Path, dst: Path, ignore=None) -> None:
     if not src.exists():
         return
     if dst.exists():
         shutil.rmtree(dst)
-    shutil.copytree(src, dst, ignore=ignore_system_files)
+    shutil.copytree(src, dst, ignore=ignore or ignore_system_files)
 
 
 def latex_root_tex() -> Path:
@@ -133,10 +133,6 @@ def rewrite_latex_package_paths(package_dir: Path) -> None:
 def copy_markdown_sources(package_dir: Path) -> None:
     source_root = package_dir / "Source_Files"
     copy_tree(ROOT / "docs" / "en", source_root / "Markdown" / "docs_en")
-    copy_tree(ROOT / "docs" / "zh", source_root / "Markdown" / "docs_zh_reference")
-    copy_file(ROOT / "mkdocs.yml", source_root / "mkdocs.yml")
-    copy_file(ROOT / "README.md", source_root / "README.md")
-    copy_file(ROOT / "publishing" / "12_figures_tables_register.md", source_root / "12_figures_tables_register.md")
     copy_tree(LATEX_PARTS_DIR, source_root / "LaTeX" / "parts")
     copy_tree(LATEX_CHAPTERS_DIR, source_root / "LaTeX" / "chapters")
     copy_tree(LATEX_ASSETS_DIR, source_root / "LaTeX" / "assets")
@@ -153,12 +149,24 @@ def copy_metadata(package_dir: Path) -> None:
 
 
 def copy_permissions_and_audits(package_dir: Path) -> None:
-    copy_tree(ROOT / "publishing" / "permissions", package_dir / "Permissions")
+    def ignore_non_submission_permissions(_dir: str, names: list[str]) -> set[str]:
+        skipped = ignore_system_files(_dir, names)
+        skipped.update(name for name in names if name.endswith("_zh.md"))
+        return skipped
+
+    copy_tree(ROOT / "publishing" / "permissions", package_dir / "Permissions", ignore=ignore_non_submission_permissions)
     copy_tree(ROOT / "publishing" / "final_review", package_dir / "Audit_Reports")
 
 
 def copy_accessibility(package_dir: Path) -> None:
-    copy_tree(ACCESSIBILITY_DIR, package_dir / "Accessibility")
+    dst = package_dir / "Accessibility"
+    if dst.exists():
+        shutil.rmtree(dst)
+    dst.mkdir(parents=True, exist_ok=True)
+    for src in sorted(ACCESSIBILITY_DIR.glob("springer_alt_text_inventory.*")):
+        if src.suffix.lower() not in {".xlsx", ".csv", ".json"}:
+            continue
+        copy_file(src, dst / src.name)
 
 
 def copy_pdfs(package_dir: Path) -> None:
@@ -194,16 +202,29 @@ This folder is the publisher-facing Springer submission package generated from t
 
 | Folder | Purpose |
 | --- | --- |
-| `Source_Files/Markdown` | English manuscript sources plus Chinese reference sources. |
+| `Source_Files/Markdown` | English manuscript Markdown sources only. |
 | `Source_Files/LaTeX` | LaTeX export sources, including `{latex_source}`, `chapters/` independent chapter/contribution `.tex` files, `parts/` review-group `.tex` files, and LaTeX assets. |
 | `Full_PDF` | Complete paginated review PDF. Current PDF count: {full_pdf_count}. |
 | `Chapter_PDFs` | Springer reference PDF set: front matter PDF, chapter/project/appendix PDFs, and back matter PDF when applicable. Current PDF count: {chapter_pdf_count}. |
-| `Figures` | Figure files referenced by the English manuscript, with `figures_manifest.csv`. |
+| `Figures` | Figure files referenced by the English manuscript. |
 | `Accessibility` | Springer alt-text Excel workbook plus CSV/JSON sidecars for all manuscript images. |
 | `Permissions` | Author/editor-provided third-party permission evidence copied as-is. |
 | `Declarations` | Declaration and metadata templates for publisher workflow completion. |
 | `Audit_Reports` | Machine audit reports plus human signoff/exception notes. |
 | `Checksums` | SHA-256 manifests for package integrity verification. |
+
+## ZIP Scope
+
+When `--zip` is used, the ZIP archive is intentionally limited to the publisher-facing submission set:
+
+- `Source_Files`
+- `Full_PDF`
+- `Chapter_PDFs`
+- `Figures`
+- `Accessibility/springer_alt_text_inventory.xlsx`
+- this `README.md`
+
+The auxiliary workflow folders `Metadata`, `Permissions`, `Declarations`, `Audit_Reports`, and `Checksums` remain available in the unpacked package directory for handoff and internal review, but they are not included in the ZIP archive.
 
 ## Submission Notes
 
@@ -249,7 +270,6 @@ def markdown_image_targets(markdown_path: Path) -> set[Path]:
 
 def copy_figures(package_dir: Path) -> None:
     figure_root = package_dir / "Figures"
-    manifest_rows: list[dict[str, str]] = []
     targets: set[Path] = set()
     for markdown_path in sorted((ROOT / "docs" / "en").rglob("*.md")):
         targets.update(markdown_image_targets(markdown_path))
@@ -257,13 +277,6 @@ def copy_figures(package_dir: Path) -> None:
         rel = src.relative_to(ROOT)
         dst = figure_root / rel
         copy_file(src, dst)
-        manifest_rows.append({"source": rel.as_posix(), "package_path": dst.relative_to(package_dir).as_posix()})
-    if manifest_rows:
-        figure_root.mkdir(parents=True, exist_ok=True)
-        with (figure_root / "figures_manifest.csv").open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=["source", "package_path"])
-            writer.writeheader()
-            writer.writerows(manifest_rows)
 
 
 def collect_manifest(package_dir: Path) -> list[ManifestRow]:
@@ -308,11 +321,19 @@ def create_zip_archive(package_dir: Path) -> Path:
     zip_path = package_dir.with_suffix(".zip")
     if zip_path.exists():
         zip_path.unlink()
+    auxiliary_dirs = {"Metadata", "Permissions", "Declarations", "Audit_Reports", "Checksums"}
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(package_dir.rglob("*")):
             if not path.is_file():
                 continue
             if should_skip_path(path):
+                continue
+            rel_to_package = path.relative_to(package_dir)
+            if rel_to_package.parts and rel_to_package.parts[0] in auxiliary_dirs:
+                continue
+            if path.name.endswith(".inspect.ndjson"):
+                continue
+            if rel_to_package.parts[:1] == ("Accessibility",) and path.suffix.lower() != ".xlsx":
                 continue
             archive.write(path, path.relative_to(package_dir.parent).as_posix())
     return zip_path

@@ -285,8 +285,7 @@ For example, online logs can automatically filter out samples where "first param
 For this reason, log structure should be planned concurrently with sample structure design—not added as a patch after the system goes live. Once key states are not recorded, reconstructing the trajectories required for training from real-world behavior later becomes very difficult. For Tool-Use teams, sample format and log format are best organized from the start according to the same state model, so that offline and online can truly be connected. The typical tasks, core input fields, environment feedback fields, and recovery-related fields for different tool types are shown in Table 19-1.
 
 
-**Table 19-1: Tool Type and Sample Field Reference**
-
+*Table 19-1: Tool Type and Sample Field Reference.*
 | Tool Type | Typical Tasks | Core Input Fields | Core Environment Feedback Fields | Recovery-Related Fields | Notes |
 |---|---|---|---|---|---|
 | Search tools | Web search, document retrieval, knowledge query | query, filters, top_k, time_range | hits, source, snippet, empty_result | reformulated_query, fallback_source | Emphasize query rewriting and empty-result recovery |
@@ -481,7 +480,7 @@ The tool layer is not static. Tool names change, fields are added or deprecated,
 Therefore, tool data governance must include a version management mechanism. Training samples need to mark the tool version; evaluation sets should roll forward with the online version; call logs should also retain the version information at the time of actual execution. Otherwise, teams fall into a common pitfall: the model performs well on offline evaluation, yet online calls continue failing inexplicably—the actual reason being only that training data and real tools are no longer on the same semantic plane.
 
 
-**Table 19-2: Security Risk and Constraint Mechanism Reference**
+*Table 19-2: Security Risk and Constraint Mechanism Reference.*
 | Risk Type | Typical Manifestation | Possible Consequence | Constraint Mechanism | Data Sample Requirement |
 |---|---|---|---|---|
 | Unauthorized access | Requesting to read unauthorized resources, modify restricted objects | Data leakage, compliance risk | Permission validation, read-only mode, explicit rejection | Must include rejection-call and safety-explanation samples |
@@ -522,38 +521,38 @@ Looking toward future practice, three capabilities deserve continued investment.
 
 ## References
 
-Karpas, E., Abend, O., Belinkov, Y., et al. (2022). MRKL Systems: A Modular, Neuro-Symbolic Architecture That Combines Large Language Models, External Knowledge Sources and Discrete Reasoning. arXiv:2205.00445.
+Karpas E, Abend O, Belinkov Y, et al. (2022) MRKL Systems: A Modular, Neuro-Symbolic Architecture That Combines Large Language Models, External Knowledge Sources and Discrete Reasoning. arXiv:2205.00445.
 
-Parisi, A., Zhao, Y., & Fiedel, N. (2022). TALM: Tool Augmented Language Models. arXiv:2205.12255.
+Parisi A, Zhao Y, Fiedel N (2022) TALM: Tool Augmented Language Models. arXiv:2205.12255.
 
-Nakano, R., Hilton, J., Balaji, S., et al. (2021). WebGPT: Browser-Assisted Question-Answering with Human Feedback. arXiv:2112.09332.
+Nakano R, Hilton J, Balaji S, et al. (2021) WebGPT: Browser-Assisted Question-Answering with Human Feedback. arXiv:2112.09332.
 
-Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.
+Yao S, Zhao J, Yu D, et al. (2023) ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.
 
-Schick, T., Dwivedi-Yu, J., Dessì, R., et al. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
+Schick T, Dwivedi-Yu J, Dessì R, et al. (2023) Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
 
-Li, M., Zhao, Y., Yu, B., et al. (2023). API-Bank: A Comprehensive Benchmark for Tool-Augmented LLMs. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 3102–3116. https://doi.org/10.18653/v1/2023.emnlp-main.187.
+Li M, Zhao Y, Yu B, et al. (2023) API-Bank: A Comprehensive Benchmark for Tool-Augmented LLMs. Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing, 3102–3116. https://doi.org/10.18653/v1/2023.emnlp-main.187.
 
-Qin, Y., Liang, S., Ye, Y., et al. (2024). ToolLLM: Facilitating Large Language Models to Master 16000+ Real-World APIs. International Conference on Learning Representations.
+Qin Y, Liang S, Ye Y, et al. (2024) ToolLLM: Facilitating Large Language Models to Master 16000+ Real-World APIs. International Conference on Learning Representations.
 
-Patil, S. G., Zhang, T., Wang, X., & Gonzalez, J. E. (2024). Gorilla: Large Language Model Connected with Massive APIs. Advances in Neural Information Processing Systems, 37. arXiv:2305.15334.
+Patil S G, Zhang T, Wang X, Gonzalez J E (2024) Gorilla: Large Language Model Connected with Massive APIs. Advances in Neural Information Processing Systems, 37. arXiv:2305.15334.
 
-Zhuang, Y., Yu, Y., Wang, K., et al. (2023). ToolQA: A Dataset for LLM Question Answering with External Tools. Advances in Neural Information Processing Systems, 36. https://doi.org/10.52202/075280-2180.
+Zhuang Y, Yu Y, Wang K, et al. (2023) ToolQA: A Dataset for LLM Question Answering with External Tools. Advances in Neural Information Processing Systems, 36. https://doi.org/10.52202/075280-2180.
 
-Huang, Y., Shi, J., Li, Y., et al. (2023). MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use. arXiv:2310.03128.
+Huang Y, Shi J, Li Y, et al. (2023) MetaTool Benchmark for Large Language Models: Deciding Whether to Use Tools and Which to Use. arXiv:2310.03128.
 
-Patil, S. G., Mao, H., Yan, F., et al. (2025). The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models. Proceedings of the 42nd International Conference on Machine Learning, Proceedings of Machine Learning Research, 267, 48371–48392.
+Patil S G, Mao H, Yan F, et al. (2025) The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models. Proceedings of the 42nd International Conference on Machine Learning, Proceedings of Machine Learning Research, 267, 48371–48392.
 
-Yao, S., Shinn, N., Razavi, P., & Narasimhan, K. (2025). τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains. International Conference on Learning Representations.
+Yao S, Shinn N, Razavi P, Narasimhan K (2025) τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains. International Conference on Learning Representations.
 
-Shinn, N., Cassano, F., Gopinath, A., et al. (2023). Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
+Shinn N, Cassano F, Gopinath A, et al. (2023) Reflexion: Language Agents with Verbal Reinforcement Learning. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
 
-Yang, J., Jimenez, C. E., Wettig, A., et al. (2024). SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering. Advances in Neural Information Processing Systems, 37. https://doi.org/10.52202/079017-1601.
+Yang J, Jimenez C E, Wettig A, et al. (2024) SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering. Advances in Neural Information Processing Systems, 37. https://doi.org/10.52202/079017-1601.
 
-Ruan, Y., Dong, H., Wang, A., et al. (2024). Identifying the Risks of LM Agents with an LM-Emulated Sandbox. International Conference on Learning Representations.
+Ruan Y, Dong H, Wang A, et al. (2024) Identifying the Risks of LM Agents with an LM-Emulated Sandbox. International Conference on Learning Representations.
 
-Greshake, K., Abdelnabi, S., Mishra, S., et al. (2023). Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection. Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security, 79–90. https://doi.org/10.1145/3605764.3623985.
+Greshake K, Abdelnabi S, Mishra S, et al. (2023) Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection. Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security, 79–90. https://doi.org/10.1145/3605764.3623985.
 
-Liu, Y., Deng, G., Li, Y., et al. (2023). Prompt Injection Attack against LLM-Integrated Applications. arXiv:2306.05499.
+Liu Y, Deng G, Li Y, et al. (2023) Prompt Injection Attack against LLM-Integrated Applications. arXiv:2306.05499.
 
-Debenedetti, E., Zhang, J., Balunović, M., et al. (2024). AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents. Advances in Neural Information Processing Systems, 37.
+Debenedetti E, Zhang J, Balunović M, et al. (2024) AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents. Advances in Neural Information Processing Systems, 37.

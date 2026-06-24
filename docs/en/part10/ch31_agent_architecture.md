@@ -62,8 +62,7 @@ Four high-frequency task categories in LLM data engineering are naturally suited
 
 ### 31.1.2 Benefit and Risk Matrix
 
-*Table 31-1: Benefit and risk assessment for agentizing high-frequency data engineering tasks*
-
+*Table 31-1: Benefit and risk assessment for agentizing high-frequency data engineering tasks.*
 | Task type | Average manual time | Time after agentization | Risk level | Suggested automation level |
 | --- | --- | --- | --- | --- |
 | Parser exception detection and attribution | 30 min | 2 min | Low | Semi-automatic: agent suggests, human confirms |
@@ -123,8 +122,7 @@ Task boundaries must be constrained through layering. Each layer owns one type o
 
 *Figure 31-1: Six-layer architecture for data engineering agents.*
 
-*Table 31-2: Responsibility boundaries and failure modes of six layers*
-
+*Table 31-2: Responsibility boundaries and failure modes of six layers.*
 | Layer | Core responsibility | Boundary that must not be crossed | Typical failure mode |
 | --- | --- | --- | --- |
 | Planner | Generate task plans, split substeps, select tools | Must not execute tools directly | Bad plan not detected before execution |
@@ -151,8 +149,7 @@ Planner design principles:
 
 The Tool Executor maps abstract plan steps to concrete tool calls. It maintains a **Tool Registry** where each tool declares capability boundaries, parameter schema, risk level, required permission, and rollback support.
 
-*Table 31-3: Example agent tool registry*
-
+*Table 31-3: Example agent tool registry.*
 | Tool | Capability | Risk | Required permission | Rollback support |
 | --- | --- | --- | --- | --- |
 | `data_profiler` | Generate data quality report | Low | read | N/A |
@@ -268,8 +265,7 @@ Hard constraints:
 
 ### 31.2.9 Failure Isolation and Degradation
 
-*Table 31-4: Degradation strategies for six-layer failures*
-
+*Table 31-4: Degradation strategies for six-layer failures.*
 | Failed layer | Failure type | Degradation strategy | Recovery condition |
 | --- | --- | --- | --- |
 | Planner | Plan generation timeout or unreasonable plan | Use templated plan based on known successful plans | Resume after three successful manual plans |
@@ -285,8 +281,7 @@ The key principle is that degradation must increase human involvement. When auto
 
 DataAgent can be understood as an Agentic Data Engineering framework for enterprise data tasks. It does not put every capability into one large model. Instead, configuration, tools, sub-agents, semantic layer, and workspace turn natural-language tasks into manageable engineering units.
 
-*Table 31-5: Mapping DataAgent to the six-layer architecture*
-
+*Table 31-5: Mapping DataAgent to the six-layer architecture.*
 | Architecture layer | DataAgent capability | Meaning for data engineering agents |
 | --- | --- | --- |
 | Planner | FlexAgent, ReAct main agent, `SCENARIO`, task prompts | Convert business questions into executable steps and decide when to call tools or sub-agents |
@@ -310,8 +305,7 @@ DataAgent has three roles in this part:
 
 Not all data engineering tasks are suitable for fully automatic execution. This chapter proposes a four-level automation model, where each level corresponds to different agent permissions and human involvement.
 
-*Table 31-6: Four-level automation matrix*
-
+*Table 31-6: Four-level automation matrix.*
 | Level | Name | Agent role | Human role | Typical tasks | Hard constraint |
 | --- | --- | --- | --- | --- | --- |
 | L1 | Recommendation | Analyze and suggest | Decide and execute | Alert attribution, quality report interpretation | Agent performs no writes |
@@ -349,8 +343,7 @@ A minimum viable Data Engineering Agent should complete this loop independently:
 
 ### 31.4.2 Technology Choices
 
-*Table 31-7: Technology choices for MVP components*
-
+*Table 31-7: Technology choices for MVP components.*
 | Component | Minimal implementation | Recommended implementation |
 | --- | --- | --- |
 | Planner | Rule-based step templates | LLM plus few-shot prompts and tool descriptions |
@@ -376,8 +369,7 @@ Business question
 
 This usually maps to L1-L2. The agent may read metadata, generate SQL, execute read-only queries, and save results, but it should not rewrite schemas, publish metric definitions, or trigger downstream production pipelines.
 
-*Table 31-8: Configuration gates for a DataAgent semantic query MVP*
-
+*Table 31-8: Configuration gates for a DataAgent semantic query MVP.*
 | Configuration surface | Typical content | MVP gate |
 | --- | --- | --- |
 | `MODEL` | chat model, temperature, base URL, API key | Config loads; secrets are not stored in repository or written config |
@@ -406,6 +398,7 @@ Input quality report for `orders`:
 
 *Planner output*
 
+*Table 31-9: Planner output.*
 | Step | Tool | Target | Estimated rows | Risk |
 | --- | --- | --- | --- | --- |
 | Step 1 | `field_fixer` | Normalize `order_date` | ~1500 | Low |
@@ -463,8 +456,7 @@ The architecture assumes every layer can fail and prevents one failure from beco
 
 ### Production Agent Maturity Model
 
-*Table 31-9: Data engineering agent maturity model*
-
+*Table 31-10: Data engineering agent maturity model.*
 | Maturity | Characteristics | Automation | Human intervention | Typical timeline |
 | --- | --- | --- | --- | --- |
 | L0: Manual | All tasks done by humans | 0% | 100% | Baseline |

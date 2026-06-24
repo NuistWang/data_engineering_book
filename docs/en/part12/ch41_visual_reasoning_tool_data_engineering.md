@@ -123,6 +123,7 @@ The example is one integrated science infographic. Its internal regions belong t
 
 #### Case A.3.2 Full Question Chain
 
+*Table 41-1: Case A.3.2 Full Question Chain.*
 | ID | Type | Question | Answer | Evidence Source | Dependency |
 | --- | --- | --- | --- | --- | --- |
 | Q1 | Maximum lookup | Which U.S. county has the highest historical shark-attack count? | Volusia, FL | Subchart A | None |
@@ -278,6 +279,7 @@ The basic idea of MedImage-ToolVQA can therefore be summarized as follows: trans
 
 MedImage-ToolVQA targets medical image multiple-choice QA. Samples are built on region-level information from BiomedParse (Zhao et al. 2025), including original image, target region, mask, bbox, target description, question, candidate options, correct answer, and local observation images returned by tools. The final training data has **24,992 records**.
 
+*Table 41-2: Case B.3: Data Objects and Scale.*
 | Metric | Value | Data-Engineering Meaning |
 | --- | ---: | --- |
 | Total records | 24,992 | Medical image tool-use samples for training and evaluation |
@@ -478,6 +480,7 @@ MedImage-ToolVQA uses three visual tools: `Zoom-in`, `BiomedParse`, and `SAM2`. 
 
 `SAM2` is a general bbox-prompted segmentation tool (Ravi et al. 2025). It does not rely on medical semantics; instead, it generates a finer mask from a geometric prompt. For samples that already have a candidate box but need a clearer boundary, `SAM2` can provide supplementary observation. Its main risk is strong dependence on bbox quality: if the bbox covers background or adjacent structures, the segmentation result will also be affected.
 
+*Table 41-3: Case B.6: Three Tools and Their Boundaries.*
 | Tool | Main Input | Return | Best For | Risks to Control |
 | --- | --- | --- | --- | --- |
 | `Zoom-in` | Image index, bbox coordinates | Local crop image | Region too small, whole-image resolution insufficient, detail review needed | Bbox drift, over-cropping, context loss |
@@ -689,6 +692,7 @@ The fifth failure is observation not consumed. The model calls a tool and the to
 
 The sixth failure is over-calling. The model calls a tool even when the whole image is sufficient, or it calls multiple tools in sequence without gaining new information. Over-calling increases inference cost and can introduce latency and error accumulation in a real system. The training set therefore needs to preserve a certain proportion of direct visual reasoning samples, and evaluation should distinguish necessary tool use from formalized tool use.
 
+*Table 41-4: Case B.9: Common Failure Modes.*
 | Failure Mode | Symptom | Risk | Governance Method |
 | --- | --- | --- | --- |
 | Text-answerable question | Can answer without image | Model ignores visual input | No-image check, rewrite or filter |
@@ -829,44 +833,44 @@ The main method in this chapter is to decompose visual reasoning tasks into anno
 
 ## References
 
-Masry, A., Long, D. X., Tan, J. Q., Joty, S., & Hoque, E. (2022). ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.
+Masry A, Long D X, Tan J Q, Joty S, Hoque E (2022) ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.
 
-Methani, N., Ganguly, P., Khapra, M. M., & Kumar, P. (2020). PlotQA: Reasoning over Scientific Plots. WACV 2020. https://doi.org/10.1109/wacv45572.2020.9093523.
+Methani N, Ganguly P, Khapra M M, Kumar P (2020) PlotQA: Reasoning over Scientific Plots. WACV 2020. https://doi.org/10.1109/wacv45572.2020.9093523.
 
-Kahou, S. E., Michalski, V., Atkinson, A., Kádár, Á., Trischler, A., & Bengio, Y. (2017). FigureQA: An Annotated Figure Dataset for Visual Reasoning. arXiv:1710.07300.
+Kahou S E, Michalski V, Atkinson A, Kádár Á, Trischler A, Bengio Y (2017) FigureQA: An Annotated Figure Dataset for Visual Reasoning. arXiv:1710.07300.
 
-Kafle, K., Price, B., Cohen, S., & Kanan, C. (2018). DVQA: Understanding Data Visualizations via Question Answering. CVPR 2018. https://doi.org/10.1109/cvpr.2018.00592.
+Kafle K, Price B, Cohen S, Kanan C (2018) DVQA: Understanding Data Visualizations via Question Answering. CVPR 2018. https://doi.org/10.1109/cvpr.2018.00592.
 
-Mathew, M., Karatzas, D., & Jawahar, C. V. (2021). DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
+Mathew M, Karatzas D, Jawahar C V (2021) DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
 
-Masry, A., Islam, M. S., Ahmed, M., Bajaj, A., Kabir, F., Kartha, A., ... & Joty, S. (2025, July). Chartqapro: A more diverse and challenging benchmark for chart question answering. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 19123-19151). https://doi.org/10.18653/v1/2025.findings-acl.978.
+Masry A, Islam M S, Ahmed M, Bajaj A, Kabir F, Kartha A, et al. (2025) Chartqapro: A more diverse and challenging benchmark for chart question answering. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 19123-19151). https://doi.org/10.18653/v1/2025.findings-acl.978.
 
-Xie, T., Lin, M., Liu, M., Ye, Y., Chen, C., & Liu, S. (2026). Infochartqa: A benchmark for multimodal question answering on infographic charts. Advances in Neural Information Processing Systems, 38.
+Xie T, Lin M, Liu M, Ye Y, Chen C, Liu S (2026) Infochartqa: A benchmark for multimodal question answering on infographic charts. Advances in Neural Information Processing Systems, 38.
 
-Foroutan, N., Romanou, A., Ansaripour, M., Eisenschlos, J. M., Aberer, K., & Lebret, R. (2025, July). Wikimixqa: a multimodal benchmark for question answering over tables and charts. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 24941-24958).
+Foroutan N, Romanou A, Ansaripour M, Eisenschlos J M, Aberer K, Lebret R (2025) Wikimixqa: a multimodal benchmark for question answering over tables and charts. In Findings of the Association for Computational Linguistics: ACL 2025 (pp. 24941-24958).
 
-Zhu, Z., Jia, M., Zhang, Z., Li, L., & Jiang, M. (2025, April). MultiChartQA: Benchmarking vision-language models on multi-chart problems. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) (pp. 11341-11359).
+Zhu Z, Jia M, Zhang Z, Li L, Jiang M (2025) MultiChartQA: Benchmarking vision-language models on multi-chart problems. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) (pp. 11341-11359).
 
-Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425-2433. https://doi.org/10.1109/ICCV.2015.279.
+Antol S, Agrawal A, Lu J, Mitchell M, Batra D, Zitnick C L, Parikh D (2015) VQA: Visual Question Answering. Proceedings of the IEEE International Conference on Computer Vision, 2425-2433. https://doi.org/10.1109/ICCV.2015.279.
 
-Lau, J. J., Gayen, S., Ben Abacha, A., & Demner-Fushman, D. (2018). A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251.
+Lau J J, Gayen S, Ben Abacha A, Demner-Fushman D (2018) A dataset of clinically generated visual questions and answers about radiology images. Scientific Data, 5, 180251. https://doi.org/10.1038/sdata.2018.251.
 
-He, X., Zhang, Y., Mou, L., Xing, E., & Xie, P. (2020). PathVQA: 30000+ Questions for Medical Visual Question Answering. arXiv:2003.10286.
+He X, Zhang Y, Mou L, Xing E, Xie P (2020) PathVQA: 30000+ Questions for Medical Visual Question Answering. arXiv:2003.10286.
 
-Liu, B., Zhan, L.-M., Xu, L., Ma, L., Yang, Y., & Wu, X.-M. (2021). SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010.
+Liu B, Zhan L-M, Xu L, Ma L, Yang Y, Wu X-M (2021) SLAKE: A Semantically-Labeled Knowledge-Enhanced Dataset for Medical Visual Question Answering. IEEE 18th International Symposium on Biomedical Imaging. https://doi.org/10.1109/ISBI48211.2021.9434010.
 
-Yao, S., Zhao, J., Yu, D., et al. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.
+Yao S, Zhao J, Yu D, et al. (2023) ReAct: Synergizing Reasoning and Acting in Language Models. International Conference on Learning Representations. arXiv:2210.03629.
 
-Schick, T., Dwivedi-Yu, J., Dessi, R., et al. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
+Schick T, Dwivedi-Yu J, Dessi R, et al. (2023) Toolformer: Language Models Can Teach Themselves to Use Tools. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
 
-Kirillov, A., Mintun, E., Ravi, N., et al. (2023). Segment Anything. Proceedings of the IEEE/CVF International Conference on Computer Vision, 4015-4026.
+Kirillov A, Mintun E, Ravi N, et al. (2023) Segment Anything. Proceedings of the IEEE/CVF International Conference on Computer Vision, 4015-4026.
 
-Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., et al. (2025). SAM 2: Segment Anything in Images and Videos. International Conference on Learning Representations.
+Ravi N, Gabeur V, Hu Y-T, Hu R, Ryali C, Ma T, et al. (2025) SAM 2: Segment Anything in Images and Videos. International Conference on Learning Representations.
 
-Ma, J., He, Y., Li, F., et al. (2024). Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z.
+Ma J, He Y, Li F, et al. (2024) Segment anything in medical images. Nature Communications, 15, 654. https://doi.org/10.1038/s41467-024-44824-z.
 
-Zhao, T., Gu, Y., Yang, J., et al. (2025). A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities. Nature Methods, 22, 166-176. https://doi.org/10.1038/s41592-024-02499-w.
+Zhao T, Gu Y, Yang J, et al. (2025) A foundation model for joint segmentation, detection and recognition of biomedical objects across nine modalities. Nature Methods, 22, 166-176. https://doi.org/10.1038/s41592-024-02499-w.
 
-Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daume III, H., & Crawford, K. (2021). Datasheets for Datasets. Communications of the ACM, 64(12), 86-92. https://doi.org/10.1145/3458723.
+Gebru T, Morgenstern J, Vecchione B, Vaughan J W, Wallach H, Daume III H, Crawford K (2021) Datasheets for Datasets. Communications of the ACM, 64(12), 86-92. https://doi.org/10.1145/3458723.
 
-Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220-229. https://doi.org/10.1145/3287560.3287596.
+Mitchell M, Wu S, Zaldivar A, et al. (2019) Model Cards for Model Reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220-229. https://doi.org/10.1145/3287560.3287596.

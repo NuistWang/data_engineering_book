@@ -43,13 +43,12 @@ The main text retains only the key implementation excerpts that illuminate desig
 
 Acceptance metrics include reasoning accuracy, candidate retention rate, verification coverage, long-chain length distribution, recirculated sample quality, and cost per sample. If the project enters production, a course, or a public reproducibility experiment environment, the version number, dependency environment, random seeds, sample spot-check results, and failed-sample post-mortem records should also be logged.
 
+*Table P12-1: Publication Acceptance Table for the Pedagogical R1 Reasoning Data Flywheel.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criterion |
 | --- | --- | --- |
 | Candidate generation | Number of multi-path samples, long-chain length distribution, and task-source coverage | Describe the differences between mock, vLLM, and real model sampling |
 | Filtering and recirculation | Verifier coverage, candidate retention rate, recirculated sample quality, and format pass rate | Each recirculated sample should be traceable to its original task, candidate trace, and verification result |
 | Risk control | Post-mortem of self-reinforcing errors, verifier bias, and overly long trace noise | Do not equate a rejection-sampling pass with an improvement in reasoning capability |
-
-*Table P12-1: Publication Acceptance Table for the Pedagogical R1 Reasoning Data Flywheel*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -111,6 +110,7 @@ The sixth component is **training and evaluation**. `train_lora.py` provides a m
 
 The main artifacts are as follows:
 
+*Table P12-2: Stage and Description Reference Table.*
 | Stage | Default Artifact | Description |
 | --- | --- | --- |
 | Cold-start extraction | `data/processed/cold_start_5k.jsonl` | First-round SFT samples |
@@ -121,8 +121,6 @@ The main artifacts are as follows:
 | Data merging | `data/training/merged_sft_data.jsonl` | Second-round SFT input |
 | Training record | `data/training/training_manifest.json` | Training data composition |
 | Evaluation results | `data/reports/eval_results_gsm8k_math.json` | GSM8K/MATH comparison results |
-
-*Table P12-2: Stage and Description Reference Table*
 
 ---
 
@@ -458,6 +456,7 @@ It should be emphasized that LoRA and the evaluation script in this project are 
 
 The final output of this project is not a single score table but a set of reviewable data assets. The minimum acceptable results should include:
 
+*Table P12-3: Artifact and Checkpoint Reference Table.*
 | Artifact | Checkpoint |
 | --- | --- |
 | `cold_start_5k.jsonl` | Fields are complete; `messages` can be used directly for SFT |
@@ -469,12 +468,11 @@ The final output of this project is not a single score table but a set of review
 | `training_manifest.json` | Merge scale and domain distribution are recorded |
 | `eval_results_gsm8k_math.json` | Base and LoRA evaluation results can be compared |
 
-*Table P12-3: Artifact and Checkpoint Reference Table*
-
 From an engineering perspective, acceptance can be divided into three tiers. The first tier is pipeline acceptance: `pytest -q` passes, and mock mode can complete cold start, sampling, verification, rejection sampling, merging, training, and evaluation. The second tier is real-sampling acceptance: the vLLM service can be called by `sample_traces.py`, sampling results enter `sampled_traces`, and can be processed by the verifier. The third tier is performance acceptance: after LoRA training, there is a stable gain over the base model on GSM8K/MATH. The current project prioritizes the first two tiers; the third tier requires larger-scale data and multiple rounds of hyperparameter tuning.
 
 In terms of cost, the primary expenses come from multi-path sampling and training. If resources are constrained, the following fallback strategies can be applied:
 
+*Table P12-4: Resource Bottleneck and Fallback Strategy Reference Table.*
 | Resource Bottleneck | Fallback Strategy |
 | --- | --- |
 | Insufficient VRAM | Reduce `max_model_len`, `max_num_seqs`, or concurrent prompts |
@@ -483,8 +481,6 @@ In terms of cost, the primary expenses come from multi-path sampling and trainin
 | Insufficient recirculated samples | Expand candidate sampling rather than blindly relaxing the verifier |
 | Slow LoRA training | First run a smoke train with `--max-train-samples 1024` |
 | Long evaluation time | Start with `--max-examples 100`, then expand the evaluation scale |
-
-*Table P12-4: Resource Bottleneck and Fallback Strategy Reference Table*
 
 ## Chapter Summary
 

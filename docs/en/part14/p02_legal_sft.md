@@ -296,14 +296,13 @@ This not only degrades sample readability, but also causes downstream Self-Instr
 
 ### 7.2 Component Selection
 
+*Table P02-1: Components and Selection Rationale.*
 | Component | Choice | Function | Rationale |
 | --- | --- | --- | --- |
 | PDF parsing | `pdfplumber` | Read page text and coordinates | Supports bounding-box-based header/footer trimming; well-suited for institutional PDFs |
 | Cleaning logic | `Regex` | Repair word breaks, remove page numbers, strip dirty characters | Many errors in legal PDFs are rule-based; regex is the most direct and controllable option at early stages |
 | Generative model | `DeepSeek-V3` | Instruction synthesis and reasoning expansion | Balances reasoning quality and cost; suitable for large-scale synthesis |
 | Orchestration logic | `Python` | Batch processing, sampling, post-processing | Facilitates rapid construction of a minimal reproducible pipeline |
-
-*Table P02-1: Components and Selection Rationale*
 
 ### 7.3 Trimming Headers and Footers
 
@@ -1218,8 +1217,12 @@ As part of Part 14, this chapter corresponds to the project-level validation of 
 
 ## References
 
-1. Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. *JMLR*, 21(140), 1–67.
-2. Hugging Face. (2026). Datasets Documentation. https://huggingface.co/docs/datasets/.
-3. Ray Project. (2026). Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
-4. MLflow Authors. (2026). MLflow Documentation. https://mlflow.org/docs/latest/.
-5. Great Expectations Contributors. (2026). Great Expectations Documentation. https://docs.greatexpectations.io/.
+Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+
+Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+
+Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+
+Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

@@ -677,52 +677,52 @@ SFT数据设计的核心在于如何把任务结构、行为边界、输出规�
 
 ## 参考文献
 
-Brown, T. B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., et al. (2020). *Language Models are Few-Shot Learners*. Advances in Neural Information Processing Systems, 33, 1877–1901. arXiv:2005.14165.
+Brown T B, Mann B, Ryder N, Subbiah M, Kaplan J, Dhariwal P, et al. (2020) *Language Models are Few-Shot Learners*. Advances in Neural Information Processing Systems, 33, 1877–1901. arXiv:2005.14165.
 
-Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., et al. (2022). *Training Language Models to Follow Instructions with Human Feedback*. Advances in Neural Information Processing Systems, 35, 27730–27744. arXiv:2203.02155.
+Ouyang L, Wu J, Jiang X, Almeida D, Wainwright C L, Mishkin P, et al. (2022) *Training Language Models to Follow Instructions with Human Feedback*. Advances in Neural Information Processing Systems, 35, 27730–27744. arXiv:2203.02155.
 
-Wei, J., Bosma, M., Zhao, V. Y., Guu, K., Yu, A. W., Lester, B., Du, N., Dai, A. M., & Le, Q. V. (2022). *Finetuned Language Models Are Zero-Shot Learners*. International Conference on Learning Representations. arXiv:2109.01652.
+Wei J, Bosma M, Zhao V Y, Guu K, Yu A W, Lester B, Du N, Dai A M, Le Q V (2022) *Finetuned Language Models Are Zero-Shot Learners*. International Conference on Learning Representations. arXiv:2109.01652.
 
-Chung, H. W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., et al. (2024). *Scaling Instruction-Finetuned Language Models*. Journal of Machine Learning Research, 25(70), 1–53. https://www.jmlr.org/papers/v25/23-0870.html.
+Chung H W, Hou L, Longpre S, Zoph B, Tay Y, Fedus W, et al. (2024) *Scaling Instruction-Finetuned Language Models*. Journal of Machine Learning Research, 25(70), 1–53. https://www.jmlr.org/papers/v25/23-0870.html.
 
-Zhou, C., Liu, P., Xu, P., Iyer, S., Sun, J., Mao, Y., et al. (2023). *LIMA: Less Is More for Alignment*. Advances in Neural Information Processing Systems, 36. arXiv:2305.11206.
+Zhou C, Liu P, Xu P, Iyer S, Sun J, Mao Y, et al. (2023) *LIMA: Less Is More for Alignment*. Advances in Neural Information Processing Systems, 36. arXiv:2305.11206.
 
-Wang, Y., Kordi, Y., Mishra, S., Liu, A., Smith, N. A., Khashabi, D., & Hajishirzi, H. (2023). *Self-Instruct: Aligning Language Models with Self-Generated Instructions*. Proceedings of ACL 2023, 13484–13508. arXiv:2212.10560.
+Wang Y, Kordi Y, Mishra S, Liu A, Smith N A, Khashabi D, Hajishirzi H (2023) *Self-Instruct: Aligning Language Models with Self-Generated Instructions*. Proceedings of ACL 2023, 13484–13508. arXiv:2212.10560.
 
-Wang, Y., Mishra, S., Alipoormolabashi, P., Kordi, Y., Mirzaei, A., Naik, A., et al. (2022). *Super-NaturalInstructions: Generalization via Declarative Instructions on 1600+ NLP Tasks*. Proceedings of EMNLP 2022, 5085–5109. arXiv:2204.07705.
+Wang Y, Mishra S, Alipoormolabashi P, Kordi Y, Mirzaei A, Naik A, et al. (2022) *Super-NaturalInstructions: Generalization via Declarative Instructions on 1600+ NLP Tasks*. Proceedings of EMNLP 2022, 5085–5109. arXiv:2204.07705.
 
-Christiano, P. F., Leike, J., Brown, T. B., Martic, M., Legg, S., & Amodei, D. (2017). *Deep Reinforcement Learning from Human Preferences*. Advances in Neural Information Processing Systems, 30. arXiv:1706.03741.
+Christiano P F, Leike J, Brown T B, Martic M, Legg S, Amodei D (2017) *Deep Reinforcement Learning from Human Preferences*. Advances in Neural Information Processing Systems, 30. arXiv:1706.03741.
 
-Stiennon, N., Ouyang, L., Wu, J., Ziegler, D., Lowe, R., Voss, C., et al. (2020). *Learning to Summarize from Human Feedback*. Advances in Neural Information Processing Systems, 33, 3008–3021. arXiv:2009.01325.
+Stiennon N, Ouyang L, Wu J, Ziegler D, Lowe R, Voss C, et al. (2020) *Learning to Summarize from Human Feedback*. Advances in Neural Information Processing Systems, 33, 3008–3021. arXiv:2009.01325.
 
-Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D., & Finn, C. (2023). *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems, 36. arXiv:2305.18290.
+Rafailov R, Sharma A, Mitchell E, Ermon S, Manning C D, Finn C (2023) *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems, 36. arXiv:2305.18290.
 
-Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., et al. (2022). *Constitutional AI: Harmlessness from AI Feedback*. arXiv:2212.08073.
+Bai Y, Kadavath S, Kundu S, Askell A, Kernion J, Jones A, et al. (2022) *Constitutional AI: Harmlessness from AI Feedback*. arXiv:2212.08073.
 
-Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). *Toolformer: Language Models Can Teach Themselves to Use Tools*. Advances in Neural Information Processing Systems, 36 (NeurIPS 2023 Oral). arXiv:2302.04761.
+Schick T, Dwivedi-Yu J, Dessì R, Raileanu R, Lomeli M, Zettlemoyer L, Cancedda N, Scialom T (2023) *Toolformer: Language Models Can Teach Themselves to Use Tools*. Advances in Neural Information Processing Systems, 36 (NeurIPS 2023 Oral). arXiv:2302.04761.
 
-Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). *ReAct: Synergizing Reasoning and Acting in Language Models*. International Conference on Learning Representations. arXiv:2210.03629.
+Yao S, Zhao J, Yu D, Du N, Shafran I, Narasimhan K, Cao Y (2023) *ReAct: Synergizing Reasoning and Acting in Language Models*. International Conference on Learning Representations. arXiv:2210.03629.
 
-Askell, A., Bai, Y., Chen, A., Drain, D., Ganguli, D., Henighan, T., et al. (2021). A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.
+Askell A, Bai Y, Chen A, Drain D, Ganguli D, Henighan T, et al. (2021) A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.
 
-OpenAI. (2024). *Introducing Structured Outputs in the API*. OpenAI Blog, August 6, 2024; OpenAI API Documentation: *Structured Model Outputs*. Accessed May 14, 2026.
+OpenAI (2024) *Introducing Structured Outputs in the API*. OpenAI Blog, August 6, 2024; OpenAI API Documentation: *Structured Model Outputs*. Accessed May 14, 2026.
 
-Singhal, K., Azizi, S., Tu, T., Mahdavi, S. S., Wei, J., Chung, H. W., et al. (2023). Large Language Models Encode Clinical Knowledge. Nature. https://doi.org/10.1038/s41586-023-06291-2.
+Singhal K, Azizi S, Tu T, Mahdavi S S, Wei J, Chung H W, et al. (2023) Large Language Models Encode Clinical Knowledge. Nature. https://doi.org/10.1038/s41586-023-06291-2.
 
-Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). *Datasheets for Datasets*. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723.
+Gebru T, Morgenstern J, Vecchione B, Vaughan J W, Wallach H, Daumé III H, Crawford K (2021) *Datasheets for Datasets*. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723.
 
-Pushkarna, M., Zaldivar, A., & Kjartansson, O. (2022). *Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI*. Proceedings of the ACM Conference on Fairness, Accountability, and Transparency, 1776–1826. https://doi.org/10.1145/3531146.3533231.
+Pushkarna M, Zaldivar A, Kjartansson O (2022) *Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI*. Proceedings of the ACM Conference on Fairness, Accountability, and Transparency, 1776–1826. https://doi.org/10.1145/3531146.3533231.
 
-Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., et al. (2019). *Model Cards for Model Reporting*. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220–229. https://doi.org/10.1145/3287560.3287596.
+Mitchell M, Wu S, Zaldivar A, Barnes P, Vasserman L, Hutchinson B, et al. (2019) *Model Cards for Model Reporting*. Proceedings of the Conference on Fairness, Accountability, and Transparency, 220–229. https://doi.org/10.1145/3287560.3287596.
 
-Liang, P., Bommasani, R., Lee, T., Tsipras, D., Soylu, D., Yasunaga, M., et al. (2022). *Holistic Evaluation of Language Models*. arXiv:2211.09110.
+Liang P, Bommasani R, Lee T, Tsipras D, Soylu D, Yasunaga M, et al. (2022) *Holistic Evaluation of Language Models*. arXiv:2211.09110.
 
-Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S., et al. (2022). *Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned*. arXiv:2209.07858.
+Ganguli D, Lovitt L, Kernion J, Askell A, Bai Y, Kadavath S, et al. (2022) *Red Teaming Language Models to Reduce Harms: Methods, Scaling Behaviors, and Lessons Learned*. arXiv:2209.07858.
 
-Perez, E., Huang, S., Song, F., Cai, T., Ring, R., Aslanides, J., Glaese, A., McAleese, N., & Irving, G. (2022). *Red Teaming Language Models with Language Models*. Proceedings of EMNLP 2022, 3419–3448. arXiv:2202.03286.
+Perez E, Huang S, Song F, Cai T, Ring R, Aslanides J, Glaese A, McAleese N, Irving G (2022) *Red Teaming Language Models with Language Models*. Proceedings of EMNLP 2022, 3419–3448. arXiv:2202.03286.
 
-National Institute of Standards and Technology. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1. U.S. Department of Commerce.
+National Institute of Standards and Technology (2023) *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1. U.S. Department of Commerce.
 
 Moffatt v. Air Canada. 2024. *Civil Resolution Tribunal of British Columbia*, 2024 BCCRT 149.
 
-Lifshitz, L. R., & Hung, R. 2024. BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot. *ABA Business Law Today*.
+Lifshitz L R, Hung R (2024) BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot. *ABA Business Law Today*.

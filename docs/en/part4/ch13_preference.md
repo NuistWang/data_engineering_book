@@ -395,8 +395,7 @@ Debiasing further involves sampling strategy. Many teams, when expanding prefere
 
 In summary, governance of preference data should not stop at "improving agreement rates"—it should further advance toward "modeling inconsistency and uncertainty." Only when a team can identify which samples are more trustworthy, which sources are more stable, which tasks are more prone to drift, and which conflicts are worth preserving rather than forcibly averaged, will reward signals truly possess long-term maintainability.
 
-**Table 13-1: Reward Noise Sources and Governance Actions**
-
+*Table 13-1: Reward Noise Sources and Governance Actions.*
 | Noise Source | Typical Manifestation | Impact on Training | Governance Action |
 |---|---|---|---|
 | Annotation disagreement | Win/lose labels on the same sample frequently reverse | Weakens preference signal, reduces DPO/RM stability | Establish arbitration pool, re-label, increase task specification granularity |
@@ -424,8 +423,7 @@ Preference data becomes genuinely usable as a reward signal only when it is succ
 
 In practice, many mature teams do not treat DPO, RM, RLAIF, and PRM as mutually exclusive paths. They instead build a layered system: the base layer uses preference pairs for rapid DPO alignment; the platform layer trains reward models to form a unified scoring interface; the expansion layer uses RLAIF and rule judges to increase coverage; and the complex-task layer introduces PRM for process constraints. In other words, the diversity of training methods essentially requires data teams to build layered data interfaces rather than expecting one sample type to serve all methods.
 
-**Table 13-2: Correspondence Between Preference Types and Training Methods**
-
+*Table 13-2: Correspondence Between Preference Types and Training Methods.*
 | Preference/Reward Type | Typical Data Structure | Best-Matched Method(s) | Advantages | Key Challenges |
 |---|---|---|---|---|
 | Pairwise Preference | `(x, y_w, y_l)` | DPO, ranking-based RM, some RLAIF | Annotation is intuitive, consistency is generally higher, fast to implement | Requires high-quality candidate construction; difficult to express fine-grained rationale |
@@ -473,48 +471,48 @@ When preference data is understood and built in this way, it is elevated from be
 
 ## References
 
-Christiano, P. F., Leike, J., Brown, T. B., Martic, M., Legg, S., & Amodei, D. (2017). Deep reinforcement learning from human preferences. *Advances in Neural Information Processing Systems*, 30. arXiv:1706.03741.
+Christiano P F, Leike J, Brown T B, Martic M, Legg S, Amodei D (2017) Deep reinforcement learning from human preferences. *Advances in Neural Information Processing Systems*, 30. arXiv:1706.03741.
 
-Ziegler, D. M., Stiennon, N., Wu, J., Brown, T. B., Radford, A., Amodei, D., Christiano, P., & Irving, G. (2019). Fine-tuning language models from human preferences. *arXiv preprint arXiv:1909.08593*.
+Ziegler D M, Stiennon N, Wu J, Brown T B, Radford A, Amodei D, Christiano P, Irving G (2019) Fine-tuning language models from human preferences. *arXiv preprint arXiv:1909.08593*.
 
-Stiennon, N., Ouyang, L., Wu, J., Ziegler, D. M., Lowe, R., Voss, C., Radford, A., Amodei, D., & Christiano, P. (2020). Learning to summarize from human feedback. *Advances in Neural Information Processing Systems*, 33, 3008–3021. arXiv:2009.01325.
+Stiennon N, Ouyang L, Wu J, Ziegler D M, Lowe R, Voss C, Radford A, Amodei D, Christiano P (2020) Learning to summarize from human feedback. *Advances in Neural Information Processing Systems*, 33, 3008–3021. arXiv:2009.01325.
 
-Askell, A., Bai, Y., Chen, A., et al. (2021). A general language assistant as a laboratory for alignment. *arXiv preprint arXiv:2112.00861*.
+Askell A, Bai Y, Chen A, et al. (2021) A general language assistant as a laboratory for alignment. *arXiv preprint arXiv:2112.00861*.
 
-Ouyang, L., Wu, J., Jiang, X., et al. (2022). Training language models to follow instructions with human feedback. *Advances in Neural Information Processing Systems*, 35, 27730–27744. arXiv:2203.02155.
+Ouyang L, Wu J, Jiang X, et al. (2022) Training language models to follow instructions with human feedback. *Advances in Neural Information Processing Systems*, 35, 27730–27744. arXiv:2203.02155.
 
-Bai, Y., Jones, A., Ndousse, K., et al. (2022a). Training a helpful and harmless assistant with reinforcement learning from human feedback. *arXiv preprint arXiv:2204.05862*.
+Bai Y, Jones A, Ndousse K, et al. (2022a) Training a helpful and harmless assistant with reinforcement learning from human feedback. *arXiv preprint arXiv:2204.05862*.
 
-Rafailov, R., Sharma, A., Mitchell, E., et al. (2023). Direct preference optimization: Your language model is secretly a reward model. *Advances in Neural Information Processing Systems*, 36, 53728–53741. arXiv:2305.18290.
+Rafailov R, Sharma A, Mitchell E, et al. (2023) Direct preference optimization: Your language model is secretly a reward model. *Advances in Neural Information Processing Systems*, 36, 53728–53741. arXiv:2305.18290.
 
-Bai, Y., Kadavath, S., Kundu, S., et al. (2022b). Constitutional AI: Harmlessness from AI feedback. *arXiv preprint arXiv:2212.08073*.
+Bai Y, Kadavath S, Kundu S, et al. (2022b) Constitutional AI: Harmlessness from AI feedback. *arXiv preprint arXiv:2212.08073*.
 
-Lee, H., Phatale, S., Mansoor, H., et al. (2023). RLAIF vs. RLHF: Scaling reinforcement learning from human feedback with AI feedback. Proceedings of the 41st International Conference on Machine Learning (ICML 2024). arXiv:2309.00267.
+Lee H, Phatale S, Mansoor H, et al. (2023) RLAIF vs. RLHF: Scaling reinforcement learning from human feedback with AI feedback. Proceedings of the 41st International Conference on Machine Learning (ICML 2024). arXiv:2309.00267.
 
-Lightman, H., Kosaraju, V., Burda, Y., et al. (2024). Let's verify step by step. International Conference on Learning Representations (ICLR 2024). arXiv:2305.20050.
+Lightman H, Kosaraju V, Burda Y, et al. (2024) Let's verify step by step. International Conference on Learning Representations (ICLR 2024). arXiv:2305.20050.
 
-Uesato, J., Kushman, N., Kumar, R., et al. (2022). Solving math word problems with process- and outcome-based feedback. *arXiv preprint arXiv:2211.14275*.
+Uesato J, Kushman N, Kumar R, et al. (2022) Solving math word problems with process- and outcome-based feedback. *arXiv preprint arXiv:2211.14275*.
 
-Bradley, R. A., & Terry, M. E. (1952). Rank analysis of incomplete block designs: I. The method of paired comparisons. *Biometrika*, 39(3/4), 324–345. https://doi.org/10.2307/2334029.
+Bradley R A, Terry M E (1952) Rank analysis of incomplete block designs: I. The method of paired comparisons. *Biometrika*, 39(3/4), 324–345. https://doi.org/10.2307/2334029.
 
-Roijers, D. M., Vamplew, P., Whiteson, S., et al. (2013). A survey of multi-objective sequential decision-making. *Journal of Artificial Intelligence Research*, 48, 67–113.
+Roijers D M, Vamplew P, Whiteson S, et al. (2013) A survey of multi-objective sequential decision-making. *Journal of Artificial Intelligence Research*, 48, 67–113.
 
-Deb, K., Pratap, A., Agarwal, S., et al. (2002). A fast and elitist multiobjective genetic algorithm: NSGA-II. *IEEE Transactions on Evolutionary Computation*, 6(2), 182–197. https://doi.org/10.1109/4235.996017.
+Deb K, Pratap A, Agarwal S, et al. (2002) A fast and elitist multiobjective genetic algorithm: NSGA-II. *IEEE Transactions on Evolutionary Computation*, 6(2), 182–197. https://doi.org/10.1109/4235.996017.
 
-Cohen, J. (1960). A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, 20(1), 37–46. https://doi.org/10.1177/001316446002000104.
+Cohen J (1960) A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, 20(1), 37–46. https://doi.org/10.1177/001316446002000104.
 
-Dawid, A. P., & Skene, A. M. (1979). Maximum likelihood estimation of observer error-rates using the EM algorithm. *Journal of the Royal Statistical Society: Series C (Applied Statistics)*, 28(1), 20–28. https://doi.org/10.2307/2346806.
+Dawid A P, Skene A M (1979) Maximum likelihood estimation of observer error-rates using the EM algorithm. *Journal of the Royal Statistical Society: Series C (Applied Statistics)*, 28(1), 20–28. https://doi.org/10.2307/2346806.
 
-Snow, R., O'Connor, B., Jurafsky, D., et al. (2008). Cheap and fast—but is it good? Evaluating non-expert annotations for natural language tasks. *Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing*, 254–263.
+Snow R, O'Connor B, Jurafsky D, et al. (2008) Cheap and fast—but is it good? Evaluating non-expert annotations for natural language tasks. *Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing*, 254–263.
 
-Aroyo, L., & Welty, C. (2015). Truth is a lie: Crowd truth and the seven myths of human annotation. *AI Magazine*, 36(1), 15–24. https://doi.org/10.1609/aimag.v36i1.2564.
+Aroyo L, Welty C (2015) Truth is a lie: Crowd truth and the seven myths of human annotation. *AI Magazine*, 36(1), 15–24. https://doi.org/10.1609/aimag.v36i1.2564.
 
-Northcutt, C. G., Jiang, L., & Chuang, I. L. (2021). Confident learning: Estimating uncertainty in dataset labels. *Journal of Artificial Intelligence Research*, 70, 1373–1411. https://doi.org/10.1613/jair.1.12125.
+Northcutt C G, Jiang L, Chuang I L (2021) Confident learning: Estimating uncertainty in dataset labels. *Journal of Artificial Intelligence Research*, 70, 1373–1411. https://doi.org/10.1613/jair.1.12125.
 
-Gebru, T., Morgenstern, J., Vecchione, B., et al. (2021). Datasheets for datasets. *Communications of the ACM*, 64(12), 86–92. https://doi.org/10.1145/3458723.
+Gebru T, Morgenstern J, Vecchione B, et al. (2021) Datasheets for datasets. *Communications of the ACM*, 64(12), 86–92. https://doi.org/10.1145/3458723.
 
-Bender, E. M., & Friedman, B. (2018). Data statements for natural language processing: Toward mitigating system bias and enabling better science. *Transactions of the Association for Computational Linguistics*, 6, 587–604. https://doi.org/10.1162/tacl_a_00041.
+Bender E M, Friedman B (2018) Data statements for natural language processing: Toward mitigating system bias and enabling better science. *Transactions of the Association for Computational Linguistics*, 6, 587–604. https://doi.org/10.1162/tacl_a_00041.
 
-Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model cards for model reporting. *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 220–229. https://doi.org/10.1145/3287560.3287596.
+Mitchell M, Wu S, Zaldivar A, et al. (2019) Model cards for model reporting. *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 220–229. https://doi.org/10.1145/3287560.3287596.
 
-Liang, P., Bommasani, R., Lee, T., et al. (2022). Holistic evaluation of language models. *arXiv preprint arXiv:2211.09110*.
+Liang P, Bommasani R, Lee T, et al. (2022) Holistic evaluation of language models. *arXiv preprint arXiv:2211.09110*.

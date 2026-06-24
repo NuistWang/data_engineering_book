@@ -364,7 +364,6 @@ Radford A, Kim J W, Hallacy C, Ramesh A, Goh G, Agarwal S, Sastry G, Askell A, M
 
 Rombach R, Blattmann A, Lorenz D, Esser P, Ommer B (2022) High-Resolution Image Synthesis with Latent Diffusion Models. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp 10684-10695.
 
-
 Sakoe H, Chiba S (1978) Dynamic Programming Algorithm Optimization for Spoken Word Recognition (DTW). IEEE Transactions on Acoustics, Speech, and Signal Processing 26(1):43-49.
 
 Salvador S, Chan P (2007) Toward Accurate Dynamic Time Warping in Linear Time and Space (FastDTW). Intelligent Data Analysis 11(5):561-580. https://doi.org/10.3233/ida-2007-11508.

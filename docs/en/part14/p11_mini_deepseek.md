@@ -40,8 +40,7 @@ The body of the chapter retains only the key implementation fragments that illus
 
 Acceptance metrics include token distribution, corpus-mix deviation, packing efficiency, training loss trend, throughput, GPU memory/cost, and failed-sample review. If the project enters production, a course, or a public reproduction experiment environment, the version number, dependency environment, random seed, sample spot-check results, and failed-sample retrospective records should also be logged.
 
-*Table P11-1: Mini-DeepSeek Pre-Training Reproduction Publication Acceptance Table*
-
+*Table P11-1: Mini-DeepSeek Pre-Training Reproduction Publication Acceptance Table.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criterion |
 | --- | --- | --- |
 | Recipe reproduction | Corpus-mix deviation, cross-source deduplication records, and tokenizer training logs | A reduced-scale experiment must state the scale difference from the original recipe and the boundaries of non-comparability |
@@ -88,6 +87,7 @@ The four core components of the pipeline are:
 
 Table P11-2 maps each architectural component to its code entry point, stage artifact, and review fields. Project chapters need to retain tables of this kind because they connect "the engineering narrative visible to the reader" with the scripts in `code/zh/project_11_mini_deepseek`, preventing the chapter from remaining at the level of conceptual introduction alone.
 
+*Table P11-2: Mini-DeepSeek Data Pipeline Stage Artifacts and Code Entry Points.*
 | Stage | Code Entry Point | Primary Input | Primary Output | Review Fields |
 | --- | --- | --- | --- | --- |
 | Multi-source sampling | `mix_sampler.py` | `RECIPE`, target document count, Hugging Face data sources | `./data/mixed_1b_raw` | `source`, sample count, recipe weight deviation |
@@ -96,8 +96,6 @@ Table P11-2 maps each architectural component to its code entry point, stage art
 | Pack & Shuffle | `pack_shuffle.py` | Deduplicated corpus, tokenizer | `./data/mixed_1b_final_packed` | `SEQ_LEN`, packing efficiency, shuffle seed |
 | End-to-end run | `run_pipeline.sh` | Stage scripts and local environment | Complete data directory | Logs, failed stages, artifact integrity |
 | Unit tests | `tests/test_pipeline.py` | Recipe, MinHash, packing constants | Test report | Weights sum to 1, MinHash similarity, `SEQ_LEN` |
-
-*Table P11-2: Mini-DeepSeek Data Pipeline Stage Artifacts and Code Entry Points*
 
 The most easily overlooked column in Table P11-2 is "Review Fields." For example, `mixed_1b_raw` is simply a Hugging Face Dataset directory on its own and says nothing about whether the recipe is correct; one must additionally verify that the sample count for each `source` is consistent with the target weights. Similarly, `mixed_1b_dedup` cannot be validated merely by checking whether the directory exists—the duplicate sample ratio and threshold must also be recorded. For the tokenizer, the existence of the file does not indicate training success; special tokens, vocabulary size, Chinese/code compression ratio, and rare-character coverage must also be checked.
 
@@ -236,6 +234,7 @@ This command sequentially generates `mixed_1b_raw`, `mixed_1b_dedup`, `mini_deep
 
 Table P11-3 lists the minimal audit information that should be recorded before and after a run.
 
+*Table P11-3: Mini-DeepSeek Minimal Reproduction Experiment Record Items.*
 | Category | Record Item | Purpose |
 | --- | --- | --- |
 | Data version | Data source repo id, split, config name, sampling time | Explains sample distribution changes |
@@ -246,14 +245,13 @@ Table P11-3 lists the minimal audit information that should be recorded before a
 | Environment information | Python, datasets, tokenizers, datasketch versions | Diagnoses artifact differences |
 | Run results | Sample count, token count, directory size, failure logs | Determines deliverability |
 
-*Table P11-3: Mini-DeepSeek Minimal Reproduction Experiment Record Items*
-
 ## Data Quality and Recipe Acceptance
 
 The acceptance focus for Mini-DeepSeek is not the final model score but whether the recipe is interpretable, verifiable, and extensible. A common pitfall is reporting only "1B tokens were ultimately obtained" without stating which domains those tokens came from, how many cross-source duplicates were removed, or whether the tokenizer is biased toward a particular language or code domain. For pre-training data, quantity is merely the outcome; the recipe is the core.
 
 Table P11-4 gives the recipe-level acceptance criteria.
 
+*Table P11-4: Mini-DeepSeek Recipe-Level Acceptance Checklist.*
 | Acceptance Item | Recommended Check | Non-conformance Indicator |
 | --- | --- | --- |
 | Weight consistency | Deviation between each data source's sample count and its `RECIPE` weight | A source is over-sampled or underestimated due to streaming interruption |
@@ -264,8 +262,6 @@ Table P11-4 gives the recipe-level acceptance criteria.
 | Packing integrity | All `input_ids` have length `4096` | Padding or length inconsistency occurs during training |
 | Randomness | Fixed shuffle seed and sampling strategy | Sample order or distribution across multiple runs is inexplicable |
 
-*Table P11-4: Mini-DeepSeek Recipe-Level Acceptance Checklist*
-
 In practice, begin by sampling 100 records from each source for manual inspection to verify that the text type matches expectations; then spot-check near-duplicate pairs from the MinHash-deleted samples to assess whether the threshold is too strict. If the duplication rate is anomalously high, it may indicate genuine overlap between data sources, or it may indicate that 5-grams are overly sensitive to short texts. If the duplication rate is anomalously low, check whether the text field was selected correctly—some datasets use `content` rather than `text`.
 
 ## Fine-Grained Inspection of Tokenizer and Packing
@@ -274,6 +270,7 @@ The tokenizer training stage most easily produces the problem of "file creation 
 
 It is recommended to compute the metrics in Table P11-5 after training is complete.
 
+*Table P11-5: Tokenizer and Packing Quality Metrics.*
 | Metric | Computation Method | Interpretation |
 | --- | --- | --- |
 | Chinese tokens/char | Token count of Chinese web page samples divided by character count | Assesses Chinese compression efficiency |
@@ -283,8 +280,6 @@ It is recommended to compute the metrics in Table P11-5 after training is comple
 | `<|endoftext|>` presence | Whether separator tokens exist in packed data | Assesses whether document boundaries are preserved |
 | OOV behavior | `<|unk|>` usage rate | Assesses whether ByteLevel coverage is normal |
 
-*Table P11-5: Tokenizer and Packing Quality Metrics*
-
 The packing stage also requires inspection. `pack_shuffle.py` concatenates sample tokens and truncates to an integer multiple of `SEQ_LEN`, outputting fixed-length `input_ids`. This improves training throughput but means original document boundaries are no longer directly visible. Therefore, the insertion and counting of `<|endoftext|>` is critically important. If the separator is forgotten, the model learns adjacent documents as continuous text; if separators are overly dense, short documents will dominate the context structure.
 
 ## Test Coverage and Code Isolation
@@ -293,6 +288,7 @@ The packing stage also requires inspection. `pack_shuffle.py` concatenates sampl
 
 Table P11-6 maps tests to gaps.
 
+*Table P11-6: Mini-DeepSeek Test Coverage and Acceptance Gaps.*
 | Test Item | Covered Content | Still Requires Manual or Integration Acceptance |
 | --- | --- | --- |
 | `test_recipe_weights` | Recipe weights sum to 1 | Actual sample count per source |
@@ -301,8 +297,6 @@ Table P11-6 maps tests to gaps.
 | `test_minhash_similarity` | Identical text similarity | Near-duplicate false-deletion/missed-deletion boundary |
 | `test_tokenizer_pack` | `SEQ_LEN` constant | Length of each packed sample |
 | `test_end_to_end_mock` | Test entry point exists | Real end-to-end small-sample run |
-
-*Table P11-6: Mini-DeepSeek Test Coverage and Acceptance Gaps*
 
 Published manuscripts should clearly distinguish "teaching example code" from "production-ready code." The code in this chapter illustrates the basic organization of multi-source sampling, MinHash, BPE, and packing, but real large-scale pre-training additionally requires distributed execution, data-source failure retries, download caching, contamination detection, sensitive-content filtering, license whitelisting, and training framework integration.
 
@@ -322,6 +316,7 @@ The goal of P11 is not to report a complete large-model training result but to d
 
 Table P11-7 provides a training smoke test record template.
 
+*Table P11-7: Mini-DeepSeek Training Smoke Test Record Template.*
 | Record Item | Example | Review Significance |
 | --- | --- | --- |
 | Data directory | `./data/mixed_1b_final_packed` | Confirms that training reads from the final packed data |
@@ -334,8 +329,6 @@ Table P11-7 provides a training smoke test record template.
 | Tokens/s | Tokens per second | Estimates cost of subsequent scale-up |
 | Sample decoding | Random decode of 10 packed samples | Checks for garbled content, boundary issues, and repetition |
 
-*Table P11-7: Mini-DeepSeek Training Smoke Test Record Template*
-
 The smoke test report should not simply state "training runs successfully." More useful content includes: read throughput, loss over the first several steps, decoded results from several packed samples, and a record of how failed samples were handled. If the loss fails to decrease over an extended period, this may indicate a model configuration problem or the presence of large amounts of duplicated, garbled, or meaningless tokens in the data. If throughput is below expectation, the `.arrow` shards may be too small, data loading workers may be insufficient, or disk I/O may be the bottleneck.
 
 ## Data Contamination and Benchmark Leakage Inspection
@@ -344,6 +337,7 @@ Pre-training reproduction projects must pay attention to benchmark contamination
 
 Table P11-8 presents a minimal contamination inspection plan.
 
+*Table P11-8: Pre-Training Data Contamination Inspection Plan.*
 | Inspection Target | Method | Handling |
 | --- | --- | --- |
 | Exact duplicates | Hash or normalized string matching against benchmark prompts | Directly remove matched samples |
@@ -353,14 +347,13 @@ Table P11-8 presents a minimal contamination inspection plan.
 | Forum reposts | Check for benchmark problem reposts on web pages or blogs | Remove or flag as contamination risk |
 | Training report | Save match counts, deletion strategy, and sample ids | Supports subsequent benchmark claims |
 
-*Table P11-8: Pre-Training Data Contamination Inspection Plan*
-
 Contamination inspection should be completed before packing, because once the data enters a packed dataset, original document boundaries and source fields become harder to trace. If a teaching project does not implement complete contamination filtering, the report should explicitly state "not used for public benchmark claims" to prevent readers from mistaking smoke-test scores for publishable results.
 
 ## Deliverable Directory and Release Package Structure
 
 A deliverable P11 project should contain not only the final data directory but also the recipe, logs, tests, and audit materials. Table P11-9 gives the recommended directory structure.
 
+*Table P11-9: Mini-DeepSeek Project Deliverable Directory.*
 | Path | Content | Included in Public Release |
 | --- | --- | --- |
 | `data/mixed_1b_raw/` | Raw mixed data sampled according to the recipe | Depends on data licenses |
@@ -374,14 +367,13 @@ A deliverable P11 project should contain not only the final data directory but a
 | `tests/` | Unit tests and small-sample tests | May be made public |
 | `LICENSES.md` | Data source license documentation | Must be made public |
 
-*Table P11-9: Mini-DeepSeek Project Deliverable Directory*
-
 If data sources do not permit redistribution, the recipe, scripts, tokenizer, and report templates may still be published, but raw or packed samples cannot be released directly. In this case, a reproducibility guide should be provided so that readers with the requisite authorization can rebuild the data locally.
 
 ## Scaling from 1B Tokens to Larger Scales
 
 The reduced-scale pipeline of P11 helps readers understand the recipe, but scaling to 10B, 70B, or larger requires systematic refactoring. Table P11-10 lists the refactoring checklist for moving from the teaching implementation to a production-scale implementation.
 
+*Table P11-10: Mini-DeepSeek Refactoring Checklist from Teaching Implementation to Production Scale.*
 | Module | Teaching Implementation | Production-Scale Refactoring |
 | --- | --- | --- |
 | Data ingestion | Hugging Face streaming + local Dataset | Connect to object storage, data lake, or distributed cache |
@@ -392,8 +384,6 @@ The reduced-scale pipeline of P11 helps readers understand the recipe, but scali
 | Auditing | Manual reports | Metadata service, lineage tracking, deletion-request replay |
 | Testing | Unit tests + mock e2e | Small-sample real e2e, data-diff regression, contamination scan |
 
-*Table P11-10: Mini-DeepSeek Refactoring Checklist from Teaching Implementation to Production Scale*
-
 The most important point when scaling is not to mistake "the script runs" for "the system is scalable." Large-scale pre-training data systems must handle failure retries, checkpoint-based resumption, version freezing, sample deletion, license changes, in-training data mixing strategy adjustments, and multi-team collaboration. The value of P11 lies in presenting the minimal form of these problems rather than claiming to replace a complete industrial system.
 
 ## Data Dashboard and Continuous Monitoring
@@ -402,6 +392,7 @@ Once pre-training data engineering enters continuous iteration, one-off run logs
 
 Table P11-11 gives the recommended dashboard metrics.
 
+*Table P11-11: Mini-DeepSeek Data Dashboard Metrics.*
 | Dashboard Metric | Statistics Source | Observation Purpose |
 | --- | --- | --- |
 | Source sample count | `mixed_1b_raw` | Check for recipe proportion drift |
@@ -415,8 +406,6 @@ Table P11-11 gives the recommended dashboard metrics.
 | Packed shard size | `mixed_1b_final_packed` | Check training read balance |
 | Contamination match count | Contamination scan | Record benchmark leakage risk |
 
-*Table P11-11: Mini-DeepSeek Data Dashboard Metrics*
-
 The core value of the dashboard is batch comparison. For example, if The Stack v2 sample count is unchanged in a given run but the token count rises significantly, it may indicate that code samples have become longer or that filtering conditions have changed. If the deduplication rate for OpenWebMath suddenly increases in a given run, it may indicate that templated content in math web pages has increased. Without a batch dashboard, these changes often go undetected until a training loss or benchmark anomaly is observed.
 
 ## Deletion Requests and Sample Withdrawal Mechanism
@@ -425,6 +414,7 @@ Multi-source pre-training data must have a sample withdrawal capability. Even in
 
 Table P11-12 gives the processing path for deletion requests.
 
+*Table P11-12: Pre-Training Sample Deletion Request Processing Path.*
 | Step | Action | Artifact |
 | --- | --- | --- |
 | Receive request | Record the requester, URL, sample characteristics, and timestamp | Deletion request ticket |
@@ -434,8 +424,6 @@ Table P11-12 gives the processing path for deletion requests.
 | Rebuild packed data | Re-run packing and shuffle | Revised packed dataset |
 | Update report | Update recipe proportions, token counts, and deletion notes | Release note |
 
-*Table P11-12: Pre-Training Sample Deletion Request Processing Path*
-
 Real production systems typically store document-level hashes, URLs, source, license, and a packed-shard reverse index. Teaching implementations do not necessarily require a complete index, but readers should understand that the earlier lineage is discarded, the higher the subsequent withdrawal cost. Retaining this point in the published text prevents readers from mistakenly believing that `.arrow` training data can circulate independently of its origin.
 
 ## Domain Transfer: From General Recipe to Domain-Specific Models
@@ -444,6 +432,7 @@ The Mini-DeepSeek recipe is dominated by web pages, code, mathematics, academic 
 
 Table P11-13 gives adjustment directions for domain transfer.
 
+*Table P11-13: Domain Transfer Considerations for the Mini-DeepSeek Recipe.*
 | Domain | Data to Add | Additional Risks | Acceptance Focus |
 | --- | --- | --- | --- |
 | Legal | Regulations, case law, contracts, compliance Q&A | Regional and temporal differences | Statute version, citation accuracy |
@@ -452,14 +441,13 @@ Table P11-13 gives adjustment directions for domain transfer.
 | Industrial | Equipment manuals, fault records, process documents | Internal confidentiality and terminology ambiguity | Permissions, terminology glossary, fault classification |
 | Education | Textbooks, exercises, solutions, course notes | Copyright and answer leakage | Copyright licenses, question-bank contamination |
 
-*Table P11-13: Domain Transfer Considerations for the Mini-DeepSeek Recipe*
-
 When transferring to a domain, it is recommended to retain the general corpus as a foundation and gradually increase the domain corpus proportion. If the domain data proportion is raised too rapidly, the model may acquire domain terminology capability while losing general language and coding capability. A safer approach is to design a multi-round curriculum: maintain a dominant share of general corpus in the early stages, then increase domain- and task-relevant data proportions in the mid-to-late stages, monitored by domain validation sets.
 
 ## Relationship with P01 Mini-C4
 
 P01 focuses on single-source web page cleaning; P11 focuses on a multi-source pre-training recipe. These are not redundant; they represent an upgrade from "cleaning one type of corpus" to "organizing multiple types of corpora." Table P11-14 summarizes the differences.
 
+*Table P11-14: Differences Between P01 Mini-C4 and P11 Mini-DeepSeek.*
 | Dimension | P01 Mini-C4 | P11 Mini-DeepSeek |
 | --- | --- | --- |
 | Data sources | Single source or a small number of web sources | Web pages, code, mathematics, academic papers, Chinese text |
@@ -469,8 +457,6 @@ P01 focuses on single-source web page cleaning; P11 focuses on a multi-source pr
 | Training samples | Cleaned documents | Fixed-length packed token blocks |
 | Acceptance focus | Text quality and cleaning rules | Recipe, compression ratio, contamination, smoke test |
 | Scaling direction | Larger web corpus | Larger multi-source pre-training system |
-
-*Table P11-14: Differences Between P01 Mini-C4 and P11 Mini-DeepSeek*
 
 Understanding this relationship helps readers connect the projects in Part 14. P01 is the starting point of data cleaning; P11 organizes multiple cleaned sources into a pre-training recipe. Without the quality filtering of P01, the multi-source recipe of P11 would absorb large amounts of noise; without the recipe organization of P11, the single-source cleaning of P01 is insufficient to support modern general-purpose model training.
 

@@ -418,7 +418,6 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 ## 5.7 Common Defects, Detection Methods, and Cost Reference
 
 *Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors; detection cost is a relative description of engineering complexity, and actual cost depends on data scale, model calls, and infrastructure configuration.*
-
 | Defect Type | Typical Manifestation | Detection Method | Cost of Miss | Recommended Threshold/Tool |
 | :--- | :--- | :--- | :--- | :--- |
 | **HTML/noise residue** | Tags such as `<div>`, CSS, and JS code mixed into body text | Special-character ratio percentiles; regex rules | Model outputs garbled text/tags | Calibrate the project waterline on manually confirmed samples |
@@ -431,9 +430,6 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 | **Low lexical diversity** | Extremely low Type-Token Ratio (boilerplate text) | TTR distribution anomaly | Model vocabulary use becomes rigid | Set TTR baselines by language and content type |
 
 *Table 5-2: Impact comparison of cleaning actions on training outcomes. Source: compiled by the authors; impact directions are engineering-experience summaries, and specific gains must be validated through same-configuration training or proxy-model experiments.*
-
-Note: Table 5-2 is used to illustrate the correspondence between cleaning actions and risk-mitigation directions. It does not provide fixed cross-project gains. Actual effects depend on corpus structure, model scale, evaluation sets, cleaning thresholds, and training configuration, and should be validated through ablation experiments.
-
 | Cleaning Action | Typical Model Symptoms When Skipped | Risk-Mitigation Direction When Fully Applied | Cost/Timeline |
 | :--- | :--- | :--- | :--- |
 | Language filtering | Model mixes languages; Chinese responses interspersed with English | Improved language consistency | CPU, hours |
@@ -443,6 +439,8 @@ Note: Table 5-2 is used to illustrate the correspondence between cleaning action
 | PII redaction | Post-deployment privacy leakage incidents; model recites user information | Privacy compliance achieved; legal risks avoided | CPU + GPU NER, days |
 | Benchmark decontamination | Inflated benchmark scores; real user experience misaligned with benchmarks | Evaluation integrity achieved; real-world performance more predictable | CPU, hours |
 | Quality-stratified sampling | High- and low-quality data at equal weight dilutes the effect of high-quality data | Lets limited training budget be spent more on high-value samples | No additional compute cost |
+
+Note: Table 5-2 is used to illustrate the correspondence between cleaning actions and risk-mitigation directions. It does not provide fixed cross-project gains. Actual effects depend on corpus structure, model scale, evaluation sets, cleaning thresholds, and training configuration, and should be validated through ablation experiments.
 
 ---
 
@@ -485,7 +483,6 @@ After understanding all the technical modules in this chapter, a practical quest
 The lightweight solution focuses on "holding the baseline," filtering out the most harmful defects with minimal engineering investment:
 
 *Table 5-3: Minimum viable combination for the lightweight cleaning solution. Source: compiled by the authors; the combination is a starting recommendation, and production environments should extend it according to risk level, corpus source, and compliance requirements.*
-
 | Step | Implementation | Tools | Required? |
 |:--- |:--- |:--- |:--- |
 | Language filtering | FastText identification, confidence threshold calibrated by language | fasttext | ★ Required |
@@ -513,7 +510,7 @@ The platform-level solution targets industrial-scale large-volume data processin
 
 ## Chapter Summary
 
-This chapter, organized around the theme of "why cleaning determines the quality ceiling of training data," systematically introduces the complete technical system of rule-based filtering, model scoring, exact deduplication, MinHash fuzzy deduplication, PII redaction, and benchmark decontamination, following the sequence of the cleaning lifecycle. Two tables (Table 5-1 defect–detection–cost matrix; Table 5-2 cleaning action effect comparison) provide engineers with directly usable decision-making tools. Two anonymized composite case studies — "knowledge loss from over-cleaning" and "security risks from PII omission" — validate the need for fine-grained configuration of the cleaning system from both a positive and negative direction.
+This chapter, organized around the theme of "why cleaning determines the quality ceiling of training data," systematically introduces the complete technical system of rule-based filtering, model scoring, exact deduplication, MinHash fuzzy deduplication, PII redaction, and benchmark decontamination, following the sequence of the cleaning lifecycle. Two tables (Table 5-1 defect–detection–cost matrix; Table 5-1 cleaning action effect comparison) provide engineers with directly usable decision-making tools. Two anonymized composite case studies — "knowledge loss from over-cleaning" and "security risks from PII omission" — validate the need for fine-grained configuration of the cleaning system from both a positive and negative direction.
 
 After cleaning, deduplication, and decontamination are complete, the raw corpus is ready to enter the training input organization stage. The next chapter continues on cleaned data to discuss the final stretch of pretraining data engineering: **Chapter 6: Tokenization, Serialization, and Efficient Loading** — that is, how to transform clean text into token sequences that GPUs can efficiently consume.
 

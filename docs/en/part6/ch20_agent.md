@@ -374,7 +374,7 @@ To prevent red-line tests from remaining at the level of principled rhetoric, te
 These scenarios matter because they represent high-frequency stress points that multi-turn agents will readily encounter once they enter real usage environments—they are not edge cases. If the model repeatedly fails at these points, no amount of high accuracy on static question-answering benchmarks can conceal the systemic shortfall. Table 20-1 summarizes common multi-turn failure patterns along with their typical manifestations, likely root causes, and corresponding detection actions.
 
 
-**Table 20-1: Multi-Turn Failure Patterns and Detection Actions**
+*Table 20-1: Multi-Turn Failure Patterns and Detection Actions.*
 | Failure Pattern | Typical Manifestation | Likely Root Cause | Detection Action |
 |---|---|---|---|
 | State Drift | Deviates from original task goal as conversation lengthens | Missing state fields; weak trajectory supervision | Run long-horizon replay and compare goal consistency at key checkpoints |
@@ -444,7 +444,7 @@ Accordingly, multi-turn data engineering must specify not only write content, wr
 To support practical data modeling, Table 20-2 provides a set of foundational field designs:
 
 
-**Table 20-2: Session Fields and Memory Fields**
+*Table 20-2: Session Fields and Memory Fields.*
 | Field Category | Example Field Name | Description | Recommended Layer | Decayable |
 |---|---|---|---|---|
 | Session field | session_id | Identifier for a single continuous interaction container | session | No |
@@ -474,34 +474,34 @@ This chapter particularly emphasizes that long-term memory must not be treated a
 
 ## References
 
-Young, S., Gašić, M., Thomson, B., & Williams, J. D. (2013). *POMDP-Based Statistical Spoken Dialog Systems: A Review*. Proceedings of the IEEE, 101(5), 1160–1179. https://doi.org/10.1109/JPROC.2012.2225812.
+Young S, Gašić M, Thomson B, Williams J D (2013) *POMDP-Based Statistical Spoken Dialog Systems: A Review*. Proceedings of the IEEE, 101(5), 1160–1179. https://doi.org/10.1109/JPROC.2012.2225812.
 
-Williams, J. D., Raux, A., Ramachandran, D., & Black, A. (2013). *The Dialog State Tracking Challenge*. Proceedings of the SIGDIAL 2013 Conference, 404–413. https://doi.org/10.1109/slt.2014.7078595.
+Williams J D, Raux A, Ramachandran D, Black A (2013) *The Dialog State Tracking Challenge*. Proceedings of the SIGDIAL 2013 Conference, 404–413. https://doi.org/10.1109/slt.2014.7078595.
 
-Budzianowski, P., Wen, T.-H., Tseng, B.-H., et al. (2018). *MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling*. Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, 5016–5026. https://doi.org/10.18653/v1/d18-1547.
+Budzianowski P, Wen T-H, Tseng B-H, et al. (2018) *MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling*. Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, 5016–5026. https://doi.org/10.18653/v1/d18-1547.
 
-Yao, S., Zhao, J., Yu, D., et al. (2023). *ReAct: Synergizing Reasoning and Acting in Language Models*. International Conference on Learning Representations. arXiv:2210.03629.
+Yao S, Zhao J, Yu D, et al. (2023) *ReAct: Synergizing Reasoning and Acting in Language Models*. International Conference on Learning Representations. arXiv:2210.03629.
 
-Schick, T., Dwivedi-Yu, J., Dessì, R., et al. (2023). *Toolformer: Language Models Can Teach Themselves to Use Tools*. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
+Schick T, Dwivedi-Yu J, Dessì R, et al. (2023) *Toolformer: Language Models Can Teach Themselves to Use Tools*. Advances in Neural Information Processing Systems, 36. arXiv:2302.04761.
 
-Liu, N. F., Lin, K., Hewitt, J., et al. (2024a). *Lost in the Middle: How Language Models Use Long Contexts*. Transactions of the Association for Computational Linguistics, 12, 157–173. https://doi.org/10.1162/tacl_a_00638.
+Liu N F, Lin K, Hewitt J, et al. (2024a) *Lost in the Middle: How Language Models Use Long Contexts*. Transactions of the Association for Computational Linguistics, 12, 157–173. https://doi.org/10.1162/tacl_a_00638.
 
-Packer, C., Wooders, S., Lin, K., et al. (2023). *MemGPT: Towards LLMs as Operating Systems*. arXiv:2310.08560.
+Packer C, Wooders S, Lin K, et al. (2023) *MemGPT: Towards LLMs as Operating Systems*. arXiv:2310.08560.
 
-Wang, W., Dong, L., Cheng, H., et al. (2023). *Augmenting Language Models with Long-Term Memory*. Advances in Neural Information Processing Systems, 36. https://doi.org/10.52202/075280-3259.
+Wang W, Dong L, Cheng H, et al. (2023) *Augmenting Language Models with Long-Term Memory*. Advances in Neural Information Processing Systems, 36. https://doi.org/10.52202/075280-3259.
 
-Zhong, W., Guo, L., Gao, Q., et al. (2024). *MemoryBank: Enhancing Large Language Models with Long-Term Memory*. Proceedings of the AAAI Conference on Artificial Intelligence, 38(17), 19724–19731. https://doi.org/10.1609/aaai.v38i17.29946.
+Zhong W, Guo L, Gao Q, et al. (2024) *MemoryBank: Enhancing Large Language Models with Long-Term Memory*. Proceedings of the AAAI Conference on Artificial Intelligence, 38(17), 19724–19731. https://doi.org/10.1609/aaai.v38i17.29946.
 
-Park, J. S., O'Brien, J. C., Cai, C. J., et al. (2023). *Generative Agents: Interactive Simulacra of Human Behavior*. Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology. https://doi.org/10.1145/3586183.3606763.
+Park J S, O'Brien J C, Cai C J, et al. (2023) *Generative Agents: Interactive Simulacra of Human Behavior*. Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology. https://doi.org/10.1145/3586183.3606763.
 
-Lewis, P., Perez, E., Piktus, A., et al. (2020). *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*. Advances in Neural Information Processing Systems, 33, 9459–9474. arXiv:2005.11401.
+Lewis P, Perez E, Piktus A, et al. (2020) *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*. Advances in Neural Information Processing Systems, 33, 9459–9474. arXiv:2005.11401.
 
-Asai, A., Wu, Z., Wang, Y., et al. (2024). *Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection*. International Conference on Learning Representations.
+Asai A, Wu Z, Wang Y, et al. (2024) *Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection*. International Conference on Learning Representations.
 
-Shinn, N., Cassano, F., Gopinath, A., et al. (2023). *Reflexion: Language Agents with Verbal Reinforcement Learning*. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
+Shinn N, Cassano F, Gopinath A, et al. (2023) *Reflexion: Language Agents with Verbal Reinforcement Learning*. Advances in Neural Information Processing Systems, 36. arXiv:2303.11366.
 
-Liu, X., Yu, H., Zhang, H., et al. (2024b). *AgentBench: Evaluating LLMs as Agents*. International Conference on Learning Representations.
+Liu X, Yu H, Zhang H, et al. (2024b) *AgentBench: Evaluating LLMs as Agents*. International Conference on Learning Representations.
 
-Carlini, N., Tramèr, F., Wallace, E., et al. (2021). *Extracting Training Data from Large Language Models*. USENIX Security Symposium.
+Carlini N, Tramèr F, Wallace E, et al. (2021) *Extracting Training Data from Large Language Models*. USENIX Security Symposium.
 
 Securities and Exchange Commission. 2013. *In the Matter of Knight Capital Americas LLC: Order Instituting Administrative and Cease-and-Desist Proceedings, Release No. 70694*. U.S. Securities and Exchange Commission.

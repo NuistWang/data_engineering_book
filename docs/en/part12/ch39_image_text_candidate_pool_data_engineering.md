@@ -56,6 +56,7 @@ The LAION-5B paper reports 5.85B CLIP-filtered image-text pairs, including appro
 
 *Table 39-1 Public Subset Structure of LAION-5B*
 
+*Table 39-1: Public Subset Structure of LAION-5B.*
 | Subset | Scale | Text-language Form | Engineering Meaning | Typical Use |
 | --- | ---: | --- | --- | --- |
 | LAION-2B-en | 2.32B | English | Higher language-identification confidence, filtered with English CLIP | English CLIP, image-text retrieval, English T2I data candidates |
@@ -79,6 +80,7 @@ Image-text candidate pools should also be modeled by channel. The Parquet metada
 
 *Table 39-2 Image-text Candidate Record Schema*
 
+*Table 39-2: Image-text Candidate Record Schema.*
 | Channel | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Text channel | `text`, `language`, `text_length`, `text_hash` | Alt text, language identification, hash | Text filtering, language bucketing, contamination detection |
@@ -119,6 +121,7 @@ LAION-5B construction can be divided into six stages: extract candidates from Co
 
 *Table 39-3 LAION-5B Construction Flow*
 
+*Table 39-3: LAION-5B Construction Flow.*
 | Stage | Input | Processing Action | Output | Corresponding Channel |
 | ---: | --- | --- | --- | --- |
 | 1 | Common Crawl WAT metadata | Parse HTML IMG tags and retain image candidates with alt text | `<url, text>` candidate pairs | Text channel, visual channel |
@@ -200,6 +203,7 @@ Controllable speech data must validate semantics, style, and audio quality simul
 
 *Table 39-4 Quality-evaluation Metrics for Image-text Candidate Pools*
 
+*Table 39-4: Quality-evaluation Metrics for Image-text Candidate Pools.*
 | Channel | Core Question | Automatic Metrics | Human-review Focus | Handling of Failed Samples |
 | --- | --- | --- | --- | --- |
 | Text channel | Is the caption usable? | Language confidence, length, template hits, repetition rate | Whether it is advertising, filename, or SEO text | Text-rule filtering, source downweighting |
@@ -226,6 +230,7 @@ Risks in image-text data are easier for the public to perceive and harder to ful
 
 *Table 39-5 Risk-control Checklist for LAION-5B-like Image-text Data*
 
+*Table 39-5: Risk-control Checklist for LAION-5B-like Image-text Data.*
 | Risk Type | Trigger Scenario | Control Measures | Audit Evidence |
 | --- | --- | --- | --- |
 | URL decay | Images cannot be downloaded or content changes when rerun | Preserve hash, download time, failure logs, and snapshot strategy | Download manifest |
@@ -261,14 +266,14 @@ For readers of this book, what is most worth learning from LAION-5B is not downl
 
 ## References
 
-Schuhmann, C., Beaumont, R., Vencu, R., Gordon, C., Wightman, R., Cherti, M., et al. (2022). LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.
+Schuhmann C, Beaumont R, Vencu R, Gordon C, Wightman R, Cherti M, et al. (2022) LAION-5B: An open large-scale dataset for training next generation image-text models. NeurIPS 2022 Datasets and Benchmarks Track. https://arxiv.org/abs/2210.08402.
 
-LAION. (2022). LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.
+LAION (2022) LAION-5B: A new era of open large-scale multi-modal datasets. https://laion.ai/blog/laion-5b/.
 
-LAION-AI. (2022). dataset-spec. https://github.com/LAION-AI/dataset-spec.
+LAION-AI (2022) dataset-spec. https://github.com/LAION-AI/dataset-spec.
 
-Gadre, S. Y., Ilharco, G., Fang, A., Hayase, J., Smyrnis, G., Nguyen, T., et al. (2023). DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.
+Gadre S Y, Ilharco G, Fang A, Hayase J, Smyrnis G, Nguyen T, et al. (2023) DataComp: In search of the next generation of multimodal datasets. NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2304.14108.
 
-DataComp Team. (2026). DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.
+DataComp Team (2026) DataComp Benchmark Documentation. https://www.datacomp.ai/dcclip/.
 
-ML Foundations. (2023). DataComp codebase. https://github.com/mlfoundations/datacomp.
+ML Foundations (2023) DataComp codebase. https://github.com/mlfoundations/datacomp.

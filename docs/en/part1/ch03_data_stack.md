@@ -120,7 +120,6 @@ The processing orchestration layer solves the core engineering problem: how to r
 Two mainstream industrial choices are **Apache Spark** (Zaharia et al. 2016) and **Ray Data** (Moritz et al. 2018). They differ fundamentally in design philosophy and use cases.
 
 *Table 3-1: Core feature comparison of Apache Spark vs. Ray Data. Source: compiled by the authors based on public documentation of open-source frameworks and LLM data-processing practice.*
-
 | Dimension | Apache Spark | Ray Data |
 | :--- | :--- | :--- |
 | **Core language runtime** | Scala/Java core; Python through PySpark, with JVM-Python serialization overhead | Python-native, no JVM overhead, seamless with PyTorch and Hugging Face |
@@ -181,7 +180,6 @@ An LLM data stack must manage three very different kinds of data. Each has disti
 The three mainstream lakehouse formats each have their own appropriate scenarios.
 
 *Table 3-2: Lakehouse table format selection comparison: Apache Iceberg vs. Delta Lake vs. Apache Hudi. Source: compiled by the authors based on public documentation of open-source projects and lakehouse architecture practice.*
-
 | Feature | Apache Iceberg | Delta Lake | Apache Hudi |
 | :--- | :--- | :--- | :--- |
 | **Core maintainer** | Netflix to Apache Foundation | Databricks, core commercial open source | Uber to Apache Foundation |
@@ -300,7 +298,6 @@ The recommended large-team pattern centers on a **unified data platform**. At th
 An important lesson is that large-team data platforms should be built in **three stages**, not all at once. Stage 1, taking one to three months, should connect the core path: storage ingestion, basic cleaning operators, and version management, so data can flow in a controlled way. Stage 2, taking three to six months, should build observability: quality dashboards, experiment tracking, and alerting systems, turning the platform into a transparent system. Stage 3, after six months, should add more complex multi-tenant isolation, cross-project lineage insight, and resource quota management. Entering Stage 3 too early can make platform complexity exceed real needs and reduce core data-flow efficiency.
 
 *Table 3-3: Quick selection matrix for data stacks across three team types. Source: compiled by the authors; setup cycles are empirical planning ranges, and actual cycles depend on team experience, permission workflows, and data-source complexity.*
-
 | Team size | Recommended storage | Recommended compute | Recommended orchestration | Recommended version management | Estimated build cycle |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1-5 people, startup | S3/MinIO + Parquet | DuckDB / Polars | Prefect / Dagster | DVC | 1-2 weeks |

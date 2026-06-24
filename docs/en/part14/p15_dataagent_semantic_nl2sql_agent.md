@@ -225,6 +225,7 @@ This chapter depends on DataAgent, Semantic Service, a value-match service, and 
 
 ### 5.1 Version and Minimal Environment Matrix
 
+*Table P15-1: Minimal environment matrix for the DataAgent semantic BI assistant.*
 | Component | Minimal Reproduction Requirement | Version Record |
 | --- | --- | --- |
 | DataAgent | Install from the same Git tag, commit, or package version. | Record `DATAAGENT_VERSION` or `DATAAGENT_COMMIT` in the report. |
@@ -234,11 +235,9 @@ This chapter depends on DataAgent, Semantic Service, a value-match service, and 
 | value match | Provide field-value matching and literal-value validation. | Record service URL, value-index version, and refresh time. |
 | A2A service | Enable only when external agents need to call this assistant. | Record host, port, token source, and exposure scope. |
 
-*Table P15-1: Minimal environment matrix for the DataAgent semantic BI assistant*
-
 ### 5.2 Install the Project
 
-DataAgent is the currently open-source execution engine in the DataGallery open-source ecosystem (DataGallery Contributors, 2026a). The DataGallery open-source entry is [https://gitcode.com/datagallery](https://gitcode.com/datagallery), and the DataAgent source repository is [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent) (DataGallery Contributors, 2026b). For DataGallery's broader technical map, reproduction boundaries, and project-governance usage, see [Appendix G: DataGallery Open-source Ecosystem Overview](../appendix_g_datagallery_note.md).
+DataAgent is one of the primary execution engines in the DataGallery open-source ecosystem. The DataGallery open-source entry is [https://gitcode.com/datagallery](https://gitcode.com/datagallery), and the DataAgent source repository is [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent). For DataGallery's broader technical map, reproduction boundaries, and project-governance usage, see [Appendix G: DataGallery Open-source Ecosystem and Reproduction Notes](../appendix_g_datagallery_note.md).
 
 First pin the version, then install dependencies from the repository root:
 
@@ -457,6 +456,7 @@ Coordinator
 
 Each node has a distinct responsibility.
 
+*Table P15-2: Core nodes and responsibilities of the NL2SQL sub-agent.*
 | Node | Role |
 | --- | --- |
 | Coordinator | Organizes NL2SQL task entry and state transitions. |
@@ -466,8 +466,6 @@ Each node has a distinct responsibility.
 | Reflector | Attempts correction when confidence is low or execution fails. |
 | Executor | Executes SQL and returns columns, rows, and rows preview. |
 | Selector | Chooses final SQL, result, and confidence. |
-
-*Table P15-2: Core nodes and responsibilities of the NL2SQL sub-agent*
 
 Minimal config:
 
@@ -521,6 +519,7 @@ SQL generation must know:
 
 Semantic Service provides this structured context before SQL generation.
 
+*Table P15-3: Key Semantic Service capabilities and engineering value.*
 | Capability | Engineering Value |
 | --- | --- |
 | Table list and table descriptions | Helps the model locate candidate business tables. |
@@ -530,21 +529,18 @@ Semantic Service provides this structured context before SQL generation.
 | Value match | Checks whether literals exist in data. |
 | Vector database index | Turns business descriptions, metric definitions, and field semantics into retrievable assets. |
 
-*Table P15-3: Key Semantic Service capabilities and engineering value*
-
 Semantic Service should not be treated as "extra documentation." It is the upstream data engineering layer of NL2SQL. Without it, the model guesses from table and field names; with it, the model can generate SQL from business semantics, field descriptions, and join relations.
 
 ## 9. Tool Invocation: How the Main Agent Delegates to the NL2SQL Sub-agent
 
 `nl2sql_sub_agent_tool` is the core tool. Its parameters are:
 
+*Table P15-4: Input parameters of nl2sql_sub_agent_tool.*
 | Parameter | Description |
 | --- | --- |
 | `query` | Natural-language query for the NL2SQL sub-agent. It should include business goal, metric definition, filters, grouping, and output fields. |
 | `sql_filename` | Filename for saved SQL. |
 | `csv_filename` | Filename for saved query result CSV. |
-
-*Table P15-4: Input parameters of `nl2sql_sub_agent_tool`*
 
 At runtime the tool:
 
@@ -671,6 +667,7 @@ For enterprise applications, traces are not merely debugging artifacts; they are
 
 Semantic BI assistant evaluation should cover SQL, data, answer, and engineering execution.
 
+*Table P15-5: Evaluation metrics for the enterprise semantic BI assistant.*
 | Metric | Description |
 | --- | --- |
 | Schema recall hit rate | Whether the required tables and fields entered candidate context. |
@@ -681,8 +678,6 @@ Semantic BI assistant evaluation should cover SQL, data, answer, and engineering
 | Answer faithfulness | Whether the final answer is based only on query results. |
 | Trace completeness | Whether tool calls, inputs, outputs, errors, and file paths are traceable. |
 | Safety violation rate | Whether unauthorized paths, sensitive fields, or disallowed SQL operations appear. |
-
-*Table P15-5: Evaluation metrics for the enterprise semantic BI assistant*
 
 SQL execution success is only the baseline. A real BI assistant must also choose the right schema, explain metric definitions, produce reviewable results, and make failures diagnosable.
 
@@ -703,6 +698,7 @@ This test verifies:
 
 Enterprise deployment also needs a business regression set:
 
+*Table P15-6: Business regression question types for enterprise BI.*
 | Type | Example |
 | --- | --- |
 | Single-table aggregation | Monthly order count, order count by status. |
@@ -712,8 +708,6 @@ Enterprise deployment also needs a business regression set:
 | TopN ranking | Top 10 customers by sales amount. |
 | Metric-definition sensitivity | New customers, repeat purchase rate, conversion rate, average order value. |
 | Abnormal input | Nonexistent field, ambiguous metric definition, unauthorized query. |
-
-*Table P15-6: Business regression question types for enterprise BI*
 
 Each test sample should include:
 
@@ -892,6 +886,7 @@ This is why DataAgent is a strong practice project: it combines Agent, Tool-Use,
 
 Check at least these gates before launch:
 
+*Table P15-7: Pre-launch gate checklist for the DataAgent semantic BI assistant.*
 | Gate | Check Item |
 | --- | --- |
 | Configuration gate | YAML loads; model, database, Semantic Service, and workspace are configured. |
@@ -901,8 +896,6 @@ Check at least these gates before launch:
 | Faithfulness gate | Final answers do not invent numbers outside query results. |
 | Safety gate | Paths, databases, sensitive fields, SQL types, and A2A authentication all have boundaries. |
 | Review gate | Tool calls, errors, file paths, and final answers are traceable. |
-
-*Table P15-7: Pre-launch gate checklist for the DataAgent semantic BI assistant*
 
 ## Topic: Why This Case Is Better Than Plain NL2SQL for a Project Chapter
 
@@ -926,10 +919,12 @@ As part of Part 14, this chapter validates earlier methods at the project level.
 
 ## References
 
-1. Yu, T., Zhang, R., Yang, K., Yasunaga, M., Wang, D., Li, Z., et al. (2018). Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task. EMNLP 2018.
-2. Wang, B., Shin, R., Liu, X., Polozov, O., & Richardson, M. (2020). RAT-SQL: Relation-Aware Schema Encoding and Linking for Text-to-SQL Parsers. ACL 2020. https://doi.org/10.18653/v1/2020.acl-main.677.
-3. Schick, T., Dwivedi-Yu, J., Dessi, R., Raileanu, R., Lomeli, M., Hambro, E., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
-4. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
-5. dbt Labs. (2026). dbt Documentation. https://docs.getdbt.com/.
-6. DataGallery Contributors. (2026a). DataGallery organization page. https://gitcode.com/datagallery.
-7. DataGallery Contributors. (2026b). DataAgent source repository. https://gitcode.com/datagallery/dataagent.
+Yu T, Zhang R, Yang K, Yasunaga M, Wang D, Li Z, et al. (2018) Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task. EMNLP 2018.
+
+Wang B, Shin R, Liu X, Polozov O, Richardson M (2020) RAT-SQL: Relation-Aware Schema Encoding and Linking for Text-to-SQL Parsers. ACL 2020. https://doi.org/10.18653/v1/2020.acl-main.677.
+
+Schick T, Dwivedi-Yu J, Dessi R, Raileanu R, Lomeli M, Hambro E, Zettlemoyer L, Cancedda N, Scialom T (2023) Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
+
+Yao S, Zhao J, Yu D, Du N, Shafran I, Narasimhan K, Cao Y (2023) ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
+
+dbt Labs (2026) dbt Documentation. https://docs.getdbt.com/.

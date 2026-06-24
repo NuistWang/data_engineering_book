@@ -639,44 +639,44 @@ QA 手册则更强调执行属性。知识库可以很丰富，但一线执行�
 
 ## 参考文献
 
-Wang, R. Y., & Strong, D. M. (1996). *Beyond Accuracy: What Data Quality Means to Data Consumers*. Journal of Management Information Systems, 12(4), 5–33. DOI: 10.1080/07421222.1996.11518099.
+Wang R Y, Strong D M (1996) *Beyond Accuracy: What Data Quality Means to Data Consumers*. Journal of Management Information Systems, 12(4), 5–33. DOI: 10.1080/07421222.1996.11518099.
 
-Pipino, L. L., Lee, Y. W., & Wang, R. Y. (2002). *Data Quality Assessment*. Communications of the ACM, 45(4), 211–218. DOI: 10.1145/505248.506010.
+Pipino L L, Lee Y W, Wang R Y (2002) *Data Quality Assessment*. Communications of the ACM, 45(4), 211–218. DOI: 10.1145/505248.506010.
 
-Wei, J., Bosma, M., Zhao, V. Y., et al. (2022). *Finetuned Language Models Are Zero-Shot Learners*. International Conference on Learning Representations. arXiv:2109.01652.
+Wei J, Bosma M, Zhao V Y, et al. (2022) *Finetuned Language Models Are Zero-Shot Learners*. International Conference on Learning Representations. arXiv:2109.01652.
 
-Ouyang, L., Wu, J., Jiang, X., et al. (2022). *Training Language Models to Follow Instructions with Human Feedback*. Advances in Neural Information Processing Systems, 35, 27730–27744. arXiv:2203.02155.
+Ouyang L, Wu J, Jiang X, et al. (2022) *Training Language Models to Follow Instructions with Human Feedback*. Advances in Neural Information Processing Systems, 35, 27730–27744. arXiv:2203.02155.
 
-Christiano, P. F., Leike, J., Brown, T. B., et al. (2017). *Deep Reinforcement Learning from Human Preferences*. Advances in Neural Information Processing Systems, 30. arXiv:1706.03741.
+Christiano P F, Leike J, Brown T B, et al. (2017) *Deep Reinforcement Learning from Human Preferences*. Advances in Neural Information Processing Systems, 30. arXiv:1706.03741.
 
-Stiennon, N., Ouyang, L., Wu, J., et al. (2020). *Learning to Summarize from Human Feedback*. Advances in Neural Information Processing Systems, 33, 3008–3021. arXiv:2009.01325.
+Stiennon N, Ouyang L, Wu J, et al. (2020) *Learning to Summarize from Human Feedback*. Advances in Neural Information Processing Systems, 33, 3008–3021. arXiv:2009.01325.
 
-Bradley, R. A., & Terry, M. E. (1952). *Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons*. Biometrika, 39(3/4), 324–345. DOI: 10.2307/2334029.
+Bradley R A, Terry M E (1952) *Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons*. Biometrika, 39(3/4), 324–345. DOI: 10.2307/2334029.
 
-Rafailov, R., Sharma, A., Mitchell, E., et al. (2023). *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems, 36. arXiv:2305.18290.
+Rafailov R, Sharma A, Mitchell E, et al. (2023) *Direct Preference Optimization: Your Language Model is Secretly a Reward Model*. Advances in Neural Information Processing Systems, 36. arXiv:2305.18290.
 
-Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). *Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena*. Advances in Neural Information Processing Systems, 36. arXiv:2306.05685.
+Zheng L, Chiang W-L, Sheng Y, et al. (2023) *Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena*. Advances in Neural Information Processing Systems, 36. arXiv:2306.05685.
 
-Bai, Y., Kadavath, S., Kundu, S., et al. (2022). *Constitutional AI: Harmlessness from AI Feedback*. arXiv:2212.08073.
+Bai Y, Kadavath S, Kundu S, et al. (2022) *Constitutional AI: Harmlessness from AI Feedback*. arXiv:2212.08073.
 
-Snow, R., O'Connor, B., Jurafsky, D., & Ng, A. Y. (2008). *Cheap and Fast—But is it Good? Evaluating Non-Expert Annotations for Natural Language Tasks*. Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing, 254–263.
+Snow R, O'Connor B, Jurafsky D, Ng A Y (2008) *Cheap and Fast—But is it Good? Evaluating Non-Expert Annotations for Natural Language Tasks*. Proceedings of the 2008 Conference on Empirical Methods in Natural Language Processing, 254–263.
 
-Sheng, V. S., Provost, F., & Ipeirotis, P. G. (2008). *Get Another Label? Improving Data Quality and Data Mining Using Multiple, Noisy Labelers*. Proceedings of the 14th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 614–622. DOI: 10.1145/1401890.1401965.
+Sheng V S, Provost F, Ipeirotis P G (2008) *Get Another Label? Improving Data Quality and Data Mining Using Multiple, Noisy Labelers*. Proceedings of the 14th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 614–622. DOI: 10.1145/1401890.1401965.
 
-Dawid, A. P., & Skene, A. M. (1979). *Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm*. Applied Statistics, 28(1), 20–28. DOI: 10.2307/2346806.
+Dawid A P, Skene A M (1979) *Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm*. Applied Statistics, 28(1), 20–28. DOI: 10.2307/2346806.
 
-Artstein, R., & Poesio, M. (2008). *Inter-Coder Agreement for Computational Linguistics*. Computational Linguistics, 34(4), 555–596. DOI: 10.1162/coli.07-034-R2.
+Artstein R, Poesio M (2008) *Inter-Coder Agreement for Computational Linguistics*. Computational Linguistics, 34(4), 555–596. DOI: 10.1162/coli.07-034-R2.
 
-Cohen, J. (1960). *A Coefficient of Agreement for Nominal Scales*. Educational and Psychological Measurement, 20(1), 37–46. DOI: 10.1177/001316446002000104.
+Cohen J (1960) *A Coefficient of Agreement for Nominal Scales*. Educational and Psychological Measurement, 20(1), 37–46. DOI: 10.1177/001316446002000104.
 
-Fleiss, J. L. (1971). *Measuring Nominal Scale Agreement among Many Raters*. Psychological Bulletin, 76(5), 378–382. DOI: 10.1037/h0031619.
+Fleiss J L (1971) *Measuring Nominal Scale Agreement among Many Raters*. Psychological Bulletin, 76(5), 378–382. DOI: 10.1037/h0031619.
 
-Krippendorff, K. (2004). *Reliability in Content Analysis: Some Common Misconceptions and Recommendations*. Human Communication Research, 30(3), 411–433. DOI: 10.1111/j.1468-2958.2004.tb00738.x.
+Krippendorff K (2004) *Reliability in Content Analysis: Some Common Misconceptions and Recommendations*. Human Communication Research, 30(3), 411–433. DOI: 10.1111/j.1468-2958.2004.tb00738.x.
 
-Kittur, A., Chi, E. H., & Suh, B. (2008). *Crowdsourcing User Studies with Mechanical Turk*. Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, 453–456. DOI: 10.1145/1357054.1357127.
+Kittur A, Chi E H, Suh B (2008) *Crowdsourcing User Studies with Mechanical Turk*. Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, 453–456. DOI: 10.1145/1357054.1357127.
 
-Settles, B. (2009). *Active Learning Literature Survey*. Computer Sciences Technical Report 1648, University of Wisconsin–Madison.
+Settles B (2009) *Active Learning Literature Survey*. Computer Sciences Technical Report 1648, University of Wisconsin–Madison.
 
-Ratner, A., Bach, S. H., Ehrenberg, H., et al. (2017). *Snorkel: Rapid Training Data Creation with Weak Supervision*. Proceedings of the VLDB Endowment, 11(3), 269–282. DOI: 10.14778/3157794.3157797.
+Ratner A, Bach S H, Ehrenberg H, et al. (2017) *Snorkel: Rapid Training Data Creation with Weak Supervision*. Proceedings of the VLDB Endowment, 11(3), 269–282. DOI: 10.14778/3157794.3157797.
 
-Thurstone, L. L. (1927). *A Law of Comparative Judgment*. Psychological Review, 34(4), 273–286. DOI: 10.1037/h0070288.
+Thurstone L L (1927) *A Law of Comparative Judgment*. Psychological Review, 34(4), 273–286. DOI: 10.1037/h0070288.

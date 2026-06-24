@@ -1073,8 +1073,12 @@ P10 作为总装层，还有一个特别值得补出来的工程动作，就是�
 
 ## 参考文献
 
-1. Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
-2. Hugging Face. (2026). Datasets Documentation. https://huggingface.co/docs/datasets/.
-3. Ray Project. (2026). Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
-4. MLflow Authors. (2026). MLflow Documentation. https://mlflow.org/docs/latest/.
-5. Great Expectations Contributors. (2026). Great Expectations Documentation. https://docs.greatexpectations.io/.
+Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+
+Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+
+Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+
+Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

@@ -321,7 +321,7 @@ If synthetic data long-term dilutes this friction, the model will progressively 
 Therefore, the value of real data lies not only in "providing more samples"—it lies in "providing real resistance that cannot easily be regularized." This resistance is uncomfortable for training, but it is irreplaceable for capability formation. Table 17-1 summarizes the early risk signals, common manifestations, and priority investigation directions for excessive use of synthetic data.
 
 
-**Table 17-1: Risk Signals and Possible Causes Reference Table**
+*Table 17-1: Risk Signals and Possible Causes Reference Table.*
 | Early Risk Signal | Common Manifestations | Possible Causes | Priority Investigation Direction |
 |---|---|---|---|
 | Highly uniform output style | Increasingly similar sentence patterns, structures, and wording | Template rigidity, single-teacher dominance, singular judge preference | Template versions, teacher source distribution, judge scoring standards |
@@ -447,8 +447,7 @@ One of the most troublesome aspects of synthetic data risk is that offline and o
 
 One viable approach is to establish a mapping between "online problem types" and "offline proxy metrics." For example, if style uniformity and off-target answers appear online, one should check whether the offline style diversity metrics and open-ended Q&A robustness metrics are drifting synchronously; if complex scenario success rates are declining online, one should check whether degradation in long-tail sets, hard sets, and cross-domain sets occurred earlier. Only by decomposing online problems into signals that can be proxied by offline measurements can the governance system form a truly closed loop.
 
-**Table 17-2: Detection Metrics, Thresholds, and Governance Actions**
-
+*Table 17-2: Detection Metrics, Thresholds, and Governance Actions.*
 | Metric Category | Representative Metrics | Risk Signal | Recommended Action |
 |---|---|---|---|
 | Distribution metrics | Length distribution divergence, topic coverage divergence, task type proportion | Synthetic data concentrated in few patterns | Expand real samples, diversify templates, add hard samples |
@@ -547,7 +546,7 @@ Post-mortem review reveals that this incident was not simply due to "low-quality
 The value of a governance checklist (Gebru et al. 2021; Mitchell et al. 2019; Raji et al. 2020) lies in converting abstract principles into actionable inspection items. A major reason synthetic data systems can easily lose control is that teams often continue to expand in a state of "overall feeling acceptable." The significance of deployment red lines is to clearly specify which problems, once they appear, require the system to pause, roll back, or undergo re-review, rather than allowing continued reliance on optimistic subjective judgment. Table 17-3 lists required inspection questions and corresponding deployment red lines across dimensions such as data source, sample distribution, and repetition and similarity.
 
 
-**Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training**
+*Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training.*
 | Inspection Dimension | Required Inspection Questions | Deployment Red Line |
 |---|---|---|
 | Data source | Does it long-term rely on few teachers/few templates? | Single source dominates long-term without external correction |
@@ -576,40 +575,40 @@ Case post-mortems demonstrate that synthetic data quality deterioration typicall
 
 ## References
 
-Tan, Z., Li, D., Wang, S., et al. (2024). Large Language Models for Data Annotation and Synthesis: A Survey. *Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing*, 930–957. https://doi.org/10.18653/v1/2024.emnlp-main.54.
+Tan Z, Li D, Wang S, et al. (2024) Large Language Models for Data Annotation and Synthesis: A Survey. *Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing*, 930–957. https://doi.org/10.18653/v1/2024.emnlp-main.54.
 
-Long, L., Wang, R., Xiao, R., et al. (2024). On LLMs-Driven Synthetic Data Generation, Curation, and Evaluation: A Survey. *Findings of the Association for Computational Linguistics: ACL 2024*, 11065–11082.
+Long L, Wang R, Xiao R, et al. (2024) On LLMs-Driven Synthetic Data Generation, Curation, and Evaluation: A Survey. *Findings of the Association for Computational Linguistics: ACL 2024*, 11065–11082.
 
-Shumailov, I., Shumaylov, Z., Zhao, Y., et al. (2024). AI models collapse when trained on recursively generated data. *Nature*, 631, 755–759. https://doi.org/10.1038/s41586-024-07566-y.
+Shumailov I, Shumaylov Z, Zhao Y, et al. (2024) AI models collapse when trained on recursively generated data. *Nature*, 631, 755–759. https://doi.org/10.1038/s41586-024-07566-y.
 
-Alemohammad, S., Casco-Rodriguez, J., Luzi, L., et al. (2024). Self-Consuming Generative Models Go MAD. *International Conference on Learning Representations*. arXiv:2307.01850.
+Alemohammad S, Casco-Rodriguez J, Luzi L, et al. (2024) Self-Consuming Generative Models Go MAD. *International Conference on Learning Representations*. arXiv:2307.01850.
 
-Gerstgrasser, M., Schaeffer, R., Dey, A., et al. (2024). Is Model Collapse Inevitable? Breaking the Curse of Recursion by Accumulating Real and Synthetic Data. arXiv:2404.01413.
+Gerstgrasser M, Schaeffer R, Dey A, et al. (2024) Is Model Collapse Inevitable? Breaking the Curse of Recursion by Accumulating Real and Synthetic Data. arXiv:2404.01413.
 
-Wang, Y., Kordi, Y., Mishra, S., et al. (2023). Self-Instruct: Aligning Language Models with Self-Generated Instructions. *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics*, 13484–13508. https://doi.org/10.18653/v1/2023.acl-long.754.
+Wang Y, Kordi Y, Mishra S, et al. (2023) Self-Instruct: Aligning Language Models with Self-Generated Instructions. *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics*, 13484–13508. https://doi.org/10.18653/v1/2023.acl-long.754.
 
-Honovich, O., Scialom, T., Levy, O., et al. (2023). Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor. *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics*, 14409–14428.
+Honovich O, Scialom T, Levy O, et al. (2023) Unnatural Instructions: Tuning Language Models with (Almost) No Human Labor. *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics*, 14409–14428.
 
-Xu, C., Sun, Q., Zheng, K., et al. (2024). WizardLM: Empowering Large Language Models to Follow Complex Instructions. *International Conference on Learning Representations (ICLR 2024)*. arXiv:2304.12244.
+Xu C, Sun Q, Zheng K, et al. (2024) WizardLM: Empowering Large Language Models to Follow Complex Instructions. *International Conference on Learning Representations (ICLR 2024)*. arXiv:2304.12244.
 
-Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. *Advances in Neural Information Processing Systems*, 36. arXiv:2306.05685.
+Zheng L, Chiang W-L, Sheng Y, et al. (2023) Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. *Advances in Neural Information Processing Systems*, 36. arXiv:2306.05685.
 
-Liu, Y., Iter, D., Xu, Y., et al. (2023). G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing*, 2511–2522. arXiv:2303.16634.
+Liu Y, Iter D, Xu Y, et al. (2023) G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing*, 2511–2522. arXiv:2303.16634.
 
-Geirhos, R., Jacobsen, J.-H., Michaelis, C., et al. (2020). Shortcut learning in deep neural networks. *Nature Machine Intelligence*, 2, 665–673.
+Geirhos R, Jacobsen J-H, Michaelis C, et al. (2020) Shortcut learning in deep neural networks. *Nature Machine Intelligence*, 2, 665–673.
 
-Torralba, A., & Efros, A. A. (2011). Unbiased Look at Dataset Bias. *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition*, 1521–1528.
+Torralba A, Efros A A (2011) Unbiased Look at Dataset Bias. *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition*, 1521–1528.
 
-Koh, P. W., Sagawa, S., Marklund, H., et al. (2021). WILDS: A Benchmark of in-the-Wild Distribution Shifts. *Proceedings of the 38th International Conference on Machine Learning*, 5637–5664.
+Koh P W, Sagawa S, Marklund H, et al. (2021) WILDS: A Benchmark of in-the-Wild Distribution Shifts. *Proceedings of the 38th International Conference on Machine Learning*, 5637–5664.
 
-Ribeiro, M. T., Wu, T., Guestrin, C., et al. (2020). Beyond Accuracy: Behavioral Testing of NLP Models with CheckList. *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics*, 4902–4912. https://doi.org/10.18653/v1/2020.acl-main.442.
+Ribeiro M T, Wu T, Guestrin C, et al. (2020) Beyond Accuracy: Behavioral Testing of NLP Models with CheckList. *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics*, 4902–4912. https://doi.org/10.18653/v1/2020.acl-main.442.
 
-Lee, K., Ippolito, D., Nystrom, A., et al. (2022). Deduplicating Training Data Makes Language Models Better. *Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics*, 8424–8445.
+Lee K, Ippolito D, Nystrom A, et al. (2022) Deduplicating Training Data Makes Language Models Better. *Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics*, 8424–8445.
 
-Carlini, N., Ippolito, D., Jagielski, M., et al. (2023). Quantifying Memorization Across Neural Language Models. *International Conference on Learning Representations*.
+Carlini N, Ippolito D, Jagielski M, et al. (2023) Quantifying Memorization Across Neural Language Models. *International Conference on Learning Representations*.
 
-Gebru, T., Morgenstern, J., Vecchione, B., et al. (2021). Datasheets for Datasets. *Communications of the ACM*, 64(12), 86–92. https://doi.org/10.1145/3458723.
+Gebru T, Morgenstern J, Vecchione B, et al. (2021) Datasheets for Datasets. *Communications of the ACM*, 64(12), 86–92. https://doi.org/10.1145/3458723.
 
-Mitchell, M., Wu, S., Zaldivar, A., et al. (2019). Model Cards for Model Reporting. *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 220–229. https://doi.org/10.1145/3287560.3287596.
+Mitchell M, Wu S, Zaldivar A, et al. (2019) Model Cards for Model Reporting. *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 220–229. https://doi.org/10.1145/3287560.3287596.
 
-Raji, I. D., Smart, A., White, R. N., et al. (2020). Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Algorithmic Auditing. *Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency*, 33–44.
+Raji I D, Smart A, White R N, et al. (2020) Closing the AI Accountability Gap: Defining an End-to-End Framework for Internal Algorithmic Auditing. *Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency*, 33–44.
