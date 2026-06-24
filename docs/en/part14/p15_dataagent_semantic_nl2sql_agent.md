@@ -238,7 +238,7 @@ This chapter depends on DataAgent, Semantic Service, a value-match service, and 
 
 ### 5.2 Install the Project
 
-DataAgent is the currently open-source execution engine in the DataGallery open-source ecosystem (DataGallery Contributors, 2026a). The DataGallery open-source entry is [https://gitcode.com/datagallery](https://gitcode.com/datagallery), and the DataAgent source repository is [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent) (DataGallery Contributors, 2026b). For DataGallery's broader technical map, reproduction boundaries, and project-governance usage, see [Appendix G: DataGallery Open-source Ecosystem Overview](../appendix_g_datagallery_note.md).
+DataAgent is one of the primary execution engines in the DataGallery open-source ecosystem. The DataGallery open-source entry is [https://gitcode.com/datagallery](https://gitcode.com/datagallery), and the DataAgent source repository is [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent). For DataGallery's broader technical map, reproduction boundaries, and project-governance usage, see [Appendix G: DataGallery Open-source Ecosystem and Reproduction Notes](../appendix_g_datagallery_note.md).
 
 First pin the version, then install dependencies from the repository root:
 
@@ -931,5 +931,3 @@ As part of Part 14, this chapter validates earlier methods at the project level.
 3. Schick, T., Dwivedi-Yu, J., Dessi, R., Raileanu, R., Lomeli, M., Hambro, E., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
 4. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
 5. dbt Labs. (2026). dbt Documentation. https://docs.getdbt.com/.
-6. DataGallery Contributors. (2026a). DataGallery organization page. https://gitcode.com/datagallery.
-7. DataGallery Contributors. (2026b). DataAgent source repository. https://gitcode.com/datagallery/dataagent.

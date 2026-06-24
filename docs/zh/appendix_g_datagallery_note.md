@@ -1,18 +1,18 @@
-# 附录G：DataGallery 开源生态简介
+# 附录G：DataGallery 开源生态与复现说明
 
 ## G.1 附录定位
 
-本附录用于说明 DataGallery 在本书项目十五及相关 Agent 数据工程实践中的位置。DataGallery 的公开开源入口位于 GitCode：[https://gitcode.com/datagallery](https://gitcode.com/datagallery)。本附录不是 DataGallery 或 DataAgent 的安装手册，也不替代对应仓库中的 README、示例配置、依赖说明和发布记录；读者在复现实验或接入工程系统时，应以公开仓库、具体 tag、commit 和项目文档为准（DataGallery Contributors 2026a; DataGallery Contributors 2026b）。
+本附录用于说明 DataGallery 在本书项目十五及相关 Agent 数据工程实践中的位置。DataGallery 的公开开源入口位于 GitCode：[https://gitcode.com/datagallery](https://gitcode.com/datagallery)。本附录不是 DataGallery 或 DataAgent 的安装手册，也不替代对应仓库中的 README、示例配置、依赖说明和发布记录；读者在复现实验或接入工程系统时，应以公开仓库、具体 tag、commit 和项目文档为准。
 
-在本书语境中，DataGallery 更适合被理解为围绕 Data + AI 实践组织的一组开源工程入口，而不是单一工具名称。项目十五使用 DataAgent 构建企业级语义问数助手，其核心问题并不是“如何调用一个模型生成 SQL”，而是如何把业务问题、语义层、NL2SQL 子 Agent、工具调用、workspace 资产、运行轨迹和服务接口组织成可复查的数据工程系统。DataGallery 为这类工作提供开源承载位置，DataAgent 则是本书最直接引用的项目入口。
+在本书语境中，DataGallery 更适合被理解为围绕 Data + AI 实践组织的一组开源工程入口，而不是单一工具名称。项目十五使用 DataAgent 构建企业级语义问数助手，其核心问题并不是“如何调用一个模型生成 SQL”，而是如何把业务问题、语义层、NL2SQL 子 Agent、工具调用、workspace 资产、运行轨迹和服务接口组织成可复查的数据工程系统。DataGallery 提供公开组织和项目入口，DataAgent 则是本书最直接引用的工程项目。
 
-因此，本附录重点讨论 DataGallery 与数据工程方法之间的关系：它如何帮助读者把书中关于 Agent、Tool-Use、语义层、DataOps、复现和治理的内容，落到可运行、可审计、可迭代的开源项目中。对于具体 API、启动命令、配置文件字段和依赖版本，本附录只给出使用原则，不展开逐项教程。
+因此，本附录重点讨论 DataGallery 与数据工程方法之间的关系：如何把书中关于 Agent、Tool-Use、语义层、DataOps、复现和治理的内容，落到可运行、可审计、可迭代的开源项目中。对于具体 API、启动命令、配置文件字段和依赖版本，本附录只给出使用原则，不展开逐项教程。
 
 ## G.2 与项目十五的关系
 
 项目十五选择 DataAgent 作为企业语义问数助手的实践对象，是因为它把 Agent 编排、语义层增强、NL2SQL、工具调用、workspace 资产和服务化接口放在同一条工程链路中。DataGallery 则提供了更上层的开源组织入口，使 DataAgent 不只是孤立仓库，而是可以被放入数据智能体、数据应用和数据工程复现的生态视角中理解。
 
-这一区分很重要。DataAgent 是具体项目：读者需要关注它的 YAML 配置、Semantic Service、NL2SQL 子 Agent、执行工具、workspace 和 A2A 接口。DataGallery 是生态入口：读者应通过它确认项目归属、公开仓库、许可证、维护状态、相关项目和后续迁移线索。对于出版物来说，章节正文适合讲清项目链路，附录则适合说明开源生态和复现边界。
+这一边界需要明确。DataAgent 是具体项目：复现时需要检查它的 YAML 配置、Semantic Service、NL2SQL 子 Agent、执行工具、workspace 和 A2A 接口。DataGallery 是生态入口：读者可通过它确认项目归属、公开仓库、许可证、维护状态、相关项目和后续迁移线索。对于出版物来说，章节正文适合讲清项目链路，附录则适合说明开源生态和复现边界。
 
 在阅读路径上，建议将项目十五和本附录连读。项目十五回答“如何用 DataAgent 构建一个企业语义问数助手”；本附录回答“这个项目在 DataGallery 开源生态中如何被定位、复现和治理”。两者共同构成从案例到生态的说明。
 
@@ -20,13 +20,13 @@
 
 从数据工程角度看，DataGallery 的价值不在于把复杂系统包装成一个黑盒，而在于为可复现项目提供公开组织边界。一个成熟的数据工程案例通常需要回答七类问题：项目从哪里获取，代码是否开源，许可证是什么，示例数据和配置是否可复现，运行结果是否能落盘，失败样本和日志是否能回看，后续版本变化如何追踪。DataGallery 作为公开入口，可以帮助读者把这些问题集中到同一处核对。
 
-DataGallery 也提醒读者，开源数据智能体项目的核心资产不只是模型调用代码。对 DataAgent 这类系统而言，真正需要长期维护的是语义层 schema、工具配置、数据库连接、执行权限、workspace 目录、运行轨迹、测试样例、评估脚本和上线前门禁。只有这些资产被组织起来，Agent 才能从演示能力变成工程能力。
+这一点也意味着，开源数据智能体项目的核心资产不只是模型调用代码。对 DataAgent 这类系统而言，需要长期维护的是语义层 schema、工具配置、数据库连接、执行权限、workspace 目录、运行轨迹、测试样例、评估脚本和上线前门禁。只有这些资产被组织起来，Agent 才能从演示能力变成工程能力。
 
-在团队协作中，DataGallery 还可以作为跨角色沟通入口。算法同学关注模型、提示词和工具选择；数据工程同学关注 schema、样本、数据源、质量门禁和结果资产；平台同学关注环境、权限、服务接口和运行审计；业务同学关注指标口径、查询边界和结果解释。开源仓库和组织入口使这些角色能够围绕同一套版本、文档和 issue 记录协作，而不是依赖分散的临时说明。
+在团队协作中，DataGallery 还可以作为跨角色沟通入口。算法工程师关注模型、提示词和工具选择；数据工程师关注 schema、样本、数据源、质量门禁和结果资产；平台工程师关注环境、权限、服务接口和运行审计；业务人员关注指标口径、查询边界和结果解释。开源仓库和组织入口使这些角色能够围绕同一套版本、文档和 issue 记录协作，而不是依赖分散的临时说明。
 
 ## G.4 DataGallery 生态的技术版图
 
-DataGallery 组织介绍将其定位为一个面向 Data + AI 的开源组织，目标是用 Agent 范式重构数据工程全链路（DataGallery Contributors 2026a）。从工程角度看，它不是一个单独可执行包，而更像一个分层生态。其技术版图可以概括为四个支柱。
+从公开组织页和项目文档看，DataGallery 面向 Data + AI 开源实践，强调用 Agent 范式组织数据工程链路。从工程角度看，它不是一个单独可执行包，而更像一个分层生态。其技术版图可以概括为四个支柱。
 
 第一个支柱是 **DataAgent**，也就是当前已经开源的执行引擎。它承载 NL2SQL、数据分析、特征工程、工具调用、workspace 资产落盘和服务化暴露能力，是项目十五最直接使用的部分。
 
@@ -38,9 +38,9 @@ DataGallery 组织介绍将其定位为一个面向 Data + AI 的开源组织，
 
 这四个支柱与本书结构高度对应。语义层连接元数据、数据目录、RAG 和数据产品章节；DataAgent 连接工具使用、多轮交互、Agent 架构和项目交付章节；自演进连接 DataOps 和反馈闭环；评测框架连接数据质量、benchmark 构建、验收门禁和可复现性。
 
-## G.5 DataAgent 作为当前首个开源入口
+## G.5 DataAgent 作为当前主要开源入口
 
-DataAgent 是目前最能让读者复现 DataGallery 工程思想的开源项目。其公开 README 将它描述为面向企业 Data + AI 场景的智能体平台，要求 Python 3.11+，采用 Apache License 2.0，集成 LangGraph、openJiuwen，并优先支持围绕 GaussVector 的语义检索增强和版本化开源包入口（DataGallery Contributors 2026b）。
+DataAgent 是当前较适合读者复现 DataGallery 工程思想的开源项目。公开项目文档显示，它面向企业 Data + AI 场景，要求 Python 3.11+，采用 Apache License 2.0，集成 LangGraph、openJiuwen，并支持围绕 GaussVector 的语义检索增强和版本化开源包入口。
 
 结合仓库结构和文档，DataAgent 可以拆成五层理解。
 
@@ -94,8 +94,8 @@ DataGallery 与本书多处内容有自然连接。第六篇讨论推理与 Agen
 
 第四，持续同步仓库变化。开源项目更新后，应比较配置字段、服务接口、依赖版本和示例路径的变化，并更新本书配套复现说明或教学材料。
 
-## 参考文献
+## 开源入口
 
-DataGallery Contributors (2026a) DataGallery organization page. Available at: https://gitcode.com/datagallery.
+- DataGallery 组织入口：[https://gitcode.com/datagallery](https://gitcode.com/datagallery)。
 
-DataGallery Contributors (2026b) DataAgent source repository. Available at: https://gitcode.com/datagallery/DataAgent.
+- DataAgent 项目仓库：[https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent)。

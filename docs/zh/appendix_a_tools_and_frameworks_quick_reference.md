@@ -251,9 +251,9 @@ Agent 工具调用数据与普通问答数据最大的不同，是其中的中�
 - 面向预训练与后训练配方，优先强调批处理、版本治理、实验追踪和数据卡片。
 - 面向推理、多模态与生成场景，优先强调轨迹记录、评测切片、存储分层和推理服务。
 - 面向专项数据集案例，优先强调事实核验、样本 schema、构建流水线、评测协议、合规审计和复现边界。
-- 面向附录 A-H，重点承担“把这些工具能力翻译成可执行清单和模板”的职责。
+- 面向附录 A-H，重点承担“把这些工具能力转化为可执行清单和模板”的职责。
 
-这样的映射有一个很重要的好处：它提醒读者，附录并不是正文之外的次要补充，而是把正文里出现过的工程能力重新整理成能直接被项目经理、助教、平台同学和维护者调用的操作层语言。
+这样的映射提醒读者，附录并不是正文之外的次要补充，而是把正文里出现过的工程能力重新整理成能被项目经理、助教、平台工程师和维护者直接调用的操作层语言。
 
 ## A.9 本附录建议长期维护的速查字段
 
@@ -293,8 +293,8 @@ Mitchell M, Wu S, Zaldivar A, Barnes P, Vasserman L, Hutchinson B, Spitzer E, Ra
 
 Pushkarna M, Zaldivar A, Kjartansson O (2022) Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI. In: Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency, pp 1776-1826.
 
-DVC Contributors (2026) Data Version Control Documentation. Available at: https://dvc.org/doc.
+DVC Contributors (2026) Data Version Control Documentation. https://dvc.org/doc.
 
-MLflow Authors (2026) MLflow Documentation. Available at: https://mlflow.org/docs/latest/.
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
 
-Hugging Face (2026) Hugging Face Datasets Documentation. Available at: https://huggingface.co/docs/datasets.
+Hugging Face (2026) Hugging Face Datasets Documentation. https://huggingface.co/docs/datasets.

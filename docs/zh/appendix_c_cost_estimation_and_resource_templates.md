@@ -8,7 +8,7 @@
 
 ## C.2 成本为什么要按生命周期拆开
 
-很多预算争议的根源，不是总额高低，而是不同角色盯的成本对象不同。研究同学可能只盯训练 GPU，平台同学更关心存储和回流，课程负责人更关心镜像和助教工时，管理层则关心季度投入与交付节奏。若没有统一拆分，讨论会不断失焦。
+很多预算争议的根源，不是总额高低，而是不同角色关注的成本对象不同。研究人员可能只关注训练 GPU，平台工程师更关心存储和回流，课程负责人更关心镜像和助教工时，管理层则关心季度投入与交付节奏。若没有统一拆分，讨论会不断失焦。
 
 一个更适合数据工程项目的拆法，是按生命周期拆成六类成本：
 
@@ -319,6 +319,6 @@ Narayanan D, Shoeybi M, Casper J, LeGresley P, Patwary M, Catanzaro B (2021) Eff
 
 Kwon W, Li Z, Zhuang S, Sheng Y, Zheng L, Yu C H, Gonzalez J E, Zhang H, Stoica I (2023) Efficient Memory Management for Large Language Model Serving with PagedAttention. In: Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles, pp 611-626. https://doi.org/10.1145/3600006.3613165.
 
-Kubernetes Authors (2026) Kubernetes Documentation. Available at: https://kubernetes.io/docs/.
+Kubernetes Authors (2026) Kubernetes Documentation. https://kubernetes.io/docs/.
 
-vLLM Project (2026) vLLM Documentation. Available at: https://docs.vllm.ai/.
+vLLM Project (2026) vLLM Documentation. https://docs.vllm.ai/.

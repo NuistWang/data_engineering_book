@@ -244,7 +244,7 @@
 | public_notice | 对外公告链接或说明 |
 | preventive_action | 后续预防措施 |
 
-把事故台账制度化的意义，不在于“显得正式”，而在于防止同一类问题在不同学期、不同项目、不同责任人之间重复发生。
+事故台账制度化的意义不在于增加流程形式，而在于防止同一类问题跨学期、跨项目、跨责任人重复发生。
 
 ### B.8.3 高风险红旗信号
 
@@ -309,14 +309,14 @@
 
 ## 参考文献
 
-National People's Congress of the People's Republic of China (2016) Cybersecurity Law of the People's Republic of China. Available at: http://www.npc.gov.cn/zgrdw/npc/xinwen/2016-11/07/content_2001605.htm.
+National People's Congress of the People's Republic of China (2016) Cybersecurity Law of the People's Republic of China. http://www.npc.gov.cn/zgrdw/npc/xinwen/2016-11/07/content_2001605.htm.
 
-National People's Congress of the People's Republic of China (2021a) Data Security Law of the People's Republic of China. Available at: https://www.cac.gov.cn/2021-06/11/c_1624994566919140.htm.
+National People's Congress of the People's Republic of China (2021a) Data Security Law of the People's Republic of China. https://www.cac.gov.cn/2021-06/11/c_1624994566919140.htm.
 
-National People's Congress of the People's Republic of China (2021b) Personal Information Protection Law of the People's Republic of China. Available at: http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html.
+National People's Congress of the People's Republic of China (2021b) Personal Information Protection Law of the People's Republic of China. http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html.
 
-National Institute of Standards and Technology (2023) AI Risk Management Framework (AI RMF 1.0). Available at: https://www.nist.gov/itl/ai-risk-management-framework.
+National Institute of Standards and Technology (2023) AI Risk Management Framework (AI RMF 1.0). https://www.nist.gov/itl/ai-risk-management-framework.
 
-European Parliament and Council of the European Union (2024) Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). Available at: https://eur-lex.europa.eu/eli/reg/2024/1689/oj.
+European Parliament and Council of the European Union (2024) Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act). https://eur-lex.europa.eu/eli/reg/2024/1689/oj.
 
 Mitchell M, Wu S, Zaldivar A, Barnes P, Vasserman L, Hutchinson B, Spitzer E, Raji I D, Gebru T (2019) Model Cards for Model Reporting. In: Proceedings of the Conference on Fairness, Accountability, and Transparency, pp 220-229. https://doi.org/10.1145/3287560.3287596.

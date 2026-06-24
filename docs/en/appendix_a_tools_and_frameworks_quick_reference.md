@@ -253,7 +253,7 @@ The later parts of the book connect naturally to tool choices:
 - Chapters 44-45: pre-training and post-training recipes need batch processing, version governance, experiment tracking, and data cards.
 - Chapters 46-48: reasoning, multimodal, and generative scenarios need trajectory records, evaluation slices, storage layering, and inference services.
 - Chapters 38-43: specialized datasets need fact checking, sample schemas, build pipelines, evaluation protocols, compliance audits, and reproducibility boundaries.
-- Appendices A-C translate those capabilities into operational checklists and templates for project managers, teaching assistants, platform teams, and maintainers.
+- Appendices A-H translate those capabilities into operational checklists and templates for project managers, teaching assistants, platform teams, and maintainers.
 
 This reminds readers that appendices are not secondary extras. They translate engineering capabilities from the main text into operational language.
 
@@ -292,8 +292,8 @@ Mitchell M, Wu S, Zaldivar A, Barnes P, Vasserman L, Hutchinson B, Spitzer E, Ra
 
 Pushkarna M, Zaldivar A, Kjartansson O, Cicconi P, Chen V, Efrat A, Zou Y, Mueller J, Taly A, Ehyaei A, Karkkainen K, Marathe A, Han X, Mittal A, Schuster T, Yarmand M, Sohn H, Dwarakanath N C, McCann B (2022) Data Cards: Purposeful and Transparent Dataset Documentation for Responsible AI. In: Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency, pp 1776-1826. https://doi.org/10.1145/3531146.3533231.
 
-DVC Contributors (2026) Data Version Control Documentation. Available at: https://dvc.org/doc.
+DVC Contributors (2026) Data Version Control Documentation. https://dvc.org/doc.
 
-MLflow Authors (2026) MLflow Documentation. Available at: https://mlflow.org/docs/latest/.
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
 
-Hugging Face (2026) Hugging Face Datasets Documentation. Available at: https://huggingface.co/docs/datasets.
+Hugging Face (2026) Hugging Face Datasets Documentation. https://huggingface.co/docs/datasets.

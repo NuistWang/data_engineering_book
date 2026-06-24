@@ -178,7 +178,7 @@ For a chapter-level reproduction repository, consider this structure:
 | `data/` | Data snapshot, index, and version note |
 | `src/` | Core implementation |
 | `configs/` | Parameters, paths, run configuration |
-| `scripts/` | One-command run scripts |
+| `scripts/` | Reproducible run scripts |
 | `eval/` | Evaluation scripts and slice reports |
 | `docs/` | Documentation, boundary notes, FAQ |
 | `reports/` | Result charts, acceptance screenshots, postmortems |

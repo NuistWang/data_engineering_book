@@ -237,7 +237,7 @@ DataAgent 的运行状态、消息轨迹、工具返回和 workspace 文件为�
 
 ### 5.2 安装项目
 
-DataAgent 是 DataGallery 开源生态中当前已经开源的执行引擎（DataGallery Contributors, 2026a）。DataGallery 开源入口见 [https://gitcode.com/datagallery](https://gitcode.com/datagallery)，DataAgent 项目仓库见 [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent)（DataGallery Contributors, 2026b）。关于 DataGallery 的整体技术版图、复现边界和项目治理方式，可参见[附录G：DataGallery 开源生态简介](../appendix_g_datagallery_note.md)。
+DataAgent 是 DataGallery 开源生态中的主要执行引擎之一。DataGallery 开源入口见 [https://gitcode.com/datagallery](https://gitcode.com/datagallery)，DataAgent 项目仓库见 [https://gitcode.com/datagallery/dataagent](https://gitcode.com/datagallery/dataagent)。关于 DataGallery 的整体技术版图、复现边界和项目治理方式，可参见[附录G：DataGallery 开源生态与复现说明](../appendix_g_datagallery_note.md)。
 
 建议先固定版本，再在仓库根目录安装依赖：
 
@@ -899,5 +899,3 @@ NL2SQL -> CSV -> 图表 -> Markdown 报告 -> 业务交付
 3. Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Hambro, E., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
 4. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
 5. dbt Labs. (2026). dbt Documentation. https://docs.getdbt.com/.
-6. DataGallery Contributors. (2026a). DataGallery organization page. https://gitcode.com/datagallery.
-7. DataGallery Contributors. (2026b). DataAgent source repository. https://gitcode.com/datagallery/dataagent.
