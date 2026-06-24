@@ -136,6 +136,7 @@ One of the most serious alignment failures in long-temporal data is unrelated au
 Strict mismatch detection and review are therefore required.
 
 *Table 10-1: Temporal audio-video data defects and multi-layer detection/remediation strategies. Source: compiled by the authors; detection and remediation strategies are engineering patterns, and thresholds should be calibrated through sampled playback and downstream evaluation.*
+
 | Defect type and manifestation | Root cause | Detection and remediation | Severity |
 | :--- | :--- | :--- | :--- |
 | **Severe audio-video mismatch**: a silent forest view while the speech track explains an FPS game. | Incorrect secondary editing or audio track bleeding during automated encoding. | **Compute feature cosine scores with pretrained discriminators**: extract CLIP visual vectors from middle frames and semantic vectors from speech/audio. If cross-modal similarity is below the warning threshold, isolate the segment and discard that time-window label. | P0: must not enter the data lake |
@@ -170,6 +171,7 @@ To decide whether a decompressed video is worth sending to the next stage, we ne
 Data engineers need a clear view of unit cost at each layer.
 
 *Table 10-2: Long-temporal audio-video processing cost drivers and cost-reduction strategies. Source: compiled by the authors; cost drivers should be recalculated according to cloud pricing, hardware specifications, concurrency limits, and caching strategies.*
+
 | Processing stage | Resource profile | Cost drivers | Cost-reduction strategy |
 | :--- | :--- | :--- | :--- |
 | **1. Raw long-stream crawling and block download** | High-bandwidth network and massive object-storage block I/O. | Cross-region traffic, object-storage request count, cache hit rate | Add edge caching gateways and preload fragments to fast NVMe near the GPU to avoid direct reads from slow storage. |
@@ -303,6 +305,7 @@ DataLoader worker 0: Pipe broken, resetting shard iterator. Skipping shard.
 ## 10.6.6 Frequent Error Quick Reference
 
 *Table 10-3: Frequent audio-video pipeline error types and remediation strategies. Source: compiled by the authors; error codes and remediation strategies are anonymized engineering patterns.*
+
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |
 | TMP_ERR_CODE_1XXX | S3/I/O timeout | Large-scale concurrent streaming without jittered backoff | Add jitter sleep and edge-cache prewarming |

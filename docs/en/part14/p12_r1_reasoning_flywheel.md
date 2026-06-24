@@ -44,6 +44,7 @@ The main text retains only the key implementation excerpts that illuminate desig
 Acceptance metrics include reasoning accuracy, candidate retention rate, verification coverage, long-chain length distribution, recirculated sample quality, and cost per sample. If the project enters production, a course, or a public reproducibility experiment environment, the version number, dependency environment, random seeds, sample spot-check results, and failed-sample post-mortem records should also be logged.
 
 *Table P12-1: Publication Acceptance Table for the Pedagogical R1 Reasoning Data Flywheel.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criterion |
 | --- | --- | --- |
 | Candidate generation | Number of multi-path samples, long-chain length distribution, and task-source coverage | Describe the differences between mock, vLLM, and real model sampling |
@@ -111,6 +112,7 @@ The sixth component is **training and evaluation**. `train_lora.py` provides a m
 The main artifacts are as follows:
 
 *Table P12-2: Stage and Description Reference Table.*
+
 | Stage | Default Artifact | Description |
 | --- | --- | --- |
 | Cold-start extraction | `data/processed/cold_start_5k.jsonl` | First-round SFT samples |
@@ -457,6 +459,7 @@ It should be emphasized that LoRA and the evaluation script in this project are 
 The final output of this project is not a single score table but a set of reviewable data assets. The minimum acceptable results should include:
 
 *Table P12-3: Artifact and Checkpoint Reference Table.*
+
 | Artifact | Checkpoint |
 | --- | --- |
 | `cold_start_5k.jsonl` | Fields are complete; `messages` can be used directly for SFT |
@@ -473,6 +476,7 @@ From an engineering perspective, acceptance can be divided into three tiers. The
 In terms of cost, the primary expenses come from multi-path sampling and training. If resources are constrained, the following fallback strategies can be applied:
 
 *Table P12-4: Resource Bottleneck and Fallback Strategy Reference Table.*
+
 | Resource Bottleneck | Fallback Strategy |
 | --- | --- |
 | Insufficient VRAM | Reduce `max_model_len`, `max_num_seqs`, or concurrent prompts |

@@ -50,6 +50,7 @@ Security investigation reveals the attack path:
 The core principle is **least privilege**: at any moment, the agent should hold only the minimum permissions needed for the current task. This differs from traditional data engineering permissions. Engineers often have broad permissions for emergencies; agents should receive task-scoped permissions that are granted and revoked dynamically.
 
 *Table 35-1: Data classification and agent permission matrix.*
+
 | Data level | Definition | Example | Agent read | Agent write | Approval |
 | --- | --- | --- | --- | --- | --- |
 | L0 public | No sensitive information; freely shareable | Public datasets, open-source code | Automatic | Automatic within bounded scope | Post-hoc audit |
@@ -62,6 +63,7 @@ The core principle is **least privilege**: at any moment, the agent should hold 
 Tool calls must be controlled by allowlists. The allowlist defines not only which tools are callable, but also under what conditions.
 
 *Table 35-2: Agent tool allowlist and call conditions.*
+
 | Tool | Default state | Automatic-call condition | Approval required when |
 | --- | --- | --- | --- |
 | Data read | Open | Most scenarios | Reading L3 data |
@@ -86,6 +88,7 @@ Tool calls must be controlled by allowlists. The allowlist defines not only whic
 Data engineering agents process many untrusted sources, so their prompt injection surface is wider than that of general agents.
 
 *Table 35-3: Prompt injection attack vectors for agents.*
+
 | Attack vector | Injection channel | Risk | Real-world analogy |
 | --- | --- | --- | --- |
 | Web content injection | Hidden instruction text in crawled pages | Medium | White text on white background |
@@ -182,6 +185,7 @@ Handling process:
 Agent audit logs differ from ordinary application logs. They must record not only what happened, but why it happened and who approved it.
 
 *Table 35-4: Agent audit log field specification.*
+
 | Field | Meaning | Example |
 | --- | --- | --- |
 | `event_id` | Unique event ID | `evt_20240601_001` |
@@ -212,6 +216,7 @@ When an automatic operation causes data problems, responsibility must be explici
 In regulated industries, audit logs must serve as legal evidence.
 
 *Table 35-5: Compliance audit requirements for agent logs.*
+
 | Compliance need | Log requirement | Example |
 | --- | --- | --- |
 | Source traceability | Every training item traces to original source | Data A came from page 3 of PDF X collected on 2024-03-15 |
@@ -237,6 +242,7 @@ Security incidents require predefined response, not improvised decisions.
 *Incident response SLA*
 
 *Table 35-6: Incident response SLA.*
+
 | Stage | Target time | Owner |
 | --- | --- | --- |
 | Incident confirmation to agent pause | Within 15 minutes | On-call security engineer |
@@ -253,6 +259,7 @@ Security incidents require predefined response, not improvised decisions.
 The collaboration question is which tasks agents can perform, which require human review, and which require multi-person approval. Use four dimensions.
 
 *Table 35-7: Human-AI task allocation matrix.*
+
 | Decision dimension | Agent autonomous decision | Human review | Multi-person approval |
 | --- | --- | --- | --- |
 | Operation risk | Low, affects a few rows | Medium, affects hundreds to thousands | High, affects tens of thousands or cross-table |
@@ -312,6 +319,7 @@ The collaboration question is which tasks agents can perform, which require huma
 ### Remediation Results
 
 *Table 35-8: Remediation Results.*
+
 | Metric | Before | After |
 | --- | --- | --- |
 | Rule release approval coverage | 60%, some low-risk rules auto-passed | 100%, every rule receives at least single review |
@@ -342,6 +350,7 @@ Security feedback loop:
 Trust is quantifiable.
 
 *Table 35-9: Human-AI collaboration trust metrics.*
+
 | Trust metric | Measurement | Healthy value | Improvement action |
 | --- | --- | --- | --- |
 | Approval rejection rate | Share of agent suggestions rejected in Human Gate | 5-15% | > 20% means poor agent quality; < 2% means rubber-stamping |

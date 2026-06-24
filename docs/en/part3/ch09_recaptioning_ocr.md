@@ -105,6 +105,7 @@ At the highest-value layer of the funnel, automation scripts mainly perform cand
 These human labels should not rely only on low-barrier crowdsourcing. Multimodal alignment requires high noun precision and hierarchical structure, so annotators usually need systematic training and a dedicated internal labeling tool to confirm small regions one by one. Although this portion is tiny, it forms the **golden truth** used later for training recaptioning reward models or fine-tuning base models.
 
 *Table 9-1: Comparison and accounting dimensions for automated recaptioning production tiers. Source: compiled by the authors; cost and throughput must be recalculated according to model version, API pricing, concurrency limits, and annotation region.*
+
 | Recaptioning tier | Cost drivers | Throughput constraints | Complex-scene and chart ability | Advantages and deployment risks |
 | :--- | :--- | :--- | :--- | :--- |
 | **Small VLM local batch** | GPU card-hours, model quantization method, image resolution | Local inference concurrency and I/O | Weak, especially for tables | **Advantage**: low cost and rapid object alignment.<br>**Risk**: hallucination, not suited to fine-grained training. |
@@ -228,6 +229,7 @@ Even if all machine quality metrics pass, a final **expert blind-sampling verifi
 These experts not only judge quality but also provide error-attribution reports from long-document token lists to the model-development team. To reduce responsibility ambiguity after training divergence, for example vision engineers blaming the language base and language engineers blaming visual features, the evaluation group needs an incident classification tree.
 
 *Table 9-2: OCR core error attribution and remediation matrix for cross-modal and advanced document recognition. Source: compiled by the authors from anonymized engineering patterns; error types and remediation actions should be reviewed by document type and OCR model version.*
+
 | Error pattern in model output | Root-cause diagnosis in expert workstation | Core remediation strategy and architectural iteration |
 | :--- | :--- | :--- |
 | **Small mathematical formulas or table decimals are read incorrectly** | Upstream OCR or table-recognition engine has insufficient extraction accuracy. | Replace or fine-tune Paddle/Mathpix/Table OCR; add dense-table samples; raise document input resolution when necessary. |

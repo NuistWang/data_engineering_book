@@ -418,6 +418,7 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 ## 5.7 Common Defects, Detection Methods, and Cost Reference
 
 *Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors; detection cost is a relative description of engineering complexity, and actual cost depends on data scale, model calls, and infrastructure configuration.*
+
 | Defect Type | Typical Manifestation | Detection Method | Cost of Miss | Recommended Threshold/Tool |
 | :--- | :--- | :--- | :--- | :--- |
 | **HTML/noise residue** | Tags such as `<div>`, CSS, and JS code mixed into body text | Special-character ratio percentiles; regex rules | Model outputs garbled text/tags | Calibrate the project waterline on manually confirmed samples |
@@ -430,6 +431,7 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 | **Low lexical diversity** | Extremely low Type-Token Ratio (boilerplate text) | TTR distribution anomaly | Model vocabulary use becomes rigid | Set TTR baselines by language and content type |
 
 *Table 5-2: Impact comparison of cleaning actions on training outcomes. Source: compiled by the authors; impact directions are engineering-experience summaries, and specific gains must be validated through same-configuration training or proxy-model experiments.*
+
 | Cleaning Action | Typical Model Symptoms When Skipped | Risk-Mitigation Direction When Fully Applied | Cost/Timeline |
 | :--- | :--- | :--- | :--- |
 | Language filtering | Model mixes languages; Chinese responses interspersed with English | Improved language consistency | CPU, hours |
@@ -483,6 +485,7 @@ After understanding all the technical modules in this chapter, a practical quest
 The lightweight solution focuses on "holding the baseline," filtering out the most harmful defects with minimal engineering investment:
 
 *Table 5-3: Minimum viable combination for the lightweight cleaning solution. Source: compiled by the authors; the combination is a starting recommendation, and production environments should extend it according to risk level, corpus source, and compliance requirements.*
+
 | Step | Implementation | Tools | Required? |
 |:--- |:--- |:--- |:--- |
 | Language filtering | FastText identification, confidence threshold calibrated by language | fasttext | ★ Required |

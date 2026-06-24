@@ -345,6 +345,7 @@ Therefore, mature teams typically establish dedicated discovery, archiving, and 
 To help teams establish task mapping relationships, Table 12-1 provides example relationships between instruction types and applicable tasks.
 
 *Table 12-1: Instruction Types and Applicable Tasks.*
+
 | Instruction Type | Typical Input Form | Target Output Form | Applicable Tasks | Annotation Focus | Common Risks |
 |---|---|---|---|---|---|
 | Direct Q&A | Question, or question with brief background | Natural-language answer | General Q&A, knowledge explanation, customer service reply | Accurate intent recognition; complete answer without excessive elaboration | Hallucination fill-in, off-topic response |
@@ -567,6 +568,7 @@ datasets/
 To facilitate practical acceptance, Table 12-2 provides an example quality dimension scoring rubric for supervised fine-tuning.
 
 *Table 12-2: Supervised Fine-Tuning Quality Dimension Scoring Rubric.*
+
 | Scoring Dimension | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
 | Instruction Clarity | Task is ambiguous; constraints missing; objective unclear | Task broadly intelligible but with obvious ambiguity | Task mostly clear; some implicit requirements remain | Task is clear; input-output relationship well-defined | Task boundaries extremely clear; constraints complete; no ambiguity |

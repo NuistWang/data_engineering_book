@@ -375,6 +375,7 @@ These scenarios matter because they represent high-frequency stress points that 
 
 
 *Table 20-1: Multi-Turn Failure Patterns and Detection Actions.*
+
 | Failure Pattern | Typical Manifestation | Likely Root Cause | Detection Action |
 |---|---|---|---|
 | State Drift | Deviates from original task goal as conversation lengthens | Missing state fields; weak trajectory supervision | Run long-horizon replay and compare goal consistency at key checkpoints |
@@ -445,6 +446,7 @@ To support practical data modeling, Table 20-2 provides a set of foundational fi
 
 
 *Table 20-2: Session Fields and Memory Fields.*
+
 | Field Category | Example Field Name | Description | Recommended Layer | Decayable |
 |---|---|---|---|---|
 | Session field | session_id | Identifier for a single continuous interaction container | session | No |

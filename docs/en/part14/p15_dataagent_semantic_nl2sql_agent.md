@@ -226,6 +226,7 @@ This chapter depends on DataAgent, Semantic Service, a value-match service, and 
 ### 5.1 Version and Minimal Environment Matrix
 
 *Table P15-1: Minimal environment matrix for the DataAgent semantic BI assistant.*
+
 | Component | Minimal Reproduction Requirement | Version Record |
 | --- | --- | --- |
 | DataAgent | Install from the same Git tag, commit, or package version. | Record `DATAAGENT_VERSION` or `DATAAGENT_COMMIT` in the report. |
@@ -457,6 +458,7 @@ Coordinator
 Each node has a distinct responsibility.
 
 *Table P15-2: Core nodes and responsibilities of the NL2SQL sub-agent.*
+
 | Node | Role |
 | --- | --- |
 | Coordinator | Organizes NL2SQL task entry and state transitions. |
@@ -520,6 +522,7 @@ SQL generation must know:
 Semantic Service provides this structured context before SQL generation.
 
 *Table P15-3: Key Semantic Service capabilities and engineering value.*
+
 | Capability | Engineering Value |
 | --- | --- |
 | Table list and table descriptions | Helps the model locate candidate business tables. |
@@ -536,6 +539,7 @@ Semantic Service should not be treated as "extra documentation." It is the upstr
 `nl2sql_sub_agent_tool` is the core tool. Its parameters are:
 
 *Table P15-4: Input parameters of nl2sql_sub_agent_tool.*
+
 | Parameter | Description |
 | --- | --- |
 | `query` | Natural-language query for the NL2SQL sub-agent. It should include business goal, metric definition, filters, grouping, and output fields. |
@@ -668,6 +672,7 @@ For enterprise applications, traces are not merely debugging artifacts; they are
 Semantic BI assistant evaluation should cover SQL, data, answer, and engineering execution.
 
 *Table P15-5: Evaluation metrics for the enterprise semantic BI assistant.*
+
 | Metric | Description |
 | --- | --- |
 | Schema recall hit rate | Whether the required tables and fields entered candidate context. |
@@ -699,6 +704,7 @@ This test verifies:
 Enterprise deployment also needs a business regression set:
 
 *Table P15-6: Business regression question types for enterprise BI.*
+
 | Type | Example |
 | --- | --- |
 | Single-table aggregation | Monthly order count, order count by status. |
@@ -887,6 +893,7 @@ This is why DataAgent is a strong practice project: it combines Agent, Tool-Use,
 Check at least these gates before launch:
 
 *Table P15-7: Pre-launch gate checklist for the DataAgent semantic BI assistant.*
+
 | Gate | Check Item |
 | --- | --- |
 | Configuration gate | YAML loads; model, database, Semantic Service, and workspace are configured. |

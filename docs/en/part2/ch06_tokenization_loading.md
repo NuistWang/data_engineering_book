@@ -159,6 +159,7 @@ spm.SentencePieceTrainer.train(
 The choice of data format has a direct, order-of-magnitude impact on DataLoader throughput. The following summarizes the performance and engineering trade-offs of mainstream formats:
 
 *Table 6-1: Data format, compression, and access pattern comparison. Source: compiled by the authors; performance should be validated through pressure tests on target hardware, storage backend, compression method, and DataLoader implementation.*
+
 | Format | Type | Sequential Read Speed | Random Access | Compression Support | Cross-Framework Support | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **JSONL (.jsonl)** | Text lines | Slow (requires JSON parsing) | Not supported | ✗ (requires .gz combination) | Excellent | Data exchange, debugging |
@@ -236,6 +237,7 @@ $$p_i = \frac{n_i^{1/T}}{\sum_j n_j^{1/T}}$$
 When $T = 1$, weights are proportional to data volume and large sources completely dominate; as $T \to \infty$, all source weights approach uniform. In practice, $T = 2$ is commonly used (the multilingual sampling setting of mT5 (Xue et al. 2021)), upsampling small sources while avoiding excessive deviation from the original data distribution.
 
 *Table 6-2: Comparison of sampling and mixing strategy benefits. Source: compiled by the authors; benefit descriptions are summaries of common patterns, and actual effects should be confirmed through data-recipe ablation experiments.*
+
 | Mixing Strategy | Principle | Advantages | Disadvantages | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- |
 | **Proportional sampling** (T=1) | Proportional to original data volume | Closest to true data distribution | Small sources overwhelmed by large ones; code/papers are underrepresented | General corpus pretraining (early stages) |

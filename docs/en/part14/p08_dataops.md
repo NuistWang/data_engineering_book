@@ -84,6 +84,7 @@ Acceptance metrics include version traceability, experiment-record completeness,
 If the project enters production, coursework, or public reproduction, reports should also record version numbers, dependency environments, random seeds, sampled inspection results, and failed-sample reviews.
 
 *Table P08-1: Publication acceptance table for the DataOps platform.*
+
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Governance objects | Completeness of tenants, projects, roles, versions, experiments, and events | Platform explanation should prioritize object relationships, not only UI pages or scripts |

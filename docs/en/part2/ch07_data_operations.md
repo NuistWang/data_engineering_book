@@ -171,6 +171,7 @@ It is important to be vigilant: all offline metrics are merely "proxies" and do 
 Evaluation must never stop at merely "looking at metrics." A qualified evaluation report must culminate in concrete system governance actions. See the table below for reference:
 
 *Table 7-1: Evaluation Metric to Governance Action Mapping. Source: compiled by the authors; metric thresholds and governance actions should be calibrated according to project goals, historical baselines, and manual review results.*
+
 | Metric Observation (Offline/Online) | Common Root Cause and Manifestation | Corresponding Governance Action |
 | :--- | :--- | :--- |
 | **Overall decline in sampled TTR (diversity)** | MinHash deduplication may be overly aggressive, eliminating reasonable overlap in general domains | **Raise the duplicate-decision threshold or switch to a stricter definition of duplication, and introduce domain-specific vocabulary protection** |
@@ -253,6 +254,7 @@ This costly training interruption demonstrates that the data operations team mus
 In a formal business iteration system, every data batch deployed to the main training cluster must be accompanied by a release log as rigorous as a software release note. The table below provides a benchmark log template from a production pipeline.
 
 *Table 7-2: Case Retrospective: Root-Cause Localization of a Training Loss Spike.*
+
 | Evaluation Dimension | Version Log Field Example |
 | :--- | :--- |
 | **Basic information** | Version: v2.1 → v2.2; Operator: Zhang San (DataOps); Submission date: 2026-X-X |

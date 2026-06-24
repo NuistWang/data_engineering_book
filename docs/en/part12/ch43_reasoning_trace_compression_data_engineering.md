@@ -43,6 +43,7 @@ The final training split of the [Latent-Switch-69K dataset](https://huggingface.
 In terms of difficulty distribution, the dataset does not pursue perfect uniformity. Medium-difficulty samples constitute the majority at 45,650 samples (65.5%); hard samples account for 17,428 (25.0%); and easy samples account for 6,667 (9.5%). This distribution has a clear rationale for latent-switch training. Medium-difficulty questions typically require genuine reasoning rather than templated question-answering, yet they are not so complex as to destabilize the distillation process. Hard samples provide longer, more complex reasoning chains, exposing the model to higher-budget implicit planning scenarios. Easy samples help the model retain the ability to produce short answers and direct verifications, preventing all samples from being cast as long-reasoning tasks.
 
 *Table 43-1: Dataset Overview: Scale, Difficulty, and Domain Composition.*
+
 | Statistic | Value | Share / Notes |
 | --- | ---: | --- |
 | Total examples | 69,745 | 100.0% |
@@ -365,6 +366,7 @@ Here \(\mathcal{S}_{\mathrm{prompt}}\) denotes positions in the user prompt and 
 `teacher_kl_mask` is used for teacher-distribution supervision. Each sample also generates a teacher-reference conversation: it contains no student latent placeholders; instead, it merges the original question and the distilled solution intuition as teacher input and provides a distributional reference at the shortened `<think> ... </think>` and answer positions. The benefit is that the teacher does not need to simulate continuous latent placeholders; it supervises only the token distribution quality of explicit reasoning and the answer.
 
 *Table 43-2: Supervision Masks: Which Tokens Contribute to the Loss.*
+
 | Span | Example tokens | CE label | Primary mask | Engineering significance |
 | --- | --- | --- | --- | --- |
 | Prompt and assistant prefix | user question `<\|im_start\|>assistant` | `-100` | `prompt_mask` | Serves as conditioning, not as output target |
@@ -390,6 +392,7 @@ Another detail worth noting is the weight applied to explicit CoT. Latent-Switch
 Quality control for Latent-Switch-69K is not merely about filtering dirty text. Because the dataset simultaneously contains compressed reasoning, latent budgets, and multiple masks, risks are distributed across multiple layers.
 
 *Table 43-3: Quality Control: Five Categories of Risk in Compression, Boundaries, and Bias.*
+
 | Risk type | Typical symptom | Impact | Remediation |
 | --- | --- | --- | --- |
 | Over-compression | Compressed CoT contains only a conclusion with no visible verification chain | Model fails to learn the transition from latent planning to explicit verification | Add verification sufficiency checks; reject samples with missing steps |

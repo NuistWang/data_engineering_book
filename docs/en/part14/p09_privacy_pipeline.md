@@ -60,6 +60,7 @@ The main text retains only the key implementation fragments needed to illustrate
 Acceptance metrics include PII detection rate, false-positive/false-negative samples, redacted field coverage, audit chain integrity, policy hit rate, and inspection pass rate. If the project enters a production, course, or publicly reproducible experimental environment, the version number, dependency environment, random seed, sample spot-check results, and failed-sample postmortem records should also be logged.
 
 *Table P09-1: Privacy Pipeline Publication Acceptance Table.*
+
 | Acceptance Dimension | Metrics / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Detection and handling | PII detection rate, false-positive/false-negative samples, and redacted field coverage | Each sensitive field category should have a rule source, processing action, and verification sample |

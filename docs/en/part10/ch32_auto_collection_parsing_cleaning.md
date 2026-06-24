@@ -74,6 +74,7 @@ The first responsibility of a collection agent is **automatic task generation**.
 3. **Provenance capture.** Every collection records URL, collection time, HTTP headers, and file hash. This matters for compliance audit and copyright tracing.
 
 *Table 32-1: Collection failure categories and retry strategies.*
+
 | Failure type | Detection | Retry strategy | Max retries | After limit |
 | --- | --- | --- | --- | --- |
 | Network timeout | HTTP status or exception | Exponential backoff: 1s, 2s, 4s, 8s | 5 | Mark temporarily unavailable; retry after 1 hour |
@@ -89,6 +90,7 @@ Retry strategy must be polite. Aggressive retry can worsen access blocks or crea
 When an agent manages hundreds of sources, scheduling is no longer simple cron execution. It becomes a constrained optimization problem: maximize throughput and freshness while respecting access limits.
 
 *Table 32-2: Collection scheduling constraints.*
+
 | Constraint | Meaning | Example |
 | --- | --- | --- |
 | Frequency limit | Request-rate limit of target website or API | At most 10 requests per second |
@@ -199,6 +201,7 @@ Sandbox validation is the last defense before rule release. The sandbox should s
 - **Diff visualization.** Show before/after comparisons and highlight modified fields and modification volume.
 
 *Table 32-3: Sandbox validation dimensions and pass conditions.*
+
 | Dimension | Check | Pass condition | If failed |
 | --- | --- | --- | --- |
 | Rule match scope | How many rows are affected | Affected rows within expected range, deviation < 20% | Adjust scope |
@@ -213,6 +216,7 @@ Sandbox validation is the last defense before rule release. The sandbox should s
 The hardest part of quality judgment is not deciding right or wrong. It is knowing how uncertain the agent is. A well-designed agent should request human help under uncertainty rather than forcing a possibly wrong decision.
 
 *Table 32-4: Quality uncertainty routing.*
+
 | Quality dimension | High certainty: auto-pass | Medium certainty: mark and sample review | Low certainty: human review |
 | --- | --- | --- | --- |
 | Format correctness | Regex/constraints match 100% | Match rate 80%-99% | Match rate < 80% |
@@ -250,6 +254,7 @@ Thresholds should be configurable by business need and data characteristics:
 ### 32.4.4 Priority and SLA Management for Human Review
 
 *Table 32-5: Human review priority and SLA management.*
+
 | Priority | Trigger | SLA | Timeout action |
 | --- | --- | --- | --- |
 | P0 | Affects key downstream pipeline, such as model training export | Within 1 hour | Escalate and pause related pipelines |
@@ -270,6 +275,7 @@ A legal AI team transforms its manual collection process into an agent-driven ad
 ### Key Metric Changes
 
 *Table 32-6: Key Metric Changes.*
+
 | Metric | Before: manual | After: agent-assisted | Change |
 | --- | --- | --- | --- |
 | New source onboarding time | 3-5 days | 4-8 hours | -80% |

@@ -61,6 +61,7 @@ This contract document is not a static file but a versioned document that evolve
 Quality is by no means a static standard; it presents entirely different core requirements at different stages as the data lifecycle progresses. Applying a fixed standard to measure data across the entire lifecycle will inevitably produce serious misjudgments. As shown in Table 2-1, the core quality requirements and detection metrics differ significantly across the four stages of pre-training, instruction fine-tuning, preference alignment, and RAG deployment.
 
 *Table 2-1: LLM Data Four-Stage Quality Objective Evolution Matrix. Source: compiled by the authors; scale ranges and metric definitions reflect common engineering practice and must be recalibrated for the project dataset in production.*
+
 | Training Stage | Typical Data Scale | Core Quality Requirements | Primary Detection Metrics | Typical Defects and Risks | Primary Processing Tools |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Pre-training** | Hundreds of billions to tens of trillions of tokens | High diversity, low duplication rate, broad knowledge coverage | N-gram duplication rate, PPL distribution, domain proportion, language distribution | Insufficient deduplication ("parrot" effect); benchmark data leaking in (inflated evaluation scores); excessive low-quality SEO content | MinHash / SimHash; fastText language identification; KenLM; Quality Classifier |

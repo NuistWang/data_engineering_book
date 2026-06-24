@@ -84,6 +84,7 @@ Acceptance metrics include asset coverage, feedback-loop rate, version iteration
 For production, course, or public reproduction settings, reports should also record version numbers, dependency environments, random seeds, sampled inspection results, and failed-sample review records.
 
 *Table P10-1: Publication acceptance table for the LLM data flywheel.*
+
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Asset integration | Upstream project coverage, registry completeness, and interface mapping records | Every upstream asset should explain its source, owner, version, and reuse path |

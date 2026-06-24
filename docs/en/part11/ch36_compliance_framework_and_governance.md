@@ -120,6 +120,7 @@ When these are separated, a familiar misalignment appears: the business asks for
 ### 36.1.4 Traditional Flow vs. Shift-Left Governance
 
 *Table 36-1: Traditional Flow vs. Shift-Left Governance.*
+
 | Stage | Traditional Mode | Shift-Left Governance Mode |
 | :--- | :--- | :--- |
 | Requirements | Focus on business functions; data boundaries are rarely explicit | Define data types, purpose, authorization basis, and output boundaries |
@@ -160,6 +161,7 @@ Not all data should be governed with the same intensity. Treating all data as hi
 This chapter uses a three-level baseline:
 
 *Table 36-2: Data Classification Architecture.*
+
 | Security Level | Definition and Examples | Processing Requirements | Masking and Encryption Strategy |
 | :--- | :--- | :--- | :--- |
 | **L3 high sensitivity (C3)** | Sensitive personal information such as biometrics, medical health, precise location; core trade secrets such as unpublished financials | Separate consent; cannot enter analytics domains without masking; legal may veto | Strong storage encryption such as AES-256; full display masking; “usable but not visible” through privacy computing |
@@ -229,6 +231,7 @@ When the data level is high, the action is strong, and the impact scope is broad
 ### 36.2.5 Example Risk Matrix
 
 *Table 36-3: Example Risk Matrix.*
+
 | Data Level | Purpose | Processing Action | Risk Level | Default Controls |
 | :--- | :--- | :--- | :--- | :--- |
 | C1 | Stability monitoring | Aggregate query | Low | Standard access control |
@@ -245,6 +248,7 @@ When the data level is high, the action is strong, and the impact scope is broad
 Without a clear accountability chain, even good rules distort during execution. Governance must define who proposes the need, who judges legality, who provides technical controls, who is responsible for compliant use, and who audits execution.
 
 *Table 36-4: Accountability Chain: RACI Matrix.*
+
 | Role | Main Responsibilities | RACI |
 | :--- | :--- | :--- |
 | Legal / Compliance | Interpret regulations, define red lines, approve high-risk scenarios | Accountable |
@@ -309,6 +313,7 @@ Without RoPA, a team cannot explain which data was used by whom and for what rea
 #### Minimal RoPA Form
 
 *Table 36-5: Minimal RoPA Form.*
+
 | Field | Description |
 | :--- | :--- |
 | project_id | Unique project identifier |
@@ -362,6 +367,7 @@ DPIA is not about writing a long report. It asks:
 #### DPIA Risk Scoring Example
 
 *Table 36-6: DPIA Risk Scoring Example.*
+
 | Dimension | Score Description |
 | :--- | :--- |
 | Data sensitivity | C1=1, C2=2, C3=3 |
@@ -411,6 +417,7 @@ A mature audit system should record:
 #### Audit Log Design Example
 
 *Table 36-7: Audit Log Design Example.*
+
 | Field | Description |
 | :--- | :--- |
 | event_time | Event time |
@@ -614,6 +621,7 @@ Privacy-preserving methods for prompt tuning, text generation, and LLM services 
 ### 36.4.7 High-Risk Scenario Summary
 
 *Table 36-8: High-Risk Scenario Summary.*
+
 | Scenario | Main Risks | Core Controls |
 | :--- | :--- | :--- |
 | Health care | Health-data leakage, purpose drift | Independent encryption zone, fine-grained permissions, strong audit |
@@ -939,6 +947,7 @@ approval_rules:
 Governance templates are not paper designs. The table below maps common deliverables in a privacy-governance pipeline to the governance capabilities they represent.
 
 *Table 36-9: Governance Deliverable Mapping.*
+
 | Deliverable | Governance Meaning |
 | :--- | :--- |
 | `compliance_scope.json` | Defines compliance scope |

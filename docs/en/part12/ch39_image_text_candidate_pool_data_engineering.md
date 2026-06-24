@@ -57,6 +57,7 @@ The LAION-5B paper reports 5.85B CLIP-filtered image-text pairs, including appro
 *Table 39-1 Public Subset Structure of LAION-5B*
 
 *Table 39-1: Public Subset Structure of LAION-5B.*
+
 | Subset | Scale | Text-language Form | Engineering Meaning | Typical Use |
 | --- | ---: | --- | --- | --- |
 | LAION-2B-en | 2.32B | English | Higher language-identification confidence, filtered with English CLIP | English CLIP, image-text retrieval, English T2I data candidates |
@@ -81,6 +82,7 @@ Image-text candidate pools should also be modeled by channel. The Parquet metada
 *Table 39-2 Image-text Candidate Record Schema*
 
 *Table 39-2: Image-text Candidate Record Schema.*
+
 | Channel | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Text channel | `text`, `language`, `text_length`, `text_hash` | Alt text, language identification, hash | Text filtering, language bucketing, contamination detection |
@@ -122,6 +124,7 @@ LAION-5B construction can be divided into six stages: extract candidates from Co
 *Table 39-3 LAION-5B Construction Flow*
 
 *Table 39-3: LAION-5B Construction Flow.*
+
 | Stage | Input | Processing Action | Output | Corresponding Channel |
 | ---: | --- | --- | --- | --- |
 | 1 | Common Crawl WAT metadata | Parse HTML IMG tags and retain image candidates with alt text | `<url, text>` candidate pairs | Text channel, visual channel |
@@ -204,6 +207,7 @@ Controllable speech data must validate semantics, style, and audio quality simul
 *Table 39-4 Quality-evaluation Metrics for Image-text Candidate Pools*
 
 *Table 39-4: Quality-evaluation Metrics for Image-text Candidate Pools.*
+
 | Channel | Core Question | Automatic Metrics | Human-review Focus | Handling of Failed Samples |
 | --- | --- | --- | --- | --- |
 | Text channel | Is the caption usable? | Language confidence, length, template hits, repetition rate | Whether it is advertising, filename, or SEO text | Text-rule filtering, source downweighting |
@@ -231,6 +235,7 @@ Risks in image-text data are easier for the public to perceive and harder to ful
 *Table 39-5 Risk-control Checklist for LAION-5B-like Image-text Data*
 
 *Table 39-5: Risk-control Checklist for LAION-5B-like Image-text Data.*
+
 | Risk Type | Trigger Scenario | Control Measures | Audit Evidence |
 | --- | --- | --- | --- |
 | URL decay | Images cannot be downloaded or content changes when rerun | Preserve hash, download time, failure logs, and snapshot strategy | Download manifest |

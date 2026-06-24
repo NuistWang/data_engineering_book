@@ -50,6 +50,7 @@ Understanding the distinction between these three layers is a prerequisite for b
 **Data correctness** is the most critical layer: the output data is healthy in content and meets the quality standards expected by the business. Data validation research indicates that schema checks, statistical constraints, distribution-shift detection, and anomaly-value detection should be integrated into routine pipelines rather than reserved for post-incident manual investigation (Breck et al. 2019). Data correctness cannot be inferred from task status; it can only be verified by inspecting the data content itself.
 
 *Table 26-1: Three-Layer Definitions of Success and Typical Blind Spots.*
+
 | Layer | What Is Inspected | Typical Tools | Common Blind Spots |
 |-------|-------------------|---------------|--------------------|
 | Schedule success | Whether the task was started | Airflow/Dagster status | Task starts but immediately exits with an error |
@@ -149,6 +150,7 @@ Business metrics assess the overall health of data assets from a business-value 
 - Compliant data ratio: proportion of total data that has passed compliance review
 
 *Table 26-2: Tiered Monitoring Metrics.*
+
 | Metric Layer | Typical Metrics | Update Frequency | Primary Audience |
 |--------------|-----------------|------------------|------------------|
 | Task metrics | Success rate, duration, throughput | Real-time / minute-level | Platform engineers, SRE |
@@ -182,6 +184,7 @@ The four core observability tools — Logs, Traces, Audit Logs, and Lineage — 
 **Lineage**: As described in Chapter 25, lineage records dependency relationships between data assets. The key distinction between lineage and logs/traces is that lineage describes the static "derivation relationship," while logs and traces describe the dynamic "processing process." The lineage graph tells you "which data sources were used to produce dataset v2.3"; a trace tells you "what processing steps this specific sample went through."
 
 *Table 26-3: Characteristics of Typical Observability Information.*
+
 | Tool | Records | Timeliness | Primary Use |
 |------|---------|------------|-------------|
 | Logs | Processing-event details | Real-time | Fault investigation, filter-reason analysis |
@@ -275,6 +278,7 @@ Alert systems also require ongoing review. Each week or month, teams can track m
 ### 26.3.2 Four-Tier Alert Framework
 
 *Table 26-4: Alert Tiers and Corresponding Remediation Actions.*
+
 | Tier | Name | Example Trigger Conditions | Response Time | Notification Method | Remediation Action |
 |------|------|---------------------------|---------------|---------------------|--------------------|
 | P0 | Critical | Core pipeline fully down; training set accidentally deleted; large-scale compliance violation discovered | Within 15 minutes | Phone + SMS + instant message | Immediately page on-call engineer; initiate incident response procedure |
@@ -408,6 +412,7 @@ Capacity forecasting results should appear in the operational dashboard and trig
 The main cost categories of an LLM data platform are four. The cost of a cloud-based data system typically arises from a combination of compute, storage, networking, and platform services; cost observability must be designed together with capacity forecasting and retention policies (Nygard 2018):
 
 *Table 26-5: Cost Driver and Optimization Direction Design.*
+
 | Cost Category | Primary Cost Drivers | Optimization Direction |
 |---------------|----------------------|------------------------|
 | Compute cost | CPU/GPU usage for data processing, format conversion, and quality assessment | Batch consolidation, off-peak scheduling, algorithmic optimization to reduce compute density |
@@ -498,6 +503,7 @@ At the time of the incident, all job statuses at the platform layer were normal.
 The incident also exhibited clear latency. The code change occurred on May 15; the alert fired on May 21, spanning multiple batches. The coverage drop in any single batch had not reached the existing alert threshold, but the cumulative trend was unmistakable. After the incident was exposed, the team recognized that the existing monitoring attended only to point-in-time anomalies and lacked trend detection, as well as error-budget management for critical category coverage.
 
 *Table 26-6: Case Timeline.*
+
 | Time | Event |
 |------|-------|
 | May 15, 09:00 | Data engineer Zhang made a "minor optimization" to the crawler filter rules: the keyword list in the filter rule was changed from an external JSON file to hardcoded values, with the goal of reducing configuration file dependencies |
@@ -565,6 +571,7 @@ The team also required the three affected experiments to rebind to the repaired 
 The following is a standardized incident post-mortem template applicable to all P0/P1 data incidents. Effective post-mortems should focus on systemic improvement rather than individual blame — a principle consistently emphasized in SRE incident post-mortem practice and resilience engineering (Beyer et al. 2016; Beyer et al. 2018):
 
 *Table 26-7: Incident Post-Mortem Report.*
+
 | Field | Content |
 |-------|---------|
 | Incident ID | INC-2024-0521-001 |
@@ -591,6 +598,7 @@ After the post-mortem concludes, action items should be incorporated into the is
 Through the remediation of this incident, the team improved the following monitoring capabilities:
 
 *Table 26-8: Metric Improvements.*
+
 | Improvement Item | Before | After |
 |-----------------|--------|-------|
 | Detection latency for category coverage anomalies | ~6 days (in this incident, sufficient cumulative deviation was needed before the alert fired) | Target < 6 hours (target detection time after adding trend alerting) |
@@ -606,6 +614,7 @@ From an implementation perspective, data platform observability should not be pu
 Observability construction should also follow a risk-first principle. Not every dataset requires the same monitoring intensity. Formal training sets, critical evaluation sets, production feedback data, and compliance-sensitive data should have more stringent SLOs, alerting, and auditing. Exploratory experimental data may use lighter-weight monitoring but must be clearly marked as ineligible for the formal pipeline. Temporary analytical data needs only basic access and lifecycle records. Tiered monitoring prevents the platform team from being overwhelmed by low-value signals and concentrates resources on the objects that truly affect models and the business.
 
 *Table 26-9: Data Platform Observability Build Stages and Acceptance Questions.*
+
 | Build Stage | Primary Objective | Key Capabilities | Acceptance Question |
 |-------------|-------------------|------------------|---------------------|
 | Foundation | Make platform problems visible | Task status, basic logs, quality summary, version records | Can you determine when the core dataset is produced and whether it passes basic quality checks? |

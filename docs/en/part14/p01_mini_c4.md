@@ -230,6 +230,7 @@ Therefore, the goal of the body text extraction phase is not "to capture as many
 
 
 *Table P01-1: Component and Reason for Choice Reference Table.*
+
 | Component | Selection | Reason for Choice |
 |---|---|---|
 | WARC reading | `warcio` | Standard WARC reading library with streaming support, avoiding the memory pressure of loading large files all at once |
@@ -698,6 +699,7 @@ Its significance lies in making the dataset not merely a collection of scattered
 The final retention funnel obtained by this project is as follows:
 
 *Table P01-2: Stage and Typical Interception Reasons Reference Table.*
+
 | Stage | Record Count | Retention Rate (based on extracted) | Typical Interception Reasons |
 |---|---:|---:|---|
 | Extracted | 3028 | 100.0% | HTML parsing failure, empty content |

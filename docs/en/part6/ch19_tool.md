@@ -286,6 +286,7 @@ For this reason, log structure should be planned concurrently with sample struct
 
 
 *Table 19-1: Tool Type and Sample Field Reference.*
+
 | Tool Type | Typical Tasks | Core Input Fields | Core Environment Feedback Fields | Recovery-Related Fields | Notes |
 |---|---|---|---|---|---|
 | Search tools | Web search, document retrieval, knowledge query | query, filters, top_k, time_range | hits, source, snippet, empty_result | reformulated_query, fallback_source | Emphasize query rewriting and empty-result recovery |
@@ -481,6 +482,7 @@ Therefore, tool data governance must include a version management mechanism. Tra
 
 
 *Table 19-2: Security Risk and Constraint Mechanism Reference.*
+
 | Risk Type | Typical Manifestation | Possible Consequence | Constraint Mechanism | Data Sample Requirement |
 |---|---|---|---|---|
 | Unauthorized access | Requesting to read unauthorized resources, modify restricted objects | Data leakage, compliance risk | Permission validation, read-only mode, explicit rejection | Must include rejection-call and safety-explanation samples |

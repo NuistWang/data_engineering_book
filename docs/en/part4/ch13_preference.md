@@ -396,6 +396,7 @@ Debiasing further involves sampling strategy. Many teams, when expanding prefere
 In summary, governance of preference data should not stop at "improving agreement rates"—it should further advance toward "modeling inconsistency and uncertainty." Only when a team can identify which samples are more trustworthy, which sources are more stable, which tasks are more prone to drift, and which conflicts are worth preserving rather than forcibly averaged, will reward signals truly possess long-term maintainability.
 
 *Table 13-1: Reward Noise Sources and Governance Actions.*
+
 | Noise Source | Typical Manifestation | Impact on Training | Governance Action |
 |---|---|---|---|
 | Annotation disagreement | Win/lose labels on the same sample frequently reverse | Weakens preference signal, reduces DPO/RM stability | Establish arbitration pool, re-label, increase task specification granularity |
@@ -424,6 +425,7 @@ Preference data becomes genuinely usable as a reward signal only when it is succ
 In practice, many mature teams do not treat DPO, RM, RLAIF, and PRM as mutually exclusive paths. They instead build a layered system: the base layer uses preference pairs for rapid DPO alignment; the platform layer trains reward models to form a unified scoring interface; the expansion layer uses RLAIF and rule judges to increase coverage; and the complex-task layer introduces PRM for process constraints. In other words, the diversity of training methods essentially requires data teams to build layered data interfaces rather than expecting one sample type to serve all methods.
 
 *Table 13-2: Correspondence Between Preference Types and Training Methods.*
+
 | Preference/Reward Type | Typical Data Structure | Best-Matched Method(s) | Advantages | Key Challenges |
 |---|---|---|---|---|
 | Pairwise Preference | `(x, y_w, y_l)` | DPO, ranking-based RM, some RLAIF | Annotation is intuitive, consistency is generally higher, fast to implement | Requires high-quality candidate construction; difficult to express fine-grained rationale |

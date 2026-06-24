@@ -58,6 +58,7 @@ The main text retains only the key implementation snippets that illuminate desig
 Acceptance metrics include tool-call validity rate, parameter completeness, trajectory success rate, recovery path coverage, block scenario proportion, and format compliance rate. If the project enters production, course, or public reproduction experimental environments, version numbers, dependency environments, random seeds, sample audit results, and failure post-mortem records should also be documented.
 
 *Table P07-1: Agent Tool-Use Publication Acceptance Checklist.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Tool Contract | Schema field completeness rate, parameter validity rate, and environment execution records | Each tool-call type should have defined inputs, outputs, errors, and permission boundaries |

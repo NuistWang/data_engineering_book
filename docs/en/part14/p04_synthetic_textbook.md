@@ -58,6 +58,7 @@ The main text retains only the key implementation snippets that illustrate desig
 Acceptance metrics include validation pass rate, difficulty distribution, topic coverage, solution consistency, proportion of erroneous samples, and structural completeness of volumes. If the project enters production, curriculum, or public reproducibility environments, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample post-mortem records should also be logged.
 
 *Table P04-1: Synthetic Textbook Factory Publication Acceptance Table.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Data closed loop | Seed problems, evolved problems, PoT solutions, sandbox logs, and textbook volumes are all traceable | Spot-checked samples must be traceable back to original seeds and validation records |

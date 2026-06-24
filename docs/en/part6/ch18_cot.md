@@ -183,6 +183,7 @@ From an engineering standpoint, the degree of structure in reasoning trajectorie
 
 
 *Table 18-1: Reasoning Sample Types and Applicable Tasks.*
+
 | Reasoning Sample Type | Primary Representation | Applicable Tasks | Advantages | Limitations |
 |---|---|---|---|---|
 | Answer-only sample | Problem + final answer | Simple Q&A, classification, low-reasoning-depth tasks | Low cost, high throughput | Cannot expose process deficiencies |
@@ -331,6 +332,7 @@ For example, a sample may ultimately produce an incorrect answer, but if ninety 
 
 
 *Table 18-2: Error Types and Corrective Actions.*
+
 | Error Type | Typical Manifestations | Common Causes | Recommended Corrective Actions |
 |---|---|---|---|
 | Arithmetic error | Incorrect calculation result, copied sign error, substitution mistake | Unstable basic computation, local errors from excessively long trajectories | Use executor to recompute, replace erroneous step and replay subsequent chain |

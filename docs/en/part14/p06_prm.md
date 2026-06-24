@@ -58,6 +58,7 @@ The main text retains only the key implementation excerpts that illustrate desig
 Acceptance metrics include step annotation consistency, validation pass rate, positive-to-negative sample ratio, repair coverage, PRM discriminability, and spot-check error rate. If the project enters production, a curriculum, or a public reproduction environment, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample post-mortem records should also be documented.
 
 *Table P06-1: Process Supervision Data Publication Acceptance Table.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Process Labels | Step annotation consistency, reward bucket distribution, and validation pass rate | Verify that positive, negative, and repair trajectories each have independent evidence upon spot-check |

@@ -322,6 +322,7 @@ Therefore, the value of real data lies not only in "providing more samples"—it
 
 
 *Table 17-1: Risk Signals and Possible Causes Reference Table.*
+
 | Early Risk Signal | Common Manifestations | Possible Causes | Priority Investigation Direction |
 |---|---|---|---|
 | Highly uniform output style | Increasingly similar sentence patterns, structures, and wording | Template rigidity, single-teacher dominance, singular judge preference | Template versions, teacher source distribution, judge scoring standards |
@@ -448,6 +449,7 @@ One of the most troublesome aspects of synthetic data risk is that offline and o
 One viable approach is to establish a mapping between "online problem types" and "offline proxy metrics." For example, if style uniformity and off-target answers appear online, one should check whether the offline style diversity metrics and open-ended Q&A robustness metrics are drifting synchronously; if complex scenario success rates are declining online, one should check whether degradation in long-tail sets, hard sets, and cross-domain sets occurred earlier. Only by decomposing online problems into signals that can be proxied by offline measurements can the governance system form a truly closed loop.
 
 *Table 17-2: Detection Metrics, Thresholds, and Governance Actions.*
+
 | Metric Category | Representative Metrics | Risk Signal | Recommended Action |
 |---|---|---|---|
 | Distribution metrics | Length distribution divergence, topic coverage divergence, task type proportion | Synthetic data concentrated in few patterns | Expand real samples, diversify templates, add hard samples |
@@ -547,6 +549,7 @@ The value of a governance checklist (Gebru et al. 2021; Mitchell et al. 2019; Ra
 
 
 *Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training.*
+
 | Inspection Dimension | Required Inspection Questions | Deployment Red Line |
 |---|---|---|
 | Data source | Does it long-term rely on few teachers/few templates? | Single source dominates long-term without external correction |

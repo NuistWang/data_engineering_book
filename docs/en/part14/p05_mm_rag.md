@@ -60,6 +60,7 @@ The body text retains only the key implementation snippets that illuminate desig
 Acceptance metrics include retrieval hit rate, citation accuracy, answer keyword accuracy, latency, page processing cost, noise-page suppression effectiveness, and evidence back-link completeness. If the project enters production, a course environment, or a public reproducibility experiment, the version number, dependency environment, random seeds, sample inspection results, and failure sample post-mortems should also be recorded.
 
 *Table P05-1: Multimodal RAG Publication Acceptance Table.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Verification Criteria |
 | --- | --- | --- |
 | Evidence Retrieval | Top-K hit rate, table-of-contents page false recall rate, cross-page recall coverage, and evidence page stability | Each answer should be traceable to a page image, page number, retrieval score, and match rationale |

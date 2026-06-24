@@ -60,6 +60,7 @@ The main text retains only the key implementation excerpts that illustrate desig
 Acceptance metrics include image-text consistency, task type coverage, OCR evidence usability, conversation turn distribution, format pass rate, and manual sampling quality. If the project enters a production, course, or public reproducibility environment, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample review records should also be documented.
 
 *Table P03-1: LLaVA Multimodal Instruction Data Factory Publication Acceptance Table.*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Task boundary | Coverage records for LLaVA-style conversation templates, image descriptions, OCR, chart reading, bbox grounding, and multi-image comparison | State that this project is the classic LLaVA workflow baseline and does not include Qwen-VL factory-scale extension capabilities in project conclusions |
@@ -306,6 +307,7 @@ Therefore, this project does not remain at COCO natural images but further deriv
 Table P03-2 summarizes the relationship between different asset types and their task mappings.
 
 *Table P03-2: Asset Types and Primary Risks Reference Table.*
+
 | Asset Type | Typical Source | Compatible Tasks | Primary Risks |
 | --- | --- | --- | --- |
 | `general_image` | COCO natural images, general scene photographs | Image description, counting, visual QA, local grounding | Hallucinated descriptions, missed objects, category confusion |
@@ -824,6 +826,7 @@ This indicates:
 Table P03-3 summarizes the relationships among task types, coverage capability, and engineering value.
 
 *Table P03-3: Task Types and Engineering Value Reference Table.*
+
 | Task Type | Primary Input | Primary Output | Coverage Capability | Engineering Value |
 | --- | --- | --- | --- | --- |
 | `image_description` | General images | Scene description | Whole-image understanding | Builds visual subject and scene expression capability |
@@ -860,6 +863,7 @@ These figures are modest, but they already reflect the cost structure of a small
 Table P03-4 summarizes the current project's costs, time investment, and manual effort.
 
 *Table P03-4: Project Items and Notes Reference Table.*
+
 | Item | Current Result | Notes |
 | --- | ---: | --- |
 | Total assets | 87 | Three asset categories, balanced at 29 each |
@@ -924,6 +928,7 @@ These failure samples can be classified into at least the following types:
 Table P03-5 summarizes typical failure sample types and priority repair directions.
 
 *Table P03-5: Failure Types and Priority Repair Directions Reference Table.*
+
 | Failure Type | Typical Manifestation | Most Likely Source | Priority Repair Direction |
 | --- | --- | --- | --- |
 | Visual hallucination | Response describes objects or relationships not present in the image | Open-ended generation over-diverging, re-captioning too expansive | Tighten prompt, add constraints on salient objects |
@@ -1065,6 +1070,7 @@ As sample scale grows, pure manual spot-checking quickly becomes a bottleneck. T
 Table P03-6 summarizes the categories and roles of this project's deliverables.
 
 *Table P03-6: Categories and Roles Reference Table.*
+
 | Category | Representative Files | Role |
 | --- | --- | --- |
 | Assets and intermediate layer | `asset_manifest.jsonl`, `llava_alignment.jsonl`, `llava_interleaved.jsonl` | Records asset provenance, task derivation, and intermediate sample state |

@@ -297,6 +297,7 @@ This not only degrades sample readability, but also causes downstream Self-Instr
 ### 7.2 Component Selection
 
 *Table P02-1: Components and Selection Rationale.*
+
 | Component | Choice | Function | Rationale |
 | --- | --- | --- | --- |
 | PDF parsing | `pdfplumber` | Read page text and coordinates | Supports bounding-box-based header/footer trimming; well-suited for institutional PDFs |
