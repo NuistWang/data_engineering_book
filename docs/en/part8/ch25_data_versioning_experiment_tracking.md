@@ -111,8 +111,7 @@ The Data Management Body of Knowledge typically treats data assets, metadata, li
 
 **Release package level (Release)**: An externally released model version. Version information includes release version number, the corresponding model checkpoint, the dataset version used, the list of evaluation sets passed, and the release approval record.
 
-**Table 25-1: Data version granularity and applicable scenarios**
-
+*Table 25-1: Data version granularity and applicable scenarios.*
 | Version Granularity | Primary Use | Key Fields | Retention Policy |
 |---|---|---|---|
 | Sample level | Compliance auditing, annotation traceability | sample_id, source, status | Permanent retention |
@@ -127,8 +126,7 @@ In practice, teams need not automate management of all granularities from the st
 
 Granularity design must also account for cost. Sample-level versioning is the most fine-grained but incurs the highest storage and indexing costs; dataset-level versioning is the most widely used but insufficient for explaining fine-grained quality issues; release-package-level versioning is best suited to compliance auditing but cannot directly answer questions about processing details. Teams should therefore adopt a strategy of "fine granularity for critical paths, moderate granularity for ordinary paths." For formal training sets, evaluation sets, high-sensitivity data, and online feedback data, sample-level or shard-level records should be retained where possible. For one-off exploratory data, only dataset-level and experiment-level records may be needed, but these must be marked as ineligible for formal release.
 
-**Table 25-2: Recommended version granularity by data type**
-
+*Table 25-2: Recommended version granularity by data type.*
 | Data Type | Recommended Minimum Granularity | Rationale | Records That May Be Simplified |
 |---|---|---|---|
 | Formal training set | Shard level + Dataset level | Need to explain data recipe and quality changes | Temporary cleaning intermediate files may be cleaned up according to policy |
@@ -226,6 +224,7 @@ The following is a standard experiment card field design:
 
 **Basic Information**
 
+*Table 25-3: Field Design for Experiment Cards.*
 | Field | Type | Description |
 |---|---|---|
 | experiment_id | string | Unique experiment identifier |
@@ -237,6 +236,7 @@ The following is a standard experiment card field design:
 
 **Data Configuration**
 
+*Table 25-4: Field Design for Experiment Cards.*
 | Field | Type | Description |
 |---|---|---|
 | dataset_id | string | ID of the dataset used |
@@ -247,6 +247,7 @@ The following is a standard experiment card field design:
 
 **Model Configuration**
 
+*Table 25-5: Field Design for Experiment Cards.*
 | Field | Type | Description |
 |---|---|---|
 | base_model | string | Base model name and version |
@@ -256,6 +257,7 @@ The following is a standard experiment card field design:
 
 **Runtime Environment Configuration**
 
+*Table 25-6: Field Design for Experiment Cards.*
 | Field | Type | Description |
 |---|---|---|
 | runtime_env | object | Python, OS, training framework, and key runtime versions |
@@ -268,6 +270,7 @@ The following is a standard experiment card field design:
 
 **Evaluation Results**
 
+*Table 25-7: Field Design for Experiment Cards.*
 | Field | Type | Description |
 |---|---|---|
 | eval_datasets | list | List of evaluation sets used |
@@ -277,8 +280,7 @@ The following is a standard experiment card field design:
 
 **Experiment Records**
 
-**Table 25-3: Sample experiment card fields**
-
+*Table 25-8: Sample experiment card fields.*
 | Field | Type | Description |
 |---|---|---|
 | hypothesis | string | Experiment hypothesis (what this experiment aims to validate) |
@@ -349,8 +351,7 @@ Failed experiment preservation also requires distinguishing among different fail
 
 For example, an experiment that terminates due to insufficient VRAM during training does not imply that the data recipe is invalid. An experiment that produces anomalous results due to evaluation set contamination does not imply a genuine improvement in model capability. An experiment that regresses because newly added data is mismatched to the task objective can clearly rule out that data direction. Failure classification enables the team to decide whether to re-run, fix the data, adjust evaluation, or add the direction to the exclusion list.
 
-**Table 25-4: Failed experiment types and preservation requirements**
-
+*Table 25-9: Failed experiment types and preservation requirements.*
 | Failure Type | Typical Manifestation | Should Re-Run? | Information to Preserve |
 |---|---|---|---|
 | Execution failure | Training interrupted, logs missing, insufficient resources | Usually should re-run | Resource configuration, failure cause, re-run conditions |
@@ -367,8 +368,7 @@ For R&D teams, carefully recording failures also has cultural significance. It s
 
 A complete audit trail must be able to answer the following core questions. Research on both data cards and model cards emphasizes that data sources, usage boundaries, evaluation conditions, and model behavior must be documented to support auditing and accountability tracing (Gebru et al. 2021; Mitchell et al. 2019):
 
-**Table 25-5: Audit trail information requirements**
-
+*Table 25-10: Audit trail information requirements.*
 | Question | Information Required |
 |---|---|
 | What data was used to train this model? | Release package → Experiment → Dataset version |
@@ -438,8 +438,7 @@ The standard change audit workflow is as follows:
 6. **Change verification**: Run automated quality checks and compare against the expected impact described in the change request.
 7. **Change recording**: Write the change log into the dataset's metadata and update the lineage graph.
 
-**Table 25-6: Data change audit workflow**
-
+*Table 25-11: Data change audit workflow.*
 | Step | Executor | Tool | Output |
 |---|---|---|---|
 | Change request | Requesting party | Change request form | Completed request form |
@@ -493,8 +492,7 @@ Governance rules must also be tied to the data lifecycle. From collection, clean
 
 Governance rule enforcement should also be tiered. Low-risk operations can be completed through system prompts and automatic recording. Medium-risk operations require lightweight approval. High-risk operations require formal approval and auditing. Prohibited operations should be blocked directly by the system. Text-based policies alone cannot guarantee compliance because people under project pressure tend to bypass processes. Embedding rules into tools—such as frozen versions being read-only, failing quality checks blocking release, and unauthorized data sources being blocked from the mainline—is what genuinely reduces the probability of violations.
 
-**Table 25-7: Lineage governance rules by data lifecycle stage**
-
+*Table 25-12: Lineage governance rules by data lifecycle stage.*
 | Lifecycle Stage | Permitted Focus | Key Constraints | Primary Evidence |
 |---|---|---|---|
 | Collection | Explore data sources, build sample pools | Source, authorization, and sensitivity classification must be recorded | Source manifest, authorization records, collection logs |
@@ -583,8 +581,7 @@ Without version management, this investigation would likely have taken a very di
 
 With version management, the retrospection path flows from model to experiment, experiment to dataset, dataset to shard, shard to quality review, and review record to business rule. This is a structured evidence chain. It not only shortens investigation time but also changes the way the team discusses problems: discussions are no longer centered on "who might have changed the data" but on "where the evidence chain shows a rule produced an unintended effect."
 
-**Table 25-8: Comparison of retrospection approaches with and without version management**
-
+*Table 25-13: Comparison of retrospection approaches with and without version management.*
 | Retrospection Step | Typical Approach Without Version Management | Approach With Version Management | Difference |
 |---|---|---|---|
 | Locate training data | Ask experiment owner; search file folders | Find dataset version through experiment card | Starting point changes from memory to record |

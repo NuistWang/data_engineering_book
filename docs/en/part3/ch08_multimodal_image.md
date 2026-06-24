@@ -118,7 +118,6 @@ For real business use cases such as reading financial reports or invoices, natur
 - **Coordinate normalization**: in grounding tasks, the model must output concrete pixel coordinates. Because training images have very different resolutions, the original absolute pixel coordinate `(X, Y)` is usually mapped into a discrete token bucket in `[0, 1000]`, such as `[<loc_255>, <loc_899>]`. This discretization turns continuous spatial coordinates into a vocabulary-like form that an LLM can process.
 
 *Table 8-1: Image-text sample types, characteristics, and applicable tasks. Source: compiled by the authors; applicable tasks are engineering generalizations, and production environments should review them against model architecture, the vision encoder, and data licensing.*
-
 | Sample type | Data characteristics | Core acquisition method | Best-fit stage | Key capability gained |
 | :--- | :--- | :--- | :--- | :--- |
 | **Pure image-caption** | One-to-one text/image pairs, high noise | Web `<img alt>`, public-cloud OSS crawling | Alignment pretraining | Basic feature perception and cross-modal retrieval |
@@ -290,7 +289,6 @@ A balanced MLLM pretraining mix must allocate weights to different sources caref
 3. **High-density OCR document screenshots**: scanned white papers, single-page PDFs, receipt and invoice images. This data is crucial for models that act as contract-review assistants or invoice helpers because it trains the rare "fine-grained text focus" capability that natural images almost never contain. The Qwen-VL and Qwen2.5-VL technical reports both list OCR, document understanding, grounding, and multi-resolution processing as core capability sources (Bai et al. 2023, 2025).
 
 *Table 8-2: Image-cleaning strategies and cost comparison. Source: compiled by the authors; cost descriptions are relative complexity, and actual cost depends on image resolution, model version, concurrency, and manual spot-check ratio.*
-
 | Cleaning strategy | Compute cost | Core function and benefit | Residual risks and side effects |
 | :--- | :--- | :--- | :--- |
 | **Basic resolution cutoff** | Very low, I/O intensive | Remove meaningless color blocks and reduce storage and downstream decoding overhead | May wrongly remove historically meaningful documentary images that only survived in low resolution |

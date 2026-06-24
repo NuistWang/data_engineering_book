@@ -229,12 +229,11 @@ Therefore, the goal of the body text extraction phase is not "to capture as many
 *Figure P01-2: Parsing Path from WARC to Body Text.*
 
 
+*Table P01-1: Component and Reason for Choice Reference Table.*
 | Component | Selection | Reason for Choice |
 |---|---|---|
 | WARC reading | `warcio` | Standard WARC reading library with streaming support, avoiding the memory pressure of loading large files all at once |
 | Body text extraction | `trafilatura` | More stable extraction of main content areas; compared to simple HTML parsing approaches, offers better cleanup of navigation bars, footers, and template areas |
-
-*Table P01-1: Component and Reason for Choice Reference Table*
 
 ### 5.3 The Engineering Value of Stream Processing
 
@@ -698,14 +697,13 @@ Its significance lies in making the dataset not merely a collection of scattered
 
 The final retention funnel obtained by this project is as follows:
 
+*Table P01-2: Stage and Typical Interception Reasons Reference Table.*
 | Stage | Record Count | Retention Rate (based on extracted) | Typical Interception Reasons |
 |---|---:|---:|---|
 | Extracted | 3028 | 100.0% | HTML parsing failure, empty content |
 | Cleaned | 2425 | 80.08% | Short text, excessive code symbols, blacklist |
 | Dedup | 2305 | 76.12% | Mirror sites, template pages, reposts |
 | Final | 526 | 17.37% | Directory pages, high perplexity, language mixing |
-
-*Table P01-2: Stage and Typical Interception Reasons Reference Table*
 
 ### 12.2 What These Numbers Really Indicate
 
@@ -1073,8 +1071,8 @@ As part of Chapter 14, this chapter corresponds to the project-level empirical v
 
 ## References
 
-1. Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
-2. Hugging Face. (2026). Datasets Documentation. https://huggingface.co/docs/datasets/.
-3. Ray Project. (2026). Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
-4. MLflow Authors. (2026). MLflow Documentation. https://mlflow.org/docs/latest/.
-5. Great Expectations Contributors. (2026). Great Expectations Documentation. https://docs.greatexpectations.io/.
+Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

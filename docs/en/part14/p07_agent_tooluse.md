@@ -57,13 +57,12 @@ The main text retains only the key implementation snippets that illuminate desig
 
 Acceptance metrics include tool-call validity rate, parameter completeness, trajectory success rate, recovery path coverage, block scenario proportion, and format compliance rate. If the project enters production, course, or public reproduction experimental environments, version numbers, dependency environments, random seeds, sample audit results, and failure post-mortem records should also be documented.
 
+*Table P07-1: Agent Tool-Use Publication Acceptance Checklist.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Tool Contract | Schema field completeness rate, parameter validity rate, and environment execution records | Each tool-call type should have defined inputs, outputs, errors, and permission boundaries |
 | Behavior Trajectory | Proportions of success, recovery, and block trajectories, and task success rate | Do not show only success paths; retain failure-recovery and safety-block samples |
 | Safety Boundary | Unsafe block coverage, permission denial records, and manual sampling conclusions | Public samples must not induce real-world high-risk tool execution |
-
-*Table P07-1: Agent Tool-Use Publication Acceptance Checklist*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -1163,8 +1162,8 @@ As part of Part Fourteen, this chapter corresponds to the project-level validati
 
 ## References
 
-1. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
-2. Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Hambro, E., Zettlemoyer, L., Cancedda, N., & Scialom, T. (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
-3. NIST. (2023). Artificial Intelligence Risk Management Framework (AI RMF 1.0). National Institute of Standards and Technology.
-4. OWASP Foundation. (2025). OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.
-5. OpenTelemetry Authors. (2026). OpenTelemetry Documentation. https://opentelemetry.io/docs/.
+Yao S, Zhao J, Yu D, Du N, Shafran I, Narasimhan K, Cao Y (2023) ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
+Schick T, Dwivedi-Yu J, Dessì R, Raileanu R, Lomeli M, Hambro E, Zettlemoyer L, Cancedda N, Scialom T (2023) Toolformer: Language Models Can Teach Themselves to Use Tools. arXiv:2302.04761.
+NIST (2023) Artificial Intelligence Risk Management Framework (AI RMF 1.0). National Institute of Standards and Technology.
+OWASP Foundation (2025) OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.
+OpenTelemetry Authors (2026) OpenTelemetry Documentation. https://opentelemetry.io/docs/.

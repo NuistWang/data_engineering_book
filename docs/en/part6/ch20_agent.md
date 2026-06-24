@@ -374,7 +374,7 @@ To prevent red-line tests from remaining at the level of principled rhetoric, te
 These scenarios matter because they represent high-frequency stress points that multi-turn agents will readily encounter once they enter real usage environments—they are not edge cases. If the model repeatedly fails at these points, no amount of high accuracy on static question-answering benchmarks can conceal the systemic shortfall. Table 20-1 summarizes common multi-turn failure patterns along with their typical manifestations, likely root causes, and corresponding detection actions.
 
 
-**Table 20-1: Multi-Turn Failure Patterns and Detection Actions**
+*Table 20-1: Multi-Turn Failure Patterns and Detection Actions.*
 | Failure Pattern | Typical Manifestation | Likely Root Cause | Detection Action |
 |---|---|---|---|
 | State Drift | Deviates from original task goal as conversation lengthens | Missing state fields; weak trajectory supervision | Run long-horizon replay and compare goal consistency at key checkpoints |
@@ -444,7 +444,7 @@ Accordingly, multi-turn data engineering must specify not only write content, wr
 To support practical data modeling, Table 20-2 provides a set of foundational field designs:
 
 
-**Table 20-2: Session Fields and Memory Fields**
+*Table 20-2: Session Fields and Memory Fields.*
 | Field Category | Example Field Name | Description | Recommended Layer | Decayable |
 |---|---|---|---|---|
 | Session field | session_id | Identifier for a single continuous interaction container | session | No |

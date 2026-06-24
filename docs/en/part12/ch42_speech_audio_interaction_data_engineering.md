@@ -46,8 +46,7 @@ VoiceStyleControl is composed of two task types: speech-to-speech dialogue gener
 
 VoiceStyleControl contains 154,906 samples in total. Of these, S2SEmoControl contains 20,117 samples (approximately 13.0% of the total), targeting style-controllable speech-to-speech dialogue generation; TTSSpeakerControl contains 134,789 samples (approximately 87.0% of the total), targeting controllable text-to-speech generation. The former is closer to a real voice assistant scenario, where the model must understand the user's spoken request and generate a spoken assistant response; the latter focuses more directly on training the model to generate target speech from a style text, acoustic condition, and emotional style.
 
-**Table 42-1: VoiceStyleControl Sample Scale and Emotion Distribution**
-
+*Table 42-1: VoiceStyleControl Sample Scale and Emotion Distribution.*
 | Emotion | S2SEmoControl | TTSSpeakerControl | Total | Total ratio |
 |---|---:|---:|---:|---:|
 | happy | 4,050 | 38,500 | 42,550 | 27.5% |
@@ -128,8 +127,7 @@ TTSSpeakerControl concentrates the control capability in a text-to-speech form. 
 
 Combining samples from both S2S and TTS, the fields in VoiceStyleControl can be organized into six layers: task identifier, text content, acoustic conditions, emotion conditions, speech supervision, and basic audio configuration. S2S samples contain both user-side and assistant-side fields and therefore distinguish query-side from answer-side; TTS samples generate only assistant-side speech and therefore have a more concentrated set of fields. `language` fixes the language, and `sample_rate` fixes the audio sampling configuration; these foundational fields are the underlying contract for training loading and evaluation reproducibility and must not be inferred implicitly from path names or directory conventions alone.
 
-**Table 42-2: Field Descriptions for Speaker, Emotion, and Sampling Labels**
-
+*Table 42-2: Field Descriptions for Speaker, Emotion, and Sampling Labels.*
 | Label layer | Field | Values / examples | Distribution or engineering requirements |
 |---|---|---|---|
 | Query-side speaker | `query_gender` | `female` / `male`, e.g., `female` | Calculated separately for the query side. |
@@ -370,8 +368,7 @@ Quality assessment for controllable voice interaction data must simultaneously c
 
 Quality gates should be divided into "hard failures" and "soft risks." Missing paths, incorrect sampling rates, corrupted audio, unreadable tokens, and severe ASR reverse-transcription inconsistency typically constitute hard failures and should be blocked immediately. Slightly weak emotion intensity, average naturalness, or borderline acoustic condition perception can enter a soft-risk queue, where the decision to re-synthesize, downweight, or manually review is made based on task criticality. Treating every issue as a disqualifying veto wastes remediable samples; allowing every issue to pass dilutes the control signal with noise.
 
-**Table 42-3: Quality Assessment Metrics**
-
+*Table 42-3: Quality Assessment Metrics.*
 | Assessment dimension | Core question | Automated metrics | Key points for human review | Handling of failures |
 |---|---|---|---|---|
 | Semantic consistency | Does the answer address the user's intent? Is TTS content read out correctly? | ASR reverse-transcription CER/WER, semantic similarity, intent hit rate | Non-responsive answers, omission of key information, hazardous suggestions | Rewrite text, re-synthesize, remove |
@@ -409,8 +406,7 @@ Evaluation results should also be written back to the data version, not stored o
 
 Voice identity is a highly sensitive data asset. A person's voice contains cues about age, gender, regional background, emotional state, health condition, and personal identity; in speaker verification systems, voice can even function as an authentication credential. Once controllable voice data incorporates voice cloning, authorization, revocation, usage restriction, and auditing must be embedded in the data lifecycle — not appended as disclaimer footnotes at model release time.
 
-**Table 42-4: Privacy and Misuse Risk Control Checklist**
-
+*Table 42-4: Privacy and Misuse Risk Control Checklist.*
 | Risk type | Triggering scenario | Control measures | Audit evidence |
 |---|---|---|---|
 | Voice identity authorization | Reference audio originates from real speakers or identifiable voices | Pre-collection consent, purpose limitation, revocability, authorization version number | Authorization timestamp, revocation records |

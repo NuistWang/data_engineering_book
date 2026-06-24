@@ -123,6 +123,7 @@ The example is one integrated science infographic. Its internal regions belong t
 
 #### Case A.3.2 Full Question Chain
 
+*Table 41-1: Case A.3.2 Full Question Chain.*
 | ID | Type | Question | Answer | Evidence Source | Dependency |
 | --- | --- | --- | --- | --- | --- |
 | Q1 | Maximum lookup | Which U.S. county has the highest historical shark-attack count? | Volusia, FL | Subchart A | None |
@@ -278,6 +279,7 @@ The basic idea of MedImage-ToolVQA can therefore be summarized as follows: trans
 
 MedImage-ToolVQA targets medical image multiple-choice QA. Samples are built on region-level information from BiomedParse (Zhao et al. 2025), including original image, target region, mask, bbox, target description, question, candidate options, correct answer, and local observation images returned by tools. The final training data has **24,992 records**.
 
+*Table 41-2: Case B.3: Data Objects and Scale.*
 | Metric | Value | Data-Engineering Meaning |
 | --- | ---: | --- |
 | Total records | 24,992 | Medical image tool-use samples for training and evaluation |
@@ -478,6 +480,7 @@ MedImage-ToolVQA uses three visual tools: `Zoom-in`, `BiomedParse`, and `SAM2`. 
 
 `SAM2` is a general bbox-prompted segmentation tool (Ravi et al. 2025). It does not rely on medical semantics; instead, it generates a finer mask from a geometric prompt. For samples that already have a candidate box but need a clearer boundary, `SAM2` can provide supplementary observation. Its main risk is strong dependence on bbox quality: if the bbox covers background or adjacent structures, the segmentation result will also be affected.
 
+*Table 41-3: Case B.6: Three Tools and Their Boundaries.*
 | Tool | Main Input | Return | Best For | Risks to Control |
 | --- | --- | --- | --- | --- |
 | `Zoom-in` | Image index, bbox coordinates | Local crop image | Region too small, whole-image resolution insufficient, detail review needed | Bbox drift, over-cropping, context loss |
@@ -689,6 +692,7 @@ The fifth failure is observation not consumed. The model calls a tool and the to
 
 The sixth failure is over-calling. The model calls a tool even when the whole image is sufficient, or it calls multiple tools in sequence without gaining new information. Over-calling increases inference cost and can introduce latency and error accumulation in a real system. The training set therefore needs to preserve a certain proportion of direct visual reasoning samples, and evaluation should distinguish necessary tool use from formalized tool use.
 
+*Table 41-4: Case B.9: Common Failure Modes.*
 | Failure Mode | Symptom | Risk | Governance Method |
 | --- | --- | --- | --- |
 | Text-answerable question | Can answer without image | Model ignores visual input | No-image check, rewrite or filter |

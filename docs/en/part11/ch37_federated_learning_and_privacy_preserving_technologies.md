@@ -100,6 +100,7 @@ The industry has evolved five main technical families for privacy-preserving com
 
 ### 37.2.1 Core Technologies and Comparison
 
+*Table 37-1: Core Technologies and Comparison.*
 | Technology Family | Core Principle | Protection Target | Applicable Phase | Implementation Cost and Main Bottlenecks |
 | :--- | :--- | :--- | :--- | :--- |
 | **Federated Learning (FL)** | Data stays local while models move; nodes train locally and exchange gradients or parameters | Raw training data does not directly leave its domain | Model training and fine-tuning | High communication cost; gradient leakage risk; sensitive to node heterogeneity |

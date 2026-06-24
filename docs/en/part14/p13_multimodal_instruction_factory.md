@@ -42,14 +42,13 @@ The chapter keeps only implementation fragments that explain design trade-offs. 
 
 Acceptance metrics include task coverage, image-text consistency, OCR usability, format pass rate, safety-filtering rate, and manual spot-check quality. If the project enters production, a course environment, or a public reproduction environment, it should also record version numbers, dependency environment, random seeds, sample spot-check results, and failure-sample review records.
 
+*Table P13-1: Publication acceptance table for the multimodal instruction factory.*
 | Acceptance dimension | Metric / evidence | Publication review rule |
 | --- | --- | --- |
 | Task coverage | Ratio of description, OCR, chart, grounding, and multi-turn QA tasks | Task types must correspond to data sources, model capability, and downstream training goals |
 | Quality filtering | Image-text consistency, format pass rate, safety-filtering rate, self-consistency result, manual review quality | LLM-as-Judge results must retain scoring rules, spot-check calibration examples, and multi-sample consistency records |
 | Multilingual expansion | Ratio of Chinese, English, and translated samples; cross-language terminology consistency; format-preservation rate | Multilingual samples must not be judged by quantity only; semantic consistency, visual reference, and proper-name translation require sampling review |
 | Copyright safety | Image authorization, sensitive-content interception, redistribution boundary | Public examples should prefer authorized or owned assets; external images require separate registration |
-
-*Table P13-1: Publication acceptance table for the multimodal instruction factory.*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -92,6 +91,7 @@ The factory is divided into five components, shown in Figure 13-1.
 
 Table P13-2 maps architecture components to code entry points and key artifacts. Unlike P03, P13 does not walk through LLaVA image-text preparation again. Its focus is how a modern multimodal instruction factory organizes seed selection, templates, generation, filtering, expansion, packaging, and acceptance into a reviewable chain.
 
+*Table P13-2: Stage artifacts and code entry points for the multimodal instruction factory.*
 | Stage | Code entry | Main input | Main output | Key review point |
 | --- | --- | --- | --- | --- |
 | Seed selection | `seed_selector.py` | LAION metadata or private visual-asset manifest | Seed list | Resolution, aspect ratio, original caption length, authorization status |
@@ -102,8 +102,6 @@ Table P13-2 maps architecture components to code entry points and key artifacts.
 | Multilingual expansion | `multilingual_expand.py` | High-quality English samples | Bilingual records | Terminology consistency, visual-reference preservation |
 | Unified packaging | `pack_multi_image_video.py` | Scored records | `mm_sft_final.jsonl` | Qwen format, image/video paths, conversation fields |
 | Unit tests | `tests/test_factory.py` | Template, judge, expansion, packaging functions | Test report | Basic contracts and example-output completeness |
-
-*Table P13-2: Stage artifacts and code entry points for the multimodal instruction factory.*
 
 The key function of Table P13-2 is to split "generation" out of a single model call. In real projects, VLM generation is only the middle of the pipeline. Before it, controlled seeds and task templates are required; after it, consistency checks, score filtering, multilingual review, and format packaging are required. If only the generation script is kept, the chapter becomes a demo. If stage artifacts and review fields are kept, the chapter has the engineering depth expected of a project chapter.
 
@@ -329,6 +327,7 @@ pack_to_qwen_format(expanded, "./data/mm_sft_final.jsonl")
 
 This code describes the factory's minimal closed loop, but it is not yet a production script. Production runs need four additional controls. First, model calls must record model path, temperature, top-p, max tokens, and concurrency. Second, seeds must record source, authorization, and download status. Third, judge output must retain the scoring prompt, threshold, and human calibration set. Fourth, before packaging, the pipeline must check image links, conversation format, and sample deduplication.
 
+*Table P13-3: Runtime records for the multimodal instruction factory.*
 | Category | Record item | Purpose |
 | --- | --- | --- |
 | Asset version | Image source, URL, authorization, download time | Proves sample traceability |
@@ -339,12 +338,11 @@ This code describes the factory's minimal closed loop, but it is not yet a produ
 | Packaging version | Output format, field schema, target training framework | Ensures training scripts can read the data |
 | Spot-check record | Human samples, failure samples, revision notes | Supports release gates |
 
-*Table P13-3: Runtime records for the multimodal instruction factory.*
-
 ## Data Schema and Sample Contract
 
 A minimal multimodal instruction record cannot contain only `image`, `instruction`, and `response`. The project chapter should emphasize that training formats can be narrow, but engineering intermediate states must be wider. Otherwise, once hallucination, format errors, or copyright problems appear, the data team cannot trace a sample back to its image, template, model call, or filtering step.
 
+*Table P13-4: Intermediate-state sample schema for the multimodal instruction factory.*
 | Field | Example | Meaning |
 | --- | --- | --- |
 | `sample_id` | `p13_laion_000001` | Stable primary key across logs |
@@ -360,14 +358,13 @@ A minimal multimodal instruction record cannot contain only `image`, `instructio
 | `language` | `en`, `zh` | Distinguishes multilingual samples |
 | `audit_trace` | Batch, timestamp, script version | Supports review and takedown |
 
-*Table P13-4: Intermediate-state sample schema for the multimodal instruction factory.*
-
 The final `mm_sft_final.jsonl` file in Qwen format can be narrower than the intermediate state, but the intermediate state should not be discarded. Training files serve the training framework; audit files serve quality and release. They can be joined by `sample_id`.
 
 ## Quality Filtering: From Length Thresholds to Calibrated Rubrics
 
 The demonstration `llm_judge.py` uses response length as a proxy: answers above a certain word count receive 4.5, while shorter answers receive 3.0. This is acceptable for teaching, but not for a real release gate. A real LLM-as-Judge setup should include at least four scoring dimensions: image-text consistency, answer completeness, task following, and safety/compliance.
 
+*Table P13-5: LLM-as-Judge scoring rubric for multimodal instruction samples.*
 | Scoring dimension | 5-point behavior | Low-score risk |
 | --- | --- | --- |
 | Image-text consistency | Describes only content supported by visual evidence | Hallucinates subjects, actions, or text |
@@ -377,14 +374,13 @@ The demonstration `llm_judge.py` uses response length as a proxy: answers above 
 | Safety and compliance | Avoids sensitive identity inference and improper content | Privacy, bias, or dangerous guidance |
 | Language quality | Clear expression without severe repetition | Mechanical repetition, garbling, or abnormal language mixing |
 
-*Table P13-5: LLM-as-Judge scoring rubric for multimodal instruction samples.*
-
 Self-consistency complements judge blind spots. For complex reasoning questions, the model can generate multiple answers, then compare whether conclusions and key evidence agree. If different samples conflict on subjects, text, or spatial relationships, the record should not enter the training set even if one answer is long and fluent. The current `self_consistency.py` is a simplified interface and teaching implementation; real projects should plug in multi-sample generation and consistency metrics.
 
 ## Multilingual Expansion and Cross-Language Acceptance
 
 Multilingual expansion is not simply copying an English instruction and adding an `instruction_zh` field. In multimodal tasks, cross-language errors often occur in visual references and proper-name translation. For example, "the sign on the left" may be translated as "the sign on the right," or brands, place names, and units may be localized incorrectly. P13 should treat Chinese and English as two sample sets that both require spot checks, not as a cheap way to double the count.
 
+*Table P13-6: Multilingual expansion acceptance items.*
 | Acceptance item | Check method | Common issue |
 | --- | --- | --- |
 | Reference consistency | Compare image against left/right, top/bottom, foreground/background | Direction words mistranslated |
@@ -393,14 +389,13 @@ Multilingual expansion is not simply copying an English instruction and adding a
 | Format preservation | Check tables, lists, JSON, Markdown | Translation breaks structure |
 | Safety boundary | Check whether sensitive content bypasses filtering in another language | English filtering works but Chinese filtering fails |
 
-*Table P13-6: Multilingual expansion acceptance items.*
-
 If the project targets Chinese-model training, do not only translate English samples into Chinese. Keep a portion of native Chinese templates and native Chinese judge prompts. Translated samples are useful for scale, but native Chinese samples better reflect real Chinese user questions.
 
 ## Test Coverage and Code Notes
 
 `tests/test_factory.py` covers template existence, random prompt return type, judge filtering, Chinese expansion, and JSONL packaging. These tests prevent basic interface breakage, but they do not prove the factory is releasable. In particular, `generate_with_qwen_vl.py` is a teaching example. Before real vLLM or Qwen-VL integration, it needs input variables, exception handling, model-call result parsing, and failed-sample records. The chapter presents it to explain the generation-stage interface, not to claim production completeness.
 
+*Table P13-7: Test coverage and acceptance gaps for the multimodal instruction factory.*
 | Test item | Covered | Still needed |
 | --- | --- | --- |
 | Template test | Three template types exist; prompt returns a string | Template repetition rate, task ratio |
@@ -408,8 +403,6 @@ If the project targets Chinese-model training, do not only translate English sam
 | Multilingual test | Chinese expansion field generated | Semantic consistency and format preservation |
 | Packaging test | JSONL file can be written | Conversation-field spot check |
 | End-to-end mock | Test entry exists | Small-sample real model run |
-
-*Table P13-7: Test coverage and acceptance gaps for the multimodal instruction factory.*
 
 ## Common Faults and Troubleshooting Paths
 
@@ -425,6 +418,7 @@ Packaging-stage issues involve mismatch among image URLs, `<image>` markers, and
 
 Multimodal instruction factories often look good on automated metrics while failing under human reading. High-scoring samples may be fluent but unfaithful to the image; multilingual samples may be grammatical but wrong on direction, count, or OCR text. Manual spot checks are therefore mandatory before release.
 
+*Table P13-8: Manual review strata for the multimodal instruction factory.*
 | Review layer | Sample source | Review focus |
 | --- | --- | --- |
 | High-score samples | Highest judge-score batch | Whether the judge over-rewards long text |
@@ -435,12 +429,11 @@ Multimodal instruction factories often look good on automated metrics while fail
 | Chinese samples | Multilingual expansion results | Terminology, direction, proper names |
 | Multi-image / video samples | Packer extensions | Reference order and placeholders |
 
-*Table P13-8: Manual review strata for the multimodal instruction factory.*
-
 Manual review should use dual review plus arbitration. The first reviewer checks image-text consistency and task following. The second checks language quality and safety boundaries. Conflicts enter an arbitration pool, which is then used to revise judge prompts, templates, and thresholds. Manual review is not a one-time quality check; it is part of factory iteration.
 
 Release gates should include at least four checks. First, sample sources must be traceable, and external images must not be represented only by naked URLs. Second, training files must be readable by the target framework, not merely valid JSON. Third, there must be an agreement report between judge and human review. Fourth, if multilingual samples are released, Chinese and English quality must be reported separately.
 
+*Table P13-9: Release-gate checklist for the multimodal instruction factory.*
 | Gate | Required evidence | Action on failure |
 | --- | --- | --- |
 | Source gate | URL, license, download status, deletion-request handling | Remove unauthorized or untraceable samples |
@@ -450,12 +443,11 @@ Release gates should include at least four checks. First, sample sources must be
 | Safety gate | Sensitive content, privacy, identity-inference checks | Delete samples and update filtering rules |
 | Version gate | Model version, template version, run batch | Freeze versions before release |
 
-*Table P13-9: Release-gate checklist for the multimodal instruction factory.*
-
 ## Multi-Image and Video Extension Path
 
 The presence of `pack_multi_image_video.py` indicates that this project targets more than single-image SFT. Modern VLM training increasingly depends on interleaved images, multi-image comparison, and short video clips. The core issue is not concatenating several `<image>` tags, but making the instruction clearly point to each visual input and making the answer explicitly express comparison, ordering, temporal change, or cross-image relation.
 
+*Table P13-10: Comparison of multimodal instruction types.*
 | Type | Input organization | Instruction focus | Common error |
 | --- | --- | --- | --- |
 | Single image | One `<image>` | Description, OCR, local reasoning | Hallucinated object or text |
@@ -464,14 +456,13 @@ The presence of `pack_multi_image_video.py` indicates that this project targets 
 | Short video | Multiple frames or `<video>` | Action, temporal order, camera movement | Describes video as static image |
 | Chart screenshot | Image plus OCR/table structure | Numeric reading, trend explanation | Fabricated value or axis |
 
-*Table P13-10: Comparison of multimodal instruction types.*
-
 For video, reuse P14's shot-level structure: `frame_paths`, `caption_en`, `shot_language`, and `camera_motion` can become video-instruction material for P13. A video QA sample can ask the model to explain how the subject moves or infer camera movement. P13 and P14 are therefore upstream and downstream: P13 is the instruction factory, while P14 is the video data pipeline.
 
 ## Deliverable Directory and Version Management
 
 P13 deliverables should be separated into raw, scored, expanded, packed, and reports. This avoids mixing training files with audit files and makes stage-level rollback possible.
 
+*Table P13-11: Deliverable directory for the multimodal instruction factory.*
 | Path | Content | Note |
 | --- | --- | --- |
 | `data/seeds.jsonl` | Seed asset list | URL, authorization, original caption, filtering reason |
@@ -484,14 +475,13 @@ P13 deliverables should be separated into raw, scored, expanded, packed, and rep
 | `reports/human_review.md` | Manual review report | Core release-gate evidence |
 | `reports/license_audit.md` | Copyright and source audit | Required for public release |
 
-*Table P13-11: Deliverable directory for the multimodal instruction factory.*
-
 For version management, hash templates and judge prompts. A model version can remain fixed while template text changes enough to shift sample distribution. A small judge-prompt change can also move pass rates. Release reports should include model version, template version, judge-prompt version, and data batch, not just "generated with Qwen2.5-VL."
 
 ## Data Dashboard and Continuous Iteration
 
 After launch, the factory must continue observing sample distribution instead of generating once and sending data directly to training. The dashboard can start as JSONL statistics scripts; it does not need to be a complex platform. Each batch should answer: whether task types are balanced, whether judge pass rate is abnormal, whether multilingual ratio is stable, and which asset types dominate failure samples.
 
+*Table P13-12: Dashboard metrics for the multimodal instruction factory.*
 | Dashboard metric | Object | Purpose |
 | --- | --- | --- |
 | Seed pass rate | `seeds.jsonl` | Judge whether asset-selection thresholds are too strict |
@@ -504,14 +494,13 @@ After launch, the factory must continue observing sample distribution instead of
 | Manual-review pass rate | Review report | Judge release-gate readiness |
 | Safety-interception rate | Safety filter | Monitor sensitive content and privacy risk |
 
-*Table P13-12: Dashboard metrics for the multimodal instruction factory.*
-
 Dashboards must be stored by batch. A sudden judge-pass-rate increase does not necessarily mean quality improved; the judge prompt may have become looser, templates may have become longer, or the model may have learned to produce verbose answers. If OCR-task pass rate is much lower than description-task pass rate, inspect OCR image quality and the scoring rubric separately instead of raising the global threshold.
 
 ## Sample Takedown and Copyright Response
 
 Multimodal data triggers copyright, portrait-right, and privacy risks more easily than pure text. A public URL does not imply unlimited redistribution of images or generated results. P13 must keep a takedown path: when an image, author, or source collection must be deleted, the system should locate related instructions, translated samples, and final training files.
 
+*Table P13-13: Takedown path for multimodal instruction samples.*
 | Step | Operation | Affected artifact |
 | --- | --- | --- |
 | Register request | Record URL, author, source, request time, evidence | Ticket |
@@ -521,14 +510,13 @@ Multimodal data triggers copyright, portrait-right, and privacy risks more easil
 | Recompute statistics | Update task distribution, language ratio, quality report | Reports |
 | Publish note | Record deletion reason and new version | Release note |
 
-*Table P13-13: Takedown path for multimodal instruction samples.*
-
 The takedown mechanism requires stable `sample_id` in the intermediate state. If only the final Qwen conversation format is saved, it is hard to trace a training sample back to the original image and generation batch. P13 must therefore distinguish the narrow training table from the wide audit table.
 
 ## Domain Transfer: From General Images to Industry Assets
 
 P13 can transfer to medical imaging, industrial inspection, e-commerce product images, legal-evidence screenshots, and educational charts. But templates and gates must be redesigned for each domain. Visual evidence and risk boundaries differ too much to reuse generic LAION templates directly.
 
+*Table P13-14: Domain-transfer adjustments for the multimodal instruction factory.*
 | Domain | Asset type | Template adjustment | Risk control |
 | --- | --- | --- | --- |
 | Medical | Images, report screenshots | Describe abnormal regions; avoid diagnostic conclusions | Expert review, privacy masking |
@@ -537,21 +525,18 @@ P13 can transfer to medical imaging, industrial inspection, e-commerce product i
 | Finance | Report screenshots, charts | Table reading, trend explanation, evidence citation | Numeric accuracy, investment-advice boundary |
 | Education | Problem figures, board writing, textbook illustrations | Solving hints, chart understanding | Copyright, answer leakage |
 
-*Table P13-14: Domain-transfer adjustments for the multimodal instruction factory.*
-
 For domain transfer, build a small set of high-quality templates and expert-review samples before scaling. In high-risk domains, do not rely entirely on LLM-as-Judge. The judge can pre-filter, but release gates should be decided jointly by domain experts or rule systems.
 
 ## Relationship with P03 and P14
 
 P13 sits between P03 and P14. P03 establishes the classic LLaVA image-text and conversation baseline. P13 adds Qwen-VL-style generation, judge, self-consistency, and multilingual expansion. P14 extends visual input from static images to video shots. Together they form a progression from single-image baseline to modern multimodal factory and then to video-generation data.
 
+*Table P13-15: Project boundaries among P03, P13, and P14.*
 | Project | Core object | Key capability | Boundary not to confuse |
 | --- | --- | --- | --- |
 | P03 | LLaVA image-text pairs and conversation | Classic flow, OCR, bbox, visual spot checks | Does not emphasize newer Qwen-VL factory capability |
 | P13 | Multimodal instruction samples | Templates, VLM generation, judge, multilingual packaging | Does not handle video cutting and T2V quality filtering |
 | P14 | Video shot data | Shot segmentation, motion, aesthetics, caption, shot language | Does not handle large-scale instruction diversification |
-
-*Table P13-15: Project boundaries among P03, P13, and P14.*
 
 With this organization, readers can treat P03 as the baseline data structure, P13 as the instruction-generation factory, and P14 as the video-material and temporal-supervision source. A future Video-QA or Video-Instruct dataset can first use P14 to create video segments and shot fields, then use P13 templates, judge, and packaging to produce instruction samples.
 

@@ -321,7 +321,7 @@ If synthetic data long-term dilutes this friction, the model will progressively 
 Therefore, the value of real data lies not only in "providing more samples"—it lies in "providing real resistance that cannot easily be regularized." This resistance is uncomfortable for training, but it is irreplaceable for capability formation. Table 17-1 summarizes the early risk signals, common manifestations, and priority investigation directions for excessive use of synthetic data.
 
 
-**Table 17-1: Risk Signals and Possible Causes Reference Table**
+*Table 17-1: Risk Signals and Possible Causes Reference Table.*
 | Early Risk Signal | Common Manifestations | Possible Causes | Priority Investigation Direction |
 |---|---|---|---|
 | Highly uniform output style | Increasingly similar sentence patterns, structures, and wording | Template rigidity, single-teacher dominance, singular judge preference | Template versions, teacher source distribution, judge scoring standards |
@@ -447,8 +447,7 @@ One of the most troublesome aspects of synthetic data risk is that offline and o
 
 One viable approach is to establish a mapping between "online problem types" and "offline proxy metrics." For example, if style uniformity and off-target answers appear online, one should check whether the offline style diversity metrics and open-ended Q&A robustness metrics are drifting synchronously; if complex scenario success rates are declining online, one should check whether degradation in long-tail sets, hard sets, and cross-domain sets occurred earlier. Only by decomposing online problems into signals that can be proxied by offline measurements can the governance system form a truly closed loop.
 
-**Table 17-2: Detection Metrics, Thresholds, and Governance Actions**
-
+*Table 17-2: Detection Metrics, Thresholds, and Governance Actions.*
 | Metric Category | Representative Metrics | Risk Signal | Recommended Action |
 |---|---|---|---|
 | Distribution metrics | Length distribution divergence, topic coverage divergence, task type proportion | Synthetic data concentrated in few patterns | Expand real samples, diversify templates, add hard samples |
@@ -547,7 +546,7 @@ Post-mortem review reveals that this incident was not simply due to "low-quality
 The value of a governance checklist (Gebru et al. 2021; Mitchell et al. 2019; Raji et al. 2020) lies in converting abstract principles into actionable inspection items. A major reason synthetic data systems can easily lose control is that teams often continue to expand in a state of "overall feeling acceptable." The significance of deployment red lines is to clearly specify which problems, once they appear, require the system to pause, roll back, or undergo re-review, rather than allowing continued reliance on optimistic subjective judgment. Table 17-3 lists required inspection questions and corresponding deployment red lines across dimensions such as data source, sample distribution, and repetition and similarity.
 
 
-**Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training**
+*Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training.*
 | Inspection Dimension | Required Inspection Questions | Deployment Red Line |
 |---|---|---|
 | Data source | Does it long-term rely on few teachers/few templates? | Single source dominates long-term without external correction |

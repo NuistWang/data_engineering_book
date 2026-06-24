@@ -169,7 +169,7 @@ A truly effective scheduling system should treat training feedback as an importa
 
 No factory configuration is universally superior or inferior; each represents an optimal solution under specific phases, task types, and budget conditions. The table below is intended to help teams understand the core of a synthetic data system—how to design a production pipeline matched to business objectives—rather than to provide a single answer or to reduce the problem to "which model to pick."
 
-**Table 15-1: Cost, Throughput, and Quality Balance Table**
+*Table 15-1: Cost, Throughput, and Quality Balance Table.*
 | Factory Configuration Strategy | Typical Approach | Cost | Throughput | Quality Ceiling | Primary Risk | Best-Suited Scenarios |
 |---|---|---:|---:|---:|---|---|
 | Strong single-model direct output | High-end model generates directly; lightweight rule filtering before intake | High | Medium | High | Excessive cost; uniform style; difficult to scale | Cold-start phase; curated set construction; benchmark sample creation |
@@ -297,7 +297,7 @@ The two therefore jointly determine not only the data ceiling but also the direc
 
 The table below is intended to help teams develop the basic understanding that "seeds are not all the same thing." Seeds from different sources differ markedly in authenticity, cost, risk, and expansibility, and are therefore suited to different tasks.
 
-**Table 15-2: Seed Sources and Applicable Task Table**
+*Table 15-2: Seed Sources and Applicable Task Table.*
 | Seed Source | Typical Content | Advantages | Primary Risks | Best-Suited Tasks | Usage Recommendation |
 |---|---|---|---|---|---|
 | Human-annotated premium samples | Expert-authored Q&A, reasoning, refusal, and tool-invocation samples | High quality; clear boundaries; usable as gold standard | High cost; limited coverage | High-risk tasks; complex reasoning; alignment data; first-round template abstraction | Use as core anchors; quantity need not be large, but precision is essential |

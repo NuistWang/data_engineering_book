@@ -83,8 +83,7 @@ Acceptance metrics include asset coverage, feedback-loop rate, version iteration
 
 For production, course, or public reproduction settings, reports should also record version numbers, dependency environments, random seeds, sampled inspection results, and failed-sample review records.
 
-*Table P10-1: Publication acceptance table for the LLM data flywheel*
-
+*Table P10-1: Publication acceptance table for the LLM data flywheel.*
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Asset integration | Upstream project coverage, registry completeness, and interface mapping records | Every upstream asset should explain its source, owner, version, and reuse path |
@@ -1565,8 +1564,8 @@ Readers can combine this case with the data recipes in Part 13, the platform-gov
 
 ## References
 
-1. Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., and Liu, P. J. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
-2. Hugging Face. (2026). Datasets Documentation. https://huggingface.co/docs/datasets/.
-3. Ray Project. (2026). Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
-4. MLflow Authors. (2026). MLflow Documentation. https://mlflow.org/docs/latest/.
-5. Great Expectations Contributors. (2026). Great Expectations Documentation. https://docs.greatexpectations.io/.
+Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

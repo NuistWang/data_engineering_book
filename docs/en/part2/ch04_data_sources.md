@@ -87,7 +87,6 @@ If this chapter is an audit checklist for LLM data engineering, the source map i
 In practical engineering decisions, source selection cannot be based on quality alone; license risk and acquisition feasibility must also be incorporated into the framework. The following is a risk-profile matrix for major data sources:
 
 *Table 4-1: Source type, license, and risk matrix. Source: compiled by the authors; license risk should be based on specific source terms, robots.txt, service agreements, and legal-review conclusions.*
-
 | Source type | Representative sources | License pattern | Commercial risk | Knowledge density | Scale potential |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Open web | Common Crawl, RefinedWeb | CC-BY / mixed page licenses | Medium: page-specific | Low to medium | PB-level |
@@ -105,7 +104,6 @@ In practical engineering decisions, source selection cannot be based on quality 
 Data mix ratio is one of the most strategic decisions in pretraining data engineering. There is no universal fixed mix, because different business objectives require different data combinations. The following are reference mixing strategies for four typical business objectives:
 
 *Table 4-2: Data mix strategy by business objective. Source: compiled by the authors; mixing recommendations are a strategic framework and should be calibrated in production through proxy-model evaluation and ablation experiments.*
-
 | Business objective | General web | Code | Academic papers | Books / encyclopedia | Vertical data | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **General Chinese base model** | High | Medium | Low-medium | Medium | Low | Pursues broad knowledge coverage; code should not be too low because it affects reasoning capability. |

@@ -57,6 +57,7 @@ The main text retains only the key implementation snippets that illustrate desig
 
 Acceptance metrics include validation pass rate, difficulty distribution, topic coverage, solution consistency, proportion of erroneous samples, and structural completeness of volumes. If the project enters production, curriculum, or public reproducibility environments, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample post-mortem records should also be logged.
 
+*Table P04-1: Synthetic Textbook Factory Publication Acceptance Table.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Data closed loop | Seed problems, evolved problems, PoT solutions, sandbox logs, and textbook volumes are all traceable | Spot-checked samples must be traceable back to original seeds and validation records |
@@ -64,8 +65,6 @@ Acceptance metrics include validation pass rate, difficulty distribution, topic 
 | Expert review | Teaching explanations, chapter ordering, difficulty gradient, terminology consistency, and high-risk sample review records | Expert review comments should distinguish among "answer correct," "explanation teachable," and "suitable for inclusion" |
 | Code isolation | Executable validation scripts, non-executable display code, sandbox logs, and dependency manifests | Code snippets in published text must not be executed as production scripts by default; companion scripts must be validated in an isolated environment |
 | Decision boundaries | Code safety, copyright contamination, and expert review boundaries are maintained | Before public delivery, confirm problem source authorization, non-executable code isolation, and failure sample rework records |
-
-*Table P04-1: Synthetic Textbook Factory Publication Acceptance Table*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -948,8 +947,8 @@ As part of Part 14, this chapter corresponds to the project-level implementation
 
 ## References
 
-1. Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W., & Liu, P. J. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
-2. Hugging Face. (2026). Datasets Documentation. https://huggingface.co/docs/datasets/.
-3. Ray Project. (2026). Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
-4. MLflow Authors. (2026). MLflow Documentation. https://mlflow.org/docs/latest/.
-5. Great Expectations Contributors. (2026). Great Expectations Documentation. https://docs.greatexpectations.io/.
+Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, Zhou Y, Li W, Liu P J (2020) Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. JMLR, 21(140), 1-67.
+Hugging Face (2026) Datasets Documentation. https://huggingface.co/docs/datasets/.
+Ray Project (2026) Ray Data Documentation. https://docs.ray.io/en/latest/data/data.html.
+MLflow Authors (2026) MLflow Documentation. https://mlflow.org/docs/latest/.
+Great Expectations Contributors (2026) Great Expectations Documentation. https://docs.greatexpectations.io/.

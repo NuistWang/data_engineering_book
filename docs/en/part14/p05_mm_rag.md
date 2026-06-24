@@ -59,14 +59,13 @@ The body text retains only the key implementation snippets that illuminate desig
 
 Acceptance metrics include retrieval hit rate, citation accuracy, answer keyword accuracy, latency, page processing cost, noise-page suppression effectiveness, and evidence back-link completeness. If the project enters production, a course environment, or a public reproducibility experiment, the version number, dependency environment, random seeds, sample inspection results, and failure sample post-mortems should also be recorded.
 
+*Table P05-1: Multimodal RAG Publication Acceptance Table.*
 | Acceptance Dimension | Metric / Evidence | Publication Verification Criteria |
 | --- | --- | --- |
 | Evidence Retrieval | Top-K hit rate, table-of-contents page false recall rate, cross-page recall coverage, and evidence page stability | Each answer should be traceable to a page image, page number, retrieval score, and match rationale |
 | Evidence Location | Back-link records for table regions, footnote descriptions, chart pages, body text pages, and screenshot evidence | Numerical values, trends, and interpretive conclusions must point to at least one verifiable evidence object |
 | Answer Quality | Citation accuracy, numerical consistency, trend judgment accuracy, and abstention coverage | Financial figures, chart trends, footnote limitations, and conclusions must be human-verifiable |
 | Cost Boundaries | Page rendering cost, visual model call count, and average latency | Delivery must clarify the difference between small-sample demonstration and production full-library scale |
-
-*Table P05-1: Multimodal RAG Publication Acceptance Table*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -1209,8 +1208,8 @@ As part of Part Fourteen, this chapter corresponds to the project-level deployme
 
 ## References
 
-1. Liu, H., Li, C., Wu, Q., & Lee, Y. J. (2023). Visual Instruction Tuning. NeurIPS 2023. https://doi.org/10.52202/075280-1516.
-2. Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C. L. (2014). Microsoft COCO: Common Objects in Context. ECCV 2014. https://doi.org/10.1007/978-3-319-10602-1_48.
-3. Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., et al. (2021). Learning Transferable Visual Models From Natural Language Supervision. ICML 2021.
-4. Mathew, M., Karatzas, D., & Jawahar, C. V. (2021). DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
-5. Masry, A., Long, D. X., Tan, J. Q., Joty, S., & Hoque, E. (2022). ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.
+Liu H, Li C, Wu Q, Lee Y J (2023) Visual Instruction Tuning. NeurIPS 2023. https://doi.org/10.52202/075280-1516.
+Lin, T-Y, Maire M, Belongie S, Hays J, Perona P, Ramanan D, Dollár P, Zitnick C L (2014) Microsoft COCO: Common Objects in Context. ECCV 2014. https://doi.org/10.1007/978-3-319-10602-1_48.
+Radford A, Kim J W, Hallacy C, Ramesh A, Goh G, et al. (2021) Learning Transferable Visual Models From Natural Language Supervision. ICML 2021.
+Mathew M, Karatzas D, Jawahar C V (2021) DocVQA: A Dataset for VQA on Document Images. WACV 2021. https://doi.org/10.1109/wacv48630.2021.00225.
+Masry A, Long D X, Tan J Q, Joty S, Hoque E (2022) ChartQA: A Benchmark for Question Answering about Charts with Visual and Logical Reasoning. ACL 2022. https://doi.org/10.18653/v1/2022.findings-acl.177.

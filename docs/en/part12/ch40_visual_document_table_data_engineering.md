@@ -69,8 +69,7 @@ This is why arithmetic self-consistency must be a first-class object. In high-ri
 
 StructBill-CN contains **2,300 high-resolution bill images** across **six business schemas**, all from two public medical datasets: CHIP-2022 and SIBR-Med. The mixture intentionally includes wired-grid tables, text-dense records, and borderless tables so the model cannot simply memorize one layout.
 
-*Table 40-1: StructBill-CN composition and characteristics*
-
+*Table 40-1: StructBill-CN composition and characteristics.*
 | Source Subset | Document Type | Count | Table Form |
 | --- | --- | ---: | --- |
 | CHIP-2022 | Inpatient invoice | 680 | Wired grid |
@@ -249,8 +248,7 @@ expense_schema = Schema(
 
 #### 40.3.4 Field Types, Annotation Rules, and Metrics
 
-*Table 40-2: Field type, annotation rule, and metric mapping*
-
+*Table 40-2: Field type, annotation rule, and metric mapping.*
 | Field Type | Representative Fields | Annotation Rule | Main Metric |
 | --- | --- | --- | --- |
 | Text attribute | `Hospital_Name`, `Item_Name` | Semantic ownership first; tolerate minor OCR noise in long text | ANLS / Entity-Level F1 |
@@ -401,8 +399,7 @@ Reproducible evaluation requires a fixed test split fingerprint, fixed schema ve
 
 #### 40.5.3 Error Attribution and Repair Actions
 
-*Table 40-3: Common errors and repair actions*
-
+*Table 40-3: Common errors and repair actions.*
 | Error Type | Symptom | Root Cause | Data-Engineering Repair |
 | --- | --- | --- | --- |
 | Numeric hallucination | Amount or quantity is fabricated or copied wrongly | Token-level approximation, missing logic constraints | Bind P x Q = A and sum = T; use Doc-ACR as a quality gate; create numeric negatives |
@@ -447,7 +444,6 @@ Regarding the benchmark data, all images in StructBill-CN **come exclusively fro
 Regarding production extension, when this chapter's methodology is applied to real private bills or medical records, field-level masking must be performed at the earliest stage of the pipeline. The table below provides concrete masking rules for each sensitive-field type in medical-expense documents.
 
 *Table 40-4: Field-level de-identification rules for medical-expense documents (for production extension)*
-
 | Sensitive Field Type | Example | Masking Rule | Notes |
 |---|---|---|---|
 | Patient name | Zhang XX | Replace entirely with placeholder `<NAME>` or irreversible hash | Core PHI field; must be fully removed |
@@ -519,6 +515,7 @@ https://huggingface.co/datasets/champion666/SparseTable_Bench_Dataset
 
 In terms of scale, dataset documentation typically summarizes STB as "approximately 11,000 table images"; by split-level counts, the precise sample count is 10,983. To avoid ambiguity, this chapter uses the numbers from the split table as the authoritative reference.
 
+*Table 40-5: Case B.2: Dataset Overview and Task Boundaries.*
 | Split | Image Count | Annotation Format | Primary Purpose |
 |---|---:|---|---|
 | STB-Train | 8,000 | HTML + cell bbox | Multi-task supervised training |
@@ -565,6 +562,7 @@ The `[EMPTY_CELL]` token here is not ordinary text; it is a placeholder expressi
 
 From a data engineering perspective, the sample schema of STB includes at least the following fields and validation rules.
 
+*Table 40-6: Case B.3: Sample Schema: Synchronized Representation of HTML, Text, and Bounding Boxes.*
 | Object | Typical Fields | Purpose | Key Quality Checks |
 |---|---|---|---|
 | Image | `image_id`, image file, width/height | Serves as visual input and bbox coordinate reference | Image opens successfully; resolution is consistent with bbox coordinate system; no corrupted pages |
@@ -620,6 +618,7 @@ These structural errors are further reflected in evaluation results. In sparse t
 
 Errors in sparse tables can be classified into five types.
 
+*Table 40-7: Case B.5: How Empty Cells and Sparse Layouts Induce Structural Errors.*
 | Error Type | Manifestation | Primary Cause | Observation Method in STB |
 |---|---|---|---|
 | Missing empty position | Empty `<td>` not generated; column count decreases | Empty cells lack visual text anchors | `[EMPTY_CELL]` recall, TEDS-S, row-column expansion check |
@@ -661,6 +660,7 @@ These two metrics are appropriate for cross-model comparison, but must not be in
 
 In extremely sparse tables or tables with many empty cells, lower TEDS/TEDS-S scores usually originate from structural prediction errors. Numerous empty positions weaken visible text anchors. A model may fill nonexistent content into empty cells, skip empty columns, or assign neighboring-column content to the wrong column position. Once these errors enter the HTML output, the number of `<td>` nodes, node order, and row-column expansion relationships change, ultimately reducing TEDS or TEDS-S. TEDS-S further focuses on structural topology and empty-cell positions, making it especially useful for exposing such row-column alignment errors.
 
+*Table 40-8: Case B.7: Evaluation Protocol: TEDS, TEDS-S, and Error Interpretation.*
 | Metric Pattern | Possible Interpretation | Conclusion That Should Not Be Drawn | Supplementary Check |
 |---|---|---|---|
 | TEDS high, TEDS-S high | Structure and text are broadly stable | Does not imply bboxes are necessarily correct | Cell bbox IoU, row-column geometric alignment |
@@ -697,6 +697,7 @@ Fifth, error cases should be traced back to data objects. A single failure can b
 
 For reproducibility, using STB should not stop at the coarse-grained procedure of "load data, train model, report score." A more rigorous approach is to decompose each experiment into four auditable stages. Stage one is data loading verification: randomly sample training, validation, standard test, and pressure test samples to confirm that the image, HTML, cell list, and bounding boxes can all be associated through a single sample ID. Stage two is schema rendering verification: expand the HTML into a two-dimensional grid and overlay bounding boxes on the original image to confirm that empty cells, merged cells, and non-empty text are visually interpretable. Stage three is model input-output verification: clarify whether the model receives the original image, a cropped image, or a patch-based image, and whether it outputs pure HTML, HTML with coordinate tokens, or multi-task HTML and bbox results. Stage four is evaluation and attribution verification: compute Standard-Test and STB-Mask-Stress scores separately, then sample and review failures by the four error categories of empty-position miss, column shift, text error, and spatial drift.
 
+*Table 40-9: Case B.8: Data Engineering Practice: Using STB for Training and Reproduction.*
 | Reproduction Stage | Input Objects | Output Objects | Key Checks |
 |---|---|---|---|
 | Data loading | Image, HTML, cells, bbox | Unified sample record | ID alignment, field completeness, correct split assignment |

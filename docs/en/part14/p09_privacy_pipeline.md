@@ -59,14 +59,13 @@ The main text retains only the key implementation fragments needed to illustrate
 
 Acceptance metrics include PII detection rate, false-positive/false-negative samples, redacted field coverage, audit chain integrity, policy hit rate, and inspection pass rate. If the project enters a production, course, or publicly reproducible experimental environment, the version number, dependency environment, random seed, sample spot-check results, and failed-sample postmortem records should also be logged.
 
+*Table P09-1: Privacy Pipeline Publication Acceptance Table.*
 | Acceptance Dimension | Metrics / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Detection and handling | PII detection rate, false-positive/false-negative samples, and redacted field coverage | Each sensitive field category should have a rule source, processing action, and verification sample |
 | Audit feedback loop | Policy hit rate, audit log integrity, and incident/postmortem records | Compliance documentation must be traceable to the data subject, legal basis for processing, and operator |
 | Release gate | Preflight results, version freeze, rollback path, and responsible owner | Align item by item with Appendix B; confirm that release, takedown, rollback, and postmortem evidence are complete |
 | Compliance boundaries | Cross-border transfer, over-redaction, permission misconfiguration, and retention period risks | Do not present rule-based prototypes as conclusions of full regulatory compliance |
-
-*Table P09-1: Privacy Pipeline Publication Acceptance Table*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -1126,8 +1125,8 @@ As part of Part XIV, this chapter corresponds to the project-level validation of
 
 ## References
 
-1. European Union. (2016). Regulation (EU) 2016/679: General Data Protection Regulation. https://eur-lex.europa.eu/eli/reg/2016/679/oj.
-2. NIST. (2020). NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management, Version 1.0. https://doi.org/10.6028/nist.cswp.10.
-3. Dwork, C., & Roth, A. (2014). The Algorithmic Foundations of Differential Privacy. *Foundations and Trends in Theoretical Computer Science*. https://doi.org/10.1561/9781601988195.
-4. Kairouz, P., McMahan, H. B., Avent, B., Bellet, A., Bennis, M., Bhagoji, A. N., et al. (2021). Advances and Open Problems in Federated Learning. *Foundations and Trends in Machine Learning*. https://doi.org/10.1561/2200000083.
-5. OWASP Foundation. (2025). OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.
+European Union (2016) Regulation (EU) 2016/679: General Data Protection Regulation. https://eur-lex.europa.eu/eli/reg/2016/679/oj.
+NIST (2020) NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management, Version 1.0. https://doi.org/10.6028/nist.cswp.10.
+Dwork C, Roth A (2014) The Algorithmic Foundations of Differential Privacy. Foundations and Trends in Theoretical Computer Science. https://doi.org/10.1561/9781601988195.
+Kairouz P, McMahan H B, Avent B, Bellet A, Bennis M, Bhagoji A N, et al. (2021) Advances and Open Problems in Federated Learning. Foundations and Trends in Machine Learning. https://doi.org/10.1561/2200000083.
+OWASP Foundation (2025) OWASP Top 10 for Large Language Model Applications. https://genai.owasp.org/llm-top-10/.

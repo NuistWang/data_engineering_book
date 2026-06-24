@@ -196,6 +196,7 @@ The greatest advantage of rule-based rewards is reproducibility, but they also i
 
 The advantage of model-based rewards is coverage of more complex human preferences, but they must be constrained to appropriate positions. Allowing a judge model to directly decide all rewards risks the training system inheriting the judge's tastes—for example, preferring longer explanations, more polite phrasing, or more confident tone. For reasoning tasks, a judge is better suited as a supplementary evaluator: checking whether the reasoning process is self-consistent, whether conditions were missed, or whether obvious hallucinations are present—not substituting for verifiable answers. Judge prompts must also be saved in data records; otherwise, when evaluation standards change, different data batches cannot be compared.
 
+*Table 46-1: Rule-Based Rewards and Model-Based Rewards.*
 | Reward Type | Applicable Tasks | Advantages | Risks | Key Data Records |
 | --- | --- | --- | --- | --- |
 | Rule-based reward | Math, code, structured output | Stable, reproducible, low cost | Limited coverage; rules may have loopholes | Verifier version, test cases, failure reason |
@@ -241,6 +242,7 @@ For data filtering, a lightweight language detector can calculate the language r
 
 Reasoning data relies more heavily on metadata than ordinary SFT data. The recommended minimum fields are:
 
+*Table 46-2: Trajectory Storage and Version Control.*
 | Field | Meaning |
 | --- | --- |
 | `task_id` | Original problem ID |
@@ -317,8 +319,7 @@ The shared value of OpenThoughts and Sky-T1 is that they transform reasoning dat
 
 However, open-source data cannot be equated directly with business data. The problem types, languages, difficulty levels, and answer styles of datasets like OpenThoughts have their own distributions, and Sky-T1's training objectives may not align with enterprise scenarios. Before using them in a project, three checks are required: whether the target language is consistent, whether the target task types are covered, and whether evaluation set contamination risk is present. Only after passing these checks is open-source data suitable as cold-start data or control-experiment data.
 
-**Table 46-1: Comparison of Dataset Exposure Across Major Reasoning Models**
-
+*Table 46-3: Comparison of Long-CoT Data Characteristics.*
 | Model/Dataset | Core Driving Stages | Reasoning Trajectory Source | Open-Source/Downloadable | Distinctive Strategy | Annotation |
 | --- | --- | --- | --- | --- | --- |
 | DeepSeek-R1 | Cold start + RL + Rejection sampling + SFT | Proprietary multi-path sampling and rule-based verification | Model open; training data not fully open | 600K reasoning data + 200K non-reasoning data | [D] |
@@ -327,8 +328,7 @@ However, open-source data cannot be equated directly with business data. The pro
 | OpenThoughts-114K | SFT / open-source reproduction | Community synthesis and curation | Dataset open | 114K-scale Long-CoT data | [D] |
 | Sky-T1 | Small-scale Long-CoT SFT | QwQ distillation and curation | Model, data, and code open | Low-cost reproduction of reasoning capability | [D] |
 
-**Table 46-2: Comparison of Long-CoT Data Characteristics**
-
+*Table 46-4: Comparison of Long-CoT Data Characteristics.*
 | Dimension | DeepSeek-R1 | QwQ-32B | Kimi k1.5 | OpenThoughts / Sky-T1 |
 | --- | --- | --- | --- | --- |
 | Primary tasks | Math, code, general alignment | Math, code, reasoning | Long-context, multimodal, reasoning | Math, code, science, logic |
@@ -371,6 +371,7 @@ Distilled reasoning data also needs to record the relationship among the teacher
 
 An actionable data catalog is as follows:
 
+*Table 46-5: Case A: Anatomy of the OpenThoughts-114K Dataset.*
 | Subset | Entry Condition | Use |
 | --- | --- | --- |
 | `curated_long_cot` | Complete reasoning, verifiable answer, clear license | Cold-start SFT |
@@ -441,6 +442,7 @@ The goal of rejection sampling is to select high-quality trajectories from a lar
 
 Rejection sampling should retain failed samples. Failed samples are not garbage; they help the team analyze common model errors and can serve as future PRM or hard-case data. It is recommended to classify samples into four categories:
 
+*Table 46-6: Case C: Rejection Sampling in Practice.*
 | Type | Meaning | Downstream Use |
 | --- | --- | --- |
 | pass_good_trace | Correct answer, clear reasoning | Enter second-round SFT |
@@ -476,6 +478,7 @@ This explicit decision record allows the team to reuse old trajectories when adj
 
 Chapter 46 defines the theory and paradigm, while Part XIV Project 12 turns the paradigm into a runnable project. To avoid mixing the chapter explanation with the project implementation, the core objects are mapped as follows.
 
+*Table 46-7: Interface Mapping to Part XIV Project 12.*
 | Chapter object | P12 asset | Interface meaning |
 | --- | --- | --- |
 | Cold-start SFT | `data/processed/cold_start_5k.jsonl`, `cold_start_summary.json` | Organizes Long-CoT seeds into first-round trainable samples |
@@ -548,6 +551,7 @@ For small teams, starting with full RL training is not recommended. A more reali
 
 The focus of this path is to first validate the data production closed loop, then consider scaling the model and task volume.
 
+*Table 46-8: Cost, Risk, and Applicability Boundaries.*
 | Stage | Cost Source | Small-Team Downgrade Option |
 | --- | --- | --- |
 | Cold-start SFT | Data cleaning, training | Use an open-source Long-CoT subset |

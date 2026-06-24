@@ -329,8 +329,7 @@ Capacity boundaries are reflected not only in parameter scale but also in task l
 To present common collaboration modes and applicable tasks more clearly, Table 16-1 below maps collaboration patterns to role configurations, applicable tasks, and risk points.
 
 
-**Table 16-1: Collaboration Modes and Applicable Tasks**
-
+*Table 16-1: Collaboration Modes and Applicable Tasks.*
 | Collaboration Mode | Role Configuration | Typical Workflow | Applicable Tasks | Advantages | Risk Points |
 |---|---|---|---|---|---|
 | Single-teacher direct distillation | 1 teacher + 1 student | Teacher generates → rule filtering → student trains | Formatted Q&A, simple classification, template writing | Short pipeline, fast startup, uniform style | Single bias easily inherited |
@@ -560,8 +559,7 @@ if __name__ == "__main__":
 Table 16-2 below presents a distillation returns and costs comparison suitable for helping teams make more systematic decisions. As shown, typical returns and costs differ across dimensions such as inference quality, latency performance, and cost control.
 
 
-*Table 16-2: Distillation Returns and Costs*
-
+*Table 16-2: Distillation Returns and Costs.*
 | Evaluation Dimension | Typical Returns | Typical Costs | Common Pitfalls | Applicability Judgment |
 |---|---|---|---|---|
 | Inference quality | Improved accuracy, consistency, and style stability | Teacher generation cost, judge evaluation cost | High scores may stem from data leakage or homogeneous validation sets | Suitable for tasks with clear objectives and well-defined evaluation criteria |

@@ -74,8 +74,7 @@ As with pure-text foundation models, the data barriers between multimodal models
 
 *(Note: Annotation convention in the table: [D] = explicitly disclosed in report; [I] = inferred; [E] = estimated.)*
 
-**Table 47-1: Cross-Comparison of Mainstream VLM Data Compositions (4 rows × 8 columns)**
-
+*Table 47-1: Cross-Comparison of Mainstream VLM Data Compositions (4 rows × 8 columns).*
 | Model Family              | Pre-training Pair Scale | Pre-training Cleaning Strategy    | Interleaved Document Ratio | SFT Multimodal Instruction Volume | Video Data Scale              | OCR/Doc Specialization      | Hi-Res Resolution Support |
 | :------------------------ | :---------------------- | :-------------------------------- | :------------------------- | :-------------------------------- | :---------------------------- | :--------------------------- | :------------------------ |
 | **Qwen2.5-VL**      | ~2B+ Pairs [I]          | Proprietary image filtering + rewrite | Very high (~30%) [I]   | ~5M+ [E]                          | Very high, variable-length clips [D] | Strong, multilingual OCR | Native Resolution         |
@@ -127,8 +126,7 @@ Represented by Qwen2-VL and Qwen2.5-VL. These models abandon rigid tiling logic;
 
 This recipe preserves the most complete global and local information, entirely eliminating semantic discontinuity at patch boundaries, and is the highest-precision approach. However, its data engineering complexity is also the highest: training data must be precisely bucketed and packed by token count (rather than image count) to prevent extreme length variance within each batch causing OOM errors. Qwen2.5-VL specifically developed a "token-aware" data packer that constrains the total vision token count per batch within a fixed interval, sacrificing approximately 15% of training throughput in exchange for a near-zero OOM rate [I].
 
-**Table 47-2: Native Resolution vs. Dynamic Hi-Res Data Processing Differences (2 rows × 6 columns)**
-
+*Table 47-2: Native Resolution vs. Dynamic Hi-Res Data Processing Differences (2 rows × 6 columns).*
 | Resolution Approach         | Representative Model | Image Data Preprocessing Action              | Visual Encoder Modification       | LLM-side Token Sequence Characteristics | Strengths and Weaknesses                                            |
 | :-------------------------- | :------------------- | :------------------------------------------- | :-------------------------------- | :-------------------------------------- | :------------------------------------------------------------------ |
 | **Native Res.**       | Qwen2.5-VL           | Retain original image, dynamically unfold by patch size | Remove fixed positional embedding | 2D absolute coordinate mapping (M-RoPE) | Highest precision, no boundary discontinuity / Very high engineering complexity, prone to memory fragmentation |
@@ -153,8 +151,7 @@ As shown in Figure 47-4, multimodal instruction synthesis has long surpassed the
 3. **Knowledge recombination with a capable LLM**: Feed the text enriched with bounding box and OCR information into a capable language model. Since the image has already been converted to precise text, even a pure-text GPT-4 (rather than GPT-4V) can complete this step—instructing it to generate complex reasoning questions such as: "Based on the invoice total in the upper right corner of the image and the line items on the left, calculate the tax rate."
 4. **Quality filtering and deduplication**: Use self-consistency (majority-vote across multiple samples) or LLM-as-Judge to score the quality of synthesized outputs, filtering out samples with severe hallucinations or logical incoherence; also perform semantic-level instruction deduplication to prevent a single image from spawning large numbers of homogeneous question-answer pairs.
 
-**Table 47-3: Comparison of Multimodal Instruction Data Synthesis Methods (3 rows × 5 columns)**
-
+*Table 47-3: Comparison of Multimodal Instruction Data Synthesis Methods (3 rows × 5 columns).*
 | Synthesis Approach                        | Core Dependent Models                    | Typical Application Scenarios              | Cost Estimate                    | Noise and Hallucination Risk                                   |
 | :---------------------------------------- | :--------------------------------------- | :----------------------------------------- | :------------------------------- | :------------------------------------------------------------- |
 | **GPT-4V Distillation**             | External closed-source VLM API           | Complex logical reasoning, long summarization | Very high (API quota dependent) | Relatively low, but constrained by teacher model's inherent biases |

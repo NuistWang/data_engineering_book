@@ -86,8 +86,7 @@ When reading the table below, please note the annotation conventions:
 * **[I]**: Scale figures reasonably inferred based on publicly available training pipelines, split ratios, or contextual information.
 * **[E]**: Estimates derived for pedagogical illustration or engineering approximation; should not be treated as official disclosed figures.
 
-**Table 45-1: Post-Training Data Transparency and Scale of Mainstream Open-Source Models**
-
+*Table 45-1: Post-Training Data Transparency and Scale of Mainstream Open-Source Models.*
 | Model / Project | Post-Training Stages | Data Openness | SFT Data Scale | Preference / Reward Data Scale | Key Data Sources | Reproducibility Value |
 | --- | --- | --- | --- | --- | --- | --- |
 | **Tülu-3** | SFT / DPO / RLVR | High | 939K [D] | DPO mixture scale requires item-by-item verification [D] | SFT-Mix, DPO mix, RLVR verifier | Fully open-source recipe reference system; suitable for reproduction and transfer |
@@ -131,8 +130,7 @@ Another notable approach is Magpie. It minimizes dependency on manual seeds by d
 **Engineering Advantage:** Substantially reduces human intervention, and the resulting data distribution more closely approximates the distribution of real, natural user queries across the long tail. When discussing the post-training of open-source models such as Qwen2.5, Magpie can serve as a reference method for "how large-scale synthetic instructions can enhance diversity," rather than being attributed as an official recipe component of a specific model without a direct source.
 **Primary Risk:** Model self-generation can amplify the model's inherent biases and hallucinations. The data pipeline requires distribution filtering and safety filtering mechanisms.
 
-**Table 45-2: Engineering Comparison of the Three SFT Synthesis Schools**
-
+*Table 45-2: Engineering Comparison of the Three SFT Synthesis Schools.*
 | School | Seed Dependency | Generation Method | Suitable Tasks | Primary Risk | Quality Control Focus | Representative Material | Relationship to This Chapter |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Self-Instruct** | Medium | Seed-inspired expansion | General instruction breadth coverage | Templatization, homogeneity | ROUGE deduplication, diversity evaluation, answerability checks | Self-Instruct paper | Foundational synthesis approach |
@@ -189,8 +187,7 @@ Reinforcement Learning with Verifiable Rewards (RLVR) advances the source of pre
 * **Suitable tasks:** Mathematical problem-solving, code generation, format compliance, and tool invocation. Math problems can be verified against the final answer, code problems can run unit tests, structured outputs can undergo JSON/XML regex or schema validation, and tool calls can check API return status codes.
 * **Engineering challenge:** Writing verifiers that cover a sufficiently wide range of tasks without loopholes. This section introduces the data shape concept of RLVR to lay the groundwork for subsequent discussion; the R1-style reasoning flywheel will be detailed in Ch46.
 
-**Table 45-3: Different Data Requirements Across Preference Paradigms**
-
+*Table 45-3: Different Data Requirements Across Preference Paradigms.*
 | Paradigm | Core Data Shape | Reward Source | Suitable Tasks | Data Engineering Challenges | Interface with Ch46 |
 | --- | --- | --- | --- | --- | --- |
 | **RLHF** | prompt + multiple candidates + human/AI preference | Human annotation / trained RM | General assistant behavior, complex value alignment | High annotation cost, inter-annotator consistency difficult to guarantee | Provides industrial background for multi-round iteration |
@@ -262,6 +259,7 @@ The value of multi-round iteration lies in the continuous absorption of boundary
 
 This re-integration is still, in essence, reconstructing preference signals or reward signals; it is not simply continuing to expand the SFT instruction pool. It should be managed separately from the sample-generation tasks in Section 45.3, so that "creating samples" and "creating signals" are not conflated.
 
+*Table 45-4: Case Study B: Interpreting Llama-3's Multi-Round RLHF Iteration.*
 | Iteration Step | Data Input | Processing Action | Data Output | Annotation Convention |
 | --- | --- | --- | --- | --- |
 | Post-SFT initial sampling | Hard prompts, production failure cases | Multi-candidate generation | Candidate responses | Mark as `[I]` when sampling scale lacks a source |
@@ -312,6 +310,7 @@ In post-training, contamination means not only repeated problem statements, but 
 3. **Implicit filtering contamination:** During rejection sampling, using the pass rate on external evaluation sets as a filtering signal is equivalent to leaking test set metrics into the model.
 4. **Feedback loop contamination:** In online feedback systems, directly re-integrating user-submitted test set prompts into daily training tasks causes severe data leakage.
 
+*Table 45-5: Data Contamination in the Post-Training Phase.*
 | Contamination Type | Occurrence Location | Typical Symptoms | Inspection Method | Remediation |
 | --- | --- | --- | --- | --- |
 | SFT contamination | Instruction synthesis, data mixing | Model exhibits unusual familiarity with benchmark questions | n-gram / embedding near-duplicate detection | Remove contaminated samples, rebuild split |
@@ -352,6 +351,7 @@ Post-training involves not only technical route selection, but also cost, organi
 **Engineering costs that must not be overlooked:**
 Advancing a full-chain post-training effort requires teams to reserve budget across several cost categories. First is the **human preference annotation cost**: building a high-consistency RM training set typically requires an annotation team with domain expertise. Second is the **synthetic data inference cost**: whether using Evol-Instruct or multi-path sampling, both consume substantial GPU time. Once the alignment stage begins, **multi-candidate sampling costs** and **Reward Model / Verifier maintenance and retraining costs** continue to accumulate. Finally, the **data audit and contamination detection cost** that runs throughout is an essential investment for ensuring the final model's trustworthiness.
 
+*Table 45-6: Implementation Risks, Costs, and Applicability Boundaries.*
 | Cost Item | Primary Source | Easily Underestimated Component | Downgrade Strategy |
 | --- | --- | --- | --- |
 | Human preference annotation | Chosen/rejected pairs, rankings, attribute scoring | Annotation consistency training and review | Start with a small high-consistency set |

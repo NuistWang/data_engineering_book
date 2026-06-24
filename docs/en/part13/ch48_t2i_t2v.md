@@ -92,8 +92,7 @@ Wan2.2 (Wan Team 2025) places greater emphasis on aesthetic direction for high-q
 
 Comparing these models together reveals three relatively clear approaches. The first is the image recaptioning approach represented by DALL·E 3 and SD3, focused on making training text more granular and more closely aligned with user prompts. The second is the video engineering approach represented by HunyuanVideo and Open-Sora, focused on unifying motion, shot language, quality, OCR, watermarks, and structured captions into a single pipeline. The third is the industry model approach represented by FLUX and Wan2.2—publicly disclosed effects are strong, data chain details are limited, but one can observe trends toward high aesthetics, stringent safety constraints, and orientation toward creative use cases. For the purposes of this chapter, Table 48-1 serves primarily to consolidate these differences; what readers truly need to understand is this: generative model data pipelines have evolved from "data collection" to "supervisory signal production." Data no longer passively enters training sets; after filtering, rewriting, stratification, and routing, it actively shapes the generative capabilities of models.
 
-**Table 48-1: Comparative Overview of Mainstream T2I/T2V Model Data Pipelines**
-
+*Table 48-1: Comparative Overview of Mainstream T2I/T2V Model Data Pipelines.*
 | Model / Project | Modality | Data Ingestion & Disclosure Level | Filtering & Governance Focus | Caption / Annotation Strategy | Implications for Data Engineering |
 |---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023; OpenAI 2023) | T2I | Data pool not fully disclosed; public materials emphasize high-quality image-text supervision | Safety filtering, personal information reduction, inference-side prompt rewriting | Highly descriptive captions; user prompts expanded at inference time | Demonstrates that highly descriptive captions are critical for prompt following |
@@ -139,8 +138,7 @@ T2I recaptioning commonly takes one of three forms:
 
 SD3's 50/50 mixing strategy is particularly worth emulating. Replacing all original captions wholesale with VLM-generated captions may cause concept forgetting and stylistic uniformity; retaining some original captions preserves the rough diversity of the data distribution. In engineering practice, this can be extended to random-length mixing: the same image is sometimes paired with a short caption, sometimes with a dense caption, and sometimes with a long caption assembled from structured fields. This prevents the model from adapting exclusively to one text length.
 
-**Table 48-2: Comparison of Caption Rewriting Approaches (DALL·E 3 / SD3 / CogVLM2 Distillation)**
-
+*Table 48-2: Comparison of Caption Rewriting Approaches (DALL·E 3 / SD3 / CogVLM2 Distillation).*
 | Approach | Training-side caption generator | Original caption retention strategy | Output form | Inference-side prompt rewriting | Advantages | Risks and costs |
 |---|---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023) | Specially trained highly descriptive captioner | Not fully disclosed in public materials | High-density natural-language caption | Yes, user prompt expanded with GPT-4 | Marked improvement in prompt following; short prompts converted into executable descriptions | System is closed; captioner training details and data thresholds cannot be reproduced |
@@ -233,8 +231,7 @@ T2V data pipelines therefore typically include a layer of **spatiotemporal align
 
 It is important to emphasize that spatiotemporal alignment does not mean this chapter re-examines long-video timeline design. That subject is handled in Chapter 10. This chapter addresses a narrower question: **when training a T2V model, how to make captions more faithfully correspond to the action sequence and spatial changes within a clip.** The more precise this alignment, the better the model learns fine-grained processes such as "the character first turns around, then steps forward, and finally leaves the frame," rather than outputting vaguely animated sequences.
 
-**Table 48-3: Spatiotemporal Alignment Strategies for Video Captioning**
-
+*Table 48-3: Spatiotemporal Alignment Strategies for Video Captioning.*
 | Strategy | Method | Representative Projects | Advantages | Limitations | Applicable Position |
 |---|---|---|---|---|---|
 | Single-shot single caption | One overall description per single-shot clip | HunyuanVideo, Open-Sora | High throughput; suitable for large-scale pretraining | Intra-shot details and action order easily compressed | Large-scale pretraining main data |

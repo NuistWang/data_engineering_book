@@ -96,8 +96,7 @@ The sixth is **cinematic language annotation**. A regular caption describes cont
 
 Table P14-1 summarizes the artifacts of each stage. The publication manuscript must retain these filenames, as they serve as the index by which readers map the main text, code, and reproduced artifacts to one another.
 
-*Table P14-1: Stage artifacts and field contracts of the video generation data pipeline*
-
+*Table P14-1: Stage artifacts and field contracts of the video generation data pipeline.*
 | Stage | Code Entry Point | Primary Input | Primary Output | Key Fields |
 | --- | --- | --- | --- | --- |
 | Video source loading | `load_pexels.py` | `pexels_manifest.jsonl` or `pexels_*.mp4` | `source_videos.jsonl` | `video_id`, `path`, `license`, `duration`, `fps`, `width`, `height` |
@@ -339,8 +338,7 @@ The third is **GPU memory degradation**. `aesthetic_filter.py`, `caption_with_vl
 
 Table P14-2 summarizes the key runtime parameters and their effects.
 
-*Table P14-2: Key runtime parameters of the video generation data pipeline*
-
+*Table P14-2: Key runtime parameters of the video generation data pipeline.*
 | Parameter | Default or Example | Scope of Effect | Tuning Recommendation |
 | --- | --- | --- | --- |
 | `scene_detect.py --threshold` | `27.0` | Number and completeness of detected shots | Inspect a sample of segmentation results before fixing the threshold |
@@ -358,8 +356,7 @@ Table P14-2 summarizes the key runtime parameters and their effects.
 
 Accepting a video generation dataset cannot be reduced to "checking whether captions were generated." For T2V training, at minimum, provenance, clips, motion, visual quality, text, cinematic tags, and safety boundaries must all be simultaneously verified. Table P14-3 provides the publication-grade acceptance criteria for this project.
 
-*Table P14-3: Publication acceptance checklist for the video generation data pipeline*
-
+*Table P14-3: Publication acceptance checklist for the video generation data pipeline.*
 | Acceptance Dimension | Metric / Evidence | Pre-Release Check |
 | --- | --- | --- |
 | Provenance compliance | `license`, `page_url`, `author_name`, source file path | Randomly sample and trace back to original pages; confirm authorization and attribution fields are complete |
@@ -389,6 +386,7 @@ After the first six stages are complete, the project must merge the distributed 
 
 Table P14-4 presents the recommended field structure for the final manifest.
 
+*Table P14-4: Recommended field structure for the T2V final manifest.*
 | Field Group | Fields | Source Stage | Purpose |
 | --- | --- | --- | --- |
 | Identity fields | `shot_id`, `video_id`, `idx` | scene detect | Sample primary key and join key |
@@ -401,19 +399,16 @@ Table P14-4 presents the recommended field structure for the final manifest.
 | Cinematic language | `shot_size`, `camera_angle`, `lighting`, `style` | shot tags | Control training and retrieval |
 | Audit fields | `status`, `error`, `run_id`, `model_versions` | all stages | Post-mortem and release gates |
 
-*Table P14-4: Recommended field structure for the T2V final manifest*
-
 When integrating with training, it is not advisable to immediately write all fields into the model input. A more prudent approach is to use the manifest in three layers. The first layer is training-essential fields, including `segment_path` and `caption_en`. The second layer is sampling control fields, including `motion_strength`, `aesthetic_score`, `shot_size`, and `camera_motion`. The third layer is audit fields, including provenance, authorization, run batch, and error status. The training data loader needs to read only the first layer and part of the second; the auditing system and data dashboard require the complete set of fields.
 
 Table P14-5 presents three common training integration approaches.
 
+*Table P14-5: Training integration approaches for video generation datasets.*
 | Integration Approach | Data Organization | Applicable Scenario | Notes |
 | --- | --- | --- | --- |
 | JSONL manifest + local video | JSONL pointing to `segment_path` | Single-machine teaching, internal experiments | Manifest must be rewritten if paths are migrated |
 | WebDataset tar shards | `.tar` containing video, caption, metadata | Large-scale distributed training | Shard size, sample ordering, and index must be fixed |
 | Object storage URI | Manifest pointing to S3/OSS/HDFS URI | Multi-machine training and platform deployments | Requires permissions, caching, and failure retry |
-
-*Table P14-5: Training integration approaches for video generation datasets*
 
 If the training framework only accepts a simple "video path + caption" format, the remaining fields should not be discarded. A narrow-format training file can be generated while retaining the wide-format audit manifest. The narrow format serves training throughput; the wide format serves data governance. Both are linked via `shot_id`.
 
@@ -421,6 +416,7 @@ If the training framework only accepts a simple "video path + caption" format, t
 
 P14 deliverables should not consist solely of the final manifest. A video data pipeline involves video clips, sampled frames, model outputs, quality scores, and logs — any missing component will impair reproducibility. Table P14-6 presents the recommended directory structure.
 
+*Table P14-6: Deliverable directory for the video generation data pipeline.*
 | Path | Contents | Publication Recommendation |
 | --- | --- | --- |
 | `source_videos.jsonl` | Source video manifest and ffprobe metadata | Publish a de-identified version |
@@ -436,14 +432,13 @@ P14 deliverables should not consist solely of the final manifest. A video data p
 | `reports/quality_report.md` | Quality, failure, and spot-check report | Core release evidence |
 | `reports/license_audit.md` | Provenance, authorization, and takedown mechanism description | Required for public release |
 
-*Table P14-6: Deliverable directory for the video generation data pipeline*
-
 Version freezing must include at minimum four categories of information. The first is code version, including the commit or release package version of each script. The second is model version, including the path and weight hash for CLIP, the LAION-Aesthetic MLP, Qwen2.5-VL, or InternVL3. The third is tool version, including ffmpeg, PySceneDetect, OpenCV, Transformers, and PyTorch. The fourth is threshold version, including scene threshold, motion threshold, aesthetic threshold, minimum word count, and sampling frame count. Without these records, even with access to the same batch of videos, it is very difficult to reproduce the same set of training samples.
 
 ## 9. Data Dashboard and Continuous Iteration
 
 Before a video dataset enters training, it is advisable to establish a lightweight data dashboard. The dashboard need not be a complex system — even a set of statistical scripts and a Markdown report can significantly improve review efficiency. Table P14-7 presents the recommended dashboard metrics.
 
+*Table P14-7: Dashboard metrics for the video generation data pipeline.*
 | Dashboard Metric | Computed From | Purpose |
 | --- | --- | --- |
 | Number of video sources | `source_videos.jsonl` | Check source material coverage |
@@ -455,16 +450,15 @@ Before a video dataset enters training, it is advisable to establish a lightweig
 | Failure status counts | Per-stage `status` field | Locate systemic failures |
 | Spot-check pass rate | Manual review records | Decide whether to release |
 
-*Table P14-7: Dashboard metrics for the video generation data pipeline*
-
 During continuous iteration, avoid adjusting thresholds based solely on final training outcomes. The more prudent approach is to first observe distributions on the data dashboard, then manually spot-check boundary samples, and finally validate with a small-scale training run. Directly adjusting thresholds by large amounts based on model performance risks attributing training hyperparameter issues to data filtering, or concealing data biases within model metrics.
 
 ## 10. Sample Retraction and Copyright Response
 
 Video data requires retraction mechanisms more urgently than plain text or single-image data. A video clip may involve the original author's license, platform permissions, portrait rights, location information, trademarks, watermarks, and on-screen text. Even though this project uses Pexels open-license video as its example, publication should still preserve the path from every final sample back to the original page and author information.
 
-Table P14-9 presents the video sample retraction workflow.
+Table P14-8 presents the video sample retraction workflow.
 
+*Table P14-8: Video generation data sample retraction workflow.*
 | Step | Action | Affected Objects |
 | --- | --- | --- |
 | Log the request | Record video URL, author, requester, reason, and timestamp | request ticket |
@@ -474,16 +468,15 @@ Table P14-9 presents the video sample retraction workflow.
 | Rebuild manifest | Re-merge final manifest and statistical reports | manifest / reports |
 | Publish release note | Record deletion scope, new version number, and impact statistics | release note |
 
-*Table P14-9: Video generation data sample retraction workflow*
-
 The retraction workflow requires the final manifest to retain `video_id`, `page_url`, `author_name`, and `license`. If only `segment_path` and `caption_en` are stored, it becomes very difficult to confirm which original video a training sample came from. For public video platforms, authorization status may also change over time; therefore, published versions should freeze a provenance snapshot and specify the policy for responding to subsequent retraction requests.
 
 ## 11. Domain Transfer: From Public Video to Vertical Video Assets
 
 The P14 pipeline can be transferred to scenarios such as e-commerce, education, industrial, medical, transportation, and film/advertising footage, but different domains define "trainable clips" differently. Public video emphasizes natural scenes and general motion; industrial video emphasizes defects, processes, and equipment motion; educational video emphasizes whiteboard content, gestures, and demonstration steps; transportation video emphasizes object trajectories, viewpoints, and safety events.
 
-Table P14-10 presents the adjustment directions for domain transfer.
+Table P14-9 presents the adjustment directions for domain transfer.
 
+*Table P14-9: Domain transfer considerations for the video generation data pipeline.*
 | Domain | Video Type | Stages Requiring Adjustment | Additional Acceptance |
 | --- | --- | --- | --- |
 | E-commerce | Product showcases, livestream clips | Watermark/OCR, product subject stability, brand authorization | Check for product attribute claims and exaggerated descriptions |
@@ -493,16 +486,15 @@ Table P14-10 presents the adjustment directions for domain transfer.
 | Medical | Surgery, imaging dynamics, rehabilitation motion | High-risk content filtering, expert captioning | Patient privacy and medical expert review |
 | Film/Advertising | Raw footage, commercial clips | Cinematic language, style, copyright metadata | Copyright chain and redistribution scope |
 
-*Table P14-10: Domain transfer considerations for the video generation data pipeline*
-
 General thresholds should not be reused directly when transferring to a new domain. For example, many valid industrial videos may show low-speed mechanical motion — an excessively high `motion_strength` threshold would incorrectly discard them. Educational whiteboard videos may show relatively little frame change, yet OCR content and sequential narration carry training value. Transportation videos may have strong motion, yet privacy and safety filtering are more critical. Accordingly, thresholds should be determined jointly by domain spot-checks and downstream training objectives.
 
 ## 12. Integration with the P13 Instruction Factory
 
 P14 produces high-quality video shots and structured video metadata; P13 produces multimodal instruction data. The two can be combined into Video-Instruct or Video-QA datasets: use P14 to generate `segment_path`, `frame_paths`, `caption_en`, `shot_language`, and `camera_motion`, then use P13's templates, judges, multilingual expansion, and packaging mechanisms to produce instruction samples for video understanding or video generation control.
 
-Table P14-11 presents the integration approach between the two.
+Table P14-10 presents the integration approach between the two.
 
+*Table P14-10: Integration of P14 video fields into the P13 instruction factory.*
 | P14 Field | How P13 Can Use It | Example Task |
 | --- | --- | --- |
 | `caption_en` | As base video description or answer draft | "Describe the video in detail." |
@@ -513,17 +505,14 @@ Table P14-11 presents the integration approach between the two.
 | `motion_strength` | Control sample difficulty and sampling weights | High-dynamic samples used for action understanding |
 | `aesthetic_score` | Control visual quality bucketing | High-quality samples used for generation training |
 
-*Table P14-11: Integration of P14 video fields into the P13 instruction factory*
-
 This integration avoids rebuilding video instruction data from scratch. P14 handles video material and temporal quality; P13 handles instruction diversity and language quality. If the scope later expands to video generation control training, the `shot_language` fields can also be converted into prompt conditions — for example, "a cinematic wide shot with natural lighting and a slow zoom-in over ocean cliffs" — and paired with video clips for T2V training.
 
 ## Results and Analysis
 
+*Table P14-11: Example of multi-frame sampling from a video clip.*
 | frame1 | frame2 |
 |---|---|
 | ![frame1](../../images/part14/p14_video_frame_0.jpg) | ![frame2](../../images/part14/p14_video_frame_1.jpg) |
-
-*Table P14-12: Example of multi-frame sampling from a video clip*
 
 The figure shows two sampled frames from the output data. The clip presents a coastal scene filmed from a high-altitude aerial perspective: deep blue water continuously crashes against rugged reef formations, white foam forms clearly at the edges of the dark rock faces, and sparse green vegetation distributed among the rocks preserves a degree of visual layering within the natural environment. The multi-frame caption covers the clip's subjects, scene, lighting, and atmosphere, describing natural illumination, cool-toned ocean surface, clear rock textures, and the dynamic quality imparted by wave motion. From the cinematic language annotation results, this shot is identified as `extreme_wide` shot size, `high_angle` camera angle, `rule_of_thirds` composition, `natural` lighting type, `cool` overall color tone, and `cinematic` style tag. The camera motion module classifies it as `zoom_in`, indicating a noticeable push-in or scale change in the frame; `motion_strength=0.8974` indicates that the clip carries a stable motion signal and is suitable for T2V training to learn natural scene motion, aerial perspectives, and coastal cinematic language.
 

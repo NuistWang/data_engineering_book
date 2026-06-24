@@ -285,8 +285,7 @@ For example, online logs can automatically filter out samples where "first param
 For this reason, log structure should be planned concurrently with sample structure design—not added as a patch after the system goes live. Once key states are not recorded, reconstructing the trajectories required for training from real-world behavior later becomes very difficult. For Tool-Use teams, sample format and log format are best organized from the start according to the same state model, so that offline and online can truly be connected. The typical tasks, core input fields, environment feedback fields, and recovery-related fields for different tool types are shown in Table 19-1.
 
 
-**Table 19-1: Tool Type and Sample Field Reference**
-
+*Table 19-1: Tool Type and Sample Field Reference.*
 | Tool Type | Typical Tasks | Core Input Fields | Core Environment Feedback Fields | Recovery-Related Fields | Notes |
 |---|---|---|---|---|---|
 | Search tools | Web search, document retrieval, knowledge query | query, filters, top_k, time_range | hits, source, snippet, empty_result | reformulated_query, fallback_source | Emphasize query rewriting and empty-result recovery |
@@ -481,7 +480,7 @@ The tool layer is not static. Tool names change, fields are added or deprecated,
 Therefore, tool data governance must include a version management mechanism. Training samples need to mark the tool version; evaluation sets should roll forward with the online version; call logs should also retain the version information at the time of actual execution. Otherwise, teams fall into a common pitfall: the model performs well on offline evaluation, yet online calls continue failing inexplicably—the actual reason being only that training data and real tools are no longer on the same semantic plane.
 
 
-**Table 19-2: Security Risk and Constraint Mechanism Reference**
+*Table 19-2: Security Risk and Constraint Mechanism Reference.*
 | Risk Type | Typical Manifestation | Possible Consequence | Constraint Mechanism | Data Sample Requirement |
 |---|---|---|---|---|
 | Unauthorized access | Requesting to read unauthorized resources, modify restricted objects | Data leakage, compliance risk | Permission validation, read-only mode, explicit rejection | Must include rejection-call and safety-explanation samples |

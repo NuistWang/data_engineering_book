@@ -90,7 +90,6 @@ After a model can handle short image-text pairs and short video segments, it sti
 Here the object is no longer an isolated segment, but a manual, paper, research report, webpage archive, or continuous frame sequence from a long video. The data-production focus shifts from local coordinates to **interleaved ordering** across a 100K or even 1M-token training window. Images, text, and audio signals must be ordered by interpretable rules so the model can use earlier figures, table structures, or audio-video clues for reference and reasoning later in the context.
 
 *Table 11-1: Three heterogeneous alignment strategies, cost characteristics, and applicable tasks. Source: compiled by the authors; cost characteristics are relative descriptions, and actual solutions should be evaluated according to modality type, sequence length, and annotation budget.*
-
 | Alignment granularity | Main method and feature expression | Data construction cost | Typical tasks |
 | :--- | :--- | :--- | :--- |
 | **Object-level** | Human or model-assisted BBox labeling with region-word coordinate mapping. | High; depends on fine-grained annotation, review, and local visual reasoning. | Region grounding, medical-image localization, industrial defect detection. |
@@ -148,7 +147,6 @@ In contrastive alignment (Dufumier et al. 2025 (ICLR) argue that effective multi
 5. **LLM-generated synthetic hard negatives**: provide a positive description to an LLM and ask it to generate adversarial text that is semantically similar but contains key factual errors. Compared with dictionary replacement, this approach is more diverse and is a common scalable production method.
 
 *Table 11-2: Comparison of five hard-negative mining strategies. Source: compiled by the authors; strategy effects should be validated jointly through manual review, training stability, and downstream cross-modal evaluations.*
-
 | Strategy | Generation method | Granularity | Main advantage | Main risk |
 | :--- | :--- | :--- | :--- | :--- |
 | Subtle replacement | Dictionary or attribute replacement | Word/attribute | Precise control of replacement position | Requires fine-grained dictionaries |
@@ -166,7 +164,6 @@ Cross-modal fusion data is expensive to build and should not enter training with
 Cross-modal evaluation must look beyond single-modality quality and measure whether mappings between modalities are stable. Table 11-3 lists common metrics and governance actions.
 
 *Table 11-3: Core evaluation metrics, error sources, and governance-action mapping. Source: compiled by the authors; metric interpretation and governance actions should be calibrated according to model architecture, task type, and data version.*
-
 | Metric | Physical meaning and business mapping | Risk threshold and error source | Governance action |
 | :--- | :--- | :--- | :--- |
 | **Cross-modal recall (R@1 / R@5)** | Given an image or video, retrieve the corresponding text description. | A significant drop usually indicates systematic mismatch in object coordinates or dictionary mapping. | Pause the problematic batch; resample-check BBox, captions, and assembly links. |
@@ -322,7 +319,6 @@ Affected batch: 256 samples. Training step 28,441 aborted.
 ### 11.6.6 Frequent Error Quick Reference
 
 *Table 11-4: Frequent cross-modal alignment error types and remediation strategies. Source: compiled by the authors; error types and remediation strategies are anonymized engineering patterns.*
-
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |
 | ERR_CROSS_MDL_FUSION_7XXXX | Contrastive Loss NaN | Noise samples trigger attention zero-division | Feature norm clipping plus gradient clipping |

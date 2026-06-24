@@ -376,8 +376,7 @@ Therefore, the relationship between task modeling and workflow should not be und
 *Figure 14-1: LLM Annotation Platform Workflow Diagram.*
 
 
-**Table 14-1: Annotation Role Responsibilities and Permissions**
-
+*Table 14-1: Annotation Role Responsibilities and Permissions.*
 | Role | Core Responsibilities | Primary Permissions | Key Boundaries |
 |---|---|---|---|
 | Platform Administrator | Maintain the system, configure processes, manage templates and permissions | Create templates, configure workflows, manage accounts, view full audit logs | Does not directly participate in routine quality adjudication to avoid role conflicts |
@@ -573,8 +572,7 @@ True **annotation productivity** is not about how many items each person complet
 
 Therefore, productivity governance and cost governance must be considered jointly with platform design, QA design, and knowledge retention. The more structured the platform makes tasks, the more reasonably human–machine collaboration is embedded, the clearer the QA path tiering, and the more timely the knowledge base is updated—typically the lower the per-usable-data-item cost. What LLM data production truly requires is not point-in-time savings but systematically directing expenditure toward the areas most capable of improving usable output.
 
-**Table 14-2: Operational Metrics and SLA Reference Table**
-
+*Table 14-2: Operational Metrics and SLA Reference Table.*
 | Metric Category | Metric Name | Definition | Typical Monitoring Frequency | Reference SLA Example | Typical Governance Action |
 |---|---|---|---|---|---|
 | Productivity | Effective output per person-hour | Ratio of samples passing QA to person-hours worked | Daily / Weekly | Establish baselines by task type and continuously calibrate | Optimize templates, adjust distribution, strengthen human–machine collaboration |

@@ -71,6 +71,7 @@ FineWeb is publicly available as a full dataset, configurations split by Common 
 
 *Table 38-1 Public FineWeb Forms and Engineering Uses*
 
+*Table 38-1: Public FineWeb Forms and Engineering Uses.*
 | Form | Public Description | Engineering Use | Usage Notes |
 | --- | ---: | --- | --- |
 | FineWeb full dataset | The initial paper reports 15T tokens; the official dataset card continues listing later dumps | Large-scale English Web pre-training, data ablation, filtering-strategy research | The data continues to update; cite the dataset-card access time and scale convention |
@@ -115,6 +116,7 @@ The official FineWeb dataset card states that samples include `language`, `langu
 
 *Table 38-2 FineWeb-like Web Document Record Schema*
 
+*Table 38-2: FineWeb-like Web Document Record Schema.*
 | Field Group | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Provenance fields | `url`, `dump`, `warc_record_id`, `fetch_time` | WARC metadata and reader supplements | Trace original Web pages, locate crawls, respond to removals |
@@ -190,6 +192,7 @@ The main processing pipeline can be abstracted in the following order. Class nam
 
 *Table 38-3 Key Modules in the FineWeb Main Processing Pipeline*
 
+*Table 38-3: Key Modules in the FineWeb Main Processing Pipeline.*
 | Order | DataTrove Module | Input | Output | Role |
 | ---: | --- | --- | --- | --- |
 | 1 | `WarcReader` | Common Crawl WARC segments | Raw HTML document stream | Reads Web snapshots from `s3://commoncrawl/crawl-data/.../warc/` |
@@ -256,6 +259,7 @@ FineWeb's evaluation protocol can be summarized in Table 38-4.
 
 *Table 38-4 FineWeb Data-ablation Evaluation Protocol*
 
+*Table 38-4: FineWeb Data-ablation Evaluation Protocol.*
 | Control Item | FineWeb Paper Practice | Data-engineering Meaning |
 | --- | --- | --- |
 | Model scale | Ablation model has 1.82B parameters and Llama architecture | Prevents model-scale changes from hiding data differences |
@@ -290,6 +294,7 @@ FineWeb's experience can be converted into an error-attribution table for Web pr
 
 *Table 38-5 Common Failures and Repair Actions for FineWeb-like Web Corpora*
 
+*Table 38-5: Common Failures and Repair Actions for FineWeb-like Web Corpora.*
 | Error Type | Symptom | Possible Root Cause | Data-engineering Repair Action |
 | --- | --- | --- | --- |
 | Page-template residue | Model repeats menus, footers, or cookie text | Direct WET usage or poor main-text extraction | Return to WARC, re-extract with Trafilatura or similar tools, and sample-check template residue |
@@ -369,6 +374,7 @@ Dolma is not a single static file, but a corpus asset with version evolution. Th
 
 *Table 38-6 Public Dolma Versions and Uses*
 
+*Table 38-6: Public Dolma Versions and Uses.*
 | Version | Release Date | Compressed Size | Dataset-card Description | Engineering Use |
 | --- | --- | ---: | --- | --- |
 | `v1` | 2023-08-18 | 6.0 TB | First Dolma release | Trace the earliest public corpus form |
@@ -386,6 +392,7 @@ Dolma covers Web, code, papers, social media, books, and encyclopedic sources. T
 
 *Table 38-7 Dolma v1.6 Source Statistics*
 
+*Table 38-7: Dolma v1.6 Source Statistics.*
 | Source | Document Type | UTF-8 Bytes | Documents | Unicode Words | Llama Tokens |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Common Crawl | web pages | 9,022 GB | 3,370M | 1,775B | 2,281B |
@@ -451,6 +458,7 @@ Transparent corpora do not end with packaging and uploading `text`. At least thr
 
 *Table 38-8 Dolma-like Transparent Corpus Record Schema*
 
+*Table 38-8: Dolma-like Transparent Corpus Record Schema.*
 | Layer | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Document level | `id`, `source`, `text`, `text_hash` | Data reader and hash computation | Locate samples, deduplicate, read during training |
@@ -502,6 +510,7 @@ Dolma Toolkit documentation summarizes data organization as four actions: tag, d
 
 *Table 38-9 Dolma Toolkit Processing Actions and Evidence Outputs*
 
+*Table 38-9: Dolma Toolkit Processing Actions and Evidence Outputs.*
 | Order | Action | Official Documentation Description | Evidence Output | Main Risk |
 | ---: | --- | --- | --- | --- |
 | 1 | Taggers | Assign language, toxicity, perplexity, and other attribute tags to document spans | Document quality labels and risk labels | Tagger-version changes alter filtering results |
@@ -541,6 +550,7 @@ When $\Delta_s$ changes clearly on code tasks, scientific QA, or long-context ta
 
 *Table 38-10 Dolma-like Transparent Corpus Evaluation and Diagnosis Table*
 
+*Table 38-10: Dolma-like Transparent Corpus Evaluation and Diagnosis Table.*
 | Evaluation Question | Required Records | Metric or Evidence | Possible Action |
 | --- | --- | --- | --- |
 | Which source drives a capability | Source mix, sample proportion, seen tokens | Source ablation, task-score difference $\Delta_s$ | Adjust source weight or add data |
@@ -553,6 +563,7 @@ When $\Delta_s$ changes clearly on code tasks, scientific QA, or long-context ta
 
 *Table 38-11 Common Failures and Repair Actions for Dolma-like Transparent Corpora*
 
+*Table 38-11: Common Failures and Repair Actions for Dolma-like Transparent Corpora.*
 | Failure Mode | Symptom | Possible Root Cause | Governance Action |
 | --- | --- | --- | --- |
 | Source-mix drift | A task category suddenly regresses in a new version | Sample proportion or filtering rules changed | Compare manifest diff, roll back, or resample by strata |

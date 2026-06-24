@@ -57,13 +57,12 @@ The main text retains only the key implementation excerpts that illustrate desig
 
 Acceptance metrics include step annotation consistency, validation pass rate, positive-to-negative sample ratio, repair coverage, PRM discriminability, and spot-check error rate. If the project enters production, a curriculum, or a public reproduction environment, version numbers, dependency environments, random seeds, sample spot-check results, and failure sample post-mortem records should also be documented.
 
+*Table P06-1: Process Supervision Data Publication Acceptance Table.*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Process Labels | Step annotation consistency, reward bucket distribution, and validation pass rate | Verify that positive, negative, and repair trajectories each have independent evidence upon spot-check |
 | Training Interface | PRM sample field completeness rate, training split records, and manifest | Each data batch should be traceable back to task, trajectory, validator, and label source |
 | Noise Control | Negative sample contamination rate, ambiguous repair trajectory samples, and manual review conclusions | Do not treat samples not covered by the validator directly as high-quality supervision signals |
-
-*Table P06-1: Process Supervision Data Publication Acceptance Table*
 
 ## Cost, Risk, and Compliance Boundaries
 
@@ -1138,8 +1137,8 @@ As part of Part Fourteen, this chapter corresponds to the project-level validati
 
 ## References
 
-1. Wei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., Le, Q. V., & Zhou, D. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022. arXiv:2201.11903.
-2. Lightman, H., Kosaraju, V., Burda, Y., Edwards, H., Baker, B., Lee, T., Leike, J., Schulman, J., Sutskever, I., & Cobbe, K. (2023). Let's Verify Step by Step. arXiv:2305.20050.
-3. Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2023). ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
-4. DeepSeek-AI. (2025). DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. arXiv:2501.12948.
-5. Hendrycks, D., Burns, C., Kadavath, S., Arora, A., Basart, S., Tang, E., Song, D., & Steinhardt, J. (2021). Measuring Mathematical Problem Solving With the MATH Dataset. NeurIPS 2021. arXiv:2103.03874.
+Wei J, Wang X, Schuurmans D, Bosma M, Xia F, Chi E, Le Q V, Zhou D (2022) Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022. arXiv:2201.11903.
+Lightman H, Kosaraju V, Burda Y, Edwards H, Baker B, Lee T, Leike J, Schulman J, Sutskever I, Cobbe K (2023) Let's Verify Step by Step. arXiv:2305.20050.
+Yao S, Zhao J, Yu D, Du N, Shafran I, Narasimhan K, Cao Y (2023) ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629.
+DeepSeek-AI (2025) DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning. arXiv:2501.12948.
+Hendrycks D, Burns C, Kadavath S, Arora A, Basart S, Tang E, Song D, Steinhardt J (2021) Measuring Mathematical Problem Solving With the MATH Dataset. NeurIPS 2021. arXiv:2103.03874.
