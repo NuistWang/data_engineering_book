@@ -71,6 +71,7 @@ plugins:
           site_name: 大模型数据工程：架构、算法及项目实战
           nav:
             - 题名页: title_page.md
+            - 在线资源与讨论入口: online_resources.md
             - 序言: preface.md
             - 致谢: acknowledgments.md
             - 卷前导读：全书结构、阅读路径与版本说明: front_matter_guide.md
@@ -200,6 +201,7 @@ plugins:
                   name: Switch to light mode
           nav:
             - Title Page: title_page.md
+            - Online Resources and Community: online_resources.md
             - Preface: preface.md
             - Acknowledgments: acknowledgments.md
             - Front Matter Guide: front_matter_guide.md

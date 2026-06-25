@@ -48,7 +48,7 @@ CONTENTS_ENTRY_GAP_MM = 6.2
 CONTENTS_SUBENTRY_GAP_MM = 5.2
 
 EXCLUDED_FROM_FORMAL_PDF = {"title_page.md", "index.md", "translation-status.md"}
-PRE_CONTENTS_FRONT_PATHS = {"preface.md", "acknowledgments.md", "front_matter_guide.md"}
+PRE_CONTENTS_FRONT_PATHS = {"online_resources.md", "preface.md", "acknowledgments.md", "front_matter_guide.md"}
 POST_CONTENTS_FRONT_PATHS = {"contributors.md", "abbreviations.md"}
 
 BOOK_AUTHORS = (
@@ -905,6 +905,7 @@ def generated_front_matter_html(*, include_toc: bool = True) -> str:
     return (
         generated_title_page_html()
         + """
+<section class="source-file front-section generated-front-section"><h1>Online Resources and Community</h1></section>
 <section class="source-file front-section generated-front-section"><h1>Preface</h1></section>
 <section class="source-file front-section generated-front-section"><h1>Acknowledgments</h1></section>
 """
@@ -921,11 +922,12 @@ def prepare_pdf_items(items: list[NavItem]) -> list[NavItem]:
 
     filtered = [item for item in items if item.path not in EXCLUDED_FROM_FORMAL_PDF]
     front_order = {
-        "preface.md": 0,
-        "acknowledgments.md": 1,
-        "front_matter_guide.md": 2,
-        "contributors.md": 3,
-        "abbreviations.md": 4,
+        "online_resources.md": 0,
+        "preface.md": 1,
+        "acknowledgments.md": 2,
+        "front_matter_guide.md": 3,
+        "contributors.md": 4,
+        "abbreviations.md": 5,
     }
     front = [item for item in filtered if item.group_slug == "front-matter"]
     rest = [item for item in filtered if item.group_slug != "front-matter"]

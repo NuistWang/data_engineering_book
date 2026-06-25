@@ -72,18 +72,21 @@ function classifyFile(file) {
   } else if (base === "preface.md") {
     unit = "序言";
     order = 3001;
+  } else if (base === "online_resources.md") {
+    unit = "在线资源";
+    order = 3002;
   } else if (base === "front_matter_guide.md") {
     unit = "卷前导读";
-    order = 3002;
+    order = 3003;
   } else if (base === "index.md") {
     unit = "全书总目录";
-    order = 3003;
+    order = 3004;
   } else if (base === "abbreviations.md") {
     unit = "缩写表";
-    order = 3004;
+    order = 3005;
   } else if (base === "afterword.md") {
     unit = "后记";
-    order = 3005;
+    order = 3006;
   }
   return { section, unit, order };
 }
