@@ -580,7 +580,7 @@ From a data engineering perspective, the sample schema of STB includes at least 
 
 The value of this schema lies in allowing the same data to serve multiple training and evaluation objectives. If the model is a purely generative VLM, image-to-HTML sequence supervision can be used; if the model includes a position prediction head, bbox regression or discrete coordinate tokens can be used; if the research goal is empty-cell recovery, the recall rate of `[EMPTY_CELL]`, the empty-column preservation rate, and structural edit distance can be tracked specifically. The closer a data asset is to this "multi-signal synchronized" form, the easier it becomes to perform error attribution in model experiments.
 
-It is important to note that the specific notation for the empty-cell token must remain consistent across the dataset, tokenizer, training scripts, and evaluation scripts. The dataset uses `[EMPTY_CELL]` to represent empty cells; in some model paper contexts, typographic variants such as `[EMPTY CELL]` may also appear. During engineering implementation, one canonical form should be selected and enforced uniformly during the data transformation stage; otherwise, the same empty position may be tokenized differently, causing the training objective and the evaluation objective to become misaligned.
+The notation for the empty-cell token must remain consistent across the dataset, tokenizer, training scripts, and evaluation scripts. The dataset uses `[EMPTY_CELL]` to represent empty cells; in some model paper contexts, typographic variants such as `[EMPTY CELL]` may also appear. During engineering implementation, one canonical form should be selected and enforced uniformly during the data transformation stage; otherwise, the same empty position may be tokenized differently, causing the training objective and the evaluation objective to become misaligned.
 
 ### Case B.4: Four-Stage Construction Pipeline
 
@@ -738,7 +738,7 @@ In addition to the GitHub code entry, the public dataset address should cross-re
 
 https://huggingface.co/datasets/champion666/SparseTable_Bench_Dataset
 
-It is important to note that the role of the code repository is not to simply replicate paper experiments, but to support reproduction of the data engineering workflow described in this chapter: loading samples, validating the schema, constructing occlusions, running evaluation, and interpreting errors. As long as these interfaces remain stable, subsequent substitution of SA-Table, OCRFlux, Qwen-VL, or any other table recognition model can be compared under the same data protocol.
+The role of the code repository is not to simply replicate paper experiments, but to support reproduction of the data engineering workflow described in this chapter: loading samples, validating the schema, constructing occlusions, running evaluation, and interpreting errors. As long as these interfaces remain stable, subsequent substitution of SA-Table, OCRFlux, Qwen-VL, or any other table recognition model can be compared under the same data protocol.
 
 ### Case B.10: Connections to Adjacent Chapters
 

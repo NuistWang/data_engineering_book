@@ -531,9 +531,9 @@ For formal acceptance, the project must satisfy at least four conditions: first,
 
 ## Chapter Summary
 
-This chapter uses the "video generation data pipeline" as a case study to demonstrate the engineering organization of video sources, clip segmentation, captioning, quality scoring, and training packaging into T2V data assets. The principal value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metric acceptance, and reproducibility resources on a single chain — making the project not merely a sequence of operational steps but a verifiable case study.
+This chapter followed a video generation data pipeline from video sources through clip segmentation, captioning, quality scoring, and training packaging. Its main lesson is that T2V data assets need task definition, data boundaries, architecture choices, sample schema, metric acceptance, and reproducibility resources on the same chain.
 
-The boundaries of this case must also be clearly retained. The focus is on public video samples and a small-scale pipeline, not covering full commercial copyright management or large-scale video platforms. In scenarios with larger scale, higher risk, or stricter compliance requirements, data sources, permission status, manual review proportions, operational costs, and failure rollback strategies must all be reassessed.
+The scope is public video samples and a small-scale pipeline. It does not cover full commercial copyright management or large-scale video platforms. Larger-scale, higher-risk, or stricter compliance settings require renewed review of data sources, permission status, manual review proportions, operating costs, and rollback strategies.
 
 As part of Part 14, this chapter corresponds to the project-level validation of the methods presented earlier in this book. Readers may combine this case with the data recipes in Part 13, the platform governance chapters earlier in the book, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 

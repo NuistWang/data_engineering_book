@@ -114,7 +114,7 @@ Compliance sits at the intersection of data governance, model governance, and bu
 
 When these are separated, a familiar misalignment appears: the business asks for a new capability, the model quickly connects new features, the platform exposes the interface, but no one judges the compliance of the full data path. A unified metadata center, policy center, and audit center are needed to connect requirements that otherwise sit in different teams.
 
-![Figure 36-1: Compliance shift-left and governance coordination architecture](../../images/part11/Wang-Chap36-Fig01-ZH.svg)
+![Figure 36-1: Compliance shift-left and governance coordination architecture](../../images/part11/Wang-Chap36-Fig01-EN.svg)
 *Figure 36-1: Compliance review shifts from pre-launch review into requirements analysis and architecture design.*
 
 ### 36.1.4 Traditional Flow vs. Shift-Left Governance
@@ -240,7 +240,7 @@ When the data level is high, the action is strong, and the impact scope is broad
 | C3 | Automated decision | Training / scoring | High | DPIA, legal approval, strong audit, release blocking |
 | C3 | Third-party sharing | Export / API call | Very high | DPA, masking gateway, minimum field set, dedicated assessment |
 
-![Figure 36-2: Risk matrix formed by data level, purpose, and processing action](../../images/part11/Wang-Chap36-Fig02-ZH.svg)
+![Figure 36-2: Risk matrix formed by data level, purpose, and processing action](../../images/part11/Wang-Chap36-Fig02-EN.svg)
 *Figure 36-2: Risk matrix formed by data level, purpose, and processing action.*
 
 ### 36.2.6 Accountability Chain: RACI Matrix
@@ -451,7 +451,7 @@ Typical preflight checks include:
 
 When any high-risk item is missing, the pipeline should block build, deployment, or training-task execution.
 
-![Figure 36-3: Compliance gate flow from data onboarding to model training](../../images/part11/Wang-Chap36-Fig03-ZH.svg)
+![Figure 36-3: Compliance gate flow from data onboarding to model training](../../images/part11/Wang-Chap36-Fig03-EN.svg)
 *Figure 36-3: Compliance gate flow from data onboarding to model training.*
 
 ### 36.3.7 Governance Pipeline: From Documents to System Execution
@@ -466,7 +466,7 @@ Once compliance requirements enter engineering, governance objects must become e
 
 This chain reflects a key fact: **compliance is not a single action. It is a pipeline from policy generation, data processing, alert response, to evaluation and verification**.
 
-![Figure 36-4: Privacy specification and policy generation flow](../../images/part11/Wang-Chap36-Fig04-ZH.svg)
+![Figure 36-4: Privacy specification and policy generation flow](../../images/part11/Wang-Chap36-Fig04-EN.svg)
 *Figure 36-4: Privacy specification and policy generation flow.*
 
 ### 36.3.8 Translating Governance Metrics into Engineering Language
@@ -481,7 +481,7 @@ Governance metrics matter not because of large sample counts, but because they s
 
 The point is not the absolute value. These metrics turn governance from an abstract ideal into inspectable, reviewable, and repeatable system behavior.
 
-![Figure 36-5: Engineering approval flow for DPIA and RoPA](../../images/part11/Wang-Chap36-Fig05-ZH.svg)
+![Figure 36-5: Engineering approval flow for DPIA and RoPA](../../images/part11/Wang-Chap36-Fig05-EN.svg)
 *Figure 36-5: Data compliance lifecycle from business initiation to automated blocking and audit.*
 
 ### 36.3.9 Example Compliance Release Gate Checklist
@@ -525,7 +525,7 @@ Many teams do well before release and loosen controls after launch. Real risks o
 
 Runtime governance should therefore include periodic permission review, export audit, new-purpose assessment, abnormal-access detection, deletion-request SLA tracking, incident response, and postmortem mechanisms.
 
-![Figure 36-6: Closed loop of audit logs, alerts, incident response, and postmortem review](../../images/part11/Wang-Chap36-Fig06-ZH.svg)
+![Figure 36-6: Closed loop of audit logs, alerts, incident response, and postmortem review](../../images/part11/Wang-Chap36-Fig06-EN.svg)
 *Figure 36-6: Closed loop of audit logs, alerts, incident response, and postmortem review.*
 
 ---
@@ -596,7 +596,7 @@ Typical risks include:
 
 A boundary gateway should automatically perform field detection, plaintext identification, masking replacement, rule-based blocking, request tracing, and high-risk call approval before requests leave the domain.
 
-![Figure 36-7: Boundary gateway for third-party APIs and large-model calls](../../images/part11/Wang-Chap36-Fig07-ZH.svg)
+![Figure 36-7: Boundary gateway for third-party APIs and large-model calls](../../images/part11/Wang-Chap36-Fig07-EN.svg)
 *Figure 36-7: Boundary gateway for third-party APIs and large-model calls.*
 
 ### 36.4.5 Cross-Border Transfer Governance
@@ -718,7 +718,7 @@ pipeline_gate:
   block_if_deletion_path_missing: true
 ```
 
-![Figure 36-8: Full-path propagation and cleanup for user deletion requests](../../images/part11/Wang-Chap36-Fig08-ZH.svg)
+![Figure 36-8: Full-path propagation and cleanup for user deletion requests](../../images/part11/Wang-Chap36-Fig08-EN.svg)
 *Figure 36-8: Full-path propagation and cleanup for user deletion requests.*
 
 ### 36.5.2 Data Classification Policy

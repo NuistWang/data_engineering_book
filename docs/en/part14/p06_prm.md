@@ -1130,9 +1130,9 @@ A major risk in many process supervision projects is not the current presence of
 
 ## Chapter Summary
 
-This chapter uses "CoT Reasoning Dataset and PRM Training" as a case study to demonstrate the engineering organization required to construct process supervision samples containing positive examples, negative examples, and repair paths for training or evaluating a PRM. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metrics acceptance, and reproducibility resources within a single pipeline, so that the project is no longer merely a sequence of operational steps but becomes a verifiable case study.
+This chapter described CoT Reasoning Dataset and PRM Training as an engineering workflow for process-supervision samples with positive examples, negative examples, and repair paths. The workflow keeps task definition, data boundaries, architecture choices, sample schema, acceptance metrics, and reproducibility resources together, so the PRM data can be checked as a system.
 
-The boundaries of this case must also be clearly preserved. The focus is on verifiable reasoning tasks and structured step labels, and does not cover all open-domain complex reasoning. In scenarios with greater scale, higher risk, or stronger compliance constraints, data sources, permission status, manual review proportions, operating costs, and failure rollback plans should be re-evaluated.
+The scope is verifiable reasoning tasks and structured step labels; it does not cover all open-domain complex reasoning. At greater scale or under stronger compliance constraints, sources, permissions, manual review proportions, operating costs, and rollback plans should be revisited.
 
 As part of Part Fourteen, this chapter corresponds to the project-level validation of the methods introduced earlier. Readers may combine this case with the data recipes from Part Thirteen, the platform governance chapters from earlier parts, and the checklists in the appendix, to form a closed loop from methodological understanding to engineering delivery.
 

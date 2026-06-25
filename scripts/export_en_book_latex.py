@@ -422,6 +422,27 @@ def protect(replacements: list[str], latex: str) -> str:
     return token
 
 
+def breakable_monospace(value: str) -> str:
+    return (
+        value.replace(r"\_", r"\_\allowbreak{}")
+        .replace("/", r"/\allowbreak{}")
+        .replace(".", r".\allowbreak{}")
+        .replace("-", r"-\allowbreak{}")
+    )
+
+
+def should_preserve_dollar_math(value: str) -> bool:
+    stripped = value.strip()
+    if not stripped:
+        return False
+    if re.match(r"^\d", stripped) and re.search(r",|USD|/hr|to\s*$", stripped, re.I):
+        return False
+    math_markers = ["\\", "_", "^", "{", "}", "=", "<", ">", "\\times", "\\frac", "\\sum", "\\Delta"]
+    if any(marker in stripped for marker in math_markers):
+        return True
+    return bool(re.fullmatch(r"[A-Za-z][A-Za-z0-9,;:\s+\-*/().]*", stripped))
+
+
 def inline_to_latex(text: str) -> str:
     text = html.unescape(text)
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.I)
@@ -432,8 +453,26 @@ def inline_to_latex(text: str) -> str:
 
     replacements: list[str] = []
 
+    def display_math_repl(match: re.Match[str]) -> str:
+        body = match.group(1).strip()
+        return protect(replacements, "\\[\n" + body + "\n\\]")
+
+    def inline_paren_math_repl(match: re.Match[str]) -> str:
+        return protect(replacements, r"\(" + match.group(1).strip() + r"\)")
+
+    def dollar_math_repl(match: re.Match[str]) -> str:
+        body = match.group(1).strip()
+        if not should_preserve_dollar_math(body):
+            return match.group(0)
+        return protect(replacements, "$" + body + "$")
+
+    text = re.sub(r"\\\[(.*?)\\\]", display_math_repl, text, flags=re.S)
+    text = re.sub(r"\$\$(.*?)\$\$", display_math_repl, text, flags=re.S)
+    text = re.sub(r"\\\((.*?)\\\)", inline_paren_math_repl, text, flags=re.S)
+    text = re.sub(r"(?<!\\)\$([^$\n]+?)(?<!\\)\$", dollar_math_repl, text)
+
     def code_repl(match: re.Match[str]) -> str:
-        value = escape_plain(match.group(1).strip())
+        value = breakable_monospace(escape_plain(match.group(1).strip()))
         return protect(replacements, rf"\texttt{{{value}}}")
 
     text = re.sub(r"`([^`\n]+)`", code_repl, text)
@@ -451,6 +490,16 @@ def inline_to_latex(text: str) -> str:
         return protect(replacements, rf"\href{{{url}}}{{{label}}}")
 
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", link_repl, text)
+
+    def bare_url_repl(match: re.Match[str]) -> str:
+        url = match.group(0)
+        trailing = ""
+        while url and url[-1] in ".,;:":
+            trailing = url[-1] + trailing
+            url = url[:-1]
+        return protect(replacements, rf"\url{{{latex_url(url)}}}") + trailing
+
+    text = re.sub(r"https?://[^\s<>)\]]+", bare_url_repl, text)
 
     def bold_repl(match: re.Match[str]) -> str:
         value = escape_plain(match.group(1).strip())
@@ -481,7 +530,7 @@ def is_table_separator(line: str) -> bool:
     cells = split_table_row(line)
     if not cells:
         return False
-    return all(re.fullmatch(r":?-{3,}:?", cell.strip()) for cell in cells)
+    return all(re.fullmatch(r":?-{2,}:?", cell.strip()) for cell in cells)
 
 
 def split_table_row(line: str) -> list[str]:
@@ -514,14 +563,21 @@ def render_table(lines: list[str], stats: ExportStats) -> str:
     header = split_table_row(lines[0])
     rows = [split_table_row(line) for line in lines[2:]]
     cols = max(1, len(header))
-    width = max(0.10, min(0.32, 0.90 / cols))
-    spec = "|" + "|".join([rf">{{\RaggedRight\arraybackslash}}p{{{width:.3f}\textwidth}}" for _ in range(cols)]) + "|"
+    width = max(0.075, min(0.28, 0.82 / cols))
+    spec = "@{}" + "".join([rf">{{\RaggedRight\arraybackslash}}p{{{width:.3f}\textwidth}}" for _ in range(cols)]) + "@{}"
 
     def normalize(row: list[str]) -> list[str]:
         row = row[:cols]
         return row + [""] * (cols - len(row))
 
-    rendered: list[str] = [rf"\begin{{longtable}}{{{spec}}}", r"\hline"]
+    rendered: list[str] = [
+        r"\begingroup",
+        r"\scriptsize",
+        r"\setlength{\tabcolsep}{3pt}",
+        r"\renewcommand{\arraystretch}{1.16}",
+        rf"\begin{{longtable}}{{{spec}}}",
+        r"\hline",
+    ]
     rendered.append(
         r"\rowcolor{tablehead} "
         + " & ".join(rf"\textbf{{{inline_to_latex(cell)}}}" for cell in normalize(header))
@@ -537,6 +593,7 @@ def render_table(lines: list[str], stats: ExportStats) -> str:
     for row in rows:
         rendered.append(" & ".join(inline_to_latex(cell) for cell in normalize(row)) + r" \\ \hline")
     rendered.append(r"\end{longtable}")
+    rendered.append(r"\endgroup")
     return "\n".join(rendered)
 
 
@@ -624,6 +681,11 @@ def render_code_block(language: str, body: list[str], stats: ExportStats) -> str
     )
 
 
+def render_source_header(item: NavItem) -> str:
+    header = inline_to_latex(item.title)
+    return r"\noindent\parbox{\textwidth}{\small\textsf{\RaggedRight " + header + r"}}\par\vspace{1.5mm}"
+
+
 def render_list(lines: list[str], ordered: bool) -> str:
     env = "enumerate" if ordered else "itemize"
     rendered = [rf"\begin{{{env}}}"]
@@ -643,16 +705,38 @@ def render_heading(line: str) -> str:
         return inline_to_latex(line)
     level = len(match.group(1))
     title = inline_to_latex(match.group(2).strip())
+    if level == 1:
+        return "\n".join(
+            [
+                r"\phantomsection",
+                rf"\chapter*{{{title}}}",
+                rf"\addcontentsline{{toc}}{{chapter}}{{{title}}}",
+                rf"\markboth{{{title}}}{{{title}}}",
+            ]
+        )
+    if level == 2:
+        return "\n".join(
+            [
+                r"\phantomsection",
+                rf"\section*{{{title}}}",
+                rf"\addcontentsline{{toc}}{{section}}{{{title}}}",
+            ]
+        )
+    if level == 3:
+        return "\n".join(
+            [
+                r"\phantomsection",
+                rf"\subsection*{{{title}}}",
+                rf"\addcontentsline{{toc}}{{subsection}}{{{title}}}",
+            ]
+        )
     commands = {
-        1: "chapter",
-        2: "section",
-        3: "subsection",
         4: "subsubsection",
         5: "paragraph",
         6: "subparagraph",
     }
     command = commands[level]
-    return rf"\{command}{{{title}}}"
+    return rf"\{command}*{{{title}}}"
 
 
 def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats: ExportStats, tex_dir: Path) -> str:
@@ -772,6 +856,8 @@ def latex_preamble(stats: ExportStats) -> str:
 \setCJKsansfont{{PingFang SC}}
 \setCJKmonofont{{PingFang SC}}
 \setmonofont{{Menlo}}
+\usepackage{{amsmath}}
+\usepackage{{amssymb}}
 \usepackage{{graphicx}}
 \usepackage{{float}}
 \usepackage{{caption}}
@@ -780,21 +866,22 @@ def latex_preamble(stats: ExportStats) -> str:
 \usepackage{{array}}
 \usepackage{{ragged2e}}
 \usepackage[table]{{xcolor}}
-\usepackage{{fancyvrb}}
+\usepackage{{fvextra}}
 \usepackage{{hyperref}}
 \usepackage{{import}}
 \hypersetup{{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black}}
 \definecolor{{tablehead}}{{RGB}}{{238,243,248}}
 \definecolor{{codeframe}}{{RGB}}{{190,198,210}}
-\DefineVerbatimEnvironment{{printcode}}{{Verbatim}}{{fontsize=\scriptsize,frame=single,framesep=2mm,rulecolor=\color{{codeframe}}}}
+\DefineVerbatimEnvironment{{printcode}}{{Verbatim}}{{fontsize=\scriptsize,frame=single,framesep=2mm,rulecolor=\color{{codeframe}},breaklines=true,breakanywhere=true}}
 \setlength{{\parindent}}{{2em}}
 \setlength{{\parskip}}{{0.25em}}
+\setlength{{\emergencystretch}}{{3em}}
 \linespread{{1.18}}
 \captionsetup{{font=small,labelformat=empty}}
 \sloppy
 
 \title{{Data Engineering for Large Foundation Models\\A Handbook}}
-\author{{Jun Yu, Changwen Chen, Fan Yu, Cong Wang, Yang Luo, Ran Zhang, Wenzhuo Du, Xin Xu, Ke Wang, Zhili Wang, Zhongyi Liu, Xuhong Cao, Guanlin Mu, Guanjun Liu, Yuefeng Zou, Lin Xu, Xinyu Chen, Fengxin Chen, Xuan Li, Gongpeng Zhao, Can Wang, Feng Zhao, Ye Yu, Fang Gao, Jiaen Liang, Wei Huang, Shengping Liu, Qingsong Liu, and Jianqing Sun}}
+\author{{\parbox{{0.92\textwidth}}{{\centering Jun Yu, Changwen Chen, Fan Yu, Cong Wang, Yang Luo, Ran Zhang, Wenzhuo Du, Xin Xu, Ke Wang, Zhili Wang, Zhongyi Liu, Xuhong Cao, Guanlin Mu, Guanjun Liu, Yuefeng Zou, Lin Xu, Xinyu Chen, Fengxin Chen, Xuan Li, Gongpeng Zhao, Can Wang, Feng Zhao, Ye Yu, Fang Gao, Jiaen Liang, Wei Huang, Shengping Liu, Qingsong Liu, and Jianqing Sun}}}}
 \date{{Springer 16K LaTeX review source\\Files: {stats.files}; images: {stats.images}; code blocks: {stats.code_blocks}; tables: {stats.tables}}}
 """
 
@@ -815,11 +902,7 @@ def build_latex_document(items: list[NavItem], assets: AssetManager, stats: Expo
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
-        body.append(
-            r"\noindent{\small\textsf{"
-            + inline_to_latex(f"{item.title} | {item.path}")
-            + r"}}\par\vspace{1.5mm}"
-        )
+        body.append(render_source_header(item))
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir))
 
     preamble = latex_preamble(stats)
@@ -856,11 +939,7 @@ def build_latex_body(items: list[NavItem], assets: AssetManager, stats: ExportSt
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
-        body.append(
-            r"\noindent{\small\textsf{"
-            + inline_to_latex(f"{item.title} | {item.path}")
-            + r"}}\par\vspace{1.5mm}"
-        )
+        body.append(render_source_header(item))
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir))
 
     return "\n\n".join(body)

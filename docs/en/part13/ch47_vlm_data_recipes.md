@@ -326,8 +326,6 @@ Seven implementation risks (§47.7) reveal engineering details that technical re
 
 Once VLMs have mastered the "visual understanding" capability for both the physical world and two-dimensional surfaces through the high-standard data recipes described in this chapter, they also acquire the foundation for processing visual inputs and driving downstream generative tasks. In the next chapter, **Ch48: Data Engineering for Multimodal Generative Models**, we shift perspective toward generative tasks, discussing how data recipes will evolve as models transition from "observers" to generators of pixels and video.
 
-> **Compliance Notice**: Image copyright and privacy protection details are covered in Ch04 §4.4 and Ch27; general-purpose multimodal preprocessing methods underlying VLM data engineering are covered in Ch08–Ch11.
-
 ## References
 
 Chen Z, Wu J, Wang W, Su W, Chen G, Xing S, Zhong M, Liu Q, Lu Y, Li B, others (2023) InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks (ShareGPT4V). arXiv preprint arXiv:2312.14238.

@@ -517,9 +517,9 @@ When performing multi-source mixing, the open-source licenses of the original da
 
 ## Chapter Summary
 
-This chapter used "Mini-DeepSeek Pre-Training Reproduction" as a case study to demonstrate the engineering organization required to reproduce the key engineering stages of an open-source LLM pre-training data recipe using small-scale resources. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metric acceptance, and reproduction resources on a single traceable chain, so that the project becomes not merely a set of operational steps but an auditable case study.
+This chapter used Mini-DeepSeek Pre-Training Reproduction to walk through the key engineering stages of an open-source LLM pretraining data recipe under small-scale resource constraints. The project keeps task definition, data boundaries, architecture choices, sample schema, metric acceptance, and reproduction resources on one traceable chain.
 
-The boundaries of this case must also be clearly preserved. It is positioned as a reduced-scale recipe validation and does not aim for full large-model scale or publicly reported SOTA metrics. In scenarios involving larger scale, higher risk, or stricter compliance requirements, data sources, permission status, manual review proportions, runtime costs, and failure rollback plans should be re-evaluated.
+This is a reduced-scale recipe validation. It does not aim to reproduce full large-model scale or publicly reported SOTA metrics. Larger-scale, higher-risk, or stricter compliance settings require renewed review of data sources, permission status, manual review proportions, runtime costs, and rollback plans.
 
 As part of Part 14, this chapter corresponds to the project-level validation of the methods presented earlier. Readers can combine this case with the data recipes of Part 13, the platform governance chapters in earlier sections, and the checklists in the appendices to form a complete loop from methodological understanding to engineering delivery.
 

@@ -1155,9 +1155,9 @@ Once these activities begin forming a regular cadence, the Agent Tool-Use data f
 
 ## Chapter Summary
 
-This chapter used the "Agent Tool-Use Data Factory" as a case study to demonstrate the engineering organization of tool schemas, task environments, and interaction trajectories into Agent tool-use training data. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metrics acceptance, and reproducibility resources along a single pipeline, transforming the project from a mere set of operational steps into an auditable case study.
+This chapter used the Agent Tool-Use Data Factory to organize tool schemas, task environments, and interaction trajectories into training data for agent tool use. Its practical lesson is that task definition, data boundaries, architecture choices, sample schema, acceptance metrics, and reproducibility resources must stay connected if trajectory data is to remain auditable.
 
-The boundaries of this case must equally be clearly retained. The project operates primarily within a simulated environment with a controlled tool set, and does not represent an open internet or real enterprise permission environment. In scenarios of larger scale, higher risk, or stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and failure rollback plans should all be re-evaluated.
+The project operates mainly in a simulated environment with a controlled tool set. It does not represent the open internet or a real enterprise permission environment. Larger-scale, higher-risk, or compliance-sensitive scenarios require renewed review of sources, permissions, manual review proportions, operating costs, and rollback plans.
 
 As part of Part Fourteen, this chapter corresponds to the project-level validation of the methodologies presented in earlier parts of the book. Readers may combine this case with the data recipes of Part Thirteen, the platform governance chapters from earlier sections, and the inspection checklists in the appendices to form a complete loop from methodology understanding to engineering delivery.
 

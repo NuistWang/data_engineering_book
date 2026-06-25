@@ -1210,9 +1210,9 @@ Many teams conducting industry data work leave caution for late-stage human revi
 
 ## Chapter Summary
 
-This chapter uses a "legal-domain expert SFT data factory" as its case study, demonstrating the engineering organization required to transform regulations, case law, and legal Q&A materials into traceable domain-specific SFT training assets. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schemas, metric acceptance criteria, and reproducibility resources within a single pipeline, so that the project is no longer merely a sequence of operational steps but becomes an auditable case study.
+This chapter presented a legal-domain expert SFT data factory for turning regulations, case law, and legal Q&A materials into traceable domain-specific SFT assets. The project ties task definition, data boundaries, architecture choices, sample schemas, acceptance criteria, and reproducibility resources into one auditable pipeline.
 
-The boundaries of this case must also be clearly preserved. Input is limited to publicly available or licensed legal texts; the project does not cover real legal consultation liability or production-grade case management systems. In scenarios with larger scale, higher risk, or stronger compliance constraints, data sources, permission status, manual review ratios, operational costs, and failure rollback plans should all be re-evaluated.
+Its boundary is limited to publicly available or licensed legal texts. It does not cover real legal consultation liability or production-grade case management systems. For larger, riskier, or more tightly regulated deployments, teams should reassess sources, permissions, manual review ratios, operating costs, and rollback plans.
 
 As part of Part 14, this chapter corresponds to the project-level validation of the methods introduced earlier in the book. Readers may use this case together with the data recipes from Part 13, the platform governance chapters from earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 

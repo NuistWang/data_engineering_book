@@ -67,7 +67,7 @@ As shown in the comparison in Figure 23-1, in real systems this divergence direc
 
 
 
-![Figure 23-1: From Offline Evaluation to the Online Real Problem Distribution](../../images/part7/Yu-Chap23-Fig01-ZH.svg)
+![Figure 23-1: From Offline Evaluation to the Online Real Problem Distribution](../../images/part7/Yu-Chap23-Fig01-EN.svg)
 
 *Figure 23-1: From Offline Evaluation to the Online Real Problem Distribution.*
 
@@ -107,7 +107,7 @@ For example, a user who does not downvote but reformulates the same question thr
 
 The value of online feedback also lies in its ability to help teams establish problem-priority awareness. During the offline phase, teams may pursue overall metric improvement—for example, Recall@k (the number of successfully recalled relevant results among the top k results), Answer Accuracy, Citation Accuracy, and so on. After deployment, however, what truly needs to be prioritized is not every error but high-frequency errors, high-risk errors, and high-impact errors. High-frequency errors affect a large number of users with similar problems, so fixing them yields high returns; high-risk errors involve sensitive scenarios such as legal, financial, medical, compliance, and permissions, and must be prioritized for control; high-impact errors may appear in critical business processes such as approval, reimbursement, contract review, customer service, and operations incident handling. Online feedback can provide error frequency, user impact scope, and business consequences, thereby helping teams direct limited resources to the most valuable repair directions.
 
-It should be noted that online feedback does not equal data that can be used directly for training. User feedback often contains noise, emotion, misoperation, and missing context. For example, a user's downvote may be because the answer is genuinely wrong, but it may also be because the answer is too long, the tone is inappropriate, it does not give a direct conclusion, or the user's own input was incomplete. Therefore, online feedback must undergo cleaning, attribution, annotation, and routing before it can be transformed into usable data assets. This is precisely the data engineering core of the online feedback loop: not simply collecting logs, but transforming user behavior into structured problems, transforming structured problems into repair tasks, and transforming repair tasks into new knowledge, indices, evaluations, and model improvements.
+Online feedback does not equal data that can be used directly for training. User feedback often contains noise, emotion, misoperation, and missing context. For example, a user's downvote may be because the answer is genuinely wrong, but it may also be because the answer is too long, the tone is inappropriate, it does not give a direct conclusion, or the user's own input was incomplete. Therefore, online feedback must undergo cleaning, attribution, annotation, and routing before it can be transformed into usable data assets. This is precisely the data engineering core of the online feedback loop: not simply collecting logs, but transforming user behavior into structured problems, transforming structured problems into repair tasks, and transforming repair tasks into new knowledge, indices, evaluations, and model improvements.
 
 ---
 
@@ -152,7 +152,7 @@ As shown in Figure 23-2, a complete data flywheel typically comprises six stages
 
 
 
-![Figure 23-2: The Online Feedback Data Flywheel for Large-Model Applications](../../images/part7/Yu-Chap23-Fig02-ZH.svg)
+![Figure 23-2: The Online Feedback Data Flywheel for Large-Model Applications](../../images/part7/Yu-Chap23-Fig02-EN.svg)
 
 *Figure 23-2: The Online Feedback Data Flywheel for Large-Model Applications.*
 
@@ -270,7 +270,7 @@ A complete event schema should include at least six categories of information: u
 
 At the implementation level, the event schema should not only serve log storage but also downstream sample construction. That is, when designing fields, teams need to think ahead about how these data will eventually enter evaluation sets, failure sample repositories, knowledge update queues, and model training pipelines. For example, `index_version` and `prompt_version` may appear to be purely engineering fields, but they determine whether version attribution is possible after the fact; `citation_anchors` may appear to be only a display field, but it determines whether one can verify that the answer was based on correct evidence; `training_allowed` may appear to be only a compliance field, but it determines whether the data can enter subsequent training or fine-tuning pipelines.
 
-![Figure 23-3: Online Feedback Event Collection and Routing Pipeline](../../images/part7/Yu-Chap23-Fig03-ZH.svg)
+![Figure 23-3: Online Feedback Event Collection and Routing Pipeline](../../images/part7/Yu-Chap23-Fig03-EN.svg)
 
 *Figure 23-3: Online Feedback Event Collection and Routing Pipeline.*
 
@@ -377,7 +377,7 @@ Scheduled updates are appropriate for periodically changing knowledge, such as h
 
 Audited updates are appropriate for high-risk content, such as compliance policies, financial rules, medical guidelines, legal terms, permission policies, contract templates, and critical business processes. Audited updates cannot be automatically deployed directly but require responsible party confirmation, expert review, regression evaluation, approval documentation, and gray release. For this type of knowledge, update speed is not the only goal—correctness, traceability, and rollback capability are more important.
 
-![Figure 23-4: Knowledge Update, Gray Release, and Rollback Governance Process](../../images/part7/Yu-Chap23-Fig04-ZH.svg)
+![Figure 23-4: Knowledge Update, Gray Release, and Rollback Governance Process](../../images/part7/Yu-Chap23-Fig04-EN.svg)
 
 *Figure 23-4: Knowledge Update, Gray Release, and Rollback Governance Process.*
 

@@ -237,7 +237,7 @@ dataset_slo:
   on_violation: page_on_call
 ```
 
-This SLO-driven data asset monitoring enables data quality issues to be discovered before training rather than being traced back after model performance has declined. It is important to note that a dataset SLO should not contain only metrics, thresholds, and alert channels; it should also include operational closure fields: `owner` identifies the ultimate responsible party; `steward` identifies the day-to-day maintainer; `runbook_url` points to the troubleshooting guide; `severity` determines the alert tier; `escalation_policy` defines the escalation path; `dataset_version` binds the currently controlled version; and `contract_id` links to the data contract or data product interface. Without these fields, an SLO can detect problems but cannot ensure they are correctly handed off, escalated, and resolved.
+This SLO-driven data asset monitoring enables data quality issues to be discovered before training rather than being traced back after model performance has declined. A dataset SLO should not contain only metrics, thresholds, and alert channels; it should also include operational closure fields: `owner` identifies the ultimate responsible party; `steward` identifies the day-to-day maintainer; `runbook_url` points to the troubleshooting guide; `severity` determines the alert tier; `escalation_policy` defines the escalation path; `dataset_version` binds the currently controlled version; and `contract_id` links to the data contract or data product interface. Without these fields, an SLO can detect problems but cannot ensure they are correctly handed off, escalated, and resolved.
 
 Dataset SLO design must be tailored to usage context. An SLO for a general pre-training corpus might emphasize language distribution, deduplication rate, toxic content ratio, and source diversity. An SLO for a customer service SFT dataset might emphasize business category coverage, annotation consistency, historical process retention, and sensitive information desensitization. An SLO for an evaluation set might emphasize contamination prevention, question stability, and version freeze. Applying the same set of metrics to every dataset creates the appearance of uniformity while failing to cover the critical risks specific to each.
 
@@ -330,7 +330,7 @@ When investigating data content issues, automatic metrics and manual sampling sh
 
 Attribution results should be written back into the issue backlog and knowledge base. Each incident investigation produces valuable troubleshooting paths — for example, a certain type of alert is typically caused by a specific data source going offline; a certain quality score drop is typically associated with a particular annotation task type; a certain dependency upgrade frequently affects specific language processing. Recording these observations in the troubleshooting handbook reduces the time to locate the next similar incident.
 
-![Figure 26-1: Anomaly Attribution Decision Tree](../../images/part8/Du-Chap26-Fig01-ZH.svg)
+![Figure 26-1: Anomaly Attribution Decision Tree](../../images/part8/Du-Chap26-Fig01-EN.svg)
 
 *Figure 26-1: LLM Data Platform Anomaly Attribution Decision Tree — Four-Level Diagnostic Path from Alert Trigger to Root-Cause Identification.*
 
@@ -480,7 +480,7 @@ Operational dashboards should also offer multiple time scales. Minute-level view
 
 Finally, dashboards should not grow without bound. Each view should retain a small number of core metrics and clear action entry points. The Platform Health View is focused on whether on-call action is needed; the Data Quality View on whether data needs to be paused or repaired; the Business Operations View on whether model and product plans are affected. Additional diagnostic metrics can be placed on a dedicated diagnostic page rather than occupying the primary view. The goal of a monitoring dashboard is not to demonstrate how much data the team can collect but to help the team make correct decisions faster.
 
-![Figure 26-2: Data Platform Observability Panorama](../../images/part8/Du-Chap26-Fig02-ZH.svg)
+![Figure 26-2: Data Platform Observability Panorama](../../images/part8/Du-Chap26-Fig02-EN.svg)
 
 *Figure 26-2: LLM Data Platform Observability Panorama — Architecture of the Three-Layer Metric Hierarchy and the Three-Dimensional Operational Dashboard.*
 

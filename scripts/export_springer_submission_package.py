@@ -13,6 +13,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -24,7 +25,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOK_SLUG = "Data_Engineering_for_Large_Foundation_Models_A_Handbook_Jun_Yu"
+BOOK_SLUG = "Data_Engineering_for_Large_Foundation_Models_A_Handbook"
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "springer_submission"
 PDF_DIR = ROOT / "output" / "pdf"
 SUBMISSION_PDF_DIR = PDF_DIR / "data_engineering_book_en_16k_compact_submission_pdfs"
@@ -154,6 +155,18 @@ def copy_tree(src: Path, dst: Path, ignore=None) -> None:
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst, ignore=ignore or ignore_system_files)
+    remove_system_files(dst)
+
+
+def remove_system_files(path: Path) -> None:
+    if not path.exists():
+        return
+    for item in sorted(path.rglob("*")):
+        if should_skip_path(item):
+            if item.is_dir():
+                shutil.rmtree(item)
+            else:
+                item.unlink(missing_ok=True)
 
 
 def latex_root_tex() -> Path:
@@ -292,9 +305,12 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 
 def rewrite_latex_package_paths(package_dir: Path) -> None:
     latex_root = package_dir / SOURCE_DIR_NAME / "LaTeX"
+    latex_assets = package_dir / SOURCE_DIR_NAME / "Figures" / "LaTeX_Assets"
     replacements = {
-        "../latex_assets_en/": "../assets/",
-        "latex_assets_en/": "assets/",
+        "../latex_assets_en/": "../Figures/LaTeX_Assets/",
+        "latex_assets_en/": "../Figures/LaTeX_Assets/",
+        "../assets/": "../Figures/LaTeX_Assets/",
+        "assets/": "../Figures/LaTeX_Assets/",
         "../data_engineering_book_en_16k_latex_chapters/": "../chapters/",
         "data_engineering_book_en_16k_latex_chapters/": "chapters/",
     }
@@ -302,17 +318,97 @@ def rewrite_latex_package_paths(package_dir: Path) -> None:
         text = tex_file.read_text(encoding="utf-8")
         for old, new in replacements.items():
             text = text.replace(old, new)
+
+        def fix_includegraphics(match: re.Match[str]) -> str:
+            options = match.group(1) or ""
+            image_path = match.group(2)
+            if "LaTeX_Assets/" not in image_path:
+                return match.group(0)
+            basename = Path(image_path).name
+            target = latex_assets / basename
+            rewritten = relpath_posix(target, tex_file.parent)
+            return rf"\includegraphics{options}{{{rewritten}}}"
+
+        text = re.sub(r"\\includegraphics(\[[^\]]*\])?\{([^}]+)\}", fix_includegraphics, text)
         tex_file.write_text(text, encoding="utf-8")
+
+
+def relpath_posix(target: Path, start: Path) -> str:
+    return Path(os.path.relpath(target, start)).as_posix()
+
+
+def split_local_image_url(raw_url: str) -> tuple[str, str] | None:
+    raw_url = raw_url.strip()
+    if not raw_url or re.match(r"^(?:https?:|data:|file:|#)", raw_url):
+        return None
+    suffix = ""
+    for marker in ("#", "?"):
+        if marker in raw_url:
+            raw_url, tail = raw_url.split(marker, 1)
+            suffix = marker + tail
+            break
+    return raw_url, suffix
+
+
+def package_figure_url_for_markdown(package_dir: Path, markdown_copy: Path, raw_url: str) -> str:
+    split = split_local_image_url(raw_url)
+    if split is None:
+        return raw_url
+    local_url, suffix = split
+    markdown_root = package_dir / SOURCE_DIR_NAME / "Markdown" / "docs_en"
+    try:
+        source_rel = markdown_copy.relative_to(markdown_root)
+    except ValueError:
+        return raw_url
+    original_markdown = ROOT / "docs" / "en" / source_rel
+    original_image = (original_markdown.parent / local_url).resolve()
+    if not original_image.exists() or not original_image.is_file():
+        return raw_url
+    try:
+        image_rel = original_image.relative_to(ROOT)
+    except ValueError:
+        return raw_url
+    package_image = package_dir / SOURCE_DIR_NAME / "Figures" / image_rel
+    return relpath_posix(package_image, markdown_copy.parent) + suffix
+
+
+def rewrite_markdown_package_image_paths(package_dir: Path) -> None:
+    markdown_root = package_dir / SOURCE_DIR_NAME / "Markdown" / "docs_en"
+    if not markdown_root.exists():
+        return
+
+    def replace_markdown(match: re.Match[str], markdown_copy: Path) -> str:
+        return f"![{match.group(1)}]({package_figure_url_for_markdown(package_dir, markdown_copy, match.group(2))})"
+
+    def replace_html(match: re.Match[str], markdown_copy: Path) -> str:
+        quote = match.group(2)
+        new_url = package_figure_url_for_markdown(package_dir, markdown_copy, match.group(3))
+        return f"{match.group(1)}{quote}{new_url}{quote}"
+
+    for markdown_copy in sorted(markdown_root.rglob("*.md")):
+        text = markdown_copy.read_text(encoding="utf-8", errors="replace")
+        text = re.sub(
+            r"!\[([^\]]*)]\(([^)]+)\)",
+            lambda match: replace_markdown(match, markdown_copy),
+            text,
+        )
+        text = re.sub(
+            r"(<img[^>]+src=)([\"'])([^\"']+)\2",
+            lambda match: replace_html(match, markdown_copy),
+            text,
+            flags=re.I,
+        )
+        markdown_copy.write_text(text, encoding="utf-8")
 
 
 def copy_markdown_sources(package_dir: Path) -> None:
     source_root = package_dir / SOURCE_DIR_NAME
     copy_tree(ROOT / "docs" / "en", source_root / "Markdown" / "docs_en")
+    rewrite_markdown_package_image_paths(package_dir)
     copy_tree(LATEX_PARTS_DIR, source_root / "LaTeX" / "parts")
     copy_tree(LATEX_CHAPTERS_DIR, source_root / "LaTeX" / "chapters")
-    copy_tree(LATEX_ASSETS_DIR, source_root / "LaTeX" / "assets")
+    copy_tree(LATEX_ASSETS_DIR, source_root / "Figures" / "LaTeX_Assets")
     copy_file(latex_root_tex(), source_root / "LaTeX" / "data_engineering_book_en_16k_latex.tex")
-    rewrite_latex_package_paths(package_dir)
 
     named_dir = source_root / "LaTeX" / "chapters_named_for_submission"
     manifest_rows: list[dict[str, str]] = []
@@ -332,6 +428,7 @@ def copy_markdown_sources(package_dir: Path) -> None:
             }
         )
     write_csv(source_root / "LaTeX" / "chapter_tex_manifest.csv", manifest_rows)
+    rewrite_latex_package_paths(package_dir)
 
 
 def copy_supporting_internal_files(package_dir: Path) -> None:
@@ -340,6 +437,7 @@ def copy_supporting_internal_files(package_dir: Path) -> None:
     copy_file(ROOT / "publishing" / "15_final_delivery_checklist.md", internal / "Metadata" / "15_final_delivery_checklist.md")
     copy_file(ROOT / "publishing" / "19_declarations_and_metadata_templates.md", internal / "Declarations" / "19_declarations_and_metadata_templates.md")
     copy_tree(ROOT / "publishing" / "final_review", internal / "Audit_Reports")
+    copy_tree(ROOT / "publishing" / "springer_official", internal / "Audit_Reports" / "springer_official")
 
 
 def copy_permissions(package_dir: Path) -> None:
@@ -428,7 +526,8 @@ When `--zip` is used, the ZIP archive is intentionally limited to the three publ
 - `{latex_source}` is the root LaTeX export.
 - `{SOURCE_DIR_NAME}/LaTeX/chapters` keeps the original split TeX files needed by the root TeX file.
 - `{SOURCE_DIR_NAME}/LaTeX/chapters_named_for_submission` provides duplicate chapter source filenames using first-author surname and chapter/project/appendix label.
-- `{SOURCE_DIR_NAME}/Figures` contains the renamed figure files referenced by the English manuscript.
+- `{SOURCE_DIR_NAME}/Markdown/docs_en` and `{SOURCE_DIR_NAME}/LaTeX` are rewritten in the submission package so local image references point into `{SOURCE_DIR_NAME}/Figures`.
+- `{SOURCE_DIR_NAME}/Figures` contains the figure files referenced by the English manuscript and the `LaTeX_Assets` subfolder used by the exported TeX source.
 - `{SOURCE_DIR_NAME}/Figures_Print_Formats` contains EPS copies for SVG figures and TIFF copies for raster figures, with `figures_print_format_manifest.csv` mapping each production copy back to the manuscript image path.
 - `{SOURCE_DIR_NAME}/Accessibility/springer_alt_text_inventory.xlsx` is the reviewed alt-text Excel workbook to submit with the final manuscript.
 - `{THIRD_PARTY_DIR_NAME}` contains the rights/originality confirmation; signed external publisher forms, if any, should be added there before upload.
@@ -564,6 +663,7 @@ def write_manifest(package_dir: Path) -> None:
 
 
 def create_zip_archive(package_dir: Path) -> Path:
+    remove_system_files(package_dir)
     zip_path = package_dir.with_suffix(".zip")
     if zip_path.exists():
         zip_path.unlink()
@@ -580,6 +680,7 @@ def create_zip_archive(package_dir: Path) -> Path:
             if path.name.endswith(".inspect.ndjson"):
                 continue
             archive.write(path, path.relative_to(package_dir.parent).as_posix())
+    remove_system_files(package_dir)
     return zip_path
 
 
@@ -601,6 +702,7 @@ def export_package(output_root: Path = DEFAULT_OUTPUT_ROOT, *, include_pdfs: boo
         copy_figures(package_dir)
         copy_print_figures(package_dir)
     write_package_readme(package_dir)
+    remove_system_files(package_dir)
     write_manifest(package_dir)
     return package_dir
 
@@ -617,6 +719,7 @@ def main() -> int:
     print(f"[ok] Manifest: {package_dir / '_Internal_Not_For_Submission' / 'Checksums' / 'manifest.json'}")
     if args.zip:
         zip_path = create_zip_archive(package_dir)
+        remove_system_files(package_dir)
         print(f"[ok] ZIP archive written: {zip_path}")
     return 0
 

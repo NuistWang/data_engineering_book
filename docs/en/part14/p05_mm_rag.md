@@ -1201,9 +1201,9 @@ This means that if the team were to build a more powerful enterprise document an
 
 ## Chapter Summary
 
-This chapter used a "Multimodal RAG Enterprise Financial Report Assistant" as a case study to demonstrate the engineering organization of a multimodal question-answering system that transforms complex financial report PDFs into a retrievable, citable, and evaluable form. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metric acceptance, and reproducibility resources on a single pipeline, making the project no longer merely a sequence of operational steps but a verifiable case study.
+This chapter used the Multimodal RAG Enterprise Financial Report Assistant to show how complex financial-report PDFs can become retrievable, citable, and evaluable assets. The project keeps task definition, data boundaries, architecture choices, sample schema, metric acceptance, and reproducibility resources on one pipeline, which makes the retrieval and answering behavior easier to inspect.
 
-The boundaries of this case also need to be clearly preserved. The focus is on page-level visual retrieval and single-document or small-document financial report scenarios; production-scale full-library financial analysis is not covered. In scenarios involving larger scale, higher risk, or stronger compliance constraints, the data sources, permission status, manual review proportion, operating costs, and failure rollback plans should be re-evaluated.
+The scope is page-level visual retrieval for single-document or small-document financial-report scenarios. It does not cover production-scale full-library financial analysis. Larger-scale or more regulated use requires another review of data sources, permission status, manual review proportions, operating costs, and rollback plans.
 
 As part of Part Fourteen, this chapter corresponds to the project-level deployment verification of the methods presented earlier. Readers can use this case together with Part Thirteen's data recipes, the platform governance chapters from earlier sections, and the checklists in the appendix to form a closed loop from method understanding to engineering delivery.
 

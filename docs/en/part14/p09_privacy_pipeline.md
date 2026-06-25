@@ -1118,9 +1118,9 @@ If there is lineage without accountability, the system knows where the problem i
 
 ## Chapter Summary
 
-This chapter used a "privacy-preserving data pipeline" as a case study to demonstrate the engineering organization of PII detection, classification, redaction, auditing, and inspection into a privacy-preserving processing chain. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metrics acceptance criteria, and reproducibility resources within a single pipeline, so that the project is no longer merely a sequence of operational steps but becomes a reviewable case study.
+This chapter used a privacy-preserving data pipeline to organize PII detection, classification, redaction, auditing, and inspection into one processing chain. The important pattern is that task definition, data boundaries, architecture choices, sample schema, acceptance criteria, and reproducibility resources are handled together, so privacy processing can be reviewed rather than only executed.
 
-The boundaries of this case study must also be clearly preserved. Validating the governance pipeline using rules and sample data does not substitute for legal counsel, a DPIA, or a production-grade privacy platform. In scenarios with larger scale, higher risk, or stronger compliance constraints, data provenance, permission status, manual review proportion, operating costs, and failure rollback plans should all be reassessed.
+The case has a strict boundary. Validating the governance pipeline with rules and sample data does not substitute for legal counsel, a DPIA, or a production-grade privacy platform. Larger-scale, higher-risk, or more regulated scenarios require another review of data provenance, permission status, manual review proportions, operating costs, and rollback plans.
 
 As part of Part XIV, this chapter corresponds to the project-level validation of the methods presented in prior chapters. Readers may combine this case with the data recipes in Part XIII, the platform governance chapters in earlier parts, and the checklists in the appendices to form a closed loop from methodological understanding to engineering delivery.
 

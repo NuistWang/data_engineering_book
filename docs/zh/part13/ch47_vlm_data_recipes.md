@@ -317,8 +317,6 @@ InternVL 团队不仅开源了模型权重，还开源了百万级别的 SFT 高
 
 当 VLM 通过本章所述的高标准数据配方，掌握了对物理世界与二维平面的"看图理解"能力后，它也就具备了理解视觉输入并驱动后续生成任务的基础。在下一章 **Ch48：多模态生成模型数据工程** 中，我们将视角转向生成任务，讨论当模型从"观察者"转向像素与视频生成时，数据配方将如何演进。
 
-> **合规边界提示**：图像版权与隐私保护细节见 Ch04 §4.4 与 Ch27；VLM 数据工程所依赖的通用多模态预处理方法见 Ch08-Ch11。
-
 ## 参考文献
 
 Chen Z, Wu J, Wang W, Su W, Chen G, Xing S, Zhong M, Liu Q, Lu Y, Li B, others (2023) InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks (ShareGPT4V). arXiv preprint arXiv:2312.14238.

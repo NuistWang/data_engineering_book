@@ -106,7 +106,7 @@ User preference fields describe the more stable selection tendencies that hold a
 
 Task progress fields describe what stage a task has been completed to, what sub-steps remain, which dependencies have been satisfied, which resources are ready, and where the current bottleneck lies. For complex agents, progress fields are the key to task-resumption capability. Without explicit progress, "continue where we left off" amounts to a vague instruction from the model's perspective. A mature progress representation typically includes not just a stage label but at minimum: completed steps, pending steps, current blockers, and the most recently valid action. Only then can the system determine—upon resumption—whether to continue execution, first verify the old state, or first request missing information.
 
-It is worth noting that these three categories of fields must not be naively merged. User preferences are not the same as current task state, and task progress is not the same as the current dialogue action. Mixing them into an undifferentiated state dictionary may appear to "store everything," but during training it actually makes it harder for the model to learn information hierarchy. Worse, mixed representations also cause update-logic confusion: a user correction may need to modify only task fields without overriding long-term preferences; a long-term preference update should not reset current task progress. The true value of structured representation lies not only in making information "storable," but in making different types of information subject to different update, recall, and decay rules.
+These three categories of fields must not be naively merged. User preferences are not the same as current task state, and task progress is not the same as the current dialogue action. Mixing them into an undifferentiated state dictionary may appear to "store everything," but during training it actually makes it harder for the model to learn information hierarchy. Worse, mixed representations also cause update-logic confusion: a user correction may need to modify only task fields without overriding long-term preferences; a long-term preference update should not reset current task progress. The true value of structured representation lies not only in making information "storable," but in making different types of information subject to different update, recall, and decay rules.
 
 ### The Minimal Closed-Loop Unit of State Representation
 
@@ -167,7 +167,7 @@ At a deeper level, interruption, switching, and resumption together constitute t
 
 For a more intuitive illustration, Figure 20-1 shows a multi-turn state-transition diagram. The diagram should not merely depict a generic sequential flow, but should highlight forks, suspensions, resumptions, and failure-rollback relationships within state transitions. That is, the diagram should take the form of a state network graph capturing task-thread switching and memory layer influence, rather than a "left-to-right pipeline." This allows readers to see intuitively that the complexity of multi-turn agents does not stem from "more turns" but from "more states, more transitions, and more recovery paths."
 
-![Figure 20-1: Multi-Turn Agent State Transition Diagram](../../images/part6/Zhang-Chap20-Fig01-ZH.svg)
+![Figure 20-1: Multi-Turn Agent State Transition Diagram](../../images/part6/Zhang-Chap20-Fig01-EN.svg)
 
 *Figure 20-1: Multi-Turn Agent State Transition Diagram.*
 
@@ -263,7 +263,7 @@ Conflict resolution requires not only "knowing there is a conflict" but also a p
 
 For example, if the user's long-term preference is "default output in Chinese," but in the current episode explicitly requests "use English throughout this time," the system should not continue to output Chinese based on the long-term preference. If it does, the priority system has not been established. Similarly, if the model has inferred based on old state that a certain field likely still holds, but the most recent tool query shows that condition has changed, the tool observation should override the model inference. When multi-turn data explicitly shows this override process, the model is more likely to develop robust conflict-resolution habits and avoid averaging across conflicting sources. The memory layer hierarchy for task-oriented agents and its update and override flow under different information sources are shown in Figure 20-2.
 
-![Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents](../../images/part6/Zhang-Chap20-Fig02-ZH.svg)
+![Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents](../../images/part6/Zhang-Chap20-Fig02-EN.svg)
 
 *Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents.*
 

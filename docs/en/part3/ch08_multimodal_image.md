@@ -236,7 +236,7 @@ def filter_by_semantic_score(image, text_caption, threshold=0.25):
 
 ### 8.4.2 Saving Valuable Images: Multi-Granularity Synthetic Recaptioning
 
-When an image has high resolution, good composition, and rare entities, but its original web text is only a label such as "IMG_20230401.jpg," discarding it wastes a data asset. If compute allows, using expert VLMs such as LLaVA-1.5 (Liu et al. 2024), Qwen2.5-VL (Bai et al. 2025), InternVL3 (Zhu et al. 2025), or GPT-4V to regenerate descriptions is an important way to improve image-text training quality. It is important to note that recaptioning is not an unconditional gain: generated captions can introduce hallucinations, stylistic bias, and safety-policy refusals, so the generation model, prompt version, temperature parameter, and spot-check conclusion must be recorded.
+When an image has high resolution, good composition, and rare entities, but its original web text is only a label such as "IMG_20230401.jpg," discarding it wastes a data asset. If compute allows, using expert VLMs such as LLaVA-1.5 (Liu et al. 2024), Qwen2.5-VL (Bai et al. 2025), InternVL3 (Zhu et al. 2025), or GPT-4V to regenerate descriptions is an important way to improve image-text training quality. Recaptioning is not an unconditional gain: generated captions can introduce hallucinations, stylistic bias, and safety-policy refusals, so the generation model, prompt version, temperature parameter, and spot-check conclusion must be recorded.
 
 Modern large-model engineering usually applies a **multi-granularity recaptioning array** to this image batch so that both early cold-start alignment and later long-text generation are supported:
 

@@ -1128,9 +1128,9 @@ Once these problems are fixed as replay samples, the team can quickly verify at 
 
 ## Chapter Summary
 
-This chapter used the "LLaVA Multimodal Instruction Data Factory" as a case study to demonstrate the engineering organization of multimodal training assets for image-text instructions, OCR, chart, and document understanding samples. The primary value of the case study lies in placing task definition, data boundaries, architectural decisions, sample schema, metric acceptance, and reproducibility resources along a single chain, so that the project is no longer just a series of operational steps but becomes a verifiable case study.
+This chapter examined the LLaVA Multimodal Instruction Data Factory as an engineering path for image-text instruction, OCR, chart, and document-understanding samples. The useful pattern is that task definition, data boundaries, architecture choices, sample schema, metric acceptance, and reproducibility resources are kept together rather than scattered across scripts and notes.
 
-The boundaries of this case study must also be clearly preserved. Grounded in licensable images and controlled task templates, it does not claim to cover all visual question answering types. In scenarios with larger scale, higher risk, or stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and failure rollback plans should be re-evaluated.
+The case is grounded in licensable images and controlled task templates, and it does not claim to cover every form of visual question answering. At larger scale or under stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and rollback plans should be reviewed again.
 
 As part of Part 14, this chapter corresponds to the project-level validation of the methods presented earlier in the book. Readers may use this case study in conjunction with the data recipes from Part 13, the platform governance chapters from earlier sections, and the inspection checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 

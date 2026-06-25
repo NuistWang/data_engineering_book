@@ -303,7 +303,7 @@ When referring to the tool field table, it should not be treated as a fixed fiel
 
 
 
-![Figure 19-1: Tool-Use Data Construction State Machine Diagram](../../images/part6/Yu-Chap19-Fig01-ZH.svg)
+![Figure 19-1: Tool-Use Data Construction State Machine Diagram](../../images/part6/Yu-Chap19-Fig01-EN.svg)
 
 *Figure 19-1: Tool-Use Data Construction State Machine Diagram.*
 
@@ -432,7 +432,7 @@ Furthermore, the greatest value of log feedback is that it continuously provides
 
 ### From Log to Sample Requires a Failure Semantic Reconstruction
 
-It is important to note that call logs are not inherently equivalent to training samples. Logs record what happened in the system, while training samples require "what the model should learn." Therefore, when recovering failure samples from logs, a failure semantic reconstruction is typically needed: the steps, errors, retries, and results in the raw log are reorganized into trajectory units suitable for training.
+Call logs are not inherently equivalent to training samples. Logs record what happened in the system, while training samples require "what the model should learn." Therefore, when recovering failure samples from logs, a failure semantic reconstruction is typically needed: the steps, errors, retries, and results in the raw log are reorganized into trajectory units suitable for training.
 
 For example, a log sequence may contain three consecutive failed calls, one clarifying question, and one eventual success. For operations, this is a troubleshooting record; for the data team, it is more like a complete recovery sample that needs to be re-distilled into key observations, failure types, strategy changes, and final results. Similarly, a permission-failure log may not be very long, but if it can be recognized as corresponding to the pattern "should immediately terminate rather than continue attempting," it has very high safety training value. The complete process from call failure to diagnosis, correction, and eventual recovery is shown in Figure 19-2.
 
@@ -440,7 +440,7 @@ In other words, log feedback cannot stop at the simple export layer—it is fund
 
 
 
-![Figure 19-2: Call Failure Recovery Process Diagram](../../images/part6/Yu-Chap19-Fig02-ZH.svg)
+![Figure 19-2: Call Failure Recovery Process Diagram](../../images/part6/Yu-Chap19-Fig02-EN.svg)
 
 *Figure 19-2: Call Failure Recovery Process Diagram.*
 

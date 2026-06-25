@@ -52,7 +52,7 @@ To build a real data product, the team must answer a structured set of questions
 
 As shown in Figure 28-1, the canvas organizes the key elements of a data product into one view, so that producers, consumers, and governance teams can discuss product boundaries and commitments in the same context.
 
-![Data product canvas](../../images/part9/Liu-Chap28-Fig01-ZH.svg)
+![Data product canvas](../../images/part9/Liu-Chap28-Fig01-EN.svg)
 
 *Figure 28-1: Data product canvas.*
 
@@ -121,7 +121,7 @@ A complete data contract usually contains five core clause groups, each covering
 
 Putting the five clause groups together forms a complete data contract. As shown in Figure 28-2, a typical contract template includes metadata such as name, version, and owner; the five clause groups; and effective/change information.
 
-![Data contract template with five clause groups](../../images/part9/Liu-Chap28-Fig02-ZH.svg)
+![Data contract template with five clause groups](../../images/part9/Liu-Chap28-Fig02-EN.svg)
 
 *Figure 28-2: Data contract template.*
 
@@ -199,7 +199,7 @@ The most dangerous category is the middle ground: **potentially breaking changes
 
 To judge quickly and consistently how a change should be handled in engineering practice, teams can use a **change compatibility decision tree**, as shown in Figure 28-3.
 
-![Change compatibility decision tree](../../images/part9/Liu-Chap28-Fig03-ZH.svg)
+![Change compatibility decision tree](../../images/part9/Liu-Chap28-Fig03-EN.svg)
 
 *Figure 28-3: Change compatibility decision tree.*
 
@@ -258,7 +258,7 @@ This incident clearly exposes the cost of silent failure. If a consumer registry
 
 This table turns the impact of one change from vague concern into a row-level checklist: who is affected, how, how badly, and what to do. Even consumers such as `analytics_daily`, which are affected but less severely, are included, demonstrating the completeness of impact analysis. As shown in Figure 28-4, the essence of this analysis is to map one upstream change along lineage to all downstream consumers and grade them by impact severity.
 
-![Consumer impact analysis](../../images/part9/Liu-Chap28-Fig04-ZH.svg)
+![Consumer impact analysis](../../images/part9/Liu-Chap28-Fig04-EN.svg)
 
 *Figure 28-4: Consumer impact analysis.*
 

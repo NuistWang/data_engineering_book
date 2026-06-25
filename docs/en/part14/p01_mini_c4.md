@@ -1065,9 +1065,9 @@ From this perspective, the structured fields and intermediate artifacts currentl
 
 ## Chapter Summary
 
-This chapter used the "Mini-C4 distributed web corpus pipeline" as a case study to demonstrate the engineering organization of constructing auditable pretraining corpus samples from a Common Crawl shard. The main value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metrics acceptance, and reproducibility resources in the same chain, making the project no longer merely a sequence of operational steps but an auditable case study.
+This chapter examined the Mini-C4 distributed web corpus pipeline as a compact example of auditable pretraining corpus construction from a Common Crawl shard. Its main contribution is the way it keeps task definition, data boundaries, architecture choices, sample schema, acceptance metrics, and reproducibility resources on the same traceable path.
 
-The boundaries of this case must also be clearly preserved. Single shard, single-machine CPU, and Ray Data environment, with emphasis on validating web body text extraction, cleaning and deduplication, language splitting, and training packaging. In scenarios of larger scale, higher risk, or stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and failure rollback plans should be re-evaluated.
+The case remains intentionally narrow: one shard, a single-machine CPU environment, and Ray Data, with emphasis on web body extraction, cleaning and deduplication, language splitting, and training packaging. At larger scale, or under stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and rollback plans need fresh review.
 
 As part of Chapter 14, this chapter corresponds to the project-level empirical validation of the methods presented in earlier chapters. Readers can combine this case with the data recipes from Chapter 13, the platform governance chapters in preceding sections, and the checklists in the appendices to form a closed loop from methodological understanding to engineering delivery.
 

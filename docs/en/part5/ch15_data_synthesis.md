@@ -159,7 +159,7 @@ A truly effective scheduling system should treat training feedback as an importa
 
 
 
-![Figure 15-1: Synthetic Data Factory Flow Diagram](../../images/part5/Wang-Chap15-Fig01-ZH.svg)
+![Figure 15-1: Synthetic Data Factory Flow Diagram](../../images/part5/Wang-Chap15-Fig01-EN.svg)
 
 *Figure 15-1: Synthetic Data Factory Flow Diagram.*
 
@@ -510,7 +510,7 @@ The significance of difficulty validation is to force the factory to confront th
 
 
 
-![Figure 15-2: Quality Gate and Feedback Loop Diagram](../../images/part5/Wang-Chap15-Fig02-ZH.svg)
+![Figure 15-2: Quality Gate and Feedback Loop Diagram](../../images/part5/Wang-Chap15-Fig02-EN.svg)
 
 *Figure 15-2: Quality Gate and Feedback Loop Diagram.*
 

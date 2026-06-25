@@ -940,9 +940,9 @@ For a book, this kind of consistency is itself an important quality indicator.
 
 ## Chapter Summary
 
-This chapter uses the "Synthetic Mathematics and Code Textbook Factory" as a case study to demonstrate the engineering organizational approach for generating mathematics and code textbook-grade data through verifiable problem evolution and solution pipelines. The primary value of the case lies in placing task definition, data boundaries, architectural decisions, sample schema, metric acceptance, and reproducibility resources within a single pipeline, so that the project becomes not merely a sequence of operational steps but a reviewable case study.
+This chapter presented the Synthetic Mathematics and Code Textbook Factory as a pipeline for generating textbook-grade mathematics and code data through verifiable problem evolution and solution checking. Its engineering value comes from joining task definition, data boundaries, architecture choices, sample schema, acceptance metrics, and reproducibility resources into one reviewable workflow.
 
-The boundaries of this case must also be clearly preserved. The focus is on mathematics, code, and programmatic reasoning samples, and does not replace full curriculum authoring or expert review processes. In scenarios with larger scale, higher risk, or stricter compliance constraints, data sources, permission status, manual review proportions, operating costs, and failure rollback plans should be re-evaluated.
+The scope is mathematics, code, and programmatic reasoning samples. It does not replace full curriculum authoring or expert review. For larger-scale, higher-risk, or stricter compliance settings, sources, permissions, manual review proportions, operating costs, and rollback plans should be reassessed.
 
 As part of Part 14, this chapter corresponds to the project-level implementation validation of methods introduced in earlier sections. Readers may combine this case with the data recipe content in Part 13, the platform governance chapters from earlier sections, and the checklists in the appendix to form a closed loop from method comprehension to engineering delivery.
 

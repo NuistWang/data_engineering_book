@@ -488,9 +488,9 @@ In terms of cost, the primary expenses come from multi-path sampling and trainin
 
 ## Chapter Summary
 
-This chapter uses the "Pedagogical R1 Reasoning Data Flywheel" as a case study to demonstrate the engineering organization of a closed-loop reasoning data pipeline covering Long-CoT cold start, rejection sampling, and recirculated SFT. The primary value of this case lies in placing task definition, data boundaries, architectural decisions, sample schemas, metric acceptance, and reproducibility resources in a single chain, transforming the project from a sequence of operational steps into a reviewable case study.
+This chapter presented the Pedagogical R1 Reasoning Data Flywheel as a closed-loop reasoning data pipeline covering Long-CoT cold start, rejection sampling, and recirculated SFT. The project connects task definition, data boundaries, architecture choices, sample schemas, metric acceptance, and reproducibility resources in one reviewable chain.
 
-The boundaries of this case must also be clearly preserved. The focus is on a pedagogical, small-scale reasoning data engineering pipeline; it does not cover a complete reinforcement learning platform, large-scale online training, or the full reproduction of DeepSeek-R1 training. In scenarios with larger scale, higher risk, or stricter compliance requirements, data sources, permission status, manual review rates, operating costs, and failure rollback plans should be reassessed.
+The focus is a pedagogical, small-scale reasoning data engineering pipeline. It does not cover a complete reinforcement learning platform, large-scale online training, or full DeepSeek-R1 reproduction. Larger-scale, higher-risk, or stricter compliance settings require reassessment of data sources, permission status, manual review rates, operating costs, and rollback plans.
 
 As part of Part 14, this chapter corresponds to the project-level validation of the methods presented in earlier parts. Readers can use this case alongside the data recipes of Part 13, the platform governance chapters in the earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 

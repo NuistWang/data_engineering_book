@@ -159,7 +159,7 @@
 
 
 
-![图15-1：合成数据工厂流程图](../../images/part5/Wang-Chap15-Fig01-ZH.svg)
+![图15-1：合成数据工厂流程图](../../images/part5/Wang-Chap15-Fig01-EN.svg)
 
 *图15-1：合成数据工厂流程图。*
 
@@ -512,7 +512,7 @@ if __name__ == "__main__":
 
 
 
-![图15-2：质量闸门与回流闭环图](../../images/part5/Wang-Chap15-Fig02-ZH.svg)
+![图15-2：质量闸门与回流闭环图](../../images/part5/Wang-Chap15-Fig02-EN.svg)
 
 *图15-2：质量闸门与回流闭环图。*
 

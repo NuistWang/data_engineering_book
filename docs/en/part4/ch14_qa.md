@@ -371,7 +371,7 @@ This means that task modeling is never a static action but is continuously refin
 Therefore, the relationship between task modeling and workflow should not be understood as a one-time linear sequence of "model first, then execute," but as a continuously self-correcting production loop. Front-end design affects back-end quality; back-end quality signals in turn correct front-end design. Only when this closed loop is truly established will the platform, QA, and operations form a stable and coordinated whole.
 
 
-![Figure 14-1: LLM Annotation Platform Workflow Diagram](../../images/part4/Zhang-Chap14-Fig01-ZH.svg)
+![Figure 14-1: LLM Annotation Platform Workflow Diagram](../../images/part4/Zhang-Chap14-Fig01-EN.svg)
 
 *Figure 14-1: LLM Annotation Platform Workflow Diagram.*
 
@@ -451,7 +451,7 @@ if __name__ == "__main__":
 
 In any large-scale annotation system, routine review is insufficient on its own. Once the process becomes familiar to participants, the team may exhibit mechanical responses, sycophantic answers, declining attention, or "only being careful about the parts most likely to be observed." To prevent the system from gradually distorting behind a surface appearance of stability, organizations need to actively plant special samples with calibration and audit functions into the process. The three most important types are golden sets, trap questions, and audit samples. Crowdsourcing annotation research commonly uses expert labels, redundant annotation, task design, and behavioral verification to improve or assess annotation quality, providing the methodological basis for the use of golden sets and trap questions (Snow et al. 2008; Sheng et al. 2008; Kittur et al. 2008).
 
-**Golden sets** are collections of samples with relatively stable answers, clear standards, and high adjudication confidence. Their first function is calibration. New annotators can be tested on the golden set before entering the system to verify whether they have mastered the basic rules. Existing teams can also have golden set items periodically inserted during ongoing operation to detect whether standards have drifted. Golden sets can additionally serve as scoring anchors, helping different reviewers maintain similar judgment baselines over extended work periods. It is worth noting that golden set items should not all be the simplest possible tasks—on the contrary, they should cover high-confidence standard cases at different difficulty levels.
+**Golden sets** are collections of samples with relatively stable answers, clear standards, and high adjudication confidence. Their first function is calibration. New annotators can be tested on the golden set before entering the system to verify whether they have mastered the basic rules. Existing teams can also have golden set items periodically inserted during ongoing operation to detect whether standards have drifted. Golden sets can additionally serve as scoring anchors, helping different reviewers maintain similar judgment baselines over extended work periods. Golden set items should not all be the simplest possible tasks; they should cover high-confidence standard cases at different difficulty levels.
 
 **Trap questions** focus not on difficulty but on whether they can expose perfunctory, inattentive, or opportunistic behavior. For example, if a sample includes a very obvious formatting requirement that the annotator still ignores, this suggests they may not have read carefully; if a question clearly triggers a safety red line and the result shows no alertness whatsoever, the annotator's execution strategy has obvious gaps. Trap questions are not intended to replace normal QA; they serve more as behavioral detectors, helping the organization identify which errors stem from capability gaps and which stem from attitude issues or process fatigue.
 
@@ -470,7 +470,7 @@ More importantly, this process should not stop at "the model takes a look first.
 From a management perspective, the core of human–machine collaborative QA lies not in automation rate but in observability and accountability boundaries. The system must be able to answer: was a given problem flagged by the model or actively discovered by a human; was a given rework triggered by a model false positive or a human missed judgment; why did a particular error tag suddenly increase—did a rule change, or did a model threshold change? Only when this information is traceable is human–machine collaboration under control; otherwise, it merely introduces a new opaque variable into the system.
 
 
-![Figure 14-2: Human–Machine Collaborative QA Loop Diagram](../../images/part4/Zhang-Chap14-Fig02-ZH.svg)
+![Figure 14-2: Human–Machine Collaborative QA Loop Diagram](../../images/part4/Zhang-Chap14-Fig02-EN.svg)
 
 *Figure 14-2: Human–Machine Collaborative QA Loop Diagram.*
 
