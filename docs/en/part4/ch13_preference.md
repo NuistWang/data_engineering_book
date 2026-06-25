@@ -393,7 +393,7 @@ Another important dimension of confidence modeling is **difficulty awareness**. 
 
 Debiasing further involves sampling strategy. Many teams, when expanding preference data, inadvertently over-sample the tasks the model handles best, retain the samples easiest to judge, and label the most obvious differences most heavily. This may cause offline metrics to improve rapidly, but it will lead to the model lacking sensitivity to difficult scenarios, boundary conflicts, and fine-grained stylistic differences. In other words, sampling bias itself is part of the bias in reward signals. What data teams must do extends beyond cleaning existing noise—it also means designing, at the data intake stage, a sampling strategy that is diverse, stratified, and covers critical conflict zones.
 
-In summary, governance of preference data should not stop at "improving agreement rates"—it should further advance toward "modeling inconsistency and uncertainty." Only when a team can identify which samples are more trustworthy, which sources are more stable, which tasks are more prone to drift, and which conflicts are worth preserving rather than forcibly averaged, will reward signals truly possess long-term maintainability.
+Preference data governance should not stop at "improving agreement rates"; it should further advance toward modeling inconsistency and uncertainty. Only when a team can identify which samples are more trustworthy, which sources are more stable, which tasks are more prone to drift, and which conflicts are worth preserving rather than forcibly averaged, will reward signals possess long-term maintainability.
 
 *Table 13-1: Reward Noise Sources and Governance Actions.*
 

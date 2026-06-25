@@ -397,7 +397,7 @@ def compute_scvr(predictions: list, schema: Schema,
 
 #### 40.5.2 Engineering Conventions for Reproducible Evaluation
 
-Reproducible evaluation requires a fixed test split fingerprint, fixed schema version, fixed metric implementation, and controlled random seeds. For generative models, decoding parameters and repeated runs matter. The source setting uses `temperature=0.9`, `top_p=1.0`, and reports the average over **8 independent runs** per model to absorb decoding variance. Engineering teams should archive decoding parameters, run count, and seeds with the results.
+Reproducible evaluation requires a fixed test split fingerprint, fixed schema version, fixed metric implementation, and controlled random seeds. For generative models, decoding parameters and repeated runs matter. The reported setup uses `temperature=0.9`, `top_p=1.0`, and averages **8 independent runs** per model to absorb decoding variance. Engineering teams should archive decoding parameters, run count, and seeds with the results.
 
 #### 40.5.3 Error Attribution and Repair Actions
 
@@ -422,7 +422,7 @@ This chapter does not detail the model. From the data-consumption perspective:
 
 - **Data becomes reward.** SRPO converts the discrete schema rules in Section 40.3 into dense, verifiable SCL-Reward: $R_{total}=I_{gate}\cdot[\lambda\cdot R_{content}+(1-\lambda)\cdot R_{logic}]$. The structure gate, content alignment, and logic validation all read the dataset's hierarchical JSON and constraints.
 - **Training use.** SRPO first uses the data for SFT warm start so the model can output legal JSON, then uses GRPO (Shao et al., 2024) with group sampling and SCL-Reward. The reported configuration is SFT for 10 epochs, learning rate 1e-5, batch size 128; GRPO group size G=8, reward coefficients $\lambda=0.4$ and $\gamma=0.6$; hardware 8 x NVIDIA A800 (80GB).
-- **Qualitative effect.** The source material reports that standard SFT saturates near 84% on logic scores, while adding logic reward improves Row/Doc-ACR by about 10 percentage points. The point is that logic annotation turns arithmetic consistency into an optimizable target.
+- **Qualitative effect.** Reported results show that standard SFT saturates near 84% on logic scores, while adding logic reward improves Row/Doc-ACR by about 10 percentage points. Logic annotation turns arithmetic consistency into an optimizable target.
 
 Hungarian matching is used for row-level one-to-one alignment because generated row order may differ from ground truth or include missing/spurious rows. That, in turn, requires each row to contain sufficiently discriminative fields such as item name, unit price, and quantity. Algorithm design and annotation rules must be co-designed.
 

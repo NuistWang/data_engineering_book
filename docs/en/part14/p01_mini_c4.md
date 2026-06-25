@@ -661,7 +661,7 @@ The advantages of this approach are:
 - Facilitates dataset version management
 - Promotes engineering reproducibility
 
-It is important to emphasize:
+The key point is:
 **Reproducibility is a part of data engineering quality, not an optional add-on.**
 
 ### 11.3 The Role of Smoke Tests

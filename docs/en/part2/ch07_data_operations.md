@@ -164,7 +164,7 @@ def calculate_ttr(texts, tokenizer=None):
 
 ### 7.2.3 Alignment Bias Between Proxy Metrics and True Model Performance
 
-It is important to be vigilant: all offline metrics are merely "proxies" and do not have a 100% correlation with final generation quality. For example, large volumes of machine-translated text may look excellent on PPL and TTR, but because the corpus is persistently contaminated by translationese, it can cause the trained model to frequently hallucinate on culturally specific common knowledge. Therefore, for data of heterogeneous quality, the ultimate reliance must be on continuously building small-scale "validator models."
+Teams should treat all offline metrics as proxies rather than direct guarantees of final generation quality. For example, large volumes of machine-translated text may look excellent on PPL and TTR, but because the corpus is persistently contaminated by translationese, it can cause the trained model to frequently hallucinate on culturally specific common knowledge. Therefore, for data of heterogeneous quality, the ultimate reliance must be on continuously building small-scale "validator models."
 
 ### 7.2.4 Mapping Evaluation Metrics to Governance Actions
 

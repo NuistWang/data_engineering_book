@@ -183,13 +183,18 @@ def svg_dimensions(svg_path: Path) -> tuple[int, int]:
 def convert_svg_to_png(svg_path: Path, png_path: Path) -> None:
     png_path.parent.mkdir(parents=True, exist_ok=True)
     width, height = svg_dimensions(svg_path)
-    sips = shutil.which("sips")
-    if sips:
+    inkscape = shutil.which("inkscape")
+    if inkscape:
         proc = subprocess.run(
-            [sips, "-s", "format", "png", str(svg_path), "--out", str(png_path)],
+            [
+                inkscape,
+                str(svg_path),
+                "--export-type=png",
+                f"--export-filename={png_path}",
+            ],
             capture_output=True,
             text=True,
-            timeout=30,
+            timeout=60,
         )
         if proc.returncode == 0 and detect_image_suffix(png_path) == ".png":
             return
@@ -213,6 +218,16 @@ def convert_svg_to_png(svg_path: Path, png_path: Path) -> None:
                 return
         except subprocess.TimeoutExpired:
             pass
+    sips = shutil.which("sips")
+    if sips:
+        proc = subprocess.run(
+            [sips, "-s", "format", "png", str(svg_path), "--out", str(png_path)],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if proc.returncode == 0 and detect_image_suffix(png_path) == ".png":
+            return
     render_simple_svg_to_png(svg_path, png_path, width, height)
     if detect_image_suffix(png_path) != ".png":
         raise RuntimeError("SVG conversion did not produce a valid PNG")
