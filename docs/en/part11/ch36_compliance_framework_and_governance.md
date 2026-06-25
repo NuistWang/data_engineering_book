@@ -10,7 +10,7 @@
 
 ---
 
-## Chapter Abstract
+## Abstract
 
 In a data-driven organization, compliance is no longer a stamp that legal teams add immediately before release. It is an infrastructure constraint that determines whether a system can keep operating safely over time. Many projects pass model-quality checks, business conversion targets, and gray-release experiments, yet are stopped at final review because data provenance is unclear, authorization boundaries are vague, audit trails are incomplete, or sensitive information appears in logs. The failure is rarely that teams do not care about compliance. More often, compliance has been treated as an approval attachment after engineering is complete rather than as a constraint that must shape the system from the start.
 

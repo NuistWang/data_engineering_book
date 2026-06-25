@@ -5,9 +5,12 @@
 The current Chinese mainline uses the 2026 Springer-size publication structure. The main text covers 48 chapters, 15 end-to-end projects, and 8 appendices (A-H). To reduce friction when reading across parts, this edition adds online resource entry points, a unified abbreviation table in the front matter, and a contents page for each part.
 
 - [Title Page](title_page.md)
+- [Author Affiliations](author_affiliations.md)
 - [Online Resources and Community](online_resources.md)
 - [Preface](preface.md)
 - [Acknowledgments](acknowledgments.md)
+- [Declaration of Competing Interests](competing_interests.md)
+- [Ethics Approval](ethics_approval.md)
 - [Front-Matter Guide: Book Structure, Reading Paths, and Edition Notes](front_matter_guide.md)
 - [Contributors](contributors.md)
 - [Abbreviations](abbreviations.md)

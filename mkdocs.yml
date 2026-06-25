@@ -71,9 +71,12 @@ plugins:
           site_name: 大模型数据工程：架构、算法及项目实战
           nav:
             - 题名页: title_page.md
+            - 作者机构信息: author_affiliations.md
             - 在线资源与讨论入口: online_resources.md
             - 序言: preface.md
             - 致谢: acknowledgments.md
+            - 利益冲突声明: competing_interests.md
+            - 伦理审批: ethics_approval.md
             - 卷前导读：全书结构、阅读路径与版本说明: front_matter_guide.md
             - 全书总目录: index.md
             - 贡献者: contributors.md
@@ -201,9 +204,12 @@ plugins:
                   name: Switch to light mode
           nav:
             - Title Page: title_page.md
+            - Author Affiliations: author_affiliations.md
             - Online Resources and Community: online_resources.md
             - Preface: preface.md
             - Acknowledgments: acknowledgments.md
+            - Declaration of Competing Interests: competing_interests.md
+            - Ethics Approval: ethics_approval.md
             - Front Matter Guide: front_matter_guide.md
             - Table of Contents: index.md
             - Contributors: contributors.md

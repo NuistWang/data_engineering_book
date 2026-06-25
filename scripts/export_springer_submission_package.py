@@ -24,7 +24,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOK_SLUG = "Data_Engineering_for_Large_Foundation_Models_A_Handbook"
+BOOK_SLUG = "Data_Engineering_for_Large_Foundation_Models_A_Handbook_Jun_Yu"
 DEFAULT_OUTPUT_ROOT = ROOT / "output" / "springer_submission"
 PDF_DIR = ROOT / "output" / "pdf"
 SUBMISSION_PDF_DIR = PDF_DIR / "data_engineering_book_en_16k_compact_submission_pdfs"
@@ -33,6 +33,8 @@ LATEX_CHAPTERS_DIR = PDF_DIR / "data_engineering_book_en_16k_latex_chapters"
 LATEX_ASSETS_DIR = PDF_DIR / "latex_assets_en"
 ACCESSIBILITY_DIR = ROOT / "publishing" / "accessibility"
 LATEX_EXPORT_SCRIPT = ROOT / "scripts" / "export_en_book_latex.py"
+PRINT_FIGURES_SCRIPT = ROOT / "scripts" / "export_print_figures.py"
+PRINT_FIGURES_DIR = ROOT / "output" / "springer_print_figures"
 
 SOURCE_DIR_NAME = "01_Source_Files"
 PDF_DIR_NAME = "02_PDF_Files"
@@ -427,6 +429,7 @@ When `--zip` is used, the ZIP archive is intentionally limited to the three publ
 - `{SOURCE_DIR_NAME}/LaTeX/chapters` keeps the original split TeX files needed by the root TeX file.
 - `{SOURCE_DIR_NAME}/LaTeX/chapters_named_for_submission` provides duplicate chapter source filenames using first-author surname and chapter/project/appendix label.
 - `{SOURCE_DIR_NAME}/Figures` contains the renamed figure files referenced by the English manuscript.
+- `{SOURCE_DIR_NAME}/Figures_Print_Formats` contains EPS copies for SVG figures and TIFF copies for raster figures, with `figures_print_format_manifest.csv` mapping each production copy back to the manuscript image path.
 - `{SOURCE_DIR_NAME}/Accessibility/springer_alt_text_inventory.xlsx` is the reviewed alt-text Excel workbook to submit with the final manuscript.
 - `{THIRD_PARTY_DIR_NAME}` contains the rights/originality confirmation; signed external publisher forms, if any, should be added there before upload.
 
@@ -513,6 +516,15 @@ def copy_figures(package_dir: Path) -> None:
     write_csv(package_dir / "_Internal_Not_For_Submission" / "alt_text_coverage_report.csv", coverage_rows)
 
 
+def copy_print_figures(package_dir: Path) -> None:
+    subprocess.run(
+        [sys.executable, str(PRINT_FIGURES_SCRIPT), "--output-dir", str(PRINT_FIGURES_DIR), "--check"],
+        cwd=ROOT,
+        check=True,
+    )
+    copy_tree(PRINT_FIGURES_DIR, package_dir / SOURCE_DIR_NAME / "Figures_Print_Formats")
+
+
 def collect_manifest(package_dir: Path) -> list[ManifestRow]:
     rows: list[ManifestRow] = []
     for path in sorted(package_dir.rglob("*")):
@@ -587,6 +599,7 @@ def export_package(output_root: Path = DEFAULT_OUTPUT_ROOT, *, include_pdfs: boo
         copy_pdfs(package_dir)
     if include_figures:
         copy_figures(package_dir)
+        copy_print_figures(package_dir)
     write_package_readme(package_dir)
     write_manifest(package_dir)
     return package_dir

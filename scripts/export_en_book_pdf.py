@@ -48,7 +48,15 @@ CONTENTS_ENTRY_GAP_MM = 6.2
 CONTENTS_SUBENTRY_GAP_MM = 5.2
 
 EXCLUDED_FROM_FORMAL_PDF = {"title_page.md", "index.md", "translation-status.md"}
-PRE_CONTENTS_FRONT_PATHS = {"online_resources.md", "preface.md", "acknowledgments.md", "front_matter_guide.md"}
+PRE_CONTENTS_FRONT_PATHS = {
+    "author_affiliations.md",
+    "online_resources.md",
+    "preface.md",
+    "acknowledgments.md",
+    "competing_interests.md",
+    "ethics_approval.md",
+    "front_matter_guide.md",
+}
 POST_CONTENTS_FRONT_PATHS = {"contributors.md", "abbreviations.md"}
 
 BOOK_AUTHORS = (
@@ -573,10 +581,7 @@ mjx-container[jax="SVG"][display="true"] svg {
 }
 
 .file-label {
-  font-family: "Times New Roman", "Times", "Nimbus Roman", serif;
-  color: var(--muted);
-  font-size: 8.3pt;
-  margin: -4mm 0 6mm;
+  display: none;
 }
 
 .chapter-authors {
@@ -905,9 +910,12 @@ def generated_front_matter_html(*, include_toc: bool = True) -> str:
     return (
         generated_title_page_html()
         + """
+<section class="source-file front-section generated-front-section"><h1>Author Affiliations</h1></section>
 <section class="source-file front-section generated-front-section"><h1>Online Resources and Community</h1></section>
 <section class="source-file front-section generated-front-section"><h1>Preface</h1></section>
 <section class="source-file front-section generated-front-section"><h1>Acknowledgments</h1></section>
+<section class="source-file front-section generated-front-section"><h1>Declaration of Competing Interests</h1></section>
+<section class="source-file front-section generated-front-section"><h1>Ethics Approval</h1></section>
 """
         + toc
         + """
@@ -922,12 +930,15 @@ def prepare_pdf_items(items: list[NavItem]) -> list[NavItem]:
 
     filtered = [item for item in items if item.path not in EXCLUDED_FROM_FORMAL_PDF]
     front_order = {
-        "online_resources.md": 0,
-        "preface.md": 1,
-        "acknowledgments.md": 2,
-        "front_matter_guide.md": 3,
-        "contributors.md": 4,
-        "abbreviations.md": 5,
+        "author_affiliations.md": 0,
+        "online_resources.md": 1,
+        "preface.md": 2,
+        "acknowledgments.md": 3,
+        "competing_interests.md": 4,
+        "ethics_approval.md": 5,
+        "front_matter_guide.md": 6,
+        "contributors.md": 7,
+        "abbreviations.md": 8,
     }
     front = [item for item in filtered if item.group_slug == "front-matter"]
     rest = [item for item in filtered if item.group_slug != "front-matter"]

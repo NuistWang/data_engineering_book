@@ -310,12 +310,15 @@ def prepare_latex_items(items: list[NavItem]) -> list[NavItem]:
     filtered = [item for item in items if item.path not in excluded]
     front_order = {
         "title_page.md": 0,
-        "online_resources.md": 1,
-        "preface.md": 2,
-        "acknowledgments.md": 3,
-        "front_matter_guide.md": 4,
-        "contributors.md": 5,
-        "abbreviations.md": 6,
+        "author_affiliations.md": 1,
+        "online_resources.md": 2,
+        "preface.md": 3,
+        "acknowledgments.md": 4,
+        "competing_interests.md": 5,
+        "ethics_approval.md": 6,
+        "front_matter_guide.md": 7,
+        "contributors.md": 8,
+        "abbreviations.md": 9,
     }
     front = [
         item

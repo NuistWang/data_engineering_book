@@ -2,7 +2,7 @@
 
 <div class="chapter-authors">Zhili Wang; Zhongyi Liu; Jun Yu</div>
 
-## Chapter Abstract
+## Abstract
 
 Labeling and evaluation are two of the most human-intensive stages in LLM data engineering. Labeling requires many human judgments. Evaluation requires carefully designed test cases and consistency calibration. As model iteration accelerates and data needs diversify, fully manual labeling and evaluation quickly become bottlenecks.
 

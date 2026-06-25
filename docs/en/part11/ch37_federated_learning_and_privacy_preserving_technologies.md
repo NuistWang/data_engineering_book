@@ -4,7 +4,7 @@
 
 ---
 
-## Chapter Abstract
+## Abstract
 
 The previous chapter built a compliance and governance baseline around shift-left compliance, Privacy by Design, RoPA, DPIA, and data classification. Yet for highly sensitive C3 data or cross-institutional data silos, policy statements such as “data is usable but not visible,” traditional access control, and field masking are often not enough to eliminate the physical risk of leakage. As machine learning systems, especially large-model systems, move deeper into core business processes, exposure no longer occurs only through database exports, report views, or manual queries. It also appears during feature construction, parameter training, joint modeling, and inference calls.
 
