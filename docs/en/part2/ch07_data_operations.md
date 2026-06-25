@@ -60,7 +60,7 @@ In a modern large-model development organization, the typical collaboration boun
 
 This cross-functional coordination is realized through the "operations flywheel."
 
-![Figure 7-1: Data Operations Flywheel](../../images/part2/data_operations_flywheel.svg)
+![Figure 7-1: Data Operations Flywheel](../../images/part2/Wang-Chap07-Fig01.svg)
 
 *Figure 7-1: Data Operations Flywheel — The left side shows the high-cost startup zone; the right side shows the gradually accumulated cycle of automated, high-quality data assets formed after long-term model evaluation and root-cause analysis feedback. Source: Original illustration by the authors.*
 
@@ -279,7 +279,7 @@ An excellent quality dashboard should provide a top-down view of all metrics. It
 3. **Safety risk baseline monitoring**: Records the number of PII or highly sensitive harmful documents detected and the blocking logs for each cycle.
 4. **Spot-check audit traffic lights**: Displays scoring trends from the weekly blind review of 1,000 randomly sampled corpus items, showing a moving average of fluency and correctness on a scale of 1 to 5 (for automated data validation frameworks, see Breck et al. 2019).
 
-![Figure 7-2: Data Evaluation Feedback Loop](../../images/part2/data_evaluation_loop.svg)
+![Figure 7-2: Data Evaluation Feedback Loop](../../images/part2/Wang-Chap07-Fig02.svg)
 
 *Figure 7-2: Data Evaluation Feedback Loop — A circular architecture proceeding from sampling-based blind review to root-cause investigation triggered by metric anomalies, followed by targeted system governance actions. Source: Original illustration by the authors.*
 

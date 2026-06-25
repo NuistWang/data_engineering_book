@@ -31,7 +31,7 @@ Beyond in-depth theoretical explanations, the Chinese mainline includes **15 end
 
 ## Book Architecture
 
-![Book Architecture](images/structure_en.png)
+![Book Architecture](images/Yu-Book-Fig02-EN.png)
 
 *A complete data engineering pipeline from raw data to end-to-end applications*
 

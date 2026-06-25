@@ -52,7 +52,7 @@
 
 标注辅助 Agent 的核心定位是"标注员的辅助决策工具"——不是取代标注员做判断，而是在标注流程的每个环节降低认知负荷、提升判断一致性。指令微调、RLHF、AI feedback 和偏好优化实践都表明，标注与反馈数据的质量会直接决定对齐效果，而不是简单依赖样本数量堆叠（Ouyang et al. 2022; Bai et al. 2022; Wang et al. 2023; Cui et al. 2023; Rafailov et al. 2023）。
 
-![标注辅助 Agent 的四个维度](../../images/part10/ai_agent_decision_workflow_ch33_01.svg)
+![标注辅助 Agent 的四个维度](../../images/part10/Wang-Chap33-Fig01.svg)
 
 **图33-1：标注辅助 Agent 的四个维度**
 
@@ -132,7 +132,7 @@ Agent 还应为每个标注批次设定校准样本——这些样本已有标�
 
 合成数据 Agent 的核心闭环是一个受控的生成-验证-筛选流水线。Self-Instruct、UltraFeedback 和合成数据坍缩研究共同提示，合成数据的价值来自受控扩展与严格验证，而风险来自递归自消费、分布收缩和质量信号失真（Wang et al. 2023; Cui et al. 2023; Alemohammad et al. 2024; Gerstgrasser et al. 2024; Shumailov et al. 2024）：
 
-![合成数据 Agent 闭环流水线](../../images/part10/ai_agent_decision_workflow_ch33_02.svg)
+![合成数据 Agent 闭环流水线](../../images/part10/Wang-Chap33-Fig02.svg)
 
 **图33-2：合成数据 Agent 闭环流水线**
 

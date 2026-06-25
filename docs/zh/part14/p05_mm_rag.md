@@ -174,7 +174,7 @@ Listing P05-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 4. 整体架构：从财报 PDF 到多模态回答的流水线
 
-![图 P05-1](../../images/part14/p05/p05_01_overall_architecture.svg)
+![图 P05-1](../../images/part14/p05/Cao-Project05-Fig01.svg)
 *图 P05-1：多模态 RAG 财报助手总体架构图。*
 
 从工程视角看，本项目可以拆成三层。
@@ -256,7 +256,7 @@ Vision-first 的核心思想是：**先保留页面作为图像整体的表达�
 * Prompt 负责约束回答行为；
 * 评测与日志负责验证系统是否真的找对、看对、答对。
 
-![图 P05-2](../../images/part14/p05/p05_02_vision_vs_ocr.svg)
+![图 P05-2](../../images/part14/p05/Cao-Project05-Fig02.svg)
 *图 P05-2：Vision-first 与 OCR-first 路线对比图。*
 
 ---
@@ -344,7 +344,7 @@ Byaldi 的意义在于，它把多模态检索中最麻烦的一部分工程封�
 
 当前项目会生成页面级资产和索引相关产物，例如 `page_units.jsonl`、`block_units.jsonl`、`rag_index.json` 与 `data/page_images` 等。这说明它并不只是一个临时演示，而已经具备一定的资产沉淀意识。
 
-![图 P05-3](../../images/part14/p05/p05_03_page_assets.svg)
+![图 P05-3](../../images/part14/p05/Cao-Project05-Fig03.svg)
 *图 P05-3：页面资产与页码映射示意图。*
 
 ---
@@ -377,7 +377,7 @@ Byaldi 的意义在于，它把多模态检索中最麻烦的一部分工程封�
 
 因为在复杂文档项目里，索引不是准备动作，而是能力上限的一部分。索引阶段做得粗糙，后面再强的生成模型也只能在模糊证据上“猜”。
 
-![图 P05-4](../../images/part14/p05/p05_04_indexing_pipeline.svg)
+![图 P05-4](../../images/part14/p05/Cao-Project05-Fig04.svg)
 *图 P05-4：PDF 页面渲染与视觉索引构建图。*
 
 ---
@@ -430,7 +430,7 @@ Top-K 的价值在于：
 
 例如数值类问题可优先保留表格密集页，趋势类问题可优先保留图表页。
 
-![图 P05-5](../../images/part14/p05/p05_05_topk_filtering.svg)
+![图 P05-5](../../images/part14/p05/Cao-Project05-Fig05.svg)
 *图 P05-5：Top-K 多页召回与目录页过滤示意图。*
 
 ---
@@ -502,7 +502,7 @@ Top-K 的价值在于：
 * 最后补充背景；
 * 避免只有大而化之的总结。
 
-![图 P05-6](../../images/part14/p05/p05_06_multi_image_prompting.svg)
+![图 P05-6](../../images/part14/p05/Cao-Project05-Fig06.svg)
 *图 P05-6：多图上下文注入与回答约束图。*
 
 ---
@@ -661,7 +661,7 @@ for res in results:
 
 因为图表理解并不等同于文字抽取。一个模型也许能读出“2024”“收入”“研发费用”等字样，却仍然可能把趋势判断反着说，或者把同比与环比混为一谈。
 
-![图 P05-7](../../images/part14/p05/p05_07_eval_framework.svg)
+![图 P05-7](../../images/part14/p05/Cao-Project05-Fig07.svg)
 *图 P05-7：检索与回答双层评测框架图。*
 
 ---
@@ -808,7 +808,7 @@ P05 当前指标非常整齐，这本身说明链路设计思路是对的。尤�
 
 这样更便于接入下游系统。
 
-![图 P05-8](../../images/part14/p05/p05_08_optimization_roadmap.svg)
+![图 P05-8](../../images/part14/p05/Cao-Project05-Fig08.svg)
 *图 P05-8：多模态 RAG 优化路径图。*
 
 ---
@@ -872,7 +872,7 @@ P05 当前指标非常整齐，这本身说明链路设计思路是对的。尤�
 
 这样既保留文本 RAG 的效率优势，又能用多模态 RAG 兜住复杂场景。
 
-![图 P05-9](../../images/part14/p05/p05_09_hybrid_rag.svg)
+![图 P05-9](../../images/part14/p05/Cao-Project05-Fig09.svg)
 *图 P05-9：文本 RAG 与多模态 RAG 协同架构图。*
 
 ---

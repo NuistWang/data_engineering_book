@@ -52,7 +52,7 @@
 
 面对长时序数据，数据清洗工厂不能沿用早期图文对时代的“一图配一句（Image-Text Pair）”模式。我们需要搭建一套能够剥离并处理视觉、声学和文本等多条独立轨道的**音视频样本构建全流程自动化平台**。
 
-![图10-1：音视频对齐分布式管线图](../../images/part3/av_sample_pipeline.svg)
+![图10-1：音视频对齐分布式管线图](../../images/part3/Wang-Chap10-Fig01.svg)
 
 *图10-1：音视频对齐分布式管线图（Audio-Video Pipeline: Temporal Alignment） —— 左侧原始 Video Lake 中的混合视频被剥离为视觉（Visual Track）和声学（Acoustic Track）双轨并行管线，视觉帧提取器与声学分离器各自提取特征后，最终汇集入跨模态时间对齐引擎（Temporal Alignment Engine），生成带时间戳闭合约束的多模态输入样本（Aligned Multimodal JSONL）。来源：本书自绘。*
 
@@ -63,7 +63,7 @@
 1. **关键的镜头切换点检测（Shot Boundary Detection）**
    我们需要在视觉流水线（Top Path）中加入快速检测节点，如采用**双阈值颜色直方图比对**（硬切变 Hard Cut 采用高阈值、软渐变 Fade/Dissolve 采用低阈值）或轻量级的两帧之间光流差异（Optical Flow Difference）计算，以捕获视频中由于机位推拉、镜头剪辑引起的硬切变与软渐变。只有在同一镜头内保持的连续帧，才适合作为一个完整的知识概念（Event Grounding）进入预训练视觉模型。
 
-![图10-2：自适应镜头边界检测与语义防泄漏架构图](../../images/part3/av_shot_boundary_hsv.svg)
+![图10-2：自适应镜头边界检测与语义防泄漏架构图](../../images/part3/Wang-Chap10-Fig02.svg)
 
 *图10-2：自适应镜头边界检测与语义防泄漏架构图（Adaptive Shot Boundary Detection & Semantic Leakage Prevention） —— 展示双轨特征侦测逻辑：上层提取 HSV 多通道色彩空间聚合差分，下层提取光流像素位移（Optical Flow）以捕捉细微运动姿态。两种张量差分在右侧汇入“双重阈值路由（Dual-Threshold Triage）”。当突变分值 $\Delta$ 超过硬切阈值（Hard Cut Threshold）时，引擎切分片段，避免场景转换导致视觉切片语义泄漏。来源：本书自绘。*
 
@@ -78,7 +78,7 @@
 #### A. 核心语义层提取：超大并发的 WhisperX 自动语音识别（ASR）
 对于语音轨，常见做法是调用开源 Whisper (Radford et al. 2023) 或 WhisperX (Bain et al. 2023) 等框架，将夹杂口音、噪声和停顿的音频转写为带时间戳的结构化文字序列。
 
-![图10-3：大规模 ASR 提取与时间轴动态校准对比图](../../images/part3/asr_whisperx_comparison.svg)
+![图10-3：大规模 ASR 提取与时间轴动态校准对比图](../../images/part3/Wang-Chap10-Fig03.svg)
 
 *图10-3：大规模 ASR 提取与时间轴动态校准对比图（Large-Scale ASR Extraction & Temporal Calibration） —— 展示传统 ASR 管道在长序列中可能产生累积性时间漂移（Cumulative Temporal Drift）和语义错误（将 `I love apples.` 误听写为 `maples.`）；中间展示 WhisperX 通过 VAD 切分、多路声学解码与 DTW（音素级强制对齐）矩阵进行时间校准；底部展示词汇 Token 与音频波谷通过垂直虚线对齐后的输出。来源：本书自绘。*
 
@@ -97,7 +97,7 @@
 
 一条字幕在 ASR 中写着 “Hello World!”，但在 10 秒钟时序片段里，究竟是哪几毫秒、哪个帧、哪个嘴型匹配这句声音，需要通过时间锚点（Temporal Anchors）明确。如果不建立这种绑定，大模型难以学习声画同步和口型匹配预测。
 
-![图10-4：跨模态时序校准与几何对齐架构图](../../images/part3/av_alignment_diagram.svg)
+![图10-4：跨模态时序校准与几何对齐架构图](../../images/part3/Wang-Chap10-Fig04.svg)
 
 *图10-4：跨模态时序校准与几何对齐架构图（Cross-Modal Geometric & Temporal Alignment） —— 顶端青色轨道表示视觉关键帧（Visual Modality），中段灰色轨道表示声学特征（Acoustic Modality），底端珊瑚色轨道表示离散文本 Token（Discrete Textual Tokens）。中央时间轴在 `t=4.2s` 处将“端起水杯的视觉动作”、“波谷处的声学特征”与 `<start:4.2s> "Water cup"` 文本标签绑定，最终生成统一的 Mixed Token Pipeline / JSONL 样本。来源：本书自绘。*
 

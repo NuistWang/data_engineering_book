@@ -155,7 +155,7 @@ SD3 的 50/50 混合策略尤其值得借鉴。全量替换成 VLM 生成 captio
 更细的系统还会按数据来源、审美分、caption 类型、安全等级、是否含文字、是否含人物、是否为复杂多主体场景等维度做路由。这样训练时可以控制 batch 组成，避免某类样本淹没其它样本。比如文字生成能力差，就提高含文字但低风险图片的采样权重；空间关系弱，就提高含明显位置关系的样本；人物手部细节差，就为相关样本建立专项桶。
 
 
-![图48-1：T2I 数据流水线](../../images/part13/ch48_01_t2i_data_pipeline.svg)
+![图48-1：T2I 数据流水线](../../images/part13/Zhang-Chap48-Fig01.svg)
 
 *图48-1：T2I 数据流水线。*
 
@@ -261,7 +261,7 @@ HunyuanVideo 在这方面披露得最充分。它不仅使用结构化 JSON capt
 
 
 
-![图48-2：T2V 数据流水线](../../images/part13/ch48_02_t2v_data_pipeline.svg)
+![图48-2：T2V 数据流水线](../../images/part13/Zhang-Chap48-Fig02.svg)
 
 *图48-2：T2V 数据流水线* 
 
@@ -366,7 +366,7 @@ NSFW、版权和水印过滤不能压成一个总分来处理。总分看起来�
 
 
 
-![图48-3：美学/版权/安全多级过滤架构](../../images/part13/ch48_03_multistage_filtering_architecture.svg)
+![图48-3：美学/版权/安全多级过滤架构](../../images/part13/Zhang-Chap48-Fig03.svg)
 
 *图48-3：美学/版权/安全多级过滤架构。*
 

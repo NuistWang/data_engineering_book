@@ -54,7 +54,7 @@ DataOps Agent；平台自治；根因定位；数据回滚；成本治理；运�
 
 DataOps Agent 的第一项能力是告警的智能聚合。Agent 需从四个维度读取信息，将分散的告警聚合为根因候选。AIOps 与自动化日志分析研究表明，告警聚合、日志解析和事件关联是降低 MTTR 的基础能力，不能只依赖人工值班经验（Dang et al. 2019; He et al. 2021; Zhu et al. 2019）：
 
-![告警到根因定位 Agent 流程](../../images/part10/ai_agent_decision_workflow_ch34_01.svg)
+![告警到根因定位 Agent 流程](../../images/part10/Luo-Chap34-Fig01.svg)
 
 **图34-1：告警到根因定位 Agent 流程**
 
@@ -148,7 +148,7 @@ Agent 生成的根因候选附带置信度评分，但这个评分本身需要�
 
 回滚操作属于高风险操作，必须经过多人审批：
 
-![回滚审批流程](../../images/part10/ai_agent_decision_workflow_ch34_02.svg)
+![回滚审批流程](../../images/part10/Luo-Chap34-Fig02.svg)
 
 **图34-2：回滚审批流程**
 
@@ -185,7 +185,7 @@ Agent 生成的根因候选附带置信度评分，但这个评分本身需要�
 
 **自愈的决策逻辑：**
 
-![流水线自愈决策流程](../../images/part10/ai_agent_decision_workflow_ch34_03.svg)
+![流水线自愈决策流程](../../images/part10/Luo-Chap34-Fig03.svg)
 
 **图34-3：流水线自愈决策流程**
 

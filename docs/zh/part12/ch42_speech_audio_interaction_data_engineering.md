@@ -67,7 +67,7 @@ VoiceStyleControl 共包含 154,906 条样本。其中，S2SEmoControl 包含 20
 
 ### 42.3 样本 schema：语义通道与风格通道分开建模
 
-![图42-1：语义响应与风格控制双通道 schema](../../images/part12/ch42_01_dual_channel_schema.svg)
+![图42-1：语义响应与风格控制双通道 schema](../../images/part12/Chen-Chap42-Fig01-ZH.svg)
 
 *图42-1：语义响应与风格控制双通道 schema。语义通道回答“说什么”，风格通道回答“用什么声音和情绪说”，声学监督通道把二者绑定到音频文件、speech token 和采样配置。*
 
@@ -268,7 +268,7 @@ TTSSpeakerControl 则把控制能力集中到 text-to-speech 形态。输入文�
 
 ### 42.4 构建流水线：从文本对话到可控语音记录
 
-![图42-2：VoiceStyleControl 数据构建流水线](../../images/part12/ch42_02_voice_style_data_pipeline.svg)
+![图42-2：VoiceStyleControl 数据构建流水线](../../images/part12/Chen-Chap42-Fig02-ZH.svg)
 
 *图42-2：VoiceStyleControl 数据构建流水线。文本对话或风格内容先被赋予 speaker 与 emotion 条件，再通过授权参考语音池生成或采集音频，最后经过 token 化、质检、配平和封装。*
 
@@ -362,7 +362,7 @@ for sample_idx, record in id2meta:
 
 ### 42.5 质量评估与闭环修复
 
-![图42-3：质量评估与数据飞轮闭环](../../images/part12/ch42_03_quality_loop.svg)
+![图42-3：质量评估与数据飞轮闭环](../../images/part12/Chen-Chap42-Fig03-ZH.svg)
 
 *图42-3：质量评估与数据飞轮闭环。自动校验、反向 ASR、风格评估和人工抽检共同形成问题样本队列，再回流到重合成、重标注、降权或剔除。*
 

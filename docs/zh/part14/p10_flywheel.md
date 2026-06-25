@@ -162,7 +162,7 @@ P10 更关注跨项目整合程度、阶段完成率、控制点、瓶颈和治�
 
 ## 4. 整体架构：从上游项目资产到组织级飞轮总装
 
-![图 P10-1](../../images/part14/p10/p10_01_flywheel_overview.svg)
+![图 P10-1](../../images/part14/p10/Wang-Project10-Fig01.svg)
 *图 P10-1：端到端 LLM 数据飞轮总览图。*
 
 从工程视角看，本项目可以拆成五层，而不是只看“数据输入—模型输出”这样一条线性流程。
@@ -229,7 +229,7 @@ P10 的 registry 应按照第十四篇 P01-P15 的完整目录维护。早期实
 * 它为后续架构映射和瓶颈识别提供依据；
 * 它为组织层复盘提供统一语言。
 
-![图 P10-2](../../images/part14/p10/p10_02_registry_and_interfaces.svg)
+![图 P10-2](../../images/part14/p10/Wang-Project10-Fig02.svg)
 *图 P10-2：上游项目 registry 与接口映射图。*
 
 ---
@@ -279,7 +279,7 @@ PROJECT_SPECS = [
 
 这种结构化表达把项目汇总落实为可复制的方法。后续其他总装层项目也可以沿用同样方式，将已有项目逐个纳入统一 registry，而不必依赖手工整理。
 
-![图 P10-3](../../images/part14/p10/p10_03_project_specs.svg)
+![图 P10-3](../../images/part14/p10/Wang-Project10-Fig03.svg)
 *图 P10-3：上游项目结构化配置示意图。*
 
 ---
@@ -303,7 +303,7 @@ P10 的价值之一，就是把飞轮拆成了更清晰的阶段体系。当前�
 
 阶段规划把飞轮从单纯的连通关系扩展为可推进、可复盘、可治理的组织结构。这里真正重要的，是把可迁移的推进方法明确下来，而不是停留在静态示意图层面。
 
-![图 P10-4](../../images/part14/p10/p10_04_stage_plan.svg)
+![图 P10-4](../../images/part14/p10/Wang-Project10-Fig04.svg)
 *图 P10-4：五阶段推进与里程碑关系图。*
 
 ---
@@ -362,7 +362,7 @@ def build_architecture(registry: list[dict]) -> dict:
 
 这种表达方式，才真正让飞轮具备工程可维护性。
 
-![图 P10-5](../../images/part14/p10/p10_05_architecture_code_mapping.svg)
+![图 P10-5](../../images/part14/p10/Wang-Project10-Fig05.svg)
 *图 P10-5：飞轮五层结构代码映射图。*
 
 ---
@@ -390,7 +390,7 @@ P10 当前结果显示，飞轮架构包含 `5` 层、`4` 个控制点和 `4` �
 
 控制点的存在说明，飞轮并不追求无差别加速，而是为不同环节配置不同的流转速度、审查要求和可追踪性。
 
-![图 P10-6](../../images/part14/p10/p10_06_boundaries_and_control_points.svg)
+![图 P10-6](../../images/part14/p10/Wang-Project10-Fig06.svg)
 *图 P10-6：系统边界与控制点示意图。*
 
 ---
@@ -412,7 +412,7 @@ P10 当前结果显示，飞轮架构包含 `5` 层、`4` 个控制点和 `4` �
 
 对工程师来说，阶段计划可能已经足够；但对管理者、评审和跨团队协作方来说，milestone 往往是更容易沟通的对象。它把复杂技术过程转换成更可执行的组织节奏。
 
-![图 P10-7](../../images/part14/p10/p10_07_runs_and_milestones.svg)
+![图 P10-7](../../images/part14/p10/Wang-Project10-Fig07.svg)
 *图 P10-7：运行记录与里程碑板示意图。*
 
 ---
@@ -483,7 +483,7 @@ P10 的独特之处，在于它衡量的不是局部最优，而是一条工程�
 * 仍未解决的关键问题；
 * 下一轮优化最值得投入的方向。
 
-![图 P10-8](../../images/part14/p10/p10_08_bottleneck_map.svg)
+![图 P10-8](../../images/part14/p10/Wang-Project10-Fig08.svg)
 *图 P10-8：飞轮瓶颈定位图。*
 
 ---
@@ -539,7 +539,7 @@ bottlenecks = [
 
 因此，这段代码承担的是从指标生成到结果解读的连接作用。
 
-![图 P10-9](../../images/part14/p10/p10_09_metrics_codegen.svg)
+![图 P10-9](../../images/part14/p10/Wang-Project10-Fig09.svg)
 *图 P10-9：系统级指标生成逻辑图。*
 
 ---
@@ -609,7 +609,7 @@ def run_command(command: list[str], name: str) -> dict:
 
 这一节说明，P10 并不止于汇总上游项目，还把总装层自身纳入了工程质量管理。对于整章来说，这一部分承担的是把系统整合与质量契约连接起来的作用。
 
-![图 P10-10](../../images/part14/p10/p10_10_check_contracts.svg)
+![图 P10-10](../../images/part14/p10/Wang-Project10-Fig10.svg)
 *图 P10-10：检查脚本与系统契约图。*
 
 ---

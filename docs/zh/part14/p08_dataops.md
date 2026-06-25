@@ -164,7 +164,7 @@ P08 也明确设置了边界。
 根据任务书，P08 要覆盖版本、调度、质检、监控，以及与组织接口和运营节奏相关的内容。   
 当前平台已经显式管理租户、项目、角色、API、队列、UI 面板、数据版本、实验、告警、审计与事故复盘。 
 
-![图 P08-1](../../images/part14/p08/p08_01_dataops_platform_overview.svg)
+![图 P08-1](../../images/part14/p08/Yu-Project08-Fig01.svg)
 *图 P08-1：P08 DataOps 平台总览图。*
 
 ---
@@ -202,7 +202,7 @@ P08 也明确设置了边界。
 这一层承接数据版本、实验结果、评测报告、操作日志、配置文件和运营记录。  
 它保证平台管理的不是抽象流程，而是可复用的数据资产和治理资产。
 
-![图 P08-2](../../images/part14/p08/p08_02_four_layer_architecture.svg)
+![图 P08-2](../../images/part14/p08/Yu-Project08-Fig02.svg)
 *图 P08-2：平台四层架构图。*
 
 ---
@@ -230,7 +230,7 @@ P08 也明确设置了边界。
 - **再定义运行与事件；**
 - **最后定义指标与验收。**
 
-![图 P08-3](../../images/part14/p08/p08_03_specs_to_ops_pipeline.svg)
+![图 P08-3](../../images/part14/p08/Yu-Project08-Fig03.svg)
 *图 P08-3：规格生成—模拟运行—评估—检查流程图。*
 
 ---
@@ -287,7 +287,7 @@ P08 也明确设置了边界。
 
 它们共同说明，P08 并不是只做离线产物，而是在原型层面已经思考了“系统如何被调用、如何被执行、如何被观察”。
 
-![图 P08-4](../../images/part14/p08/p08_04_object_model.svg)
+![图 P08-4](../../images/part14/p08/Yu-Project08-Fig04.svg)
 *图 P08-4：租户—项目—角色—API 关系图。*
 
 ---
@@ -401,7 +401,7 @@ dataset_version = {
 
 在这个结构中，版本不再是静态标签，而是一个能参与运行、评估和回滚的治理对象。
 
-![图 P08-5](../../images/part14/p08/p08_05_version_lifecycle.svg)
+![图 P08-5](../../images/part14/p08/Yu-Project08-Fig05.svg)
 *图 P08-5：版本演进与发布/回滚点示意图。*
 
 ---
@@ -463,7 +463,7 @@ experiment_run = {
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
-![图 P08-6](../../images/part14/p08/p08_06_experiment_tracking.svg)
+![图 P08-6](../../images/part14/p08/Yu-Project08-Fig06.svg)
 *图 P08-6：实验状态分布与治理动作图。*
 
 ---
@@ -506,7 +506,7 @@ lineage_edge = {
 如果一开始就把版本、实验、告警、回滚和报告视为互相关联的图对象，后续平台扩展会更顺；
 如果一开始把它们分散成若干孤立表格，后面再补血缘通常成本更高。
 
-![图 P08-7](../../images/part14/p08/p08_07_lineage_graph.svg)
+![图 P08-7](../../images/part14/p08/Yu-Project08-Fig07.svg)
 *图 P08-7：版本—实验—结果—回滚血缘图。*
 
 ---
@@ -547,7 +547,7 @@ lineage_edge = {
 当平台发生回归时，核心风险不是“需要后退”，而是“后退成本不可控”。
 一个具备 rollback 能力的平台，可以把“出现问题怎么办”从紧急救火变成标准动作。
 
-![图 P08-8](../../images/part14/p08/p08_08_rollback_flow.svg)
+![图 P08-8](../../images/part14/p08/Yu-Project08-Fig08.svg)
 *图 P08-8：回滚触发与恢复流程图。*
 
 ---
@@ -605,7 +605,7 @@ alert = {
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
-![图 P08-9](../../images/part14/p08/p08_09_observability_loop.svg)
+![图 P08-9](../../images/part14/p08/Yu-Project08-Fig09.svg)
 *图 P08-9：指标—日志—告警—审计闭环图。*
 
 ---
@@ -644,7 +644,7 @@ incident review 负责回答“为什么出问题、以后怎么不再发生”�
 这两者如果分开存在，平台只能提供局部证据；
 如果联动存在，平台才具备学习能力。
 
-![图 P08-10](../../images/part14/p08/p08_10_audit_and_incident_review.svg)
+![图 P08-10](../../images/part14/p08/Yu-Project08-Fig10.svg)
 *图 P08-10：审计日志与事故复盘关联图。*
 
 ---
@@ -724,7 +724,7 @@ for path in required_files:
 
 这种检查看起来简单，但它能有效把平台工程从“概念正确”推进到“交付一致”。
 
-![图 P08-11](../../images/part14/p08/p08_11_validation_pipeline.svg)
+![图 P08-11](../../images/part14/p08/Yu-Project08-Fig11.svg)
 *图 P08-11：检查链路与一致性验证图。*
 
 ---

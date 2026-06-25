@@ -81,7 +81,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 1. 项目背景：合成数学与代码教材工厂的必要性
 
-![图 P04-1](../../images/part14/p04/p04_01_project_positioning.svg)
+![图 P04-1](../../images/part14/p04/Xu-Project04-Fig01.svg)
 *图 P04-1：合成数学与代码教材工厂项目定位图。*
 
 
@@ -106,7 +106,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 2. 项目目标与边界
 
-![图 P04-2](../../images/part14/p04/p04_02_goals_and_scope.svg)
+![图 P04-2](../../images/part14/p04/Xu-Project04-Fig02.svg)
 *图 P04-2：P04 项目目标与边界示意图。*
 
 
@@ -186,7 +186,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 4. 整体架构：从种子题到教材卷册的推理数据流水线
 
-![图 P04-3](../../images/part14/p04/p04_03_pipeline_overview.svg)
+![图 P04-3](../../images/part14/p04/Xu-Project04-Fig03.svg)
 *图 P04-3：P04 整体架构总览图。*
 
 
@@ -230,7 +230,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 5. 工程前置：教材工厂的关键面
 
-![图 P04-4](../../images/part14/p04/p04_04_roles_and_responsibilities.svg)
+![图 P04-4](../../images/part14/p04/Xu-Project04-Fig04.svg)
 *图 P04-4：教材工厂职责协同图。*
 
 
@@ -276,7 +276,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 6. 种子层：题目种子的必要性
 
-![图 P04-5](../../images/part14/p04/p04_05_seed_to_plan.svg)
+![图 P04-5](../../images/part14/p04/Xu-Project04-Fig05.svg)
 *图 P04-5：种子题到章节计划的映射图。*
 
 
@@ -315,7 +315,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 7. Evol-Instruct：题目进化机制
 
-![图 P04-6](../../images/part14/p04/p04_06_evol_path.svg)
+![图 P04-6](../../images/part14/p04/Xu-Project04-Fig06.svg)
 *图 P04-6：Evol-Instruct 进化路径图。*
 
 
@@ -354,7 +354,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 8. PoT 选择：程序化推理路径
 
-![图 P04-7](../../images/part14/p04/p04_07_cot_vs_pot.svg)
+![图 P04-7](../../images/part14/p04/Xu-Project04-Fig07.svg)
 *图 P04-7：CoT 与 PoT 对比图。*
 
 
@@ -395,7 +395,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 ## 9. 生成链路：从 prompt 到代码解法的具体实现
 
-![图 P04-8](../../images/part14/p04/p04_08_generation_chain.svg)
+![图 P04-8](../../images/part14/p04/Xu-Project04-Fig08.svg)
 *图 P04-8：生成链路细化图。*
 
 
@@ -425,7 +425,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 ## 10. 沙箱验证：生成即验证的核心门槛
 
-![图 P04-9](../../images/part14/p04/p04_09_sandbox_validation.svg)
+![图 P04-9](../../images/part14/p04/Xu-Project04-Fig09.svg)
 *图 P04-9：沙箱验证执行路径图。*
 
 
@@ -471,7 +471,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 ## 11. 教材打包：课程化资产组织
 
-![图 P04-10](../../images/part14/p04/p04_10_packaging_outputs.svg)
+![图 P04-10](../../images/part14/p04/Xu-Project04-Fig10.svg)
 *图 P04-10：教材打包产物关系图。*
 
 
@@ -515,7 +515,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 ## 12. 训练封装：教材数据进入训练系统
 
-![图 P04-11](../../images/part14/p04/p04_11_training_interface.svg)
+![图 P04-11](../../images/part14/p04/Xu-Project04-Fig11.svg)
 *图 P04-11：训练封装接口图。*
 
 

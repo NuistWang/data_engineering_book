@@ -232,7 +232,7 @@ $$
 
 MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去重参数为 5-grams、112 个哈希函数，拆成 14 个 bucket，每个 bucket 8 个 hash；任一 bucket 的 8 个 MinHash 相同即可判为重复候选。DataTrove 示例脚本中的 `MinhashConfig` 也对应 `n_grams=5`、`num_buckets=14`、`hashes_per_bucket=8`。
 
-![图38-1 FineWeb MinHash 去重和 PII 处理流程](../../images/part12/ch38_01_fineweb_minhash_pii_flow.svg)
+![图38-1 FineWeb MinHash 去重和 PII 处理流程](../../images/part12/Mu-Chap38-Fig01-ZH.svg)
 
 *图38-1 FineWeb MinHash 去重和 PII 处理流程。Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and FineWeb dataset card.*
 
@@ -242,7 +242,7 @@ MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去�
 
 这个结果对工程实践很重要。去重不是数学上越彻底越好，而是要看它如何改变数据分布。全局去重会让新旧 crawl 之间的时间分布、站点覆盖和重复簇结构发生复杂变化；如果只看“删除了多少重复”，可能误删更有价值的样本，保留低质量长尾。
 
-![图38-2 FineWeb 数据处理选择的消融评估回路](../../images/part12/ch38_02_fineweb_ablation_loop.svg)
+![图38-2 FineWeb 数据处理选择的消融评估回路](../../images/part12/Mu-Chap38-Fig02-ZH.svg)
 
 *图38-2 FineWeb 数据处理选择的消融评估回路。Source: original illustration based on FineWeb paper Section 3.1.*
 
@@ -511,7 +511,7 @@ Dolma Toolkit 文档把数据整理概括为四个动作：tag、dedup、mix、t
 
 数据来源 Dolma Toolkit documentation README。
 
-![图38-3 Dolma 透明语料证据链](../../images/part12/ch38_03_dolma_evidence_chain.svg)
+![图38-3 Dolma 透明语料证据链](../../images/part12/Mu-Chap38-Fig03-ZH.svg)
 
 *图38-3 Dolma 透明语料证据链。Source: original illustration based on AllenAI Dolma Toolkit documentation.*
 
@@ -533,7 +533,7 @@ $$
 
 当 $\Delta_s$ 在代码任务、科学问答或长文本任务上明显变化时，数据团队才能把能力变化回溯到 source mix，而不是泛泛归因于“模型参数”。
 
-![图38-4 Dolma source mix 与训练诊断回路](../../images/part12/ch38_04_dolma_source_mix_diagnosis.svg)
+![图38-4 Dolma source mix 与训练诊断回路](../../images/part12/Mu-Chap38-Fig04-ZH.svg)
 
 *图38-4 Dolma source mix 与训练诊断回路。Source: original illustration based on Dolma dataset card and OLMo training use.*
 

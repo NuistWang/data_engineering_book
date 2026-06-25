@@ -78,7 +78,7 @@ This section focuses on how to organize a rerunnable, auditable, and extensible 
 
 Figure P14-1 shows the English-annotated architecture diagram for this project. The upper half of the diagram represents data stages; the lower half represents engineering controls. This layout deliberately places "caption generation" in the later stage rather than treating it as the sole core: the quality of a video generation dataset depends on the collective coordination of source, segmentation, motion, aesthetics, captioning, cinematic language, and release gates.
 
-![P14 Video Generation Data Pipeline](../../images/part14/p14_video_generation_pipeline_en.svg)
+![P14 Video Generation Data Pipeline](../../images/part14/Luo-Project14-Fig04-EN.svg)
 
 *Figure P14-1: English architecture diagram of the video generation data pipeline.*
 
@@ -523,7 +523,7 @@ This integration avoids rebuilding video instruction data from scratch. P14 hand
 
 | frame1 | frame2 |
 |---|---|
-| ![frame1](../../images/part14/p14_video_frame_0.jpg) | ![frame2](../../images/part14/p14_video_frame_1.jpg) |
+| ![frame1](../../images/part14/Luo-Project14-Fig01.jpg) | ![frame2](../../images/part14/Luo-Project14-Fig02.jpg) |
 
 The figure shows two sampled frames from the output data. The clip presents a coastal scene filmed from a high-altitude aerial perspective: deep blue water continuously crashes against rugged reef formations, white foam forms clearly at the edges of the dark rock faces, and sparse green vegetation distributed among the rocks preserves a degree of visual layering within the natural environment. The multi-frame caption covers the clip's subjects, scene, lighting, and atmosphere, describing natural illumination, cool-toned ocean surface, clear rock textures, and the dynamic quality imparted by wave motion. From the cinematic language annotation results, this shot is identified as `extreme_wide` shot size, `high_angle` camera angle, `rule_of_thirds` composition, `natural` lighting type, `cool` overall color tone, and `cinematic` style tag. The camera motion module classifies it as `zoom_in`, indicating a noticeable push-in or scale change in the frame; `motion_strength=0.8974` indicates that the clip carries a stable motion signal and is suitable for T2V training to learn natural scene motion, aerial perspectives, and coastal cinematic language.
 

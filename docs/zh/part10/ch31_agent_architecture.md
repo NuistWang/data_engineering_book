@@ -126,7 +126,7 @@ DataAgent 适合作为本篇的工程锚点，原因不在于它覆盖了所有�
 
 数据工程 Agent 的任务边界必须通过分层来约束。每一层只承担一个维度的职责，层与层之间通过结构化协议通信，不共享内部状态。多 Agent 会话框架和自治 Agent 综述都强调，复杂 Agent 系统要通过角色划分、消息协议和状态隔离来降低失控风险（Wu et al. 2023; Wang et al. 2023; Xi et al. 2023）。下图展示六层架构的核心关系：
 
-![数据工程 Agent 六层架构图](../../images/part10/ai_agent_decision_workflow_ch31_01.svg)
+![数据工程 Agent 六层架构图](../../images/part10/Yu-Chap31-Fig01.svg)
 
 **图31-1：数据工程 Agent 六层架构图**
 
@@ -354,7 +354,7 @@ DataAgent 可以被理解为一个面向企业数据任务的 Agentic Data Engin
 
 ### 31.3.3 人机协同的核心流程
 
-![人机协同流程图——按风险等级分流](../../images/part10/ai_agent_decision_workflow_ch31_02.svg)
+![人机协同流程图——按风险等级分流](../../images/part10/Yu-Chap31-Fig02.svg)
 
 **图31-2：人机协同流程图——按风险等级分流**
 

@@ -238,7 +238,7 @@ $$
 
 MinHash approximates this similarity with multiple hash functions. The FineWeb paper states that its deduplication parameters are 5-grams and 112 hash functions, split into 14 buckets with 8 hashes per bucket; if the 8 MinHash values in any bucket match, the pair is considered a duplicate candidate. The `MinhashConfig` in the DataTrove example script also corresponds to `n_grams=5`, `num_buckets=14`, and `hashes_per_bucket=8`.
 
-![Figure 38-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/ch38_01_fineweb_minhash_pii_flow_en.svg)
+![Figure 38-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/Mu-Chap38-Fig01-EN.svg)
 
 *Figure 38-1 FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
 
@@ -248,7 +248,7 @@ Intuitively, global deduplication seems more thorough: put all 96 crawls togethe
 
 This result matters for engineering practice. Deduplication is not mathematically better simply because it is more exhaustive; what matters is how it changes the data distribution. Global deduplication can alter the time distribution, site coverage, and duplicate-cluster structure across old and new crawls in complex ways. If one looks only at "how much duplication was removed," valuable samples may be removed while low-quality long-tail samples remain.
 
-![Figure 38-2 FineWeb data-processing-choice ablation loop](../../images/part12/ch38_02_fineweb_ablation_loop_en.svg)
+![Figure 38-2 FineWeb data-processing-choice ablation loop](../../images/part12/Mu-Chap38-Fig02-EN.svg)
 
 *Figure 38-2 FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
 
@@ -529,7 +529,7 @@ Dolma Toolkit documentation summarizes data organization as four actions: tag, d
 
 Source: Dolma Toolkit documentation README.
 
-![Figure 38-3 Dolma transparent-corpus evidence chain](../../images/part12/ch38_03_dolma_evidence_chain_en.svg)
+![Figure 38-3 Dolma transparent-corpus evidence chain](../../images/part12/Mu-Chap38-Fig03-EN.svg)
 
 *Figure 38-3 Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation.*
 
@@ -551,7 +551,7 @@ $$
 
 When $\Delta_s$ changes clearly on code tasks, scientific QA, or long-context tasks, the data team can trace capability changes back to source mix instead of vaguely attributing them to "model parameters."
 
-![Figure 38-4 Dolma source mix and training-diagnosis loop](../../images/part12/ch38_04_dolma_source_mix_diagnosis_en.svg)
+![Figure 38-4 Dolma source mix and training-diagnosis loop](../../images/part12/Mu-Chap38-Fig04-EN.svg)
 
 *Figure 38-4 Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use.*
 

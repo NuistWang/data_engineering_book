@@ -194,7 +194,7 @@ StructBill-CN 的每个样本，把一张票据图像与一份预定义 schema �
 
 schema 的三个部分 $\{K, T, C\}$ 与最终的层级 JSON 一一对应：$K$ 落到全局 `key_information` 对象，$T$ 落到 `Fee_List` 数组及其行内字段，$C$ 则不直接成为字段，而是作为「校验关系」贴附在数值字段之上。结构关系如图 40-1。
 
-![图40-1：Schema 到 JSON 的结构化映射](../../images/part12/ch40_01_schema_decomposition.png)
+![图40-1：Schema 到 JSON 的结构化映射](../../images/part12/Liu-Chap40-Fig01-ZH.png)
 
 *图 40-1：Schema 到层级 JSON 的结构示意 —— 键字段与表结构构成可见的 JSON 节点；约束规则不是节点，而是贴附在金额、总额等数值字段上的可验证关系。*
 
@@ -281,7 +281,7 @@ expense_schema = Schema(
 
 StructBill-CN 通过一条多阶段流水线构建，核心诉求是**同时保留语义内容与业务逻辑拓扑**，并在每一步设置可回溯的质量门禁。整体数据流如图 40-2。
 
-![图40-2：StructBill-CN 数据集构建流水线](../../images/part12/ch40_02_dataset_construction_pipeline.png)
+![图40-2：StructBill-CN 数据集构建流水线](../../images/part12/Liu-Chap40-Fig02-ZH.png)
 
 *图 40-2：StructBill-CN 数据构建流水线 —— 关键设计是第 ⑥ 步与质检门禁：未通过逻辑一致性校验的样本会回流到标注阶段重做，而不是直接进入训练集。*
 
@@ -299,7 +299,7 @@ StructBill-CN 通过一条多阶段流水线构建，核心诉求是**同时保�
 
 **⑥ 逻辑一致性校验。** 这是 StructBill-CN 区别于普通抽取数据集的核心步骤——**对标注本身做算术自洽性检查**：逐行验证「单价 × 数量 ≈ 金额」，并验证「明细金额之和 ≈ 总额」（均带容差 $\varepsilon$ 以吸收 OCR 浮点误差）。校验流程见图 40-3。只有当标注本身算术自洽时，它才能作为可靠的逻辑监督信号；否则后续基于该数据训练的奖励信号就是"脏"的。
 
-![图40-3：结构一致性校验门禁](../../images/part12/ch40_03_structural_consistency_validation.png)
+![图40-3：结构一致性校验门禁](../../images/part12/Liu-Chap40-Fig03-ZH.png)
 
 *图 40-3：逻辑一致性校验流程 —— 同一套门禁逻辑在两处复用：构建期用于拦截不自洽的标注，评测/训练期用于给模型输出打一致性分（即 §40.6 的 SCL-Reward 中的结构门禁 $I_{gate}$ 与逻辑奖励 $R_{logic}$）。这种"构建即评测"的复用，是保证训练目标与评测口径一致的关键工程手段。*
 
@@ -593,7 +593,7 @@ SparseTable-Bench 的一个核心设计是把每张表格图像表示为同步�
 
 这里的 `[EMPTY_CELL]` 不是普通文本，而是用于表达“结构存在、内容为空”的占位符。它把单元格的结构身份和语义内容解耦：即使图像区域没有可读字符，该位置仍然有行列坐标、边界框和上下文关系。对于稀疏表格，这种占位符可以防止模型在生成时把空白区域当作不存在的区域，从而降低列坍缩和左移错误的概率。图 40-4 概括了同一表格样本中 HTML、文本和 bbox 三类监督信号的同步关系。
 
-![图40-4：表格样本三类监督信号结构图](../../images/part12/ch40_04_supervision_schema.png)
+![图40-4：表格样本三类监督信号结构图](../../images/part12/Liu-Chap40-Fig04-ZH.png)
 
 从数据工程角度看，STB 的样本 schema 至少包含以下字段和检查规则。
 
@@ -614,7 +614,7 @@ SparseTable-Bench 的一个核心设计是把每张表格图像表示为同步�
 
 SparseTable-Bench 的构建可整理为四个阶段：表格收集、结构抽取、空间标注和稀疏拓扑增强。四个阶段之间不是简单串行的文件转换，而是围绕“结构、文本、几何三者一致”反复校验，如图 40-5 所示。
 
-![图40-5：SparseTable-Bench 四阶段构建流水线图](../../images/part12/ch40_05_stb_pipeline.png)
+![图40-5：SparseTable-Bench 四阶段构建流水线图](../../images/part12/Liu-Chap40-Fig05-ZH.png)
 
 #### 案例B.4.1 表格收集
 
@@ -668,7 +668,7 @@ STB-Mask-Stress 是 SparseTable-Bench 中专门用于鲁棒性评估的压力测
 
 图 40-6 展示了 STB-Mask-Stress 从列级遮挡生成到评测解释的基本流程。
 
-![图40-6：STB-Mask-Stress 遮挡生成与评测流程图](../../images/part12/ch40_06_mask_stress_flow.png)
+![图40-6：STB-Mask-Stress 遮挡生成与评测流程图](../../images/part12/Liu-Chap40-Fig06-ZH.png)
 
 STB-Mask-Stress 的遮挡策略是列感知的。流程可以概括如下。
 

@@ -34,7 +34,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 > **前置知识与合规边界提示**：
 > 本章专注于探讨针对具体 VLM 特化的“数据配方”与 Curriculum 调度差异。关于基础的图文对抓取、MinHash 去重流水线、基础 OCR 抽取，以及跨模态对齐的通用预处理（如 Resize/CenterCrop 等图像处理流），已经在 **Ch08（图文对）**、**Ch09（重标注与文档理解）**、**Ch10（视频与音频）** 与 **Ch11（跨模态对齐）** 中做了详尽铺垫。对于底层通用流水线，可先复习图47-1 的多模态数据工程全景。此外，任何涉及图像爬虫版权的溯源风险，请直接参阅 **Ch04 §4.4** 与 **Ch27（数据合规）**。本章只讲“配方”，不重复“造轮子”。
 
-![图47-1：多模态数据工程全景图](../../images/part13/ch47_01_multimodal_data_panorama.png)
+![图47-1：多模态数据工程全景图](../../images/part13/Cao-Chap47-Fig01.png)
 
 <div align="center"><b>图47-1：多模态数据工程全景图（改绘自第8章基础图）</b></div>
 
@@ -44,7 +44,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 
 如果我们去剖析 Qwen2.5-VL 或 InternVL3 的技术报告，会发现当今的 VLM 数据配方已经形成了高度标准化的"三阶段流水线"（如图47-2 所示）。仅仅是预训练阶段，其目标就已经从单纯的"概念绑定"演化为深度的"视觉特征结构化"。每个阶段对数据的质量要求、类型分布与规模体量均存在数量级上的差异，盲目混用三个阶段的数据是大量团队配方失败的首要根源。
 
-![图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)](../../images/part13/ch47_02_vlm_three_stages_en.svg)
+![图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)](../../images/part13/Cao-Chap47-Fig02-EN.svg)
 
 <div align="center"><b>图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Pipeline)</b></div>
 
@@ -111,7 +111,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 多模态领域存在一个长期的工程痛点：高分辨率（High-Resolution）图像带来的 Token 爆炸。如果强制把图片统一 Resize 到 224×224，模型就变成了"近视眼"，永远无法读懂密集排列的发票和数学公式。为了解决这个问题，数据管线中演化出了两派截然不同的处理哲学，它们在数据预处理阶段就已经产生了本质分歧。
 
-![图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)](../../images/part13/ch47_03_resolution_handling_en.svg)
+![图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)](../../images/part13/Cao-Chap47-Fig03-EN.svg)
 
 <div align="center"><b>图47-3：Native vs Dynamic Resolution 数据 pipeline 对比</b></div>
 
@@ -142,7 +142,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 到了微调（SFT）阶段，高质量的指令数据成了决定模型上限的最后一块拼图。由于让人类去框选图片中的物体（Grounding）或编写复杂的视觉逻辑题极其昂贵，**"合成数据工厂"**成了头部玩家的标配。
 
-![图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)](../../images/part13/ch47_04_instruction_synthesis_en.svg)
+![图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)](../../images/part13/Cao-Chap47-Fig04-EN.svg)
 
 <div align="center"><b>图47-4：多模态指令合成 pipeline</b></div>
 

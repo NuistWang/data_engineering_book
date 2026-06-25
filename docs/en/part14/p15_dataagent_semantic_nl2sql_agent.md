@@ -8,7 +8,7 @@ This project uses DataAgent to build a semantic BI assistant for enterprise stru
 
 Read in engineering order, the project follows a complete chain from business question to trustworthy delivery, as shown in Figure P15-1.
 
-![DataAgent semantic BI assistant engineering chain](../../images/part14/p15_dataagent_engineering_chain_en.png)
+![DataAgent semantic BI assistant engineering chain](../../images/part14/Cao-Project15-Fig03-EN.png)
 
 *Figure P15-1: Engineering chain of the DataAgent semantic BI assistant.*
 
@@ -140,7 +140,7 @@ This case highlights DataAgent's distinctive capabilities: NL2SQL, Semantic Serv
 
 The semantic BI assistant in this chapter is not an isolated NL2SQL component. It is an application form inside the broader DataGallery ecosystem. It uses DataAgent for task understanding, tool orchestration, and execution control; Semantic Service for metadata, metric definitions, and semantic retrieval; and Data Studio and Data Ops to connect BI capability with applications, evaluation, observation, and continuous improvement. Appendix G provides a fuller discussion of DataGallery's four-pillar technical map: the currently open-source DataAgent execution engine, the unified semantic layer, agent-semantic self-evolution, and the evaluation framework. Figure P15-2 shows the architectural relationships that support this project.
 
-![DataGallery ecosystem architecture around DataAgent, Semantic Service, Data Studio, Data Ops, and foundation infrastructure](../../images/part14/p15_datagallery_architecture_vector.svg)
+![DataGallery ecosystem architecture around DataAgent, Semantic Service, Data Studio, Data Ops, and foundation infrastructure](../../images/part14/Cao-Project15-Fig08.svg)
 
 *Figure P15-2: DataGallery ecosystem architecture around DataAgent.*
 
@@ -576,7 +576,7 @@ Before running, confirm:
 
 A complete BI task can be described as:
 
-![Runtime flow of the DataAgent enterprise semantic BI assistant](../../images/part14/p15_dataagent_semantic_bi_sequence_en.svg)
+![Runtime flow of the DataAgent enterprise semantic BI assistant](../../images/part14/Cao-Project15-Fig07-EN.svg)
 
 *Figure P15-3: Runtime flow of the DataAgent enterprise semantic BI assistant.*
 

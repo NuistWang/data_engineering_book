@@ -154,7 +154,7 @@
 - `grounding_bboxes`：通过 GroundingDINO 提取并映射的细粒度实体坐标，是训练基座具备“指认能力”的核心。
 - `clip_score`与`quality_flag`：用于前置校验过滤的自动打分；是否设为 `REJECT` 应根据当前视觉-文本编码器、语种、图片类型和人工抽检分布校准阈值（完整双轨管道见图9-1）。
 
-![图9-1：重标注与 OCR 双流线增强图](../../images/part3/recaptioning_ocr_pipeline.svg)
+![图9-1：重标注与 OCR 双流线增强图](../../images/part3/Yu-Chap09-Fig01.svg)
 
 *图9-1：重标注与 OCR 增强联合的双轨管道图（Dual-track Pipeline） —— 左侧展示语义密集叙述流（Semantic Vision Track），右侧展示包含 DOM 排版分割与表格矩阵的高密度结构流（Structural Text Track），最终融合为统一的混合监督模板格式。来源：本书自绘。*
 
@@ -187,7 +187,7 @@
 
 在多级 OCR 提取后，核心工程难点在于**坐标对准机制（Modality Absolute Geometric Alignment）**（见图9-2）。提取出的文字如果不与图片上的像素区域建立绑定，模型仍不知道应关注页面的哪个区域。常见做法是在每段文本后追加 `<box_coord>` 映射串，让注意力机制可以参考这些坐标锚点。
 
-![图9-2：文档结构 Layout-to-Token 映射图](../../images/part3/document_structure_sample.svg)
+![图9-2：文档结构 Layout-to-Token 映射图](../../images/part3/Yu-Chap09-Fig02.svg)
 
 *图9-2：文档结构 Layout-to-Token 映射图（Document Structure Layout-to-Token Mapping） —— 左半区展示一份双栏学术报告残页；系统首先通过 Bounding Box 阵列定位标题、正文、图表和公式区域；右半区展示 Nougat、PaddleOCR 等特化模型输出如何经脚本后处理，归并为层级化 Markdown 文本与离散坐标 `[x_y]` 的富文本数据流。来源：本书自绘。*
 

@@ -70,7 +70,7 @@ R1-Zero 这类实验给数据工程带来的启发是：在可验证任务上，
 
 R1 风格推理数据飞轮可以拆成四个阶段：冷启动 SFT、大规模 RL、拒绝采样、二轮 SFT。这四个阶段不是线性的一次性流程，而是可以反复运行的闭环。
 
-![图46-1：R1 风格推理数据飞轮四阶段](../../images/part13/ch46_01_r1_reasoning_flywheel.svg)
+![图46-1：R1 风格推理数据飞轮四阶段](../../images/part13/Xu-Chap46-Fig01.svg)
 *图46-1：冷启动 SFT、大规模 RL、拒绝采样与二轮 SFT 之间的数据回流关系。*
 
 ### 46.2.1 第一阶段：冷启动 SFT
@@ -177,7 +177,7 @@ RL 阶段的训练日志需要和数据日志对齐。只记录 loss、reward �
 
 R1 范式的数据工程核心，是奖励信号与验证器设计。没有可靠奖励，RL 只是在放大模型已有偏差；没有可追踪数据结构，拒绝采样也无法复盘。
 
-![图46-2：推理数据奖励信号与验证器结构](../../images/part13/ch46_02_reward_verifier_architecture.svg)
+![图46-2：推理数据奖励信号与验证器结构](../../images/part13/Xu-Chap46-Fig02.svg)
 *图46-2：rule-based reward、model-based reward 与人工审计之间的关系。*
 
 ### 46.3.1 Rule-based reward 与 model-based reward
@@ -222,7 +222,7 @@ Verifier 池是推理数据飞轮的基础设施。它不是一个单独脚本�
 
 Long-CoT 轨迹的质量也可以从内部结构观察。常见的三类片段是 Reflection、Verification 和 Backtrack：Reflection 用于重新审视假设，Verification 用于检查中间结论或最终答案，Backtrack 用于在发现路径错误后回退并更换解法。这三类模式不应被机械地写成固定模板，而应作为分析推理轨迹时的结构标签。
 
-![图46-3：Long-CoT 数据样例剖面](../../images/part13/ch46_03_long_cot_trace_patterns.svg)
+![图46-3：Long-CoT 数据样例剖面](../../images/part13/Xu-Chap46-Fig03.svg)
 *图46-3：Long-CoT 数据样例剖面，展示 Reflection、Verification 与 Backtrack 三种推理轨迹模式。*
 
 ### 46.3.3 Long-CoT 中英文混合推理策略

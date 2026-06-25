@@ -127,7 +127,7 @@ Mini-C4 的意义就在这里。它不是工业级完整 C4 的替代品，而�
 
 ## 3. 项目整体架构
 
-![图 P01-1](../../images/part14/p01/p01_01_mini_c4_pipeline_overview.svg)
+![图 P01-1](../../images/part14/p01/Xu-Project01-Fig01.svg)
 *图 P01-1：Mini-C4 数据流水线总览。*
 
 
@@ -225,7 +225,7 @@ Common Crawl 是构建网页类预训练数据集最常用的公开来源之一�
 
 ### 5.2 核心组件选型
 
-![图 P01-2](../../images/part14/p01/p01_02_warc_to_text.svg)
+![图 P01-2](../../images/part14/p01/Xu-Project01-Fig02.svg)
 *图 P01-2：WARC 到正文文本的解析路径。*
 
 
@@ -293,7 +293,7 @@ def extract_text_from_warc(warc_path, output_path):
 
 ## 6. 启发式清洗：首轮噪声筛除
 
-![图 P01-3](../../images/part14/p01/p01_03_cleaning_rules.svg)
+![图 P01-3](../../images/part14/p01/Xu-Project01-Fig03.svg)
 *图 P01-3：启发式清洗规则示意。*
 
 
@@ -382,7 +382,7 @@ Listing P01-3 给出了流程或路径示例，用于说明本节中的输入输
 
 ## 7. 去重：网页语料中的近重复处理
 
-![图 P01-4](../../images/part14/p01/p01_04_dedup_minhash_lsh.svg)
+![图 P01-4](../../images/part14/p01/Xu-Project01-Fig04.svg)
 *图 P01-4：MinHash + LSH 去重思路。*
 
 
@@ -477,7 +477,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 8. 语种拆分：按语言处理的必要性
 
-![图 P01-5](../../images/part14/p01/p01_05_language_split.svg)
+![图 P01-5](../../images/part14/p01/Xu-Project01-Fig05.svg)
 *图 P01-5：语种拆分与分支处理。*
 
 ### 8.1 不同语言不能共用同一套质量门
@@ -512,7 +512,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 9. 质量过滤：从“看起来像文本”到“适合训练”
 
-![图 P01-6](../../images/part14/p01/p01_06_quality_filter.svg)
+![图 P01-6](../../images/part14/p01/Xu-Project01-Fig06.svg)
 *图 P01-6：质量过滤决策示意。*
 
 ### 9.1 为什么质量过滤是最关键的一道门
@@ -574,7 +574,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 10. 三轮实验复盘：流水线的迭代形成过程
 
-![图 P01-7](../../images/part14/p01/p01_07_three_iterations.svg)
+![图 P01-7](../../images/part14/p01/Xu-Project01-Fig07.svg)
 *图 P01-7：三轮实验迭代路径。*
 
 如果只把项目理解为一串脚本调用，就不容易看清这些设计背后的取舍。
@@ -691,7 +691,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 12. 数据评估：流水线价值判断
 
-![图 P01-8](../../images/part14/p01/p01_08_funnel.svg)
+![图 P01-8](../../images/part14/p01/Xu-Project01-Fig08.svg)
 *图 P01-8：数据留存漏斗。*
 
 ### 12.1 数据留存漏斗
@@ -738,7 +738,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 13. 成本分析：资源核算与瓶颈
 
-![图 P01-9](../../images/part14/p01/p01_09_cost_breakdown.svg)
+![图 P01-9](../../images/part14/p01/Xu-Project01-Fig09.svg)
 *图 P01-9：资源与成本构成。*
 
 在很多初学项目中，开发者更关注“链路是否能够完成”，而不太关注“代价是什么”。
@@ -769,7 +769,7 @@ Ray 并行处理最大的一个常见误区是：
 
 ## 14. 验证闭环：项目一致性检查
 
-![图 P01-10](../../images/part14/p01/p01_10_validation_loop.svg)
+![图 P01-10](../../images/part14/p01/Xu-Project01-Fig10.svg)
 *图 P01-10：项目验证闭环。*
 
 ### 14.1 项目检查的作用
@@ -892,7 +892,7 @@ Mini-C4 的价值在于说明方法，但它也有非常明确的局限。
 
 ## 17. 工程实践总结：Mini-C4 的方法价值
 
-![图 P01-11](../../images/part14/p01/p01_11_methodology_summary.svg)
+![图 P01-11](../../images/part14/p01/Xu-Project01-Fig11.svg)
 *图 P01-11：Mini-C4 工程方法论总结。*
 
 本项目真正想传达的，不是某个库的用法，而是一种更普遍的数据工程方法论：

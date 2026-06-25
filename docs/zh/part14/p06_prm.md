@@ -179,7 +179,7 @@ Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输
 
 > 当团队想让模型学会更好的过程，而不是只学会更好的结果时，数据工程应该怎样重新设计？
 
-![图 P06-1](../../images/part14/p06/p06_01_prm_factory_overview.svg)
+![图 P06-1](../../images/part14/p06/Wang-Project06-Fig01.svg)
 *图 P06-1：CoT 与 PRM 数据工厂总览。*
 
 ---
@@ -226,7 +226,7 @@ Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输
 
 到这一步，项目才从“生成了一些 reasoning traces”变成“建立了一条过程监督数据流水线”。
 
-![图 P06-2](../../images/part14/p06/p06_02_step_validation_loop.svg)
+![图 P06-2](../../images/part14/p06/Wang-Project06-Fig02.svg)
 *图 P06-2：步骤级验证与训练闭环图。*
 
 ---
@@ -343,7 +343,7 @@ task_spec = {
 * 可以把任务层和轨迹层分开迭代，而不是每次全链条重写；
 * 可以为未来扩展到新任务域保留接口。
 
-![图 P06-3](../../images/part14/p06/p06_03_task_sampling.svg)
+![图 P06-3](../../images/part14/p06/Wang-Project06-Fig03.svg)
 *图 P06-3：任务采样与规格生成流程图。*
 
 ---
@@ -416,7 +416,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 现有指标显示，项目生成了 108 条轨迹，其中三类轨迹完全对称：`positive=36`、`negative=36`、`repair=36`。这说明项目在轨迹结构上不是临时生成若干样本，而是明确把三类过程当作平行监督对象来设计。
 
-![图 P06-4](../../images/part14/p06/p06_04_trace_types.svg)
+![图 P06-4](../../images/part14/p06/Wang-Project06-Fig04.svg)
 *图 P06-4：三类轨迹关系示意图。*
 
 ---
@@ -470,7 +470,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 从这个角度看，step schema 不是附属设计，而是 PRM 数据工厂的地基。
 
-![图 P06-5](../../images/part14/p06/p06_05_step_schema.svg)
+![图 P06-5](../../images/part14/p06/Wang-Project06-Fig05.svg)
 *图 P06-5：PRM step schema 示意图。*
 
 ---
@@ -546,7 +546,7 @@ P06 的中间核心步骤是 `src/validate_and_score.py`，也就是把生成出
 
 现有指标显示，整体轨迹验证通过率为 `67.59%`，但正例轨迹通过率达到 `100.00%`，说明当前问题主要集中在 negative 与 repair 轨迹的控制上。这个结果非常有价值，因为它明确指出项目后续优化不应盲目扩量，而应优先提高清洗和验证质量。
 
-![图 P06-6](../../images/part14/p06/p06_06_validation_pipeline.svg)
+![图 P06-6](../../images/part14/p06/Wang-Project06-Fig06.svg)
 *图 P06-6：步骤验证与结果比对流程图。*
 
 ---
@@ -580,7 +580,7 @@ step label 的价值在于，它把“过程质量”拆成机器可消费的监
 
 这恰恰说明 PRM 数据工厂不是“把答案拆开而已”，而是在建设 outcome 之外的新监督层。
 
-![图 P06-7](../../images/part14/p06/p06_07_step_labels.svg)
+![图 P06-7](../../images/part14/p06/Wang-Project06-Fig07.svg)
 *图 P06-7：step 标签与 process-only signal 示意图。*
 
 ---
@@ -678,7 +678,7 @@ P06 的流程中，这一步由 `src/prepare_prm_data.py` 负责。它的意义�
 
 这类产物不会直接提升模型分数，但会显著提升项目的可维护性与可复现性。
 
-![图 P06-8](../../images/part14/p06/p06_08_training_interface.svg)
+![图 P06-8](../../images/part14/p06/Wang-Project06-Fig08.svg)
 *图 P06-8：PRM 数据封装与训练接口图。*
 
 ---
@@ -751,7 +751,7 @@ P06 当前 `67.59%` 的整体通过率虽然不高，却真实暴露了 negative
 
 这说明项目的下一步优化方向已经很明确，而不是处于“哪里都可能有问题”的混沌状态。
 
-![图 P06-9](../../images/part14/p06/p06_09_validation_metrics.svg)
+![图 P06-9](../../images/part14/p06/Wang-Project06-Fig09.svg)
 *图 P06-9：验证通过率与轨迹类型对照图。*
 
 ---
@@ -850,7 +850,7 @@ repair 轨迹看起来很理想，因为它模拟了模型犯错后修复的过�
 
 这是一条非常重要的工程结论，因为它把“下一步做什么”从泛泛而谈，收敛成了明确的生产线问题。
 
-![图 P06-10](../../images/part14/p06/p06_10_noise_sources.svg)
+![图 P06-10](../../images/part14/p06/Wang-Project06-Fig10.svg)
 *图 P06-10：negative / repair 噪声来源图。*
 
 ---

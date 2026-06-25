@@ -167,7 +167,7 @@ At a deeper level, interruption, switching, and resumption together constitute t
 
 For a more intuitive illustration, Figure 20-1 shows a multi-turn state-transition diagram. The diagram should not merely depict a generic sequential flow, but should highlight forks, suspensions, resumptions, and failure-rollback relationships within state transitions. That is, the diagram should take the form of a state network graph capturing task-thread switching and memory layer influence, rather than a "left-to-right pipeline." This allows readers to see intuitively that the complexity of multi-turn agents does not stem from "more turns" but from "more states, more transitions, and more recovery paths."
 
-![Figure 20-1: Multi-Turn Agent State Transition Diagram](../../images/part6/图20_1.svg)
+![Figure 20-1: Multi-Turn Agent State Transition Diagram](../../images/part6/Zhang-Chap20-Fig01-ZH.svg)
 
 *Figure 20-1: Multi-Turn Agent State Transition Diagram.*
 
@@ -263,7 +263,7 @@ Conflict resolution requires not only "knowing there is a conflict" but also a p
 
 For example, if the user's long-term preference is "default output in Chinese," but in the current episode explicitly requests "use English throughout this time," the system should not continue to output Chinese based on the long-term preference. If it does, the priority system has not been established. Similarly, if the model has inferred based on old state that a certain field likely still holds, but the most recent tool query shows that condition has changed, the tool observation should override the model inference. When multi-turn data explicitly shows this override process, the model is more likely to develop robust conflict-resolution habits and avoid averaging across conflicting sources. The memory layer hierarchy for task-oriented agents and its update and override flow under different information sources are shown in Figure 20-2.
 
-![Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents](../../images/part6/图20_2.svg)
+![Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents](../../images/part6/Zhang-Chap20-Fig02-ZH.svg)
 
 *Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents.*
 

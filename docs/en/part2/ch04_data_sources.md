@@ -60,7 +60,7 @@ This conclusion lays the foundation for the source-selection strategy throughout
 
 If this chapter is an audit checklist for LLM data engineering, the source map is the central view. Before collecting anything, the team should answer: where does the corpus come from, how much does each source contribute, and what are the quality and legal risks?
 
-![Figure 4-1: Layered map of pre-training data sources](../../images/part2/pretrain_data_source_map.svg)
+![Figure 4-1: Layered map of pre-training data sources](../../images/part2/Yu-Chap04-Fig01.svg)
 
 *Figure 4-1: Layered map of pre-training data sources. The three-layer taxonomy positions mainstream sources by processing complexity, knowledge density, and license risk, with typical reference ranges for mixing. Source: original illustration from this book.*
 
@@ -263,7 +263,7 @@ Each ingested batch should write standard fields to the metadata database at the
 }
 ```
 
-![Figure 4-2: Data ingestion and provenance chain](../../images/part2/data_ingestion_provenance_chain.svg)
+![Figure 4-2: Data ingestion and provenance chain](../../images/part2/Yu-Chap04-Fig02.svg)
 
 *Figure 4-2: Data ingestion and provenance chain. From source contact to final archive, each processing stage appends metadata records to the "Provenance Ledger," forming a complete auditable data-lineage chain. Source: original illustration from this book.*
 

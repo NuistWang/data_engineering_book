@@ -26,7 +26,7 @@ REPO = Path(__file__).resolve().parent.parent
 INPUT_MD = REPO / "outputs/presentations/2026-05-28-1hour-100page-outline.md"
 OUTPUT_PPTX = REPO / "outputs/presentations/2026-05-28-1hour-100page-presentation.pptx"
 IMG_ROOT = REPO / "docs/images"
-STRUCTURE_IMG = REPO / "images/structure_cn.png"
+STRUCTURE_IMG = REPO / "images/Yu-Book-Fig01.png"
 
 
 SLIDE_W = Inches(13.333)
@@ -98,9 +98,9 @@ def takeaway_label_for(page_type: str) -> str:
 
 PAGE_IMAGES: dict[int, str] = {
     # Module 0 — opening (no real images for cover/poster slides)
-    2: "../../images/structure_cn.png",  # commitments backed by full book map
+    2: "../../images/Yu-Book-Fig01.png",  # commitments backed by full book map
     3: "part1/data_lifecycle_map_1775830407042.png",  # failure project intro
-    5: "../../images/structure_cn.png",  # full-book structure
+    5: "../../images/Yu-Book-Fig01.png",  # full-book structure
     # Module 1 — paradigm & lifecycle (Ch01-03)
     7: "part1/data_engineering_roles_1775830393574.png",
     8: "part1/data_quality_hierarchy_1775835516841.png",
@@ -114,8 +114,8 @@ PAGE_IMAGES: dict[int, str] = {
     16: "part1/ai_data_stack_architecture.png",
     17: "part1/ai_data_stack_architecture.png",
     18: "part1/cost_governance_loop.png",
-    19: "../../images/structure_cn.png",
-    20: "../../images/structure_cn.png",
+    19: "../../images/Yu-Book-Fig01.png",
+    20: "../../images/Yu-Book-Fig01.png",
     # L1 Text pretraining (p21-28, Ch04-07)
     21: "part2/pretrain_data_source_map.png",
     22: "part2/cleaning_pipeline_overview.png",
@@ -137,23 +137,23 @@ PAGE_IMAGES: dict[int, str] = {
     36: "part4/sft_instruction_architecture.png",
     37: "part4/sft_generation_loop.png",
     38: "part4/sft_instruction_architecture.png",
-    39: "part4/图11_1_人类偏好示意图.png",
-    40: "part4/图14_1.png",
-    41: "part4/图13_1.png",
+    39: "part4/Wang-Chap11-Fig01-ZH.png",
+    40: "part4/Zhang-Chap14-Fig01-ZH.png",
+    41: "part4/Yu-Chap13-Fig01-ZH.png",
     # L4 Synthetic (p42-47, Ch15-17)
-    42: "part4/图9_1_自我指令和进化指令对比.png",
-    43: "part5/图15_1.png",
-    44: "part4/图9_1_自我指令和进化指令对比.png",
-    45: "part5/图16_1.png",
-    46: "part5/图17_1.png",
-    47: "part5/图15_2.png",
+    42: "part4/Yu-Chap09-Fig01-ZH.png",
+    43: "part5/Wang-Chap15-Fig01-ZH.png",
+    44: "part4/Yu-Chap09-Fig01-ZH.png",
+    45: "part5/Wang-Chap16-Fig01-ZH.png",
+    46: "part5/Zhang-Chap17-Fig01-ZH.png",
+    47: "part5/Wang-Chap15-Fig02-ZH.png",
     # L5 Reasoning / Agent (p48-53, Ch18-20)
-    48: "part6/图18_1.png",
-    49: "part6/图18_1.png",
-    50: "part6/图18_2.png",
-    51: "part6/图19_1.png",
-    52: "part6/图20_1.png",
-    53: "part6/图20_2.png",
+    48: "part6/Yu-Chap18-Fig01-ZH.png",
+    49: "part6/Yu-Chap18-Fig01-ZH.png",
+    50: "part6/Yu-Chap18-Fig02-ZH.png",
+    51: "part6/Yu-Chap19-Fig01-ZH.png",
+    52: "part6/Zhang-Chap20-Fig01-ZH.png",
+    53: "part6/Zhang-Chap20-Fig02-ZH.png",
     # L6 RAG / feedback (p54-59, Ch21-23)
     54: "part7/图21_1zh.png",
     55: "part7/图21_2zh.png",
@@ -196,11 +196,11 @@ PAGE_IMAGES: dict[int, str] = {
     89: "part10/10_8_fig07_lineage_graph.png",
     90: "part10/10_10_fig05_architecture_code_mapping.png",
     # Module 4 — closing
-    91: "../../images/structure_cn.png",
+    91: "../../images/Yu-Book-Fig01.png",
     92: "part10/10_10_fig01_flywheel_overview.png",
-    93: "part5/图17_1.png",
+    93: "part5/Zhang-Chap17-Fig01-ZH.png",
     94: "part10/10_10_fig04_stage_plan.png",
-    95: "../../images/structure_cn.png",
+    95: "../../images/Yu-Book-Fig01.png",
     96: "part8/图24_3_DataOps团队组织全景图.png",
     97: "part10/10_10_fig04_stage_plan.png",
     # 98, 99, 100 stay text-only (poster/resource/Q&A)
@@ -368,7 +368,7 @@ def add_image_fitted(slide, image_path: Path, x, y, w, h):
 
 def resolve_image_path(rel: str) -> Path | None:
     """Resolve image relative-path under docs/images/ or special prefix."""
-    # Allow escape: "../../images/structure_cn.png" -> REPO/images/...
+    # Allow escape: "../../images/Yu-Book-Fig01.png" -> REPO/images/...
     if rel.startswith("../../images/"):
         p = REPO / rel.replace("../../", "")
     else:

@@ -36,7 +36,7 @@ LLM；数据配方；开源大模型；训练数据；阶段化调度
 
 在探讨具体的预训练数据配方之前，首先需要建立一个信息可信度标尺。由于商业竞争加剧，当今“开源模型”在数据披露上的态度差异较大。如果不对技术报告中的表述进行降噪，工程师很容易将宣传性表述误读为数据工程的真实依据。为此，本章将主流开源大模型的数据披露程度，划分为一个基于四个维度的“透明度光谱”：**来源（Sources）**、**配比（Mixture/Ratio）**、**清洗规则（Cleaning Pipeline）** 以及 **可下载性（Downloadability）**。
 
-![图44-1：数据配方漏斗 (Data Recipe Funnel)](../../images/part13/ch44_01_data_recipe_funnel_en.svg)
+![图44-1：数据配方漏斗 (Data Recipe Funnel)](../../images/part13/Wang-Chap44-Fig01-EN.svg)
 <div align="center"><b>图44-1：数据配方漏斗 (Data Recipe Funnel)</b></div>
 
 如图44-1 所示，数据配方的漏斗从上到下逐层收窄。技术报告中披露的宏观数字（如 14.8T Tokens）仅是表层；能够推断出各领域的精确配比已经深入一层；而真正能够落地到工程动作的，是启发式过滤阈值与清洗脚本等细节。
@@ -48,12 +48,12 @@ LLM；数据配方；开源大模型；训练数据；阶段化调度
 3. **黑盒（Black-box）闭源**：
    仅在技术报告中模糊提及“我们收集了庞大且高质量的多语言语料库”，没有任何来源切分、没有具体比例、更无代码或数据下载。其披露的数字往往仅具备公关价值，工程指导意义极低。
 
-![图44-2：大模型数据透明度光谱 (Data Transparency Spectrum)](../../images/part13/ch44_02_data_transparency_spectrum_en.svg)
+![图44-2：大模型数据透明度光谱 (Data Transparency Spectrum)](../../images/part13/Wang-Chap44-Fig02-EN.svg)
 <div align="center"><b>图44-2：大模型数据透明度光谱 (Data Transparency Spectrum)</b></div>
 
 > **提示**：通用数据采集、清洗（如 MinHash LSH 去重）与分词（Tokenizer）的基础通用方法论，已经在 Ch04（数据源）、Ch05（清洗）、Ch06（分词）中做了详尽铺垫。如第4章给出的预训练数据源分层地图，构成了本章讨论的基石。本章及本篇将不再赘述这些底层基础设施，而是聚焦于不同模型在配方阶段的具体工程权衡。
 
-![图44-3：预训练数据源分层地图](../../images/part13/ch44_03_pretrain_data_source_map.png)
+![图44-3：预训练数据源分层地图](../../images/part13/Wang-Chap44-Fig03.png)
 <div align="center"><b>图44-3：预训练数据源分层地图（改绘自第4章基础图）</b></div>
 
 **表47-1：主流开源大模型数据透明度光谱 (6 行 × 5 列)**
@@ -84,7 +84,7 @@ LLM；数据配方；开源大模型；训练数据；阶段化调度
 | **数理逻辑 (Math)** | 论坛/合成推导 | 格式纯净，逻辑严密 | ~10-15% [E] | ~12% [I] | ~15% [E] | ~10% [E]，高质量数学数据集中于后段 | ~10-15% [E]，Dolmino Mix 高质量使用 |
 | **学术文献 (Academic)** | ArXiv/医学/法律 | 专业名词，公式解析 | ~5% [I] | ~5-8% [I] | ~8% [I] | ~5% [I]，高质量期刊/公开论文为主 | ~5-8% [I]，Dolmino Mix 学术阶段集中使用 |
 
-![图44-4：三模型数据组成饼图对比 (Estimated Data Mixture Ratios)](../../images/part13/ch44_04_models_pie_chart_en.svg)
+![图44-4：三模型数据组成饼图对比 (Estimated Data Mixture Ratios)](../../images/part13/Wang-Chap44-Fig04-EN.svg)
 <div align="center"><b>图44-4：三模型数据组成饼图对比 (Estimated Data Mixture Ratios)</b></div>
 
 通过横向对比这张大表（如图44-4 所示），可以得到**三个重要观察**：
@@ -249,7 +249,7 @@ Qwen2.5 的 schedule 可以从三个层次理解。第一层是基础预训练�
 
 因此，在 1B tokens 或更小预算下复现大模型时，不能简单按比例缩放大模型数据。更合理的做法是把 token 预算拆成阶段：前段使用干净通用文本，中段逐步提高代码、数学、百科和书籍比例，后段集中使用高质量数据进行退火或能力压实；如果需要长上下文能力，则单独安排窗口扩展阶段，并用短上下文评测和长文检索评测共同监控退化。训练 schedule 的本质，是让模型在合适的时间遇到合适难度的数据。只有这样，有限 token 才能转化为稳定能力，而不是被平均采样稀释掉。
 
-![图44-5：Llama-3 退火期数据组成时间轴 (Curriculum Learning Schedule)](../../images/part13/ch44_05_llama3_annealing_schedule_en.svg)
+![图44-5：Llama-3 退火期数据组成时间轴 (Curriculum Learning Schedule)](../../images/part13/Wang-Chap44-Fig05-EN.svg)
 <div align="center"><b>图44-5：Llama-3 退火期数据组成时间轴 (Curriculum Learning Schedule)</b></div>
 
 Qwen2.5 在数据采样策略上也体现了经典的 Curriculum Learning（课程学习）(Bengio et al. 2009) 思想。第一阶段（基础奠基），模型主要接触海量泛网页数据与基础语料，重点学习语言的统计分布与常识；第二阶段（高质量提纯），语料的质量过滤阈值被大幅提高，泛文本比例下降，代码、数学及严谨学术文档的密度增加，这是能力提升的关键期；第三阶段（退火与超长上下文），学习率下降（退火），开始引入较高比例的合成数据、特定领域的高精人工指令数据以及超长序列数据，实现从预训练到对齐（Alignment）的平滑过渡。

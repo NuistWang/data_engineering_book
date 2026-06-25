@@ -30,7 +30,7 @@
 
 Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简单的“更短 CoT 数据集”，也不是把 Long-CoT 样本做摘要后直接用于 SFT。它服务的是 LaTER 这类 latent-then-explicit reasoning 系统，而 [Latent-Switch MindSpore](https://github.com/yuki10033/latent_switch_mindspore) 则把其中的数据加载、span 物化和 mask 构造落到 MindSpore 数据管线中：模型先经过一段有边界的 latent reasoning 区间，在连续隐状态中完成高层规划和压缩思考，然后切换回可见文本，用较短的显式 CoT 做符号验证，最后生成答案。数据工程目标因此发生了变化：样本不仅要回答“答案是什么”，也要回答“哪些内容适合成为隐藏规划预算，哪些内容仍需要作为可见验证监督”。
 
-![图43-1：Latent-Switch-69K 构建流水线图](../../images/part12/ch43_01_latent_switch_pipeline.svg)
+![图43-1：Latent-Switch-69K 构建流水线图](../../images/part12/Li-Chap43-Fig01.svg)
 
 *图43-1：Latent-Switch-69K 将 Dolci-Think-SFT-32B 的推理轨迹蒸馏为 solution intuition、压缩 CoT、latent budget、student sequence 和 mask 对齐后的 SFT 记录。*
 
@@ -55,7 +55,7 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 
 领域构成上，Latent-Switch-69K 明显偏向 reasoning-intensive 任务。数学问题约占 37%，代码问题约占 34%，science-oriented questions 约占 5%，剩余部分主要来自 instruction-following 和 general knowledge prompts。这个比例不是偶然的。latent-then-explicit reasoning 最需要解决的是“有高层解题计划，但不希望把所有推导都展开”的任务；数学和代码恰好具有强验证性、强步骤性和较高 token 成本。科学问题提供概念推理和多条件判断场景，而通用指令与知识类样本让模型不至于只学习到竞赛数学或代码补全的表达模式。
 
-![图43-2：Latent-Switch-69K 数据来源与领域组成](../../images/part12/ch43_02_dataset_composition.png)
+![图43-2：Latent-Switch-69K 数据来源与领域组成](../../images/part12/Li-Chap43-Fig02.png)
 
 *图43-2：最终训练集包含 69,745 条样本，来源中数学、代码和精确指令类数据占比较高。*
 
@@ -180,7 +180,7 @@ record = asyncio.run(
 )
 ```
 
-![图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比](../../images/part12/ch43_03_cot_latent_comparison.svg)
+![图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比](../../images/part12/Li-Chap43-Fig03.svg)
 
 *图43-3：source trace 中的大量可见推理被拆成两类信号：solution intuition 用于估计 latent budget，压缩 CoT 用于显式验证和答案监督。*
 
@@ -193,7 +193,7 @@ $$
 
 最终语料的压缩率均值为 0.612，中位数为 0.569。这说明蒸馏后的可见 CoT 通常只保留原始推理长度的 57% 到 61% 左右。注意，这个数字不应被解释为“删除了四成推理信息”。更准确的理解是：一部分细节被压缩进 solution intuition 所代表的高层计划，并进一步映射到 latent placeholder 预算；另一部分必要推导仍保留在 `<think>` 中，用于显式验证和监督模型的可见推理风格。
 
-![图43-4：原始与蒸馏后推理长度及压缩率统计](../../images/part12/ch43_04_token_compression_distribution.png)
+![图43-4：原始与蒸馏后推理长度及压缩率统计](../../images/part12/Li-Chap43-Fig04.png)
 
 *图43-4：本图展示了 source CoT length、distilled CoT length、insight length、ground truth length 和 compression ratio 的分布。*
 
@@ -346,7 +346,7 @@ $$
 
 其中 $\mathcal{S}_{prompt}$ 表示用户 prompt 与 assistant prefix 之前的上下文位置，$\mathcal{S}_{lat}^{int}$ 表示 `<latent_think>` 和 `</latent_think>` 之间的内部 placeholder 位置。被置为 `-100` 的 token 不被普通 CE 直接拟合。这样做避免了一个错误目标：要求模型在 latent 内部位置预测某个固定文本 token。对 latent-switch 数据来说，latent 内部位置的价值不是输出 `<|endoftext|>`，而是为模型执行若干步隐藏状态更新预留槽位；MindSpore 数据管线会把这些位置显式写入 `latent_internal_mask`、`latent_positions` 和 `latent_slot_mask`。
 
-![图43-5：Supervision mask 示意图](../../images/part12/ch43_05_supervision_mask.svg)
+![图43-5：Supervision mask 示意图](../../images/part12/Li-Chap43-Fig05.svg)
 
 *图43-5：prompt 与 latent interior 被普通 CE mask 掉；latent 边界、显式 CoT、答案和结束 token 由不同权重和 mask 控制。*
 

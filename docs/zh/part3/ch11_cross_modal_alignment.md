@@ -67,7 +67,7 @@
 
 在生产级数据平台中，上述对齐对象通常会按颗粒度（Granularity）划分为三个层级，形成跨模态对齐的三级框架。
 
-![图11-1：跨模态对齐的三级金字塔架构](../../images/part3/cross_modal_alignment_hierarchy.svg)
+![图11-1：跨模态对齐的三级金字塔架构](../../images/part3/Wang-Chap11-Fig01.svg)
 
 *图11-1：跨模态对齐的三级金字塔架构 —— 展现从微观到宏观的三级对齐体系：底层为基于 BBox 的对象级对齐（Object-Level），中层为基于 DTW 时序同步的片段级对齐（Segment-Level），顶层为长上下文交错排序的文档级对齐（Document-Level）。来源：本书自绘。*
 
@@ -121,7 +121,7 @@
 ```
 这种设计（JSONL Schema）是融合训练数据设计的基石。它使得文本管道和视觉管道能够解耦开发：数据工程师只负责在 JSON 结构中维护元数据和占位符逻辑，而深度学习框架中的 DataLoader 在最后一步才根据 `visual_features_path` 将真正的稠密张量（Dense Tensors）读取并注入到计算图中。
 
-![图11-2：多模态融合与负样本挖掘管线](../../images/part3/fusion_training_sample_design.svg)
+![图11-2：多模态融合与负样本挖掘管线](../../images/part3/Wang-Chap11-Fig02.svg)
 
 *图11-2：多模态融合样本设计图 —— 左侧展示独立的图片、音频和文本池，中间展示数据拼装 JSONL 结构，右侧通过占位符技术（Placeholder Grid）映射为离散 Token，最终打包成统一维度的融合张量块供下游模型预训练。来源：本书自绘。*
 

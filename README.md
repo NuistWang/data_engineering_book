@@ -32,7 +32,7 @@
 
 ## 全书架构
 
-![大模型数据工程全书架构](images/structure_cn.png)
+![大模型数据工程全书架构](images/Yu-Book-Fig01.png)
 
 *从原始数据到端到端应用的完整数据工程流水线*
 

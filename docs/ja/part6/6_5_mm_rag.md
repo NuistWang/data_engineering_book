@@ -19,7 +19,7 @@
 
 ### データパイプライン図
 
-![図 6: マルチモーダル RAG Enterprise Financial Report Assistant](../../images/part6/图6_多模态RAG企业财报助手数据流水线图.png)
+![図 6: マルチモーダル RAG Enterprise Financial Report Assistant](../../images/part6/Wang-Chap06-Fig04-ZH.png)
 
 
 ### テクノロジースタック

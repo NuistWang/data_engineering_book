@@ -76,7 +76,7 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 
 为了实现上述目标，我们设计了包含四个核心组件的数据流水线。其整体架构如图 P11-1 所示。
 
-![Mini-DeepSeek Data Pipeline](../../images/part14/p11_mini_deepseek_arch_en.svg)
+![Mini-DeepSeek Data Pipeline](../../images/part14/Yu-Project11-Fig02-EN.svg)
 *图 P11-1：Mini-DeepSeek 多源预训练数据流水线架构。*
 
 流水线的四个核心组件包括：

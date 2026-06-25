@@ -7,7 +7,7 @@
 
 如果按工程顺序阅读，本章对应的是一条从业务问题到可信交付的完整链路，如图 P15-1 所示。
 
-![DataAgent 语义问数助手工程链路](../../images/part14/p15_dataagent_engineering_chain_en.png)
+![DataAgent 语义问数助手工程链路](../../images/part14/Cao-Project15-Fig03-EN.png)
 
 *图 P15-1：DataAgent 语义问数助手工程链路。*
 
@@ -139,7 +139,7 @@ DataAgent 的价值在于把这些环节组织成一个可配置的 Agent 数据
 
 本章的语义问数助手不是孤立的 NL2SQL 组件，而是 DataGallery 生态中的一个应用形态。它依赖 DataAgent 完成任务理解、工具编排和执行控制，依赖 Semantic Service 承载元数据、指标口径和语义检索能力，并通过 Data Studio 与 Data Ops 将问数能力进一步连接到业务应用、评测、观测和持续改进环节。附录 G 更完整地说明了 DataGallery 的四支柱技术版图：当前已开源的 DataAgent 执行引擎、统一语义层、Agent 与语义的自演进，以及整体评测框架。图 P15-2 展示了这一项目所处的整体技术关系。
 
-![围绕 DataAgent、Semantic Service、Data Studio、Data Ops 与基础设施展开的 DataGallery 生态架构](../../images/part14/p15_datagallery_architecture_vector.svg)
+![围绕 DataAgent、Semantic Service、Data Studio、Data Ops 与基础设施展开的 DataGallery 生态架构](../../images/part14/Cao-Project15-Fig08.svg)
 
 *图 P15-2：围绕 DataAgent 展开的 DataGallery 生态架构。*
 
@@ -542,7 +542,7 @@ CORE:
 
 从运行时看，一次完整问数任务可以拆成以下流程：
 
-![DataAgent 企业语义问数助手运行流程](../../images/part14/p15_dataagent_semantic_bi_sequence.svg)
+![DataAgent 企业语义问数助手运行流程](../../images/part14/Cao-Project15-Fig06-ZH.svg)
 
 *图 P15-3：DataAgent 企业语义问数助手运行流程。*
 

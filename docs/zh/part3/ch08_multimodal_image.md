@@ -55,7 +55,7 @@
 
 仅仅将图像的边长拉大 4.5 倍，**Attention 层的计算量**就会增加近 **410 倍**（注意：这里衡量的是 Self-Attention 的二次方复杂度，而非整个模型的 FLOPs；其他层如 FFN 的计算量与序列长度呈线性增长，实际总训练算力涨幅仍然显著但略小于 410 倍）。因此，图文多模态数据工程的核心任务之一，是在保留局部细节与控制训练成本之间设计动态裁切、降维与多尺度 Patching 策略（见图8-1中的全景流程）。
 
-![图8-1：图文数据工程全景图](../../images/part3/multimodal_data_panorama.svg)
+![图8-1：图文数据工程全景图](../../images/part3/Yu-Chap08-Fig01.svg)
 
 *图8-1：多模态图文数据工程全景图 —— 从最左侧的 DOM 树抓取与 PDF 解析起始，依次穿过格式解析、水印过滤、CLIP 语义对齐、直至最右侧的交错序列拼装与 Token 化表示。分布式计算与 Metadata 是横跨底层的核心支撑。来源：本书自绘。*
 
@@ -236,7 +236,7 @@ def filter_by_semantic_score(image, text_caption, threshold=0.25):
 3. **结构化边界框与 OCR 注入 (Grounded Injection)**：
    - **并行流合并**：仅用大模型观察图像仍不够准确，尤其是画面里出现密集数字时。重标注引擎的旁路（Side-car Workflow）会同步调用 PaddleOCR。如果在长描述中发现画面背景有一块广告牌，合并脚本会将其坐标转化为特殊 Token 拼接入文本：`...背景是一块写着 "<box_45_120_350_200> Broadway 5th Ave. </box>" 的广告牌。` 这使视觉符号能够在训练样本中转化为可定位的字符串和坐标信息。
 
-![图8-2：图像语义对齐与过滤流程图](../../images/part3/image_semantic_alignment_flow.svg)
+![图8-2：图像语义对齐与过滤流程图](../../images/part3/Yu-Chap08-Fig02.svg)
 
 *图8-2：图像语义对齐与过滤流程图 —— 展示基于 CLIP 与启发式规则的量化决策树，将低匹配样本筛出，将中等匹配但高价值图片送往 Re-captioning 流水线，最后将图片 Zero-pad 或动态切分后存入训练池。来源：本书自绘。*
 
@@ -252,7 +252,7 @@ def filter_by_semantic_score(image, text_caption, threshold=0.25):
 
 早期 VLM（如 CLIP 及其时代的诸多模型）通常对输入图像采取固定尺寸缩放（Resize）：许多管线会将横版风景图或纵向长文档压缩至 $224 \times 224$ 一类固定正方形输入，导致内容比例失真。为解决这一问题，现代数据工厂在预处理阶段常引入 **AnyRes（动态高分辨率保持）** 策略（见图8-3）：
 
-![图8-3：AnyRes 动态多分辨率切割算法原理图](../../images/part3/anyres_dynamic_patching.svg)
+![图8-3：AnyRes 动态多分辨率切割算法原理图](../../images/part3/Yu-Chap08-Fig03.svg)
 
 *图8-3：AnyRes 动态多分辨率切割算法原理图 —— 展示 AnyRes 的核心思想：左侧的超长全景图（High-Res Input）不再被强制压缩，而是被自适应网格（Adaptive Grid）划分为 $1 \times 3$ 个原生分辨率的局部图像块（Local Patches），同时结合右上方全局缩略图（Global Thumbnail）一同送入 Vision Encoder，以保留高频局部特征与宏观语义。来源：本书自绘。*
 

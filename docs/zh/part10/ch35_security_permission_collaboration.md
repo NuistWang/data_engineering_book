@@ -86,7 +86,7 @@ Agent 的工具调用必须受限于白名单机制。工具白名单不仅定�
 
 ### 35.1.3 审批闸门的分层设计
 
-![Agent 权限分层审批流程](../../images/part10/ai_agent_decision_workflow_ch35_01.svg)
+![Agent 权限分层审批流程](../../images/part10/Luo-Chap35-Fig01.svg)
 
 **图35-1：Agent 权限分层审批流程**
 
@@ -128,7 +128,7 @@ Agent 的工具调用必须受限于白名单机制。工具白名单不仅定�
 - Agent 生成的规则、计划和操作在执行前需经过独立的语义验证——检查输出中是否包含数据内容中不应出现的指令或模式。
 - 当 Agent 生成的规则影响范围超过预期时（如影响表数 > 预期表数），自动升级到人工审批。
 
-![提示注入分层防御流程](../../images/part10/ai_agent_decision_workflow_ch35_02.svg)
+![提示注入分层防御流程](../../images/part10/Luo-Chap35-Fig02.svg)
 
 **图35-2：提示注入分层防御流程**
 
@@ -257,7 +257,7 @@ Agent 的审计日志不同于传统的应用日志——它不仅需要记录"�
 
 当安全事件发生时（如确认 Agent 被提示注入攻击），需要一套预定义的应急响应流程，而非临时决策：
 
-![Agent 安全事件应急响应流程](../../images/part10/ai_agent_decision_workflow_ch35_03.svg)
+![Agent 安全事件应急响应流程](../../images/part10/Luo-Chap35-Fig03.svg)
 
 **图35-3：Agent 安全事件应急响应流程**
 

@@ -268,7 +268,7 @@ Further, these four components each correspond to a distinct training meaning. s
 
 To help teams develop a unified understanding, Figure 12-1 provides an architecture diagram of the SFT instruction system.
 
-![Figure 12-1: Architecture Diagram of the SFT Instruction System](../../images/part4/图12_1.svg)
+![Figure 12-1: Architecture Diagram of the SFT Instruction System](../../images/part4/Yu-Chap12-Fig01-ZH.svg)
 
 *Figure 12-1: Architecture Diagram of the SFT Instruction System.*
 
@@ -583,7 +583,7 @@ In practice, teams may set a weighted total score—for example, assigning highe
 
 To help teams understand the overall flow from generation to revision, Figure 12-2 provides a schematic of the sample generation and acceptance feedback loop.
 
-![Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop](../../images/part4/图12_2.svg)
+![Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop](../../images/part4/Yu-Chap12-Fig02-ZH.svg)
 
 *Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop.*
 
