@@ -77,6 +77,17 @@ class ExportEnglishBookLatexTest(unittest.TestCase):
 
             self.assertEqual(run.call_args.kwargs["cwd"], tex_dir)
 
+    def test_latex_asset_names_use_submission_unit_and_figure_number(self):
+        exporter = load_exporter()
+        item = exporter.NavItem("Project 2: Vertical-Domain Expert SFT (Legal)", "part14/p02_legal_sft.md", 3)
+
+        self.assertEqual(exporter.latex_asset_prefix(item), "Xu-Project02")
+        self.assertEqual(exporter.latex_asset_name(item, ".svg", 3), "Xu-Project02-Fig03.png")
+        self.assertEqual(exporter.latex_asset_name(item, ".jpg", 12), "Xu-Project02-Fig12.jpg")
+
+        chapter = exporter.NavItem("Chapter 1: The Data Revolution", "part1/ch01_data_change.md", 3)
+        self.assertEqual(exporter.latex_asset_name(chapter, ".svg", 1), "Yu-Chap01-Fig01.png")
+
 
 if __name__ == "__main__":
     unittest.main()

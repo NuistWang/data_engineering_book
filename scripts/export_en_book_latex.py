@@ -55,6 +55,72 @@ PIL_FORMAT_SUFFIXES = {
     "PNG": ".png",
 }
 
+AUTHOR_PREFIXES = {
+    "part1/ch01_": "Jun Yu; Changwen Chen; Ke Wang",
+    "part1/ch02_": "Jun Yu; Changwen Chen; Ke Wang",
+    "part1/ch03_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch04_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch05_": "Jun Yu; Ke Wang; Changwen Chen",
+    "part2/ch06_": "Ke Wang; Fan Yu; Jun Yu",
+    "part2/ch07_": "Ke Wang; Fan Yu; Jun Yu",
+    "part3/ch08_": "Jun Yu; Ke Wang; Cong Wang",
+    "part3/ch09_": "Jun Yu; Ke Wang; Cong Wang",
+    "part3/ch10_": "Ke Wang; Cong Wang; Jun Yu",
+    "part3/ch11_": "Ke Wang; Cong Wang; Jun Yu",
+    "part4/ch12_": "Jun Yu; Ran Zhang; Yang Luo",
+    "part4/ch13_": "Jun Yu; Ran Zhang; Yang Luo",
+    "part4/ch14_": "Ran Zhang; Yang Luo; Jun Yu",
+    "part5/ch15_": "Cong Wang; Ran Zhang; Jun Yu",
+    "part5/ch16_": "Cong Wang; Ran Zhang; Jun Yu",
+    "part5/ch17_": "Ran Zhang; Yang Luo; Jun Yu",
+    "part6/ch18_": "Jun Yu; Ran Zhang; Zhongyi Liu",
+    "part6/ch19_": "Jun Yu; Ran Zhang; Zhongyi Liu",
+    "part6/ch20_": "Ran Zhang; Zhongyi Liu; Jun Yu",
+    "part7/ch21_": "Wenzhuo Du; Gongpeng Zhao; Jun Yu",
+    "part7/ch22_": "Wenzhuo Du; Gongpeng Zhao; Jun Yu",
+    "part7/ch23_": "Jun Yu; Wenzhuo Du; Gongpeng Zhao",
+    "part8/ch24_": "Jun Yu; Wenzhuo Du; Can Wang",
+    "part8/ch25_": "Wenzhuo Du; Can Wang; Jun Yu",
+    "part8/ch26_": "Wenzhuo Du; Can Wang; Jun Yu",
+    "part9/ch27_": "Ran Zhang; Feng Zhao; Wenzhuo Du",
+    "part9/ch28_": "Zhongyi Liu; Ye Yu; Wenzhuo Du",
+    "part9/ch29_": "Zhongyi Liu; Wenzhuo Du; Jun Yu",
+    "part9/ch30_": "Yang Luo; Fang Gao; Wenzhuo Du",
+    "part10/ch31_": "Jun Yu; Zhili Wang; Zhongyi Liu",
+    "part10/ch32_": "Jun Yu; Zhili Wang; Zhongyi Liu",
+    "part10/ch33_": "Zhili Wang; Zhongyi Liu; Jun Yu",
+    "part10/ch34_": "Yang Luo; Zhili Wang; Jun Yu",
+    "part10/ch35_": "Yang Luo; Zhili Wang; Jun Yu",
+    "part11/ch36_": "Zhili Wang; Xin Xu; Jun Yu",
+    "part11/ch37_": "Zhili Wang; Xin Xu; Jun Yu",
+    "part12/ch38_": "Guanlin Mu; Xuhong Cao",
+    "part12/ch39_": "Guanlin Mu; Xuhong Cao",
+    "part12/ch40_": "Guanjun Liu; Yuefeng Zou",
+    "part12/ch41_": "Lin Xu; Xinyu Chen",
+    "part12/ch42_": "Fengxin Chen; Xuan Li",
+    "part12/ch43_": "Xuan Li; Fengxin Chen",
+    "part13/ch44_": "Ke Wang; Jiaen Liang; Jun Yu",
+    "part13/ch45_": "Cong Wang; Xin Xu; Wei Huang",
+    "part13/ch46_": "Xin Xu; Shengping Liu; Fan Yu",
+    "part13/ch47_": "Xuhong Cao; Ke Wang; Qingsong Liu",
+    "part13/ch48_": "Ran Zhang; Jianqing Sun; Fan Yu",
+    "part14/p01_": "Xin Xu; Ran Zhang; Jun Yu",
+    "part14/p02_": "Xin Xu; Ran Zhang; Jun Yu",
+    "part14/p03_": "Jun Yu; Xin Xu; Wenzhuo Du",
+    "part14/p04_": "Xin Xu; Wenzhuo Du; Jun Yu",
+    "part14/p05_": "Xuhong Cao; Ke Wang; Jun Yu",
+    "part14/p06_": "Cong Wang; Xin Xu; Ke Wang",
+    "part14/p07_": "Jun Yu; Xin Xu; Zhili Wang",
+    "part14/p08_": "Jun Yu; Xin Xu; Zhili Wang",
+    "part14/p09_": "Zhongyi Liu; Xin Xu; Guanlin Mu",
+    "part14/p10_": "Ke Wang; Xin Xu; Guanlin Mu",
+    "part14/p11_": "Jun Yu; Ke Wang; Yang Luo",
+    "part14/p12_": "Cong Wang; Xin Xu; Yang Luo",
+    "part14/p13_": "Jun Yu; Ke Wang; Wenzhuo Du",
+    "part14/p14_": "Yang Luo; Ran Zhang; Wenzhuo Du",
+    "part14/p15_": "Xuhong Cao; Zhongyi Liu; Jun Yu",
+}
+
 
 @dataclass
 class NavItem:
@@ -88,7 +154,7 @@ class AssetManager:
         self._seen.clear()
         self._counter = 0
 
-    def register(self, image_path: Path, source_file: Path) -> str | None:
+    def register(self, image_path: Path, source_file: Path, item: NavItem | None = None, figure_index: int | None = None) -> str | None:
         self.stats.images += 1
         image_path = image_path.resolve()
         suffix = image_path.suffix.lower()
@@ -113,8 +179,7 @@ class AssetManager:
         if suffix == ".svg":
             if image_path in self._seen:
                 return self._seen[image_path]
-            self._counter += 1
-            target_name = f"asset_{self._counter:04d}.png"
+            target_name = self._next_target_name(image_path, ".png", item, figure_index)
             target = self.asset_dir / target_name
             try:
                 convert_svg_to_png(image_path, target)
@@ -137,13 +202,22 @@ class AssetManager:
         suffix = actual_suffix
         if image_path in self._seen:
             return self._seen[image_path]
-        self._counter += 1
-        target_name = f"asset_{self._counter:04d}{suffix}"
+        target_name = self._next_target_name(image_path, suffix, item, figure_index)
         target = self.asset_dir / target_name
         shutil.copy2(image_path, target)
         rel = f"{self.asset_dir.name}/{target_name}"
         self._seen[image_path] = rel
         return rel
+
+    def _next_target_name(self, image_path: Path, suffix: str, item: NavItem | None, figure_index: int | None) -> str:
+        self._counter += 1
+        if item is None or figure_index is None:
+            return f"asset_{self._counter:04d}{suffix}"
+        target_name = latex_asset_name(item, image_path.suffix.lower(), figure_index)
+        if not (self.asset_dir / target_name).exists():
+            return target_name
+        stem = Path(target_name).stem
+        return f"{stem}-{self._counter:04d}{Path(target_name).suffix}"
 
 
 def detect_image_suffix(image_path: Path) -> str | None:
@@ -345,6 +419,45 @@ def prepare_latex_items(items: list[NavItem]) -> list[NavItem]:
     rest = [item for item in filtered if item not in front]
     front.sort(key=lambda item: (front_order.get(item.path, 99), item.path))
     return front + rest
+
+
+def safe_slug(value: str, max_len: int = 90) -> str:
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", value.strip()).strip("-")
+    slug = re.sub(r"-+", "-", slug)
+    return slug[:max_len].strip("-") or "untitled"
+
+
+def authors_for_path(path: str) -> str:
+    normalized = path.replace("\\", "/")
+    for prefix, authors in AUTHOR_PREFIXES.items():
+        if normalized.startswith(prefix) or f"/{prefix}" in normalized:
+            return authors
+    return "Jun Yu"
+
+
+def first_author_surname(authors: str) -> str:
+    first = re.split(r";|,", authors, maxsplit=1)[0].strip()
+    return safe_slug(first.split()[-1], max_len=24) if first else "Yu"
+
+
+def latex_asset_prefix(item: NavItem) -> str:
+    surname = first_author_surname(authors_for_path(item.path))
+    if match := re.search(r"/ch(\d{2})_", item.path):
+        return f"{surname}-Chap{int(match.group(1)):02d}"
+    if match := re.search(r"/p(\d{2})_", item.path):
+        return f"{surname}-Project{int(match.group(1)):02d}"
+    if match := re.match(r"appendix_([a-z])_", item.path):
+        return f"{surname}-Appendix{match.group(1).upper()}"
+    if item.path == "afterword.md":
+        return f"{surname}-BackMatter"
+    return f"{surname}-{safe_slug(Path(item.path).stem, max_len=32)}"
+
+
+def latex_asset_name(item: NavItem, original_suffix: str, figure_index: int) -> str:
+    suffix = ".png" if original_suffix.lower() == ".svg" else original_suffix.lower()
+    if suffix not in {".png", ".jpg", ".jpeg", ".pdf"}:
+        suffix = ".png"
+    return f"{latex_asset_prefix(item)}-Fig{figure_index:02d}{suffix}"
 
 
 def part_key(item: NavItem) -> str:
@@ -612,14 +725,21 @@ def render_table(lines: list[str], stats: ExportStats) -> str:
     return "\n".join(rendered)
 
 
-def render_image(match: re.Match[str], source_file: Path, assets: AssetManager, tex_dir: Path) -> str:
+def render_image(
+    match: re.Match[str],
+    source_file: Path,
+    assets: AssetManager,
+    tex_dir: Path,
+    item: NavItem | None = None,
+    figure_index: int | None = None,
+) -> str:
     alt = match.group(1).strip()
     raw_url = match.group(2).strip()
     image_path = resolve_asset_url(raw_url, source_file)
     caption = inline_to_latex(alt) if alt else "Figure"
     if image_path is None:
         return rf"\begin{{quote}}\small External image not embedded: {inline_to_latex(raw_url)}\end{{quote}}"
-    rel = assets.register(image_path, source_file)
+    rel = assets.register(image_path, source_file, item, figure_index)
     if rel is None:
         return (
             r"\begin{quote}\small "
@@ -754,11 +874,17 @@ def render_heading(line: str) -> str:
     return rf"\{command}*{{{title}}}"
 
 
-def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats: ExportStats, tex_dir: Path) -> str:
+def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats: ExportStats, tex_dir: Path, item: NavItem | None = None) -> str:
     text = preprocess_markdown(text)
     lines = text.splitlines()
     out: list[str] = []
     i = 0
+    figure_index = 0
+
+    def render_next_image(match: re.Match[str]) -> str:
+        nonlocal figure_index
+        figure_index += 1
+        return render_image(match, source_file, assets, tex_dir, item, figure_index)
 
     while i < len(lines):
         line = lines[i]
@@ -788,7 +914,7 @@ def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats:
 
         image_match = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", stripped)
         if image_match:
-            out.append(render_image(image_match, source_file, assets, tex_dir))
+            out.append(render_next_image(image_match))
             i += 1
             continue
 
@@ -841,7 +967,7 @@ def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats:
         paragraph = " ".join(paragraph_lines)
 
         def inline_image_repl(match: re.Match[str]) -> str:
-            return "\n" + render_image(match, source_file, assets, tex_dir) + "\n"
+            return "\n" + render_next_image(match) + "\n"
 
         if re.search(r"!\[[^\]]*\]\([^)]+\)", paragraph):
             pieces = re.split(r"(\!\[[^\]]*\]\([^)]+\))", paragraph)
@@ -849,7 +975,7 @@ def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats:
             for piece in pieces:
                 match = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", piece)
                 if match:
-                    rendered_pieces.append(render_image(match, source_file, assets, tex_dir))
+                    rendered_pieces.append(render_next_image(match))
                 elif piece.strip():
                     rendered_pieces.append(inline_to_latex(piece))
             out.append("\n".join(rendered_pieces))
@@ -918,7 +1044,7 @@ def build_latex_document(items: list[NavItem], assets: AssetManager, stats: Expo
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
         body.append(render_source_header(item))
-        body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir))
+        body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     preamble = latex_preamble(stats)
     # Stats are updated while rendering the body, so regenerate the preamble once.
@@ -955,7 +1081,7 @@ def build_latex_body(items: list[NavItem], assets: AssetManager, stats: ExportSt
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
         body.append(render_source_header(item))
-        body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir))
+        body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     return "\n\n".join(body)
 
