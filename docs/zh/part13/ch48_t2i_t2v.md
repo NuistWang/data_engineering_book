@@ -1,6 +1,6 @@
 # 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线
 
-<div class="chapter-authors">张然（Ran Zhang）；Jianqing Sun；Fan Yu</div>
+<div class="chapter-authors">张然（Ran Zhang）；Jianqing Sun；于璠</div>
 
 ## 摘要
 

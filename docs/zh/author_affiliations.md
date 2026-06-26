@@ -10,9 +10,9 @@ ORCID：https://orcid.org/0000-0002-3197-8103
 
 於俊 -- 中国科学技术大学，合肥，中国。邮箱：harryjun@ustc.edu.cn。ORCID：https://orcid.org/0000-0002-3197-8103。
 
-Changwen Chen -- 香港理工大学，香港，中国。邮箱：changwen.chen@polyu.edu.hk。ORCID：https://orcid.org/0000-0002-6720-234X。
+陈长汶 -- 香港理工大学，香港，中国。邮箱：changwen.chen@polyu.edu.hk。ORCID：https://orcid.org/0000-0002-6720-234X。
 
-Fan Yu -- 华为技术有限公司，中国。邮箱：fan.yu@huawei.com。ORCID：https://orcid.org/0000-0002-9772-1503。
+于璠 -- 华为技术有限公司，中国。邮箱：fan.yu@huawei.com。ORCID：https://orcid.org/0000-0002-9772-1503。
 
 王聪 -- 中国科学技术大学，合肥，中国。邮箱：cwang10@mail.ustc.edu.cn。ORCID：https://orcid.org/0000-0002-4539-2525。
 

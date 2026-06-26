@@ -1,6 +1,6 @@
 # 第4章 数据源、采集与版权
 
-<div class="chapter-authors">於俊（Jun Yu）；王柯（Ke Wang）；Changwen Chen</div>
+<div class="chapter-authors">於俊（Jun Yu）；王柯（Ke Wang）；陈长汶</div>
 
 ## 摘要
 
