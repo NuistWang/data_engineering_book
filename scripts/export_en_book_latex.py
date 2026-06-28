@@ -755,7 +755,6 @@ def render_image(
             r"\begin{figure}[H]",
             r"\centering",
             rf"\includegraphics[width=\linewidth,height=0.55\textheight,keepaspectratio]{{{image_ref_text}}}",
-            rf"\caption*{{{caption}}}",
             r"\end{figure}",
         ]
     )
@@ -821,6 +820,18 @@ def render_source_header(item: NavItem) -> str:
     return r"\noindent\parbox{\textwidth}{\small\textsf{\RaggedRight " + header + r"}}\par\vspace{1.5mm}"
 
 
+def running_head_title(raw_title: str) -> str:
+    title = re.sub(r"\s+", " ", raw_title).strip()
+    match = re.match(r"^(Chapter\s+\d+|Project\s+\d+|Appendix\s+[A-Z]|Part\s+(?:[IVXLCDM]+|\d+))\b", title)
+    if match:
+        return match.group(1)
+    if ":" in title and len(title) > 60:
+        return title.split(":", 1)[0].strip()
+    if len(title) > 70:
+        return title[:67].rstrip() + "..."
+    return title
+
+
 def render_list(lines: list[str], ordered: bool) -> str:
     env = "enumerate" if ordered else "itemize"
     rendered = [rf"\begin{{{env}}}"]
@@ -839,14 +850,16 @@ def render_heading(line: str) -> str:
     if not match:
         return inline_to_latex(line)
     level = len(match.group(1))
-    title = inline_to_latex(match.group(2).strip())
+    raw_title = match.group(2).strip()
+    title = inline_to_latex(raw_title)
     if level == 1:
+        running_title = inline_to_latex(running_head_title(raw_title))
         return "\n".join(
             [
                 r"\phantomsection",
                 rf"\chapter*{{{title}}}",
                 rf"\addcontentsline{{toc}}{{chapter}}{{{title}}}",
-                rf"\markboth{{{title}}}{{{title}}}",
+                rf"\markboth{{{running_title}}}{{{running_title}}}",
             ]
         )
     if level == 2:
@@ -1020,6 +1033,10 @@ def latex_preamble(stats: ExportStats) -> str:
 \linespread{{1.18}}
 \captionsetup{{font=small,labelformat=empty}}
 \sloppy
+\makeatletter
+\renewcommand{{\@pnumwidth}}{{3em}}
+\renewcommand{{\@tocrmarg}}{{4em}}
+\makeatother
 
 \title{{Data Engineering for Large Foundation Models\\A Handbook}}
 \author{{\parbox{{0.92\textwidth}}{{\centering Jun Yu, Changwen Chen, Fan Yu, Cong Wang, Yang Luo, Ran Zhang, Wenzhuo Du, Xin Xu, Ke Wang, Zhili Wang, Zhongyi Liu, Xuhong Cao, Guanlin Mu, Guanjun Liu, Yuefeng Zou, Lin Xu, Xinyu Chen, Fengxin Chen, Xuan Li, Gongpeng Zhao, Can Wang, Feng Zhao, Ye Yu, Fang Gao, Jiaen Liang, Wei Huang, Shengping Liu, Qingsong Liu, and Jianqing Sun}}}}
@@ -1043,7 +1060,6 @@ def build_latex_document(items: list[NavItem], assets: AssetManager, stats: Expo
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
-        body.append(render_source_header(item))
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     preamble = latex_preamble(stats)
@@ -1080,7 +1096,6 @@ def build_latex_body(items: list[NavItem], assets: AssetManager, stats: ExportSt
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
         body.append(r"\cleardoublepage")
-        body.append(render_source_header(item))
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     return "\n\n".join(body)

@@ -158,16 +158,18 @@ spm.SentencePieceTrainer.train(
 
 数据格式的选择对 DataLoader 的吞吐量有直接的数量级级别的影响。以下是主流格式的性能与工程权衡：
 
+表6-1汇总了相应的对比和工程要点。
+
 *表6-1：数据格式、压缩与访问模式对照表。来源：本书整理，性能表现需以目标硬件、存储后端、压缩方式和 DataLoader 实现压测为准。*
 
 | 格式 | 类型 | 顺序读速度 | 随机访问 | 压缩支持 | 跨框架支持 | 适用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **JSONL (.jsonl)** | 文本行 | 慢（需 JSON 解析） | 不支持 | ✗（需 .gz 组合）| 极好 | 数据交换、调试 |
-| **Parquet** | 列式二进制 | 快（列裁剪） | 支持（行组级） | √ Snappy/Zstd | 很好（Spark/pandas）| 批处理分析、第5章输出 |
-| **Apache Arrow / Feather** | 行式二进制 | 极快（零拷贝） | 支持 | √ LZ4/Zstd | 好（PyArrow）| CPU→GPU 中间层 |
-| **MDS（Mosaic）** | Shard二进制 | 极快 | Shard级 | √ Zstd | 好（Streaming Datasets）| 流式多节点训练的候选方案 |
-| **WebDataset (.tar)** | Tar打包 | 快（流式）| Shard级 | √（内部文件压缩）| 好（Torchvision）| 多模态训练 |
-| **Raw .bin（Token IDs）** | 二进制整型 | 极快（内存映射）| 支持（byte offset）| ✗ | 需自实现 | 超大规模预训练 |
+| **JSONL (.jsonl)** | 文本行 | 慢（需 JSON 解析） | 不支持 | 否（需 .gz 组合）| 极好 | 数据交换、调试 |
+| **Parquet** | 列式二进制 | 快（列裁剪） | 支持（行组级） | 支持：Snappy/Zstd | 很好（Spark/pandas）| 批处理分析、第5章输出 |
+| **Apache Arrow / Feather** | 行式二进制 | 极快（零拷贝） | 支持 | 支持：LZ4/Zstd | 好（PyArrow）| CPU→GPU 中间层 |
+| **MDS（Mosaic）** | Shard二进制 | 极快 | Shard级 | 支持：Zstd | 好（Streaming Datasets）| 流式多节点训练的候选方案 |
+| **WebDataset (.tar)** | Tar打包 | 快（流式）| Shard级 | 支持：内部文件压缩 | 好（Torchvision）| 多模态训练 |
+| **Raw .bin（Token IDs）** | 二进制整型 | 极快（内存映射）| 支持（byte offset）| 否 | 需自实现 | 超大规模预训练 |
 
 对于需要对象存储流式读取和多节点弹性扩缩的 LLM 预训练场景，**MDS 格式** (Mosaic AI Research 2022) 是值得优先评估的候选方案——它专为流式多节点读取设计，支持多 GPU 节点并发读取同一数据集，内置 shuffle 缓冲区，并支持从 S3/GCS 等对象存储直接流式读取而无需完整下载。若训练集已经完成离线分词且主要依赖本地 NVMe，**Raw .bin 内存映射格式**（Megatron-LM 使用方案）同样常见：它将 token ID 数组直接写为二进制文件，读取时使用 `np.memmap` 进行内存映射，在本地高性能存储上可获得很低的解析开销。
 
@@ -396,6 +398,8 @@ dataloader = DataLoader(
 ## 6.5 工程案例与性能优化清单
 
 ### 图与案例
+
+图6-2展示了相应的流程或结构。
 
 ![图6-2：训练输入管道分层图](../../images/part2/Wang-Chap06-Fig02.svg)
 

@@ -158,16 +158,18 @@ spm.SentencePieceTrainer.train(
 
 The choice of data format has a direct, order-of-magnitude impact on DataLoader throughput. The following summarizes the performance and engineering trade-offs of mainstream formats:
 
+Table 6-1 summarizes the corresponding comparison and engineering considerations.
+
 *Table 6-1: Data format, compression, and access pattern comparison. Source: compiled by the authors; performance should be validated through pressure tests on target hardware, storage backend, compression method, and DataLoader implementation.*
 
 | Format | Type | Sequential Read Speed | Random Access | Compression Support | Cross-Framework Support | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **JSONL (.jsonl)** | Text lines | Slow (requires JSON parsing) | Not supported | ✗ (requires .gz combination) | Excellent | Data exchange, debugging |
-| **Parquet** | Columnar binary | Fast (column pruning) | Supported (row-group level) | √ Snappy/Zstd | Very good (Spark/pandas) | Batch analytics, Chapter 5 output |
-| **Apache Arrow / Feather** | Row-oriented binary | Very fast (zero-copy) | Supported | √ LZ4/Zstd | Good (PyArrow) | CPU→GPU intermediate layer |
-| **MDS (Mosaic)** | Shard binary | Very fast | Shard level | √ Zstd | Good (Streaming Datasets) | Preferred for LLM pretraining |
-| **WebDataset (.tar)** | Tar archive | Fast (streaming) | Shard level | √ (internal file compression) | Good (Torchvision) | Multimodal training |
-| **Raw .bin (Token IDs)** | Binary integer | Very fast (memory-mapped) | Supported (byte offset) | ✗ | Requires custom implementation | Very large-scale pretraining |
+| **JSONL (.jsonl)** | Text lines | Slow (requires JSON parsing) | Not supported | No (requires .gz combination) | Excellent | Data exchange, debugging |
+| **Parquet** | Columnar binary | Fast (column pruning) | Supported (row-group level) | Yes: Snappy/Zstd | Very good (Spark/pandas) | Batch analytics, Chapter 5 output |
+| **Apache Arrow / Feather** | Row-oriented binary | Very fast (zero-copy) | Supported | Yes: LZ4/Zstd | Good (PyArrow) | CPU→GPU intermediate layer |
+| **MDS (Mosaic)** | Shard binary | Very fast | Shard level | Yes: Zstd | Good (Streaming Datasets) | Preferred for LLM pretraining |
+| **WebDataset (.tar)** | Tar archive | Fast (streaming) | Shard level | Yes: internal file compression | Good (Torchvision) | Multimodal training |
+| **Raw .bin (Token IDs)** | Binary integer | Very fast (memory-mapped) | Supported (byte offset) | No | Requires custom implementation | Very large-scale pretraining |
 
 For LLM pretraining scenarios, **MDS format** (Mosaic AI Research 2022) is currently the most recommended choice — it is designed specifically for streaming multi-node reads, supports concurrent conflict-free reading of the same dataset by multiple GPU nodes, has a built-in shuffle buffer, and supports direct streaming reads from object storage such as S3/GCS without requiring a full download. The second choice is **Raw .bin memory-mapped format** (the approach used by Megatron-LM), which writes the token ID array directly as a binary file and uses `np.memmap` for memory mapping at read time, achieving near-memory read speeds on local NVMe SSDs.
 
@@ -396,6 +398,8 @@ dataloader = DataLoader(
 ## 6.5 Engineering Case Studies and Performance Optimization Checklist
 
 ### Figures and Case Studies
+
+Figure 6-2 illustrates the corresponding workflow or structure.
 
 ![Figure 6-2: Training Input Pipeline Layer Diagram](../../images/part2/Wang-Chap06-Fig02.svg)
 

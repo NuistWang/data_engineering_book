@@ -370,7 +370,6 @@ def render_image(match: re.Match[str], source_file: Path, assets: AssetManager, 
             r"\begin{figure}[H]",
             r"\centering",
             rf"\includegraphics[width=\linewidth,height=0.55\textheight,keepaspectratio]{{{image_ref_text}}}",
-            rf"\caption*{{{caption}}}",
             r"\end{figure}",
         ]
     )

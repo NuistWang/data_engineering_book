@@ -836,18 +836,6 @@ def build_book_html(
 def transform_section_opening(html_body: str, source_path: str) -> str:
     """Use a Springer-like title block in the PDF while keeping source headings stable."""
 
-    if not re.search(r"(?:part\d+/ch\d+_|part14/p\d+_|appendix_)", source_path):
-        return html_body
-
-    patterns = [
-        (r"<h1>Chapter\s+\d+:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
-        (r"<h1>Project\s+\d+:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
-        (r"<h1>Appendix\s+[A-H]:\s*([^<]+)</h1>", r"<h1>\1</h1>"),
-    ]
-    for pattern, replacement in patterns:
-        html_body, count = re.subn(pattern, replacement, html_body, count=1)
-        if count:
-            return html_body
     return html_body
 
 
@@ -995,8 +983,10 @@ def to_roman(number: int) -> str:
 
 
 def build_page_number_label(page_number: int, first_body_page: int) -> str:
+    if page_number <= 1:
+        return "C1"
     if page_number < first_body_page:
-        return to_roman(page_number)
+        return to_roman(page_number - 1)
     return str(page_number - first_body_page + 1)
 
 
@@ -1114,20 +1104,17 @@ def generate_contents_pdf(path: Path, toc_entries: list[TocEntry | tuple[str, in
             c.drawCentredString(page_width / 2, 10 * mm, label)
         c.showPage()
 
-    def write_contents_page_header(page_no: int) -> float:
+    def write_contents_page_header() -> float:
         c.setFillColor(colors.HexColor("#182336"))
         c.setFont(bold_font, 17)
         c.drawString(left, page_height - top, "Contents")
         c.setStrokeColor(colors.HexColor("#d9dee7"))
         c.setLineWidth(0.7)
         c.line(left, page_height - top - 4 * mm, page_width - right, page_height - top - 4 * mm)
-        c.setFont(regular_font, 9)
-        c.setFillColor(colors.HexColor("#5f6876"))
-        c.drawRightString(page_width - right, page_height - top, f"Page {page_no}")
         return page_height - top - 12 * mm
 
     contents_page_no = start_page_number
-    y = write_contents_page_header(contents_page_no)
+    y = write_contents_page_header()
     min_y = bottom + 10 * mm
     for raw_entry in toc_entries:
         entry = normalize_toc_entry(raw_entry)
@@ -1135,9 +1122,9 @@ def generate_contents_pdf(path: Path, toc_entries: list[TocEntry | tuple[str, in
         level = entry.level
         page_label = entry.page_label
         if y < min_y:
-            footer(to_roman(contents_page_no))
+            footer(None)
             contents_page_no += 1
-            y = write_contents_page_header(contents_page_no)
+            y = write_contents_page_header()
         indent = max(0, level - 1) * 5 * mm
         font = bold_font if level == 1 else regular_font
         size = 9.4 if level <= 2 else 8.7
@@ -1176,7 +1163,7 @@ def generate_contents_pdf(path: Path, toc_entries: list[TocEntry | tuple[str, in
             y -= CONTENTS_AUTHOR_ENTRY_GAP_MM * mm
         else:
             y -= CONTENTS_ENTRY_GAP_MM * mm if level <= 2 else CONTENTS_SUBENTRY_GAP_MM * mm
-    footer(to_roman(contents_page_no))
+    footer(None)
     c.save()
     return page_count
 
@@ -1432,6 +1419,7 @@ def add_page_number_overlay(writer: Any, *, first_body_page: int) -> Any:
         from io import BytesIO
 
         from pypdf import PdfReader, PdfWriter
+        from pypdf.constants import PageLabelStyle
         from reportlab.lib import colors
         from reportlab.pdfgen import canvas
     except Exception as exc:  # pragma: no cover - dependency check
@@ -1463,6 +1451,12 @@ def add_page_number_overlay(writer: Any, *, first_body_page: int) -> Any:
         numbered.add_page(page)
     if len(numbered.pages) != total_pages:
         raise RuntimeError("page-number overlay changed the page count")
+    if total_pages >= 1:
+        numbered.set_page_label(0, 0, style=PageLabelStyle.DECIMAL, prefix="C", start=1)
+    if first_body_page > 2:
+        numbered.set_page_label(1, first_body_page - 2, style=PageLabelStyle.LOWERCASE_ROMAN, start=1)
+    if first_body_page <= total_pages:
+        numbered.set_page_label(first_body_page - 1, total_pages - 1, style=PageLabelStyle.DECIMAL, start=1)
     return numbered
 
 
@@ -1523,6 +1517,18 @@ def locate_item_pages(
                 needles.append(needle)
         return needles
 
+    def page_starts_with_title(index: int, needles: list[str], title: str) -> bool:
+        raw_text = pages[index].extract_text() or ""
+        lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
+        if not lines:
+            return False
+        opening = normalize(" ".join(lines[:6]))
+        if not any(opening.startswith(needle) for needle in needles):
+            return False
+        if re.match(r"^(?:Chapter|Project)\s+\d+\s*:", title):
+            return any(line.startswith("Author:") for line in lines[1:5])
+        return True
+
     result: dict[str, int] = {}
     if reader is None:
         return result
@@ -1552,6 +1558,12 @@ def locate_item_pages(
         needles = title_needles(item.title)
         found = None
         for idx in range(current, page_count):
+            if page_starts_with_title(idx, needles, item.title):
+                found = idx
+                break
+        for idx in range(current, page_count):
+            if found is not None:
+                break
             text = page_text(idx)
             if any(needle in text for needle in needles):
                 found = idx
