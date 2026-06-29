@@ -47,6 +47,8 @@ Listing P05-1 provides a process or path example illustrating the input/output r
 Financial Report PDF → Page Images → Multimodal Index → Top-K Page Evidence → Multi-Image Reasoning → Answer with Source Citations and Evaluation Records
 ```
 
+*Listing P05-1: Process or path example.*
+
 This snippet converts the above process into a structured representation that can be inspected.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -178,7 +180,7 @@ In this sense, this chapter answers a larger question:
 
 Figure P05-1 illustrates the corresponding workflow or structure.
 
-![Figure P05-1](../../images/part14/p05/Cao-Project05-Fig01.svg)
+![Figure P05-1: Overall architecture diagram of the multimodal RAG financial report assistant](../../images/part14/p05/Cao-Project05-Fig01.svg)
 *Figure P05-1: Overall architecture diagram of the multimodal RAG financial report assistant.*
 
 From an engineering perspective, this project can be decomposed into three layers.
@@ -262,7 +264,7 @@ The key to this design lies not in the model names themselves, but in the separa
 
 Figure P05-2 illustrates the corresponding workflow or structure.
 
-![Figure P05-2](../../images/part14/p05/Cao-Project05-Fig02.svg)
+![Figure P05-2: Comparison of Vision-First and OCR-First approaches](../../images/part14/p05/Cao-Project05-Fig02.svg)
 *Figure P05-2: Comparison of Vision-First and OCR-First approaches.*
 
 ---
@@ -352,7 +354,7 @@ The current project generates page-level assets and index-related artifacts, suc
 
 Figure P05-3 illustrates the corresponding workflow or structure.
 
-![Figure P05-3](../../images/part14/p05/Cao-Project05-Fig03.svg)
+![Figure P05-3: Page assets and page number mapping diagram](../../images/part14/p05/Cao-Project05-Fig03.svg)
 *Figure P05-3: Page assets and page number mapping diagram.*
 
 ---
@@ -387,7 +389,7 @@ In complex document projects, indexing is not a preparatory step but part of the
 
 Figure P05-4 illustrates the corresponding workflow or structure.
 
-![Figure P05-4](../../images/part14/p05/Cao-Project05-Fig04.svg)
+![Figure P05-4: PDF page rendering and visual index construction diagram](../../images/part14/p05/Cao-Project05-Fig04.svg)
 *Figure P05-4: PDF page rendering and visual index construction diagram.*
 
 ---
@@ -442,7 +444,7 @@ For example, numerical questions can prioritize pages with dense tables; trend q
 
 Figure P05-5 illustrates the corresponding workflow or structure.
 
-![Figure P05-5](../../images/part14/p05/Cao-Project05-Fig05.svg)
+![Figure P05-5: Top-K multi-page recall and table-of-contents page filtering diagram](../../images/part14/p05/Cao-Project05-Fig05.svg)
 *Figure P05-5: Top-K multi-page recall and table-of-contents page filtering diagram.*
 
 ---
@@ -516,7 +518,7 @@ Therefore, in multi-image scenarios it is especially important to prompt the mod
 
 Figure P05-6 illustrates the corresponding workflow or structure.
 
-![Figure P05-6](../../images/part14/p05/Cao-Project05-Fig06.svg)
+![Figure P05-6: Multi-image context injection and answer constraint diagram](../../images/part14/p05/Cao-Project05-Fig06.svg)
 *Figure P05-6: Multi-image context injection and answer constraint diagram.*
 
 ---
@@ -553,6 +555,8 @@ def build_index():
     )
 ```
 
+*Listing P05-2: Python implementation excerpt.*
+
 This snippet converts the above process into a structured representation that can be inspected.
 
 ### 12.2 Phase Two: Multi-Page Retrieval
@@ -565,6 +569,8 @@ RAG = RAGMultiModalModel.from_index(INDEX_NAME)
 RETRIEVAL_K = 4
 results = RAG.search(user_query, k=RETRIEVAL_K)
 ```
+
+*Listing P05-3: Python implementation excerpt.*
 
 This snippet converts the above process into a structured representation that can be inspected.
 
@@ -593,6 +599,8 @@ for res in results:
         }
     })
 ```
+
+*Listing P05-4: Python implementation excerpt.*
 
 This snippet converts the above process into a structured representation that can be inspected.
 
@@ -678,7 +686,7 @@ Because chart comprehension is not equivalent to text extraction. A model may be
 
 Figure P05-7 illustrates the corresponding workflow or structure.
 
-![Figure P05-7](../../images/part14/p05/Cao-Project05-Fig07.svg)
+![Figure P05-7: Dual-layer evaluation framework for retrieval and answer quality](../../images/part14/p05/Cao-Project05-Fig07.svg)
 *Figure P05-7: Dual-layer evaluation framework for retrieval and answer quality.*
 
 ---
@@ -827,7 +835,7 @@ This facilitates integration with downstream systems.
 
 Figure P05-8 illustrates the corresponding workflow or structure.
 
-![Figure P05-8](../../images/part14/p05/Cao-Project05-Fig08.svg)
+![Figure P05-8: Multimodal RAG optimization roadmap](../../images/part14/p05/Cao-Project05-Fig08.svg)
 *Figure P05-8: Multimodal RAG optimization roadmap.*
 
 ---
@@ -893,7 +901,7 @@ This preserves the efficiency advantages of text RAG while using multimodal RAG 
 
 Figure P05-9 illustrates the corresponding workflow or structure.
 
-![Figure P05-9](../../images/part14/p05/Cao-Project05-Fig09.svg)
+![Figure P05-9: Collaborative architecture of text RAG and multimodal RAG](../../images/part14/p05/Cao-Project05-Fig09.svg)
 *Figure P05-9: Collaborative architecture of text RAG and multimodal RAG.*
 
 ---

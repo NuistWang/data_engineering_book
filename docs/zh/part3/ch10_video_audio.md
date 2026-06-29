@@ -174,6 +174,8 @@
 
 数据工程师需要对每一层处理的单位成本保持清晰认识。
 
+表10-2汇总了长时序音视频处理的成本驱动因素与降本策略。
+
 *表10-2：长时序音视频处理成本驱动因素与降本策略。来源：本书整理，成本驱动因素应按云厂商价格、硬件规格、并发限制和缓存策略重新核算。*
 
 注：表10-2不提供通用成本占比，因为实际账单取决于云厂商价格、GPU 型号、视频分辨率、采样帧率、ASR 模型、缓存命中率和对象存储计费方式。工程上更稳健的做法，是先识别成本驱动因素，再在目标环境中做小批量压测。
@@ -221,15 +223,16 @@
 
 代码清单10-1展示了 S3 并发拉流超限导致 DataLoader 死锁的错误日志示例。
 
-*代码清单10-1：S3 并发拉流超限错误日志示例。日志内容为匿名化示例，指标和路径不对应公开事故。*
 
-```bash
+```text
 [FATAL] node-001.gpu-cluster.internal:
 Connection reset by peer. Timeout extracting frame chunk from blob: /bucket-v/dataset/vid_slice_0001.mp4
 File descriptor limits exceeded (Too many open files).
 RuntimeError: Multiprocessing synchronization lock stuck at DataLoader worker 1.
 AVSync_Module: Subtitle timestamp [1.21s] completely drifts out of matched acoustic window bounds.
 ```
+
+*代码清单10-1：S3 并发拉流超限错误日志示例。日志内容为匿名化示例，指标和路径不对应公开事故。*
 
 **[根因与修复示例]**：
 
@@ -244,15 +247,16 @@ AVSync_Module: Subtitle timestamp [1.21s] completely drifts out of matched acous
 
 代码清单10-2展示了 NVDEC 并发解码显存溢出的错误日志示例。
 
-*代码清单10-2：NVDEC 并发解码显存溢出错误日志示例。日志内容为匿名化示例，硬件限制需以实际设备规格与压测结果为准。*
 
-```bash
+```text
 [FATAL] node-007.gpu-cluster.internal:
 NVDecCreateDecoder failed: CUDA_ERROR_OUT_OF_MEMORY (error 2)
 Video resolution 3840x2160 exceeds NVDEC hardware capability on A100-40GB.
 cudaMemcpy failed during frame copy: cudaErrorIllegalAddress
 Decoder context invalidated. All queued frames dropped (estimated loss: 2.3TB).
 ```
+
+*代码清单10-2：NVDEC 并发解码显存溢出错误日志示例。日志内容为匿名化示例，硬件限制需以实际设备规格与压测结果为准。*
 
 **[根因与修复]**：
 
@@ -267,14 +271,15 @@ Decoder context invalidated. All queued frames dropped (estimated loss: 2.3TB).
 
 代码清单10-3展示了 WhisperX 长视频时间戳漂移的错误日志示例。
 
-*代码清单10-3：WhisperX 时间戳漂移错误日志示例。日志内容为匿名化示例，漂移阈值应通过抽样回放和下游评测校准。*
 
-```bash
+```text
 [WARN] whisperx_worker_3: Timestamp drift detected at segment 847.
 Expected anchor: [1823.4s], Model output: [1831.8s]. Delta: +8.4s.
 [ERROR] TemporalAligner: Cross-modal lock failed - audio anchor outside visual frame window.
 Alignment quality score: 0.23 (threshold: 0.75). Segment rejected and quarantined.
 ```
+
+*代码清单10-3：WhisperX 时间戳漂移错误日志示例。日志内容为匿名化示例，漂移阈值应通过抽样回放和下游评测校准。*
 
 **[根因与修复]**：
 
@@ -289,15 +294,16 @@ Alignment quality score: 0.23 (threshold: 0.75). Segment rejected and quarantine
 
 代码清单10-4展示了说话人分离任务内存泄漏的错误日志示例。
 
-*代码清单10-4：Diarization 内存泄漏错误日志示例。日志内容为匿名化示例，内存水位和批次大小应按节点配置压测。*
 
-```bash
+```text
 [ERROR] diarization_worker_12: Killed by OOM Killer (signal 9).
 Process memory at kill time: 187.3 GB / 192 GB RAM.
 pyannote.audio: SpeakerDiarization pipeline not released between batches.
 torch.nn.Module references retained in embedding cache (est. leak: 2.1 GB/batch).
 Unprocessed queue depth at crash: 3,421 audio segments (est. 68h audio).
 ```
+
+*代码清单10-4：Diarization 内存泄漏错误日志示例。日志内容为匿名化示例，内存水位和批次大小应按节点配置压测。*
 
 **[根因与修复]**：
 
@@ -312,14 +318,15 @@ Unprocessed queue depth at crash: 3,421 audio segments (est. 68h audio).
 
 代码清单10-5展示了 WebDataset shard 并发写入损坏的错误日志示例。
 
-*代码清单10-5：WebDataset shard 并发写入损坏错误日志示例。日志内容为匿名化示例，生产环境应配合 shard 写入锁、校验和与重试策略。*
 
-```bash
+```text
 [ERROR] training_node_44: WebDataset TarReader failed on shard: /data/processed/shard_0023.tar
 tarfile.ReadError: invalid header magic bytes at offset 2147483392.
 Estimated corrupted samples in shard: ~4,200 (approx 12.3GB of aligned multimodal data).
 DataLoader worker 0: Pipe broken, resetting shard iterator. Skipping shard.
 ```
+
+*代码清单10-5：WebDataset shard 并发写入损坏错误日志示例。日志内容为匿名化示例，生产环境应配合 shard 写入锁、校验和与重试策略。*
 
 **[根因与修复]**：
 

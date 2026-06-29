@@ -89,7 +89,7 @@ Using public academic sources is a deliberate compliance choice. A publishable b
 
 The code below sketches how the dataset connects to the SRPO training loop in MindSpore. It traces the full data-consumption path — load samples, sample candidate outputs, score each with SCL-Reward, compute group-relative advantages, and update the policy via the GRPO loss — making concrete how the dataset's schema and logic constraints become trainable signals. 
 
-Listing 40-1 provides the corresponding code or configuration example.
+Listing 40-1 provides a process flow example.
 
 ```python
 import mindspore as ms
@@ -115,7 +115,7 @@ train_set = GeneratorDataset(
 
 # ---- 2. SCL-Reward: turn one prediction into a scalar reward ----
 def scl_reward(pred_text, gt_json, schema, lam=0.4, gamma=0.6):
-    gate, row_acr, doc_acr = validate_logic(pred_text, schema)    # Code Example 2
+    gate, row_acr, doc_acr = validate_logic(pred_text, schema)    # defined later in this section
     if not gate:                        # structure / hallucination veto
         return 0.0                      # I_gate = 0 -> reward zeroed
     r_content = content_alignment(pred_text, gt_json, schema)     # Hungarian match
@@ -148,7 +148,7 @@ for epoch in range(EPOCHS):
         loss = grpo_train_step(policy, batch, G=8)
 ```
 
-*Listing 40-1: Code or configuration example.*
+*Listing 40-1: Process flow example.*
 
 
 #### 40.2.2 Task Definition
@@ -203,7 +203,7 @@ This design is also the basis for backward-compatible data-contract evolution. A
 
 #### 40.3.3 Complete Sample Structure
 
-Listing 40-2 provides the corresponding code or configuration example.
+Listing 40-2 provides a JSON data example.
 
 ```json
 {
@@ -229,14 +229,12 @@ Listing 40-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 40-2: Code or configuration example.*
+*Listing 40-2: JSON data example.*
 
 
 In this small sample, `key_information` and `Fee_List` are structure. The row-level and document-level arithmetic equations are logic constraints. Both must be annotated, validated, and evaluated. The construction pipeline, quality checks, and metrics that follow all revolve around making this JSON both structurally legal and arithmetically self-consistent.
 
-**Code Example 1: Schema definition as a Python dataclass.** The following snippet shows how the schema $S=\{K, T, C\}$ is represented programmatically. Each business document type corresponds to one `Schema` instance. The three constraint fields (`price_field`, `qty_field`, `amount_field`) plus `total_field` encode the arithmetic rules $C$ without modifying the JSON output format.
-
-Listing 40-3 provides the corresponding code or configuration example.
+Listing 40-3 defines the schema $S=\{K, T, C\}$ as a Python dataclass. Each business document type corresponds to one `Schema` instance. The three constraint fields (`price_field`, `qty_field`, `amount_field`) plus `total_field` encode the arithmetic rules $C$ without modifying the JSON output format.
 
 ```python
 @dataclass
@@ -263,7 +261,7 @@ expense_schema = Schema(
 )
 ```
 
-*Listing 40-3: Code or configuration example.*
+*Listing 40-3: Python implementation excerpt.*
 
 
 #### 40.3.4 Field Types, Annotation Rules, and Metrics
@@ -310,9 +308,7 @@ Figure 40-2 illustrates the corresponding workflow or structure.
 
 *Figure 40-3: Logic-consistency validation. The same gate is reused during construction to block inconsistent labels and during evaluation/training to score model output.*
 
-**Code Example 2: Logic-consistency validation gate.** This function implements the structure gate ($I_{gate}$), row-level check (Row-ACR), and document-level check (Doc-ACR) from Figure 40-3. The same code is reused in both the construction pipeline (to block inconsistent labels) and the evaluation pipeline (to score model outputs). It takes the `Schema` defined in Code Example 1.
-
-Listing 40-4 provides the corresponding code or configuration example.
+Listing 40-4 implements the logic-consistency validation gate. It covers the structure gate ($I_{gate}$), row-level check (Row-ACR), and document-level check (Doc-ACR) from Figure 40-3. The same code is reused in both the construction pipeline (to block inconsistent labels) and the evaluation pipeline (to score model outputs). It takes the `Schema` defined in Listing 40-3.
 
 ```python
 def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
@@ -359,7 +355,7 @@ def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
     return True, row_acr, doc_acr
 ```
 
-*Listing 40-4: Code or configuration example.*
+*Listing 40-4: Process flow example.*
 
 
 **7. Version split.** The dataset uses an 8:2 train-test split. In practice, the split should preserve the six schema distributions, reserve true cross-layout test samples, and attach data fingerprints and statistics to each version.
@@ -388,9 +384,7 @@ Academic metrics tend to be positive: how much is correct. Production monitoring
 
 SCVR adds no new labels. It reuses the existing structure and logic validation flow.
 
-**Code Example 3: Batch SCVR computation.** Using `validate_logic` from Code Example 2, the following function computes SCVR and companion metrics over a batch of model predictions. It requires no additional labels beyond the existing schema and arithmetic constraints.
-
-Listing 40-5 provides the corresponding code or configuration example.
+Listing 40-5 uses `validate_logic` from Listing 40-4 to compute SCVR and companion metrics over a batch of model predictions. It requires no additional labels beyond the existing schema and arithmetic constraints.
 
 ```python
 def compute_scvr(predictions: list, schema: Schema,
@@ -425,7 +419,7 @@ def compute_scvr(predictions: list, schema: Schema,
 # print(f"SCVR={metrics['scvr']:.1%}, ingestible={metrics['ingestible_rate']:.1%}")
 ```
 
-*Listing 40-5: Code or configuration example.*
+*Listing 40-5: Process flow example.*
 
 
 #### 40.5.2 Engineering Conventions for Reproducible Evaluation
@@ -580,7 +574,7 @@ The third is mask pressure testing. STB-Mask-Stress actively reduces text cues t
 
 A core design principle of SparseTable-Bench is to represent each table image as a synchronized multi-signal sample, rather than retaining only a single target format. The example below illustrates a simplified sample in which the second cell is empty, yet it remains a structurally valid column slot.
 
-Listing 40-6 provides the corresponding code or configuration example.
+Listing 40-6 provides a JSON data example.
 
 ```json
 {
@@ -602,12 +596,14 @@ Listing 40-6 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 40-6: Code or configuration example.*
+*Listing 40-6: JSON data example.*
 
 
 The `[EMPTY_CELL]` token here is not ordinary text; it is a placeholder expressing "structure exists, content is absent." It decouples a cell's structural identity from its semantic content: even if the corresponding image region contains no readable characters, that position still has row-column coordinates, a bounding box, and contextual relationships. For sparse tables, this placeholder prevents the model from treating blank regions as non-existent during generation, thereby reducing the probability of column collapse and left-shift errors. Figure 40-4 summarizes the synchronized relationship among the three supervision signals — HTML, text, and bounding boxes — within the same table sample.
 
 ![Figure 40-4: Three synchronized supervision signals in a table sample](../../images/part12/Liu-Chap40-Fig04-EN.png)
+
+*Figure 40-4: Three synchronized supervision signals in a table sample.*
 
 From a data engineering perspective, the sample schema of STB includes at least the following fields and validation rules.
 
@@ -633,6 +629,8 @@ The notation for the empty-cell token must remain consistent across the dataset,
 The construction of SparseTable-Bench can be organized into four stages: table collection, structure extraction, spatial annotation, and sparse topology augmentation. These four stages are not a simple serial file transformation; rather, they involve repeated validation of consistency among structure, text, and geometry, as illustrated in Figure 40-5.
 
 ![Figure 40-5: Four-stage SparseTable-Bench construction pipeline](../../images/part12/Liu-Chap40-Fig05-EN.png)
+
+*Figure 40-5: Four-stage SparseTable-Bench construction pipeline.*
 
 #### Case B.4.1 Table Collection
 
@@ -691,6 +689,8 @@ STB-Mask-Stress is the robustness evaluation split within SparseTable-Bench, ded
 Figure 40-6 illustrates the basic workflow of STB-Mask-Stress, from column-level occlusion generation to evaluation interpretation.
 
 ![Figure 40-6: STB-Mask-Stress occlusion generation and evaluation workflow](../../images/part12/Liu-Chap40-Fig06-EN.png)
+
+*Figure 40-6: STB-Mask-Stress occlusion generation and evaluation workflow.*
 
 The occlusion strategy of STB-Mask-Stress is column-aware. The workflow can be summarized as follows.
 
@@ -796,7 +796,7 @@ The role of the code repository is not to simply replicate paper experiments, bu
 
 SparseTable-Bench connects naturally to multiple parts of this book.
 
-With respect to the document understanding and cross-modal alignment topics in Part III, STB provides a stricter example than ordinary OCR: visual regions, text content, and structure tokens must be simultaneously aligned. The OCR and document structure re-annotation discussed in Chapter 9 is concretely instantiated here as the synchronization of cell-level text, bounding boxes, and HTML. The cross-modal alignment discussed in Chapter 11 is concretely instantiated here as the alignment of table image regions with logical cell nodes. This chapter can therefore be viewed as a specialized case study advancing from "page text recognition" toward "structured visual object recovery."
+With respect to the document understanding and cross-modal alignment topics in Part 3, STB provides a stricter example than ordinary OCR: visual regions, text content, and structure tokens must be simultaneously aligned. The OCR and document structure re-annotation discussed in Chapter 9 is concretely instantiated here as the synchronization of cell-level text, bounding boxes, and HTML. The cross-modal alignment discussed in Chapter 11 is concretely instantiated here as the alignment of table image regions with logical cell nodes. This chapter can therefore be viewed as a specialized case study advancing from "page text recognition" toward "structured visual object recovery."
 
 Compared with Chapter 40 on invoice document understanding, StructBill-CN places greater emphasis on business schemas, field extraction, and logical consistency, while SparseTable-Bench places greater emphasis on intra-table topology, empty cells, and sparse layouts. Both belong to visual document data engineering, but one targets high-risk invoice fields and the other targets general table structure robustness.
 
@@ -804,7 +804,7 @@ Compared with Chapter 41 on multi-chart infographic reasoning, STB focuses on st
 
 Looking ahead, STB connects directly to Chapter 47 on VLM data recipes. Chapter 47 examines how multimodal training data organizes images, text, coordinates, and instruction signals; STB provides exactly such a structured visual supervision example: the input is a table image, and the output simultaneously includes HTML structure, cell text, bounding boxes, and empty-cell placeholders. It can serve as a document-table slice in VLM data recipes, demonstrating why general image-caption pairs are insufficient for training stable table structure capability.
 
-In the Part XIV projects, STB can also connect to P03 and P05. The LLaVA multimodal instruction data factory in P03 needs to convert document images into trainable visual instruction samples; STB can provide instruction sources such as "identify the table structure," "indicate the positions of empty cells," and "explain column-position shift errors." The multimodal RAG project in P05 needs to extract retrievable evidence from PDFs, financial reports, and scientific publications; STB can help parse tables into structured evidence that is citable, comparable, and traceable. Particularly in financial reports, medical papers, and scientific publications, table structure errors are often harder to detect and more likely to affect final answers than individual OCR character errors.
+In the Part 14 projects, STB can also connect to P03 and P05. The LLaVA multimodal instruction data factory in P03 needs to convert document images into trainable visual instruction samples; STB can provide instruction sources such as "identify the table structure," "indicate the positions of empty cells," and "explain column-position shift errors." The multimodal RAG project in P05 needs to extract retrievable evidence from PDFs, financial reports, and scientific publications; STB can help parse tables into structured evidence that is citable, comparable, and traceable. Particularly in financial reports, medical papers, and scientific publications, table structure errors are often harder to detect and more likely to affect final answers than individual OCR character errors.
 
 ### Case B: Summary
 

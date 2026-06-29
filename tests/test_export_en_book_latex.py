@@ -58,6 +58,31 @@ class ExportEnglishBookLatexTest(unittest.TestCase):
         self.assertIn(r"\mainmatter", tex)
         self.assertEqual(stats.files, 1)
 
+    def test_english_latex_does_not_force_extra_page_before_each_markdown_unit(self):
+        exporter = load_exporter()
+        stats = exporter.ExportStats()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            assets = exporter.AssetManager(Path(tmpdir) / "latex_assets_en_test", stats)
+            assets.reset()
+            tex = exporter.build_latex_document(
+                [
+                    exporter.NavItem("Chapter 1", "part1/ch01_data_change.md", 3),
+                    exporter.NavItem("Chapter 2", "part1/ch02_quality_framework.md", 3),
+                ],
+                assets,
+                stats,
+            )
+            chapter_body = exporter.build_latex_body(
+                [exporter.NavItem("Chapter 1", "part1/ch01_data_change.md", 3)],
+                assets,
+                exporter.ExportStats(),
+                Path(tmpdir),
+            )
+
+        self.assertNotIn(r"\cleardoublepage", tex)
+        self.assertFalse(chapter_body.lstrip().startswith(r"\cleardoublepage"))
+        self.assertGreaterEqual(tex.count(r"\chapter*{Chapter "), 2)
+
     def test_xelatex_compile_runs_from_tex_directory_for_relative_assets(self):
         exporter = load_exporter()
 

@@ -228,13 +228,13 @@ Risk assessment should consider:
 
 In engineering practice, this can be compressed into executable logic:
 
-Listing 36-1 provides the corresponding code or configuration example.
+Listing 36-1 provides a risk-score formula example.
 
 ```text
 risk_level = data_sensitivity * processing_intensity * business_impact_scope
 ```
 
-*Listing 36-1: Code or configuration example.*
+*Listing 36-1: Risk-score formula example.*
 
 
 When the data level is high, the action is strong, and the impact scope is broad, the policy engine should require more approvals, stricter masking, and higher audit levels.
@@ -677,7 +677,7 @@ The previous sections covered principles, methods, and processes. This section g
 
 On the platform side, every data application should submit a compliance configuration file before launch. The CI/CD pipeline can pull and validate it automatically.
 
-Listing 36-2 provides the corresponding code or configuration example.
+Listing 36-2 provides a RoPA declaration template.
 
 ```yaml
 # P09-User-Insight-Model RoPA Declaration
@@ -755,7 +755,7 @@ pipeline_gate:
   block_if_deletion_path_missing: true
 ```
 
-*Listing 36-2: Code or configuration example.*
+*Listing 36-2: RoPA declaration template.*
 
 
 Figure 36-8 illustrates the corresponding workflow or structure.
@@ -765,7 +765,7 @@ Figure 36-8 illustrates the corresponding workflow or structure.
 
 ### 36.5.2 Data Classification Policy
 
-Listing 36-3 provides the corresponding code or configuration example.
+Listing 36-3 provides a JSON data example.
 
 ```json
 {
@@ -806,12 +806,12 @@ Listing 36-3 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 36-3: Code or configuration example.*
+*Listing 36-3: JSON data example.*
 
 
 ### 36.5.3 Access Control Policy
 
-Listing 36-4 provides the corresponding code or configuration example.
+Listing 36-4 provides a YAML configuration example.
 
 ```yaml
 policy_id: "p09_access_policy"
@@ -859,12 +859,12 @@ approval_rules:
       plaintext_forbidden: true
 ```
 
-*Listing 36-4: Code or configuration example.*
+*Listing 36-4: YAML configuration example.*
 
 
 ### 36.5.4 DPIA Template
 
-Listing 36-5 provides the corresponding code or configuration example.
+Listing 36-5 provides a DPIA assessment form template.
 
 ```md
 # DPIA Assessment Form
@@ -918,12 +918,12 @@ Listing 36-5 provides the corresponding code or configuration example.
 |  |  |  |  |
 ```
 
-*Listing 36-5: Code or configuration example.*
+*Listing 36-5: DPIA assessment form template.*
 
 
 ### 36.5.5 Audit Log Structure
 
-Listing 36-6 provides the corresponding code or configuration example.
+Listing 36-6 provides an audit-log JSON example.
 
 ```json
 {"event_time":"2026-03-10T10:15:01Z","actor":"algo_user_a","role":"algo_reader","action":"query","dataset":"dim_user_profile_masked","fields":["hashed_phone","age_band"],"record_count":200,"purpose":"feature_validation","approval_id":"APR-1029","policy_result":"allow_masked","trace_id":"trace-001"}
@@ -932,12 +932,12 @@ Listing 36-6 provides the corresponding code or configuration example.
 {"event_time":"2026-03-10T10:33:56Z","actor":"ops_user_b","role":"ops_admin","action":"export","dataset":"user_precise_location","fields":["geo_hash_12"],"record_count":50,"purpose":"troubleshooting","approval_id":"APR-1099","policy_result":"blocked","trace_id":"trace-004"}
 ```
 
-*Listing 36-6: Code or configuration example.*
+*Listing 36-6: Audit-log JSON example.*
 
 
 ### 36.5.6 Preflight Checklist
 
-Listing 36-7 provides the corresponding code or configuration example.
+Listing 36-7 provides a preflight-checklist JSON example.
 
 ```json
 {
@@ -962,12 +962,12 @@ Listing 36-7 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 36-7: Code or configuration example.*
+*Listing 36-7: Preflight-checklist JSON example.*
 
 
 ### 36.5.7 Incident Response and Postmortem Template
 
-Listing 36-8 provides the corresponding code or configuration example.
+Listing 36-8 provides a privacy incident postmortem template.
 
 ```md
 # Privacy Incident Postmortem
@@ -1011,7 +1011,7 @@ Listing 36-8 provides the corresponding code or configuration example.
 - [ ] Related projects checked
 ```
 
-*Listing 36-8: Code or configuration example.*
+*Listing 36-8: Privacy incident postmortem template.*
 
 
 ### 36.5.8 Governance Deliverable Mapping

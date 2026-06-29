@@ -81,7 +81,7 @@ Latent-Switch-69K 的构建起点是 Dolci-Think-SFT-32B 中采样得到的推�
 
 下面的教学化示例展示了最简单的 source trace 抽取方式：从 Hugging Face 读取 Dolci-Think-SFT-32B，使用固定随机种子打乱并选取一批记录，再把对话整理为后续蒸馏需要的最小字段。在 Latent-Switch MindSpore 的职责边界里，这一步和后续 teacher API 调用都属于上游数据准备；MindSpore 仓库接收的是已经带有 `stage1.correct_insight`、`stage2.distilled_cot` 和 `stage2.answer` 的蒸馏结果。
 
-代码清单43-1给出了相应的代码或配置示例。
+代码清单43-1给出了Python 实现片段。
 
 ```python
 from datasets import load_dataset
@@ -118,7 +118,7 @@ for row in sampled:
     )
 ```
 
-*代码清单43-1：代码或配置示例。*
+*代码清单43-1：Python 实现片段。*
 
 
 第一阶段是提取 solution intuition。数据构建提示要求 teacher 只抽取关键洞见，不要写成短 CoT，也不要直接给最终答案。这个字段应该描述“解决这道题的高层计划”，例如应该建立什么方程、应该枚举哪类状态、代码题应该使用什么数据结构、科学题应该抓住哪条因果关系。它的颗粒度介于标签和完整推导之间：比领域标签更具体，但比逐步推理更压缩。这样做的核心价值是把 Long-CoT 中可被内化的 planning signal 提取出来，为后续 latent budget 提供依据。
@@ -127,7 +127,7 @@ for row in sampled:
 
 下面的最小实现使用 OpenAI-compatible API 串联两个阶段。第一阶段只要求返回 JSON 格式的 `correct_insight`；第二阶段以问题和该 intuition 为条件继续生成，并把 API 返回的隐藏 reasoning 内容记录为 `distilled_cot`，把可见内容记录为最终答案。密钥、API 地址和 teacher model 均从环境变量读取。
 
-代码清单43-2给出了相应的代码或配置示例。
+代码清单43-2给出了Python 实现片段。
 
 ```python
 import asyncio
@@ -191,7 +191,7 @@ record = asyncio.run(
 )
 ```
 
-*代码清单43-2：代码或配置示例。*
+*代码清单43-2：Python 实现片段。*
 
 
 图43-3展示了相应的流程或结构。
@@ -248,7 +248,7 @@ $$
 
 下面的示例对应 Latent-Switch MindSpore `records.py` 中 `build_sft_record` 的真实调用方式：上游蒸馏产物以 `stage1` 和 `stage2` 字段进入，`SFTBuildConfig` 控制压缩率过滤、latent budget、loss weight 和占位 token。`tokens.py` 中的 `validate_tokenizer_contract` 会先检查 `<latent_think>`、`</latent_think>`、`<think>`、`</think>`、`<|im_start|>`、`<|im_end|>` 和 `<|endoftext|>` 是否能被稳定编码。
 
-代码清单43-3给出了相应的代码或配置示例。
+代码清单43-3给出了 Python 实现片段。
 
 ```python
 import os
@@ -286,14 +286,14 @@ if reason != "ok":
     raise ValueError(f"sample filtered during SFT build: {reason}")
 ```
 
-*代码清单43-3：代码或配置示例。*
+*代码清单43-3：Python 实现片段。*
 
 
 生产预处理还会依据压缩率和字段完整性过滤样本，并记录 CoT、answer 的 loss weight。更重要的是，渲染后的记录仍需交给 `dataset.py` 中的 `materialize_sample` 或 `LatentSwitchSFTSource` 重新定位 special-token spans 和构造 supervision masks；仅仅拼出这段字符串，并不意味着样本已经可以安全训练。
 
 如果运行环境已安装 MindSpore，最终可以把构造好的 JSONL 直接包装为 `mindspore.dataset.GeneratorDataset`。下面的示例展示了最小加载方式，batch 中会包含 `input_ids`、`labels`、`teacher_kl_mask`、`latent_positions` 等训练侧需要的列。
 
-代码清单43-4给出了相应的代码或配置示例。
+代码清单43-4给出了Python 实现片段。
 
 ```python
 import os
@@ -318,12 +318,12 @@ for batch in dataset.create_dict_iterator(output_numpy=True, num_epochs=1):
     break
 ```
 
-*代码清单43-4：代码或配置示例。*
+*代码清单43-4：Python 实现片段。*
 
 
 下面是一个教学化的简化样本序列示例。它只用于说明 schema 和 mask 关系，不是数据集中某条真实训练样本。
 
-代码清单43-5给出了相应的代码或配置示例。
+代码清单43-5给出了隐式推理轨迹样本。
 
 ```text
 <|im_start|>user
@@ -344,18 +344,18 @@ a_4 = 3 * 22 + 1 = 67。
 <|im_end|>
 ```
 
-*代码清单43-5：代码或配置示例。*
+*代码清单43-5：隐式推理轨迹样本。*
 
 
 这条示例里，`<latent_think>` 和 `</latent_think>` 是结构边界；中间四个 `<|endoftext|>` 只是占位符，真实样本中的数量由 `n_latent_steps` 决定；`<think>` 到 `</think>` 之间是可见压缩 CoT；之后是答案。对于训练来说，最重要的不是这段文本看起来像不像自然对话，而是每个 token 区间是否能被稳定定位。[Latent-Switch MindSpore](https://github.com/yuki10033/latent_switch_mindspore) 中的 `build_spans` 会检查一条样本中恰好包含一个 `<latent_think>`、一个 `</latent_think>`、一个 `<think>` 和一个 `</think>`，并保证它们满足：
 
-代码清单43-6给出了相应的代码或配置示例。
+代码清单43-6给出了隐式边界顺序约束示例。
 
 ```text
 assistant_content_start <= latent_start < latent_end < think_start < think_end
 ```
 
-*代码清单43-6：代码或配置示例。*
+*代码清单43-6：隐式边界顺序约束示例。*
 
 
 这个顺序约束非常关键。如果边界 token 缺失、重复或顺序错乱，mask 就会错位，latent placeholder 可能被误当作普通答案 token，或者 answer 区间被截断。对于普通 SFT 数据，边界错一处也许只是格式问题；对于 latent-switch 数据，边界错位会直接改变训练目标。

@@ -125,11 +125,11 @@ Whether to use a linear trajectory should therefore be determined not by annotat
 
 In mathematics tasks, a good schema often includes the problem, known conditions, target quantity, step sequence, intermediate variables, and final conclusion; the MATH dataset itself provides complete step-by-step solutions for competition mathematics problems, making it suitable for studying answer derivation and explanation generation (Hendrycks et al. 2021a). In some cases it is also worth recording the action type for each step—e.g., substitution, expansion, cancellation, elimination, differentiation, integration boundary handling—and so on. The benefit of this design is that the team knows not only "what the model wrote" but also "what operation it performed." Once rule validation or error classification is needed later, action labels greatly reduce the difficulty of analysis.
 
-**Code Example: A Deployable "Reasoning Trajectory Sample Schema" (Mathematics Scenario)**
+The following snippet focuses on A Deployable "Reasoning Trajectory Sample Schema" (Mathematics Scenario).
 
 The example below illustrates a structured trajectory with "action labels + intermediate expressions." The `expr` field can be subjected to equivalence/executability checks; the `action` field can be checked against a whitelist; and the `vars` field can be checked for consistency.
 
-Listing 18-1 provides the corresponding code or configuration example.
+Listing 18-1 provides a JSON data example.
 
 ```json
 {
@@ -146,7 +146,7 @@ Listing 18-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 18-1: Code or configuration example.*
+*Listing 18-1: JSON data example.*
 
 
 For code tasks, the schema is better suited to a structure of "problem localization—root cause analysis—fix plan—code change—verification result"; SWE-bench organizes GitHub issues, code repositories, and corresponding patches as real-world software engineering solving tasks, providing a canonical reference for this type of schema (Jimenez et al. 2024). Unlike mathematics, the intermediate process in code tasks more closely resembles a solution process directly tied to program state rather than an abstract chain of thought. A high-quality code sample should ideally contain not only the code snippet before and after the fix, but also the test that triggered the error, the failure log, the localization rationale, candidate fix strategies, and the final verification result. Otherwise, the model tends to remain at the level of local patch mapping and struggles to form complete debugging logic.
@@ -231,11 +231,11 @@ Rule-based verification is best suited to parts with stable form, explicit const
 
 Execution verification applies to intermediate processes that can be "run." Examples include expression evaluation in mathematics, symbolic steps, intermediate programs from program-of-thought, and local function execution in code samples. Whenever a step can be formally executed, the reliability of the verification is generally significantly higher than natural-language judgment. The significance of execution verification is that it transforms "appears reasonable" into "actually runnable." For many reasoning tasks, this is the critical step from surface plausibility to genuine validity.
 
-**Code Example: Execution Verification for "Arithmetic/Expression Steps" (Safe Simplified Version)**
+The following snippet focuses on Execution Verification for "Arithmetic/Expression Steps" (Safe Simplified Version).
 
 Without introducing additional dependencies, a "controlled expression" executor can first be implemented: allowing only numerals and `+ - * / ( )`, verifying whether the right-hand side of each step's equation can be evaluated and matches the given target.
 
-Listing 18-2 provides the corresponding code or configuration example.
+Listing 18-2 provides a process flow example.
 
 ```python
 import ast
@@ -286,7 +286,7 @@ if __name__ == "__main__":
     print(verify_step("x = __import__('os').system('rm -rf /')"))  # False
 ```
 
-*Listing 18-2: Code or configuration example.*
+*Listing 18-2: Process flow example.*
 
 
 Unit tests primarily serve code repair, program synthesis, and structured tool-invocation tasks; HumanEval, APPS, and MBPP all treat test cases or program behavior as important criteria for evaluating code generation (Chen et al. 2021; Austin et al. 2021). They check not only whether the final program runs, but whether the fix truly satisfies expected behavior. For code tasks, looking at the generated text alone is often insufficient; the true quality standard lies in whether the program behavior is correct, whether edge conditions are covered, and whether new side effects have been introduced. Unit tests serve the role of "behavioral ground truth" here—they are closer to real-world usage standards than text similarity or superficial explanation quality.

@@ -64,11 +64,11 @@ From an engineering management perspective, "capability units before sample volu
 
 Teacher model outputs are not inherently equivalent to high-value samples. Even if the teacher is far more capable overall than the student, it may still produce redundant content, localized errors, stylistic imbalances, overconfident boundary statements, or answers that violate business standards (Ouyang et al. 2022). If a team treats teacher outputs as "automatic ground truth," the distillation process degenerates into an efficient replication mechanism for errors and noise.
 
-**Code Example: Compressing a "Long Teacher Answer" into a Student-Friendly Structured Supervision Signal**
+The following snippet focuses on Compressing a "Long Teacher Answer" into a Student-Friendly Structured Supervision Signal.
 
 The following example demonstrates a common "representation mapping" approach: decomposing a long teacher response into three sections—`final` / rationale / constraints (which makes it easier for smaller models to learn stable boundaries)—while retaining the most critical metadata (teacher source, judge score, and whether the sample enters the main training set).
 
-Listing 16-1 provides the corresponding code or configuration example.
+Listing 16-1 provides a process flow example.
 
 ```python
 from dataclasses import dataclass
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     print(s)
 ```
 
-*Listing 16-1: Code or configuration example.*
+*Listing 16-1: Process flow example.*
 
 
 This pattern is very common in real-world projects. Teams initially tend to place a natural trust in a strong teacher, reasoning that since its overall performance far exceeds the student's, directly saving its outputs must at least be more cost-effective than manually rewriting everything. This reasoning is not entirely wrong, but it skips one critical step of filtering: a strong teacher does not mean it is appropriate learning material for the student on every task and in every expressive form. Teacher models have their own generation habits—sometimes they favor elaboration, sometimes they lean toward over-explanation, and sometimes, to make an answer appear complete, they add tone and structure that the student should not learn. If all of this is retained without filtering, the student learns not only task capability but an entire expressive burden that may not suit its own profile at all.
@@ -266,11 +266,11 @@ The judge's role typically manifests at three levels. The first is **filtering**
 
 In engineering practice, judge models often require greater stability than teacher models. Teachers may explore diverse expressions, but judges must maintain scoring criteria as consistently as possible; otherwise, the training set will exhibit hidden distributional noise. If the same response is assigned completely different standards by the judge across different batches, the student will learn a confused set of boundaries. For this reason, many teams combine judge strategies with rule systems, using rules to guarantee floor standards and models to handle complex judgments.
 
-**Code Example: A "Candidate–Judge–Intake" Structure for Distillation Samples (JSONL)**
+The following snippet focuses on A "Candidate–Judge–Intake" Structure for Distillation Samples (JSONL).
 
 This type of structure simultaneously supports engineering needs such as "multi-teacher competition," "failure sample retention," and "confidence-weighted sampling."
 
-Listing 16-2 provides the corresponding code or configuration example.
+Listing 16-2 provides a JSON data example.
 
 ```json
 {
@@ -293,7 +293,7 @@ Listing 16-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 16-2: Code or configuration example.*
+*Listing 16-2: JSON data example.*
 
 
 Going further, in multi-model collaboration, the judge model plays the role of "system memory." Teachers may change, experts may be swapped out, students may be retrained, but if judge standards can remain relatively stable, the entire sample repository will not experience criterion drift across different cycles. This is especially critical in long-cycle distillation projects. Systems without a stable judge easily end up with samples from the first cycle emphasizing correctness, the second emphasizing expressiveness, and the third emphasizing length compression—leaving the student learning conflicting signals.
@@ -531,9 +531,9 @@ Distillation is a systemic investment; returns and costs must be calculated toge
 
 Return accounting should therefore cover at least three dimensions. The first is **quality returns**: accuracy, factual consistency, tool success rates, format compliance rates, and user satisfaction. The second is **system returns**: average latency, peak throughput, resource utilization, and deployment complexity. The third is **operational returns**: whether manual review volume is reduced, whether dependence on teacher model online calls is lowered, and whether delivery cycles are shortened. Only by simultaneously examining all three categories can teams judge whether distillation is creating value or manufacturing an expensive intermediate layer.
 
-**Code Example: A Minimal ROI Estimator (Placing "Saved Production Costs" and "Distillation Investment" on the Same Ledger)**
+The following snippet focuses on A Minimal ROI Estimator (Placing "Saved Production Costs" and "Distillation Investment" on the Same Ledger).
 
-Listing 16-3 provides the corresponding code or configuration example.
+Listing 16-3 provides a process flow example.
 
 ```python
 def distill_roi(
@@ -569,7 +569,7 @@ if __name__ == "__main__":
     print("ROI =", round(roi, 3))
 ```
 
-*Listing 16-3: Code or configuration example.*
+*Listing 16-3: Process flow example.*
 
 
 Table 16-2 below presents a distillation returns and costs comparison suitable for helping teams make more systematic decisions. As shown, typical returns and costs differ across dimensions such as inference quality, latency performance, and cost control.

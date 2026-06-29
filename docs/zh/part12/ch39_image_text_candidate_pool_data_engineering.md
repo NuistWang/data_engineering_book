@@ -56,7 +56,7 @@ LAION-5B 论文报告它包含 5.85B 个 CLIP 过滤后的图文对，其中英�
 
 表39-1汇总了相应的对比和工程要点。
 
-*表39-1 LAION-5B 的公开子集结构*
+*表39-1：LAION-5B 的公开子集结构。*
 
 | 子集 | 规模 | 文本语言形态 | 工程含义 | 典型用途 |
 | --- | ---: | --- | --- | --- |
@@ -79,11 +79,11 @@ LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是�
 
 ![图39-1 LAION-5B 图文候选记录的多通道 schema](../../images/part12/Mu-Chap39-Fig01-ZH.svg)
 
-*图39-1 LAION-5B 图文候选记录的多通道 schema。Source: original illustration based on LAION-5B paper and LAION dataset-spec.*
+*图39-1：LAION-5B 图文候选记录的多通道 schema。Source: original illustration based on LAION-5B paper and LAION dataset-spec.*
 
 表39-2汇总了相应的对比和工程要点。
 
-*表39-2 图文候选记录 schema*
+*表39-2：图文候选记录 schema。*
 
 | 通道 | 典型字段 | 来源或生成方式 | 工程用途 |
 | --- | --- | --- | --- |
@@ -95,7 +95,7 @@ LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是�
 
 一个内部训练集的样本记录可以写成如下形式：
 
-代码清单39-1给出了相应的代码或配置示例。
+代码清单39-1给出了JSON 数据示例。
 
 ```json
 {
@@ -119,7 +119,7 @@ LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是�
 }
 ```
 
-*代码清单39-1：代码或配置示例。*
+*代码清单39-1：JSON 数据示例。*
 
 
 分通道建模能够定位失败来源。若模型生成文本与图片不匹配，问题通常在对齐通道；若训练时大量样本无法下载，问题在视觉通道或发布视图；若模型输出带水印纹理，问题可能在风险通道；若评测污染难以排查，问题在文本 hash、image hash 和版本 manifest。
@@ -130,7 +130,7 @@ LAION-5B 的构建可以拆成六个阶段：从 Common Crawl 中抽取候选，
 
 表39-3汇总了相应的对比和工程要点。
 
-*表39-3 LAION-5B 构建流程*
+*表39-3：LAION-5B 构建流程。*
 
 | 阶段 | 输入 | 处理动作 | 输出 | 对应通道 |
 | ---: | --- | --- | --- | --- |
@@ -147,7 +147,7 @@ LAION-5B 论文描述的英文过滤阈值为 CLIP 余弦相似度 0.28，非英
 
 下面的伪代码展示了 LAION-5B 类图文处理流程的核心。它不是官方实现，而是把论文流程改写为数据工程任务：
 
-代码清单39-2给出了相应的代码或配置示例。
+代码清单39-2给出了Python 实现片段。
 
 ```python
 def build_image_text_candidates(wat_records, clip_model, lang_detector, thresholds):
@@ -187,7 +187,7 @@ def build_image_text_candidates(wat_records, clip_model, lang_detector, threshol
             }
 ```
 
-*代码清单39-2：代码或配置示例。*
+*代码清单39-2：Python 实现片段。*
 
 
 这个流程把是否保留样本拆成若干可审计的筛选闸门。每个闸门都应进入配置和 manifest，而不应只停留在脚本参数里。
@@ -216,11 +216,11 @@ $$
 
 ![图39-2 图文候选池质量评估与闭环修复](../../images/part12/Mu-Chap39-Fig02-ZH.svg)
 
-*图39-2 图文候选池质量评估与闭环修复。Source: original illustration based on LAION-5B paper and DataComp benchmark design.*
+*图39-2：图文候选池质量评估与闭环修复。Source: original illustration based on LAION-5B paper and DataComp benchmark design.*
 
 表39-4汇总了相应的对比和工程要点。
 
-*表39-4 图文候选池质量评估指标*
+*表39-4：图文候选池质量评估指标。*
 
 | 通道 | 核心问题 | 自动指标 | 人工复核要点 | 不合格处理 |
 | --- | --- | --- | --- | --- |
@@ -246,7 +246,7 @@ $$
 
 图文数据的风险更容易被公众感知，也更难完全自动化处理。图片中可能出现人脸、儿童、车牌、家庭环境、医疗影像、身份证件、商标、艺术作品和水印。caption 即使不含 PII，图像本身也可能泄露隐私。URL 公开不等于授权清晰，CLIP 分数高不等于内容安全，NSFW 分数低也不等于风险为零。
 
-*表39-5 LAION-5B 类图文数据风险控制清单*
+*表39-5：LAION-5B 类图文数据风险控制清单。*
 
 | 风险类型 | 触发场景 | 控制措施 | 审计证据 |
 | --- | --- | --- | --- |

@@ -42,10 +42,12 @@ P09 聚焦敏感数据进入训练、分析与共享链路之前的治理过程�
 
 核心数据流可概括为：
 
-Listing P09-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 原始记录 -> PII 检测 -> 数据分类 -> 脱敏/去标识化 -> 风险标签 -> 审计与检查报告
 ```
+
+*代码清单P09-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -175,7 +177,7 @@ P09 的核心目标正是解决这一类问题。根据项目整体报告，P09 
 
 图P09-1展示了相应的流程或结构。
 
-![图 P09-1](../../images/part14/p09/Liu-Project09-Fig01.svg)
+![图 P09-1：P09 隐私保护数据流水线总体架构](../../images/part14/p09/Liu-Project09-Fig01.svg)
 *图 P09-1：P09 隐私保护数据流水线总体架构。*
 
 从工程视角看，P09 可以拆成三层。
@@ -248,7 +250,7 @@ P09 的核心目标正是解决这一类问题。根据项目整体报告，P09 
 
 图P09-2展示了相应的流程或结构。
 
-![图 P09-2](../../images/part14/p09/Liu-Project09-Fig02.svg)
+![图 P09-2：P09 隐私流水线关键工程面图](../../images/part14/p09/Liu-Project09-Fig02.svg)
 *图 P09-2：P09 隐私流水线关键工程面图。*
 
 ---
@@ -267,7 +269,7 @@ P09 的第一个脚本是 `src/build_privacy_specs.py`。这件事本身就很�
 
 对应代码如下：
 
-Listing P09-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def build_scope() -> dict:
     return {
@@ -287,6 +289,8 @@ def build_scope() -> dict:
     }
 ```
 
+*代码清单P09-2：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段结构说明，P09 的起点不是脱敏动作，而是控制目标。
@@ -302,7 +306,7 @@ def build_scope() -> dict:
 
 `build_classification_policy()` 把这些规则组织成结构化对象：
 
-Listing P09-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def build_classification_policy() -> dict:
     return {
@@ -327,6 +331,8 @@ def build_classification_policy() -> dict:
     }
 ```
 
+*代码清单P09-3：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 ### 6.3 访问策略的前置约束
@@ -337,7 +343,7 @@ def build_classification_policy() -> dict:
 
 图P09-3展示了相应的流程或结构。
 
-![图 P09-3](../../images/part14/p09/Liu-Project09-Fig03.svg)
+![图 P09-3：隐私规格层四类产物关系图](../../images/part14/p09/Liu-Project09-Fig03.svg)
 *图 P09-3：隐私规格层四类产物关系图。*
 
 ---
@@ -361,7 +367,7 @@ def build_classification_policy() -> dict:
 
 `run_privacy_pipeline.py` 中的 `build_raw_records()` 直接给出了代表性数据：
 
-Listing P09-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def build_raw_records() -> list[dict]:
     return [
@@ -389,6 +395,8 @@ def build_raw_records() -> list[dict]:
     ]
 ```
 
+*代码清单P09-4：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这类写法的优点是，不必先下载外部数据集，也能完整理解流水线逻辑。它牺牲了一定的真实复杂度，换来更强的可复现性。
@@ -399,7 +407,7 @@ def build_raw_records() -> list[dict]:
 
 图P09-4展示了相应的流程或结构。
 
-![图 P09-4](../../images/part14/p09/Liu-Project09-Fig04.svg)
+![图 P09-4：原始敏感记录场景覆盖图](../../images/part14/p09/Liu-Project09-Fig04.svg)
 *图 P09-4：原始敏感记录场景覆盖图。*
 
 ---
@@ -418,7 +426,7 @@ def build_raw_records() -> list[dict]:
 
 代码如下：
 
-Listing P09-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 PHONE_RE = re.compile(r"\b\d{3}-\d{3}-\d{4}\b")
@@ -441,6 +449,8 @@ def detect_pii(text: str) -> list[dict]:
     return detections
 ```
 
+*代码清单P09-5：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 ### 8.2 检测结果作为数据资产
@@ -455,7 +465,7 @@ def detect_pii(text: str) -> list[dict]:
 
 图P09-5展示了相应的流程或结构。
 
-![图 P09-5](../../images/part14/p09/Liu-Project09-Fig05.svg)
+![图 P09-5：PII 检测规则与命中分布图](../../images/part14/p09/Liu-Project09-Fig05.svg)
 *图 P09-5：PII 检测规则与命中分布图。*
 
 ---
@@ -464,7 +474,7 @@ def detect_pii(text: str) -> list[dict]:
 
 真正稳健的隐私分类，往往不是“只看字段内容”或“只看数据来源”，而是两者结合。P09 的 `classify_record()` 就体现了这一点。
 
-Listing P09-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def classify_record(record: dict, classification_policy: dict) -> dict:
     source_type_map = {
@@ -482,6 +492,8 @@ def classify_record(record: dict, classification_policy: dict) -> dict:
         "requires_quarantine": sensitivity == "restricted",
     }
 ```
+
+*代码清单P09-6：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -507,7 +519,7 @@ def classify_record(record: dict, classification_policy: dict) -> dict:
 
 图P09-6展示了相应的流程或结构。
 
-![图 P09-6](../../images/part14/p09/Liu-Project09-Fig06.svg)
+![图 P09-6：分类判定与隔离触发关系图](../../images/part14/p09/Liu-Project09-Fig06.svg)
 *图 P09-6：分类判定与隔离触发关系图。*
 
 ---
@@ -521,7 +533,7 @@ def classify_record(record: dict, classification_policy: dict) -> dict:
 
 P09 在 `redact_payload()` 中使用了三种策略：tokenize、mask 与 remove。
 
-Listing P09-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def redact_payload(text: str, detections: list[dict]) -> str:
     redacted = text
@@ -537,6 +549,8 @@ def redact_payload(text: str, detections: list[dict]) -> str:
     return redacted
 ```
 
+*代码清单P09-7：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 ### 10.1 tokenize、mask 与 remove 的分工
@@ -549,12 +563,14 @@ def redact_payload(text: str, detections: list[dict]) -> str:
 
 辅助脚本中使用 `sha256` 生成稳定 token：
 
-Listing P09-8 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-8 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def hash_token(value: str) -> str:
     digest = hashlib.sha256(value.encode("utf-8")).hexdigest()
     return f"tok_{digest[:12]}"
 ```
+
+*代码清单P09-8：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -566,7 +582,7 @@ def hash_token(value: str) -> str:
 
 图P09-7展示了相应的流程或结构。
 
-![图 P09-7](../../images/part14/p09/Liu-Project09-Fig07.svg)
+![图 P09-7：不同 PII 类型的去标识化策略图](../../images/part14/p09/Liu-Project09-Fig07.svg)
 *图 P09-7：不同 PII 类型的去标识化策略图。*
 
 ---
@@ -577,7 +593,7 @@ def hash_token(value: str) -> str:
 
 P09 通过 `build_isolation_plan()` 显式给出四类 zone：raw_zone、quarantine_zone、redacted_zone 和 audit_zone。
 
-Listing P09-9 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-9 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def build_isolation_plan() -> dict:
     return {
@@ -596,6 +612,8 @@ def build_isolation_plan() -> dict:
         ],
     }
 ```
+
+*代码清单P09-9：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -620,7 +638,7 @@ quarantine_zone 的意义在于：
 
 图P09-8展示了相应的流程或结构。
 
-![图 P09-8](../../images/part14/p09/Liu-Project09-Fig08.svg)
+![图 P09-8：存储分区与角色访问边界图](../../images/part14/p09/Liu-Project09-Fig08.svg)
 *图 P09-8：存储分区与角色访问边界图。*
 
 ---
@@ -633,7 +651,7 @@ quarantine_zone 的意义在于：
 
 `build_alerts()` 构造了两个典型告警：
 
-Listing P09-10 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-10 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def build_alerts() -> list[dict]:
     return [
@@ -654,6 +672,8 @@ def build_alerts() -> list[dict]:
     ]
 ```
 
+*代码清单P09-10：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这两个告警非常典型：一个是越权访问原始区，一个是未经批准请求导出 restricted 数据。它们恰好对应了隐私治理中最危险的两类动作。
@@ -668,7 +688,7 @@ def build_alerts() -> list[dict]:
 
 图P09-9展示了相应的流程或结构。
 
-![图 P09-9](../../images/part14/p09/Liu-Project09-Fig09.svg)
+![图 P09-9：告警、审计与事件响应关系图](../../images/part14/p09/Liu-Project09-Fig09.svg)
 *图 P09-9：告警、审计与事件响应关系图。*
 
 ---
@@ -679,7 +699,7 @@ def build_alerts() -> list[dict]:
 
 P09 在 `simulate_privacy_ops.py` 中先做 preflight，再做 incident simulation。这一顺序很有工程意味。
 
-Listing P09-11 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-11 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 preflight = {
     "checks": [
@@ -691,6 +711,8 @@ preflight = {
     ]
 }
 ```
+
+*代码清单P09-11：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -716,7 +738,7 @@ preflight = {
 
 图P09-10展示了相应的流程或结构。
 
-![图 P09-10](../../images/part14/p09/Liu-Project09-Fig10.svg)
+![图 P09-10：preflight 检查流程图](../../images/part14/p09/Liu-Project09-Fig10.svg)
 *图 P09-10：preflight 检查流程图。*
 
 ---
@@ -727,7 +749,7 @@ preflight = {
 
 P09 将 incident 场景写成结构化记录：分析师未经批准尝试导出 restricted 原始记录，其中 detection、containment、outcome 和 response_minutes 都被显式保留。
 
-Listing P09-12 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-12 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 incident = {
     "incident_id": "privacy_inc_001",
@@ -742,6 +764,8 @@ incident = {
     "response_minutes": 24,
 }
 ```
+
+*代码清单P09-12：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -766,7 +790,7 @@ incident = {
 
 图P09-11展示了相应的流程或结构。
 
-![图 P09-11](../../images/part14/p09/Liu-Project09-Fig11.svg)
+![图 P09-11：事故响应与 postmortem 闭环图](../../images/part14/p09/Liu-Project09-Fig11.svg)
 *图 P09-11：事故响应与 postmortem 闭环图。*
 
 ---
@@ -779,7 +803,7 @@ P09 的评估由 `src/evaluate_privacy_pipeline.py` 完成。它不是手工写�
 
 评估阶段会先读取 scope、classification、access、tech options、raw/classified/redacted/quarantined、alerts、audit、preflight、incident、postmortem 等全部产物，再计算关键结果。
 
-Listing P09-13 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-13 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 metrics = {
     "domain_count": len(scope["example_domains"]),
@@ -804,6 +828,8 @@ metrics = {
     "postmortem_follow_up_count": len(postmortem["follow_ups"]),
 }
 ```
+
+*代码清单P09-13：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -982,7 +1008,7 @@ P09 的核心产物则是控制策略、处理结果、审计证据、运维文�
 
 P09 的最小运行顺序可以概括为下面五步：
 
-Listing P09-14 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P09-14 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python src/build_privacy_specs.py
 python src/run_privacy_pipeline.py
@@ -990,6 +1016,8 @@ python src/simulate_privacy_ops.py
 python src/evaluate_privacy_pipeline.py
 python src/run_p9_checks.py
 ```
+
+*代码清单P09-14：命令行运行示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -1009,7 +1037,7 @@ python src/run_p9_checks.py
 
 图P09-12展示了相应的流程或结构。
 
-![图 P09-12](../../images/part14/p09/Liu-Project09-Fig12.svg)
+![图 P09-12：P09 最小可复现运行链图](../../images/part14/p09/Liu-Project09-Fig12.svg)
 *图 P09-12：P09 最小可复现运行链图。*
 
 ---

@@ -40,10 +40,12 @@ P10 聚焦把数据、监督、训练、应用、平台治理和反馈回流组�
 
 核心数据流可概括为：
 
-Listing P10-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P10-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 项目资产 -> registry -> 阶段计划 -> 训练/评测反馈 -> 数据修订 -> 发布决策 -> 飞轮报告
 ```
+
+*代码清单P10-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -166,7 +168,7 @@ P10 更关注跨项目整合程度、阶段完成率、控制点、瓶颈和治�
 
 图P10-1展示了相应的流程或结构。
 
-![图 P10-1](../../images/part14/p10/Wang-Project10-Fig01.svg)
+![图 P10-1：端到端 LLM 数据飞轮总览图](../../images/part14/p10/Wang-Project10-Fig01.svg)
 *图 P10-1：端到端 LLM 数据飞轮总览图。*
 
 从工程视角看，本项目可以拆成五层，而不是只看“数据输入—模型输出”这样一条线性流程。
@@ -235,7 +237,7 @@ P10 的 registry 应按照第十四篇 P01-P15 的完整目录维护。早期实
 
 图P10-2展示了相应的流程或结构。
 
-![图 P10-2](../../images/part14/p10/Wang-Project10-Fig02.svg)
+![图 P10-2：上游项目 registry 与接口映射图](../../images/part14/p10/Wang-Project10-Fig02.svg)
 *图 P10-2：上游项目 registry 与接口映射图。*
 
 ---
@@ -244,7 +246,7 @@ P10 的 registry 应按照第十四篇 P01-P15 的完整目录维护。早期实
 
 `src/collect_upstream_projects.py` 负责汇总上游项目资产，并将项目信息整理为统一规格。
 
-Listing P10-2 保留出版稿中的关键结构。完整项目清单、指标文件路径和接口字段应维护在配套资源的 `src/collect_upstream_projects.py` 中，正文只展示支撑飞轮装配的最小数据模型。
+代码清单P10-2 保留出版稿中的关键结构。完整项目清单、指标文件路径和接口字段应维护在配套资源的 `src/collect_upstream_projects.py` 中，正文只展示支撑飞轮装配的最小数据模型。
 ```python
 PROJECT_SPECS = [
     {
@@ -272,6 +274,8 @@ PROJECT_SPECS = [
 ]
 ```
 
+*代码清单P10-2：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段结构反映了上游资产汇总的几个基本要求：
@@ -287,7 +291,7 @@ PROJECT_SPECS = [
 
 图P10-3展示了相应的流程或结构。
 
-![图 P10-3](../../images/part14/p10/Wang-Project10-Fig03.svg)
+![图 P10-3：上游项目结构化配置示意图](../../images/part14/p10/Wang-Project10-Fig03.svg)
 *图 P10-3：上游项目结构化配置示意图。*
 
 ---
@@ -313,7 +317,7 @@ P10 的价值之一，就是把飞轮拆成了更清晰的阶段体系。当前�
 
 图P10-4展示了相应的流程或结构。
 
-![图 P10-4](../../images/part14/p10/Wang-Project10-Fig04.svg)
+![图 P10-4：五阶段推进与里程碑关系图](../../images/part14/p10/Wang-Project10-Fig04.svg)
 *图 P10-4：五阶段推进与里程碑关系图。*
 
 ---
@@ -322,7 +326,7 @@ P10 的价值之一，就是把飞轮拆成了更清晰的阶段体系。当前�
 
 `src/build_flywheel.py` 负责把第十四篇项目映射到飞轮结构中。早期最小实现只覆盖 P01-P09；当前出版口径应把 P10-P15 继续映射到 governance、foundation recipe、reasoning、multimodal instruction、generative media 和 enterprise application 等阶段。
 
-Listing P10-3 保留层级映射的核心骨架。完整实现可在配套资源的 `src/build_flywheel.py` 中维护，并随项目清单增减同步更新。
+代码清单P10-3 保留层级映射的核心骨架。完整实现可在配套资源的 `src/build_flywheel.py` 中维护，并随项目清单增减同步更新。
 ```python
 def build_architecture(registry: list[dict]) -> dict:
     return {
@@ -351,6 +355,8 @@ def build_architecture(registry: list[dict]) -> dict:
     }
 ```
 
+*代码清单P10-3：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段结构说明，飞轮依赖显式映射来维持一致性。项目与层级被写入数据结构后，报告、检查、dashboard 和治理分析都可以围绕同一套映射展开。
@@ -374,7 +380,7 @@ def build_architecture(registry: list[dict]) -> dict:
 
 图P10-5展示了相应的流程或结构。
 
-![图 P10-5](../../images/part14/p10/Wang-Project10-Fig05.svg)
+![图 P10-5：飞轮五层结构代码映射图](../../images/part14/p10/Wang-Project10-Fig05.svg)
 *图 P10-5：飞轮五层结构代码映射图。*
 
 ---
@@ -404,7 +410,7 @@ P10 当前结果显示，飞轮架构包含 `5` 层、`4` 个控制点和 `4` �
 
 图P10-6展示了相应的流程或结构。
 
-![图 P10-6](../../images/part14/p10/Wang-Project10-Fig06.svg)
+![图 P10-6：系统边界与控制点示意图](../../images/part14/p10/Wang-Project10-Fig06.svg)
 *图 P10-6：系统边界与控制点示意图。*
 
 ---
@@ -428,7 +434,7 @@ P10 当前结果显示，飞轮架构包含 `5` 层、`4` 个控制点和 `4` �
 
 图P10-7展示了相应的流程或结构。
 
-![图 P10-7](../../images/part14/p10/Wang-Project10-Fig07.svg)
+![图 P10-7：运行记录与里程碑板示意图](../../images/part14/p10/Wang-Project10-Fig07.svg)
 *图 P10-7：运行记录与里程碑板示意图。*
 
 ---
@@ -501,7 +507,7 @@ P10 的独特之处，在于它衡量的不是局部最优，而是一条工程�
 
 图P10-8展示了相应的流程或结构。
 
-![图 P10-8](../../images/part14/p10/Wang-Project10-Fig08.svg)
+![图 P10-8：飞轮瓶颈定位图](../../images/part14/p10/Wang-Project10-Fig08.svg)
 *图 P10-8：飞轮瓶颈定位图。*
 
 ---
@@ -530,7 +536,7 @@ P10 的独特之处，在于它衡量的不是局部最优，而是一条工程�
 
 `src/evaluate_flywheel.py` 负责把散落在多份产物中的结果收束成系统级指标与总报告。
 
-Listing P10-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P10-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 total_manual_review_hours = round(sum(item["estimated_manual_review_hours"] for item in registry), 2)
 total_manual_review_cost_rmb = round(sum(item["estimated_manual_review_cost_rmb"] for item in registry), 2)
@@ -543,6 +549,8 @@ bottlenecks = [
     {"name": "platform_regression_handling", "severity": "low", "reason": "P8 still observed one regressed run and one failed run, so release gates should stay strict."},
 ]
 ```
+
+*代码清单P10-4：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -559,7 +567,7 @@ bottlenecks = [
 
 图P10-9展示了相应的流程或结构。
 
-![图 P10-9](../../images/part14/p10/Wang-Project10-Fig09.svg)
+![图 P10-9：系统级指标生成逻辑图](../../images/part14/p10/Wang-Project10-Fig09.svg)
 *图 P10-9：系统级指标生成逻辑图。*
 
 ---
@@ -600,7 +608,7 @@ PASS 说明 P10 当前已经具备代码、产物、统计和报告相互对齐�
 
 P10 的 `src/run_p10_checks.py` 脚本，把总装层的验收规则写成了可执行工程契约。
 
-Listing P10-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P10-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def run_command(command: list[str], name: str) -> dict:
     result = subprocess.run(command, capture_output=True, text=True)
@@ -613,6 +621,8 @@ def run_command(command: list[str], name: str) -> dict:
         "stderr": result.stderr.strip(),
     }
 ```
+
+*代码清单P10-5：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -631,7 +641,7 @@ def run_command(command: list[str], name: str) -> dict:
 
 图P10-10展示了相应的流程或结构。
 
-![图 P10-10](../../images/part14/p10/Wang-Project10-Fig10.svg)
+![图 P10-10：检查脚本与系统契约图](../../images/part14/p10/Wang-Project10-Fig10.svg)
 *图 P10-10：检查脚本与系统契约图。*
 
 ---

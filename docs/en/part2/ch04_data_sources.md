@@ -86,7 +86,7 @@ Figure 4-1 illustrates the corresponding workflow or structure.
 
 ### 4.2.2 Source Type, License, and Risk Matrix
 
-In practical engineering decisions, source selection cannot be based on quality alone; license risk and acquisition feasibility must also be incorporated into the framework. The following is a risk-profile matrix for major data sources:
+In practical engineering decisions, source selection cannot be based on quality alone; license risk and acquisition feasibility must also be incorporated into the framework. Table 4-1 summarizes a risk-profile matrix for major data sources.
 
 *Table 4-1: Source type, license, and risk matrix. Source: compiled by the authors; license risk should be based on specific source terms, robots.txt, service agreements, and legal-review conclusions.*
 
@@ -129,7 +129,6 @@ For tens of millions of URLs, a single-threaded crawler is insufficient. Product
 
 Listing 4-1 gives a lightweight asynchronous concurrent ingestion framework based on `aiohttp`. It uses `urllib.robotparser` to automatically check compliance before sending requests; production environments should also add rate limiting, audit logs, exception retries, and legally maintained source policies.
 
-*Listing 4-1: Example code for asynchronous concurrent ingestion and robots.txt checks. Production environments should add rate limiting, failed retries, audit logs, and source-policy whitelists.*
 
 ```python
 import asyncio
@@ -182,6 +181,8 @@ class AsyncEthicalCrawler:
             return await asyncio.gather(*(bounded_fetch(url) for url in urls))
 ```
 
+*Listing 4-1: Example code for asynchronous concurrent ingestion and robots.txt checks. Production environments should add rate limiting, failed retries, audit logs, and source-policy whitelists.*
+
 This design can raise single-machine throughput to hundreds of QPS while preventing accidental access to disallowed paths. Production systems should add rate limits, audit logs, exception retries, and legal-policy controls.
 
 ### 4.3.2 Parsing Heterogeneous Sources
@@ -192,7 +193,6 @@ Different sources require different parsing routes. Using the wrong parser eithe
 
 Listing 4-2 shows an illustrative flow for parsing body text from WARC files while preserving source metadata.
 
-*Listing 4-2: Example code for WARC body parsing and source metadata preservation. This snippet shows the parsing path; production environments should add encoding detection, anomalous-sample isolation, and parsing-quality spot checks.*
 
 ```python
 import gzip
@@ -233,6 +233,8 @@ def parse_warc_to_clean_text(warc_path: str) -> list[dict]:
     return records
 ```
 
+*Listing 4-2: Example code for WARC body parsing and source metadata preservation. This snippet shows the parsing path; production environments should add encoding detection, anomalous-sample isolation, and parsing-quality spot checks.*
+
 **PDFs.** Academic papers, books, and enterprise documents are harder because PDF is a page-layout format rather than a semantic-text format. Simple extraction with `pdfplumber` or `PyMuPDF` often interleaves columns in academic papers. Scientific papers may require GROBID, Nougat, or Mathpix; enterprise PDFs should receive manual sampling after parsing to verify paragraph and table structure.
 
 **Git repositories.** Code should normally be obtained by cloning repositories rather than through partial API pulls. The parser should identify language by extension and content, filter generated or very large files, validate syntax where possible, and read license files. For Python, AST parsing can reject corrupted files; for repository-level governance, permissive license whitelists such as MIT and Apache-2.0 are essential.
@@ -245,7 +247,6 @@ Every ingested batch should write metadata at the same time it writes raw data t
 
 Each ingested batch should write standard fields to the metadata database at the same time it lands in object storage. Listing 4-3 gives example fields; actual systems should extend them according to data source, authorization method, and audit requirements.
 
-*Listing 4-3: Example metadata provenance fields for an ingestion batch. Field values are illustrative examples; production environments should extend them according to authorization method, audit requirements, and data-source type.*
 
 ```json
 {
@@ -264,6 +265,8 @@ Each ingested batch should write standard fields to the metadata database at the
   "team_contact": "data-team@company.com"
 }
 ```
+
+*Listing 4-3: Example metadata provenance fields for an ingestion batch. Field values are illustrative examples; production environments should extend them according to authorization method, audit requirements, and data-source type.*
 
 Figure 4-2 illustrates the corresponding workflow or structure.
 
@@ -303,7 +306,6 @@ The most practical engineering control is a three-list source-governance system.
 
 Listing 4-4 shows a simplified implementation:
 
-*Listing 4-4: Example code for copyright blacklist interception at the ingestion entrance. In production, the list should be maintained by legal and data-governance teams, and hit reasons and review time should be recorded.*
 
 ```python
 # Copyright blacklist: intercept prohibited sources at the ingestion entrance
@@ -322,11 +324,12 @@ def is_url_allowed(url: str) -> bool:
     return not any(domain.endswith(blocked) for blocked in COPYRIGHT_BLACKLIST_DOMAINS)
 ```
 
+*Listing 4-4: Example code for copyright blacklist interception at the ingestion entrance. In production, the list should be maintained by legal and data-governance teams, and hit reasons and review time should be recorded.*
+
 ### 4.4.3 Automatic License Classification
 
 For code data, license information is usually stored in `LICENSE` or `LICENSE.md` at the repository root and can be automatically identified through rules or classifiers. Listing 4-5 shows a simplified implementation; production systems should use stricter license-parsing libraries and legal-review workflows.
 
-*Listing 4-5: Example code for automatic license-type classification. This snippet is only used to illustrate rule-based recognition; production environments should use mature license-parsing libraries and retain a manual review chain.*
 
 ```python
 import re
@@ -355,6 +358,8 @@ def classify_license(license_text: str) -> dict:
             }
     return {"license": "Unknown", "commercial_safe": False, "risk_level": "high"}
 ```
+
+*Listing 4-5: Example code for automatic license-type classification. This snippet is only used to illustrate rule-based recognition; production environments should use mature license-parsing libraries and retain a manual review chain.*
 
 ---
 

@@ -61,13 +61,13 @@ It avoids compressing all logic into a one-off script.
 
 The core data flow can be summarized as:
 
-Listing P08-8 provides the corresponding code or configuration example.
+Listing P08-1 provides a process flow example.
 
 ```text
 platform specification -> data version -> experiment record -> lineage event -> alert/audit -> rollback and incident review -> check report
 ```
 
-*Listing P08-8: Code or configuration example.*
+*Listing P08-1: Process flow example.*
 
 
 Sample records should at least preserve `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`.
@@ -276,9 +276,11 @@ According to the project brief, P08 should cover versioning, scheduling, quality
 
 The current platform explicitly manages tenants, projects, roles, APIs, queues, UI panels, data versions, experiments, alerts, audit records, and incident reviews.
 
-![Figure 1: P08 DataOps platform overview](../../images/part14/p08/Yu-Project08-Fig01.svg)
+Figure P08-1 shows the platform overview and the main governance objects managed by this project.
 
-*Figure 1: P08 DataOps platform overview.*
+![Figure P08-1: P08 DataOps platform overview](../../images/part14/p08/Yu-Project08-Fig01.svg)
+
+*Figure P08-1: P08 DataOps platform overview.*
 
 ---
 
@@ -332,9 +334,11 @@ This layer stores data versions, experiment results, evaluation reports, operati
 
 It ensures that the platform manages reusable data and governance assets, not just abstract processes.
 
-![Figure 2: Four-layer platform architecture](../../images/part14/p08/Yu-Project08-Fig02.svg)
+Figure P08-2 summarizes the four-layer platform architecture.
 
-*Figure 2: Four-layer platform architecture.*
+![Figure P08-2: Four-layer platform architecture](../../images/part14/p08/Yu-Project08-Fig02.svg)
+
+*Figure P08-2: Four-layer platform architecture.*
 
 ---
 
@@ -366,9 +370,11 @@ This reflects a key platform principle:
 - define runtime and events second;
 - define metrics and acceptance last.
 
-![Figure 3: Spec generation, simulated run, evaluation, and check flow](../../images/part14/p08/Yu-Project08-Fig03.svg)
+Figure P08-3 shows how specification generation, simulated operation, evaluation, and checks are connected.
 
-*Figure 3: Specification generation, simulated operation, evaluation, and check flow.*
+![Figure P08-3: Spec generation, simulated run, evaluation, and check flow](../../images/part14/p08/Yu-Project08-Fig03.svg)
+
+*Figure P08-3: Specification generation, simulated operation, evaluation, and check flow.*
 
 ---
 
@@ -442,9 +448,11 @@ Together, they show that P08 is not only an offline artifact.
 
 Even at prototype level, it considers how the system is called, executed, and observed.
 
-![Figure 4: Tenant, project, role, and API relationship](../../images/part14/p08/Yu-Project08-Fig04.svg)
+Figure P08-4 summarizes the relationship among tenants, projects, roles, and API entry points.
 
-*Figure 4: Tenant, project, role, and API relationship.*
+![Figure P08-4: Tenant, project, role, and API relationship](../../images/part14/p08/Yu-Project08-Fig04.svg)
+
+*Figure P08-4: Tenant, project, role, and API relationship.*
 
 ---
 
@@ -465,7 +473,7 @@ Core specifications are materialized as structured files.
 
 The following implementation illustrates how platform specifications become structured artifacts:
 
-Listing P08-9 provides the corresponding code or configuration example.
+Listing P08-2 provides a Python implementation excerpt.
 
 ```python
 from pathlib import Path
@@ -493,7 +501,7 @@ with open(OUTPUT_DIR / "platform_scope.json", "w", encoding="utf-8") as f:
     json.dump(platform_scope, f, ensure_ascii=False, indent=2)
 ```
 
-*Listing P08-9: Code or configuration example.*
+*Listing P08-2: Python implementation excerpt.*
 
 
 This structure reflects three platform-design characteristics:
@@ -548,7 +556,7 @@ True version governance should include at least:
 
 ### 8.3 Version Structure Example
 
-Listing P08-10 provides the corresponding code or configuration example.
+Listing P08-3 provides a Python implementation excerpt.
 
 ```python
 dataset_version = {
@@ -565,16 +573,18 @@ dataset_version = {
 }
 ```
 
-*Listing P08-10: Code or configuration example.*
+*Listing P08-3: Python implementation excerpt.*
 
 
 In this structure, a version is no longer a static label.
 
 It is a governance object that participates in runtime, evaluation, and rollback.
 
-![Figure 5: Version lifecycle with release and rollback points](../../images/part14/p08/Yu-Project08-Fig05.svg)
+Figure P08-5 shows the version lifecycle and the release and rollback points that make version governance operational.
 
-*Figure 5: Version lifecycle with release and rollback points.*
+![Figure P08-5: Version lifecycle with release and rollback points](../../images/part14/p08/Yu-Project08-Fig05.svg)
+
+*Figure P08-5: Version lifecycle with release and rollback points.*
 
 ---
 
@@ -639,11 +649,15 @@ experiment_run = {
 }
 ```
 
+*Listing P08-4: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
-![Figure 6: Experiment status distribution and governance actions](../../images/part14/p08/Yu-Project08-Fig06.svg)
+Figure P08-6 summarizes experiment status distribution and the corresponding governance actions.
 
-*Figure 6: Experiment status distribution and governance actions.*
+![Figure P08-6: Experiment status distribution and governance actions](../../images/part14/p08/Yu-Project08-Fig06.svg)
+
+*Figure P08-6: Experiment status distribution and governance actions.*
 
 ---
 
@@ -679,6 +693,8 @@ lineage_edge = {
 }
 ```
 
+*Listing P08-5: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 ### 10.3 Why Introduce Lineage During the Prototype Stage
@@ -693,9 +709,11 @@ If versions, experiments, alerts, rollbacks, and reports are treated as connecte
 
 If they start as isolated tables, adding lineage later is usually more expensive.
 
-![Figure 7: Version, experiment, result, and rollback lineage](../../images/part14/p08/Yu-Project08-Fig07.svg)
+Figure P08-7 illustrates how versions, experiments, results, and rollback events are linked in the lineage graph.
 
-*Figure 7: Version, experiment, result, and rollback lineage.*
+![Figure P08-7: Version, experiment, result, and rollback lineage](../../images/part14/p08/Yu-Project08-Fig07.svg)
+
+*Figure P08-7: Version, experiment, result, and rollback lineage.*
 
 ---
 
@@ -741,9 +759,11 @@ The core risk is that stepping back is uncontrollable.
 
 A platform with rollback capability turns "what do we do if something goes wrong" from emergency firefighting into a standard action.
 
-![Figure 8: Rollback trigger and recovery flow](../../images/part14/p08/Yu-Project08-Fig08.svg)
+Figure P08-8 shows the rollback trigger and recovery flow.
 
-*Figure 8: Rollback trigger and recovery flow.*
+![Figure P08-8: Rollback trigger and recovery flow](../../images/part14/p08/Yu-Project08-Fig08.svg)
+
+*Figure P08-8: Rollback trigger and recovery flow.*
 
 ---
 
@@ -807,11 +827,15 @@ alert = {
 }
 ```
 
+*Listing P08-6: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
-![Figure 9: Metrics, logs, alerts, and audit loop](../../images/part14/p08/Yu-Project08-Fig09.svg)
+Figure P08-9 connects metrics, logs, alerts, and audit records into an observability loop.
 
-*Figure 9: Metrics, logs, alerts, and audit loop.*
+![Figure P08-9: Metrics, logs, alerts, and audit loop](../../images/part14/p08/Yu-Project08-Fig09.svg)
+
+*Figure P08-9: Metrics, logs, alerts, and audit loop.*
 
 ---
 
@@ -855,9 +879,11 @@ If they exist separately, the platform only provides partial evidence.
 
 If they are linked, the platform gains learning capability.
 
-![Figure 10: Audit logs and incident review](../../images/part14/p08/Yu-Project08-Fig10.svg)
+Figure P08-10 shows how audit logs connect with incident review.
 
-*Figure 10: Audit logs and incident review.*
+![Figure P08-10: Audit logs and incident review](../../images/part14/p08/Yu-Project08-Fig10.svg)
+
+*Figure P08-10: Audit logs and incident review.*
 
 ---
 
@@ -943,15 +969,19 @@ for path in required_files:
     assert Path(path).exists(), f"Missing required artifact: {path}"
 ```
 
+*Listing P08-7: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This check looks simple.
 
 It effectively moves platform engineering from "conceptually correct" to "delivery consistent."
 
-![Figure 11: Check pipeline and consistency validation](../../images/part14/p08/Yu-Project08-Fig11.svg)
+Figure P08-11 presents the check pipeline and consistency validation loop.
 
-*Figure 11: Check pipeline and consistency validation.*
+![Figure P08-11: Check pipeline and consistency validation](../../images/part14/p08/Yu-Project08-Fig11.svg)
+
+*Figure P08-11: Check pipeline and consistency validation.*
 
 ---
 

@@ -1,8 +1,8 @@
-# Part X: Intelligent Data Engineering and the Data Engineering Agent
+# Part 10: Intelligent Data Engineering and Data Engineering Agents
 
 ## Positioning of This Part
 
-Part X discusses Agentic Data Engineering, focusing on how data engineering agents participate in collection, parsing, cleaning, annotation, synthesis, evaluation, DataOps, and security collaboration. This part uses DataAgent as a through-line engineering reference: Chapter 31 first situates it within an architecture and boundary framework, while subsequent chapters discuss how collection and cleaning, evaluation, DataOps, and security collaboration each integrate with this agent-based data engineering foundation.
+Part 10 discusses Agentic Data Engineering, focusing on how data engineering agents participate in collection, parsing, cleaning, annotation, synthesis, evaluation, DataOps, and security collaboration. This part uses DataAgent as a through-line engineering reference: Chapter 31 first situates it within an architecture and boundary framework, while subsequent chapters discuss how collection and cleaning, evaluation, DataOps, and security collaboration each integrate with this agent-based data engineering foundation.
 
 ## Terminology
 

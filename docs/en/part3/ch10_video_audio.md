@@ -18,7 +18,7 @@ Video data; audio data; ASR; WhisperX; shot-boundary detection; temporal alignme
 - Build video/audio quality evaluation, severity classification, and isolation strategies.
 - Estimate the main cost sources in decoding, frame extraction, ASR, and packaging.
 
-After the processing chain from natural-language text in Parts I and II to static image-text parsing in Chapters 8 and 9, this chapter enters **temporal video and audio data engineering**.
+After the processing chain from natural-language text in Parts 1 and 2 to static image-text parsing in Chapters 8 and 9, this chapter enters **temporal video and audio data engineering**.
 
 In training based on image-text pairs or frame snapshots, a model can learn object categories, scenes, and static relationships. It still struggles to understand the motion trajectory, sound-image synchronization, and temporal causality contained in an apple "falling from a table, rolling under a bed, and making an impact sound." To train models such as Sora (Brooks et al. 2024) or Gemini 1.5 Pro (Gemini Team 2024), which can process long temporal input, one must build samples that express time, action, and sound association.
 
@@ -178,7 +178,7 @@ To decide whether a decompressed video is worth sending to the next stage, we ne
 
 ### 10.4.3 Industrial Processing Cost Breakdown
 
-Data engineers need a clear view of unit cost at each layer.
+Data engineers need a clear view of unit cost at each layer. Table 10-2 summarizes cost drivers and cost-reduction strategies for long-temporal audio-video processing.
 
 *Table 10-2: Long-temporal audio-video processing cost drivers and cost-reduction strategies. Source: compiled by the authors; cost drivers should be recalculated according to cloud pricing, hardware specifications, concurrency limits, and caching strategies.*
 
@@ -207,7 +207,7 @@ This case reinforces the core conclusion of Chapter 1: **without strict data pre
 
 ### 10.5.2 Chapter Summary and Bridge
 
-From text cleaning in Parts I and II, to image-pixel alignment in Chapters 8 and 9, and now long-temporal video and audio data, we have systematically covered preprocessing methods for heterogeneous data: video frame extraction, ASR transcription, audio-video alignment, event labeling, and quality filtering.
+From text cleaning in Parts 1 and 2, to image-pixel alignment in Chapters 8 and 9, and now long-temporal video and audio data, we have systematically covered preprocessing methods for heterogeneous data: video frame extraction, ASR transcription, audio-video alignment, event labeling, and quality filtering.
 
 Video and audio pipelines solve slicing, transcription, and temporal synchronization for long-temporal samples. Multimodal training still needs to answer another question: how do image, text, audio, and video signals form stable correspondences in the same semantic space? The next chapter, **Chapter 11: Cross-Modal Alignment and Fusion**, discusses object-level, segment-level, and document-level aligned sample construction.
 
@@ -223,17 +223,17 @@ Video and audio pipelines solve slicing, transcription, and temporal synchroniza
 
 Listing 10-1 shows an example error log for S3 concurrent streaming overload.
 
-*Listing 10-1: S3 concurrent streaming overload error log example. The log content is anonymized; metrics and paths do not correspond to a public incident.*
 
-Listing 10-2 provides the corresponding code or configuration example.
 
-```bash
+```text
 [FATAL] node-001.gpu-cluster.internal:
 Connection reset by peer. Timeout extracting frame chunk from blob: /bucket-v/dataset/vid_slice_0001.mp4
 File descriptor limits exceeded (Too many open files).
 RuntimeError: Multiprocessing synchronization lock stuck at DataLoader worker 1.
 AVSync_Module: Subtitle timestamp [1.21s] completely drifts out of matched acoustic window bounds.
 ```
+
+*Listing 10-1: S3 concurrent streaming overload error log example. The log content is anonymized; metrics and paths do not correspond to a public incident.*
 
 **Root cause and fix**
 
@@ -244,17 +244,19 @@ AVSync_Module: Subtitle timestamp [1.21s] completely drifts out of matched acous
 
 **Symptom**: when NVIDIA NVDEC decodes high-resolution 4K videos concurrently, GPU memory is exhausted, decoding stops, and training nodes are affected.
 
-*Listing 10-2: NVDEC concurrent decoding OOM log example. The log content is anonymized; hardware limits must be based on actual device specifications and stress-test results.*
+Listing 10-2 shows an example error log for NVDEC concurrent decoding OOM.
 
-Listing 10-3 provides the corresponding code or configuration example.
 
-```bash
+
+```text
 [FATAL] node-007.gpu-cluster.internal:
 NVDecCreateDecoder failed: CUDA_ERROR_OUT_OF_MEMORY (error 2)
 Video resolution 3840x2160 exceeds NVDEC hardware capability on A100-40GB.
 cudaMemcpy failed during frame copy: cudaErrorIllegalAddress
 Decoder context invalidated. All queued frames dropped (estimated loss: 2.3TB).
 ```
+
+*Listing 10-2: NVDEC concurrent decoding OOM log example. The log content is anonymized; hardware limits must be based on actual device specifications and stress-test results.*
 
 **Root cause and fix**
 
@@ -265,16 +267,18 @@ Decoder context invalidated. All queued frames dropped (estimated loss: 2.3TB).
 
 **Symptom**: when ASR is run on videos longer than 30 minutes, WhisperX timestamps drift in the second half, sometimes by 8-12 seconds, making audio-video alignment fail.
 
-*Listing 10-3: WhisperX timestamp drift error log example. The log content is anonymized; drift thresholds should be calibrated through sampled playback and downstream evaluation.*
+Listing 10-3 shows an example error log for WhisperX timestamp drift.
 
-Listing 10-4 provides the corresponding code or configuration example.
 
-```bash
+
+```text
 [WARN] whisperx_worker_3: Timestamp drift detected at segment 847.
 Expected anchor: [1823.4s], Model output: [1831.8s]. Delta: +8.4s.
 [ERROR] TemporalAligner: Cross-modal lock failed - audio anchor outside visual frame window.
 Alignment quality score: 0.23 (threshold: 0.75). Segment rejected and quarantined.
 ```
+
+*Listing 10-3: WhisperX timestamp drift error log example. The log content is anonymized; drift thresholds should be calibrated through sampled playback and downstream evaluation.*
 
 **Root cause and fix**
 
@@ -285,17 +289,19 @@ Alignment quality score: 0.23 (threshold: 0.75). Segment rejected and quarantine
 
 **Symptom**: when pyannote-audio (Bredin et al. 2020) diarization runs in bulk for a long time, process memory increases linearly by batch. After roughly four hours, the system OOM killer terminates the process and all processed results are lost.
 
-*Listing 10-4: Diarization memory-leak error log example. The log content is anonymized; memory watermarks and batch sizes should be stress-tested according to node configuration.*
+Listing 10-4 shows an example error log for diarization memory leakage.
 
-Listing 10-5 provides the corresponding code or configuration example.
 
-```bash
+
+```text
 [ERROR] diarization_worker_12: Killed by OOM Killer (signal 9).
 Process memory at kill time: 187.3 GB / 192 GB RAM.
 pyannote.audio: SpeakerDiarization pipeline not released between batches.
 torch.nn.Module references retained in embedding cache (est. leak: 2.1 GB/batch).
 Unprocessed queue depth at crash: 3,421 audio segments (est. 68h audio).
 ```
+
+*Listing 10-4: Diarization memory-leak error log example. The log content is anonymized; memory watermarks and batch sizes should be stress-tested according to node configuration.*
 
 **Root cause and fix**
 
@@ -306,14 +312,17 @@ Unprocessed queue depth at crash: 3,421 audio segments (est. 68h audio).
 
 **Symptom**: in final packaging, multiple worker processes concurrently write to the same `.tar` shard, corrupting its structure. Training-time DataLoader then fails to parse it.
 
-*Listing 10-5: WebDataset shard corruption error log example. The log content is anonymized; production environments should combine shard write locks, checksums, and retry strategies.*
+Listing 10-5 shows an example error log for WebDataset shard corruption.
 
-```bash
+
+```text
 [ERROR] training_node_44: WebDataset TarReader failed on shard: /data/processed/shard_0023.tar
 tarfile.ReadError: invalid header magic bytes at offset 2147483392.
 Estimated corrupted samples in shard: ~4,200 (approx 12.3GB of aligned multimodal data).
 DataLoader worker 0: Pipe broken, resetting shard iterator. Skipping shard.
 ```
+
+*Listing 10-5: WebDataset shard corruption error log example. The log content is anonymized; production environments should combine shard write locks, checksums, and retry strategies.*
 
 **Root cause and fix**
 

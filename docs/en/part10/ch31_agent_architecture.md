@@ -227,7 +227,7 @@ The six-layer architecture works only if adjacent layers communicate through str
 
 **Planner to Executor:**
 
-Listing 31-1 provides the corresponding code or configuration example.
+Listing 31-1 provides a JSON data example.
 
 ```json
 {
@@ -252,12 +252,12 @@ Listing 31-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 31-1: Code or configuration example.*
+*Listing 31-1: JSON data example.*
 
 
 **Executor to Verifier:**
 
-Listing 31-2 provides the corresponding code or configuration example.
+Listing 31-2 provides a JSON schema example.
 
 ```json
 {
@@ -273,7 +273,7 @@ Listing 31-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 31-2: Code or configuration example.*
+*Listing 31-2: JSON schema example.*
 
 
 **Verifier to Human Gate:** the Verifier submits a `VerificationReport` containing format, statistical, and semantic checks, confidence scores, and recommended action.
@@ -392,7 +392,7 @@ Table 31-7 summarizes the corresponding comparison and engineering consideration
 
 The previous MVP focuses on data quality repair. In DataAgent's semantic query scenario, the MVP can be narrower and lower risk: the agent does not modify production data. It converts natural language to structured queries, writes results to disk, and generates a report.
 
-Listing 31-3 provides the corresponding code or configuration example.
+Listing 31-3 provides a data-agent task flow example.
 
 ```text
 Business question
@@ -404,7 +404,7 @@ Business question
   -> trajectory, tool returns, and artifacts enter audit records
 ```
 
-*Listing 31-3: Code or configuration example.*
+*Listing 31-3: Data-agent task flow example.*
 
 
 This usually maps to L1-L2. The agent may read metadata, generate SQL, execute read-only queries, and save results, but it should not rewrite schemas, publish metric definitions, or trigger downstream production pipelines.

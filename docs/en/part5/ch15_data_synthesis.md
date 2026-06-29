@@ -65,11 +65,11 @@ Standardization begins with task definition. Teams must clearly specify what tra
 
 Another function of standardization is to elevate the conversation from "is this particular sample good?" to "does this batch of samples conform to a given production specification?" The former is an aesthetic judgment that easily devolves into subjective debate; the latter is closer to an engineering judgment that supports a consistent shared standard. Only when teams can discuss quality in terms of a unified specification can quality control be automated and scaled.
 
-**Code Example: Recommended Metadata Fields for a Synthetic Sample ("Process Label" Schema, JSONL)**
+The following snippet focuses on Recommended Metadata Fields for a Synthetic Sample ("Process Label" Schema, JSONL).
 
 The key to factory operations is traceability. Even when the sample text itself is simple, the metadata should record as completely as possible "how it was produced and how it passed the gates," facilitating downstream attribution and feedback loops.
 
-Listing 15-1 provides the corresponding code or configuration example.
+Listing 15-1 provides a JSON data example.
 
 ```json
 {
@@ -97,7 +97,7 @@ Listing 15-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 15-1: Code or configuration example.*
+*Listing 15-1: JSON data example.*
 
 
 ### Differences Between Synthetic Data Engineering and Traditional Data Augmentation
@@ -448,11 +448,11 @@ Difficulty validation is often the most overlooked dimension. Simple samples are
 
 This means the factory cannot cover all tasks with a single vague question of "is it correct?" when designing validation steps. Different tasks must be bound to different evidence types; otherwise validation becomes hollow. Where execution is possible, execute; where comparison is possible, compare; where structural validation is possible, avoid relying only on subjective judgment. Improvements in validation strength often come not from a stronger judge model but from more specific evidence sources.
 
-**Code Example: Minimal "Quality Gate" Implementation (Format Validation + Deduplication)**
+The following snippet focuses on Minimal "Quality Gate" Implementation (Format Validation + Deduplication).
 
 The example below demonstrates two common gates: JSON structure validation (preventing non-consumable samples from entering training) and simple deduplication (preventing templated repetition from drowning effective signals).
 
-Listing 15-2 provides the corresponding code or configuration example.
+Listing 15-2 provides a process flow example.
 
 ```python
 import json
@@ -501,7 +501,7 @@ if __name__ == "__main__":
     print("Dedup gate: kept =", kept, "dropped =", dropped)
 ```
 
-*Listing 15-2: Code or configuration example.*
+*Listing 15-2: Process flow example.*
 
 
 ### Readability Validation Focuses on Training-Friendliness, Not Aesthetics

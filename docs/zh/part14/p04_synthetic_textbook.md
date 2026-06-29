@@ -40,10 +40,12 @@ P04 聚焦把数学题、代码题和程序化解题过程组织成可训练、�
 
 核心数据流可概括为：
 
-Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P04-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 种子题 -> 题目进化 -> 解法生成 -> 代码/公式验证 -> 难度与主题标注 -> 教材型样本
 ```
+
+*代码清单P04-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -85,7 +87,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-1展示了相应的流程或结构。
 
-![图 P04-1](../../images/part14/p04/Xu-Project04-Fig01.svg)
+![图 P04-1：合成数学与代码教材工厂项目定位图](../../images/part14/p04/Xu-Project04-Fig01.svg)
 *图 P04-1：合成数学与代码教材工厂项目定位图。*
 
 
@@ -112,7 +114,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-2展示了相应的流程或结构。
 
-![图 P04-2](../../images/part14/p04/Xu-Project04-Fig02.svg)
+![图 P04-2：P04 项目目标与边界示意图](../../images/part14/p04/Xu-Project04-Fig02.svg)
 *图 P04-2：P04 项目目标与边界示意图。*
 
 
@@ -194,7 +196,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-3展示了相应的流程或结构。
 
-![图 P04-3](../../images/part14/p04/Xu-Project04-Fig03.svg)
+![图 P04-3：P04 整体架构总览图](../../images/part14/p04/Xu-Project04-Fig03.svg)
 *图 P04-3：P04 整体架构总览图。*
 
 
@@ -240,7 +242,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-4展示了相应的流程或结构。
 
-![图 P04-4](../../images/part14/p04/Xu-Project04-Fig04.svg)
+![图 P04-4：教材工厂职责协同图](../../images/part14/p04/Xu-Project04-Fig04.svg)
 *图 P04-4：教材工厂职责协同图。*
 
 
@@ -288,7 +290,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-5展示了相应的流程或结构。
 
-![图 P04-5](../../images/part14/p04/Xu-Project04-Fig05.svg)
+![图 P04-5：种子题到章节计划的映射图](../../images/part14/p04/Xu-Project04-Fig05.svg)
 *图 P04-5：种子题到章节计划的映射图。*
 
 
@@ -329,7 +331,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-6展示了相应的流程或结构。
 
-![图 P04-6](../../images/part14/p04/Xu-Project04-Fig06.svg)
+![图 P04-6：Evol-Instruct 进化路径图](../../images/part14/p04/Xu-Project04-Fig06.svg)
 *图 P04-6：Evol-Instruct 进化路径图。*
 
 
@@ -370,7 +372,7 @@ Listing P04-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P04-7展示了相应的流程或结构。
 
-![图 P04-7](../../images/part14/p04/Xu-Project04-Fig07.svg)
+![图 P04-7：CoT 与 PoT 对比图](../../images/part14/p04/Xu-Project04-Fig07.svg)
 *图 P04-7：CoT 与 PoT 对比图。*
 
 
@@ -413,7 +415,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 图P04-8展示了相应的流程或结构。
 
-![图 P04-8](../../images/part14/p04/Xu-Project04-Fig08.svg)
+![图 P04-8：生成链路细化图](../../images/part14/p04/Xu-Project04-Fig08.svg)
 *图 P04-8：生成链路细化图。*
 
 
@@ -445,7 +447,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 图P04-9展示了相应的流程或结构。
 
-![图 P04-9](../../images/part14/p04/Xu-Project04-Fig09.svg)
+![图 P04-9：沙箱验证执行路径图](../../images/part14/p04/Xu-Project04-Fig09.svg)
 *图 P04-9：沙箱验证执行路径图。*
 
 
@@ -493,7 +495,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 图P04-10展示了相应的流程或结构。
 
-![图 P04-10](../../images/part14/p04/Xu-Project04-Fig10.svg)
+![图 P04-10：教材打包产物关系图](../../images/part14/p04/Xu-Project04-Fig10.svg)
 *图 P04-10：教材打包产物关系图。*
 
 
@@ -539,7 +541,7 @@ PoT（Program of Thought）把一部分推理转成代码，这样带来三个�
 
 图P04-11展示了相应的流程或结构。
 
-![图 P04-11](../../images/part14/p04/Xu-Project04-Fig11.svg)
+![图 P04-11：训练封装接口图](../../images/part14/p04/Xu-Project04-Fig11.svg)
 *图 P04-11：训练封装接口图。*
 
 

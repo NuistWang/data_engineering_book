@@ -1059,7 +1059,6 @@ def build_latex_document(items: list[NavItem], assets: AssetManager, stats: Expo
             continue
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
-        body.append(r"\cleardoublepage")
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     preamble = latex_preamble(stats)
@@ -1095,7 +1094,6 @@ def build_latex_body(items: list[NavItem], assets: AssetManager, stats: ExportSt
             continue
         stats.files += 1
         text = source_file.read_text(encoding="utf-8")
-        body.append(r"\cleardoublepage")
         body.append(markdown_to_latex(text, source_file, assets, stats, tex_dir, item))
 
     return "\n\n".join(body)

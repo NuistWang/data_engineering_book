@@ -40,10 +40,12 @@ CoT；PRM；过程监督；推理轨迹；奖励建模
 
 核心数据流可概括为：
 
-Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 推理任务 -> 多路径 CoT 轨迹 -> step 切分 -> 验证与标签 -> PRM 训练样本 -> 评估报告
 ```
+
+*代码清单P06-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -183,7 +185,7 @@ Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P06-1展示了相应的流程或结构。
 
-![图 P06-1](../../images/part14/p06/Wang-Project06-Fig01.svg)
+![图 P06-1：CoT 与 PRM 数据工厂总览](../../images/part14/p06/Wang-Project06-Fig01.svg)
 *图 P06-1：CoT 与 PRM 数据工厂总览。*
 
 ---
@@ -232,7 +234,7 @@ Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P06-2展示了相应的流程或结构。
 
-![图 P06-2](../../images/part14/p06/Wang-Project06-Fig02.svg)
+![图 P06-2：步骤级验证与训练闭环图](../../images/part14/p06/Wang-Project06-Fig02.svg)
 *图 P06-2：步骤级验证与训练闭环图。*
 
 ---
@@ -274,7 +276,7 @@ Listing P06-1 给出了流程或路径示例，用于说明本节中的输入输
 
 对应实现如下：
 
-Listing P06-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 for index, record in enumerate(gsm8k):
     final_answer = extract_final_answer(record["answer"])
@@ -294,11 +296,13 @@ for index, record in enumerate(gsm8k):
     )
 ```
 
+*代码清单P06-2：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 `task_spec` 则把项目约束写成结构化配置：
 
-Listing P06-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 task_spec = {
     "seed_count": len(seeds),
@@ -315,6 +319,8 @@ task_spec = {
     ],
 }
 ```
+
+*代码清单P06-3：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -351,7 +357,7 @@ task_spec = {
 
 图P06-3展示了相应的流程或结构。
 
-![图 P06-3](../../images/part14/p06/Wang-Project06-Fig03.svg)
+![图 P06-3：任务采样与规格生成流程图](../../images/part14/p06/Wang-Project06-Fig03.svg)
 *图 P06-3：任务采样与规格生成流程图。*
 
 ---
@@ -362,7 +368,7 @@ P06 的三类轨迹在 `generate_traces.py` 中被显式构造：正例直接使
 
 对应实现如下：
 
-Listing P06-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 wrong_steps = [dict(step) for step in correct_steps]
 wrong_steps[-1]["text"] = corrupt_numeric_text(wrong_steps[-1]["text"])
@@ -385,6 +391,8 @@ repair_steps.append(
     }
 )
 ```
+
+*代码清单P06-4：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -426,7 +434,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 图P06-4展示了相应的流程或结构。
 
-![图 P06-4](../../images/part14/p06/Wang-Project06-Fig04.svg)
+![图 P06-4：三类轨迹关系示意图](../../images/part14/p06/Wang-Project06-Fig04.svg)
 *图 P06-4：三类轨迹关系示意图。*
 
 ---
@@ -482,7 +490,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 图P06-5展示了相应的流程或结构。
 
-![图 P06-5](../../images/part14/p06/Wang-Project06-Fig05.svg)
+![图 P06-5：PRM step schema 示意图](../../images/part14/p06/Wang-Project06-Fig05.svg)
 *图 P06-5：PRM step schema 示意图。*
 
 ---
@@ -493,7 +501,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 对应实现如下：
 
-Listing P06-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 if trace["domain"] == "math":
     passed, validation = validate_math_trace(trace)
@@ -509,11 +517,13 @@ enriched["trace_score"] = round(score, 4)
 enriched["reward_bucket"] = bucket
 ```
 
+*代码清单P06-5：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 其中，reward bucket 也不是黑盒评分，而是规则可解释的分段函数：
 
-Listing P06-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 def reward_bucket(score: float) -> str:
     if score >= 0.95:
@@ -524,6 +534,8 @@ def reward_bucket(score: float) -> str:
         return "low"
     return "zero"
 ```
+
+*代码清单P06-6：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -560,7 +572,7 @@ P06 的中间核心步骤是 `src/validate_and_score.py`，也就是把生成出
 
 图P06-6展示了相应的流程或结构。
 
-![图 P06-6](../../images/part14/p06/Wang-Project06-Fig06.svg)
+![图 P06-6：步骤验证与结果比对流程图](../../images/part14/p06/Wang-Project06-Fig06.svg)
 *图 P06-6：步骤验证与结果比对流程图。*
 
 ---
@@ -596,7 +608,7 @@ step label 的价值在于，它把“过程质量”拆成机器可消费的监
 
 图P06-7展示了相应的流程或结构。
 
-![图 P06-7](../../images/part14/p06/Wang-Project06-Fig07.svg)
+![图 P06-7：step 标签与 process-only signal 示意图](../../images/part14/p06/Wang-Project06-Fig07.svg)
 *图 P06-7：step 标签与 process-only signal 示意图。*
 
 ---
@@ -642,7 +654,7 @@ reward bucket 的价值，不在于它比连续分数更“高级”，而在于
 
 对应封装结构如下：
 
-Listing P06-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 record = {
     "record_id": f"{trace_id}_step_{step_idx}",
@@ -654,6 +666,8 @@ record = {
     "reward_bucket": reward_bucket,
 }
 ```
+
+*代码清单P06-7：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -696,7 +710,7 @@ P06 的流程中，这一步由 `src/prepare_prm_data.py` 负责。它的意义�
 
 图P06-8展示了相应的流程或结构。
 
-![图 P06-8](../../images/part14/p06/Wang-Project06-Fig08.svg)
+![图 P06-8：PRM 数据封装与训练接口图](../../images/part14/p06/Wang-Project06-Fig08.svg)
 *图 P06-8：PRM 数据封装与训练接口图。*
 
 ---
@@ -771,7 +785,7 @@ P06 当前 `67.59%` 的整体通过率虽然不高，却真实暴露了 negative
 
 图P06-9展示了相应的流程或结构。
 
-![图 P06-9](../../images/part14/p06/Wang-Project06-Fig09.svg)
+![图 P06-9：验证通过率与轨迹类型对照图](../../images/part14/p06/Wang-Project06-Fig09.svg)
 *图 P06-9：验证通过率与轨迹类型对照图。*
 
 ---
@@ -782,7 +796,7 @@ P06 当前 `67.59%` 的整体通过率虽然不高，却真实暴露了 negative
 
 对应实现如下：
 
-Listing P06-8 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P06-8 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 dataset_checks = [
     {
@@ -803,6 +817,8 @@ dataset_checks = [
     },
 ]
 ```
+
+*代码清单P06-8：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -872,7 +888,7 @@ repair 轨迹看起来很理想，因为它模拟了模型犯错后修复的过�
 
 图P06-10展示了相应的流程或结构。
 
-![图 P06-10](../../images/part14/p06/Wang-Project06-Fig10.svg)
+![图 P06-10：negative / repair 噪声来源图](../../images/part14/p06/Wang-Project06-Fig10.svg)
 *图 P06-10：negative / repair 噪声来源图。*
 
 ---

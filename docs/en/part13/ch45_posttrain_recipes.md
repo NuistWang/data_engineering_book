@@ -82,7 +82,7 @@ Before building one's own post-training pipeline, it is necessary to cross-compa
 
 One real-world constraint also needs to be added: open-source post-training data and recipes update very quickly, so this kind of horizontal comparison should only be treated as a snapshot at a particular point in time. Any comparison intended for publication or long-term retrospective analysis should ideally mark the report publication date, data version, and repository revision (commit/tag); otherwise the same table may become visibly outdated within a few months.
 
-When reading the table below, please note the annotation conventions:
+When reading Table 45-1, please note the annotation conventions:
 
 * **[D]**: Numbers explicitly disclosed in technical reports, papers, or dataset cards.
 * **[I]**: Scale figures reasonably inferred based on publicly available training pipelines, split ratios, or contextual information.

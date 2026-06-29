@@ -31,6 +31,8 @@ Listing P12-1 provides a process or path example illustrating the input/output r
 Reasoning seeds -> Long-CoT generation -> Multi-candidate sampling -> Verification/scoring -> Rejection sampling -> Recirculated SFT dataset
 ```
 
+*Listing P12-1: Process or path example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -88,6 +90,8 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
   -> LoRA training and evaluation
 ```
 
+*Listing P12-2: Process or path example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 Upon completing this project, readers should understand three things. First, the key engineering objects in an R1-style system are not individual model weights but the task pool, sampled traces, verifier, rejection-sampling results, and training data manifest. Second, the reasoning data flywheel can be validated first using rule-based rewards and supervised recirculation, without entering full RL from the outset. Third, as long as the target task can construct an automatic verifier, this structure can be transferred to SQL generation, code repair, structured extraction, tool calls, or an enterprise-internal question bank.
@@ -98,7 +102,7 @@ This project's architecture can be decomposed into six components: cold-start da
 
 Figure P12-1 illustrates the corresponding workflow or structure.
 
-![Figure P12-1](../../images/part14/p12/Wang-Project12-Fig01.svg)
+![Figure P12-1: The closed-loop structure from cold-start data extraction, multi-path reasoning sampling, verifier pool, and rejection sampling to second-round SFT merging and training evaluation](../../images/part14/p12/Wang-Project12-Fig01.svg)
 *Figure P12-1: The closed-loop structure from cold-start data extraction, multi-path reasoning sampling, verifier pool, and rejection sampling to second-round SFT merging and training evaluation.*
 
 The first component is **cold-start data extraction**. The corresponding script is `cold_start_data.py`. It extracts samples suitable for SFT from existing data sources and normalizes them into the `messages` format. Math samples are organized with `Reasoning:` and `Final Answer:` sections; code samples are organized with `Reasoning:` and a fenced Python code block. The purpose of cold-start data is not to directly train the highest-performance model, but to give the model a basic reasoning output structure, language style, and parseable format.
@@ -145,6 +149,8 @@ conda env create -f environment.yml
 conda activate p12-r1-flywheel
 ```
 
+*Listing P12-3: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 Before formal sampling, run the tests first to confirm that the mock pipeline and base modules are intact:
@@ -153,6 +159,8 @@ Listing P12-4 provides a command-line run example illustrating the input/output 
 ```bash
 pytest -q
 ```
+
+*Listing P12-4: Command-line run example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -175,6 +183,8 @@ python cold_start_data.py \
   --max-code 100
 ```
 
+*Listing P12-5: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 The default output files are:
@@ -184,6 +194,8 @@ Listing P12-6 provides a process or path example illustrating the input/output r
 data/processed/cold_start_5k.jsonl
 data/processed/cold_start_summary.json
 ```
+
+*Listing P12-6: Process or path example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -206,11 +218,13 @@ record = {
 }
 ```
 
+*Listing P12-7: Python implementation excerpt.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 For coding tasks, the `assistant` content becomes:
 
-Listing P12-8 provides a process or path example illustrating the input/output relationships, structural constraints, or execution modes in this section.
+Listing P12-8 shows the assistant-response format used for code tasks.
 ````text
 Reasoning: explain the implementation idea
 Code:
@@ -218,12 +232,10 @@ Code:
 def solve(...):
     ...
 
-Listing P12-23 provides the corresponding code or configuration example.
-
 ```
 ````
 
-*Listing P12-23: Code or configuration example.*
+*Listing P12-8: Code-task assistant-response format example.*
 
 
 This excerpt translates the above process into an inspectable, structured representation.
@@ -249,6 +261,8 @@ python sample_traces.py \
   --force-mock
 ```
 
+*Listing P12-9: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 The mock backend is not used for evaluating real model capability; it is used only to check whether the data pipeline can continue flowing downstream. For real sampling, the vLLM service can be started and called via the OpenAI-compatible API:
@@ -257,6 +271,8 @@ Listing P12-10 provides a command-line run example illustrating the input/output
 ```bash
 bash scripts/serve_qwen_vllm.sh
 ```
+
+*Listing P12-10: Command-line run example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -272,6 +288,8 @@ python sample_traces.py \
   --backend openai \
   --parallel-prompts 4
 ```
+
+*Listing P12-11: Command-line run example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -295,6 +313,8 @@ sample = {
     "token_count": 512,
 }
 ```
+
+*Listing P12-12: Python implementation excerpt.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -331,6 +351,8 @@ verdict = {
 }
 ```
 
+*Listing P12-13: Python implementation excerpt.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 This structure is more valuable than a single score. If the rejection-sampling pass rate drops suddenly later on, the `verification_reason` field allows one to diagnose whether the problem originates from format drift, answer parsing, code execution, or the task itself being too difficult. For a data flywheel, interpretable failure reasons are just as important as successful samples.
@@ -350,6 +372,8 @@ python rejection_sampling.py \
   --min-reward 0.8
 ```
 
+*Listing P12-14: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 The filtering priority is:
@@ -365,6 +389,8 @@ Listing P12-15 provides a process or path example illustrating the input/output 
 data/processed/rejection_selected_10k_30k.jsonl
 ```
 
+*Listing P12-15: Process or path example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 Meanwhile, the verification results for each prompt are written to:
@@ -373,6 +399,8 @@ Listing P12-16 provides a process or path example illustrating the input/output 
 ```text
 data/verified_candidates/*.jsonl
 ```
+
+*Listing P12-16: Process or path example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -395,6 +423,8 @@ selected = {
 }
 ```
 
+*Listing P12-17: Python implementation excerpt.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 One misconception must be avoided here: rejection sampling is not simply "deleting all failed samples." The current training data uses only successful traces, but failed traces are still saved in `verified_candidates`. They can be used to analyze the model's common errors, fix verifier bugs, build a hard-case pool, or train a reward model in subsequent stages.
@@ -412,6 +442,8 @@ Listing P12-18 provides a command-line run example illustrating the input/output
 python merge_sft_data.py
 ```
 
+*Listing P12-18: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 Default output:
@@ -421,6 +453,8 @@ Listing P12-19 provides a process or path example illustrating the input/output 
 data/training/merged_sft_data.jsonl
 data/training/training_manifest.json
 ```
+
+*Listing P12-19: Process or path example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 
@@ -437,6 +471,8 @@ python train_lora.py \
   --epochs 2
 ```
 
+*Listing P12-20: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 The evaluation command is:
@@ -451,6 +487,8 @@ python eval_gsm8k_math.py \
   --backend openai
 ```
 
+*Listing P12-21: Command-line run example.*
+
 This excerpt translates the above process into an inspectable, structured representation.
 
 Evaluation results are written by default to:
@@ -459,6 +497,8 @@ Listing P12-22 provides a process or path example illustrating the input/output 
 ```text
 data/reports/eval_results_gsm8k_math.json
 ```
+
+*Listing P12-22: Process or path example.*
 
 This excerpt translates the above process into an inspectable, structured representation.
 

@@ -36,7 +36,7 @@ This case reveals the core proposition of current VLM engineering research and d
 
 ![Figure 47-1: Multimodal Data Engineering Panorama](../../images/part13/Cao-Chap47-Fig01.png)
 
-<div align="center"><b>Figure 47-1: Multimodal Data Engineering Panorama (adapted from Chapter 8 base figure)</b></div>
+*Figure 47-1: Multimodal Data Engineering Panorama (adapted from Chapter 8 base figure).*
 
 ---
 
@@ -46,7 +46,7 @@ A close reading of the technical reports for Qwen2.5-VL or InternVL3 reveals tha
 
 ![Figure 47-2: VLM Three-Stage Data Engineering Pipeline](../../images/part13/Cao-Chap47-Fig02-EN.svg)
 
-<div align="center"><b>Figure 47-2: VLM Three-Stage Data Pipeline</b></div>
+*Figure 47-2: VLM Three-Stage Data Pipeline.*
 
 **Stage 1: Pre-training (Feature Alignment)**
 
@@ -115,7 +115,7 @@ Figure 47-3 illustrates the corresponding workflow or structure.
 
 ![Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison](../../images/part13/Cao-Chap47-Fig03-EN.svg)
 
-<div align="center"><b>Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison</b></div>
+*Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison.*
 
 **Camp 1: Dynamic Hi-Res Patching (AnyRes)**
 
@@ -148,7 +148,7 @@ At the SFT stage, high-quality instruction data becomes the final piece that det
 
 ![Figure 47-4: Multimodal Instruction Synthesis Pipeline](../../images/part13/Cao-Chap47-Fig04-EN.svg)
 
-<div align="center"><b>Figure 47-4: Multimodal Instruction Synthesis Pipeline</b></div>
+*Figure 47-4: Multimodal Instruction Synthesis Pipeline.*
 
 As shown in Figure 47-4, multimodal instruction synthesis has long surpassed the simplistic approach of "having GPT-4V look at an image and compose a sentence." A modern data synthesis pipeline typically involves the coordination of the following components:
 
@@ -169,7 +169,7 @@ Table 47-3 summarizes the corresponding comparison and engineering consideration
 
 Below is the core code framework for a Qwen2.5-VL-style self-distillation caption rewriting pipeline:
 
-Listing 47-1 provides the corresponding code or configuration example.
+Listing 47-1 provides a process flow example.
 
 ```python
 # Self-distillation caption rewriting core workflow (skeleton outline)
@@ -199,7 +199,7 @@ def recaption_batch(image_paths: list[str], model, processor) -> list[str]:
     return results
 ```
 
-*Listing 47-1: Code or configuration example.*
+*Listing 47-1: Process flow example.*
 
 
 **Key Engineering Notes**:

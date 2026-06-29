@@ -66,7 +66,7 @@ Object storage stores files but does not automatically provide version semantics
 | lakeFS | Branches and commits over object storage | Lakehouse-style data governance and collaboration |
 | Delta Lake / Apache Iceberg | Large tabular data governance | Large-scale structured samples and metadata |
 
-For cross-institution dataset construction, public evaluation, and teaching reproduction, a minimal combination is often enough: **Git for scripts and specifications, DVC or an equivalent for data versions, object storage for large files, and release pages for external documentation**. This combination is easy to hand off, easy to reproduce in courses, and consistent with the governance language used in Part VIII and Part XII. Concrete data-versioning commands, remote configuration, and pipeline syntax should follow the official DVC documentation (DVC Contributors 2026).
+For cross-institution dataset construction, public evaluation, and teaching reproduction, a minimal combination is often enough: **Git for scripts and specifications, DVC or an equivalent for data versions, object storage for large files, and release pages for external documentation**. This combination is easy to hand off, easy to reproduce in courses, and consistent with the governance language used in Part 8 and Part 12. Concrete data-versioning commands, remote configuration, and pipeline syntax should follow the official DVC documentation (DVC Contributors 2026).
 
 ## A.4 Cleaning, Validation, and Training Preparation Tools
 

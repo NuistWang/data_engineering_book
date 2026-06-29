@@ -1,8 +1,8 @@
-# Part V: Synthetic Data Engineering
+# Part 5: Synthetic Data Engineering
 
 ## Positioning of This Part
 
-Part V focuses on the process of building a reusable synthetic data factory from seed samples, covering knowledge distillation, teacher model collaboration, quality control, and the risk of model collapse.
+Part 5 focuses on the process of building a reusable synthetic data factory from seed samples, covering knowledge distillation, teacher model collaboration, quality control, and the risk of model collapse.
 
 ## Terminology
 

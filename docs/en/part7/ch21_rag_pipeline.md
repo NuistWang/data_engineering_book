@@ -315,7 +315,7 @@ Table parsing is more complex. Each cell in a table is not standalone text; its 
 
 Therefore, in complex-document scenarios, tables should not simply be converted into plain text. Both a structured representation and a natural-language representation should be preserved. The structured representation supports precise queries and validation; the natural-language representation enters vector retrieval. Together they balance machine processing and semantic recall. For example, for a travel-standards table, one can simultaneously preserve the original cell coordinates, structured fields, and an expanded natural-language sentence:
 
-Listing 21-1 provides the corresponding code or configuration example.
+Listing 21-1 provides a JSON data example.
 
 ```json
 {
@@ -329,7 +329,7 @@ Listing 21-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 21-1: Code or configuration example.*
+*Listing 21-1: JSON data example.*
 
 
 
@@ -751,13 +751,13 @@ The sixth stage is evaluation and feedback. After launch, the system records use
 
 ---
 
-### 21.5.4 Knowledge-Unit Schema and Code Example
+### 21.5.4 Knowledge-Unit Schema and Listing
 
 In complex-document RAG systems, the knowledge-unit schema is the core interface of the entire pipeline. It connects parsing, cleaning, indexing, retrieval, generation, and feedback. A well-designed schema lets the system pass stable, complete, and traceable information among modules; a poorly designed schema leads to constant patching for data defects.
 
 Taking the travel policy document as an example, a knowledge unit can use the following structure:
 
-Listing 21-2 provides the corresponding code or configuration example.
+Listing 21-2 provides a JSON schema example.
 
 ```json
 {
@@ -790,14 +790,14 @@ Listing 21-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 21-2: Code or configuration example.*
+*Listing 21-2: JSON schema example.*
 
 
 This schema preserves natural-language text, structured fields, and a citation anchor. `chunk_text` is used for semantic retrieval and generation context, `structured_fields` for precise filtering and numerical judgments, `citation_anchor` for answer traceability, `access_level` for permission control, and `quality_score` for ranking and quality monitoring.
 
 Below is a simplified Python example showing how to turn a parsed table row into a knowledge unit. A real production system will be more complex, but this example helps illustrate the core logic.
 
-Listing 21-3 provides the corresponding code or configuration example.
+Listing 21-3 provides a process flow example.
 
 ```python
 from dataclasses import dataclass, asdict
@@ -906,7 +906,7 @@ if __name__ == "__main__":
     print(json.dumps(asdict(unit), ensure_ascii=False, indent=2))
 ```
 
-*Listing 21-3: Code or configuration example.*
+*Listing 21-3: Process flow example.*
 
 
 This code embodies an important idea: a knowledge unit is not a plain text fragment but a data object carrying structure, context, source, permission, and quality information. It can enter vector retrieval, participate in structured filtering, and serve as citable evidence during generation.

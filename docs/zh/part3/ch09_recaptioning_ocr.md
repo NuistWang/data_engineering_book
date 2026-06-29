@@ -79,13 +79,14 @@
 **严格的 Prompt 模板约束示例**：
 想要避免开源小模型生成发散描述，Prompt 工程必须明确约束事实性、长度和输出范围。代码清单9-1给出一个重标注 Prompt 模板示例。
 
-*代码清单9-1：重标注 Prompt 模板示例。该模板用于说明约束方式，生产环境应按模型版本、图像类型和安全策略进行 A/B 验证。*
 
 ```text
 [System Instruction]: You are a neutral, highly objective visually impaired helper. 
 [Task]: Describe the main objects, actions, and physical background in this image concisely and accurately. 
 [Constraint]: Do NOT use any generic filler words like 'This is an image of' or 'I can see'. Do NOT guess the location if no text is shown. Keep the entire response strictly under 50 words. Focus solely on visible facts.
 ```
+
+*代码清单9-1：重标注 Prompt 模板示例。该模板用于说明约束方式，生产环境应按模型版本、图像类型和安全策略进行 A/B 验证。*
 
 #### （2）中间层：多模型交叉互审机制（Multi-Model-as-a-Judge）
 当面对复杂的交错场景、密集环境或含有细微文化特征的图片时，单一开源模型容易出现幻觉发散（例如把地上的黑色花园灌溉水管识别成黑色蛇）。
@@ -117,18 +118,18 @@
 
 面对这种底层结构，下游负责整合的文本组装脚本不再只输出“一个通红的苹果放置在靠左下侧的方桌上”这样的自然语言句子，而是会向训练文本中**注入结构化且闭合的 XML 定位标记**。代码清单9-2展示了一个 XML Grounding 示例。
 
-*代码清单9-2：XML Grounding 定位标记示例。坐标与对象为说明性样例，生产环境应由检测模型输出、人工抽检和坐标归一化规则共同约束。*
 
 ```xml
 在画面深处的木制方桌左下位置，放置着一颗 <object name="apple" bbox="[[320, 550, 450, 690]]">苹果</object>；其左侧还有一摞 <object name="book" bbox="[[500, 520, 680, 750]]">医学书籍</object>。
 ```
+
+*代码清单9-2：XML Grounding 定位标记示例。坐标与对象为说明性样例，生产环境应由检测模型输出、人工抽检和坐标归一化规则共同约束。*
 
 这样做的原因是 Transformer 本身并不天然具备“远近、左右、高低”的绝对空间感知。当大量从自然语言词汇扩展到 `[Bbox_xx_yy]` 离散坐标令牌的数据组合进入 SFT 流水线后，模型不仅可以回答“图里有什么”，还可以在“指出苹果在哪里”这类任务中输出坐标或区域引用。这是降低空间幻觉、支撑网页视觉代理（Web Visual Automation Agent）等应用的基础数据设计。
 
 *工业级重描述 JSONL 样例（Re-captioning Schema）。以下字段和路径均为脱敏示例。*
 最终经过 VLM 合成的重描述数据，会被封装成带有严格元数据的 JSONL 文件。代码清单9-3给出一个示意样例，字段和路径均为脱敏示例。
 
-*代码清单9-3：重描述 JSONL Schema 脱敏示例。生产环境应补充数据来源、模型版本、审核状态、许可证和安全过滤记录。*
 
 ```json
 {
@@ -147,6 +148,8 @@
   "quality_flag": "PASS"
 }
 ```
+
+*代码清单9-3：重描述 JSON 记录 schema 脱敏示例。生产环境应补充数据来源、模型版本、审核状态、许可证和安全过滤记录。*
 **字段解释**：
 
 - `original_caption`：原始爬取的低信息标签。

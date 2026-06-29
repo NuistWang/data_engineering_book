@@ -42,10 +42,12 @@ P05 聚焦把企业财报、招股书等复杂 PDF 文档组织成一条可检�
 
 核心数据流可概括为：
 
-Listing P05-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P05-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 财报 PDF -> 页面图像 -> 多模态索引 -> Top-K 页面证据 -> 多图推理 -> 带来源回答与评估记录
 ```
+
+*代码清单P05-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -178,7 +180,7 @@ Listing P05-1 给出了流程或路径示例，用于说明本节中的输入输
 
 图P05-1展示了相应的流程或结构。
 
-![图 P05-1](../../images/part14/p05/Cao-Project05-Fig01.svg)
+![图 P05-1：多模态 RAG 财报助手总体架构图](../../images/part14/p05/Cao-Project05-Fig01.svg)
 *图 P05-1：多模态 RAG 财报助手总体架构图。*
 
 从工程视角看，本项目可以拆成三层。
@@ -262,7 +264,7 @@ Vision-first 的核心思想是：**先保留页面作为图像整体的表达�
 
 图P05-2展示了相应的流程或结构。
 
-![图 P05-2](../../images/part14/p05/Cao-Project05-Fig02.svg)
+![图 P05-2：Vision-first 与 OCR-first 路线对比图](../../images/part14/p05/Cao-Project05-Fig02.svg)
 *图 P05-2：Vision-first 与 OCR-first 路线对比图。*
 
 ---
@@ -352,7 +354,7 @@ Byaldi 的意义在于，它把多模态检索中最麻烦的一部分工程封�
 
 图P05-3展示了相应的流程或结构。
 
-![图 P05-3](../../images/part14/p05/Cao-Project05-Fig03.svg)
+![图 P05-3：页面资产与页码映射示意图](../../images/part14/p05/Cao-Project05-Fig03.svg)
 *图 P05-3：页面资产与页码映射示意图。*
 
 ---
@@ -387,7 +389,7 @@ Byaldi 的意义在于，它把多模态检索中最麻烦的一部分工程封�
 
 图P05-4展示了相应的流程或结构。
 
-![图 P05-4](../../images/part14/p05/Cao-Project05-Fig04.svg)
+![图 P05-4：PDF 页面渲染与视觉索引构建图](../../images/part14/p05/Cao-Project05-Fig04.svg)
 *图 P05-4：PDF 页面渲染与视觉索引构建图。*
 
 ---
@@ -442,7 +444,7 @@ Top-K 的价值在于：
 
 图P05-5展示了相应的流程或结构。
 
-![图 P05-5](../../images/part14/p05/Cao-Project05-Fig05.svg)
+![图 P05-5：Top-K 多页召回与目录页过滤示意图](../../images/part14/p05/Cao-Project05-Fig05.svg)
 *图 P05-5：Top-K 多页召回与目录页过滤示意图。*
 
 ---
@@ -516,7 +518,7 @@ Top-K 的价值在于：
 
 图P05-6展示了相应的流程或结构。
 
-![图 P05-6](../../images/part14/p05/Cao-Project05-Fig06.svg)
+![图 P05-6：多图上下文注入与回答约束图](../../images/part14/p05/Cao-Project05-Fig06.svg)
 *图 P05-6：多图上下文注入与回答约束图。*
 
 ---
@@ -529,7 +531,7 @@ Top-K 的价值在于：
 
 当前实现中，项目通过 Byaldi 封装 ColPali，对 PDF 页面做视觉编码，并将原图随索引一起存储。这一步的关键不是“写几行代码”，而是确保后续系统能稳定取回同一张页面图。
 
-Listing P05-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P05-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 import os
 from byaldi import RAGMultiModalModel
@@ -553,18 +555,22 @@ def build_index():
     )
 ```
 
+*代码清单P05-2：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 ### 12.2 阶段二：多页检索
 
 现有实现把 `RETRIEVAL_K` 设为 4，这是一个比较务实的默认值。它既能提供一定的证据覆盖，又不至于让多模态输入膨胀得太夸张。
 
-Listing P05-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P05-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 RAG = RAGMultiModalModel.from_index(INDEX_NAME)
 RETRIEVAL_K = 4
 results = RAG.search(user_query, k=RETRIEVAL_K)
 ```
+
+*代码清单P05-3：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -572,7 +578,7 @@ results = RAG.search(user_query, k=RETRIEVAL_K)
 
 现有实现把问题文本与多张页面图一起组成 payload，再交给 Qwen2.5-VL 处理。关键点有两个：一是明确要求模型忽略目录；二是把图片 detail 设为 `high`，以便读取财报中的小字与密集数字。
 
-Listing P05-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P05-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 content_payload = [{
     "type": "text",
@@ -592,6 +598,8 @@ for res in results:
         }
     })
 ```
+
+*代码清单P05-4：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -677,7 +685,7 @@ for res in results:
 
 图P05-7展示了相应的流程或结构。
 
-![图 P05-7](../../images/part14/p05/Cao-Project05-Fig07.svg)
+![图 P05-7：检索与回答双层评测框架图](../../images/part14/p05/Cao-Project05-Fig07.svg)
 *图 P05-7：检索与回答双层评测框架图。*
 
 ---
@@ -826,7 +834,7 @@ P05 当前指标非常整齐，这本身说明链路设计思路是对的。尤�
 
 图P05-8展示了相应的流程或结构。
 
-![图 P05-8](../../images/part14/p05/Cao-Project05-Fig08.svg)
+![图 P05-8：多模态 RAG 优化路径图](../../images/part14/p05/Cao-Project05-Fig08.svg)
 *图 P05-8：多模态 RAG 优化路径图。*
 
 ---
@@ -892,7 +900,7 @@ P05 当前指标非常整齐，这本身说明链路设计思路是对的。尤�
 
 图P05-9展示了相应的流程或结构。
 
-![图 P05-9](../../images/part14/p05/Cao-Project05-Fig09.svg)
+![图 P05-9：文本 RAG 与多模态 RAG 协同架构图](../../images/part14/p05/Cao-Project05-Fig09.svg)
 *图 P05-9：文本 RAG 与多模态 RAG 协同架构图。*
 
 ---

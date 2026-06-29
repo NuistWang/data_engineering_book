@@ -103,7 +103,7 @@ After cold-start SFT, evaluation should not stop at benchmark scores. More impor
 
 In the RL stage, the model no longer merely imitates given answers; instead it performs multi-path sampling over a task pool and updates its policy based on reward signals. The key data object here is no longer a single SFT sample but a group of trajectories:
 
-Listing 46-1 provides the corresponding code or configuration example.
+Listing 46-1 provides a JSON data example.
 
 ```json
 {
@@ -123,7 +123,7 @@ Listing 46-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 46-1: Code or configuration example.*
+*Listing 46-1: JSON data example.*
 
 
 This structure shows that RL data engineering must record the task, samples, answers, verifier, rewards, and model version. If only the final trained model weights are saved, it is impossible to diagnose why the model improved or to localize reward hacking.
@@ -418,7 +418,7 @@ A rule-based reward verification pool can be decomposed into three layers.
 
 The basic workflow for a math verification pool is as follows:
 
-Listing 46-2 provides the corresponding code or configuration example.
+Listing 46-2 provides a Python implementation excerpt.
 
 ```python
 def verify_math(predicted, reference):
@@ -432,12 +432,12 @@ def verify_math(predicted, reference):
     }
 ```
 
-*Listing 46-2: Code or configuration example.*
+*Listing 46-2: Python implementation excerpt.*
 
 
 The code verification pool requires stricter security boundaries:
 
-Listing 46-3 provides the corresponding code or configuration example.
+Listing 46-3 provides a Python implementation excerpt.
 
 ```python
 def verify_code(code, tests, timeout=5):
@@ -449,7 +449,7 @@ def verify_code(code, tests, timeout=5):
     }
 ```
 
-*Listing 46-3: Code or configuration example.*
+*Listing 46-3: Python implementation excerpt.*
 
 
 These two examples are structural illustrations only. Real systems must handle malicious code, infinite loops, environment dependencies, floating-point errors, multiple valid answers, and insufficient test coverage.
@@ -499,7 +499,7 @@ Rejection sampling can output two data files. The first is `sft_selected.jsonl`,
 
 A complete filtering decision can be written with the following fields:
 
-Listing 46-4 provides the corresponding code or configuration example.
+Listing 46-4 provides a JSON data example.
 
 ```json
 {
@@ -513,18 +513,18 @@ Listing 46-4 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 46-4: Code or configuration example.*
+*Listing 46-4: JSON data example.*
 
 
 This explicit decision record allows the team to reuse old trajectories when adjusting thresholds later. For example, the first pass selects only samples with `quality_score >= 0.85`; if more data is needed in a subsequent pass, samples scoring 0.75 to 0.85 can be re-selected without resampling all tasks.
 
-### 46.5.1 Interface Mapping to Part XIV Project 12
+### 46.5.1 Interface Mapping to Part 14 Project 12
 
-Chapter 46 defines the theory and paradigm, while Part XIV Project 12 turns the paradigm into a runnable project. To avoid mixing the chapter explanation with the project implementation, the core objects are mapped as follows.
+Chapter 46 defines the theory and paradigm, while Part 14 Project 12 turns the paradigm into a runnable project. To avoid mixing the chapter explanation with the project implementation, the core objects are mapped as follows.
 
 Table 46-7 summarizes the corresponding comparison and engineering considerations.
 
-*Table 46-7: Interface Mapping to Part XIV Project 12.*
+*Table 46-7: Interface Mapping to Part 14 Project 12.*
 
 | Chapter object | P12 asset | Interface meaning |
 | --- | --- | --- |

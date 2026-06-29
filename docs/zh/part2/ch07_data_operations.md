@@ -92,7 +92,6 @@
 
 代码清单7-1展示了离线困惑度抽样计算的示意实现。
 
-*代码清单7-1：离线困惑度抽样计算示意代码。生产环境应固定语言模型版本、分词方式和抽样口径，并记录批次级分布。*
 
 ```python
 # 一个典型的离线困惑度抽样计算伪代码（基于 PyTorch 和 HuggingFace API）
@@ -119,6 +118,8 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
     return ppl_results  # 返回数组供下游生成直方图
 ```
 
+*代码清单7-1：离线困惑度抽样计算示意代码。生产环境应固定语言模型版本、分词方式和抽样口径，并记录批次级分布。*
+
 #### 2. 多样性稀疏度（Type-Token Ratio, TTR & 词汇覆盖率）
 - **检测目标**：确认清洗管线是否由于阈值设定过度（或者是去重（MinHash）过于严酷），而导致小众知识或特定长尾词汇的永久流失。
 - **验证手段**：统计前述文档集内不同独特词汇（Type，如词表内单独的词根）和总文本序列长度（Token）的比值。大跨度段落的 TTR 通常较低，故须用特定算法作窗口平均化（如 MATTR (Covington and McFall 2010)）。
@@ -126,7 +127,6 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
 
 代码清单7-2展示了 Type-Token Ratio 的离线计算示意。
 
-*代码清单7-2：Type-Token Ratio 离线计算示意代码。该片段用于展示多样性代理指标，生产环境应结合语种、领域和样本长度分层解释。*
 
 ```python
 # 典型的离线 TTR (Type-Token Ratio) 计算伪代码
@@ -145,6 +145,8 @@ def calculate_ttr(texts, tokenizer=None):
         return 0.0
     return unique_types / total_tokens
 ```
+
+*代码清单7-2：Type-Token Ratio 离线计算示意代码。该片段用于展示多样性代理指标，生产环境应结合语种、领域和样本长度分层解释。*
 
 - **进阶验证 - 词汇覆盖（Coverage）**：团队需要专门编纂一套领域词表（例如各类罕见病种、最新的冷门代码框架、或特定文学的人名全集）。如果在沙箱中，这类靶向词汇覆盖率显著低于历史基线或人工设定的最低覆盖要求，应给对应域名上游抓取添加白名单权重，并在下一轮抽检中验证是否引入噪声。
 

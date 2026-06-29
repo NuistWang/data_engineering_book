@@ -266,11 +266,11 @@ Therefore, operational view design is first and foremost a cognitive engineering
 
 Many annotation platforms retain only a single final-result field in submission records, as if process information loses its value once a task is submitted. The most direct problem with this approach is that all subsequent quality analysis can only revolve around "was the result good?" without delving into "why was it this way?" Without rationale fields, process tags, version traces, and rework chains, the organization can almost never establish an effective error-analysis feedback loop.
 
-**Code Example: Embedding "Task Modeling" into Platform Configuration (Simplified JSON Configuration)**
+The following snippet focuses on Embedding "Task Modeling" into Platform Configuration (Simplified JSON Configuration).
 
 Many platforms are fundamentally driven by task configuration to define workflows. The following example illustrates how a comparative annotation task can explicitly encode **fields, validation, randomization, and escalation rules** in configuration (this is a conceptual configuration for pedagogical purposes). The candidate randomization and hiding of model sources here primarily serve to reduce the influence of display position, source cues, and surface fluency on preference judgments (Bradley and Terry 1952; Zheng et al. 2023).
 
-Listing 14-1 provides the corresponding code or configuration example.
+Listing 14-1 provides an error-log example.
 
 ```json
 {
@@ -298,7 +298,7 @@ Listing 14-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 14-1: Code or configuration example.*
+*Listing 14-1: JSON data example.*
 
 
 For example, if a comparative annotation project retains only "A was selected," it is later difficult to know whether this was because A was more accurate or simply more fluent. If a review-style task retains only the revised text without preserving original-answer problem tags and revision rationales, it is impossible to analyze whether the team was primarily revising facts, structure, or tone. If a multi-turn task retains only a final holistic score without turn-level problem localization, subsequent training can only be very general. The leaner the submission structure, the harder it is for the organization to derive actionable insights from the data.
@@ -427,11 +427,11 @@ To make consistency interpretable, the platform must establish an **error tag ta
 
 In essence, consistency metrics, error tags, and quality tiering all address the same problem: how to transform complex LLM quality judgments from an experiential level into organizationally governable objects. Without consistency metrics, the team doesn't know whether standards are truly shared. Without error tags, the team doesn't know where problems originate. Without quality tiering, the team cannot direct limited resources toward the highest-value areas.
 
-**Code Example: Using Cohen's Kappa to Monitor Dual-Review Consistency (Minimal Implementation)**
+The following snippet focuses on Using Cohen's Kappa to Monitor Dual-Review Consistency (Minimal Implementation).
 
 Agreement rate only checks "same / different," whereas Kappa additionally discounts "chance agreement" and is more appropriate for long-term comparison of stability across different task buckets. Cohen's original Kappa coefficient was proposed precisely to correct for chance agreement in nominal-scale annotation (Cohen 1960).
 
-Listing 14-2 provides the corresponding code or configuration example.
+Listing 14-2 provides a process flow example.
 
 ```python
 from collections import Counter
@@ -458,7 +458,7 @@ if __name__ == "__main__":
     print("kappa =", round(cohen_kappa(r1, r2), 4))
 ```
 
-*Listing 14-2: Code or configuration example.*
+*Listing 14-2: Process flow example.*
 
 
 ### 14.3.3 How to Use Golden Sets, Trap Questions, and Audit Samples
@@ -505,11 +505,11 @@ Once annotation moves from project trial operation into continuous production, o
 
 **Cost metrics** must be understood with greater precision. Many teams focus only on per-unit pricing, but what truly matters is per-usable-unit cost. A vendor that appears inexpensive, if it generates many rework items, creates heavy QA pressure, requires repeated training, and produces unstable standards, may ultimately cost more per genuinely usable data item than a more expensive vendor. Cost governance therefore cannot be viewed independently of quality and cycle time—it must be measured within the context of the whole system.
 
-**Code Example: Calculating "Per-Usable-Unit Cost / Pass Rate" Using SQL (Illustrative)**
+The following snippet focuses on Calculating "Per-Usable-Unit Cost / Pass Rate" Using SQL (Illustrative).
 
 Once operational metrics are expressed in data tables, many conclusions no longer depend on "gut feeling." The example below assumes an `annotation_tasks` table (each row represents a submission/review event) and allows rapid derivation of commonly used KPIs.
 
-Listing 14-3 provides the corresponding code or configuration example.
+Listing 14-3 provides an SQL query example.
 
 ```sql
 -- Illustrative only: adjust field names to match your actual schema
@@ -543,7 +543,7 @@ SELECT
 FROM base;
 ```
 
-*Listing 14-3: Code or configuration example.*
+*Listing 14-3: SQL query example.*
 
 
 ### 14.4.2 Outsourced Team Selection, Training, Assessment, and Replacement Mechanisms

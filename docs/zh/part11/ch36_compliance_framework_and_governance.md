@@ -225,13 +225,13 @@ L3 数据包括生物识别、医疗健康、精确位置、金融账户、未�
 
 归纳起来，上述维度可以压缩为一条更便于工程落地的判断逻辑：
 
-代码清单36-1给出了相应的代码或配置示例。
+代码清单36-1给出了风险评分公式示例。
 
 ```text
 风险等级 = 数据敏感度 × 处理动作强度 × 业务影响范围
 ```
 
-*代码清单36-1：代码或配置示例。*
+*代码清单36-1：风险评分公式示例。*
 
 
 在工程实践中，这种逻辑往往最终会被编码为一个策略引擎：
@@ -703,7 +703,7 @@ DPIA 的核心不是“写一篇长报告”，而是系统性回答以下问题
 
 在平台侧，要求每个数据应用上线前，在代码仓中提交类似如下的合规配置文件，由 CI/CD 管道自动拉取并校验：
 
-代码清单36-2给出了相应的代码或配置示例。
+代码清单36-2给出了RoPA 声明模板。
 
 ```yaml
 # P09-User-Insight-Model RoPA Declaration
@@ -781,7 +781,7 @@ pipeline_gate:
   block_if_deletion_path_missing: true
 ```
 
-*代码清单36-2：代码或配置示例。*
+*代码清单36-2：RoPA 声明模板。*
 
 
 上述配置中声明的 `deletion_path` 与 `deletion_sla_days`，对应的是用户删除请求在系统中的全链路传播与清理过程。图36-8展示了一次删除请求如何从源表沿特征仓、训练样本、离线快照到下游画像逐级传播与清理。
@@ -791,7 +791,7 @@ pipeline_gate:
 
 ### 36.5.2 数据分类策略（JSON 示例）
 
-代码清单36-3给出了相应的代码或配置示例。
+代码清单36-3给出了JSON 数据示例。
 
 ```json
 {
@@ -832,12 +832,12 @@ pipeline_gate:
 }
 ```
 
-*代码清单36-3：代码或配置示例。*
+*代码清单36-3：JSON 数据示例。*
 
 
 ### 36.5.3 访问控制策略（YAML 示例）
 
-代码清单36-4给出了相应的代码或配置示例。
+代码清单36-4给出了YAML 配置示例。
 
 ```yaml
 policy_id: "p09_access_policy"
@@ -885,12 +885,12 @@ approval_rules:
       plaintext_forbidden: true
 ```
 
-*代码清单36-4：代码或配置示例。*
+*代码清单36-4：YAML 配置示例。*
 
 
 ### 36.5.4 DPIA 模板（Markdown 表单示例）
 
-代码清单36-5给出了相应的代码或配置示例。
+代码清单36-5给出了DPIA 评估表模板。
 
 ```md
 # DPIA Assessment Form
@@ -944,12 +944,12 @@ approval_rules:
 |  |  |  |  |
 ```
 
-*代码清单36-5：代码或配置示例。*
+*代码清单36-5：DPIA 评估表模板。*
 
 
 ### 36.5.5 审计日志结构（JSONL 示例）
 
-代码清单36-6给出了相应的代码或配置示例。
+代码清单36-6给出了审计日志 JSON 示例。
 
 ```jsonl
 {"event_time":"2026-03-10T10:15:01Z","actor":"algo_user_a","role":"algo_reader","action":"query","dataset":"dim_user_profile_masked","fields":["hashed_phone","age_band"],"record_count":200,"purpose":"feature_validation","approval_id":"APR-1029","policy_result":"allow_masked","trace_id":"trace-001"}
@@ -958,12 +958,12 @@ approval_rules:
 {"event_time":"2026-03-10T10:33:56Z","actor":"ops_user_b","role":"ops_admin","action":"export","dataset":"user_precise_location","fields":["geo_hash_12"],"record_count":50,"purpose":"troubleshooting","approval_id":"APR-1099","policy_result":"blocked","trace_id":"trace-004"}
 ```
 
-*代码清单36-6：代码或配置示例。*
+*代码清单36-6：审计日志 JSON 示例。*
 
 
 ### 36.5.6 预检清单（JSON 示例）
 
-代码清单36-7给出了相应的代码或配置示例。
+代码清单36-7给出了上线前检查清单 JSON 示例。
 
 ```json
 {
@@ -988,12 +988,12 @@ approval_rules:
 }
 ```
 
-*代码清单36-7：代码或配置示例。*
+*代码清单36-7：上线前检查清单 JSON 示例。*
 
 
 ### 36.5.7 事故响应与复盘模板
 
-代码清单36-8给出了相应的代码或配置示例。
+代码清单36-8给出了隐私事件复盘模板。
 
 ```md
 # Privacy Incident Postmortem
@@ -1037,7 +1037,7 @@ approval_rules:
 - [ ] 相关项目已同步排查
 ```
 
-*代码清单36-8：代码或配置示例。*
+*代码清单36-8：隐私事件复盘模板。*
 
 
 ### 36.5.8 治理交付物映射（样例）

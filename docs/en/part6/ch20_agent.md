@@ -112,11 +112,11 @@ These three categories of fields must not be naively merged. User preferences ar
 
 For multi-turn data to be truly trainable, state representation must go beyond "having a few fields" and further define a minimal closed-loop unit. The minimal closed-loop unit is the smallest structure a model must observe and output to complete one multi-turn decision. For task-oriented agents, this loop typically comprises four parts: the current state snapshot, the triggering input, the decision action, and the updated state.
 
-**Code Example: The Pre-State—Trigger—Action—Post-State Structure for Multi-Turn Samples (Minimal Closed Loop)**
+The following snippet focuses on The Pre-State—Trigger—Action—Post-State Structure for Multi-Turn Samples (Minimal Closed Loop).
 
 The example below uses a "meeting scheduling" thread to illustrate: the trigger in this turn is the user providing a timezone; the action is a calendar tool call; the post-state updates `pending_slots` and `last_action_result`.
 
-Listing 20-1 provides the corresponding code or configuration example.
+Listing 20-1 provides a JSON data example.
 
 ```json
 {
@@ -151,7 +151,7 @@ Listing 20-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 20-1: Code or configuration example.*
+*Listing 20-1: JSON data example.*
 
 
 The current state snapshot tells us what the system currently knows, what it is doing, and what it lacks. The triggering input may be a new user message, a tool observation, or a feedback signal. The decision action encompasses generating a response, invoking a tool, writing to memory, switching threads, suspending a task, and so on. The updated state records the changes that should occur internally in the system after this step. Only by linking these four parts together does the data truly form a "observe–decide–update" learning unit. If a sample contains only triggering input and response text without pre- and post-states, the model learns only "how to follow one sentence with another," not "how to advance a task given a state."
@@ -195,9 +195,9 @@ To transform memory writes from experiential behavior into trainable, auditable 
 
 A memory write is therefore a decision action, not merely a storage action (Zhong et al. 2024). After each turn of interaction, the system faces a judgment: is this piece of information only currently visible content, or is it structured knowledge that should be leveraged persistently? If this judgment is entirely invisible in the data and occurs only inside the system implementation as uninterpretable state, the model will find it very hard to learn a stable write boundary. Conversely, if training samples explicitly show "why this was written," "to which layer it was written," "what its confidence is," and "when it needs re-verification," the model is more likely to learn to manage memory with the discipline of a well-designed data system rather than hoarding text like a mechanical cache.
 
-**Code Example: A Long-Term Preference Memory Write Record (with Confidence and Decay Policy)**
+The following snippet focuses on A Long-Term Preference Memory Write Record (with Confidence and Decay Policy).
 
-Listing 20-2 provides the corresponding code or configuration example.
+Listing 20-2 provides a JSON data example.
 
 ```json
 {
@@ -220,7 +220,7 @@ Listing 20-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 20-2: Code or configuration example.*
+*Listing 20-2: JSON data example.*
 
 
 ### The Relationship Between Memory Writes and the Task Closed Loop
@@ -301,11 +301,11 @@ State-drift evaluation specifically examines whether the model deviates from the
 
 Memory-dependency evaluation focuses on whether the system has genuinely learned to use memory. Many models perform adequately on short trajectories because they can still rely on local context; once task resumption depends on old preferences or prior state, they begin to fail. Evaluation sets should therefore deliberately design scenarios that must depend on historical memory without explicit re-presentation in the current window, in order to distinguish "reading a long context" from "using memory"—two fundamentally different capabilities (Liu et al. 2024a; Wang et al. 2023). The former is more akin to a language-processing capability; the latter is a genuine cross-turn execution capability. For long-horizon task-oriented agents, the latter is clearly closer to what deployment actually requires.
 
-**Code Example: A Simplified Rule for Detecting "Thread Contamination" in Replay Evaluation**
+The following snippet focuses on A Simplified Rule for Detecting "Thread Contamination" in Replay Evaluation.
 
 If the state fields of one thread suddenly contain exclusive fields from another thread—for instance, the `recipient` field from the mail thread appearing in the resume thread—this is typically a cross-thread signal. The script below demonstrates how to perform this check on a replay log.
 
-Listing 20-3 provides the corresponding code or configuration example.
+Listing 20-3 provides a process flow example.
 
 ```python
 from typing import Dict, List
@@ -341,7 +341,7 @@ if __name__ == "__main__":
     print(detect_contamination(replay))
 ```
 
-*Listing 20-3: Code or configuration example.*
+*Listing 20-3: Process flow example.*
 
 
 ### The Basic Unit of Replay Evaluation Should Be State Transition, Not Response

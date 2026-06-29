@@ -91,7 +91,6 @@ For this reason, engineering teams usually use a headless browser with a renderi
 
 Listing 8-1 shows simplified logic for extracting interleaved DOM nodes.
 
-*Listing 8-1: Example code for DOM interleaved-node extraction. Production environments should add DOM cleaning, image-download validation, retention of alt/title fields, and failed-sample isolation.*
 
 ```python
 # Simplified pseudocode for extracting interleaved DOM nodes
@@ -108,6 +107,8 @@ for node in all_nodes_sorted_by_y_axis():
             interleaved_sequence.append(f"<img_{node.id}>")
             save_to_image_db(node.url, node.id)
 ```
+
+*Listing 8-1: Example code for DOM interleaved-node extraction. Production environments should add DOM cleaning, image-download validation, retention of alt/title fields, and failed-sample isolation.*
 
 If the DOM structure is extracted out of order, the model learns the wrong image-text correspondence.
 
@@ -200,13 +201,12 @@ We usually run a stable pretrained CLIP, such as open-source `OpenCLIP ViT-L/14`
 
 **2. From CLIP to SigLIP: abandoning global Softmax**
 
-In large enterprise data pipelines, traditional CLIP models are increasingly replaced by **SigLIP (Sigmoid Loss for Language Image Pre-Training)** (Zhai et al. 2023). Traditional CLIP computes a global Softmax probability over all image-text pairs inside the batch. This creates an engineering issue: with a very large distributed batch size, the model must distinguish many fine-grained pair differences and may become overly sensitive to certain hard negatives, making inference-time CLIP Scores unstable.
+In large enterprise data pipelines, traditional CLIP models are increasingly replaced by **SigLIP (Sigmoid Loss for Language Image Pre-Training)** (Zhai et al. 2023). Traditional CLIP computes a global Softmax probability over all image-text pairs inside the batch. This creates an engineering issue: with a very large distributed batch size, the model must distinguish many fine-grained pair differences and may become overly sensitive to certain hard negatives, making inference-time CLIP Scores unstable. Figure 8-2 illustrates the image semantic alignment and filtering flow.
 
 SigLIP converts this global multi-class problem into **pairwise binary sigmoid prediction**. This gives SigLIP better tolerance for partial matches and complex-background image-text pairs, and a more stable score distribution. Engineering teams can set more consistent cutoffs, while still calibrating them on the target data.
 
 Listing 8-2 shows a simplified SigLIP/CLIP image-text alignment filter.
 
-*Listing 8-2: Example code for SigLIP/CLIP image-text alignment filtering. The threshold is illustrative; production environments should calibrate it by model version, data domain, and manual spot-check results.*
 
 ```python
 # Pseudocode for SigLIP/CLIP image-text alignment filtering
@@ -237,6 +237,8 @@ def filter_by_semantic_score(image, text_caption, threshold=0.25):
 
     return similarity >= threshold, similarity
 ```
+
+*Listing 8-2: Example code for SigLIP/CLIP image-text alignment filtering. The threshold is illustrative; production environments should calibrate it by model version, data domain, and manual spot-check results.*
 
 ### 8.4.2 Saving Valuable Images: Multi-Granularity Synthetic Recaptioning
 
@@ -329,7 +331,7 @@ This data asset is not just a JSON file on disk. It is a long-term engineering c
 
 ## Chapter Summary
 
-As the opening chapter of Part III, this chapter systematically described four types of challenges that distinguish multimodal data from pure text, then introduced three major structural paradigms for image-text engineering. To reduce the throughput pressure caused by image archives, it discussed GPU-side decoding and preprocessing with DALI.
+As the opening chapter of Part 3, this chapter systematically described four types of challenges that distinguish multimodal data from pure text, then introduced three major structural paradigms for image-text engineering. To reduce the throughput pressure caused by image archives, it discussed GPU-side decoding and preprocessing with DALI.
 
 For complex semantic alignment, the chapter used a diagram to explain the combined workflow of CLIP Score filtering and VLM recaptioning (see Figure 8-2). Finally, through data-mix tuning and an anonymized composite case, it described the quality boundaries that enterprise-grade vision-language model training must maintain.
 

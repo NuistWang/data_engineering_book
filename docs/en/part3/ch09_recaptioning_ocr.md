@@ -82,13 +82,14 @@ For natural images with simple composition and clear subjects, such as plain lan
 
 To prevent smaller open-source models from generating unfocused descriptions, prompt engineering must strictly constrain factuality, length, and output scope. Listing 9-1 gives a recaptioning prompt template.
 
-*Listing 9-1: Recaptioning prompt template example. This template illustrates the constraint style; production environments should A/B validate it according to model version, image type, and safety policy.*
 
 ```text
 [System Instruction]: You are a neutral, highly objective visually impaired helper.
 [Task]: Describe the main objects, actions, and physical background in this image concisely and accurately.
 [Constraint]: Do NOT use any generic filler words like 'This is an image of' or 'I can see'. Do NOT guess the location if no text is shown. Keep the entire response strictly under 50 words. Focus solely on visible facts.
 ```
+
+*Listing 9-1: Recaptioning prompt template example. This template illustrates the constraint style; production environments should A/B validate it according to model version, image type, and safety policy.*
 
 #### 2. Middle layer: multi-model-as-a-judge
 
@@ -123,11 +124,12 @@ In this module, continuous text intended for humans must be converted into a dat
 
 The downstream text assembly script no longer outputs only a sentence such as "a bright red apple is placed on the lower-left side of a square wooden table." Instead, it injects structured, closed XML localization tags into the training text. Listing 9-2 shows an XML grounding example.
 
-*Listing 9-2: XML grounding localization markup example. Coordinates and objects are illustrative samples; production environments should constrain them jointly through detector outputs, manual spot-checks, and coordinate normalization rules.*
 
 ```xml
 On the lower-left side of the wooden square table in the back of the image, there is an <object name="apple" bbox="[[320, 550, 450, 690]]">apple</object>; to its left is a stack of <object name="book" bbox="[[500, 520, 680, 750]]">medical books</object>.
 ```
+
+*Listing 9-2: XML grounding localization markup example. Coordinates and objects are illustrative samples; production environments should constrain them jointly through detector outputs, manual spot-checks, and coordinate normalization rules.*
 
 The reason is that a Transformer does not naturally possess absolute spatial awareness of near/far, left/right, and high/low. After many samples extend natural-language words into discrete coordinate tokens such as `[Bbox_xx_yy]` and enter the SFT pipeline, the model can not only answer "what is in the image" but also output coordinates or region references for tasks such as "point to the apple." This is the foundation for reducing spatial hallucination and supporting web visual automation agents.
 
@@ -135,7 +137,6 @@ The reason is that a Transformer does not naturally possess absolute spatial awa
 
 The final VLM-generated recaptioning data is packaged as JSONL with strict metadata. Listing 9-3 gives an anonymized example; fields and paths are illustrative.
 
-*Listing 9-3: Anonymized recaptioning JSONL Schema example. Production environments should add data source, model version, review status, license, and safety-filter records.*
 
 ```json
 {
@@ -154,6 +155,8 @@ The final VLM-generated recaptioning data is packaged as JSONL with strict metad
   "quality_flag": "PASS"
 }
 ```
+
+*Listing 9-3: Anonymized recaptioning JSON record schema example. Production environments should add data source, model version, review status, license, and safety-filter records.*
 
 **Field notes**
 
@@ -257,7 +260,7 @@ The postmortem showed that **without rigorous data engineering, even a strong al
 
 ### 9.5.2 From Static Documents to Long Temporal Data
 
-From the text cleaning and filtering in Parts I and II, to image-text alignment in Chapter 8, and then to recaptioning and document structuring in this chapter, a relatively complete processing chain for static two-dimensional data engineering is now in place. Through OCR, layout parsing, BBox labeling, and long-text reconstruction, document images can become trainable, traceable, and measurable high-density supervision signals.
+From the text cleaning and filtering in Parts 1 and 2, to image-text alignment in Chapter 8, and then to recaptioning and document structuring in this chapter, a relatively complete processing chain for static two-dimensional data engineering is now in place. Through OCR, layout parsing, BBox labeling, and long-text reconstruction, document images can become trainable, traceable, and measurable high-density supervision signals.
 
 But the real world is not only a static image or one electronic invoice page. Many important scenarios contain continuous temporal logic, motion trajectories, and multi-band audio signals. Although AnyRes and other static-image strategies can handle high-resolution images, video at 30-60 frames per second over minutes or hours quickly increases visual tokens, decoding I/O, audio transcription, and temporal-alignment cost, and can trigger out-of-memory failures and data-loading bottlenecks.
 

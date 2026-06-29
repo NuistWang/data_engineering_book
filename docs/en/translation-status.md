@@ -27,7 +27,7 @@ The English edition is synchronized against that structure with a quality-first 
 | Part 11 | Privacy, Compliance, and Data Security, Ch36-Ch37 | Translated; release-audited |
 | Part 12 | Specialized Dataset Case Studies, Ch38-Ch43 | Translated; release-audited |
 | Part 13 | Open-source Model Data Recipes, Ch44-Ch48 | Translated; release-audited |
-| Part 14 | Project Case Studies, P01-P15 | Translated; release-audited |
+| Part 14 | Practical Projects, P01-P15 | Translated; release-audited |
 
 ## Quality Gates
 

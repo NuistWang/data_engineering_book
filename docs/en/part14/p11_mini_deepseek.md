@@ -26,13 +26,13 @@ This project follows an architectural path of "corpus mixing, tokenization, trai
 
 The core data flow can be summarized as:
 
-Listing P11-2 provides the corresponding code or configuration example.
+Listing P11-1 provides a process flow example.
 
 ```text
 Candidate corpus -> Recipe sampling -> Tokenizer processing -> Packed dataset -> Training smoke test -> Loss and sample quality report
 ```
 
-*Listing P11-2: Code or configuration example.*
+*Listing P11-1: Process flow example.*
 
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -44,6 +44,8 @@ The body of the chapter retains only the key implementation fragments that illus
 ## Experiment and Acceptance Metrics
 
 Acceptance metrics include token distribution, corpus-mix deviation, packing efficiency, training loss trend, throughput, GPU memory/cost, and failed-sample review. If the project enters production, a course, or a public reproduction experiment environment, the version number, dependency environment, random seed, sample spot-check results, and failed-sample retrospective records should also be logged.
+
+Table P11-1 summarizes the publication-facing acceptance dimensions for this reproduction project.
 
 *Table P11-1: Mini-DeepSeek Pre-Training Reproduction Publication Acceptance Table.*
 
@@ -120,7 +122,7 @@ According to the DeepSeek-V3 report, we need to fuse multiple data sources. In t
 
 We write the `mix_sampler.py` script to sample at the configured proportions.
 
-Listing P11-3 provides the corresponding code or configuration example.
+Listing P11-2 provides a Python implementation excerpt.
 
 ```python
 from datasets import load_dataset, concatenate_datasets
@@ -146,14 +148,14 @@ mixed = sample_multi_source(RECIPE, target_docs=500_000)
 mixed.save_to_disk("./data/mixed_1b_raw")
 ```
 
-*Listing P11-3: Code or configuration example.*
+*Listing P11-2: Python implementation excerpt.*
 
 
 ### Step 2: Cross-Source MinHash LSH Deduplication
 
 After multi-source mixing, the greatest hidden risk is duplicates between different sources (for example, code snippets in The Stack v2 duplicating code segments in arXiv papers). In Project 1 (Mini-C4), we performed MinHash deduplication only within a single source; here we need global deduplication.
 
-Listing P11-4 provides the corresponding code or configuration example.
+Listing P11-3 provides a Python implementation excerpt.
 
 ```python
 from datasketch import MinHash, MinHashLSH
@@ -181,14 +183,14 @@ unique, dup_count = cross_source_dedup(load_stage("mixed_1b_raw"))
 unique.save_to_disk("./data/mixed_1b_dedup")
 ```
 
-*Listing P11-4: Code or configuration example.*
+*Listing P11-3: Python implementation excerpt.*
 
 
 ### Step 3: Training a 150K Super-Vocabulary Tokenizer
 
 DeepSeek-V3 (DeepSeek-AI et al. 2024) employs a super-vocabulary of approximately 150K entries (a substantial increase over Llama-2's 32K), which makes it highly efficient at processing Chinese text and code. In this step, we train a BPE tokenizer on the mixed and deduplicated data.
 
-Listing P11-5 provides the corresponding code or configuration example.
+Listing P11-4 provides a Python implementation excerpt.
 
 ```python
 from tokenizers import Tokenizer, models, trainers, pre_tokenizers, normalizers
@@ -210,14 +212,14 @@ def train_large_tokenizer(dataset, vocab_size=150_000):
 train_large_tokenizer(load_stage("mixed_1b_dedup"))
 ```
 
-*Listing P11-5: Code or configuration example.*
+*Listing P11-4: Python implementation excerpt.*
 
 
 ### Step 4: Pack & Shuffle and `.arrow` Shard Output
 
 To avoid having the GPU handle large amounts of padding during training, we concatenate variable-length token sequences into contiguous segments of length `4096` or `8192` (packing), inserting special separator tokens.
 
-Listing P11-6 provides the corresponding code or configuration example.
+Listing P11-5 provides a Python implementation excerpt.
 
 ```python
 from tokenizers import Tokenizer
@@ -243,19 +245,21 @@ packed = pack_and_shuffle(load_stage("mixed_1b_dedup"), "./data/mini_deepseek_to
 packed.save_to_disk("./data/mixed_1b_final_packed")
 ```
 
-*Listing P11-6: Code or configuration example.*
+*Listing P11-5: Python implementation excerpt.*
 
 
 ## Engineering Execution and Minimal Reproduction Path
 
 The minimal entry point for running this project is `run_pipeline.sh`. The script chains together four stages: multi-source sampling, cross-source deduplication, tokenizer training, and packing. Its value is not merely "saving the manual execution of four commands"; it fixes the stage order, artifact paths, and failure locations. In pre-training data engineering, an incorrect stage order directly alters the data distribution. For example, if the tokenizer is trained before cross-source deduplication, the tokenizer will see duplicate samples that should have been removed; if packing precedes shuffling, subsequent recipe adjustments become difficult to trace.
 
-Listing P11-1 gives the minimal entry point for this project. Formal reproduction experiments should record Python, datasets, tokenizers, datasketch, disk paths, and random seeds before running.
+Listing P11-6 gives the minimal entry point for this project. Formal reproduction experiments should record Python, datasets, tokenizers, datasketch, disk paths, and random seeds before running.
 
 ```bash
 cd code/zh/project_11_mini_deepseek
 bash run_pipeline.sh
 ```
+
+*Listing P11-6: Command-line run example.*
 
 This command sequentially generates `mixed_1b_raw`, `mixed_1b_dedup`, `mini_deepseek_tokenizer.json`, and `mixed_1b_final_packed`. If a stage fails, it is not recommended to delete the entire `data/` directory and rerun from scratch; the safer approach is to first confirm whether the failed stage and its upstream artifacts are intact, then clean only the affected stage directory. For teaching reproductions, `target_docs` can be reduced from `500000` to a smaller scale to validate contracts and tests before scaling up the data volume.
 

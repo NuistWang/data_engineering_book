@@ -1,8 +1,8 @@
-# Part VI: Reasoning and Agent Data Engineering
+# Part 6: Reasoning and Agent Data Engineering
 
 ## Positioning of This Part
 
-Part VI focuses on reasoning trajectories, tool use, function calling, agent memory, and multi-turn interaction samples. It discusses how to transform complex reasoning and action processes into trainable, verifiable, and reviewable data assets.
+Part 6 focuses on reasoning trajectories, tool use, function calling, agent memory, and multi-turn interaction samples. It discusses how to transform complex reasoning and action processes into trainable, verifiable, and reviewable data assets.
 
 ## Terminology Conventions
 

@@ -1,8 +1,8 @@
-# Part XIV: Project Case Studies
+# Part 14: Practical Projects
 
 ## Overview
 
-Part XIV translates the methods, platforms, and recipes from the preceding thirteen parts into fifteen reproducible case studies. Rather than providing step-by-step replication instructions, this part focuses on why each project is justified, how data boundaries are defined, how architectural decisions are formed, how sample schemas are designed, how acceptance criteria are established, and how failure modes and compliance risks are documented.
+Part 14 translates the methods, platforms, and recipes from the preceding thirteen parts into fifteen reproducible case studies. Rather than providing step-by-step replication instructions, this part focuses on why each project is justified, how data boundaries are defined, how architectural decisions are formed, how sample schemas are designed, how acceptance criteria are established, and how failure modes and compliance risks are documented.
 
 The fifteen projects span pre-training corpora, domain-specific SFT, multimodal instruction tuning, synthetic textbooks, multimodal RAG, process supervision, Agent Tool-Use, DataOps, privacy protection, data flywheels, open-source model pre-training replication, a pedagogical R1 reasoning data flywheel, a multimodal instruction factory, a video generation data pipeline, and an enterprise-grade semantic question-answering assistant. Together they map the key capabilities from the preceding thirteen parts, forming the final validation layer bridging methodological understanding and engineering delivery.
 
@@ -32,13 +32,13 @@ Throughout this part, "project case study" denotes a runnable, verifiable, and a
 
 ## Capability Mapping
 
-P01–P04 correspond to raw data materials, domain instruction tuning, multimodal instruction tuning, and synthetic data capabilities, primarily building on Parts II through V.
+P01–P04 correspond to raw data materials, domain instruction tuning, multimodal instruction tuning, and synthetic data capabilities, primarily building on Parts 2 through 5.
 
-P05–P07 correspond to multimodal RAG, process supervision, and Agent Tool-Use, primarily building on Parts VI and VII.
+P05–P07 correspond to multimodal RAG, process supervision, and Agent Tool-Use, primarily building on Parts 6 and 7.
 
-P08–P10 correspond to DataOps, privacy protection, and data flywheels, primarily building on Parts VIII through XI.
+P08–P10 correspond to DataOps, privacy protection, and data flywheels, primarily building on Parts 8 through 11.
 
-P11–P15 correspond to open-source model data recipes, reasoning flywheels, multimodal instruction tuning, video generation, and enterprise-grade Agent applications, primarily building on Part XIII and extending into the delivery templates in the appendices.
+P11–P15 correspond to open-source model data recipes, reasoning flywheels, multimodal instruction tuning, video generation, and enterprise-grade Agent applications, primarily building on Part 13 and extending into the delivery templates in the appendices.
 
 ## Reading Order
 

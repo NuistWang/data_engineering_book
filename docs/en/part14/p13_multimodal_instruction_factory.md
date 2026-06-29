@@ -28,13 +28,13 @@ This project uses an architecture path of asset selection, task templates, capti
 
 The core data flow can be summarized as:
 
-Listing P13-2 provides the corresponding code or configuration example.
+Listing P13-1 provides a process flow example.
 
 ```text
 visual assets -> metadata/OCR/caption -> instruction tasks -> multi-turn samples -> quality filtering -> multimodal training set
 ```
 
-*Listing P13-2: Code or configuration example.*
+*Listing P13-1: Process flow example.*
 
 
 At minimum, the sample schema should retain fields such as `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`. The exact fields are further refined by the data type, downstream task, and acceptance method used in this project.
@@ -86,10 +86,10 @@ This project builds a complete multimodal instruction data factory. Starting fro
 
 ## Architecture
 
-The factory is divided into five components, shown in Figure 13-1.
+The factory is divided into five components, shown in Figure P13-1.
 
-![Multimodal Instruction Factory](../../images/part14/Yu-Project13-Fig02-EN.svg)
-*Figure 13-1 Qwen-VL-style multimodal instruction synthesis pipeline.*
+![Figure P13-1: Multimodal Instruction Factory](../../images/part14/Yu-Project13-Fig02-EN.svg)
+*Figure P13-1: Qwen-VL-style multimodal instruction synthesis pipeline.*
 
 1. **Seed selector**: Retrieves seed images from massive image pools, emphasizing OCR-rich images, charts, and realistic complex scenes.
 2. **Instruction generator**: Defines six categories of complex instruction templates and calls Qwen2.5-VL through vLLM (Kwon et al. 2023) for high-throughput generation.
@@ -120,7 +120,7 @@ The key function of Table P13-2 is to split "generation" out of a single model c
 
 From an open LAION subset (Schuhmann et al. 2022), use metadata such as image width, height, original caption length, and tags to select promising seeds.
 
-Listing P13-3 provides the corresponding code or configuration example.
+Listing P13-2 provides a Python implementation excerpt.
 
 ```python
 # code/zh/project_13_mm_instruction_factory/seed_selector.py
@@ -157,14 +157,14 @@ if __name__ == "__main__":
     select_seeds(num_samples=100)
 ```
 
-*Listing P13-3: Code or configuration example.*
+*Listing P13-2: Python implementation excerpt.*
 
 
 ### Step 2: Instruction Template Design
 
 Unlike fixed-question LLaVA data, this pipeline needs diverse roles and task templates.
 
-Listing P13-4 provides the corresponding code or configuration example.
+Listing P13-3 provides a Python implementation excerpt.
 
 ```python
 # code/zh/project_13_mm_instruction_factory/instruction_templates.py
@@ -189,14 +189,14 @@ def get_random_prompt(task_type):
     return random.choice(TEMPLATES.get(task_type, TEMPLATES["detailed_description"]))
 ```
 
-*Listing P13-4: Code or configuration example.*
+*Listing P13-3: Python implementation excerpt.*
 
 
 ### Step 3: High-throughput Generation with vLLM
 
 With vLLM's high concurrency, selected images and instruction templates can be sent to a base multimodal model at scale.
 
-Listing P13-5 provides the corresponding code or configuration example.
+Listing P13-4 provides a latent-reasoning trace sample.
 
 ```python
 # code/zh/project_13_mm_instruction_factory/generate_with_qwen_vl.py
@@ -251,14 +251,14 @@ def generate_instructions(seeds, model_path="Qwen/Qwen2.5-VL-7B-Instruct"):
     return results
 ```
 
-*Listing P13-5: Code or configuration example.*
+*Listing P13-4: Latent-reasoning trace sample.*
 
 
 ### Step 4: LLM-as-Judge Quality Filtering
 
 Generated responses often hallucinate. We introduce a strong judge model such as Qwen2.5-72B-Instruct. Because a text-only 72B model cannot directly inspect images, we use text-only evaluation: the judge scores the internal logic, completeness, and structure of the generated long response.
 
-Listing P13-6 provides the corresponding code or configuration example.
+Listing P13-5 provides a Python implementation excerpt.
 
 ```python
 # code/zh/project_13_mm_instruction_factory/llm_judge.py
@@ -282,14 +282,14 @@ def score_with_llm_judge(generated_data):
     return scored_data
 ```
 
-*Listing P13-6: Code or configuration example.*
+*Listing P13-5: Python implementation excerpt.*
 
 
 ### Step 5: Unified Downstream Packaging
 
 Whether the source is a single image, multiple images, or a video clip, the final output is written as JSONL in a community format such as ShareGPT or a model-specific format such as Qwen2.5-VL fine-tuning format.
 
-Listing P13-7 provides the corresponding code or configuration example.
+Listing P13-6 provides a Python implementation excerpt.
 
 ```python
 # code/zh/project_13_mm_instruction_factory/pack_multi_image_video.py
@@ -334,14 +334,14 @@ if __name__ == "__main__":
     pack_to_qwen_format(dummy_data)
 ```
 
-*Listing P13-7: Code or configuration example.*
+*Listing P13-6: Python implementation excerpt.*
 
 
 ## Engineering Run Path and Minimal Reproduction
 
 The P13 code directory is `code/zh/project_13_mm_instruction_factory`. Compared with P11 and P14, this project is more of a generative data factory. The minimal reproduction path is therefore not one fixed shell script, but a staged function chain: select seeds, generate instructions from templates, then run judge, self-consistency, multilingual expansion, and format packaging. In teaching environments, a small seed set and mock judge can first validate artifact contracts before replacing them with real Qwen2.5-VL and Qwen2.5-72B-Instruct services.
 
-Listing P13-1 shows the minimal run order. A production implementation can wrap it in shell, Makefile, Airflow, or Ray, but the project chapter should make stage boundaries and artifact transfer explicit.
+Listing P13-7 shows the minimal run order. A production implementation can wrap it in shell, Makefile, Airflow, or Ray, but the project chapter should make stage boundaries and artifact transfer explicit.
 
 ```python
 from seed_selector import select_seeds
@@ -358,6 +358,8 @@ scored = score_with_llm_judge(consistent)
 expanded = expand_multilingual(scored)
 pack_to_qwen_format(expanded, "./data/mm_sft_final.jsonl")
 ```
+
+*Listing P13-7: Python implementation excerpt.*
 
 This code describes the factory's minimal closed loop, but it is not yet a production script. Production runs need four additional controls. First, model calls must record model path, temperature, top-p, max tokens, and concurrency. Second, seeds must record source, authorization, and download status. Third, judge output must retain the scoring prompt, threshold, and human calibration set. Fourth, before packaging, the pipeline must check image links, conversation format, and sample deduplication.
 

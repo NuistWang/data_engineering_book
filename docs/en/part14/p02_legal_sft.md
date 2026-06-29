@@ -45,6 +45,8 @@ Listing P02-1 provides a process or path example to illustrate the input-output 
 Legal text/PDF → Document cleaning → Domain task schema → Instruction samples → Compliance and quality checks → SFT dataset
 ```
 
+*Listing P02-1: Process or path example.*
+
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 A sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -169,7 +171,7 @@ In this sense, the most important question this chapter addresses is not a "tech
 
 Figure P02-1 illustrates the corresponding workflow or structure.
 
-![Figure P02-1](../../images/part14/p02/Xu-Project02-Fig01.svg)
+![Figure P02-1: Legal-Domain SFT Data Factory Overview](../../images/part14/p02/Xu-Project02-Fig01.svg)
 *Figure P02-1: Legal-Domain SFT Data Factory Overview.*
 
 From an engineering perspective, this project can be decomposed into three layers.
@@ -249,7 +251,7 @@ Clearly articulating role assignments is, in essence, a statement that **industr
 
 Figure P02-2 illustrates the corresponding workflow or structure.
 
-![Figure P02-2](../../images/part14/p02/Xu-Project02-Fig02.svg)
+![Figure P02-2: Legal SFT Data Factory Role Assignment Diagram](../../images/part14/p02/Xu-Project02-Fig02.svg)
 *Figure P02-2: Legal SFT Data Factory Role Assignment Diagram.*
 
 ---
@@ -333,6 +335,8 @@ with pdfplumber.open(file_path) as pdf:
         text = page_crop.extract_text()
 ```
 
+*Listing P02-2: Python implementation excerpt.*
+
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 ### 7.4 Removing Embedded Page Numbers
@@ -343,6 +347,8 @@ Listing P02-3 provides a process or path example to illustrate the input-output 
 ```text
 ……shall bear corresponding legal liability. - 195 - The parties concerned……
 ```
+
+*Listing P02-3: Process or path example.*
 
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
@@ -362,6 +368,8 @@ legal provisions
 contractual relationship
 ```
 
+*Listing P02-4: Process or path example.*
+
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 For humans this does not impede reading, but for models it disrupts tokenization statistics, degrades generation fluency, and reduces the usability of downstream samples. Accordingly, this project applies rule-based repair to anomalous spaces between adjacent Chinese characters, and handles consecutive word breaks through multiple substitution passes.
@@ -372,12 +380,12 @@ The first step in industry SFT is never "figure out how to generate more data," 
 
 Figure P02-3 illustrates the corresponding workflow or structure.
 
-![Figure P02-3](../../images/part14/p02/Xu-Project02-Fig03.svg)
+![Figure P02-3: Legal PDF Intelligent Cleaning Pipeline Diagram](../../images/part14/p02/Xu-Project02-Fig03.svg)
 *Figure P02-3: Legal PDF Intelligent Cleaning Pipeline Diagram.*
 
 Figure P02-4 illustrates the corresponding workflow or structure.
 
-![Figure P02-4](../../images/part14/p02/Xu-Project02-Fig04.svg)
+![Figure P02-4: Examples of Embedded Page Number Removal and Chinese Word-Break Repair](../../images/part14/p02/Xu-Project02-Fig04.svg)
 *Figure P02-4: Examples of Embedded Page Number Removal and Chinese Word-Break Repair.*
 
 ---
@@ -428,7 +436,7 @@ The schema is the foundation of an industry SFT factory, not an accessory.
 
 Figure P02-5 illustrates the corresponding workflow or structure.
 
-![Figure P02-5](../../images/part14/p02/Xu-Project02-Fig05.svg)
+![Figure P02-5: Legal Seed Sample Schema Diagram](../../images/part14/p02/Xu-Project02-Fig05.svg)
 *Figure P02-5: Legal Seed Sample Schema Diagram.*
 
 ---
@@ -486,7 +494,7 @@ In the legal domain, this problem of "superficially diverse but substantively un
 
 Figure P02-6 illustrates the corresponding workflow or structure.
 
-![Figure P02-6](../../images/part14/p02/Xu-Project02-Fig06.svg)
+![Figure P02-6: Legal Task Taxonomy Stratification Diagram](../../images/part14/p02/Xu-Project02-Fig06.svg)
 *Figure P02-6: Legal Task Taxonomy Stratification Diagram.*
 
 ---
@@ -515,7 +523,7 @@ A total sample count can only answer "how large is the scale," not "toward what 
 
 Figure P02-7 illustrates the corresponding workflow or structure.
 
-![Figure P02-7](../../images/part14/p02/Xu-Project02-Fig07.svg)
+![Figure P02-7: Task Distribution vs. Legal Domain Coverage Comparison Chart](../../images/part14/p02/Xu-Project02-Fig07.svg)
 *Figure P02-7: Task Distribution vs. Legal Domain Coverage Comparison Chart.*
 
 ---
@@ -551,7 +559,7 @@ The value of this approach is that it turns "data distribution" into a controlla
 
 Figure P02-8 illustrates the corresponding workflow or structure.
 
-![Figure P02-8](../../images/part14/p02/Xu-Project02-Fig08.svg)
+![Figure P02-8: Weighted Roulette Task Sampling Diagram](../../images/part14/p02/Xu-Project02-Fig08.svg)
 *Figure P02-8: Weighted Roulette Task Sampling Diagram.*
 
 ---
@@ -591,7 +599,7 @@ Within this project, CoT value is reflected primarily in two respects:
 
 Figure P02-9 illustrates the corresponding workflow or structure.
 
-![Figure P02-9](../../images/part14/p02/Xu-Project02-Fig09.svg)
+![Figure P02-9: CoT Structure Diagram for Case Analysis Tasks](../../images/part14/p02/Xu-Project02-Fig09.svg)
 *Figure P02-9: CoT Structure Diagram for Case Analysis Tasks.*
 
 ---
@@ -632,7 +640,7 @@ Accordingly, this project includes review records as part of its artifacts. The 
 
 Figure P02-10 illustrates the corresponding workflow or structure.
 
-![Figure P02-10](../../images/part14/p02/Xu-Project02-Fig10.svg)
+![Figure P02-10: Relationship Between Preference Pairs and Review Records](../../images/part14/p02/Xu-Project02-Fig10.svg)
 *Figure P02-10: Relationship Between Preference Pairs and Review Records.*
 
 ---
@@ -668,7 +676,7 @@ The existing artifacts contain 6 risk refusal samples and 6 risk register entrie
 
 Figure P02-11 illustrates the corresponding workflow or structure.
 
-![Figure P02-11](../../images/part14/p02/Xu-Project02-Fig11.svg)
+![Figure P02-11: Legal Scenario Risk Refusal Routing Diagram](../../images/part14/p02/Xu-Project02-Fig11.svg)
 *Figure P02-11: Legal Scenario Risk Refusal Routing Diagram.*
 
 ---
@@ -718,12 +726,12 @@ Without documenting QA protocols alongside generation logic, industry SFT degrad
 
 Figure P02-12 illustrates the corresponding workflow or structure.
 
-![Figure P02-12](../../images/part14/p02/Xu-Project02-Fig12.svg)
+![Figure P02-12: QA Review Closed-Loop Diagram](../../images/part14/p02/Xu-Project02-Fig12.svg)
 *Figure P02-12: QA Review Closed-Loop Diagram.*
 
 Figure P02-13 illustrates the corresponding workflow or structure.
 
-![Figure P02-13](../../images/part14/p02/Xu-Project02-Fig13.svg)
+![Figure P02-13: QA Accept / Revise / Reject Decision Table](../../images/part14/p02/Xu-Project02-Fig13.svg)
 *Figure P02-13: QA Accept / Revise / Reject Decision Table.*
 
 ---
@@ -761,7 +769,7 @@ The word "factory" in "data factory" must ultimately be grounded in a collaborat
 
 Figure P02-14 illustrates the corresponding workflow or structure.
 
-![Figure P02-14](../../images/part14/p02/Xu-Project02-Fig14.svg)
+![Figure P02-14: Human-in-the-Loop and Vendor Tiered Review Diagram](../../images/part14/p02/Xu-Project02-Fig14.svg)
 *Figure P02-14: Human-in-the-Loop and Vendor Tiered Review Diagram.*
 
 ---
@@ -800,7 +808,7 @@ The value of a smoke test is not to evaluate model performance, but to surface o
 
 Figure P02-15 illustrates the corresponding workflow or structure.
 
-![Figure P02-15](../../images/part14/p02/Xu-Project02-Fig15.svg)
+![Figure P02-15: Training Packaging and Delivery Interface Diagram](../../images/part14/p02/Xu-Project02-Fig15.svg)
 *Figure P02-15: Training Packaging and Delivery Interface Diagram.*
 
 ---
@@ -859,7 +867,7 @@ This indicates that the project's output is not merely "a collection of JSONL fi
 
 Figure P02-16 illustrates the corresponding workflow or structure.
 
-![Figure P02-16](../../images/part14/p02/Xu-Project02-Fig16.svg)
+![Figure P02-16: P02 Core Metrics Dashboard](../../images/part14/p02/Xu-Project02-Fig16.svg)
 *Figure P02-16: P02 Core Metrics Dashboard.*
 
 ---
@@ -945,7 +953,7 @@ The emphasis in this type of experiment is not on claiming some extreme result, 
 
 Figure P02-17 illustrates the corresponding workflow or structure.
 
-![Figure P02-17](../../images/part14/p02/Xu-Project02-Fig17.svg)
+![Figure P02-17: 50-Sample Validation Protocol Diagram](../../images/part14/p02/Xu-Project02-Fig17.svg)
 *Figure P02-17: 50-Sample Validation Protocol Diagram.*
 
 ---
@@ -1046,7 +1054,7 @@ It demonstrates very clearly that: a data factory does not emerge fully formed a
 
 Figure P02-18 illustrates the corresponding workflow or structure.
 
-![Figure P02-18](../../images/part14/p02/Xu-Project02-Fig18.svg)
+![Figure P02-18: P02 Version Evolution Roadmap](../../images/part14/p02/Xu-Project02-Fig18.svg)
 *Figure P02-18: P02 Version Evolution Roadmap.*
 
 ---
@@ -1109,7 +1117,7 @@ It embodies a very important engineering habit: the completion standard for a da
 
 Figure P02-19 illustrates the corresponding workflow or structure.
 
-![Figure P02-19](../../images/part14/p02/Xu-Project02-Fig19.svg)
+![Figure P02-19: Code–Artifact–Report Consistency Validation Diagram](../../images/part14/p02/Xu-Project02-Fig19.svg)
 *Figure P02-19: Code–Artifact–Report Consistency Validation Diagram.*
 
 ---
@@ -1171,7 +1179,7 @@ What is truly transferable is not any specific prompt, but this methodology chai
 
 Figure P02-20 illustrates the corresponding workflow or structure.
 
-![Figure P02-20](../../images/part14/p02/Xu-Project02-Fig20.svg)
+![Figure P02-20: Cross-Industry Transfer Methodology Chain Diagram](../../images/part14/p02/Xu-Project02-Fig20.svg)
 *Figure P02-20: Cross-Industry Transfer Methodology Chain Diagram.*
 
 ---

@@ -70,7 +70,6 @@ Rule-Based Filtering is the first line of defense in the cleaning pipeline and t
 
 Listing 5-1 shows a sample implementation of a multi-rule heuristic quality filter.
 
-*Listing 5-1: Example code for multi-rule heuristic quality filtering. Thresholds are demonstration configurations; production environments should calibrate them by language, source, and manual spot-check results.*
 
 ```python
 import re
@@ -106,6 +105,8 @@ class HeuristicQualityFilter:
         return True, 'pass'
 ```
 
+*Listing 5-1: Example code for multi-rule heuristic quality filtering. Thresholds are demonstration configurations; production environments should calibrate them by language, source, and manual spot-check results.*
+
 ### 5.2.2 The Second Gate: Model-Based Quality Scoring
 
 Rule-based filtering can quickly eliminate "obviously" low-quality content, but it is generally powerless against a passage that is grammatically correct and well-formatted yet is essentially meaningless keyword stuffing or SEO filler text. This is where **Model-Based Filtering** is needed — using trained scoring models to make finer-grained judgments about the linguistic quality of documents.
@@ -138,7 +139,6 @@ After completing quality filtering, there is another class of work that is often
 
 Listing 5-2 shows a sample implementation of text normalization.
 
-**Listing 5-2: Sample Code for Text Normalization**
 
 ```python
 import unicodedata, re
@@ -172,6 +172,8 @@ def normalize_text(text: str, to_simplified: bool = False) -> str:
     return text.strip()
 ```
 
+*Listing 5-2: Sample Code for Text Normalization.*
+
 Although text normalization has an inconspicuous effect on individual documents, at the scale of a TB-level corpus it effectively reduces vocabulary fragmentation in the tokenizer, decreases the diversity of token representations for semantically equivalent content in the training set, and allows the model to focus its attention on genuine semantic learning rather than formatting differences. This is a step in the cleaning pipeline with extremely low cost and consistently stable returns; it is recommended as a standard step in projects of any scale.
 
 ---
@@ -202,7 +204,6 @@ The goal of Fuzzy Deduplication is to identify document pairs whose "similarity 
 
 Listing 5-3 shows a sample implementation of MinHash LSH fuzzy deduplication. In production environments, the bucket structure should be persisted to distributed storage or a stream processing framework.
 
-*Listing 5-3: Example code for MinHash LSH fuzzy deduplication. This snippet illustrates the algorithm structure; production environments should persist bucket structures, candidate pairs, and review results to distributed storage.*
 
 ```python
 import hashlib
@@ -268,6 +269,8 @@ class MinHashLSH:
         return duplicates
 ```
 
+*Listing 5-3: Example code for MinHash LSH fuzzy deduplication. This snippet illustrates the algorithm structure; production environments should persist bucket structures, candidate pairs, and review results to distributed storage.*
+
 ### 5.3.4 Semantic Deduplication: Embedding Similarity Beyond Literal Matching
 
 Both exact hash deduplication and N-gram-based MinHash LSH are fundamentally capturing the "literal features" of text. But if the same news story is rewritten by two media outlets using entirely different vocabulary (synonym substitution, sentence restructuring), with very low literal overlap, traditional LSH will fail entirely. To address this, **Semantic Deduplication** introduces embedding models.
@@ -300,7 +303,6 @@ PII detection typically adopts a **rules + NER model** combined approach:
 
 Listing 5-4 shows a sample implementation of structured PII detection and redaction.
 
-**Listing 5-4: Sample Code for Structured PII Detection and Redaction**
 
 ```python
 import re
@@ -324,6 +326,8 @@ def detect_and_redact_pii(text: str) -> tuple[str, list]:
     return text, found
 ```
 
+*Listing 5-4: Sample Code for Structured PII Detection and Redaction.*
+
 **Named Entity Recognition (NER) models** cover PII types that are difficult to enumerate with rules, such as real personal names, addresses, and organization names. It is recommended to use spaCy (Honnibal et al. 2023) with its Chinese model (`zh_core_web_trf`) or open-source Chinese NER models available on HuggingFace to identify named entities such as persons (PER), locations (LOC), and organizations (ORG), then determine based on context whether redaction is necessary.
 
 ---
@@ -342,7 +346,6 @@ The most commonly used decontamination approach is **N-gram overlap detection**:
 
 Listing 5-5 shows a sample implementation of evaluation set N-gram fingerprint construction and overlap rate computation.
 
-**Listing 5-5: Sample Code for Evaluation Set N-gram Fingerprints and Contamination Rate Computation**
 
 ```python
 from collections import Counter
@@ -367,6 +370,8 @@ def contamination_score(doc: str, eval_ngrams: set[str], n=13) -> float:
     return hits / len(doc_ngrams)
 ```
 
+*Listing 5-5: Sample Code for Evaluation Set N-gram Fingerprints and Contamination Rate Computation.*
+
 Decontamination work should be systematically completed before the formal training set is established, not patched incrementally during training. Because the scope of evaluation sets expands over time as new benchmarks continually emerge, engineering teams need to periodically update the fingerprint database and re-scan.
 
 ---
@@ -379,7 +384,6 @@ Cleaning should not be a binary black-or-white judgment; instead, each document 
 
 Listing 5-6 shows a sample definition of a multi-dimensional document quality score object.
 
-**Listing 5-6: Sample Code for a Multi-Dimensional Document Quality Score Object**
 
 ```python
 from dataclasses import dataclass
@@ -403,6 +407,8 @@ class DocumentQualityScore:
         return "low"
 ```
 
+*Listing 5-6: Sample Code for a Multi-Dimensional Document Quality Score Object.*
+
 Stratified sampling strategy: High-tier data is given a 2x sampling weight during training, Medium-tier 1x, and Low-tier 0.3x (rather than discarding entirely, preserving diversity).
 
 ### 5.6.2 Manual Spot-Check Feedback Loop
@@ -420,6 +426,8 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 ---
 
 ## 5.7 Common Defects, Detection Methods, and Cost Reference
+
+Table 5-1 summarizes common corpus defects, detection methods, missed-detection costs, and recommended thresholds or tools.
 
 *Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors; detection cost is a relative description of engineering complexity, and actual cost depends on data scale, model calls, and infrastructure configuration.*
 
@@ -519,9 +527,9 @@ The platform-level solution targets industrial-scale large-volume data processin
 
 ## Chapter Summary
 
-This chapter, organized around the theme of "why cleaning determines the quality ceiling of training data," systematically introduces the complete technical system of rule-based filtering, model scoring, exact deduplication, MinHash fuzzy deduplication, PII redaction, and benchmark decontamination, following the sequence of the cleaning lifecycle. Two tables (Table 5-1 defect–detection–cost matrix; Table 5-1 cleaning action effect comparison) provide engineers with directly usable decision-making tools. Two anonymized composite case studies — "knowledge loss from over-cleaning" and "security risks from PII omission" — validate the need for fine-grained configuration of the cleaning system from both a positive and negative direction.
+This chapter, organized around the theme of "why cleaning determines the quality ceiling of training data," systematically introduces the complete technical system of rule-based filtering, model scoring, exact deduplication, MinHash fuzzy deduplication, PII redaction, and benchmark decontamination, following the sequence of the cleaning lifecycle. Two tables (Table 5-1 defect–detection–cost matrix; Table 5-2 cleaning action effect comparison) provide engineers with directly usable decision-making tools. Two anonymized composite case studies — "knowledge loss from over-cleaning" and "security risks from PII omission" — validate the need for fine-grained configuration of the cleaning system from both a positive and negative direction.
 
-After cleaning, deduplication, and decontamination are complete, the raw corpus is ready to enter the training input organization stage. The next chapter continues on cleaned data to discuss the final stretch of pretraining data engineering: **Chapter 6: Tokenization, Serialization, and Efficient Loading** — that is, how to transform clean text into token sequences that GPUs can efficiently consume.
+After cleaning, deduplication, and decontamination are complete, the raw corpus is ready to enter the training input organization stage. The next chapter continues on cleaned data to discuss the final stretch of pretraining data engineering: **Chapter 6: Tokenization, Serialization, and Efficient Data Loading** — that is, how to transform clean text into token sequences that GPUs can efficiently consume.
 
 ## References
 

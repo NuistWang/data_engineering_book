@@ -47,6 +47,8 @@ Listing P03-1 provides a workflow or path example illustrating the input/output 
 Image/document/chart assets → caption and OCR cues → instruction templates → multi-turn conversation samples → quality checks → VLM instruction dataset
 ```
 
+*Listing P03-1: Process or path example.*
+
 This excerpt transforms the above workflow into a checkable structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -184,7 +186,7 @@ In this sense, the most important aspect of this chapter is not "the model can s
 
 Figure P03-1 illustrates the corresponding workflow or structure.
 
-![Figure P03-1](../../images/part14/p03/Yu-Project03-Fig01.svg)
+![Figure P03-1: LLaVA Multimodal Instruction Data Factory Overview](../../images/part14/p03/Yu-Project03-Fig01.svg)
 *Figure P03-1: LLaVA Multimodal Instruction Data Factory Overview.*
 
 From an engineering perspective, this project can be decomposed into three layers.
@@ -266,7 +268,7 @@ Therefore, writing out these responsibility domains clearly is essentially stati
 
 Figure P03-2 illustrates the corresponding workflow or structure.
 
-![Figure P03-2](../../images/part14/p03/Yu-Project03-Fig02.svg)
+![Figure P03-2: Multimodal Data Factory Responsibility Collaboration Diagram](../../images/part14/p03/Yu-Project03-Fig02.svg)
 *Figure P03-2: Multimodal Data Factory Responsibility Collaboration Diagram.*
 
 ---
@@ -309,7 +311,7 @@ Therefore, this project does not remain at COCO natural images but further deriv
 
 Figure P03-3 illustrates the corresponding workflow or structure.
 
-![Figure P03-3](../../images/part14/p03/Yu-Project03-Fig03.svg)
+![Figure P03-3: Multimodal Asset Layering Diagram](../../images/part14/p03/Yu-Project03-Fig03.svg)
 *Figure P03-3: Multimodal Asset Layering Diagram.*
 
 Table P03-2 summarizes the relationship between different asset types and their task mappings.
@@ -449,7 +451,7 @@ Therefore, the significance of document image tasks in this project extends beyo
 
 Figure P03-4 illustrates the corresponding workflow or structure.
 
-![Figure P03-4](../../images/part14/p03/Yu-Project03-Fig04.svg)
+![Figure P03-4: Document Image Task Layering Diagram](../../images/part14/p03/Yu-Project03-Fig04.svg)
 *Figure P03-4: Document Image Task Layering Diagram.*
 
 ---
@@ -541,6 +543,8 @@ def convert_bbox(bbox, width, height):
     ]
 ```
 
+*Listing P03-2: Python implementation excerpt.*
+
 This excerpt transforms the above workflow into a checkable structured representation.
 
 ### 11.5 The True Engineering Significance of This Step
@@ -551,7 +555,7 @@ The importance of bounding box alignment lies not merely in "knowing how to writ
 
 Figure P03-5 illustrates the corresponding workflow or structure.
 
-![Figure P03-5](../../images/part14/p03/Yu-Project03-Fig05.svg)
+![Figure P03-5: Bounding Box Coordinate Conversion and Normalization Diagram](../../images/part14/p03/Yu-Project03-Fig05.svg)
 *Figure P03-5: Bounding Box Coordinate Conversion and Normalization Diagram.*
 
 ---
@@ -614,6 +618,8 @@ def generate_comparison(img1_path, img2_path):
     return messages
 ```
 
+*Listing P03-3: Python implementation excerpt.*
+
 This excerpt transforms the above workflow into a checkable structured representation.
 
 ### 12.4 Why the Number of Interleaved Samples Is Usually Small
@@ -667,6 +673,8 @@ Listing P03-4 provides a JSON data structure example illustrating the input/outp
   ]
 }
 ```
+
+*Listing P03-4: JSON data structure example.*
 
 This excerpt transforms the above workflow into a checkable structured representation.
 
@@ -722,7 +730,7 @@ In multimodal projects, the low-quality sample library provides at least three b
 
 Figure P03-6 illustrates the corresponding workflow or structure.
 
-![Figure P03-6](../../images/part14/p03/Yu-Project03-Fig06.svg)
+![Figure P03-6: Sample Quality Inspection and Rollback Closure Loop Diagram](../../images/part14/p03/Yu-Project03-Fig06.svg)
 *Figure P03-6: Sample Quality Inspection and Rollback Closure Loop Diagram.*
 
 ---
@@ -938,7 +946,7 @@ These failure samples can be classified into at least the following types:
 
 Figure P03-7 illustrates the corresponding workflow or structure.
 
-![Figure P03-7](../../images/part14/p03/Yu-Project03-Fig07.svg)
+![Figure P03-7: Failure Sample Attribution Diagram](../../images/part14/p03/Yu-Project03-Fig07.svg)
 *Figure P03-7: Failure Sample Attribution Diagram.*
 
 Table P03-5 summarizes typical failure sample types and priority repair directions.
@@ -995,7 +1003,7 @@ From the perspective of engineering reuse, this type of closure information ofte
 
 Figure P03-8 illustrates the corresponding workflow or structure.
 
-![Figure P03-8](../../images/part14/p03/Yu-Project03-Fig08.svg)
+![Figure P03-8: Project Validation Closure Loop Diagram](../../images/part14/p03/Yu-Project03-Fig08.svg)
 *Figure P03-8: Project Validation Closure Loop Diagram.*
 
 ---

@@ -110,10 +110,10 @@
 图 41-4 展示了鲨鱼袭击信息图被拆分后的四个子图区域，便于读者观察跨图表推理所依赖的局部证据。
 
 <div class="figure-grid figure-grid-4" markdown="1">
-![图41-4子图1：鲨鱼袭击信息图中的美国历史县域排行部分](../../images/part12/Xu-Chap41-Fig04-Alt02.jpg)
-![图41-4子图2：鲨鱼袭击信息图中的近十年州级袭击统计部分](../../images/part12/Xu-Chap41-Fig04-Alt03.jpg)
-![图41-4子图3：鲨鱼袭击信息图中的致命袭击备注与上下文部分](../../images/part12/Xu-Chap41-Fig04-Alt04.jpg)
-![图41-4子图4：鲨鱼袭击信息图中的年均意外死亡对比部分](../../images/part12/Xu-Chap41-Fig04-Alt05.jpg)
+![子图1：鲨鱼袭击信息图中的美国历史县域排行部分](../../images/part12/Xu-Chap41-Fig04-Alt02.jpg)
+![子图2：鲨鱼袭击信息图中的近十年州级袭击统计部分](../../images/part12/Xu-Chap41-Fig04-Alt03.jpg)
+![子图3：鲨鱼袭击信息图中的致命袭击备注与上下文部分](../../images/part12/Xu-Chap41-Fig04-Alt04.jpg)
+![子图4：鲨鱼袭击信息图中的年均意外死亡对比部分](../../images/part12/Xu-Chap41-Fig04-Alt05.jpg)
 </div>
 
 *图 41-4：多图表信息图样本（鲨鱼袭击）。该信息图包含四个独立子图，内容涉及美国历史累计鲨鱼袭击县域排行榜、美国近 10 年各州鲨鱼袭击汇总统计、全美年均意外死亡人数统计。原图纵向幅面远大于横向幅面，直接呈现可读性不佳，故拆解为多张子图横向排布展示。*
@@ -361,7 +361,7 @@ MedImage-ToolVQA 的构建流程可以概括为六个阶段：区域样本整理
 
 `merge` 的重点是把来自不同解析工具或中间结果的区域证据统一成 MindSpore 可读取的数据资产。这里不展开完整工程代码，只保留核心数据契约：按 `image_id` 和 `region_id` 去重，保留 bbox、mask、目标描述和来源信息，并写入 MindRecord。
 
-代码清单41-1给出了相应的代码或配置示例。
+代码清单41-1给出了Python 实现片段。
 
 ```python
 from mindspore.mindrecord import FileWriter
@@ -381,14 +381,14 @@ writer.write_raw_data(deduplicate_regions(raw_regions, keys=["image_id", "region
 writer.commit()
 ```
 
-*代码清单41-1：代码或配置示例。*
+*代码清单41-1：Python 实现片段。*
 
 
 #### 案例B.5.2 LLM 服务：使用 vllm-mindspore
 
 `make_vqa` 和 `makereasoning` 需要调用本地部署的大模型。MindSpore 体系下可以通过 `vllm-mindspore` 提供 OpenAI 兼容服务；其官方代码库采用 AtomGit 地址 <https://atomgit.com/mindspore/vllm-mindspore>。
 
-代码清单41-2给出了相应的代码或配置示例。
+代码清单41-2给出了命令行运行示例。
 
 ```bash
 vllm-mindspore serve Qwen/Qwen3-vl-8B \
@@ -396,10 +396,10 @@ vllm-mindspore serve Qwen/Qwen3-vl-8B \
   --port 8000
 ```
 
-*代码清单41-2：代码或配置示例。*
+*代码清单41-2：命令行运行示例。*
 
 
-代码清单41-3给出了相应的代码或配置示例。
+代码清单41-3给出了Python 实现片段。
 
 ```python
 from openai import OpenAI
@@ -407,14 +407,14 @@ from openai import OpenAI
 client = OpenAI(base_url="http://127.0.0.1:8000/v1", api_key="EMPTY")
 ```
 
-*代码清单41-3：代码或配置示例。*
+*代码清单41-3：Python 实现片段。*
 
 
 #### 案例B.5.3 问题生成：从 MindDataset 读取区域证据
 
 `make_vqa` 从 `MindDataset` 读取区域证据，生成问题、候选选项和标准答案。构造 prompt 时需要隐藏 bbox、mask 路径和区域编号，避免把标注机制泄漏到题干中。
 
-代码清单41-4给出了相应的代码或配置示例。
+代码清单41-4给出了Python 实现片段。
 
 ```python
 import mindspore.dataset as ds
@@ -431,14 +431,14 @@ for row in dataset.create_dict_iterator(output_numpy=True):
     write_jsonl("vqa_candidates.jsonl", parse_vqa(reply.choices[0].message.content, row))
 ```
 
-*代码清单41-4：代码或配置示例。*
+*代码清单41-4：Python 实现片段。*
 
 
 #### 案例B.5.4 质量校验：形成自动门禁结果
 
 `verify` 不直接改写样本答案，而是给样本附加质量门禁结果。只有字段完整、图像依赖明确、区域一致且工具 JSON 合法的样本，才进入后续轨迹合成。
 
-代码清单41-5给出了相应的代码或配置示例。
+代码清单41-5给出了Python 实现片段。
 
 ```python
 gates = {
@@ -452,14 +452,14 @@ sample["review_status"] = "pass" if all(gates.values()) else "revise"
 sample["quality_gates"] = gates
 ```
 
-*代码清单41-5：代码或配置示例。*
+*代码清单41-5：Python 实现片段。*
 
 
 #### 案例B.5.5 轨迹合成：把工具观察写回对话
 
 `makereasoning` 的核心不是生成更长的解释，而是把工具调用和工具返回图像变成下一轮上下文。若样本不需要局部证据，则保留直接视觉推理路径。
 
-代码清单41-6给出了相应的代码或配置示例。
+代码清单41-6给出了Python 实现片段。
 
 ```python
 observation = run_visual_tool(sample) if needs_local_evidence(sample) else None
@@ -473,14 +473,14 @@ reply = client.chat.completions.create(
 sample["trajectory"] = build_tool_trajectory(sample, observation, reply)
 ```
 
-*代码清单41-6：代码或配置示例。*
+*代码清单41-6：Python 实现片段。*
 
 
 #### 案例B.5.6 SFT 封装：训练记录继续写入 MindRecord
 
 `make_sft` 将多轮消息、图像引用、答案和质量标签写入训练用 MindRecord。SFT 训练侧再通过 `mindspore.dataset.MindDataset` 加载，并按 batch 进入模型微调流程。
 
-代码清单41-7给出了相应的代码或配置示例。
+代码清单41-7给出了Python 实现片段。
 
 ```python
 schema = {
@@ -498,7 +498,7 @@ writer.commit()
 train_ds = ds.MindDataset("tool_sft.mindrecord").shuffle(4096).batch(8)
 ```
 
-*代码清单41-7：代码或配置示例。*
+*代码清单41-7：Python 实现片段。*
 
 
 图41-6展示了相应的流程或结构。
@@ -555,7 +555,7 @@ MedImage-ToolVQA 中涉及三类视觉工具：`Zoom-in`、`BiomedParse` 和 `SA
 
 下面是一个教学型示例。它不对应具体病例，只用于说明结构。
 
-代码清单41-8给出了相应的代码或配置示例。
+代码清单41-8给出了视觉推理提示词示例。
 
 ```text
 User:
@@ -589,7 +589,7 @@ Assistant:
 <answer>A</answer>
 ```
 
-*代码清单41-8：代码或配置示例。*
+*代码清单41-8：视觉推理提示词示例。*
 
 
 这个样例展示了工具轨迹的几个关键点。首先，工具调用参数必须结构化，不能只写“请放大一下”。其次，工具返回必须成为新的多模态输入，而非在文本里简单描述“已经放大”。再次，最终答案应当消费观察结果，说明局部观察如何改变或支持判断。最后，轨迹中不应出现诊断性断言，而应围绕题目选项和视觉证据展开。
@@ -641,7 +641,7 @@ Assistant:
 
 下面以这张胸部 X 线样例为基础，给出一条多轮 SFT 记录的写法。
 
-代码清单41-9给出了相应的代码或配置示例。
+代码清单41-9给出了 JSON 数据示例。
 
 ```json
 {
@@ -733,7 +733,7 @@ Assistant:
 }
 ```
 
-*代码清单41-9：代码或配置示例。*
+*代码清单41-9：JSON 数据示例。*
 
 
 这个 schema 的重点不是让模型学习“胸片异常应当如何诊断”，而是让训练记录能够同时回答五个工程问题：这是什么医学影像任务，候选标签边界在哪里，视觉证据来自哪一个 ROI，工具调用是否可执行，最终答案是否只落在题目允许的候选范围内。若缺少 `diagnosis_schema`，SFT 样本虽然仍可训练格式，却很难在后续质检、分层评测和人工复核中区分“医学标签错误”“区域证据错误”和“工具行为错误”。

@@ -95,7 +95,6 @@ Throughout the long engineering lifecycle of pre-training, discussing "quality" 
 
 Listing 7-1 shows a reference implementation for offline perplexity sampling computation.
 
-*Listing 7-1: Example code for offline perplexity sampling computation. Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions.*
 
 ```python
 # Pseudocode for a typical offline perplexity sampling computation (based on PyTorch and HuggingFace API)
@@ -122,6 +121,8 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
     return ppl_results  # Returns an array for downstream histogram generation
 ```
 
+*Listing 7-1: Example code for offline perplexity sampling computation. Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions.*
+
 #### 2. Diversity Sparsity (Type-Token Ratio, TTR & Vocabulary Coverage)
 - **Detection objective**: Confirm whether the cleaning pipeline, due to overly aggressive threshold settings or excessively strict deduplication (MinHash), has permanently eliminated niche knowledge or specific long-tail vocabulary.
 - **Validation method**: Compute the ratio of unique word types (distinct word stems within the vocabulary) to the total token count in the document collection described above. TTR tends to be lower across long passages, so a windowed averaging algorithm must be applied (e.g., MATTR (Covington and McFall 2010)).
@@ -129,7 +130,6 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
 
 Listing 7-2 shows a reference implementation for offline Type-Token Ratio computation.
 
-*Listing 7-2: Example code for offline Type-Token Ratio computation. This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata.*
 
 ```python
 # Pseudocode for a typical offline TTR (Type-Token Ratio) computation
@@ -148,6 +148,8 @@ def calculate_ttr(texts, tokenizer=None):
         return 0.0
     return unique_types / total_tokens
 ```
+
+*Listing 7-2: Example code for offline Type-Token Ratio computation. This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata.*
 
 - **Advanced validation — Vocabulary Coverage**: Teams should compile a domain-specific vocabulary list (e.g., rare disease names, recently introduced niche code frameworks, or the complete roster of characters from a specific literary work). If the coverage of such targeted vocabulary in the sandbox is significantly lower than the historical baseline or the manually specified minimum coverage requirement, whitelist weights should be added to the upstream crawlers for the corresponding domains, and the next spot-check should verify whether noise has been introduced.
 
@@ -389,7 +391,7 @@ This chapter has articulated the data asset governance logic centered on "data e
 
 To address this, the chapter systematically explained the necessity of establishing "offline proxy metrics (PPL/TTR, etc.)," and from there introduced DVC version comparison, issue sample pool retention, and A/B testing, ultimately distilling everything into an agile workflow comprising four operational action cycles. This ensures that data development for large language models is no longer an isolated black-box process, but rather a quality feedback loop in which capability gaps can be traced upstream to drive improvements in collection and cleaning strategies.
 
-From raw web pages through quality control, cleaning and deduplication, and data mixing to efficient delivery to the GPU, Part II has covered the main pipeline of text pre-training data engineering. The next chapter begins Part III, which addresses multimodal data engineering—structurally more complex, more costly, and subject to stricter alignment requirements: **Chapter 8: Image-Text Pair Data Engineering**.
+From raw web pages through quality control, cleaning and deduplication, and data mixing to efficient delivery to the GPU, Part 2 has covered the main pipeline of text pre-training data engineering. The next chapter begins Part 3, which addresses multimodal data engineering—structurally more complex, more costly, and subject to stricter alignment requirements: **Chapter 8: Image-Text Pair Data Engineering**.
 
 ## References
 

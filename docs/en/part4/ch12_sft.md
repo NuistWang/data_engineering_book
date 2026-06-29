@@ -146,11 +146,11 @@ Sample archiving should similarly not be lazily organized into a few business-li
 
 That said, labels are not better for being more numerous. Many teams start out very conscientiously, building a very detailed labeling system, only to find that annotators cannot label accurately, reviewers ignore labels, and ultimately no one trusts them. A label system like that looks complete but has no engineering value. The appropriate state is usually one where the number of labels is not too large, semantics are clear, boundaries are stable, and filling them in on the platform is not burdensome. Ultimately, the value of labels lies not in making data look prettier, but in ensuring that future users can still understand what this batch of data was doing.
 
-**Code Example: "Retrievable Label Metadata" for a Single Sample**
+The following snippet focuses on "Retrievable Label Metadata" for a Single Sample.
 
 Many teams store "sample text" and "sample metadata" separately. The text is used for training; the metadata is used for retrieval, sampling, statistics, and attribution. Below is a minimum viable metadata example suitable for textbook reading (the `meta` field in a JSON Lines record).
 
-Listing 12-1 provides the corresponding code or configuration example.
+Listing 12-1 provides a JSON metadata example.
 
 ```json
 {
@@ -179,7 +179,7 @@ Listing 12-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 12-1: Code or configuration example.*
+*Listing 12-1: JSON metadata example.*
 
 
 ### 12.2.3 Template Design for Single-Turn, Multi-Turn, Tool-Assisted, and Constrained-Output Formats
@@ -198,11 +198,11 @@ From a template engineering perspective, single-turn templates lay the foundatio
 
 Therefore, template design should follow the principle of "diverse forms, unified rules." Different templates may differ in surface form, but they should all adhere to unified field divisions, unified constraint expression methods, unified exception handling strategies, and unified quality standards. The purpose of templates is not to make samples look tidy; the core is to ensure that supervised signals are reusable, extensible, and auditable.
 
-**Code Example: Conversational SFT Sample (system / user / assistant Message Format)**
+The following snippet focuses on Conversational SFT Sample (system / user / assistant Message Format).
 
 The example below uses the conversational messages format to implement the four-element structure: the system message encodes system rules, the user message contains both instruction and context, and the assistant message corresponds to the response.
 
-Listing 12-2 provides the corresponding code or configuration example.
+Listing 12-2 provides a JSON instruction sample example.
 
 ```json
 {
@@ -223,14 +223,14 @@ Listing 12-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 12-2: Code or configuration example.*
+*Listing 12-2: JSON instruction sample example.*
 
 
-**Code Example: Multi-Turn Clarification Template (Ask for "Minimum Necessary Information" First)**
+The following snippet focuses on Multi-Turn Clarification Template (Ask for "Minimum Necessary Information" First).
 
 When information is insufficient, the model should not "guess a reasonable answer"; it should be trained to ask for the minimum necessary information. In the example below, the assistant asks only one key question, avoiding repeated interrogation.
 
-Listing 12-3 provides the corresponding code or configuration example.
+Listing 12-3 provides a JSON data example.
 
 ```json
 {
@@ -248,7 +248,7 @@ Listing 12-3 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 12-3: Code or configuration example.*
+*Listing 12-3: JSON data example.*
 
 
 ### 12.2.4 Common Errors in Template Design
@@ -409,11 +409,11 @@ In many projects, these three dimensions frequently exhibit a "mutual masking" p
 
 Going further, teams should recognize that quality dimensions are used not only for accepting data but also for guiding template optimization. If a large number of samples score poorly on instruction clarity, the template design itself has expression problems. If many samples have format consistency errors, the schema or output constraint design is insufficiently robust. If response correctness problems are concentrated in a particular task category, this may indicate insufficient context, inadequate knowledge coverage, or inconsistent annotator understanding. In other words, quality scoring is not an endpoint—it is a diagnostic tool for driving iteration.
 
-**Code Example: Offline "Format Consistency" Verification Script (JSON Output Tasks)**
+The following snippet focuses on Offline "Format Consistency" Verification Script (JSON Output Tasks).
 
 When a task requires "output JSON only," a script can perform a hard validation pass before data ingestion, catching problems such as unclosed brackets, missing fields, and out-of-range enumeration values before they reach training.
 
-Listing 12-4 provides the corresponding code or configuration example.
+Listing 12-4 provides a process flow example.
 
 ```python
 import json
@@ -489,7 +489,7 @@ if __name__ == "__main__":
     print(batch_check(sample_responses))
 ```
 
-*Listing 12-4: Code or configuration example.*
+*Listing 12-4: Process flow example.*
 
 
 ### 12.4.2 Supplementary Quality Dimensions Beyond the Core Three
@@ -534,11 +534,11 @@ More specifically, version evolution should typically span at least three levels
 
 Freezing rules should also be quantified as much as possible. For example, critical task coverage must reach a specified threshold; structured output error rate must not exceed a specified proportion; all high-risk boundary samples must pass dual review; key items in the failure-mode regression set must achieve a specified pass rate. The purpose of quantification is to make "whether training may proceed" depend on objective criteria rather than verbal judgment—not to add procedural burden.
 
-**Code Example: A "Freezable" Dataset Directory and Version File (Recommended Structure)**
+The following snippet focuses on A "Freezable" Dataset Directory and Version File (Recommended Structure).
 
 Below is a common, practical, and traceable organization approach: templates, samples, and regression sets are separated; each training-ready version has a `MANIFEST` that clearly states "who I am, where I came from, and how I was validated."
 
-Listing 12-5 provides the corresponding code or configuration example.
+Listing 12-5 provides a directory or artifact path example.
 
 ```text
 datasets/
@@ -554,10 +554,10 @@ datasets/
         MANIFEST.json               # Version manifest (see below)
 ```
 
-*Listing 12-5: Code or configuration example.*
+*Listing 12-5: Directory or artifact path example.*
 
 
-Listing 12-6 provides the corresponding code or configuration example.
+Listing 12-6 provides an error-log example.
 
 ```json
 {
@@ -592,7 +592,7 @@ Listing 12-6 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 12-6: Code or configuration example.*
+*Listing 12-6: JSON data example.*
 
 
 To facilitate practical acceptance, Table 12-2 provides an example quality dimension scoring rubric for supervised fine-tuning.

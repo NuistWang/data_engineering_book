@@ -116,11 +116,11 @@ From a data systems perspective, the differences among these three signal types 
 
 Furthermore, these three types correspond to three distinct problem orientations. Pairwise preference is more appropriate for answering "which of these two outputs should be retained"; scalar reward is more appropriate for answering "roughly what quality level does this output represent overall"; process reward is more appropriate for answering "through what path was this output obtained, and is the path itself worth encouraging." If a team has not even differentiated these problem orientations, a common failure mode arises: trying to solve complex long-chain behavior problems while collecting only overall satisfaction labels, resulting in a fundamental mismatch between training objectives and task structure.
 
-**Code Example: Minimal Data Formats for Three Types of Preference/Reward Signals (JSONL)**
+The following snippet focuses on Minimal Data Formats for Three Types of Preference/Reward Signals (JSONL).
 
 The same task input `x` can record supervisory signals using different "feedback interfaces." The three minimal viable structures below facilitate implementation in data pipelines and annotation platforms.
 
-Listing 13-1 provides the corresponding code or configuration example.
+Listing 13-1 provides a JSON data example.
 
 ```json
 {"type":"pairwise","prompt":"User: Explain what DPO is in three sentences.","winner":"(A more concise answer that covers the key points)","loser":"(A more verbose answer that drifts off topic)","meta":{"task":"explain","dims":["helpful","concise"],"source":"human"}}
@@ -132,7 +132,7 @@ Listing 13-1 provides the corresponding code or configuration example.
 ],"meta":{"task":"rag_agent","unit":"step"}}
 ```
 
-*Listing 13-1: Code or configuration example.*
+*Listing 13-1: JSON data example.*
 
 
 ### Which Tasks Are Suited to Each of the Three Reward Signal Types
@@ -215,11 +215,11 @@ Process rewards and multi-objective preference are naturally coupled. Many objec
 
 Accordingly, from a preference learning maturity perspective, teams typically undergo a progressive upgrade: starting with overall preference pairs to address "who is generally better"; then introducing multi-dimensional evaluation to address "why it is better"; next adding process rewards for complex tasks to address "how to become better in the right way"; and ultimately forming a multi-objective, layered, interpretable reward signal system. This progression marks the transition of preference learning from concept to engineering.
 
-**Code Example: "Dimension-Aware Recording" for Multi-Objective Preference Annotation**
+The following snippet focuses on "Dimension-Aware Recording" for Multi-Objective Preference Annotation.
 
 When you do not want "overall scores" to mask conflicts, you can simultaneously retain dimension labels and aggregation strategies in the data (the aggregation strategy can be decided at the training/sampling stage rather than fixed irrevocably at annotation time).
 
-Listing 13-2 provides the corresponding code or configuration example.
+Listing 13-2 provides a JSON data example.
 
 ```json
 {
@@ -243,7 +243,7 @@ Listing 13-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 13-2: Code or configuration example.*
+*Listing 13-2: JSON data example.*
 
 
 ### Multi-Objective Preference Cannot Rely on an "Overall Score" to Mask Conflicts
@@ -362,11 +362,11 @@ The purpose of **annotator calibration** is to minimize human-introduced scale d
 
 From an engineering perspective, arbitration, re-labeling, calibration, and golden sets should not be treated as add-on processes—they should be regarded as part of preference data production. Because preference learning trains not only a model but also an entire value ranking function. If the calibration process for this function is unstable, the most advanced training methods will only amplify unstable supervision.
 
-**Code Example: A Simplified Script for Computing "Annotation Agreement Rate / Reversal Rate"**
+The following snippet focuses on A Simplified Script for Computing "Annotation Agreement Rate / Reversal Rate".
 
 Preference pairs are inherently "comparison problems" and are well suited to using agreement rates for routine health checks. The script below takes two rounds of annotation results for the same batch of samples and outputs the agreement rate and a list of high-disagreement sample IDs (for routing into the arbitration pool).
 
-Listing 13-3 provides the corresponding code or configuration example.
+Listing 13-3 provides a process flow example.
 
 ```python
 from collections import Counter
@@ -397,7 +397,7 @@ if __name__ == "__main__":
     print("Samples requiring arbitration:", disagreed)
 ```
 
-*Listing 13-3: Code or configuration example.*
+*Listing 13-3: Process flow example.*
 
 
 ### Debiasing Preference Data and Confidence Modeling

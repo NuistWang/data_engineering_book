@@ -89,7 +89,7 @@ StructBill-CN 共包含 **2,300 张**高分辨率票据图像，覆盖 **6 类�
 
 下面的代码示例说明数据集如何接入 MindSpore 中的 SRPO 训练循环。它串起了完整的数据消费路径：读取样本、采样候选输出、用 SCL-Reward 为每个候选打分、计算组内相对优势，并通过 GRPO loss 更新策略模型，从而把数据集里的 schema 与逻辑约束转化为可训练的信号。
 
-代码清单40-1给出了相应的代码或配置示例。
+代码清单40-1给出了流程示例。
 
 ```python
 import mindspore as ms
@@ -118,7 +118,7 @@ train_set = GeneratorDataset(
 
 # ---- 2. SCL-Reward：把一次预测转成标量奖励 ----
 def scl_reward(pred_text, gt_json, schema, lam=0.4, gamma=0.6):
-    gate, row_acr, doc_acr = validate_logic(pred_text, schema)    # 代码示例 2
+    gate, row_acr, doc_acr = validate_logic(pred_text, schema)    # 本节后文定义
     if not gate:                        # structure / hallucination veto
         return 0.0                      # I_gate = 0 -> reward zeroed
     r_content = content_alignment(pred_text, gt_json, schema)     # Hungarian match
@@ -154,7 +154,7 @@ for epoch in range(EPOCHS):
         loss = grpo_train_step(policy, batch, G=8)
 ```
 
-*代码清单40-1：代码或配置示例。*
+*代码清单40-1：流程示例。*
 
 
 #### 40.2.2 任务定义
@@ -211,7 +211,7 @@ schema 的三个部分 $\{K, T, C\}$ 与最终的层级 JSON 一一对应：$K$ 
 
 **StructBill-CN 样本结构示例（抽象化层级 JSON）：**
 
-代码清单40-2给出了相应的代码或配置示例。
+代码清单40-2给出了JSON 数据示例。
 
 ```json
 {
@@ -237,14 +237,12 @@ schema 的三个部分 $\{K, T, C\}$ 与最终的层级 JSON 一一对应：$K$ 
 }
 ```
 
-*代码清单40-2：代码或配置示例。*
+*代码清单40-2：JSON 数据示例。*
 
 
 这个样本框很小，但它把本章的闭环讲清楚了：`key_information` 与 `Fee_List` 是**结构**，注释里的等式是**逻辑约束**，两者都要被标注、被校验、被评测。后文的流水线、质检与指标，全部围绕「如何让这个 JSON 既结构合法又算术自洽」展开。
 
-**代码示例 1：Schema 的 Python 数据类定义。** 下面的代码展示了 schema $S=\{K, T, C\}$ 的程序化表示。每种业务文档类型对应一个 `Schema` 实例；三个约束字段（`price_field`、`qty_field`、`amount_field`）加上 `total_field` 在不改变 JSON 输出格式的前提下编码了算术规则 $C$。
-
-代码清单40-3给出了相应的代码或配置示例。
+代码清单40-3展示了 schema $S=\{K, T, C\}$ 的程序化表示。每种业务文档类型对应一个 `Schema` 实例；三个约束字段（`price_field`、`qty_field`、`amount_field`）加上 `total_field` 在不改变 JSON 输出格式的前提下编码了算术规则 $C$。
 
 ```python
 @dataclass
@@ -271,7 +269,7 @@ expense_schema = Schema(
 )
 ```
 
-*代码清单40-3：代码或配置示例。*
+*代码清单40-3：Python 实现片段。*
 
 
 #### 40.3.4 字段类型、标注规则与评测指标的对应关系
@@ -318,9 +316,7 @@ StructBill-CN 通过一条多阶段流水线构建，核心诉求是**同时保�
 
 *图 40-3：逻辑一致性校验流程 —— 同一套门禁逻辑在两处复用：构建期用于拦截不自洽的标注，评测/训练期用于给模型输出打一致性分（即 §40.6 的 SCL-Reward 中的结构门禁 $I_{gate}$ 与逻辑奖励 $R_{logic}$）。这种"构建即评测"的复用，是保证训练目标与评测口径一致的关键工程手段。*
 
-**代码示例 2：逻辑一致性校验门禁。** 下面的函数实现了图 40-3 中的结构门禁（$I_{gate}$）、行级检查（Row-ACR）与文档级检查（Doc-ACR）。它在构建流水线中拦截不自洽的标注，在评测流水线中给模型输出打分——同一份代码、两处复用。输入的 `Schema` 来自代码示例 1。
-
-代码清单40-4给出了相应的代码或配置示例。
+代码清单40-4实现了图 40-3 中的结构门禁（$I_{gate}$）、行级检查（Row-ACR）与文档级检查（Doc-ACR）。它在构建流水线中拦截不自洽的标注，在评测流水线中给模型输出打分——同一份代码、两处复用。输入的 `Schema` 来自代码清单40-3。
 
 ```python
 def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
@@ -367,7 +363,7 @@ def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
     return True, row_acr, doc_acr
 ```
 
-*代码清单40-4：代码或配置示例。*
+*代码清单40-4：流程示例。*
 
 
 **⑦ 版本切分。** 数据集按训练 : 测试 = **8:2** 切分。工程实践上建议：切分时保证 6 类 schema 在两侧的分布可控、留出真正的跨布局测试样本；并可从训练集再切出一个小验证子集用于调参，但不污染测试集。每一个版本都应带上数据指纹与统计快照，接入数据版本与实验追踪体系。
@@ -402,9 +398,7 @@ StructBill-CN 的评测沿三个维度展开——**抽取准确率、结构质�
 
 SCVR 是本章为工程监控目的给出的派生指标定义（不引入任何新的数据事实或数值），其判定逻辑完全复用原始材料中的结构门禁与逻辑校验。
 
-**代码示例 3：批量计算 SCVR。** 基于代码示例 2 的 `validate_logic`，下面的函数在一批模型预测上计算 SCVR 及其伴随指标。它不需要额外标注，只复用已有的 schema 与算术约束。
-
-代码清单40-5给出了相应的代码或配置示例。
+代码清单40-5基于代码清单40-4的 `validate_logic`，在一批模型预测上计算 SCVR 及其伴随指标。它不需要额外标注，只复用已有的 schema 与算术约束。
 
 ```python
 def compute_scvr(predictions: list, schema: Schema,
@@ -439,7 +433,7 @@ def compute_scvr(predictions: list, schema: Schema,
 # print(f"SCVR={metrics['scvr']:.1%}, 可入库率={metrics['ingestible_rate']:.1%}")
 ```
 
-*代码清单40-5：代码或配置示例。*
+*代码清单40-5：流程示例。*
 
 
 #### 40.5.2 可复现评测的工程约定
@@ -598,7 +592,7 @@ https://huggingface.co/datasets/champion666/SparseTable_Bench_Dataset
 
 SparseTable-Bench 的一个核心设计是把每张表格图像表示为同步的多信号样本，而不是只保存一种目标格式。下面的示例展示了一个简化样本，其中第二个单元格为空，但它仍然是结构上有效的列位。
 
-代码清单40-6给出了相应的代码或配置示例。
+代码清单40-6给出了JSON 数据示例。
 
 ```json
 {
@@ -620,12 +614,14 @@ SparseTable-Bench 的一个核心设计是把每张表格图像表示为同步�
 }
 ```
 
-*代码清单40-6：代码或配置示例。*
+*代码清单40-6：JSON 数据示例。*
 
 
 这里的 `[EMPTY_CELL]` 不是普通文本，而是用于表达“结构存在、内容为空”的占位符。它把单元格的结构身份和语义内容解耦：即使图像区域没有可读字符，该位置仍然有行列坐标、边界框和上下文关系。对于稀疏表格，这种占位符可以防止模型在生成时把空白区域当作不存在的区域，从而降低列坍缩和左移错误的概率。图 40-4 概括了同一表格样本中 HTML、文本和 bbox 三类监督信号的同步关系。
 
 ![图40-4：表格样本三类监督信号结构图](../../images/part12/Liu-Chap40-Fig04-ZH.png)
+
+*图40-4：表格样本三类监督信号结构图。*
 
 从数据工程角度看，STB 的样本 schema 至少包含以下字段和检查规则。
 
@@ -647,6 +643,8 @@ SparseTable-Bench 的一个核心设计是把每张表格图像表示为同步�
 SparseTable-Bench 的构建可整理为四个阶段：表格收集、结构抽取、空间标注和稀疏拓扑增强。四个阶段之间不是简单串行的文件转换，而是围绕“结构、文本、几何三者一致”反复校验，如图 40-5 所示。
 
 ![图40-5：SparseTable-Bench 四阶段构建流水线图](../../images/part12/Liu-Chap40-Fig05-ZH.png)
+
+*图40-5：SparseTable-Bench 四阶段构建流水线图。*
 
 #### 案例B.4.1 表格收集
 
@@ -701,6 +699,8 @@ STB-Mask-Stress 是 SparseTable-Bench 中专门用于鲁棒性评估的压力测
 图 40-6 展示了 STB-Mask-Stress 从列级遮挡生成到评测解释的基本流程。
 
 ![图40-6：STB-Mask-Stress 遮挡生成与评测流程图](../../images/part12/Liu-Chap40-Fig06-ZH.png)
+
+*图40-6：STB-Mask-Stress 遮挡生成与评测流程图。*
 
 STB-Mask-Stress 的遮挡策略是列感知的。流程可以概括如下。
 

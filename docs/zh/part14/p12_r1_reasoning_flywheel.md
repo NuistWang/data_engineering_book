@@ -26,10 +26,12 @@ R1；项目实战；可复现数据工程；数据流水线；验收指标
 
 核心数据流可概括为：
 
-Listing P12-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 推理种子 -> Long-CoT 生成 -> 多候选采样 -> 验证/打分 -> 拒绝采样 -> 回流 SFT 数据集
 ```
+
+*代码清单P12-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -77,7 +79,7 @@ R1 / QwQ (Guo et al. 2025; Qwen Team 2025) 这类推理模型带来的启发，�
 
 整条链路可以概括为：
 
-Listing P12-2 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-2 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 OpenThoughts / GSM8K / MATH-500 / HumanEval
   -> cold-start SFT data
@@ -87,6 +89,8 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
   -> merged SFT data
   -> LoRA training and evaluation
 ```
+
+*代码清单P12-2：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -98,7 +102,7 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
 
 图P12-1展示了相应的流程或结构。
 
-![图 P12-1](../../images/part14/p12/Wang-Project12-Fig01.svg)
+![图 P12-1：从冷启动数据抽取、多路推理采样、verifier 池、拒绝采样到二轮 SFT 合并与训练评估的闭环结构](../../images/part14/p12/Wang-Project12-Fig01.svg)
 *图 P12-1：从冷启动数据抽取、多路推理采样、verifier 池、拒绝采样到二轮 SFT 合并与训练评估的闭环结构。*
 
 第一个组件是 **冷启动数据抽取**。对应脚本为 `cold_start_data.py`。它负责从已有数据源中抽取适合 SFT 的样本，并统一为 `messages` 格式。数学样本会组织成 `Reasoning:` 和 `Final Answer:`，代码样本会组织成 `Reasoning:` 和 fenced Python code block。冷启动数据的作用不是直接训练出最高性能模型，而是让模型具备基本的推理输出结构、语言风格和可解析格式。
@@ -138,21 +142,25 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
 
 项目建议在独立 conda 环境中运行。进入代码目录后创建环境：
 
-Listing P12-3 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-3 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 cd code/zh/project_12_r1_flywheel
 conda env create -f environment.yml
 conda activate p12-r1-flywheel
 ```
 
+*代码清单P12-3：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 在正式采样之前，可以先运行测试，确认 mock 管线和基础模块没有断：
 
-Listing P12-4 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-4 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 pytest -q
 ```
+
+*代码清单P12-4：命令行运行示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -166,7 +174,7 @@ pytest -q
 
 冷启动阶段的目标，是把不同来源的数据整理成统一的 SFT 消息格式。运行命令如下：
 
-Listing P12-5 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-5 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python cold_start_data.py \
   --max-openthoughts 5000 \
@@ -175,21 +183,25 @@ python cold_start_data.py \
   --max-code 100
 ```
 
+*代码清单P12-5：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 输出文件默认为：
 
-Listing P12-6 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-6 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 data/processed/cold_start_5k.jsonl
 data/processed/cold_start_summary.json
 ```
 
+*代码清单P12-6：流程或路径示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 每条冷启动样本包含 `record_id`、`source_dataset`、`domain`、`prompt`、`reference_reasoning`、`reference_answer` 和 `messages`。其中 `messages` 是训练真正消费的字段，结构大致如下：
 
-Listing P12-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 record = {
     "record_id": "math_gsm8k_000001",
@@ -206,11 +218,13 @@ record = {
 }
 ```
 
+*代码清单P12-7：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 对于代码任务，`assistant` 内容会变成：
 
-Listing P12-8 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-8展示了代码任务中 assistant 回复内容的格式示例。
 ````text
 Reasoning: explain the implementation idea
 Code:
@@ -218,12 +232,10 @@ Code:
 def solve(...):
     ...
 
-代码清单P12-1给出了相应的代码或配置示例。
-
 ```
 ````
 
-*代码清单P12-1：代码或配置示例。*
+*代码清单P12-8：代码任务 assistant 回复格式示例。*
 
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
@@ -238,7 +250,7 @@ def solve(...):
 
 采样阶段的输入是 `cold_start_5k.jsonl` 中的 prompt，输出是每个 prompt 的多条候选推理轨迹。为了先验证流程，可以使用 mock 后端：
 
-Listing P12-9 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-9 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python sample_traces.py \
   --input data/processed/cold_start_5k.jsonl \
@@ -249,20 +261,24 @@ python sample_traces.py \
   --force-mock
 ```
 
+*代码清单P12-9：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 mock 后端不用于评估真实模型能力，只用于检查数据链路是否能继续向下游流动。真实采样时，可以启动 vLLM 服务，并通过 OpenAI 兼容 API 调用：
 
-Listing P12-10 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-10 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 bash scripts/serve_qwen_vllm.sh
 ```
+
+*代码清单P12-10：命令行运行示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 随后执行采样脚本：
 
-Listing P12-11 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-11 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python sample_traces.py \
   --input data/processed/cold_start_5k.jsonl \
@@ -273,11 +289,13 @@ python sample_traces.py \
   --parallel-prompts 4
 ```
 
+*代码清单P12-11：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 采样记录的核心字段如下：
 
-Listing P12-12 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-12 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 sample = {
     "prompt_id": "math_gsm8k_000001",
@@ -295,6 +313,8 @@ sample = {
     "token_count": 512,
 }
 ```
+
+*代码清单P12-12：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -316,7 +336,7 @@ verifier 是本项目的核心，因为它决定哪些候选可以成为回流�
 
 一个 verifier 输出可以理解为：
 
-Listing P12-13 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-13 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 verdict = {
     "verifier_type": "math",
@@ -331,6 +351,8 @@ verdict = {
 }
 ```
 
+*代码清单P12-13：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这个结构比单一分数更有价值。后续如果拒绝采样通过率突然下降，可以根据 `verification_reason` 判断问题来自格式漂移、答案解析、代码执行，还是任务本身过难。对一个数据飞轮来说，可解释的失败原因和成功样本同样重要。
@@ -341,7 +363,7 @@ verdict = {
 
 拒绝采样读取 `data/sampled_traces` 中的候选，调用 verifier 后按 prompt 分组筛选。运行命令如下：
 
-Listing P12-14 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-14 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python rejection_sampling.py \
   --cold-start data/processed/cold_start_5k.jsonl \
@@ -349,6 +371,8 @@ python rejection_sampling.py \
   --selected-per-prompt 2 \
   --min-reward 0.8
 ```
+
+*代码清单P12-14：命令行运行示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -360,25 +384,29 @@ python rejection_sampling.py \
 
 默认每个 prompt 保留最多 `selected_per_prompt` 条轨迹。被选中的记录会写入：
 
-Listing P12-15 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-15 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 data/processed/rejection_selected_10k_30k.jsonl
 ```
+
+*代码清单P12-15：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 同时，每个 prompt 的验证结果会写入：
 
-Listing P12-16 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-16 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 data/verified_candidates/*.jsonl
 ```
+
+*代码清单P12-16：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 拒绝采样的输出样本会被重新组织成 SFT 格式：
 
-Listing P12-17 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-17 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 selected = {
     "record_id": "math_gsm8k_000001_rs0",
@@ -395,6 +423,8 @@ selected = {
 }
 ```
 
+*代码清单P12-17：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这里需要避免一个误区：拒绝采样不是简单地“删除所有失败样本”。当前训练数据只使用成功轨迹，但失败轨迹仍然会保存在 `verified_candidates` 中。它们可以用于分析模型常见错误、修复 verifier 漏洞、构建 hard case 池或后续训练过程奖励模型。
@@ -407,20 +437,24 @@ selected = {
 
 拒绝采样完成后，将冷启动数据和回流数据合并：
 
-Listing P12-18 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-18 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python merge_sft_data.py
 ```
+
+*代码清单P12-18：命令行运行示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 默认输出：
 
-Listing P12-19 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-19 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 data/training/merged_sft_data.jsonl
 data/training/training_manifest.json
 ```
+
+*代码清单P12-19：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -428,7 +462,7 @@ data/training/training_manifest.json
 
 LoRA 演示训练命令如下：
 
-Listing P12-20 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-20 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python train_lora.py \
   --dataset data/training/merged_sft_data.jsonl \
@@ -437,11 +471,13 @@ python train_lora.py \
   --epochs 2
 ```
 
+*代码清单P12-20：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 评估命令如下：
 
-Listing P12-21 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-21 给出了命令行运行示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```bash
 python eval_gsm8k_math.py \
   --model-path <base-model-path> \
@@ -451,14 +487,18 @@ python eval_gsm8k_math.py \
   --backend openai
 ```
 
+*代码清单P12-21：命令行运行示例。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 评估结果默认写入：
 
-Listing P12-22 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P12-22 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 data/reports/eval_results_gsm8k_math.json
 ```
+
+*代码清单P12-22：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 

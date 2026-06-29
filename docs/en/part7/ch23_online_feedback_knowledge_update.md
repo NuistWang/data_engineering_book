@@ -576,7 +576,7 @@ High-value feedback samples typically have the following characteristics: they i
 
 The following is a simplified example of feedback sample priority scoring. It is not complete production code but demonstrates how to combine explicit feedback, implicit behavior, risk level, and knowledge update status into an interpretable filtering rule.
 
-Listing 23-1 provides the corresponding code or configuration example.
+Listing 23-1 provides a process flow example.
 
 ```python
 from dataclasses import dataclass
@@ -650,7 +650,7 @@ print(score_feedback(event))
 print(route_feedback(event))
 ```
 
-*Listing 23-1: Code or configuration example.*
+*Listing 23-1: Process flow example.*
 
 
 This code embodies an important principle: the value of a feedback sample is not determined solely by whether it was downvoted, but should be judged by multiple signals together. A low-risk question, even if downvoted, may not need immediate attention; a high-risk question, even if it appears only once, may require expert review; if a question appears at high frequency over a short period, it may represent a knowledge gap or systemic retrieval failure.

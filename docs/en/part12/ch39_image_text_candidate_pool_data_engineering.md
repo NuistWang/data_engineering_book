@@ -79,7 +79,7 @@ Figure 39-1 illustrates the corresponding workflow or structure.
 
 ![Figure 39-1 Multi-channel schema for LAION-5B image-text candidate records](../../images/part12/Mu-Chap39-Fig01-EN.svg)
 
-*Figure 39-1 Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec.*
+*Figure 39-1: Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec.*
 
 Table 39-2 summarizes the corresponding comparison and engineering considerations.
 
@@ -95,7 +95,7 @@ Table 39-2 summarizes the corresponding comparison and engineering consideration
 
 A sample record for an internal training set can be written as follows:
 
-Listing 39-1 provides the corresponding code or configuration example.
+Listing 39-1 provides a JSON data example.
 
 ```json
 {
@@ -119,7 +119,7 @@ Listing 39-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 39-1: Code or configuration example.*
+*Listing 39-1: JSON data example.*
 
 
 Channelized modeling locates failure sources. If generated text does not match the image, the issue usually lies in the alignment channel. If many samples cannot be downloaded during training, the issue lies in the visual channel or release view. If the model outputs watermark-like textures, the issue may lie in the risk channel. If evaluation contamination is hard to check, the issue lies in text hashes, image hashes, and version manifests.
@@ -147,7 +147,7 @@ The LAION-5B paper describes a CLIP cosine-similarity threshold of 0.28 for Engl
 
 The following pseudocode shows the core of a LAION-5B-like image-text processing flow. It is not the official implementation; it rewrites the paper process as a data-engineering task:
 
-Listing 39-2 provides the corresponding code or configuration example.
+Listing 39-2 provides a Python implementation excerpt.
 
 ```python
 def build_image_text_candidates(wat_records, clip_model, lang_detector, thresholds):
@@ -187,7 +187,7 @@ def build_image_text_candidates(wat_records, clip_model, lang_detector, threshol
             }
 ```
 
-*Listing 39-2: Code or configuration example.*
+*Listing 39-2: Python implementation excerpt.*
 
 
 This flow decomposes sample retention into a set of auditable filtering gates. Each gate should enter configuration and manifests rather than remaining only as a script parameter.
@@ -216,7 +216,7 @@ Figure 39-2 illustrates the corresponding workflow or structure.
 
 ![Figure 39-2 Image-text candidate-pool quality evaluation and closed-loop repair](../../images/part12/Mu-Chap39-Fig02-EN.svg)
 
-*Figure 39-2 Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design.*
+*Figure 39-2: Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design.*
 
 Table 39-4 summarizes the corresponding comparison and engineering considerations.
 

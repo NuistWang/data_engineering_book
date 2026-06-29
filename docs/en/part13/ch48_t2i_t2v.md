@@ -32,7 +32,7 @@ Video generation is even more dependent on this kind of "executable language." A
 
 This chapter addresses precisely this data chain: how T2I and T2V generative models transform raw images and video footage into training-ready, controllable, and auditable data. A boundary must be drawn with Chapter 10. Chapter 10 has already addressed general audio-visual sample engineering, including scene segmentation, shot boundary detection, keyframe selection, ASR, subtitle alignment, unified timelines, and clip-level/segment-level/frame-level sample organization. This chapter assumes that foundational processing has already been completed, and focuses on data stages unique to generative models: caption rewriting, aesthetic and quality scoring, safety and copyright filtering, video motion filtering, spatiotemporal caption augmentation, training bucketing, and data routing.
 
-This chapter also does not expand on video generation model architectures, nor does it discuss the details of DiT, U-Net, Transformer, Flow Matching, or VAE; multimodal understanding tasks are addressed in Chapter 47 and the foundational chapters in Part III. The concern here is a different and more subtle form of engineering capability: how to transform raw media into the kind of generative supervision that a model can truly learn from.
+This chapter also does not expand on video generation model architectures, nor does it discuss the details of DiT, U-Net, Transformer, Flow Matching, or VAE; multimodal understanding tasks are addressed in Chapter 47 and the foundational chapters in Part 3. The concern here is a different and more subtle form of engineering capability: how to transform raw media into the kind of generative supervision that a model can truly learn from.
 
 ---
 
@@ -398,7 +398,7 @@ The fourth category of risk is deferred copyright and privacy handling. Addressi
 
 On the cost side, offline captioning for T2V is the most easily underestimated expense. Video decoding, multi-frame sampling, VLM inference, OCR, optical flow, deduplication, aesthetic scoring, and manual spot-checking all consume substantial GPU resources and storage bandwidth. Open-Sora-Plan's disclosed captioner inference speeds already demonstrate that video captioning is not a lightweight step. Engineering practice must use tiered approaches: deploy cheaper models for lower-value samples, route boundary samples to review, and reserve strong captioners and structured annotation only for high-value samples.
 
-The scope boundaries of this chapter must also be respected. General video segmentation, ASR, speaker diarization, and subtitle timelines have been addressed in Chapter 10; multimodal understanding, video question answering, and event detection are handled by Chapter 47 and the foundational chapters in Part III. This chapter addresses only how training data for generative models is filtered, rewritten, routed, and audited. Maintaining this boundary avoids chapter redundancy and allows readers to see what is genuinely new in generative data engineering.
+The scope boundaries of this chapter must also be respected. General video segmentation, ASR, speaker diarization, and subtitle timelines have been addressed in Chapter 10; multimodal understanding, video question answering, and event detection are handled by Chapter 47 and the foundational chapters in Part 3. This chapter addresses only how training data for generative models is filtered, rewritten, routed, and audited. Maintaining this boundary avoids chapter redundancy and allows readers to see what is genuinely new in generative data engineering.
 
 ---
 
@@ -408,7 +408,7 @@ Data engineering for T2I and T2V has evolved from the early "collect and clean" 
 
 For engineering practice, what matters most is not memorizing specific fixed thresholds, but establishing a transferable set of data judgment criteria: whether raw media is safe, compliant, sharp, worth learning from, accurately described, and capable of entering the correct data bucket according to training stage. Only when these questions are systematically resolved does the ceiling imposed by model architecture have the opportunity to be fully realized.
 
-This chapter also concludes Part XI. The preceding chapters addressed the collection, organization, understanding, and evaluation of multimodal data; this chapter shifts the perspective to the data pipelines of generative models. Generative AI data engineering is no longer merely "preparing more raw material"; it is evolving into a more refined capability for data orchestration—writing the world into a language that models can learn, keeping risks out of training sets, and transforming quality and style into controllable training variables.
+This chapter also concludes Part 13. The preceding chapters addressed the collection, organization, understanding, and evaluation of multimodal data; this chapter shifts the perspective to the data pipelines of generative models. Generative AI data engineering is no longer merely "preparing more raw material"; it is evolving into a more refined capability for data orchestration—writing the world into a language that models can learn, keeping risks out of training sets, and transforming quality and style into controllable training variables.
 
 ## References
 

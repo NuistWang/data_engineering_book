@@ -66,7 +66,6 @@
 
 代码清单6-1展示了 BPE 合并过程的简化伪代码。
 
-*代码清单6-1：BPE 合并过程简化伪代码。该片段用于解释合并思想，非生产级 tokenizer 训练实现。* 注：传统 BPE 不感知词素边界；2025 年 MorphBPE (Asgari et al. 2025) 探索通过约束合并规则不跨越词素边界，改善形态丰富语言上的分词效率与训练表现。
 
 ```python
 # BPE 合并原理伪代码
@@ -78,6 +77,8 @@ def bpe_train(corpus, num_merges):
         vocab = merge_vocab(best, vocab) # 将其合并为一个新的 token
     return vocab
 ```
+
+*代码清单6-1：BPE 合并过程简化伪代码。该片段用于解释合并思想，非生产级 tokenizer 训练实现。* 注：传统 BPE 不感知词素边界；2025 年 MorphBPE (Asgari et al. 2025) 探索通过约束合并规则不跨越词素边界，改善形态丰富语言上的分词效率与训练表现。*
 BPE 的字节级变体（Byte-level BPE，如 GPT-2 的 tiktoken）通过将原始字节而非 Unicode 字符作为起始单元，显著降低了 `<UNK>` 式未登录词风险，被 LLaMA 2/3、Mistral 等模型广泛采用。
 
 **WordPiece** 是 BERT 的分词方案，与 BPE 较为相似，但合并标准并非绝对频率，而是**基于语言模型的最大似然估计（Likelihood）**。WordPiece 在合并 $A$ 和 $B$ 时，考察的是 $\frac{P(AB)}{P(A)P(B)}$ 的得分（类似互信息）。这意味着如果 $A$ 和 $B$ 各自单独出现的概率较低，但它们一起出现的概率较高，WordPiece 会倾向于将它们合并。
@@ -91,7 +92,6 @@ BPE 的字节级变体（Byte-level BPE，如 GPT-2 的 tiktoken）通过将原�
 
 代码清单6-2展示了使用 `tiktoken` 进行离线批量分词的示意实现。
 
-*代码清单6-2：离线批量分词示意代码。生产环境应补充分片校验、失败重试、词表版本记录和输出一致性检查。*
 
 ```python
 # 使用 tiktoken 进行离线批量分词（推荐用于预处理阶段）
@@ -116,6 +116,8 @@ def tokenize_document(doc: dict, max_length: int = 4096) -> dict | None:
     }
 ```
 
+*代码清单6-2：离线批量分词示意代码。生产环境应补充分片校验、失败重试、词表版本记录和输出一致性检查。*
+
 ### 6.2.2 词表设计与领域适配：不只是"够用就好"
 
 词表（Vocabulary）是分词器的核心产出，也是大模型整体架构中唯一在训练开始后几乎无法更改的组件。一旦词表确定，后续所有的数据处理、模型嵌入矩阵、输出 logit 层都与之强绑定——更换词表意味着重新分词所有训练数据、重新初始化嵌入矩阵（丢失预训练权重的嵌入部分），代价极高。因此，词表设计决策必须在整个工程启动之前完成，而不是在训练中途发现问题再回来修正。
@@ -132,7 +134,6 @@ def tokenize_document(doc: dict, max_length: int = 4096) -> dict | None:
 
 代码清单6-3展示了 SentencePiece 多语言词表训练的示意配置。
 
-*代码清单6-3：SentencePiece 多语言词表训练配置片段。参数仅为配置示例，生产环境应通过语种覆盖、OOV/UNK 率和下游评测共同调参。*
 
 ```python
 # SentencePiece 多语言词表训练（示意）
@@ -151,6 +152,8 @@ spm.SentencePieceTrainer.train(
     shuffle_input_sentence=True,
 )
 ```
+
+*代码清单6-3：SentencePiece 多语言词表训练配置片段。参数仅为配置示例，生产环境应通过语种覆盖、OOV/UNK 率和下游评测共同调参。*
 
 
 
@@ -191,7 +194,6 @@ Shuffle 是预训练数据准备中的另一个关键步骤。未经 shuffle 的
 
 代码清单6-4展示了贪心序列 Packing 的示意实现。
 
-*代码清单6-4：贪心序列 Packing 示意代码。该片段展示基本策略，生产环境应补充样本边界、标签 mask 和可复现实验记录。*
 
 ```python
 def greedy_pack_sequences(
@@ -226,6 +228,8 @@ def greedy_pack_sequences(
     return packed
 ```
 
+*代码清单6-4：贪心序列 Packing 示意代码。该片段展示基本策略，生产环境应补充样本边界、标签 mask 和可复现实验记录。*
+
 对于包含大量短文档的训练集，启用 Packing 通常可以提高有效 Token 吞吐量（Tokens/s）。实际收益取决于文档长度分布、max sequence length、attention mask 实现和硬件配置，应在目标数据集上用 padding ratio 与 tokens/s 共同验证。
 
 ### 6.3.2 多源混采：温度权重与领域比例控制
@@ -236,7 +240,7 @@ def greedy_pack_sequences(
 
 $$p_i = \frac{n_i^{1/T}}{\sum_j n_j^{1/T}}$$
 
-当 $T = 1$ 时，权重与数据量等比，大来源完全主导；当 $T \to \infty$ 时，所有来源权重趋于均匀。实践中常用 $T = 2$（mT5 (Xue et al. 2021) 的多语言采样设置），在上采样小来源的同时避免过度偏离原始数据分布。
+当 $T = 1$ 时，权重与数据量等比，大来源完全主导；当 $T \to \infty$ 时，所有来源权重趋于均匀。实践中常用 $T = 2$（mT5 (Xue et al. 2021) 的多语言采样设置），在上采样小来源的同时避免过度偏离原始数据分布。表6-2对比了常见采样与混采策略的收益和权衡。
 
 *表6-2：采样与混采策略收益对照表。来源：本书整理，收益描述为常见模式归纳，实际效果需通过数据配方消融实验确认。*
 
@@ -270,7 +274,6 @@ PyTorch 的 `DataLoader` 提供了多个直接影响 I/O 吞吐的参数，以�
 
 代码清单6-5展示了基于 MosaicML Streaming Dataset 的 DataLoader 配置示例。
 
-*代码清单6-5：MosaicML Streaming Dataset DataLoader 配置片段。生产环境应结合对象存储带宽、缓存策略和节点故障恢复能力压测。*
 
 ```python
 from torch.utils.data import DataLoader
@@ -293,9 +296,10 @@ dataloader = DataLoader(
 )
 ```
 
+*代码清单6-5：MosaicML Streaming Dataset DataLoader 配置片段。生产环境应结合对象存储带宽、缓存策略和节点故障恢复能力压测。*
+
 代码清单6-6展示了基于 `np.memmap` 的二进制 Token ID 数据集示意实现。
 
-*代码清单6-6：基于 np.memmap 的 Token ID 数据集示意代码。生产环境应补充 dtype、文件完整性、索引边界和跨平台兼容性校验。*
 
 ```python
 # 应对千万级小文件 IO 优化的 Memmap 二进制加载器伪代码
@@ -319,9 +323,11 @@ class MemmapDataset(torch.utils.data.Dataset):
         return torch.from_numpy(chunk.astype(np.int64))
 ```
 
+*代码清单6-6：基于 np.memmap 的 Token ID 数据集示意代码。生产环境应补充 dtype、文件完整性、索引边界和跨平台兼容性校验。*
+
 ### 6.4.2 吞吐瓶颈诊断：三步系统化排查
 
-当 GPU 利用率不达预期时，按以下系统化步骤排查（见图6-1）：
+当 GPU 利用率不达预期时，按以下系统化步骤排查。图6-1汇总了对应的吞吐瓶颈诊断流程。
 
 ![图6-1：吞吐瓶颈诊断流程图](../../images/part2/Wang-Chap06-Fig01.svg)
 
@@ -356,7 +362,6 @@ class MemmapDataset(torch.utils.data.Dataset):
 
 代码清单6-7展示了多节点分布式训练中的 DataLoader 配置示意。
 
-*代码清单6-7：多节点分布式 DataLoader 配置片段。生产环境应结合 rank-aware 分片、全局 shuffle 和 token 计数一致性检验。*
 
 ```python
 # 多节点分布式训练中的 DataLoader 配置
@@ -386,6 +391,8 @@ dataloader = DataLoader(
     persistent_workers=True,
 )
 ```
+
+*代码清单6-7：多节点分布式 DataLoader 配置片段。生产环境应结合 rank-aware 分片、全局 shuffle 和 token 计数一致性检验。*
 
 **避免重复读取**是多节点分布式 DataLoader 的一个常见易错点：如果各节点的 DataLoader 没有进行适当的 rank-aware 划分，每个节点会独立读取完整数据集，导致所有节点看到相同的数据顺序，梯度更新实际上是在重复数据上进行的——等效于 batch size 没有随着节点数增加而正确扩展。对于非 `StreamingDataset` 的自定义数据集，需要使用 `DistributedSampler`，并在每个 epoch 开始时调用 `sampler.set_epoch(epoch)` 以确保不同 epoch 之间的 shuffle 随机性。
 

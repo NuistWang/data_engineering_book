@@ -135,7 +135,7 @@ Fields such as `gopher_flags`, `c4_flags`, and `fineweb_flags` are field groups 
 
 The following is an abstract FineWeb-like document record. It is not an original FineWeb sample; it is an engineering example organized from the FineWeb dataset card and the DataTrove pipeline.
 
-Listing 38-1 provides the corresponding code or configuration example.
+Listing 38-1 provides a JSON data example.
 
 ```json
 {
@@ -168,7 +168,7 @@ Listing 38-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 38-1: Code or configuration example.*
+*Listing 38-1: JSON data example.*
 
 
 This example illustrates the basic idea of a FineWeb-like corpus: `text` is the training entry point, but by itself it cannot explain sample quality. What supports review is the combination of provenance, language score, filtering status, deduplication scope, and privacy-processing records.
@@ -217,7 +217,7 @@ Sources: imported modules and main-processing pipeline in DataTrove `examples/fi
 
 The code structure of the main processing stage can be summarized as:
 
-Listing 38-2 provides the corresponding code or configuration example.
+Listing 38-2 provides a Python implementation excerpt.
 
 ```python
 pipeline = [
@@ -233,7 +233,7 @@ pipeline = [
 ]
 ```
 
-*Listing 38-2: Code or configuration example.*
+*Listing 38-2: Python implementation excerpt.*
 
 
 This is conceptual pseudocode used to explain the module order in the FineWeb example script. Real parameters, log directories, S3 paths, task counts, and Slurm resource configurations should follow the DataTrove repository script.
@@ -252,7 +252,7 @@ Figure 38-1 illustrates the corresponding workflow or structure.
 
 ![Figure 38-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/Mu-Chap38-Fig01-EN.svg)
 
-*Figure 38-1 FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
+*Figure 38-1: FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
 
 #### Case A.4.3 FineWeb's Per-crawl Deduplication Judgment
 
@@ -264,7 +264,7 @@ Figure 38-2 illustrates the corresponding workflow or structure.
 
 ![Figure 38-2 FineWeb data-processing-choice ablation loop](../../images/part12/Mu-Chap38-Fig02-EN.svg)
 
-*Figure 38-2 FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
+*Figure 38-2: FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
 
 ### Case A.5: Evaluating FineWeb Data-processing Choices
 
@@ -491,7 +491,7 @@ These fields are an engineering schema organized by the author from the Dolma da
 
 The following is an abstract Dolma-like document record showing how a transparent corpus connects samples, sources, and training versions.
 
-Listing 38-3 provides the corresponding code or configuration example.
+Listing 38-3 provides a JSON data example.
 
 ```json
 {
@@ -518,7 +518,7 @@ Listing 38-3 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 38-3: Code or configuration example.*
+*Listing 38-3: JSON data example.*
 
 
 This record cannot be read at only one layer. In Dolma, the document layer, source layer, and training layer must point back to one another. If a document has a `source` but no source card, it can locate a sample but cannot explain the origin. If a source card has statistics but no training manifest, it can explain what is in the dataset but not what the model actually saw. If a manifest has sampling proportions but no document hash, removal and contamination checks break.
@@ -548,7 +548,7 @@ Figure 38-3 illustrates the corresponding workflow or structure.
 
 ![Figure 38-3 Dolma transparent-corpus evidence chain](../../images/part12/Mu-Chap38-Fig03-EN.svg)
 
-*Figure 38-3 Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation.*
+*Figure 38-3: Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation.*
 
 The boundary between toolchains and manual audits matters. A toolchain can stably generate statistics, tags, hashes, and manifests, but it cannot replace all audits. License boundaries, PII removal, evaluation contamination, and source representativeness still require human rules, sample review, or dedicated detection tasks.
 
@@ -572,7 +572,7 @@ Figure 38-4 illustrates the corresponding workflow or structure.
 
 ![Figure 38-4 Dolma source mix and training-diagnosis loop](../../images/part12/Mu-Chap38-Fig04-EN.svg)
 
-*Figure 38-4 Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use.*
+*Figure 38-4: Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use.*
 
 #### Case B.5.2 Diagnosis Checklist
 

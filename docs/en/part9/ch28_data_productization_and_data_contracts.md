@@ -125,7 +125,7 @@ Putting the five clause groups together forms a complete data contract. As shown
 
 *Figure 28-2: Data contract template.*
 
-Listing 28-1 provides the corresponding code or configuration example.
+Listing 28-1 provides a YAML configuration example.
 
 ```yaml
 contract: user_interaction_feedback
@@ -155,7 +155,7 @@ compatibility:
   deprecation: "old version retained for one version cycle"
 ```
 
-*Listing 28-1: Code or configuration example.*
+*Listing 28-1: YAML configuration example.*
 
 
 The contract is **machine-readable, checkable, and versioned**. It can live in version control, evolve with the data product, be checked by CI before release, and trigger alerts or blocks when violated. It is no longer a passive document; it is an engineering artifact embedded in the production process.

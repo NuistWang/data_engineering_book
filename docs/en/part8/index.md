@@ -1,8 +1,8 @@
-# Part VIII: Data Operations and Platform Engineering
+# Part 8: Data Operations and Platform Development
 
 ## Positioning of This Part
 
-Part VIII focuses on platform-oriented construction, covering team organization, data versioning, experiment tracking, observability, and governance mechanisms. The goal is to elevate discrete data projects into a sustainably evolving platform capability.
+Part 8 focuses on platform-oriented construction, covering team organization, data versioning, experiment tracking, observability, and governance mechanisms. The goal is to elevate discrete data projects into a sustainably evolving platform capability.
 
 ## Terminology Standards
 

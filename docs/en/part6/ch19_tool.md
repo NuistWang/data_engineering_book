@@ -105,11 +105,11 @@ This means that data teams, when constructing, sampling, and evaluating, should 
 
 A tool schema is not merely a developer-facing copy of an API specification—it is a behavioral specification from which the model learns "action semantics" (Li et al. 2023; Patil et al. 2024). A high-quality schema must clearly express at least four things: what this tool does, what the input parameters are, what constraints exist among parameters, and how the system will respond when errors occur. If a schema only records tool names and parameter names, the model may be able to generate valid JSON without truly understanding the calling conditions.
 
-**Code Example: A "Trainable" Tool Schema (with required fields, enumerations, mutual exclusions, and error codes)**
+The following snippet focuses on A "Trainable" Tool Schema (with required fields, enumerations, mutual exclusions, and error codes).
 
 The following example uses a "calendar query" tool to illustrate which information is most critical for model learning: field types, required fields, enumerations, time-range constraints, and the semantics of common error codes.
 
-Listing 19-1 provides the corresponding code or configuration example.
+Listing 19-1 provides an error-log example.
 
 ```json
 {
@@ -142,7 +142,7 @@ Listing 19-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 19-1: Code or configuration example.*
+*Listing 19-1: JSON data example.*
 
 
 Parameter schema design must pay special attention to decidability. Benchmarks such as the Berkeley Function Calling Leaderboard (BFCL) also treat function, parameter, and call structure as core evaluation objects (Patil et al. 2025). Parameter names should avoid semantic overlap; field types must be explicit; whether a field is required, its allowable value range, default behavior, mutual exclusions, and dependencies should all be expressed explicitly. For example, a "search calendar events" tool that simultaneously includes fields such as `date`, `start_time`, `end_time`, and `timezone` should clearly define their coverage relationships and the interpretation rules when any of them is absent. Otherwise, the model will easily oscillate between related fields, producing calls that are formally valid but semantically incorrect.
@@ -211,11 +211,11 @@ Therefore, in both training set and evaluation set design, recording call struct
 
 The difficulty of Tool-Use data lies not in whether to use JSON, but in whether a unified and extensible representation format exists that can stably carry natural-language input, function-call actions, and environment feedback results. A mature data format typically needs to place the following layers of information in the same trajectory: user request, tools currently available to the system, model decision, function parameters, call result, next observation, and final response (Schick et al. 2023; Qin et al. 2024).
 
-**Code Example: Unified Trajectory Format (messages + tool_call + tool_result)**
+The following snippet focuses on Unified Trajectory Format (messages + tool_call + tool_result).
 
 The following presents a "successfully closed" sample: first querying the schedule, then giving an actionable recommendation based on the conflict result. The key is to treat the tool result as an **environment feedback** entry in the trajectory rather than mixing it into ordinary text (Shinn et al. 2023).
 
-Listing 19-2 provides the corresponding code or configuration example.
+Listing 19-2 provides a JSON tool-use trajectory example.
 
 ```json
 {
@@ -253,7 +253,7 @@ Listing 19-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 19-2: Code or configuration example.*
+*Listing 19-2: JSON tool-use trajectory example.*
 
 
 If these layers of information are scattered across different sample systems, training will easily produce fragmentation. For example, natural-language understanding data is placed in one location, function-call format data in another, and error recovery data somewhere else—the result is a model that learns each local capability but cannot connect them within the same context. The value of a unified format is that it lets the model see the continuous process from "language to action, action to observation, observation back to action" (Schick et al. 2023).

@@ -214,7 +214,7 @@ Traditional infrastructure monitoring (CPU, memory, disk, network) combined with
 
 The core of data asset health monitoring is establishing "dataset SLOs (Service Level Objectives)" — for each important dataset, defining its quality targets and monitoring rules. The SRE Workbook emphasizes that SLOs should serve actual user experience and error budget decisions; dataset SLOs should likewise serve the real risks of downstream training, evaluation, and business use (Beyer et al. 2018). For example:
 
-Listing 26-1 provides the corresponding code or configuration example.
+Listing 26-1 provides a YAML configuration example.
 
 ```yaml
 dataset_slo:
@@ -245,7 +245,7 @@ dataset_slo:
   on_violation: page_on_call
 ```
 
-*Listing 26-1: Code or configuration example.*
+*Listing 26-1: YAML configuration example.*
 
 
 This SLO-driven data asset monitoring enables data quality issues to be discovered before training rather than being traced back after model performance has declined. A dataset SLO should not contain only metrics, thresholds, and alert channels; it should also include operational closure fields: `owner` identifies the ultimate responsible party; `steward` identifies the day-to-day maintainer; `runbook_url` points to the troubleshooting guide; `severity` determines the alert tier; `escalation_policy` defines the escalation path; `dataset_version` binds the currently controlled version; and `contract_id` links to the data contract or data product interface. Without these fields, an SLO can detect problems but cannot ensure they are correctly handed off, escalated, and resolved.

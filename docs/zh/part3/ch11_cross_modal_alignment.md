@@ -113,7 +113,6 @@
 
 在合成训练流时，JSON 样本通常不会直接存放大规模浮点矩阵，而是采用显式占位符模式。代码清单11-1展示了一个多模态 JSONL Schema 的示意片段。
 
-*代码清单11-1：多模态融合样本 JSONL Schema 示例。字段为说明性样例，生产环境应补充来源、许可证、模态校验、占位符版本和审核状态。*
 
 ```json
 {
@@ -123,6 +122,8 @@
   "visual_features_path": "s3://multimodal-bucket/features/cat_001.pt"
 }
 ```
+
+*代码清单11-1：多模态融合样本 JSON 记录 schema 示例。字段为说明性样例，生产环境应补充来源、许可证、模态校验、占位符版本和审核状态。*
 这种设计（JSONL Schema）是融合训练数据设计的基石。它使得文本管道和视觉管道能够解耦开发：数据工程师只负责在 JSON 结构中维护元数据和占位符逻辑，而深度学习框架中的 DataLoader 在最后一步才根据 `visual_features_path` 将真正的稠密张量（Dense Tensors）读取并注入到计算图中。
 
 图11-2展示了相应的流程或结构。
@@ -233,9 +234,8 @@
 
 代码清单11-2展示了对齐 Loss 发散的匿名化错误日志示例。
 
-*代码清单11-2：对齐 Loss 发散错误日志示例。日志内容为匿名化示例，用于说明排障模式而非公开事故复现。*
 
-```bash
+```text
 [WARNING] node-001.storage-backend.local:
 Infinity detected in temporal grounding cross-attention matrix!
 Attention weights collapsing due to zero-division in normalization.
@@ -243,6 +243,8 @@ Traceback Exception raised in /transformers_mod/alignment/fusion_encoder.py line
 Loss scaled to NaN. Global step 14510 aborted.
 Cross-Modal Feature Match Score dropped from 0.89 to 0.00000000003.
 ```
+
+*代码清单11-2：对齐 Loss 发散错误日志示例。日志内容为匿名化示例，用于说明排障模式而非公开事故复现。*
 
 **[根因与修复]**：
 
@@ -257,15 +259,16 @@ Cross-Modal Feature Match Score dropped from 0.89 to 0.00000000003.
 
 代码清单11-3展示了 BBox 坐标翻转的匿名化错误日志示例。
 
-*代码清单11-3：BBox 坐标翻转错误日志示例。日志内容为匿名化示例，生产环境应记录坐标系约定和转换版本。*
 
-```bash
+```text
 [ERROR] grounding_eval_worker_05:
 Region match failure: predicted bbox [x1:680, y1:200, x2:920, y2:450],
 ground truth bbox [x1:80, y1:200, x2:320, y2:450].
 IoU score: 0.00. Entire partition eval batch rejected.
 Suspected data augmentation mirror flip applied AFTER bbox annotation.
 ```
+
+*代码清单11-3：BBox 坐标翻转错误日志示例。日志内容为匿名化示例，生产环境应记录坐标系约定和转换版本。*
 
 **[根因与修复]**：
 
@@ -280,15 +283,16 @@ Suspected data augmentation mirror flip applied AFTER bbox annotation.
 
 代码清单11-4展示了难负样本污染的匿名化错误日志示例。
 
-*代码清单11-4：难负样本污染错误日志示例。日志内容为匿名化示例，负样本策略应通过人工复核和下游评测校准。*
 
-```bash
+```text
 [WARN] hard_negative_miner_worker_2:
 False negative rate in current batch exceeds project threshold.
 Positive pairs incorrectly tagged as hard negatives.
 CLIP cross-modal similarity threshold set too aggressively; too many true positives excluded.
 Contrastive loss variance exceeds historical baseline. Training instability detected.
 ```
+
+*代码清单11-4：难负样本污染错误日志示例。日志内容为匿名化示例，负样本策略应通过人工复核和下游评测校准。*
 
 **[根因与修复]**：
 
@@ -303,14 +307,15 @@ Contrastive loss variance exceeds historical baseline. Training instability dete
 
 代码清单11-5展示了 DTW 内存溢出的匿名化错误日志示例。
 
-*代码清单11-5：DTW 内存溢出错误日志示例。日志内容为匿名化示例，窗口大小和下采样策略应按序列长度与内存预算设定。*
 
-```bash
+```text
 [FATAL] dtw_alignment_worker_08: Killed (signal 9).
 DTW matrix allocation exceeded worker memory budget for an overlong video-text segment.
 MemoryError: cannot allocate full pairwise alignment matrix under current limits.
 Queue depth at crash exceeded the incident response threshold; affected segments were quarantined.
 ```
+
+*代码清单11-5：DTW 内存溢出错误日志示例。日志内容为匿名化示例，窗口大小和下采样策略应按序列长度与内存预算设定。*
 
 **[根因与修复]**：
 
@@ -325,15 +330,16 @@ Queue depth at crash exceeded the incident response threshold; affected segments
 
 代码清单11-6展示了 Placeholder 解析失败的匿名化错误日志示例。
 
-*代码清单11-6：Placeholder 解析失败错误日志示例。日志内容为匿名化示例，生产环境应固定占位符语法并进行训练前解析校验。*
 
-```bash
+```text
 [ERROR] multimodal_dataloader_worker_3:
 Token index 152104 out of vocabulary range (vocab_size=128256).
 <IMG_TK_451> placeholder decoded as raw text token, bypassing vision encoder.
 JSONL sample malformed: missing <|image_start|> sentinel in sample_id: mm_00483921.
 Affected batch: 256 samples. Training step 28,441 aborted.
 ```
+
+*代码清单11-6：Placeholder 解析失败错误日志示例。日志内容为匿名化示例，生产环境应固定占位符语法并进行训练前解析校验。*
 
 **[根因与修复]**：
 

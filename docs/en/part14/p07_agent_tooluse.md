@@ -45,6 +45,8 @@ Listing P07-1 provides a process or path example illustrating the input/output r
 Tool schema -> Task specification -> Simulation environment -> success/recovery/block trajectories -> Quality checks -> Agent dataset
 ```
 
+*Listing P07-1: Process or path example.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 A sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -99,7 +101,7 @@ This pipeline serves not a one-off experiment, but a methodology:
 
 Figure P07-1 illustrates the corresponding workflow or structure.
 
-![Figure P07-1](../../images/part14/p07/Yu-Project07-Fig01.svg)
+![Figure P07-1: Agent Tool-Use Data Factory Overview](../../images/part14/p07/Yu-Project07-Fig01.svg)
 *Figure P07-1: Agent Tool-Use Data Factory Overview.*
 
 ---
@@ -217,7 +219,7 @@ Only at this step does the project advance from "invocation example collection" 
 
 Figure P07-2 illustrates the corresponding workflow or structure.
 
-![Figure P07-2](../../images/part14/p07/Yu-Project07-Fig02.svg)
+![Figure P07-2: Agent Tool-Use Three-Layer Architecture Diagram](../../images/part14/p07/Yu-Project07-Fig02.svg)
 *Figure P07-2: Agent Tool-Use Three-Layer Architecture Diagram.*
 
 ---
@@ -258,7 +260,7 @@ Therefore, what needs to be explicitly written out is not a division of responsi
 
 Figure P07-3 illustrates the corresponding workflow or structure.
 
-![Figure P07-3](../../images/part14/p07/Yu-Project07-Fig03.svg)
+![Figure P07-3: Key Engineering Facets of the Agent Data Factory](../../images/part14/p07/Yu-Project07-Fig03.svg)
 *Figure P07-3: Key Engineering Facets of the Agent Data Factory.*
 
 ---
@@ -315,6 +317,8 @@ def build_tool_schemas() -> list[dict]:
     ]
 ```
 
+*Listing P07-2: Python implementation excerpt.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 This structure indicates that the project does not treat tools as "a natural language description given to the model," but rather as **structured objects that can drive subsequent data construction**. This also explains why the current project, with only `6` tool schemas, already covers behavioral boundaries across multiple categories including search, database, calendar, code, memory, and unsafe.
@@ -334,7 +338,7 @@ Schema is not for aesthetics; it is to enable alignment among "tool definition �
 
 Figure P07-4 illustrates the corresponding workflow or structure.
 
-![Figure P07-4](../../images/part14/p07/Yu-Project07-Fig04.svg)
+![Figure P07-4: Tool Schema Structure Diagram](../../images/part14/p07/Yu-Project07-Fig04.svg)
 *Figure P07-4: Tool Schema Structure Diagram.*
 
 ---
@@ -390,6 +394,8 @@ def build_templates() -> list[dict]:
     ]
 ```
 
+*Listing P07-3: Python implementation excerpt.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 This approach transforms "trajectory templates" from an abstract concept into **structures that can be directly persisted, directly inspected, and directly read by downstream consumers**. The reason `run_p7_checks.py` can later check `templates_cover_single_multi_and_safety` is precisely because the template layer has already been explicitly structured.
@@ -411,7 +417,7 @@ The current project contains `5` trajectory templates and generates `22` raw tra
 
 Figure P07-5 illustrates the corresponding workflow or structure.
 
-![Figure P07-5](../../images/part14/p07/Yu-Project07-Fig05.svg)
+![Figure P07-5: Relationship Diagram of Task Specifications and Trajectory Templates](../../images/part14/p07/Yu-Project07-Fig05.svg)
 *Figure P07-5: Relationship Diagram of Task Specifications and Trajectory Templates.*
 
 ---
@@ -467,6 +473,8 @@ def build_search_recovery(task: dict) -> list[dict]:
     ]
 ```
 
+*Listing P07-4: Python implementation excerpt.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 This implementation explicitly records the intermediate decision of "failure — analysis — retry." For training purposes, this is more valuable than retaining only the results of two tool calls.
@@ -484,6 +492,8 @@ def build_blocked(task: dict, reason: str) -> list[dict]:
         final_event(..., status="blocked", blocked=True),
     ]
 ```
+
+*Listing P07-5: Python implementation excerpt.*
 
 This snippet transforms the above pipeline into a checkable, structured representation.
 
@@ -503,7 +513,7 @@ The variant distribution in the current project is: `success = 10`, `recovery = 
 
 Figure P07-6 illustrates the corresponding workflow or structure.
 
-![Figure P07-6](../../images/part14/p07/Yu-Project07-Fig06.svg)
+![Figure P07-6: success / recovery / block Trajectory Taxonomy Diagram](../../images/part14/p07/Yu-Project07-Fig06.svg)
 *Figure P07-6: success / recovery / block Trajectory Taxonomy Diagram.*
 
 ---
@@ -562,6 +572,8 @@ def execute_trajectory(trajectory: dict, task_specs: dict[str, dict]) -> tuple[d
                 ...
 ```
 
+*Listing P07-6: Python implementation excerpt.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 The key value of this logic is that the project genuinely connects trajectories, environment, tool logs, and final metrics. Only then do metrics such as "recovery success rate" and "unsafe block rate" represent true post-execution results rather than paper-based statistics.
@@ -576,7 +588,7 @@ The simulated environment is not an endpoint, but it is a strong starting point.
 
 Figure P07-7 illustrates the corresponding workflow or structure.
 
-![Figure P07-7](../../images/part14/p07/Yu-Project07-Fig07.svg)
+![Figure P07-7: Simulated Tool Environment Execution Closure Diagram](../../images/part14/p07/Yu-Project07-Fig07.svg)
 *Figure P07-7: Simulated Tool Environment Execution Closure Diagram.*
 
 ---
@@ -612,7 +624,7 @@ Evaluation is not equivalent to inspection. Evaluation answers "how did it perfo
 
 Figure P07-8 illustrates the corresponding workflow or structure.
 
-![Figure P07-8](../../images/part14/p07/Yu-Project07-Fig08.svg)
+![Figure P07-8: P07 Six-Step Pipeline Diagram](../../images/part14/p07/Yu-Project07-Fig08.svg)
 *Figure P07-8: P07 Six-Step Pipeline Diagram.*
 
 ---
@@ -644,7 +656,7 @@ In the current project, `recovery = 9`, almost equal in magnitude to `success = 
 
 Figure P07-9 illustrates the corresponding workflow or structure.
 
-![Figure P07-9](../../images/part14/p07/Yu-Project07-Fig09.svg)
+![Figure P07-9: Parameter Correction and Retry Flow Diagram](../../images/part14/p07/Yu-Project07-Fig09.svg)
 *Figure P07-9: Parameter Correction and Retry Flow Diagram.*
 
 ---
@@ -684,7 +696,7 @@ Because correct memory behavior typically depends heavily on specification. If i
 
 Figure P07-10 illustrates the corresponding workflow or structure.
 
-![Figure P07-10](../../images/part14/p07/Yu-Project07-Fig10.svg)
+![Figure P07-10: Memory Read/Write Trajectory Diagram](../../images/part14/p07/Yu-Project07-Fig10.svg)
 *Figure P07-10: Memory Read/Write Trajectory Diagram.*
 
 ---
@@ -721,7 +733,7 @@ Because if safety boundaries are only enforced on the inference side via rules, 
 
 Figure P07-11 illustrates the corresponding workflow or structure.
 
-![Figure P07-11](../../images/part14/p07/Yu-Project07-Fig11.svg)
+![Figure P07-11: Unsafe Block Decision Flow Diagram](../../images/part14/p07/Yu-Project07-Fig11.svg)
 *Figure P07-11: Unsafe Block Decision Flow Diagram.*
 
 ---
@@ -765,6 +777,8 @@ def render_context(events: list[dict]) -> list[str]:
     return rendered
 ```
 
+*Listing P07-7: Python implementation excerpt.*
+
 This snippet transforms the above pipeline into a checkable, structured representation.
 
 This step resembles "translating system logs into training-consumable context."
@@ -785,7 +799,7 @@ This shows that the project's output is no longer "a few run results," but a set
 
 Figure P07-12 illustrates the corresponding workflow or structure.
 
-![Figure P07-12](../../images/part14/p07/Yu-Project07-Fig12.svg)
+![Figure P07-12: Event Log to Training Sample Reassembly Diagram](../../images/part14/p07/Yu-Project07-Fig12.svg)
 *Figure P07-12: Event Log to Training Sample Reassembly Diagram.*
 
 ---
@@ -908,7 +922,7 @@ This step is critically important, because it means this chapter is not merely "
 
 Figure P07-13 illustrates the corresponding workflow or structure.
 
-![Figure P07-13](../../images/part14/p07/Yu-Project07-Fig13.svg)
+![Figure P07-13: Evaluation and Inspection Dual-Closure Diagram](../../images/part14/p07/Yu-Project07-Fig13.svg)
 *Figure P07-13: Evaluation and Inspection Dual-Closure Diagram.*
 
 ---
@@ -961,7 +975,7 @@ Beyond current metrics, finer-grained metrics can be added, including tool selec
 
 Figure P07-14 illustrates the corresponding workflow or structure.
 
-![Figure P07-14](../../images/part14/p07/Yu-Project07-Fig14.svg)
+![Figure P07-14: P07 Future Evolution Roadmap](../../images/part14/p07/Yu-Project07-Fig14.svg)
 *Figure P07-14: P07 Future Evolution Roadmap.*
 
 ---

@@ -40,10 +40,12 @@ Mini-C4；Ray Data；分布式清洗；语料打包；质量验收
 
 核心数据流可概括为：
 
-Listing P01-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P01-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 Common Crawl WARC -> HTML 响应 -> 正文文本 -> 去重语料 -> 语种子集 -> train/val JSONL -> manifest 与评估报告
 ```
+
+*代码清单P01-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -129,7 +131,7 @@ Mini-C4 的意义就在这里。它不是工业级完整 C4 的替代品，而�
 
 图P01-1展示了相应的流程或结构。
 
-![图 P01-1](../../images/part14/p01/Xu-Project01-Fig01.svg)
+![图 P01-1：Mini-C4 数据流水线总览](../../images/part14/p01/Xu-Project01-Fig01.svg)
 *图 P01-1：Mini-C4 数据流水线总览。*
 
 
@@ -229,7 +231,7 @@ Common Crawl 是构建网页类预训练数据集最常用的公开来源之一�
 
 图P01-2展示了相应的流程或结构。
 
-![图 P01-2](../../images/part14/p01/Xu-Project01-Fig02.svg)
+![图 P01-2：WARC 到正文文本的解析路径](../../images/part14/p01/Xu-Project01-Fig02.svg)
 *图 P01-2：WARC 到正文文本的解析路径。*
 
 
@@ -252,7 +254,7 @@ WARC 文件通常较大，且内部包含大量并不需要的响应。
 
 ### 5.4 核心实现
 
-Listing P01-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P01-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 from warcio.archiveiterator import ArchiveIterator
 import trafilatura
@@ -274,6 +276,8 @@ def extract_text_from_warc(warc_path, output_path):
                 no_fallback=False
             )
 ```
+
+*代码清单P01-2：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -301,7 +305,7 @@ def extract_text_from_warc(warc_path, output_path):
 
 图P01-3展示了相应的流程或结构。
 
-![图 P01-3](../../images/part14/p01/Xu-Project01-Fig03.svg)
+![图 P01-3：启发式清洗规则示意](../../images/part14/p01/Xu-Project01-Fig03.svg)
 *图 P01-3：启发式清洗规则示意。*
 
 
@@ -345,10 +349,12 @@ def extract_text_from_warc(warc_path, output_path):
 
 统计如下符号的比例：
 
-Listing P01-3 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P01-3 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 { } [ ] < > \
 ```
+
+*代码清单P01-3：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -392,7 +398,7 @@ Listing P01-3 给出了流程或路径示例，用于说明本节中的输入输
 
 图P01-4展示了相应的流程或结构。
 
-![图 P01-4](../../images/part14/p01/Xu-Project01-Fig04.svg)
+![图 P01-4：MinHash + LSH 去重思路](../../images/part14/p01/Xu-Project01-Fig04.svg)
 *图 P01-4：MinHash + LSH 去重思路。*
 
 
@@ -440,7 +446,7 @@ Ray 在这里扮演的角色非常明确：
 
 对应实现如下：
 
-Listing P01-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P01-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 import ray
 from datasketch import MinHash
@@ -459,6 +465,8 @@ def process_batch(lines, batch_id):
 futures = [process_batch.remote(batch, i) for i, batch in enumerate(batches)]
 processed_batches = ray.get(futures)
 ```
+
+*代码清单P01-4：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -489,7 +497,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-5展示了相应的流程或结构。
 
-![图 P01-5](../../images/part14/p01/Xu-Project01-Fig05.svg)
+![图 P01-5：语种拆分与分支处理](../../images/part14/p01/Xu-Project01-Fig05.svg)
 *图 P01-5：语种拆分与分支处理。*
 
 ### 8.1 不同语言不能共用同一套质量门
@@ -526,7 +534,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-6展示了相应的流程或结构。
 
-![图 P01-6](../../images/part14/p01/Xu-Project01-Fig06.svg)
+![图 P01-6：质量过滤决策示意](../../images/part14/p01/Xu-Project01-Fig06.svg)
 *图 P01-6：质量过滤决策示意。*
 
 ### 9.1 为什么质量过滤是最关键的一道门
@@ -590,7 +598,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-7展示了相应的流程或结构。
 
-![图 P01-7](../../images/part14/p01/Xu-Project01-Fig07.svg)
+![图 P01-7：三轮实验迭代路径](../../images/part14/p01/Xu-Project01-Fig07.svg)
 *图 P01-7：三轮实验迭代路径。*
 
 如果只把项目理解为一串脚本调用，就不容易看清这些设计背后的取舍。
@@ -709,7 +717,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-8展示了相应的流程或结构。
 
-![图 P01-8](../../images/part14/p01/Xu-Project01-Fig08.svg)
+![图 P01-8：数据留存漏斗](../../images/part14/p01/Xu-Project01-Fig08.svg)
 *图 P01-8：数据留存漏斗。*
 
 ### 12.1 数据留存漏斗
@@ -760,7 +768,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-9展示了相应的流程或结构。
 
-![图 P01-9](../../images/part14/p01/Xu-Project01-Fig09.svg)
+![图 P01-9：资源与成本构成](../../images/part14/p01/Xu-Project01-Fig09.svg)
 *图 P01-9：资源与成本构成。*
 
 在很多初学项目中，开发者更关注“链路是否能够完成”，而不太关注“代价是什么”。
@@ -793,7 +801,7 @@ Ray 并行处理最大的一个常见误区是：
 
 图P01-10展示了相应的流程或结构。
 
-![图 P01-10](../../images/part14/p01/Xu-Project01-Fig10.svg)
+![图 P01-10：项目验证闭环](../../images/part14/p01/Xu-Project01-Fig10.svg)
 *图 P01-10：项目验证闭环。*
 
 ### 14.1 项目检查的作用
@@ -918,7 +926,7 @@ Mini-C4 的价值在于说明方法，但它也有非常明确的局限。
 
 图P01-11展示了相应的流程或结构。
 
-![图 P01-11](../../images/part14/p01/Xu-Project01-Fig11.svg)
+![图 P01-11：Mini-C4 工程方法论总结](../../images/part14/p01/Xu-Project01-Fig11.svg)
 *图 P01-11：Mini-C4 工程方法论总结。*
 
 本项目真正想传达的，不是某个库的用法，而是一种更普遍的数据工程方法论：

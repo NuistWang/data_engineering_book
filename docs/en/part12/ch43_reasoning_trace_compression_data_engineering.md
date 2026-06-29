@@ -36,7 +36,7 @@ Figure 43-1 illustrates the corresponding workflow or structure.
 
 *Figure 43-1: Latent-Switch-69K distills reasoning traces from Dolci-Think-SFT-32B into solution intuitions, compressed CoT, latent budgets, student sequences, and mask-aligned SFT records.*
 
-This chapter builds on Part V's synthetic data engineering and Part VI's reasoning data engineering. Chapters 15 through 17 discuss how to generate, distill, and quality-check high-quality training samples; Chapter 18 covers the organization of explicit CoT; and Chapters 19 and 20 cover the recording of intermediate states in tool and agent traces. Latent-Switch-69K pushes these threads to a finer level: intermediate reasoning need not always be stored as natural language, and datasets can explicitly reserve slots for hidden computation. Looking ahead, this chapter connects naturally to Chapter 45 on post-training data recipes, Chapter 46 on RL reasoning data engineering, and the reasoning flywheel projects in Part XIV (P06, P10, P12).
+This chapter builds on Part 5's synthetic data engineering and Part 6's reasoning data engineering. Chapters 15 through 17 discuss how to generate, distill, and quality-check high-quality training samples; Chapter 18 covers the organization of explicit CoT; and Chapters 19 and 20 cover the recording of intermediate states in tool and agent traces. Latent-Switch-69K pushes these threads to a finer level: intermediate reasoning need not always be stored as natural language, and datasets can explicitly reserve slots for hidden computation. Looking ahead, this chapter connects naturally to Chapter 45 on post-training data recipes, Chapter 46 on RL reasoning data engineering, and the reasoning flywheel projects in Part 14 (P06, P10, P12).
 
 ### 43.2 Dataset Overview: Scale, Difficulty, and Domain Composition
 
@@ -85,7 +85,7 @@ The starting point for constructing Latent-Switch-69K is reasoning traces sample
 
 The following pedagogical example shows the simplest way to extract source traces: load Dolci-Think-SFT-32B from Hugging Face, shuffle it with a fixed random seed, select a batch of records, and normalize the conversations into the minimum fields required for subsequent distillation. Within the responsibility boundary of Latent-Switch MindSpore, this step and the subsequent teacher API call are upstream data preparation; the MindSpore repository consumes already-distilled rows containing `stage1.correct_insight`, `stage2.distilled_cot`, and `stage2.answer`.
 
-Listing 43-1 provides the corresponding code or configuration example.
+Listing 43-1 provides a Python implementation excerpt.
 
 ```python
 from datasets import load_dataset
@@ -122,7 +122,7 @@ for row in sampled:
     )
 ```
 
-*Listing 43-1: Code or configuration example.*
+*Listing 43-1: Python implementation excerpt.*
 
 
 The first stage is extracting the solution intuition. The data construction prompt asks the teacher to extract only key insights—neither writing a short CoT nor directly providing the final answer. This field should describe "the high-level plan for solving this problem," for example which equations to set up, which state space to enumerate, which data structure to use for a coding problem, or which causal relationship to isolate for a science question. Its granularity sits between a label and a full derivation: more specific than a domain label, yet more compressed than step-by-step reasoning. The core value of this approach is extracting the planning signal from Long-CoT that can be internalized, providing the basis for the subsequent latent budget.
@@ -131,7 +131,7 @@ The second stage is generating a compressed explicit CoT. The teacher continues 
 
 The following minimal implementation connects the two stages through an OpenAI-compatible API. The first stage requests only a JSON-formatted `correct_insight`; the second stage continues from the problem and that intuition, recording the hidden reasoning returned by the API as `distilled_cot` and the visible content as the final answer. The API key, endpoint, and teacher model are all read from environment variables.
 
-Listing 43-2 provides the corresponding code or configuration example.
+Listing 43-2 provides a Python implementation excerpt.
 
 ```python
 import asyncio
@@ -195,7 +195,7 @@ record = asyncio.run(
 )
 ```
 
-*Listing 43-2: Code or configuration example.*
+*Listing 43-2: Python implementation excerpt.*
 
 
 Figure 43-3 illustrates the corresponding workflow or structure.
@@ -257,7 +257,7 @@ Here $(l_1,\dots,l_m)$ are latent placeholder positions, $(t_1,\dots,t_n)$ are t
 
 The example below follows the real `build_sft_record` call pattern in Latent-Switch MindSpore `records.py`. The upstream distilled result enters through `stage1` and `stage2`, while `SFTBuildConfig` controls compression-ratio filtering, latent budget, loss weights, and the placeholder token. `validate_tokenizer_contract` in `tokens.py` first checks that `<latent_think>`, `</latent_think>`, `<think>`, `</think>`, `<|im_start|>`, `<|im_end|>`, and `<|endoftext|>` are encoded stably.
 
-Listing 43-3 provides the corresponding code or configuration example.
+Listing 43-3 provides a Python implementation excerpt.
 
 ```python
 import os
@@ -295,14 +295,14 @@ if reason != "ok":
     raise ValueError(f"sample filtered during SFT build: {reason}")
 ```
 
-*Listing 43-3: Code or configuration example.*
+*Listing 43-3: Python implementation excerpt.*
 
 
 Production preprocessing additionally filters samples according to compression ratio and field completeness and records the loss weights for the CoT and answer. More importantly, the rendered record must still be passed to `materialize_sample` or `LatentSwitchSFTSource` in `dataset.py` to relocate special-token spans and construct supervision masks. Concatenating this string alone does not make the sample safe for training.
 
 If MindSpore is installed in the runtime, the constructed JSONL can be wrapped directly as a `mindspore.dataset.GeneratorDataset`. The minimal loading example below shows the training-side columns such as `input_ids`, `labels`, `teacher_kl_mask`, and `latent_positions`.
 
-Listing 43-4 provides the corresponding code or configuration example.
+Listing 43-4 provides a Python implementation excerpt.
 
 ```python
 import os
@@ -327,12 +327,12 @@ for batch in dataset.create_dict_iterator(output_numpy=True, num_epochs=1):
     break
 ```
 
-*Listing 43-4: Code or configuration example.*
+*Listing 43-4: Python implementation excerpt.*
 
 
 Below is a pedagogical, simplified sample sequence. It is intended only to illustrate the schema and mask relationships and is not an actual training sample from the dataset.
 
-Listing 43-5 provides the corresponding code or configuration example.
+Listing 43-5 provides a latent-reasoning trace sample.
 
 ```text
 <|im_start|>user
@@ -353,18 +353,18 @@ The final answer is 67.
 <|im_end|>
 ```
 
-*Listing 43-5: Code or configuration example.*
+*Listing 43-5: Latent-reasoning trace sample.*
 
 
 In this example, `<latent_think>` and `</latent_think>` are structural boundaries; the four `<|endoftext|>` tokens in between are merely placeholders, and their count in real samples is determined by `n_latent_steps`; the region from `<think>` to `</think>` is the visible compressed CoT; and the following text is the answer. For training purposes, what matters is not whether this text looks like natural conversation, but whether each token span can be stably located. `build_spans` in [Latent-Switch MindSpore](https://github.com/yuki10033/latent_switch_mindspore) checks that a sample contains exactly one `<latent_think>`, one `</latent_think>`, one `<think>`, and one `</think>`, and verifies that they satisfy:
 
-Listing 43-6 provides the corresponding code or configuration example.
+Listing 43-6 provides a latent-boundary ordering constraint example.
 
 ```text
 assistant_content_start <= latent_start < latent_end < think_start < think_end
 ```
 
-*Listing 43-6: Code or configuration example.*
+*Listing 43-6: Latent-boundary ordering constraint example.*
 
 
 This ordering constraint is critical. If a boundary token is missing, duplicated, or out of order, masks will be misaligned: latent placeholders may be mistakenly treated as ordinary answer tokens, or the answer span may be truncated. For ordinary SFT data, a boundary error may be merely a formatting issue; for latent-switch data, a boundary misalignment directly changes the training objective.
@@ -475,13 +475,13 @@ At the versioning level, each release should include a data version number, buil
 
 Placing Latent-Switch-69K back within the book's overall structure, its value lies not in introducing an isolated dataset but in demonstrating a new interface for reasoning data.
 
-With respect to Part V, it extends the core ideas of synthetic and distillation data. Chapter 15 emphasizes designing samples from a task definition for data synthesis; Chapter 16 discusses how distillation transfers strong model behavior into training corpora; Chapter 17 discusses quality assessment and filtering. Latent-Switch-69K concretizes these principles: extracting high-level solution intuitions from teacher traces, preserving explicit verification with compressed CoT, and using masks to assign different supervision objectives to different token spans.
+With respect to Part 5, it extends the core ideas of synthetic and distillation data. Chapter 15 emphasizes designing samples from a task definition for data synthesis; Chapter 16 discusses how distillation transfers strong model behavior into training corpora; Chapter 17 discusses quality assessment and filtering. Latent-Switch-69K concretizes these principles: extracting high-level solution intuitions from teacher traces, preserving explicit verification with compressed CoT, and using masks to assign different supervision objectives to different token spans.
 
-With respect to Part VI, it represents the next step in CoT data engineering. CoT samples in Chapter 18 typically supervise the reasoning process directly as text; tool-use data in Chapter 19 emphasizes actions, observations, and outcomes; agent data in Chapter 20 emphasizes states and trajectories. Latent-Switch-69K shows that reasoning states can also be partially stored in invisible latent slots. It does not abandon interpretability; rather, it compresses visible explanation to the necessary verification chain and migrates exploratory planning into the hidden computation interval.
+With respect to Part 6, it represents the next step in CoT data engineering. CoT samples in Chapter 18 typically supervise the reasoning process directly as text; tool-use data in Chapter 19 emphasizes actions, observations, and outcomes; agent data in Chapter 20 emphasizes states and trajectories. Latent-Switch-69K shows that reasoning states can also be partially stored in invisible latent slots. It does not abandon interpretability; rather, it compresses visible explanation to the necessary verification chain and migrates exploratory planning into the hidden computation interval.
 
-With respect to Part XIII, it serves as a prerequisite template for post-training and RL reasoning data recipes. Chapter 45 discusses the data hierarchy for SFT, preference alignment, and online continuous optimization; Chapter 46 discusses RL reasoning, verifiers, candidate groups, and reward signals. Latent-Switch-69K introduces structured reasoning budgets and mask schemas at the SFT stage, enabling subsequent RL stages to continue optimizing around "whether the latent budget is appropriate," "whether explicit verification is sufficient," and "whether the answer is verifiable."
+With respect to Part 13, it serves as a prerequisite template for post-training and RL reasoning data recipes. Chapter 45 discusses the data hierarchy for SFT, preference alignment, and online continuous optimization; Chapter 46 discusses RL reasoning, verifiers, candidate groups, and reward signals. Latent-Switch-69K introduces structured reasoning budgets and mask schemas at the SFT stage, enabling subsequent RL stages to continue optimizing around "whether the latent budget is appropriate," "whether explicit verification is sufficient," and "whether the answer is verifiable."
 
-With respect to Part XIV projects, it can interface with P06, P10, and P12 respectively. P06's PRM data focuses on scoring individual process steps; Latent-Switch-69K provides compressed explicit reasoning and answer spans, suitable for further extracting scorable verification steps. P10's LLM data flywheel focuses on online feedback and continuous iteration; latent-switch data can serve as a candidate data asset for reducing inference token costs. P12's R1 reasoning flywheel focuses on multi-sample generation, verifiers, and rejection sampling; Latent-Switch-69K provides a cold-start approach: first use distillation data to teach the model how to switch between latent planning and explicit verification, then use verifiers and RL data to further adjust the budget and answer correctness.
+With respect to Part 14 projects, it can interface with P06, P10, and P12 respectively. P06's PRM data focuses on scoring individual process steps; Latent-Switch-69K provides compressed explicit reasoning and answer spans, suitable for further extracting scorable verification steps. P10's LLM data flywheel focuses on online feedback and continuous iteration; latent-switch data can serve as a candidate data asset for reducing inference token costs. P12's R1 reasoning flywheel focuses on multi-sample generation, verifiers, and rejection sampling; Latent-Switch-69K provides a cold-start approach: first use distillation data to teach the model how to switch between latent planning and explicit verification, then use verifiers and RL data to further adjust the budget and answer correctness.
 
 Finally, the engineering conclusions of this chapter can be compressed into four points.
 

@@ -26,13 +26,13 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 
 核心数据流可概括为：
 
-代码清单P11-1给出了相应的代码或配置示例。
+代码清单P11-1给出了流程示例。
 
 ```text
 候选语料 -> 配方采样 -> tokenizer 处理 -> packed dataset -> 训练烟测 -> loss 与样本质量报告
 ```
 
-*代码清单P11-1：代码或配置示例。*
+*代码清单P11-1：流程示例。*
 
 
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
@@ -44,6 +44,8 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 ## 实验或验收指标
 
 验收指标包括token 分布、语料配比偏差、packing 效率、训练 loss 趋势、吞吐、显存/成本和失败样本复查。若项目进入生产、课程或公开复现实验环境，还应记录版本号、依赖环境、随机种子、样本抽检结果和失败样本复盘记录。
+
+表 P11-1 汇总了该复现项目面向出版交付的验收维度。
 
 *表 P11-1：Mini-DeepSeek 预训练复现出版验收表*
 
@@ -120,7 +122,7 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 
 我们编写 `mix_sampler.py` 脚本，按设定比例进行抽样。
 
-代码清单P11-2给出了相应的代码或配置示例。
+代码清单P11-2给出了Python 实现片段。
 
 ```python
 from datasets import load_dataset, concatenate_datasets
@@ -146,14 +148,14 @@ mixed = sample_multi_source(RECIPE, target_docs=500_000)
 mixed.save_to_disk("./data/mixed_1b_raw")
 ```
 
-*代码清单P11-2：代码或配置示例。*
+*代码清单P11-2：Python 实现片段。*
 
 
 ### Step 2: 跨源 MinHash LSH 去重
 
 多源混合后，最大的隐患是不同来源间存在重复（例如 The Stack v2 中的代码片段，与 arXiv 论文中的代码段重复）。在 项目 1（Mini-C4）中，我们仅在单源内进行了 MinHash 去重；在此，我们需要全局去重。
 
-代码清单P11-3给出了相应的代码或配置示例。
+代码清单P11-3给出了Python 实现片段。
 
 ```python
 from datasketch import MinHash, MinHashLSH
@@ -181,14 +183,14 @@ unique, dup_count = cross_source_dedup(load_stage("mixed_1b_raw"))
 unique.save_to_disk("./data/mixed_1b_dedup")
 ```
 
-*代码清单P11-3：代码或配置示例。*
+*代码清单P11-3：Python 实现片段。*
 
 
 ### Step 3: 训练 150K 超大 Tokenizer
 
 DeepSeek-V3 (DeepSeek-AI et al. 2024) 采用了一个规模为 150K 左右的超大词表（相较于 Llama-2 的 32K 提升巨大），这使其在处理中文与代码时效率极高。在此步骤，我们将以混合且去重后的数据训练 BPE Tokenizer。
 
-代码清单P11-4给出了相应的代码或配置示例。
+代码清单P11-4给出了Python 实现片段。
 
 ```python
 from tokenizers import Tokenizer, models, trainers, pre_tokenizers, normalizers
@@ -210,14 +212,14 @@ def train_large_tokenizer(dataset, vocab_size=150_000):
 train_large_tokenizer(load_stage("mixed_1b_dedup"))
 ```
 
-*代码清单P11-4：代码或配置示例。*
+*代码清单P11-4：Python 实现片段。*
 
 
 ### Step 4: Pack & Shuffle 与 .arrow 分片产出
 
 为了让 GPU 在训练期间不用处理大量的 Padding，我们将变长的 Token 序列拼接成长度为 `4096` 或 `8192` 的连续片段（Pack），并加入特殊分隔符。
 
-代码清单P11-5给出了相应的代码或配置示例。
+代码清单P11-5给出了Python 实现片段。
 
 ```python
 from tokenizers import Tokenizer
@@ -243,19 +245,21 @@ packed = pack_and_shuffle(load_stage("mixed_1b_dedup"), "./data/mini_deepseek_to
 packed.save_to_disk("./data/mixed_1b_final_packed")
 ```
 
-*代码清单P11-5：代码或配置示例。*
+*代码清单P11-5：Python 实现片段。*
 
 
 ## 工程运行与最小复现路径
 
 本项目的最小运行入口是 `run_pipeline.sh`。脚本串联四个阶段：多源采样、跨源去重、tokenizer 训练和 packing。它的价值不只是“省去手动执行四条命令”，而是把阶段顺序、产物路径和失败位置固定下来。对于预训练数据工程，顺序错误会直接改变数据分布。例如，如果先训练 tokenizer 再做跨源去重，tokenizer 会看见本应被删除的重复样本；如果先打包再 shuffle，后续再调整配方会变得难以追踪。
 
-Listing P11-1 给出本项目的最小运行入口。正式复现实验应在运行前记录 Python、datasets、tokenizers、datasketch、磁盘路径和随机种子。
+代码清单P11-6 给出本项目的最小运行入口。正式复现实验应在运行前记录 Python、datasets、tokenizers、datasketch、磁盘路径和随机种子。
 
 ```bash
 cd code/zh/project_11_mini_deepseek
 bash run_pipeline.sh
 ```
+
+*代码清单P11-6：最小运行入口。*
 
 这段命令会依次生成 `mixed_1b_raw`、`mixed_1b_dedup`、`mini_deepseek_tokenizer.json` 和 `mixed_1b_final_packed`。若某一阶段失败，不建议直接删除整个 `data/` 目录重跑；更稳妥的做法是先确认失败阶段和上游产物是否完整，再只清理受影响的阶段目录。教学复现可以将 `target_docs` 从 `500000` 降到更小规模，先验证契约和测试，再扩大数据量。
 

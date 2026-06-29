@@ -1,8 +1,8 @@
-# Part IV: Instruction Fine-Tuning and Preference Data
+# Part 4: Instruction Fine-tuning and Preference Data
 
 ## Overview
 
-Part IV focuses on supervised data construction for post-alignment models, covering supervised fine-tuning, preference learning, reward signals, annotation platforms, quality assurance, and data operations mechanisms.
+Part 4 focuses on supervised data construction for post-alignment models, covering supervised fine-tuning, preference learning, reward signals, annotation platforms, quality assurance, and data operations mechanisms.
 
 ## Terminology
 

@@ -45,6 +45,8 @@ Listing P04-1 provides a flow or path example illustrating the input/output rela
 Seed problem → Problem evolution → Solution generation → Code/formula validation → Difficulty and topic annotation → Textbook-grade sample
 ```
 
+*Listing P04-1: Process or path example.*
+
 The purpose of this snippet is to transform the above flow into an inspectable structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -85,7 +87,7 @@ Reproducibility materials should include data source descriptions, minimal sampl
 
 Figure P04-1 illustrates the corresponding workflow or structure.
 
-![Figure P04-1](../../images/part14/p04/Xu-Project04-Fig01.svg)
+![Figure P04-1: Synthetic Mathematics and Code Textbook Factory Project Positioning Diagram](../../images/part14/p04/Xu-Project04-Fig01.svg)
 *Figure P04-1: Synthetic Mathematics and Code Textbook Factory Project Positioning Diagram.*
 
 
@@ -112,7 +114,7 @@ Methodologically, this pipeline is arguably more important than the specific pro
 
 Figure P04-2 illustrates the corresponding workflow or structure.
 
-![Figure P04-2](../../images/part14/p04/Xu-Project04-Fig02.svg)
+![Figure P04-2: P04 Project Objectives and Scope Diagram](../../images/part14/p04/Xu-Project04-Fig02.svg)
 *Figure P04-2: P04 Project Objectives and Scope Diagram.*
 
 
@@ -194,7 +196,7 @@ In this sense, P04 is not just a "small reasoning data project" but more aptly a
 
 Figure P04-3 illustrates the corresponding workflow or structure.
 
-![Figure P04-3](../../images/part14/p04/Xu-Project04-Fig03.svg)
+![Figure P04-3: P04 Overall Architecture Overview Diagram](../../images/part14/p04/Xu-Project04-Fig03.svg)
 *Figure P04-3: P04 Overall Architecture Overview Diagram.*
 
 
@@ -240,7 +242,7 @@ At this stage, the project truly upgrades from "able to generate problems" to an
 
 Figure P04-4 illustrates the corresponding workflow or structure.
 
-![Figure P04-4](../../images/part14/p04/Xu-Project04-Fig04.svg)
+![Figure P04-4: Textbook Factory Responsibility Collaboration Diagram](../../images/part14/p04/Xu-Project04-Fig04.svg)
 *Figure P04-4: Textbook Factory Responsibility Collaboration Diagram.*
 
 
@@ -288,7 +290,7 @@ Stating these responsibility facets explicitly amounts to asserting that **a tex
 
 Figure P04-5 illustrates the corresponding workflow or structure.
 
-![Figure P04-5](../../images/part14/p04/Xu-Project04-Fig05.svg)
+![Figure P04-5: Mapping from Seed Problems to Chapter Plans](../../images/part14/p04/Xu-Project04-Fig05.svg)
 *Figure P04-5: Mapping from Seed Problems to Chapter Plans.*
 
 
@@ -329,7 +331,7 @@ From current results, the project has formed two textbook tracks (`math=30`, `co
 
 Figure P04-6 illustrates the corresponding workflow or structure.
 
-![Figure P04-6](../../images/part14/p04/Xu-Project04-Fig06.svg)
+![Figure P04-6: Evol-Instruct Evolution Path Diagram](../../images/part14/p04/Xu-Project04-Fig06.svg)
 *Figure P04-6: Evol-Instruct Evolution Path Diagram.*
 
 
@@ -370,7 +372,7 @@ Textbook data cannot tolerate such loss of control. Unlike open-ended writing, e
 
 Figure P04-7 illustrates the corresponding workflow or structure.
 
-![Figure P04-7](../../images/part14/p04/Xu-Project04-Fig07.svg)
+![Figure P04-7: CoT vs. PoT Comparison Diagram](../../images/part14/p04/Xu-Project04-Fig07.svg)
 *Figure P04-7: CoT vs. PoT Comparison Diagram.*
 
 
@@ -413,7 +415,7 @@ From a training perspective, this has greater generalization value than simply m
 
 Figure P04-8 illustrates the corresponding workflow or structure.
 
-![Figure P04-8](../../images/part14/p04/Xu-Project04-Fig08.svg)
+![Figure P04-8: Generation Pipeline Detail Diagram](../../images/part14/p04/Xu-Project04-Fig08.svg)
 *Figure P04-8: Generation Pipeline Detail Diagram.*
 
 
@@ -445,7 +447,7 @@ Generation systems inevitably encounter network jitter, incomplete responses, or
 
 Figure P04-9 illustrates the corresponding workflow or structure.
 
-![Figure P04-9](../../images/part14/p04/Xu-Project04-Fig09.svg)
+![Figure P04-9: Sandbox Validation Execution Path Diagram](../../images/part14/p04/Xu-Project04-Fig09.svg)
 *Figure P04-9: Sandbox Validation Execution Path Diagram.*
 
 
@@ -493,7 +495,7 @@ The critical risk of textbook data is that content appears to resemble a teacher
 
 Figure P04-10 illustrates the corresponding workflow or structure.
 
-![Figure P04-10](../../images/part14/p04/Xu-Project04-Fig10.svg)
+![Figure P04-10: Textbook Packaging Artifact Relationship Diagram](../../images/part14/p04/Xu-Project04-Fig10.svg)
 *Figure P04-10: Textbook Packaging Artifact Relationship Diagram.*
 
 
@@ -539,7 +541,7 @@ Many engineering projects treat teacher guides as supplementary instructional ma
 
 Figure P04-11 illustrates the corresponding workflow or structure.
 
-![Figure P04-11](../../images/part14/p04/Xu-Project04-Fig11.svg)
+![Figure P04-11: Training Encapsulation Interface Diagram](../../images/part14/p04/Xu-Project04-Fig11.svg)
 *Figure P04-11: Training Encapsulation Interface Diagram.*
 
 

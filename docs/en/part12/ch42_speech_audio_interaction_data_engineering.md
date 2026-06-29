@@ -77,7 +77,7 @@ Separate channel modeling enables precise failure attribution. If the model gene
 
 An S2SEmoControl record expresses the mapping from the user side `(query_audio, query_text, query_gender, query_mood)` to the assistant side `(answer_text, answer_audio, answer_gender, answer_mood)`. Conversational content, acoustic conditions, emotion labels, audio files, and speech tokens are bound together in a single record, making it not a loose combination of "text Q&A plus attached audio" but a complete voice interaction training sample.
 
-Listing 42-1 provides the corresponding code or configuration example.
+Listing 42-1 provides a JSON data example.
 
 ```json
 {
@@ -104,14 +104,14 @@ Listing 42-1 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 42-1: Code or configuration example.*
+*Listing 42-1: JSON data example.*
 
 
 In this sample, the user says "Tell me a short story." and the assistant replies "Sure, let me make up a short story for you. Once upon a time there was a very diligent little nightingale...". `query_gender` is `female` and `answer_gender` is `male`; both `query_mood` and `answer_mood` are `neutral`. During training, `query_audio_path` and `query_token_25hz` can serve as speech understanding inputs, with `query` providing the transcribed semantic anchor; `answer` is the semantic target, and `answer_token_25hz` together with `answer_audio_path` provide the speech generation supervision; `answer_gender` and `answer_mood` specify the style conditions for the output voice.
 
 TTSSpeakerControl concentrates the control capability in a text-to-speech form. The input text is split into two parts: `text` describes how the voice should express itself, while `answer` is the content to be spoken. For example, `text` may read "female, somewhat fearful, sweaty palms, trembling voice," and `answer` may read "Run, it's not safe here." This type of record indicates that the TTS subset does not randomly assign mood labels to sentences; instead, it constructs style–content pairs in which the natural-language style description, the structured label, and the content to be synthesized must mutually reinforce each other.
 
-Listing 42-2 provides the corresponding code or configuration example.
+Listing 42-2 provides a JSON data example.
 
 ```json
 {
@@ -133,7 +133,7 @@ Listing 42-2 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 42-2: Code or configuration example.*
+*Listing 42-2: JSON data example.*
 
 
 Combining samples from both S2S and TTS, the fields in VoiceStyleControl can be organized into six layers: task identifier, text content, acoustic conditions, emotion conditions, speech supervision, and basic audio configuration. S2S samples contain both user-side and assistant-side fields and therefore distinguish query-side from answer-side; TTS samples generate only assistant-side speech and therefore have a more concentrated set of fields. `language` fixes the language, and `sample_rate` fixes the audio sampling configuration; these foundational fields are the underlying contract for training loading and evaluation reproducibility and must not be inferred implicitly from path names or directory conventions alone.
@@ -157,7 +157,7 @@ At the data-synthesis stage, this field difference manifests as two ways of orga
 
 A unified JSON Schema constrains required fields by task type; a production-grade manifest should further add enum constraints, path-existence validation, file hashes, authorization IDs, tokenizer name, tokenizer version, and token frame rate declarations.
 
-Listing 42-3 provides the corresponding code or configuration example.
+Listing 42-3 provides a JSON schema example.
 
 ```json
 {
@@ -276,7 +276,7 @@ Listing 42-3 provides the corresponding code or configuration example.
 }
 ```
 
-*Listing 42-3: Code or configuration example.*
+*Listing 42-3: JSON schema example.*
 
 
 The unified schema splits the training entry point into three parts: semantic input consists of `query`, `text`, or `answer` text tokens; style input consists of `query_gender`, `answer_gender`, `query_mood`, `answer_mood`, and reference voice ID; and the acoustic target is the answer-side speech token or audio. `answer_gender` and `answer_mood` must not remain only in offline metadata — they must be mapped to control conditions or conditioning text in the dataloader; otherwise the model will never acquire genuine controllable generation capability.
@@ -309,7 +309,7 @@ The fourth step is speech synthesis or collection. S2S requires generating both 
 
 The following example from S2SEmoControl shows how schema fields enter the synthesis process: `query_id` and `answer_id` select reference voices for the two sides; when `answer_mood` is not `neutral`, an emotion instruction is attached to the query-side synthesis text so that the input speech carries the output style control intent.
 
-Listing 42-4 provides the corresponding code or configuration example.
+Listing 42-4 provides a Python implementation excerpt.
 
 ```python
 def build_synthesis_inputs(record):
@@ -345,7 +345,7 @@ a_tokens, a_speech = backend.compute_zeroshot_speech_token(
 )
 ```
 
-*Listing 42-4: Code or configuration example.*
+*Listing 42-4: Python implementation excerpt.*
 
 
 This example illustrates the key S2S branch: `answer_mood` determines whether an emotion instruction is injected, and `q_tokens`, `a_tokens`, and their corresponding waveforms map to the `query_token_25hz` and `answer_token_25hz` fields in the manifest.
@@ -354,7 +354,7 @@ The fifth step is discrete speech tokenization. Speech generation training needs
 
 TTSSpeakerControl uses another synthesis path: `answer` is the content to be spoken, while `text` or `prompt` is the style description. From a data-engineering perspective, the important part is not every internal parameter of CosyVoice's flow model and vocoder, but a stable data flow: extract content and style instruction from the record, call the synthesis function to produce answer-side tokens and audio, then write the supervision locations back into the same manifest record.
 
-Listing 42-5 provides the corresponding code or configuration example.
+Listing 42-5 provides a Python implementation excerpt.
 
 ```python
 for sample_idx, record in id2meta:
@@ -378,7 +378,7 @@ for sample_idx, record in id2meta:
     write_jsonl_record(jsonlf, record)
 ```
 
-*Listing 42-5: Code or configuration example.*
+*Listing 42-5: Python implementation excerpt.*
 
 
 This example corresponds to the core chain by which a natural-language style description becomes trainable speech supervision: `instruction_text` enters the synthesis function, `speech_token` becomes the discrete target that later training can model directly, and `speech_audio` supports listening checks, reverse ASR, and human review. Once the token offset, audio offset, and wav path are written back to the same record, the sample becomes traceable.

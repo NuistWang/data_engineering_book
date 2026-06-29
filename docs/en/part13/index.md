@@ -1,12 +1,12 @@
-# Part XIII: Data Engineering Recipes and Paradigms for Open-Source Large Language Models
+# Part 13: Open-source LLM Data Engineering Recipes and Paradigms
 
 ## Positioning of This Part
 
-Part XIII transitions from specialized case studies to open-source model data recipes, with the goal of abstracting long-term, transferable data engineering paradigms. Open-source model reports, training logs, and companion repositories frequently contain large numbers of model names, dataset names, and benchmark conclusions; the focus of this part is not to chase individual trending models, but to identify the data organization principles underlying different training stages.
+Part 13 transitions from specialized case studies to open-source model data recipes, with the goal of abstracting long-term, transferable data engineering paradigms. Open-source model reports, training logs, and companion repositories frequently contain large numbers of model names, dataset names, and benchmark conclusions; the focus of this part is not to chase individual trending models, but to identify the data organization principles underlying different training stages.
 
 This part covers five categories of recipes: pretraining data recipes, post-training data recipes, RL/reasoning data recipes, VLM data recipes, and T2I/T2V generative model data recipes. These correspond respectively to the questions of "what raw materials does the model learn from," "how is controllable behavior acquired," "how is verifiable reasoning formed," "how is vision-language alignment achieved," and "how generative models absorb high-quality image-text/video supervision."
 
-Looking backward, this part builds on the methods, platforms, evaluation frameworks, and compliance foundations established in Parts I through XII. Looking forward, it provides recipe coordinates for the open-source model reproduction, inference flywheels, multimodal instruction factories, video generation pipelines, and DataAgent application cases in Part XIV (P11–P15).
+Looking backward, this part builds on the methods, platforms, evaluation frameworks, and compliance foundations established in Parts 1 through 12. Looking forward, it provides recipe coordinates for the open-source model reproduction, inference flywheels, multimodal instruction factories, video generation pipelines, and DataAgent application cases in Part 14 (P11–P15).
 
 ## Terminology Conventions
 
@@ -36,4 +36,4 @@ T2I/T2V recipes focus on images, video, captions, motion information, quality sc
 
 It is recommended to read Chapters 44 and 45 first to establish baseline data recipes for pretraining and post-training, then proceed to Chapter 46 to understand the divergence between reasoning models and RL data engineering, and finally read Chapters 47 and 48 to enter the data recipes for VLMs and generative multimodal models.
 
-For further reproduction work, readers may proceed to Part XIV (P11–P15) and cross-reference the recipes abstracted in this part against the resource constraints, acceptance metrics, and failure patterns found in the project case studies.
+For further reproduction work, readers may proceed to Part 14 (P11–P15) and cross-reference the recipes abstracted in this part against the resource constraints, acceptance metrics, and failure patterns found in the project case studies.

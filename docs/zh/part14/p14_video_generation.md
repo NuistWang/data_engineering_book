@@ -48,13 +48,13 @@
 
 核心数据流可概括为：
 
-代码清单P14-1给出了相应的代码或配置示例。
+代码清单P14-1给出了流程示例。
 
 ```text
 视频源 -> 片段切分 -> 帧/字幕/运动特征 -> caption 与质量评分 -> 过滤去重 -> T2V 训练样本
 ```
 
-*代码清单P14-1：代码或配置示例。*
+*代码清单P14-1：流程示例。*
 
 
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
@@ -125,7 +125,7 @@
 
 视频加载阶段先建立一份可靠的源数据清单，暂不进入训练或过滤环节。Pexels (Pexels 2014) 视频文件通常已经下载到本地目录，同时配有 `pexels_manifest.jsonl`。manifest 中保存视频 ID、页面链接、作者信息和本地保存路径；如果 manifest 缺失，也可以从 `pexels_*.mp4` 文件名中恢复最小记录。为了避免依赖下载阶段的旧元数据，脚本会对每个 mp4 重新执行 `ffprobe`，补齐 duration、fps、width、height、nb_frames 和 file_size。由此生成的 `source_videos.jsonl` 可以作为后续流水线的稳定入口。
 
-代码清单P14-2给出了相应的代码或配置示例。
+代码清单P14-2给出了流程示例。
 
 ```python
 from pathlib import Path
@@ -146,7 +146,7 @@ def load_source_videos(src_dir: Path) -> list[dict]:
     return records
 ```
 
-*代码清单P14-2：代码或配置示例。*
+*代码清单P14-2：流程示例。*
 
 
 这里需要注意两点。第一，所有源视频都被整理成结构一致的 JSONL 行，后续阶段不再直接扫描 mp4 目录，而是读取这份 manifest。第二，加载过程支持断点续跑：已经写入的 `video_id` 不重复处理，新视频只追加到文件末尾。在 1000+ 视频规模下，这种方式比一次性全量重跑更稳，也便于中途清除损坏视频。
@@ -157,7 +157,7 @@ def load_source_videos(src_dir: Path) -> list[dict]:
 
 T2V 训练样本通常按镜头组织，不直接沿用原始视频边界。一个 Pexels 视频可能只有一个长镜头，也可能包含多个剪辑点。若不做切分，caption 很容易把多个场景揉在一起，训练时文本和画面之间会出现错配。这里使用 PySceneDetect 的 ContentDetector 做镜头检测（PySceneDetect Contributors 2026），并在检测不到边界时把整段视频作为一个 shot。切分阶段还要过滤过短片段，例如小于 1 秒的镜头通常不保留。
 
-代码清单P14-3给出了相应的代码或配置示例。
+代码清单P14-3给出了Python 实现片段。
 
 ```python
 from scenedetect import open_video, SceneManager, ContentDetector
@@ -179,7 +179,7 @@ def split_one_video(record: dict, out_root: Path, min_shot_len: float = 1.0):
     return [build_shot_record(record, idx, scene, path) for idx, (scene, path) in enumerate(zip(kept, sorted(shot_dir.glob("*.mp4"))))]
 ```
 
-*代码清单P14-3：代码或配置示例。*
+*代码清单P14-3：Python 实现片段。*
 
 
 实际运行时，1000 条视频如果平均切出 8 到 15 个镜头，就能得到约 10000 个片段。这个数量只是实验规模上的参考，并不是固定要求。需要注意的是，PySceneDetect 的阈值会明显影响片段数量：阈值低，切分更细；阈值高，切分更保守。建议先抽样观察切分结果，再固定阈值，避免产生大量语义不完整的碎片。
@@ -192,7 +192,7 @@ def split_one_video(record: dict, out_root: Path, min_shot_len: float = 1.0):
 
 这里不做复杂动作识别，只计算连续帧之间的平均光流幅值。脚本将视频缩放到 480×270 的代理分辨率，按 stride 抽取帧对，并限制最大帧对数量，避免长视频计算过慢。最终输出 `motion_strength`、`n_pairs` 和 `pass_motion`。
 
-代码清单P14-4给出了相应的代码或配置示例。
+代码清单P14-4给出了流程示例。
 
 ```python
 def motion_filter_one(shot: dict, threshold: float = 0.5) -> dict:
@@ -215,7 +215,7 @@ def motion_filter_one(shot: dict, threshold: float = 0.5) -> dict:
         return failed_motion_record(shot["shot_id"], str(exc))
 ```
 
-*代码清单P14-4：代码或配置示例。*
+*代码清单P14-4：流程示例。*
 
 
 运动阈值不宜只凭经验一次确定。可以先统计所有片段的 `motion_strength` 分布，再抽查低分、中分和高分样本。对于普通公开视频，阈值可以从 0.5 附近开始试验；若数据中包含大量慢镜头、自然风光或微动作，需要降低阈值，避免误删有效样本。这个阶段的输出不一定马上删除失败片段，也可以保留 `pass_motion=False` 的记录，后续按训练阶段决定是否使用。
@@ -228,7 +228,7 @@ def motion_filter_one(shot: dict, threshold: float = 0.5) -> dict:
 
 本项目使用 CLIP ViT-L/14 提取图像特征，再接入 LAION-Aesthetic MLP 计算审美分。每个 shot 均匀采样 4 帧，分别打分后取平均值。相比只取首帧或中间帧，多帧平均更稳定，因为视频片段内部可能存在短暂模糊、主体遮挡或曝光变化。
 
-代码清单P14-5给出了相应的代码或配置示例。
+代码清单P14-5给出了流程示例。
 
 ```python
 import torch
@@ -252,7 +252,7 @@ def score_shot_aesthetic(segment_path, clip_model, clip_processor, aesthetic_mlp
     return {"aesthetic_score": avg, "pass_aesthetic": avg >= 5.0, "status": "ok"}
 ```
 
-*代码清单P14-5：代码或配置示例。*
+*代码清单P14-5：流程示例。*
 
 
 工程实现中还需要处理多 GPU 分片和显存退化。在本项目中脚本采用确定性分片：先按 `shot_id` 排序，再根据样本序号对 `num_shards` 取模，每个 GPU 只处理自己的 shard。这种分片方式可以避免重复计算，也便于失败后从指定 shard 继续恢复。审美阈值也不应只作为删除条件使用。可以先把分数写入 manifest，再在训练阶段按分数设置采样权重或数据分桶。
@@ -265,7 +265,7 @@ def score_shot_aesthetic(segment_path, clip_model, clip_processor, aesthetic_mlp
 
 实现上，脚本先从 shot 中按时间顺序采样 8 帧，并保存到 `frames/pexels_<video_id>/shot_<idx>/`。保存帧便于在 caption 阶段复查输入，也能让 Step 6 的镜头语言标注复用同一组帧，避免重复解码视频。
 
-代码清单P14-6给出了相应的代码或配置示例。
+代码清单P14-6给出了Python 实现片段。
 
 ```python
 CAPTION_PROMPT = """
@@ -286,7 +286,7 @@ def generate_video_caption(frame_paths, model, processor, frames_n=8):
     return {"caption_en": caption, "n_words": len(caption.split()), "caption_short": len(caption.split()) < 50}
 ```
 
-*代码清单P14-6：代码或配置示例。*
+*代码清单P14-6：Python 实现片段。*
 
 
 若第一次 caption 过短，可以提高 temperature 重试两次，但不建议无限重试。过度重试可能让 caption 变长，但不一定提高准确性。对于训练数据，可以保留 `caption_short` 标记，在后处理阶段统一处理，避免模型为了凑长度补写画面中不存在的细节。InternVL3 的接入方式与 Qwen2.5-VL 类似，只需要替换模型加载和输入组织接口；数据层面的流程仍保持为“按时间顺序采样多帧 → 生成单段视频描述”。
@@ -297,7 +297,7 @@ def generate_video_caption(frame_paths, model, processor, frames_n=8):
 
 多帧 caption 侧重描述视频内容，镜头语言标注则补充拍摄方式。这一步使用两条并行路径：第一条路径由 VLM 按受控词表输出结构化标签，包括景别、机位、构图、光照、色彩和风格；第二条路径由光流估计相机运动，输出 static、pan、tilt、zoom、jitter 或 complex 等类别。两部分合并后，样本就同时具备语义 caption 和拍摄语言标签。
 
-代码清单P14-7给出了相应的代码或配置示例。
+代码清单P14-7给出了流程示例。
 
 ```python
 VOCAB = {
@@ -320,14 +320,14 @@ def tag_shot_language(shot_id: str, segment_path: str, frame_paths: list[str]) -
     }
 ```
 
-*代码清单P14-7：代码或配置示例。*
+*代码清单P14-7：流程示例。*
 
 
 这里建议使用受控词表，避免让模型自由生成标签。自由文本标签看起来更丰富，但很难用于检索、分桶和训练采样；受控标签的表达范围有限，却能把同类样本归到同一字段下。例如，`close_up`、`medium`、`wide` 可以直接用于景别分层；`golden_hour`、`backlit`、`low_key` 可以用于光照分布统计；`pan_left`、`zoom_in`、`jitter` 可以用于相机运动控制样本构建。在 T2V 训练中，这类结构化字段比一段漂亮但不可控的描述更容易进入工程流程。
 
 完成 Step 6 后，最终样本可以组织为如下形式：
 
-代码清单P14-8给出了相应的代码或配置示例。
+代码清单P14-8给出了Python 实现片段。
 
 ```python
 final_sample = {
@@ -346,7 +346,7 @@ final_sample = {
 }
 ```
 
-*代码清单P14-8：代码或配置示例。*
+*代码清单P14-8：Python 实现片段。*
 
 
 这个结构已经具备可训练数据的基本形态。后续可以继续加入 NSFW 过滤、OCR/水印过滤、去重、类别重采样和 WebDataset 打包。在这条流水线中，需要把握的是样本组织方式：视频样本会在每个阶段逐步积累可学习的监督信号，最后再被组织成训练数据。镜头切分提供时间边界，运动过滤提供动态质量，美学过滤提供视觉质量，多帧 caption 提供语义监督，镜头语言标注提供拍摄控制信息。这些字段配合使用后，T2V 模型更容易建立稳定的“文本—动作—镜头”对应关系。
@@ -355,7 +355,7 @@ final_sample = {
 
 本项目的代码并不是一次性 notebook，而是按生产流水线的方式组织。`run_pipeline.sh` 将六个阶段串成端到端流程，并通过环境变量控制数据目录、输出目录、GPU 数量、样本上限和模型路径。默认配置包括 `ROOT`、`OUT`、`SRC`、`N_GPU`、`MAX_SAMPLES`、`CLIP_PATH`、`MLP_PATH` 和 `QWEN_PATH`。这些变量应写入实验记录，避免只保存最终 JSONL 而丢失运行环境。
 
-Listing P14-1 展示了运行入口的核心形式。该命令不是唯一部署方式，但说明了本项目的最小工程边界：输入目录、输出目录、GPU 数量、样本上限和模型路径都必须显式给出。
+代码清单P14-9 展示了运行入口的核心形式。该命令不是唯一部署方式，但说明了本项目的最小工程边界：输入目录、输出目录、GPU 数量、样本上限和模型路径都必须显式给出。
 
 ```bash
 ROOT=/data0/book_code \
@@ -368,6 +368,8 @@ MLP_PATH=/data0/improved-aesthetic-predictor/sac+logos+ava1-l14-linearMSE.pth \
 QWEN_PATH=/data0/qwen-vl \
 bash run_pipeline.sh
 ```
+
+*代码清单P14-9：命令行运行示例。*
 
 这段命令的作用是固定运行上下文，而不是展示所有参数。真正的生产运行还需要记录 CUDA、PyTorch、Transformers、PySceneDetect、ffmpeg、CLIP 权重、Qwen2.5-VL 权重和 LAION-Aesthetic MLP 权重版本。
 
@@ -499,7 +501,7 @@ P14 的交付物不应只包含最终 manifest。视频数据流水线涉及视�
 
 视频数据比纯文本和单图数据更需要撤回机制。一个视频片段可能涉及原作者授权、平台许可、人物肖像、地点信息、商标、水印和背景文字。即使本项目以 Pexels 开源视频为例，发布时仍应保留从最终样本回到原始页面和作者信息的路径。
 
-表 P14-9 给出视频样本撤回流程。
+表 P14-8 给出视频样本撤回流程。
 
 | 步骤 | 操作 | 影响对象 |
 | --- | --- | --- |
@@ -510,7 +512,7 @@ P14 的交付物不应只包含最终 manifest。视频数据流水线涉及视�
 | 重建 manifest | 重新合并 final manifest 和统计报告 | manifest / reports |
 | 发布说明 | 记录删除范围、新版本号和影响统计 | release note |
 
-*表 P14-9：视频生成数据样本撤回流程*
+*表 P14-8：视频生成数据样本撤回流程*
 
 撤回流程要求 final manifest 保留 `video_id`、`page_url`、`author_name` 和 `license`。如果只保存 `segment_path` 和 `caption_en`，后续很难确认一个训练样本来自哪个原始视频。对于公开视频平台，授权状态也可能随时间变化，因此发布版本应冻结来源快照，并说明后续撤回响应策略。
 
@@ -518,7 +520,7 @@ P14 的交付物不应只包含最终 manifest。视频数据流水线涉及视�
 
 P14 的流水线可以迁移到电商、教育、工业、医疗、交通和影视素材等场景，但不同场景对“可训练片段”的定义不同。公开视频强调自然场景和通用运动，工业视频强调缺陷、流程和设备动作，教育视频强调板书、手势和演示步骤，交通视频强调目标轨迹、视角和安全事件。
 
-表 P14-10 给出领域迁移时的调整方向。
+表 P14-9 给出领域迁移时的调整方向。
 
 | 领域 | 视频类型 | 需要调整的环节 | 额外验收 |
 | --- | --- | --- | --- |
@@ -529,7 +531,7 @@ P14 的流水线可以迁移到电商、教育、工业、医疗、交通和影�
 | 医疗 | 手术、影像动态、康复动作 | 高风险内容过滤、专家 caption | 患者隐私和医学专家复核 |
 | 影视 | 镜头素材、广告片段 | 镜头语言、风格、版权元数据 | 版权链路和再分发范围 |
 
-*表 P14-10：视频生成数据流水线领域迁移要点*
+*表 P14-9：视频生成数据流水线领域迁移要点*
 
 领域迁移时不应直接复用通用阈值。例如，工业场景中大量有效视频可能是低速机械运动，`motion_strength` 阈值过高会误删；教育板书视频可能画面变化较少，但 OCR 和时序讲解具有训练价值；交通视频可能运动很强，但隐私和安全过滤更重要。因此，阈值应由领域抽检和下游训练目标共同决定。
 
@@ -537,7 +539,7 @@ P14 的流水线可以迁移到电商、教育、工业、医疗、交通和影�
 
 P14 生成的是高质量 video shots 和结构化视频元数据，P13 生成的是多模态 instruction 数据。二者可以组合成 Video-Instruct 或 Video-QA 数据集：先用 P14 生成 `segment_path`、`frame_paths`、`caption_en`、`shot_language` 和 `camera_motion`，再用 P13 的模板、judge、多语言扩展和打包机制生成面向视频理解或视频生成控制的指令样本。
 
-表 P14-11 给出二者衔接方式。
+表 P14-10 给出二者衔接方式。
 
 | P14 字段 | 可供 P13 使用的方式 | 示例任务 |
 | --- | --- | --- |
@@ -549,7 +551,7 @@ P14 生成的是高质量 video shots 和结构化视频元数据，P13 生成�
 | `motion_strength` | 控制样本难度和采样权重 | 高动态样本用于动作理解 |
 | `aesthetic_score` | 控制视觉质量分桶 | 高质量样本用于生成训练 |
 
-*表 P14-11：P14 视频字段到 P13 指令工厂的衔接*
+*表 P14-10：P14 视频字段到 P13 指令工厂的衔接*
 
 这种衔接可以避免重复建设视频指令数据。P14 负责视频素材和时序质量，P13 负责指令多样性和语言质量。若后续扩展到视频生成控制训练，也可以把 `shot_language` 字段转成 prompt 条件，例如 “a cinematic wide shot with natural lighting and a slow zoom-in over ocean cliffs”，再与视频片段配对进入 T2V 训练。
 
@@ -559,9 +561,9 @@ P14 生成的是高质量 video shots 和结构化视频元数据，P13 生成�
 |---|---|
 | ![frame1](../../images/part14/Luo-Project14-Fig01.jpg) | ![frame2](../../images/part14/Luo-Project14-Fig02.jpg) |
 
-表P14-12汇总了相应的对比和工程要点。
+表 P14-11 汇总了视频片段多帧抽样示例。
 
-*表 P14-12：视频片段多帧抽样示例*
+*表 P14-11：视频片段多帧抽样示例*
 
 图中展示了产出数据中的两帧采样结果。该片段展示了一段从高空视角拍摄的海岸线画面：深蓝色海水不断冲击崎岖礁石，浪花在暗色岩壁边缘形成明显的白色泡沫，岩石间分布着少量绿色植被，使画面在自然环境中保留了一定层次感。多帧 caption 覆盖该片段的主体、场景、光照和氛围，描述自然光照、冷色调海面、清晰岩石纹理，以及海浪运动带来的动态感。从镜头语言标注结果看，该 shot 被识别为 `extreme_wide` 景别、`high_angle` 高角度视角，构图方式为 `rule_of_thirds`，光照类型为 `natural`，整体色彩倾向为 `cool`，风格标签为 `cinematic`。相机运动模块将其判定为 `zoom_in`，说明画面存在较明显的推进或尺度变化；`motion_strength=0.8974` 表明该片段具有稳定运动信号，可用于 T2V 训练中学习自然场景运动、航拍视角和海岸镜头语言。
 

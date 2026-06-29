@@ -40,10 +40,12 @@ DataOps；版本治理；实验追踪；血缘回滚；可观测性
 
 核心数据流可概括为：
 
-Listing P08-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-1 给出了流程或路径示例，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```text
 平台规格 -> 数据版本 -> 实验记录 -> 血缘事件 -> 告警/审计 -> 回滚与复盘 -> 检查报告
 ```
+
+*代码清单P08-1：流程或路径示例。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -168,7 +170,7 @@ P08 也明确设置了边界。
 
 图P08-1展示了相应的流程或结构。
 
-![图 P08-1](../../images/part14/p08/Yu-Project08-Fig01.svg)
+![图 P08-1：P08 DataOps 平台总览图](../../images/part14/p08/Yu-Project08-Fig01.svg)
 *图 P08-1：P08 DataOps 平台总览图。*
 
 ---
@@ -208,7 +210,7 @@ P08 也明确设置了边界。
 
 图P08-2展示了相应的流程或结构。
 
-![图 P08-2](../../images/part14/p08/Yu-Project08-Fig02.svg)
+![图 P08-2：平台四层架构图](../../images/part14/p08/Yu-Project08-Fig02.svg)
 *图 P08-2：平台四层架构图。*
 
 ---
@@ -238,7 +240,7 @@ P08 也明确设置了边界。
 
 图P08-3展示了相应的流程或结构。
 
-![图 P08-3](../../images/part14/p08/Yu-Project08-Fig03.svg)
+![图 P08-3：规格生成—模拟运行—评估—检查流程图](../../images/part14/p08/Yu-Project08-Fig03.svg)
 *图 P08-3：规格生成—模拟运行—评估—检查流程图。*
 
 ---
@@ -297,7 +299,7 @@ P08 也明确设置了边界。
 
 图P08-4展示了相应的流程或结构。
 
-![图 P08-4](../../images/part14/p08/Yu-Project08-Fig04.svg)
+![图 P08-4：租户—项目—角色—API 关系图](../../images/part14/p08/Yu-Project08-Fig04.svg)
 *图 P08-4：租户—项目—角色—API 关系图。*
 
 ---
@@ -317,7 +319,7 @@ P08 的交付物中已经包含：
 
 对应实现如下，这段结构体现的是平台规格如何被落成结构化产物：
 
-Listing P08-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-2 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 from pathlib import Path
 import json
@@ -343,6 +345,8 @@ platform_scope = {
 with open(OUTPUT_DIR / "platform_scope.json", "w", encoding="utf-8") as f:
     json.dump(platform_scope, f, ensure_ascii=False, indent=2)
 ```
+
+*代码清单P08-2：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -391,7 +395,7 @@ with open(OUTPUT_DIR / "platform_scope.json", "w", encoding="utf-8") as f:
 
 ### 8.3 版本结构示意
 
-Listing P08-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-3 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 dataset_version = {
     "version_id": "ds_v005",
@@ -407,13 +411,15 @@ dataset_version = {
 }
 ```
 
+*代码清单P08-3：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 在这个结构中，版本不再是静态标签，而是一个能参与运行、评估和回滚的治理对象。
 
 图P08-5展示了相应的流程或结构。
 
-![图 P08-5](../../images/part14/p08/Yu-Project08-Fig05.svg)
+![图 P08-5：版本演进与发布/回滚点示意图](../../images/part14/p08/Yu-Project08-Fig05.svg)
 *图 P08-5：版本演进与发布/回滚点示意图。*
 
 ---
@@ -458,7 +464,7 @@ dataset_version = {
 
 ### 9.3 一个实验记录的简化结构
 
-Listing P08-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-4 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 experiment_run = {
     "experiment_id": "exp_007",
@@ -473,11 +479,13 @@ experiment_run = {
 }
 ```
 
+*代码清单P08-4：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 图P08-6展示了相应的流程或结构。
 
-![图 P08-6](../../images/part14/p08/Yu-Project08-Fig06.svg)
+![图 P08-6：实验状态分布与治理动作图](../../images/part14/p08/Yu-Project08-Fig06.svg)
 *图 P08-6：实验状态分布与治理动作图。*
 
 ---
@@ -502,7 +510,7 @@ experiment_run = {
 
 ### 10.2 一个简单的边定义示例
 
-Listing P08-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-5 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 lineage_edge = {
     "from": "dataset:ds_v005",
@@ -510,6 +518,8 @@ lineage_edge = {
     "relation": "used_by"
 }
 ```
+
+*代码清单P08-5：Python 实现片段。*
 
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
@@ -522,7 +532,7 @@ lineage_edge = {
 
 图P08-7展示了相应的流程或结构。
 
-![图 P08-7](../../images/part14/p08/Yu-Project08-Fig07.svg)
+![图 P08-7：版本—实验—结果—回滚血缘图](../../images/part14/p08/Yu-Project08-Fig07.svg)
 *图 P08-7：版本—实验—结果—回滚血缘图。*
 
 ---
@@ -565,7 +575,7 @@ lineage_edge = {
 
 图P08-8展示了相应的流程或结构。
 
-![图 P08-8](../../images/part14/p08/Yu-Project08-Fig08.svg)
+![图 P08-8：回滚触发与恢复流程图](../../images/part14/p08/Yu-Project08-Fig08.svg)
 *图 P08-8：回滚触发与恢复流程图。*
 
 ---
@@ -610,7 +620,7 @@ SLA 的价值在于，它把“系统运行”转换成“服务承诺”。
 
 ### 12.3 一个简化的告警结构
 
-Listing P08-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-6 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 alert = {
     "alert_id": "alert_003",
@@ -621,11 +631,13 @@ alert = {
 }
 ```
 
+*代码清单P08-6：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 图P08-9展示了相应的流程或结构。
 
-![图 P08-9](../../images/part14/p08/Yu-Project08-Fig09.svg)
+![图 P08-9：指标—日志—告警—审计闭环图](../../images/part14/p08/Yu-Project08-Fig09.svg)
 *图 P08-9：指标—日志—告警—审计闭环图。*
 
 ---
@@ -666,7 +678,7 @@ incident review 负责回答“为什么出问题、以后怎么不再发生”�
 
 图P08-10展示了相应的流程或结构。
 
-![图 P08-10](../../images/part14/p08/Yu-Project08-Fig10.svg)
+![图 P08-10：审计日志与事故复盘关联图](../../images/part14/p08/Yu-Project08-Fig10.svg)
 *图 P08-10：审计日志与事故复盘关联图。*
 
 ---
@@ -727,7 +739,7 @@ incident review 负责回答“为什么出问题、以后怎么不再发生”�
 
 ### 15.3 一个简化的检查示例
 
-Listing P08-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
+代码清单P08-7 给出了 Python 实现片段，用于说明本节中的输入输出关系、结构约束或执行方式。
 ```python
 required_files = [
     "data/processed/platform_scope.json",
@@ -742,13 +754,15 @@ for path in required_files:
     assert Path(path).exists(), f"Missing required artifact: {path}"
 ```
 
+*代码清单P08-7：Python 实现片段。*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这种检查看起来简单，但它能有效把平台工程从“概念正确”推进到“交付一致”。
 
 图P08-11展示了相应的流程或结构。
 
-![图 P08-11](../../images/part14/p08/Yu-Project08-Fig11.svg)
+![图 P08-11：检查链路与一致性验证图](../../images/part14/p08/Yu-Project08-Fig11.svg)
 *图 P08-11：检查链路与一致性验证图。*
 
 ---

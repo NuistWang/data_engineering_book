@@ -83,7 +83,7 @@ LLM data engineering has highly diverse sources: public web pages from Common Cr
 
 The core challenge of the ingestion layer is not "how to get data," which is mainly crawler and API development. It is **how to create a complete metadata record the moment data enters the platform**. When a batch lands, the platform must record key information: source, such as source URL or API endpoint; ingestion timestamp for freshness management; file format and version; data owner or license type for compliance audit; original file size and count; and the ingestion task ID for resume and traceability. Without this metadata, data becomes a black box after entering the platform. You know data exists, but you do not know where it came from, when it arrived, or which cleaning-pipeline version processed it. When a problem appears, root-cause analysis is impossible.
 
-Listing 3-1 provides the corresponding code or configuration example.
+Listing 3-1 shows an example data-ingestion metadata registration implementation.
 
 ```python
 # Example metadata registration: automatically write a record during ingestion
@@ -141,7 +141,7 @@ The right choice depends on team background and workload. If the team has tradit
 
 The following is a typical Ray Data cleaning pipeline.
 
-Listing 3-2 provides the corresponding code or configuration example.
+Listing 3-2 shows a Ray Data cleaning pipeline example.
 
 ```python
 import ray
@@ -207,7 +207,7 @@ For LLM data-engineering scenarios that require multi-engine collaboration and o
 
 **Model checkpoints and experiment artifacts** are the third category. They include model weight files saved during training, often hundreds of GB, TensorBoard or W&B logs, tokenizer configuration, and related artifacts. These data are large and have uneven access frequency: frequent writes during training, mostly read-only afterward. Object storage is suitable as primary storage, with DVC (Data Version Control) (DVC 2024) or MLflow Artifacts for version tracking.
 
-Listing 3-3 provides the corresponding code or configuration example.
+Listing 3-3 gives example DVC commands for dataset version tracking.
 
 ```bash
 # Use DVC to track a dataset version.
@@ -329,13 +329,13 @@ Table 3-3 summarizes the corresponding comparison and engineering considerations
 
 The AI-native data stack built in this chapter is not an isolated menu of technical options. It is the **shared infrastructure foundation** for the engineering content in the rest of the book. Understanding this helps readers map later technical details to the corresponding layer in the architecture blueprint.
 
-In **Part II: Text Pretraining Data Engineering**, large-scale MinHash deduplication in Chapter 5, KenLM perplexity filtering in Chapter 6, and DataLoader I/O optimization in Chapter 7 all run on the **processing orchestration layer** described in Section 3.2.2, using Ray Data or Spark clusters, and depend on the **metadata ingestion layer** in Section 3.2.1 for lineage tracking.
+In **Part 2: Text Pretraining Data Engineering**, large-scale MinHash deduplication in Chapter 5, KenLM perplexity filtering in Chapter 6, and DataLoader I/O optimization in Chapter 7 all run on the **processing orchestration layer** described in Section 3.2.2, using Ray Data or Spark clusters, and depend on the **metadata ingestion layer** in Section 3.2.1 for lineage tracking.
 
-In **Part III: Multimodal Data Engineering**, image-text cleaning and video slicing require GPU scheduling, which is supported by the GPU-native scheduling capability of Ray Data discussed in Section 3.2.2.
+In **Part 3: Multimodal Data Engineering**, image-text cleaning and video slicing require GPU scheduling, which is supported by the GPU-native scheduling capability of Ray Data discussed in Section 3.2.2.
 
-In **Part VII: RAG Application Data Engineering**, real-time knowledge-base update pipelines rely on the vector-database choices in Section 3.2.3, such as Milvus or Qdrant, to host vector indexes, and on the compliance-audit capability in Section 3.2.5 to ensure documents entering the knowledge base do not carry copyright risk.
+In **Part 7: RAG Application Data Engineering**, real-time knowledge-base update pipelines rely on the vector-database choices in Section 3.2.3, such as Milvus or Qdrant, to host vector indexes, and on the compliance-audit capability in Section 3.2.5 to ensure documents entering the knowledge base do not carry copyright risk.
 
-**Part VIII: DataOps Platform Development** is an expanded version of this chapter: it will build on the five-layer architecture to discuss end-to-end observability for data pipelines, automated governance of data assets, and deep integration of quality scorecards with CI/CD pipelines, upgrading the platform from a manual workshop to an intelligent data factory.
+**Part 8: DataOps Platform Development** is an expanded version of this chapter: it will build on the five-layer architecture to discuss end-to-end observability for data pipelines, automated governance of data assets, and deep integration of quality scorecards with CI/CD pipelines, upgrading the platform from a manual workshop to an intelligent data factory.
 
 The core principle for capability boundaries is: **capabilities needed by multiple projects or multiple data stages should be platformized**, such as deduplication operator libraries, quality-scorecard frameworks, and data-version management; **capabilities highly customized to one business scenario should remain project-specific**, such as entity-recognition rules for one vertical domain or parsing logic for one source. Bigger platform boundaries are not automatically better. Over-abstraction reduces iteration speed and forces project teams to adapt to platform interfaces instead of letting the platform serve real needs.
 
@@ -345,7 +345,7 @@ The core principle for capability boundaries is: **capabilities needed by multip
 
 This chapter established a full architecture blueprint for an AI-native data stack. It first analyzed why traditional warehouse technology stacks designed for BI cannot be directly moved into LLM data engineering, using three dimensions: goal differences, workload characteristics, and cost constraints. On that basis, it decomposed the stack into five functional layers: ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security. Each layer included mainstream industrial choices and concrete comparison criteria. The cost-model section revealed five cost dimensions, stage-based accounting, and a quantified ROI decision framework. Finally, the chapter provided differentiated architecture patterns for startup, mid-sized, and large teams, helping readers avoid introducing platform complexity beyond team capability and business need during early stages.
 
-With this infrastructure blueprint in place, the next chapter begins Part II: Text Pretraining Data Engineering, where we will discuss how to build trainable, traceable, and evaluable pretraining datasets from large-scale public corpora on top of this stack.
+With this infrastructure blueprint in place, the next chapter begins Part 2: Text Pretraining Data Engineering, where we will discuss how to build trainable, traceable, and evaluable pretraining datasets from large-scale public corpora on top of this stack.
 
 ## Chapter Summary
 

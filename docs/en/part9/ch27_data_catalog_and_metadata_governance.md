@@ -84,7 +84,7 @@ In recent years, the machine learning community has further established "writing
 
 This transition involves a fundamental shift in mindset. A file inventory is concerned with "where is the data," while a data asset catalog is concerned with "what is the data, where did it come from, what can it do, who is responsible for it, and what is its quality." Below is a concise partial example of structured metadata that binds the answers to these questions directly to the data:
 
-Listing 27-1 provides the corresponding code or configuration example.
+Listing 27-1 provides a YAML configuration example.
 
 ```yaml
 asset_id: user_interaction_feedback_v3      # globally unique identifier
@@ -119,7 +119,7 @@ restrictions:                               # usage restrictions
 end_of_life: 2025-12-31                      # planned retirement date
 ```
 
-*Listing 27-1: Code or configuration example.*
+*Listing 27-1: YAML configuration example.*
 
 
 The `restrictions` field is particularly noteworthy: it explicitly declares what the data "must not be used for." In a traditional file inventory, such constraints typically exist only in the memory of select individuals; once written into metadata, however, they become hard rules that can be enforced by systems and tracked in audits. It is precisely this contextual information that elevates a collection of files into a data asset that can be used with confidence.
@@ -248,7 +248,7 @@ Data lineage has a more classical name in database research—data provenance. A
 
 In practice, lineage can be fully described through structured records. The concise example below illustrates the core lineage information for a feature dataset—sources, key transformation steps, downstream consumers, and most importantly, impact analysis:
 
-Listing 27-2 provides the corresponding code or configuration example.
+Listing 27-2 provides a process flow example.
 
 ```yaml
 dataset: user_preference_features_v2
@@ -286,7 +286,7 @@ impact_analysis:
     severity: high
 ```
 
-*Listing 27-2: Code or configuration example.*
+*Listing 27-2: Process flow example.*
 
 
 The example above is highly condensed for brevity, but retains the essential skeleton of a lineage record. In production environments, each transformation step would also record more detailed processing logic, execution time, data volume ratios, and field changes. The **`impact_analysis` field** is particularly critical—it explicitly captures both "which downstream assets would be affected by an upstream change" and "which downstream systems would be impacted if this dataset has a problem," along with severity levels and mitigation actions. It is this field that transforms lineage from a static "data flow diagram" into a governance tool capable of driving incident investigation and change assessment.
@@ -319,7 +319,7 @@ The theoretical foundation for these permission levels is the widely adopted Rol
 
 In large language model applications, a key permissions scenario is **differentiated data access**: the same dataset is accessed at different levels of granularity by different teams according to their respective purposes. For example:
 
-Listing 27-3 provides the corresponding code or configuration example.
+Listing 27-3 provides a YAML configuration example.
 
 ```yaml
 dataset: user_interaction_feedback
@@ -340,7 +340,7 @@ permissions:
     includes_audit_logs: true
 ```
 
-*Listing 27-3: Code or configuration example.*
+*Listing 27-3: YAML configuration example.*
 
 
 The example above lists only the access level for each team; a complete configuration would also include a justification for the grant, accessible fields, row-level conditions, approval requirements, and audit sampling rate for each entry. The design logic is: the training team needs full raw data for best results, but this comes with full-coverage access auditing; the RAG team uses only de-identified text and features; the business analytics team can only run aggregation queries to prevent reverse-engineering of individuals from aggregate results; the governance team has administrative access including audit logs. Through this purpose-scoped control at the field, row, and query levels, the organization minimizes exposure of sensitive information while meeting the data needs of all parties.
@@ -441,7 +441,7 @@ In a real catalog, each asset would also include fields for owner, update freque
 
 To illustrate how complete a production data asset's metadata can be, the following uses `user_preference_sft_v2` (User Preference Fine-Tuning Training Dataset v2) as a simplified example, retaining only representative fields in each module:
 
-Listing 27-4 provides the corresponding code or configuration example.
+Listing 27-4 provides a YAML configuration example.
 
 ```yaml
 # Identity and ownership
@@ -496,7 +496,7 @@ retention: 3y
 expected_active_until: 2026-12-31
 ```
 
-*Listing 27-4: Code or configuration example.*
+*Listing 27-4: YAML configuration example.*
 
 
 The structural definition documents each field's type and value range; version history records each change and its compatibility; quality metrics provide numerical values for each dimension alongside known issues; and the permissions, usage records, and lifecycle modules are each detailed down to the team, downstream application, and individual timestamps.

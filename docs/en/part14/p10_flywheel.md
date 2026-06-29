@@ -61,13 +61,13 @@ It avoids compressing all logic into a one-off script.
 
 The core data flow can be summarized as:
 
-Listing P10-4 provides the corresponding code or configuration example.
+Listing P10-1 provides a process flow example.
 
 ```text
 project assets -> registry -> stage plan -> training/evaluation feedback -> data revision -> release decision -> flywheel report
 ```
 
-*Listing P10-4: Code or configuration example.*
+*Listing P10-1: Process flow example.*
 
 
 Sample records should at least preserve `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`.
@@ -274,7 +274,11 @@ This chapter focuses on system-level questions:
 
 ## 4. Overall Architecture: From Upstream Project Assets to an Organizational Flywheel
 
-![Figure 1: End-to-end LLM data flywheel overview](../../images/part14/p10/Wang-Project10-Fig01.svg)
+Figure P10-1 shows end-to-end llm data flywheel overview.
+
+![Figure P10-1: End-to-end LLM data flywheel overview](../../images/part14/p10/Wang-Project10-Fig01.svg)
+
+*Figure P10-1: End-to-end LLM data flywheel overview.*
 
 From an engineering perspective, this project should be viewed as five layers instead of a linear data-input to model-output chain.
 
@@ -388,7 +392,11 @@ The registry:
 - supports later architecture mapping and bottleneck identification;
 - gives organizational reviews a shared language.
 
-![Figure 2: Upstream project registry and interface mapping](../../images/part14/p10/Wang-Project10-Fig02.svg)
+Figure P10-2 shows upstream project registry and interface mapping.
+
+![Figure P10-2: Upstream project registry and interface mapping](../../images/part14/p10/Wang-Project10-Fig02.svg)
+
+*Figure P10-2: Upstream project registry and interface mapping.*
 
 ---
 
@@ -425,6 +433,8 @@ PROJECT_SPECS = [
 ]
 ```
 
+*Listing P10-2: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure reflects several basic requirements for upstream asset aggregation:
@@ -442,7 +452,11 @@ Other assembly-layer projects can use the same method to bring existing projects
 
 They do not need to depend on manual sorting.
 
-![Figure 3: Structured upstream project specs](../../images/part14/p10/Wang-Project10-Fig03.svg)
+Figure P10-3 shows structured upstream project specs.
+
+![Figure P10-3: Structured upstream project specs](../../images/part14/p10/Wang-Project10-Fig03.svg)
+
+*Figure P10-3: Structured upstream project specs.*
 
 ---
 
@@ -485,7 +499,11 @@ The important point is to make the transferable advancement method explicit.
 
 It should not remain a static diagram.
 
-![Figure 4: Five-stage plan and milestone relationships](../../images/part14/p10/Wang-Project10-Fig04.svg)
+Figure P10-4 shows five-stage plan and milestone relationships.
+
+![Figure P10-4: Five-stage plan and milestone relationships](../../images/part14/p10/Wang-Project10-Fig04.svg)
+
+*Figure P10-4: Five-stage plan and milestone relationships.*
 
 ---
 
@@ -525,6 +543,8 @@ def build_architecture(registry: list[dict]) -> dict:
     }
 ```
 
+*Listing P10-3: Python implementation excerpt.*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure shows that the flywheel relies on explicit mapping to maintain consistency.
@@ -552,7 +572,11 @@ It is a group of:
 
 Only this expression makes the flywheel maintainable.
 
-![Figure 5: Five-layer flywheel code mapping](../../images/part14/p10/Wang-Project10-Fig05.svg)
+Figure P10-5 shows five-layer flywheel code mapping.
+
+![Figure P10-5: Five-layer flywheel code mapping](../../images/part14/p10/Wang-Project10-Fig05.svg)
+
+*Figure P10-5: Five-layer flywheel code mapping.*
 
 ---
 
@@ -597,7 +621,11 @@ Control points show that the flywheel does not pursue undifferentiated accelerat
 
 It assigns different flow speeds, review requirements, and traceability levels to different links.
 
-![Figure 6: System boundaries and control points](../../images/part14/p10/Wang-Project10-Fig06.svg)
+Figure P10-6 shows system boundaries and control points.
+
+![Figure P10-6: System boundaries and control points](../../images/part14/p10/Wang-Project10-Fig06.svg)
+
+*Figure P10-6: System boundaries and control points.*
 
 ---
 
@@ -628,7 +656,11 @@ For managers, reviewers, and cross-team collaborators, milestones are easier to 
 
 They convert a complex technical process into an executable organizational rhythm.
 
-![Figure 7: Run records and milestone board](../../images/part14/p10/Wang-Project10-Fig07.svg)
+Figure P10-7 shows run records and milestone board.
+
+![Figure P10-7: Run records and milestone board](../../images/part14/p10/Wang-Project10-Fig07.svg)
+
+*Figure P10-7: Run records and milestone board.*
 
 ---
 
@@ -726,7 +758,11 @@ Bottleneck analysis explains:
 - which key issues are still unresolved;
 - where the next optimization round should invest.
 
-![Figure 8: Flywheel bottleneck map](../../images/part14/p10/Wang-Project10-Fig08.svg)
+Figure P10-8 shows flywheel bottleneck map.
+
+![Figure P10-8: Flywheel bottleneck map](../../images/part14/p10/Wang-Project10-Fig08.svg)
+
+*Figure P10-8: Flywheel bottleneck map.*
 
 ---
 
@@ -774,7 +810,7 @@ This turns the claim "the flywheel creates value" from a slogan into specific be
 
 The following code illustrates this calculation.
 
-Listing P10-5 provides the corresponding code or configuration example.
+Listing P10-4 provides a Python implementation excerpt.
 
 ```python
 total_manual_review_hours = round(sum(item["estimated_manual_review_hours"] for item in registry), 2)
@@ -789,7 +825,7 @@ bottlenecks = [
 ]
 ```
 
-*Listing P10-5: Code or configuration example.*
+*Listing P10-4: Python implementation excerpt.*
 
 
 This computation turns system-level judgment into structured metrics and structured conclusions.
@@ -808,7 +844,11 @@ Those conclusions must also be supported by structured computation.
 
 This code connects metric generation to result interpretation.
 
-![Figure 9: System-level metric generation logic](../../images/part14/p10/Wang-Project10-Fig09.svg)
+Figure P10-9 shows system-level metric generation logic.
+
+![Figure P10-9: System-level metric generation logic](../../images/part14/p10/Wang-Project10-Fig09.svg)
+
+*Figure P10-9: System-level metric generation logic.*
 
 ---
 
@@ -860,7 +900,7 @@ P10's `src/run_p10_checks.py` writes assembly-layer acceptance rules as executab
 
 The following code shows the basic structure of the check script.
 
-Listing P10-6 provides the corresponding code or configuration example.
+Listing P10-5 provides a process flow example.
 
 ```python
 def run_command(command: list[str], name: str) -> dict:
@@ -875,7 +915,7 @@ def run_command(command: list[str], name: str) -> dict:
     }
 ```
 
-*Listing P10-6: Code or configuration example.*
+*Listing P10-5: Process flow example.*
 
 
 This structure reflects several requirements:
@@ -899,7 +939,11 @@ It brings the assembly layer itself into engineering quality management.
 
 This section connects system integration with quality contracts.
 
-![Figure 10: Check scripts and system contracts](../../images/part14/p10/Wang-Project10-Fig10.svg)
+Figure P10-10 shows check scripts and system contracts.
+
+![Figure P10-10: Check scripts and system contracts](../../images/part14/p10/Wang-Project10-Fig10.svg)
+
+*Figure P10-10: Check scripts and system contracts.*
 
 ---
 

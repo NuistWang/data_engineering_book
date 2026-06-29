@@ -1,4 +1,4 @@
-# Data Engineering for Large Models: Architecture, Algorithms, and Project Practice
+# Data Engineering for Large Foundation Models: A Handbook
 
 ## Full Table of Contents Overview
 
@@ -23,11 +23,11 @@ The current Chinese mainline uses the 2026 Springer-size publication structure. 
 - [Part 7: Application-Level Data Engineering](part7/index.md)
 - [Part 8: Data Operations and Platform Development](part8/index.md)
 - [Part 9: Data Assets, Data Products, and Data Contracts](part9/index.md)
-- [Part 10: Agentic Data Engineering and Data Engineering Agents](part10/index.md)
-- [Part 11: Privacy, Compliance, and Data Security](part11/index.md)
+- [Part 10: Intelligent Data Engineering and Data Engineering Agents](part10/index.md)
+- [Part 11: Privacy Compliance and Data Security](part11/index.md)
 - [Part 12: Specialized Datasets and Multimodal Data Engineering Practice](part12/index.md)
-- [Part 13: Open-Source Large-Model Data Engineering Recipes and Paradigms](part13/index.md)
-- [Part 14: Hands-on Projects](part14/index.md)
+- [Part 13: Open-source LLM Data Engineering Recipes and Paradigms](part13/index.md)
+- [Part 14: Practical Projects](part14/index.md)
 - [Appendix A: Tools and Frameworks Quick Reference](appendix_a_tools_and_frameworks_quick_reference.md)
 - [Appendix B: Compliance and Release Checklist](appendix_b_compliance_and_release_checklist.md)
 - [Appendix C: Cost Estimation and Resource Templates](appendix_c_cost_estimation_and_resource_templates.md)
@@ -123,7 +123,7 @@ This part turns data pipelines into discoverable, reusable, auditable organizati
 - [Chapter 29: Data Valuation and Reuse Mechanisms](part9/ch29_data_valuation_and_reuse.md)
 - [Chapter 30: Internal Data Markets and Sharing Governance](part9/ch30_internal_data_market_and_sharing_governance.md)
 
-## Part 10: Agentic Data Engineering and Data Engineering Agents
+## Part 10: Intelligent Data Engineering and Data Engineering Agents
 
 This part discusses how data engineering agents participate in acquisition, parsing, cleaning, annotation, synthesis, evaluation, DataOps, security, permissions, and human-AI collaboration.
 
@@ -134,7 +134,7 @@ This part discusses how data engineering agents participate in acquisition, pars
 - [Chapter 34: DataOps Agents and Platform Autonomy](part10/ch34_dataops_agent.md)
 - [Chapter 35: Security, Permissions, and Human-AI Collaboration for Data Engineering Agents](part10/ch35_security_permission_collaboration.md)
 
-## Part 11: Privacy, Compliance, and Data Security
+## Part 11: Privacy Compliance and Data Security
 
 This part focuses on compliance frameworks, privacy protection, federated learning, security boundaries, and auditable controls across the data lifecycle.
 
@@ -154,7 +154,7 @@ Part 12 follows a modality-explicit path across text corpora, image-text candida
 - [Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries](part12/ch42_speech_audio_interaction_data_engineering.md)
 - [Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks](part12/ch43_reasoning_trace_compression_data_engineering.md)
 
-## Part 13: Open-Source Large-Model Data Engineering Recipes and Paradigms
+## Part 13: Open-source LLM Data Engineering Recipes and Paradigms
 
 This part focuses on data recipes, training paradigms, and engineering organization for open-source large models, covering pre-training, post-training, reasoning RL, VLMs, and T2I/T2V generation.
 
@@ -165,7 +165,7 @@ This part focuses on data recipes, training paradigms, and engineering organizat
 - [Chapter 47: Multimodal Large Model (VLM) Data Recipes: From Pre-Training to Visual Alignment](part13/ch47_vlm_data_recipes.md)
 - [Chapter 48: Data Engineering for Multimodal Generative Models: T2I and T2V Data Pipelines](part13/ch48_t2i_t2v.md)
 
-## Part 14: Project Case Studies
+## Part 14: Practical Projects
 
 This part connects acquisition, cleaning, synthesis, RAG, agents, DataOps, privacy, data flywheels, open-source model reproduction, video-generation data pipelines, and enterprise semantic data agents into runnable projects.
 

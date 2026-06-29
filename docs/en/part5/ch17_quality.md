@@ -352,11 +352,11 @@ Distributional divergence (Torralba & Efros 2011; Koh et al. 2021) is the first 
 
 Repetition rate detection (Lee et al. 2022; Carlini et al. 2023) must look not only at textual overlap but also at structural repetition and semantic repetition. Many synthetic datasets appear deduplicated on the surface but still contain large numbers of "different wording, same skeleton" samples. Teams should simultaneously monitor n-gram repetition, embedding clustering proportion, and template skeleton repetition rate to avoid mistaking surface diversity for genuine diversity.
 
-**Code Example: Using "Embedding Similarity + Nearest-Neighbor Ratio" to Roughly Measure Growing Sample Self-Similarity**
+The following snippet focuses on Using "Embedding Similarity + Nearest-Neighbor Ratio" to Roughly Measure Growing Sample Self-Similarity.
 
 The following demonstrates the idea of "self-similarity monitoring" in a very straightforward way: vectorize the text, then count what proportion of samples have a nearest-neighbor similarity above a threshold (the higher the proportion, the more the data tends to collapse into a few patterns).
 
-Listing 17-1 provides the corresponding code or configuration example.
+Listing 17-1 provides a process flow example.
 
 ```python
 from typing import List
@@ -397,7 +397,7 @@ if __name__ == "__main__":
     print("Proportion of nearest-neighbor similarities >= threshold:", ratio)
 ```
 
-*Listing 17-1: Code or configuration example.*
+*Listing 17-1: Process flow example.*
 
 
 Perplexity and evaluation degradation metrics provide another angle. If the model's perplexity on synthetic data continuously declines but performance on real validation sets, long-tail validation sets, or cross-distribution validation sets does not improve in tandem (Shumailov et al. 2024), or even begins to decline, this usually indicates the model is overfitting to the synthetic distribution. A genuinely healthy synthetic data system should keep "better on real tasks" and "more fluent on training sets" basically consistent, avoiding the two progressively diverging.
@@ -406,11 +406,11 @@ Perplexity and evaluation degradation metrics provide another angle. If the mode
 
 One of the most effective methods for determining whether synthetic data is creating risk is to systematically conduct ratio gradient experiments, rather than continuing to debate "whether the ratio is too high or too low" (Shumailov et al. 2024). For example, set the synthetic proportion in training data to 0%, 10%, 30%, 50%, 70%, and higher, and observe the trend of changes in primary metrics, long-tail metrics, robustness metrics, and online proxy metrics on the same evaluation system. What truly matters is not any single point score—the curve shape is what is critical: when do gains begin to taper off, when does risk begin to amplify, and where does the inflection point appear.
 
-**Code Example: Turning "Synthetic Ratio Gradient Experiments" into a Reproducible Experiment Matrix**
+The following snippet focuses on Turning "Synthetic Ratio Gradient Experiments" into a Reproducible Experiment Matrix.
 
 The `notes` field in the code below contains illustrative values and is included only to demonstrate the recording structure; actual values must be filled in by the training and evaluation pipeline.
 
-Listing 17-2 provides the corresponding code or configuration example.
+Listing 17-2 provides a process flow example.
 
 ```python
 from dataclasses import dataclass
@@ -447,7 +447,7 @@ if __name__ == "__main__":
     print(run_experiment(plans))
 ```
 
-*Listing 17-2: Code or configuration example.*
+*Listing 17-2: Process flow example.*
 
 
 Ablation design must also revolve around risk mechanisms rather than only around model architecture. For example, one can separately remove judge filtering, remove template diversification, remove real-data infusion, and remove retention of failed samples, then observe the manner in which the system degrades. The purpose is to identify "which governance link is truly suppressing collapse." Without such controlled experiments, even if degradation is observed, it is very difficult to know whether the problem comes from an excessively high synthetic ratio, judge bias, template rigidity, or an aging validation set.
