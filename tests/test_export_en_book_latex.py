@@ -113,6 +113,13 @@ class ExportEnglishBookLatexTest(unittest.TestCase):
         chapter = exporter.NavItem("Chapter 1: The Data Revolution", "part1/ch01_data_change.md", 3)
         self.assertEqual(exporter.latex_asset_name(chapter, ".svg", 1), "Yu-Chap01-Fig01.png")
 
+    def test_markdown_autolinks_are_preserved_in_latex(self):
+        exporter = load_exporter()
+
+        tex = exporter.inline_to_latex("<https://github.com/datascale-ai/data_engineering_book>")
+
+        self.assertIn(r"\url{https://github.com/datascale-ai/data_engineering_book}", tex)
+
 
 if __name__ == "__main__":
     unittest.main()

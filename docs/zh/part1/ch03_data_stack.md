@@ -134,10 +134,10 @@ def register_ingestion(record: DataIngestionRecord, metadata_db_path: str):
 | **GPU 计算支持** | 需借助 NVIDIA RAPIDS 插件（cuDF/cuML），集成较复杂 | 原生支持 GPU 调度，可直接在算子中调用 CUDA 算子或部署 ML 模型 |
 | **内存使用模式** | 算子之间必须物化中间结果到磁盘/内存，内存压力较大 | 流水线执行，上下游算子可以重叠运行，内存效率更高 |
 | **SQL 与 BI 生态** | Spark SQL 极为成熟，兼容 Hive 元数据，生态完整 | SQL 支持较弱，没有成熟的 SQL 查询接口 |
-| **容错与稳定性** | 经过十余年 PB 级生产验证，稳定性成熟 | 相对年轻，大规模部署的最佳实践积累少于 Spark |
+| **容错与稳定性** | 经过十余年 PB 级生产验证，稳定性成熟 | 相对年轻，大规模部署的推荐实践积累少于 Spark |
 | **典型代码风格** | 函数式（map/filter/groupBy 的链式调用） | 声明式 pipeline（`ds.map_batches()` 的链式拓扑） |
 
-选择哪一个，取决于团队背景和工作负载特征。如果团队具备传统大数据背景，且数据处理管线中有大量 SQL 逻辑和对 Hive/Iceberg 的依赖，Spark 是更稳健的选择；如果团队是 AI/ML 背景，需要在数据处理中频繁调用 ML 模型（如用分类器打 PPL 分、用 NER 模型做 PII 检测），Ray Data 的 Python 原生和 GPU 调度优势则会非常明显。许多大型团队最终采用的是混合方案：Spark 负责海量粗过滤（语言识别、规则去重），Ray Data 负责需要 ML 推理的精细化处理（质量评分、基准污染检测）。
+选择哪一个，取决于团队背景和工作负载特征。如果团队具备传统大数据背景，且数据处理管线中有大量 SQL 逻辑和对 Hive/Iceberg 的依赖，Spark 是更稳健的选择；如果团队是 AI/ML 背景，需要在数据处理中频繁调用 ML 模型（如用分类器打 PPL 分、用 NER 模型做 PII 检测），Ray Data 的 Python 原生和 GPU 调度优势则会较为明显。许多大型团队最终采用的是混合方案：Spark 负责海量粗过滤（语言识别、规则去重），Ray Data 负责需要 ML 推理的精细化处理（质量评分、基准污染检测）。
 
 以下是一个典型的 Ray Data 数据清洗 pipeline 示例：
 

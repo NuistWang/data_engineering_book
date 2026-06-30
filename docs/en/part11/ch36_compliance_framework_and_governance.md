@@ -1016,7 +1016,7 @@ Listing 36-8 provides a privacy incident postmortem template.
 
 ### 36.5.8 Governance Deliverable Mapping
 
-Governance templates are not paper designs. The table below maps common deliverables in a privacy-governance pipeline to the governance capabilities they represent.
+Governance templates are not paper designs. Table 36-9 maps common deliverables in a privacy-governance pipeline to the governance capabilities they represent.
 
 Table 36-9 summarizes the corresponding comparison and engineering considerations.
 

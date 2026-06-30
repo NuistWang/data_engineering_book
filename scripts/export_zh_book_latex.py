@@ -231,13 +231,18 @@ def protect(replacements: list[str], latex: str) -> str:
 
 def inline_to_latex(text: str) -> str:
     text = html.unescape(text)
+    replacements: list[str] = []
+
+    def autolink_repl(match: re.Match[str]) -> str:
+        url = match.group(1).strip()
+        return protect(replacements, rf"\url{{{latex_url(url)}}}")
+
+    text = re.sub(r"<(https?://[^>\s]+)>", autolink_repl, text)
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.I)
     text = re.sub(r"</?(?:span|div|center|b|strong|em|i)[^>]*>", "", text, flags=re.I)
     text = re.sub(r"<sup>(.*?)</sup>", r"^\1", text, flags=re.I)
     text = re.sub(r"<sub>(.*?)</sub>", r"_\1", text, flags=re.I)
     text = re.sub(r"<[^>]+>", "", text)
-
-    replacements: list[str] = []
 
     def code_repl(match: re.Match[str]) -> str:
         value = escape_plain(match.group(1).strip())

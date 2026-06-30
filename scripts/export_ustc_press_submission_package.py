@@ -437,7 +437,8 @@ def compile_with_xelatex(tex_path: Path, timeout: int) -> Path:
         tex_path.name,
     ]
     combined_logs: list[str] = []
-    for round_no in range(1, 3):
+    previous_toc: str | None = None
+    for round_no in range(1, 5):
         proc = subprocess.run(
             cmd,
             cwd=tex_path.parent,
@@ -451,6 +452,12 @@ def compile_with_xelatex(tex_path: Path, timeout: int) -> Path:
         if proc.returncode != 0:
             log_file.write_text("\n".join(combined_logs), encoding="utf-8")
             raise RuntimeError(f"xelatex failed on pass {round_no}; see {log_file}")
+        toc_path = tex_path.with_suffix(".toc")
+        current_toc = toc_path.read_text(encoding="utf-8", errors="ignore") if toc_path.exists() else ""
+        if round_no >= 2 and current_toc == previous_toc:
+            combined_logs.append(f"===== table of contents stabilized after pass {round_no} =====\n")
+            break
+        previous_toc = current_toc
     log_file.write_text("\n".join(combined_logs), encoding="utf-8")
     built_pdf = tex_path.with_suffix(".pdf")
     if not built_pdf.exists() or built_pdf.stat().st_size < 100_000:

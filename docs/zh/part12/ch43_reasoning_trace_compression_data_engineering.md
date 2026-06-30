@@ -44,6 +44,10 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 
 难度分布上，数据集并没有追求完全均匀。中等难度样本占主要部分，共 45,650 条，占 65.5%；困难样本 17,428 条，占 25.0%；简单样本 6,667 条，占 9.5%。这种分布对 latent-switch 训练有明确意义。中等难度问题通常需要真实推理，不是模板化问答，但又不至于让蒸馏过程过度不稳定。困难样本提供更长、更复杂的推理链，让模型接触更高预算的隐式规划场景。简单样本则帮助模型保留短回答和直接验证的能力，避免所有样本都被塑造成长推理任务。
 
+表43-1汇总了该数据集的规模、难度分布、压缩率和 latent steps 统计。
+
+*表43-1：Latent-Switch-69K 的规模、难度与领域构成概览。*
+
 | 统计项 | 数值 | 占比 / 说明 |
 | --- | ---: | --- |
 | Total examples | 69,745 | 100.0% |
@@ -64,6 +68,8 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 *图43-2：最终训练集包含 69,745 条样本，来源中数学、代码和精确指令类数据占比较高。*
 
 从数据工程角度看，这里有三类统计必须同时保留。第一类是规模统计，说明训练集足够大，可以作为一个专门的 latent reasoning 监督语料，而不是少量 prompt 模板。第二类是难度统计，说明数据并非随机堆叠，而是服务于 curriculum 和 latent budget 的稳定性。第三类是领域统计，说明该数据集更适合训练和评估数学、代码、科学、复杂指令等推理任务，不应被误读为覆盖所有对话场景的通用 SFT 数据。
+
+需要特别说明的是，本章对 Latent-Switch-69K、Dolci-Think-SFT-32B、Latent-Switch MindSpore 和 OpenAI-compatible API 的讨论，均用于说明推理轨迹数据工程方法。实际复用时，团队应分别核查原始数据集许可、模型服务条款、teacher 输出留存策略、隐私数据处理要求和机构内部审查流程；不应仅凭本章示例代码将第三方数据或 API 输出直接并入生产训练集。若业务数据包含用户输入、代码仓库、日志或内部文档，还应在 source trace 阶段记录脱敏、授权、访问时间和数据版本，以便后续审计。
 
 Latent-Switch-69K 中保留有以下字段：`dataset_name`、`source_dataset`、`record_id`、`difficulty`、`domain`、`source_cot_length`、`distilled_cot_length`、`compression_ratio`、`solution_intuition_length`、`n_latent_steps`、`assistant_cot`、`assistant_answer`、`mask_schema_version`。这些字段看似偏工程，但它们决定了后续能否解释一次训练结果是来自更短 CoT、latent budget 调整，还是来自领域比例变化。
 
@@ -358,13 +364,13 @@ assistant_content_start <= latent_start < latent_end < think_start < think_end
 *代码清单43-6：隐式边界顺序约束示例。*
 
 
-这个顺序约束非常关键。如果边界 token 缺失、重复或顺序错乱，mask 就会错位，latent placeholder 可能被误当作普通答案 token，或者 answer 区间被截断。对于普通 SFT 数据，边界错一处也许只是格式问题；对于 latent-switch 数据，边界错位会直接改变训练目标。
+这个顺序约束关键。如果边界 token 缺失、重复或顺序错乱，mask 就会错位，latent placeholder 可能被误当作普通答案 token，或者 answer 区间被截断。对于普通 SFT 数据，边界错一处也许只是格式问题；对于 latent-switch 数据，边界错位会直接改变训练目标。
 
 在实际数据仓库中，student sequence 不应只作为一个长字符串保存。更稳妥的做法是同时保存结构化字段和渲染后文本。结构化字段包括 `messages`、`assistant_cot`、`assistant_answer`、`n_latent_steps`、`latent_pad_token`、`state_align_reference_messages` 等；渲染后文本则用于快速查看和兼容普通训练框架。`LatentSwitchSFTSource` 会优先使用结构化字段构造 token ids，`materialize_sample` 再生成 labels、loss weights 和各类 mask。这个设计反映了一个经验：latent-special-token 边界太重要，不应完全依赖已经拼好的文本。
 
 `latent_pad_token` 也值得单独说明。它在序列中承担的是“占位”而非语义内容。若 tokenizer 已经注册该 token，加载器可以直接重复其 id；若没有注册，就只能把字符串重复后再编码，这会带来长度不确定性。对于一个普通 padding token，这种差异也许还能接受；对于 latent budget，它会改变 \(m\) 的实际 token 数，进而改变 hidden rollout 的步数。因此，发布数据集时应明确 tokenizer 版本、special token 注册方式和 latent pad token 的语义。
 
-teacher-reference conversation 是另一条容易被忽视的序列。它不是 student sequence 的副本，而是省略 latent placeholder 后的参考对话。teacher 输入中包含原始问题和 solution intuition，assistant continuation 则是压缩 CoT 和答案。这个设计让 teacher KL 聚焦在可见推理质量和答案分布上，而不是要求 teacher 理解 student 的 latent 内部槽位。换句话说，student sequence 负责训练 latent-then-explicit 格式，teacher reference 负责提供显式验证部分的分布参考，两者服务于不同监督目标。
+teacher-reference conversation 是另一条容易被忽视的序列。它不是 student sequence 的副本，而是省略 latent placeholder 后的参考对话。teacher 输入中包含原始问题和 solution intuition，assistant continuation 则是压缩 CoT 和答案。这个设计让 teacher KL 聚焦在可见推理质量和答案分布上，而不是要求 teacher 理解 student 的 latent 内部槽位。也就是说，student sequence 负责训练 latent-then-explicit 格式，teacher reference 负责提供显式验证部分的分布参考，两者服务于不同监督目标。
 
 ### 43.5 Supervision masks：哪些 token 参与 loss
 
@@ -398,6 +404,10 @@ $$
 
 `teacher_kl_mask` 则用于 teacher-distribution supervision。每条样本还会构造一个 teacher-reference conversation：它不包含 student 的 latent placeholder，而是把原始问题和 distilled solution intuition 合并为 teacher 输入，让 teacher 在缩短后的 `<think> ... </think>` 与答案位置提供分布参考。这样做的好处是，teacher 不需要模拟 continuous latent placeholders；它只监督显式推理和答案的 token 分布质量。
 
+表43-2列出了主要 token 区间、对应 mask 以及训练含义。
+
+*表43-2：Supervision masks 与训练目标对应关系。*
+
 | 区间 | 示例 token | 普通 CE label | 主要 mask | 工程含义 |
 | --- | --- | --- | --- | --- |
 | Prompt 与 assistant prefix | user question `<\|im_start\|>assistant` | `-100` | `prompt_mask` | 作为条件，不作为输出目标 |
@@ -422,6 +432,10 @@ $$
 
 Latent-Switch-69K 的质量控制不只是过滤脏文本。由于它同时包含压缩推理、latent 预算和多种 mask，风险也分成多层。
 
+表43-3给出了推理轨迹压缩、边界对齐和领域偏置等常见风险的检查口径。
+
+*表43-3：压缩、边界与偏置的五类质量风险及修复动作。*
+
 | 风险类型 | 典型症状 | 影响 | 修复动作 |
 | --- | --- | --- | --- |
 | 压缩过度 | compressed CoT 只有结论，没有可见验证链 | 模型学不到从 latent 规划切换到显式验证的过程 | 增加 verification sufficiency 检查；拒绝跳步样本 |
@@ -440,7 +454,7 @@ Latent-Switch-69K 的质量控制不只是过滤脏文本。由于它同时包�
 
 第四类风险是边界与 mask 错位。`<latent_think>`、`</latent_think>`、`<think>`、`</think>` 都是结构 token，而不是普通文本装饰。数据加载器会检查它们出现次数和顺序，并据此计算 span。如果一条样本多了一个 `</think>`，普通渲染可能仍然能显示，但训练 mask 会发生错位。质量控制应把 span validation 放在数据入库前，而不是等训练报错。
 
-第五类风险是领域偏置。Latent-Switch-69K 的 math 约 37%、code 约 34%、science 约 5%，这使它非常适合 reasoning-heavy 训练，但也意味着它不是通用助手语料的完整替代品。如果把它和普通 SFT 数据混合，应明确训练目的：是强化数学代码推理、压缩可见 CoT，还是改善所有用户问题的回答效率。不同目标对应不同采样权重和评估集。
+第五类风险是领域偏置。Latent-Switch-69K 的 math 约 37%、code 约 34%、science 约 5%，这使它适合 reasoning-heavy 训练，但也意味着它不是通用助手语料的完整替代品。如果把它和普通 SFT 数据混合，应明确训练目的：是强化数学代码推理、压缩可见 CoT，还是改善所有用户问题的回答效率。不同目标对应不同采样权重和评估集。
 
 质量控制还需要保留审计信息。建议每个数据版本至少输出四份报告：长度与压缩率报告、difficulty/domain 分布报告、span 与 mask 校验报告、答案一致性与失败样本报告。对于 latent reasoning 数据，光有最终 parquet 或 jsonl 不够；没有这些报告，训练后很难判断模型变化来自数据质量提升，还是来自无意的分布漂移。
 
@@ -485,8 +499,7 @@ Latent-Switch-69K 的质量控制不只是过滤脏文本。由于它同时包�
 
 第四步是谨慎解释效果。若模型使用更少 visible tokens 得到相近答案，不一定说明 latent reasoning 已经学好；它也可能只是学会直接回答。真正的验收应同时查看答案正确率、显式验证链质量、格式闭合率、latent 边界稳定性和不同预算下的 token 成本。只有这些指标一起改善，才能说明数据集确实在支持“隐式规划加显式验证”的目标。
 
-这也是本章反复强调 schema、mask 和质量报告的原因：latent reasoning 能否落地，首先取决于数据是否把隐藏规划的接口定义清楚。
-这一点尤其重要。
+这也是本章反复强调 schema、mask 和质量报告的原因：latent reasoning 能否落地，首先取决于数据是否把隐藏规划的接口定义清楚，并在数据构造、训练加载和评估复盘三个阶段保持同一套可检查口径。
 
 ### 43.9 小结
 
