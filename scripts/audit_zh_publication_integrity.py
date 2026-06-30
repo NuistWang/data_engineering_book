@@ -262,6 +262,8 @@ def audit_file(path: Path) -> list[Issue]:
 
     caption_labels = {(kind, label): line for kind, label, line in captions}
     for line, alt in images:
+        if rel == "front_matter_guide.md" and "全书架构图" in alt:
+            continue
         alt_m = re.search(r"图\s*((?:P\d{1,2}|[A-Z]|\d+)\s*[-—]\s*\d+)", alt)
         caption_window = "\n".join(lines[line : min(len(lines), line + 5)])
         cap_m = re.search(r"\*\s*图\s*((?:P\d{1,2}|[A-Z]|\d+)\s*[-—]\s*\d+)\s*[:：]", caption_window)

@@ -544,6 +544,9 @@ def latex_url(url: str) -> str:
     return url.replace("\\", "/").replace("%", r"\%")
 
 
+URL_PATTERN = r"https?://[A-Za-z0-9._~:/?#@!$&'()*+,;=%-]+"
+
+
 def protect(replacements: list[str], latex: str) -> str:
     token = f"@@LATEX_BLOCK_{len(replacements)}@@"
     replacements.append(latex)
@@ -616,10 +619,14 @@ def inline_to_latex(text: str) -> str:
     text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", image_link_repl, text)
 
     def link_repl(match: re.Match[str]) -> str:
-        label = escape_plain(re.sub(r"\s+", " ", match.group(1)).strip())
-        url = latex_url(match.group(2).strip())
+        raw_label = re.sub(r"\s+", " ", match.group(1)).strip()
+        raw_url = match.group(2).strip()
+        label = escape_plain(raw_label)
+        url = latex_url(raw_url)
         if not label:
             label = escape_plain(url)
+        elif raw_label == raw_url and re.match(r"^https?://", raw_label):
+            label = rf"\nolinkurl{{{latex_url(raw_label)}}}"
         return protect(replacements, rf"\href{{{url}}}{{{label}}}")
 
     text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", link_repl, text)
@@ -632,7 +639,7 @@ def inline_to_latex(text: str) -> str:
             url = url[:-1]
         return protect(replacements, rf"\url{{{latex_url(url)}}}") + trailing
 
-    text = re.sub(r"https?://[^\s<>)\]]+", bare_url_repl, text)
+    text = re.sub(URL_PATTERN, bare_url_repl, text)
 
     def bold_repl(match: re.Match[str]) -> str:
         value = escape_plain(match.group(1).strip())

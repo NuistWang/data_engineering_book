@@ -42,15 +42,21 @@ def breakable_monospace(value: str) -> str:
     )
 
 
+URL_PATTERN = r"https?://[A-Za-z0-9._~:/?#@!$&'()*+,;=%-]+"
+
+
 def ustc_inline_to_latex(text: str) -> str:
     text = re.sub(r"<(https?://[^>\s]+)>", r"\1", text)
-    text = re.sub(r"(https?://[^\s<>)\]]+)", normalize_bare_url_for_latex, text)
+    text = re.sub(rf"({URL_PATTERN})", lambda match: normalize_bare_url_for_latex(match, text), text)
     rendered = en_latex.inline_to_latex(text)
     return rendered
 
 
-def normalize_bare_url_for_latex(match: re.Match[str]) -> str:
+def normalize_bare_url_for_latex(match: re.Match[str], source: str) -> str:
     url = match.group(1)
+    previous = source[match.start(1) - 1] if match.start(1) > 0 else ""
+    if previous in "([":
+        return url
     trailing = ""
     while url and url[-1] in ".,;:。，；：、！？）】》\"'":
         trailing = url[-1] + trailing
