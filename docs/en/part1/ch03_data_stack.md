@@ -73,7 +73,7 @@ Figure 3-1 illustrates the corresponding workflow or structure.
 
 ![Figure 3-1: Five-layer architecture of an AI-native data stack](../../images/part1/Yu-Chap03-Fig01.svg)
 
-*Figure 3-1: Five-layer architecture of an AI-native data stack. Source: original illustration from this book*
+*Figure 3-1: Five-layer architecture of an AI-native data stack*
 
 ### 3.2.1 Ingestion and Access Layer: Turning "Data Everywhere" into "Traceable Data"
 
@@ -127,9 +127,9 @@ Two mainstream industrial choices are **Apache Spark** (Zaharia et al. 2016) and
 
 Table 3-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-1: Core feature comparison of Apache Spark and Ray Data. Source: compiled by the authors*
-
 The comparison is based on open-source framework documentation and LLM data-processing practice.
+
+*Table 3-1: Core feature comparison of Apache Spark and Ray Data*
 
 | Dimension | Apache Spark | Ray Data |
 | :--- | :--- | :--- |
@@ -194,7 +194,7 @@ The three mainstream lakehouse formats each have their own appropriate scenarios
 
 Table 3-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-2: Lakehouse table format selection comparison. Source: compiled by the authors*
+*Table 3-2: Lakehouse table format selection comparison*
 
 | Feature | Apache Iceberg | Delta Lake | Apache Hudi |
 | :--- | :--- | :--- | :--- |
@@ -283,7 +283,7 @@ Figure 3-2 illustrates the corresponding workflow or structure.
 
 ![Figure 3-2: Training-data cost-governance loop](../../images/part1/Yu-Chap03-Fig02.svg)
 
-*Figure 3-2: Training-data cost-governance loop. Source: original illustration from this book*
+*Figure 3-2: Training-data cost-governance loop*
 
 ---
 
@@ -321,7 +321,7 @@ An important lesson is that large-team data platforms should be built in **three
 
 Table 3-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-3: Data stack selection matrix for three team types. Source: compiled by the authors*
+*Table 3-3: Data stack selection matrix for three team types*
 
 | Team size | Recommended storage | Recommended compute | Recommended orchestration | Recommended version management | Estimated build cycle |
 | :--- | :--- | :--- | :--- | :--- | :--- |

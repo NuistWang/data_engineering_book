@@ -64,7 +64,7 @@ Figure 7-1 illustrates the corresponding workflow or structure.
 
 ![Figure 7-1: Data Operations Flywheel](../../images/part2/Wang-Chap07-Fig01.svg)
 
-*Figure 7-1: Data operations flywheel. Source: original illustration from this book*
+*Figure 7-1: Data operations flywheel*
 
 ---
 
@@ -180,7 +180,7 @@ Evaluation must never stop at merely "looking at metrics." A qualified evaluatio
 
 Table 7-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-1: Evaluation metric to governance action mapping. Source: compiled by the authors*
+*Table 7-1: Evaluation metric to governance action mapping*
 
 | Metric Observation (Offline/Online) | Common Root Cause and Manifestation | Corresponding Governance Action |
 | :--- | :--- | :--- |
@@ -261,9 +261,9 @@ This costly training interruption demonstrates that the data operations team mus
 
 Table 7-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-2: Version iteration log template. Source: compiled by the authors*
-
 In a formal business iteration system, every data batch deployed to the main training cluster must be accompanied by a release log as rigorous as a software release note. The table below provides a benchmark log template from a production pipeline.
+
+*Table 7-2: Version iteration log template*
 
 | Evaluation Dimension | Version Log Field Example |
 | :--- | :--- |
@@ -293,7 +293,7 @@ Figure 7-2 illustrates the corresponding workflow or structure.
 
 ![Figure 7-2: Data Evaluation Feedback Loop](../../images/part2/Wang-Chap07-Fig02.svg)
 
-*Figure 7-2: Data evaluation feedback loop. Source: original illustration from this book*
+*Figure 7-2: Data evaluation feedback loop*
 
 ### 7.4.2 Automated Quality Alert System Architecture
 

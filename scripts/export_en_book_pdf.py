@@ -462,6 +462,20 @@ figcaption {
   line-height: 1.3;
   color: var(--muted);
   margin-top: 1.2mm;
+  text-align: center;
+}
+
+.print-caption {
+  font-size: 8.6pt;
+  line-height: 1.32;
+  color: var(--muted);
+  text-align: center;
+  margin: 1.2mm auto 2mm;
+  max-width: 92%;
+}
+
+.print-caption em {
+  font-style: italic;
 }
 
 div[align="center"] {
@@ -774,6 +788,22 @@ def normalize_table_caption_spacing(markdown_text: str) -> str:
     return normalize_caption_spacing(markdown_text)
 
 
+CAPTION_HTML_RE = re.compile(
+    r"<p>\s*<em>\s*((?:Figure|Table|Listing|图|表|代码清单|清单)\s*[^<]*?[:：][\s\S]*?)\s*</em>\s*</p>",
+    re.I,
+)
+
+
+def mark_caption_paragraphs(html_body: str) -> str:
+    """Add a stable class to Markdown-style captions for print alignment."""
+
+    def repl(match: re.Match[str]) -> str:
+        caption = match.group(1).strip()
+        return f'<p class="print-caption"><em>{caption}</em></p>'
+
+    return CAPTION_HTML_RE.sub(repl, html_body)
+
+
 def make_markdown_converter() -> markdown.Markdown:
     return markdown.Markdown(
         extensions=[
@@ -827,6 +857,7 @@ def build_book_html(
         text = normalize_mermaid_blocks(text)
         text = normalize_caption_spacing(text)
         html_body = md.convert(text)
+        html_body = mark_caption_paragraphs(html_body)
         html_body = transform_section_opening(html_body, item.path)
         md.reset()
         file_class = classify_path(item.path)

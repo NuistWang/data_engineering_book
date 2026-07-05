@@ -250,10 +250,10 @@ This acknowledgment explains the collaboration background and resource sources f
 
 ## References
 
-MindFace Contributors (2026) MindFace source repository. https://github.com/mindspore-lab/mindface.
+MindFace Contributors (2026) MindFace source repository. https://gitee.com/mindspore-lab/mindface.
 
 MindSpore Contributors (2026a) MindSpore Documentation. https://www.mindspore.cn/view/en.
 
-MindSpore Contributors (2026b) MindSpore source repository. https://github.com/mindspore-ai/mindspore.
+MindSpore Contributors (2026b) MindSpore source repository. https://gitcode.com/mindspore/mindspore.
 
 MindSpore Contributors (2026c) Automatic Differentiation, MindSpore Tutorials. https://www.mindspore.cn/tutorials/en/r2.9.0/beginner/autograd.html.

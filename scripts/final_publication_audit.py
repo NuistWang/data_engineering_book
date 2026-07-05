@@ -44,9 +44,9 @@ REVIEW_TARGETS: list[tuple[str, str, str]] = [
 ]
 
 HIGH_RISK_PARTS = {
-    "Part 10": ROOT / "docs" / "zh" / "part10",
-    "Part 12": ROOT / "docs" / "zh" / "part12",
-    "Part 14": ROOT / "docs" / "zh" / "part14",
+    "Part X": ROOT / "docs" / "zh" / "part10",
+    "Part XII": ROOT / "docs" / "zh" / "part12",
+    "Part XIV": ROOT / "docs" / "zh" / "part14",
 }
 
 DOI_RE = re.compile(r"10\.\d{4,9}/[-._;()/:A-Za-z0-9]+")
@@ -351,7 +351,7 @@ def write_manual_checklist(path: Path) -> None:
     axes = "摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结"
     for kind, unit, file in REVIEW_TARGETS:
         out.append(f"| {kind} | {unit} | `{file}` | {axes} | 待人工签核 |")
-    out.extend(["", "## 二、Part 10 / Part 12 / Part 14 高风险范围", ""])
+    out.extend(["", "## 二、Part X / Part XII / Part XIV 高风险范围", ""])
     for part_name, root in HIGH_RISK_PARTS.items():
         out.append(f"### {part_name}")
         for file in sorted(root.glob("*.md")):

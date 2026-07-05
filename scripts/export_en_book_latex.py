@@ -544,6 +544,10 @@ def latex_url(url: str) -> str:
 
 
 URL_PATTERN = r"https?://[A-Za-z0-9._~:/?#@!$&'()*+,;=%-]+"
+CAPTION_LINE_RE = re.compile(
+    r"^\s*\*((?:Figure|Table|Listing|图|表|代码清单|清单)\s*[^:：]+[:：].*)\*\s*$",
+    re.I,
+)
 
 
 def protect(replacements: list[str], latex: str) -> str:
@@ -826,6 +830,20 @@ def render_code_block(language: str, body: list[str], stats: ExportStats) -> str
     )
 
 
+def render_caption_line(stripped: str) -> str | None:
+    match = CAPTION_LINE_RE.match(stripped)
+    if not match:
+        return None
+    caption = inline_to_latex(match.group(1).strip())
+    return "\n".join(
+        [
+            r"\begin{center}",
+            rf"\small\emph{{{caption}}}",
+            r"\end{center}",
+        ]
+    )
+
+
 def render_source_header(item: NavItem) -> str:
     header = inline_to_latex(item.title)
     return r"\noindent\parbox{\textwidth}{\small\textsf{\RaggedRight " + header + r"}}\par\vspace{1.5mm}"
@@ -962,6 +980,11 @@ def markdown_to_latex(text: str, source_file: Path, assets: AssetManager, stats:
                 quote_lines.append(re.sub(r"^>\s?", "", lines[i].strip()))
                 i += 1
             out.append(r"\begin{quote}" + "\n" + inline_to_latex(" ".join(quote_lines)) + "\n" + r"\end{quote}")
+            continue
+
+        if caption := render_caption_line(stripped):
+            out.append(caption)
+            i += 1
             continue
 
         if re.match(r"^\s*[-*]\s+", line):

@@ -19,7 +19,7 @@
 | `docs/zh/part10/ch32_auto_collection_parsing_cleaning.md` | 第32章：自动化采集、解析与清洗 Agent | 7 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part10/ch33_labeling_synthesis_evaluation.md` | 第33章：标注、合成与评测 Agent | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part10/ch34_dataops_agent.md` | 第34章：DataOps Agent 与平台自治 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part10/ch35_security_permission_collaboration.md` | 第35章：数据工程 Agent 的安全、权限与人机协同 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part10/ch35_security_permission_collaboration.md` | 第35章：Agent 安全与人机协同 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch36_compliance_framework_and_governance.md` | 第36章：数据合规框架与治理 | 30 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch37_federated_learning_and_privacy_preserving_technologies.md` | 第37章：联邦学习与隐私保护技术 | 44 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part12/ch38_text_corpora_transparent_ledger.md` | 第38章：文本语料数据工程 | 24 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -28,11 +28,11 @@
 | `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 第41章：视觉推理数据工程 | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 第42章：语音与音频数据工程 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 第43章：推理轨迹数据工程 | 15 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程实战：从配方到落地 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch45_posttrain_recipes.md` | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch45_posttrain_recipes.md` | 第45章：LLM 后训练数据工程 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch46_rl_reasoning_data.md` | 第46章：推理模型与强化学习数据工程 | 22 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch47_vlm_data_recipes.md` | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch48_t2i_t2v.md` | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 33 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch47_vlm_data_recipes.md` | 第47章：视觉语言模型数据配方 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch48_t2i_t2v.md` | 第48章：多模态生成数据工程 | 33 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p01_mini_c4.md` | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 26 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p02_legal_sft.md` | 项目二：垂直领域专家监督微调（法律） | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p03_llava_instruct.md` | 项目三：LLaVA 多模态指令数据工厂 | 45 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -40,13 +40,13 @@
 | `docs/zh/part14/p05_mm_rag.md` | 项目五：多模态 RAG 企业财报助手 | 43 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p06_prm.md` | 项目六：思维链推理数据集构建与过程奖励模型训练 | 39 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p07_agent_tooluse.md` | 项目七：Agent Tool-Use 数据工厂 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part14/p08_dataops.md` | 项目八：企业级 DataOps 平台搭建：从数据项目到组织级治理能力 | 32 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part14/p08_dataops.md` | 项目八：企业级 DataOps 平台 | 32 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p09_privacy_pipeline.md` | 项目九：隐私保护数据流水线 | 46 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p10_flywheel.md` | 项目十：端到端 LLM 数据飞轮 | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p11_mini_deepseek.md` | 项目十一：Mini-DeepSeek 预训练复现 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p12_r1_reasoning_flywheel.md` | 项目十二：教学化 R1 推理数据飞轮 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p13_multimodal_instruction_factory.md` | 项目十三：Qwen-VL 多模态指令工厂 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part14/p14_video_generation.md` | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part14/p14_video_generation.md` | 项目十四：视频生成数据流水线 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p15_dataagent_semantic_nl2sql_agent.md` | 项目十五：DataAgent 企业级语义问数助手 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part2/ch04_data_sources.md` | 第4章 数据源、采集与版权 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part2/ch05_cleaning_dedup.md` | 第5章 清洗、去重与去污染 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -58,7 +58,7 @@
 | `docs/zh/part3/ch11_cross_modal_alignment.md` | 第11章 跨模态对齐与融合 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch12_sft.md` | 第12章：监督微调数据设计与指令体系 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch13_preference.md` | 第13章：偏好数据与奖励信号 | 49 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part4/ch14_qa.md` | 第14章 标注平台、质量保障体系与数据运营 | 2 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part4/ch14_qa.md` | 第14章：标注平台与质量保障 | 2 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part5/ch15_data_synthesis.md` | 第15章：合成数据工厂：从种子到验证 | 52 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part5/ch16_distillation.md` | 第16章：知识蒸馏与模型协作 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part5/ch17_quality.md` | 第17章：合成数据质量控制与模型坍缩 | 1 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |

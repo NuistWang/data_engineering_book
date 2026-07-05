@@ -115,9 +115,9 @@ When training data has higher information density, less noise, and clearer task 
 
 The research trajectory described above reveals that, under the LLM data engineering paradigm, the true constraint on the capability frontier of a model is not a single dimension but the combined trade-off among **scale, quality, and diversity**. Within a limited budget and limited time, all three cannot be simultaneously maximized; pushing any one to an extreme typically incurs costs in the other two or in engineering overhead. Table 1-2 presents a cost-constraint matrix for all three dimensions, showing data processing methods, direct benefits, and primary constraints.
 
-*Table 1-2: Cost-constraint matrix for scale, quality, and diversity. Source: compiled by the authors*
-
 The matrix is based on public research trajectories and engineering practice.
+
+*Table 1-2: Cost-constraint matrix for scale, quality, and diversity*
 
 | Core Dimension | Primary Data Processing Methods | Direct Benefits | Primary Constraints |
 | :--- | :--- | :--- | :--- |
@@ -131,9 +131,9 @@ Because it is impossible to simultaneously push scale, quality, and diversity to
 
 For engineering teams with long experience in recommendation systems, search ranking, or industrial computer vision, transitioning to LLM training often involves significant methodological friction. Traditional data warehouses and machine learning pipelines primarily handle structured tables, log features, and finite label spaces, whereas LLM training involves unstructured text, code, documents, multimodal long sequences, and open-ended generation objectives. Much of the traditional ETL experience remains valuable, but it cannot directly substitute for the LLM-specific work of data cleaning, deduplication, contamination detection, mixing, version management, and training I/O optimization. Table 1-3 highlights the differences between the two data paradigms in terms of core data types, physical volume, and quality-control challenges.
 
-*Table 1-3: Traditional ML data pipelines vs. LLM-native data systems. Source: compiled by the authors*
-
 The comparison is based on engineering differences between traditional data platforms and LLM data pipelines.
+
+*Table 1-3: Traditional ML data pipelines vs. LLM-native data systems*
 
 | Comparison Dimension | Traditional ML Data Pipeline (e.g., recommendation systems) | LLM-Native Data System |
 | :--- | :--- | :--- |
@@ -156,15 +156,15 @@ The data flywheel refers to a continuously self-reinforcing data loop: after a m
 
 ![Figure 1-1: LLM-Era Data Engineering Role Restructuring Diagram, showing the closed-loop interfaces among platform, data, algorithms, annotation, product, and compliance roles](../../images/part1/Yu-Chap01-Fig01.svg)
 
-*Figure 1-1: LLM-era data engineering role restructuring diagram. Source: original illustration from this book*
+*Figure 1-1: LLM-era data engineering role restructuring diagram*
 
 The diagram depicts the role flywheel loop spanning platform architecture, data collection, model fine-tuning and validation, and product-research iteration.
 
 The prerequisite for this flywheel to operate at high speed is the existence of **clear, executable data handoff SLAs (service-level agreements)** between every pair of roles. Without them, any ambiguous interface—for example, "the product side says it will pass feedback data to the data team, but the format and field definitions are unspecified"—will stall the flywheel at its weakest link. Table 1-4 defines the data responsibilities, upstream/downstream deliverables, and key SLA metrics for the six core roles.
 
-*Table 1-4: Core roles and data-interface responsibilities in LLM projects. Source: compiled by the authors*
-
 The role definitions are based on LLM project collaboration interfaces and data governance practices.
+
+*Table 1-4: Core roles and data-interface responsibilities in LLM projects*
 
 | Role | Core Data Responsibilities | Data Inputs from Upstream | Data Deliverables to Downstream | Key SLA Metrics |
 | :--- | :--- | :--- | :--- | :--- |
@@ -216,9 +216,9 @@ The modern **LLM data engineer** has differentiated from the intersection of tra
 
 Table 1-5 compares the capability boundaries of LLM data engineers and traditional ML data engineers across dimensions including core technology stack, data-volume experience, and quality assessment ability.
 
-*Table 1-5: Capability boundaries of LLM and traditional ML data engineers. Source: compiled by the authors*
-
 The comparison reflects role-boundary changes and toolchain evolution.
+
+*Table 1-5: Capability boundaries of LLM and traditional ML data engineers*
 
 | Capability Dimension | Traditional ML Data Engineer | LLM Data Engineer |
 | :--- | :--- | :--- |
@@ -239,7 +239,7 @@ With the above paradigm shift in mind, a global map is needed to orient the read
 
 ![Figure 1-2: Full Fourteen-Part Lifecycle Map, showing the knowledge structure spanning general principles, pretraining, multimodal, alignment, applications, platform, compliance, and hands-on projects](../../images/part1/Yu-Chap01-Fig02.svg)
 
-*Figure 1-2: Full fourteen-part lifecycle map. Source: original illustration from this book*
+*Figure 1-2: Full fourteen-part lifecycle map*
 
 The map uses infrastructure as its foundation, threading through pretraining, multimodal data, alignment, applications, platform governance, compliance, and hands-on projects.
 
@@ -248,13 +248,13 @@ The map uses infrastructure as its foundation, threading through pretraining, mu
 1. **Part I (General Principles and Infrastructure)**: Establishes problem awareness, the quality vocabulary, and the infrastructure coordinate system.
 2. **Part II (Text Pretraining Data Engineering)**: Covers collection, cleaning, deduplication, tokenization, serialization, and efficient data loading.
 3. **Part III (Multimodal Data Engineering)**: Handles image-text pairs, document OCR, video and audio, and cross-modal alignment.
-4. **Parts 4-6 (Alignment, Synthetic, and Reasoning Data)**:
+4. **Parts IV-VI (Alignment, Synthetic, and Reasoning Data)**:
     * **Part IV (Instruction Fine-tuning and Preference Data)** discusses SFT, preference data, reward signals, and annotation QA.
     * **Part V (Synthetic Data Engineering)** discusses how to build a controllable synthetic data factory using strong models, rule-based verification, and data auditing.
     * **Part VI (Reasoning and Agent Data Engineering)** focuses on chain-of-thought (CoT), tool-use, agent memory, and multi-turn interaction data.
 5. **Part VII (Application-Level Data Engineering)**: Discusses RAG, multimodal retrieval, online feedback, and knowledge updates.
-6. **Parts 8-11 (Platform, Assets, and Compliance Governance)**: Covers DataOps, data versioning, observability, data assets, data contracts, privacy compliance, and federated learning.
-7. **Parts 12-14 (Specialized Datasets, Projects, and Open-Source Practice)**: Uses specialized datasets and project pipelines to present the complete path from dataset design to engineering deployment.
+6. **Parts VIII-XI (Platform, Assets, and Compliance Governance)**: Covers DataOps, data versioning, observability, data assets, data contracts, privacy compliance, and federated learning.
+7. **Parts XII-XIV (Specialized Datasets, Projects, and Open-Source Practice)**: Uses specialized datasets and project pipelines to present the complete path from dataset design to engineering deployment.
 
 ---
 
@@ -268,11 +268,11 @@ The remaining chapters of this book cover pretraining data, multimodal data, ali
 
 **Path B: Traditional Machine Learning Background Transition.** Readers with experience in recommendation systems, search ranking, or traditional machine learning should complete the paradigm shift in Part I and then focus on Part II (Text Pretraining Data Engineering) and Part IV (Instruction Fine-tuning and Preference Data). This path helps transfer structured feature engineering experience into unstructured semantic cleaning, deduplication, contamination detection, and sample design.
 
-**Path C: Full-Stack LLM Data Expert.** Readers who need to lead data engineering decisions may read in the following order: "Part I foundational framework -> Parts 2 and 3 data acquisition and processing -> Parts 4-6 alignment and reasoning data -> Part VII application-level data engineering -> Parts 8, 9, and 11 platform and governance -> Parts 13 and 14 hands-on projects." This path emphasizes end-to-end capabilities spanning data sourcing, quality assessment, platform interfaces, and compliance auditing. As shown in Table 1-6, different reader types exhibit markedly different reading priorities across the parts.
-
-*Table 1-6: Chapter priority recommendations by reader type. Source: compiled by the authors*
+**Path C: Full-Stack LLM Data Expert.** Readers who need to lead data engineering decisions may read in the following order: "Part I foundational framework -> Parts II and III data acquisition and processing -> Parts IV-VI alignment and reasoning data -> Part VII application-level data engineering -> Parts VIII, IX, and XI platform and governance -> Parts XIII and XIV hands-on projects." This path emphasizes end-to-end capabilities spanning data sourcing, quality assessment, platform interfaces, and compliance auditing. As shown in Table 1-6, different reader types exhibit markedly different reading priorities across the parts.
 
 Scores indicate reading-path recommendations rather than measured evaluations.
+
+*Table 1-6: Chapter priority recommendations by reader type*
 
 | Part | Platform / MLOps Engineer | Transitioning ML Engineer | Full-Stack LLM Data Expert |
 | :--- | :---: | :---: | :---: |

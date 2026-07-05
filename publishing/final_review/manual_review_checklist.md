@@ -15,16 +15,16 @@
 | sample-project | P13 | `docs/zh/part14/p13_multimodal_instruction_factory.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 | sample-project | P15 | `docs/zh/part14/p15_dataagent_semantic_nl2sql_agent.md` | 摘要/关键词；术语；图表权属；参考文献真实性；代码长度；案例边界；章末小结 | 待人工签核 |
 
-## 二、Part 10 / Part 12 / Part 14 高风险范围
+## 二、Part X / Part XII / Part XIV 高风险范围
 
-### Part 10
+### Part X
 - [ ] `docs/zh/part10/ch31_agent_architecture.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part10/ch32_auto_collection_parsing_cleaning.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part10/ch33_labeling_synthesis_evaluation.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part10/ch34_dataops_agent.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part10/ch35_security_permission_collaboration.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 
-### Part 12
+### Part XII
 - [ ] `docs/zh/part12/ch38_text_corpora_transparent_ledger.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part12/ch40_visual_document_table_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
@@ -32,7 +32,7 @@
 - [ ] `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 
-### Part 14
+### Part XIV
 - [ ] `docs/zh/part14/p01_mini_c4.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part14/p02_legal_sft.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。
 - [ ] `docs/zh/part14/p03_llava_instruct.md`：安全/合规边界、图表权属、参考文献真实性、案例复现边界。

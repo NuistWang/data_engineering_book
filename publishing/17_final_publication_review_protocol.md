@@ -24,7 +24,7 @@ python3 scripts/final_publication_audit.py --report-dir publishing/final_review
 | 全书逐章统稿和风格精修 | `chapter_style_checklist.md`、`style_report.md` | 逐章确认语言、逻辑、术语、图表引用、参考文献和出版体例；判断口语化、博客化、课程化表达是否需要改写，保留必要技术解释，不机械替换 | 主编 / 章节作者 |
 | 图表版权、AI 声明和高清源文件 | `figure_rights_report.md` | 每张图确认来源、授权、AI 生成或辅助情况、高清源文件、可出版分辨率和替换方案 | 图表编辑 / 资料编辑 |
 | 参考文献 DOI / Springer 样式 / 真实性 | `reference_audit_report.md` | 每条参考文献确认真实存在、年份、作者、题名、DOI/URL/arXiv、出版社样式和正文引用关系 | 参考文献编辑 |
-| 指定章节抽检 | `manual_review_checklist.md` | 第 12、16、21、24、29、40 章，P11、P12、P13、P15，以及 Part 10/12/14 高风险范围完成签核 | 主编 / 领域审校 |
+| 指定章节抽检 | `manual_review_checklist.md` | 第 12、16、21、24、29、40 章，P11、P12、P13、P15，以及 Part X/12/14 高风险范围完成签核 | 主编 / 领域审校 |
 
 ## 三、完成定义
 

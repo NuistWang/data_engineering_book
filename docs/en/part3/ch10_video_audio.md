@@ -18,7 +18,7 @@ Video data; audio data; ASR; WhisperX; shot-boundary detection; temporal alignme
 - Build video/audio quality evaluation, severity classification, and isolation strategies.
 - Estimate the main cost sources in decoding, frame extraction, ASR, and packaging.
 
-After the processing chain from natural-language text in Parts 1 and 2 to static image-text parsing in Chapters 8 and 9, this chapter enters **temporal video and audio data engineering**.
+After the processing chain from natural-language text in Parts I and II to static image-text parsing in Chapters 8 and 9, this chapter enters **temporal video and audio data engineering**.
 
 In training based on image-text pairs or frame snapshots, a model can learn object categories, scenes, and static relationships. It still struggles to understand the motion trajectory, sound-image synchronization, and temporal causality contained in an apple "falling from a table, rolling under a bed, and making an impact sound." To train models such as Sora (Brooks et al. 2024) or Gemini 1.5 Pro (Gemini Team 2024), which can process long temporal input, one must build samples that express time, action, and sound association.
 
@@ -57,7 +57,7 @@ Figure 10-1 illustrates the corresponding workflow or structure.
 
 ![Figure 10-1: Distributed audio-video alignment pipeline](../../images/part3/Wang-Chap10-Fig01.svg)
 
-*Figure 10-1: Distributed audio-video alignment pipeline. Source: drawn for this book*
+*Figure 10-1: Distributed audio-video alignment pipeline*
 
 ### 10.2.1 Visual Extraction: Shot-Boundary Detection and Scene Slicing
 
@@ -71,7 +71,7 @@ Figure 10-2 illustrates the corresponding workflow or structure.
 
 ![Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention](../../images/part3/Wang-Chap10-Fig02.svg)
 
-*Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention. Source: drawn for this book*
+*Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention*
 
 2. **Adaptive subsampling**
 
@@ -89,7 +89,7 @@ Figure 10-3 illustrates the corresponding workflow or structure.
 
 ![Figure 10-3: Large-scale ASR extraction and temporal calibration](../../images/part3/Wang-Chap10-Fig03.svg)
 
-*Figure 10-3: Large-scale ASR extraction and temporal calibration. Source: drawn for this book*
+*Figure 10-3: Large-scale ASR extraction and temporal calibration*
 
 #### B. Denoiser layer
 
@@ -113,7 +113,7 @@ Figure 10-4 illustrates the corresponding workflow or structure.
 
 ![Figure 10-4: Cross-modal temporal calibration and geometric alignment](../../images/part3/Wang-Chap10-Fig04.svg)
 
-*Figure 10-4: Cross-modal temporal calibration and geometric alignment. Source: drawn for this book*
+*Figure 10-4: Cross-modal temporal calibration and geometric alignment*
 
 Large teams usually deploy a **multi-modal temporal alignment engine** based on timestamp matrices. Once a front-end recognizer emits coordinate bounds such as `<start:2.1s><end:4.5s>`, code must use floating-point logic to slice the corresponding video frames. The final alignment information is not handed to the model only as video; it is transformed into a structured JSONL sequence with metadata tags and HTML-like multi-track mixed tokens, then passed to the training DataLoader.
 
@@ -145,7 +145,7 @@ Strict mismatch detection and review are therefore required.
 
 Table 10-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 10-1: Temporal audio-video defects and remediation strategies. Source: compiled by the authors*
+*Table 10-1: Temporal audio-video defects and remediation strategies*
 
 | Defect type and manifestation | Root cause | Detection and remediation | Severity |
 | :--- | :--- | :--- | :--- |
@@ -180,7 +180,7 @@ To decide whether a decompressed video is worth sending to the next stage, we ne
 
 Data engineers need a clear view of unit cost at each layer. Table 10-2 summarizes cost drivers and cost-reduction strategies for long-temporal audio-video processing.
 
-*Table 10-2: Long-temporal audio-video cost drivers and reduction strategies. Source: compiled by the authors*
+*Table 10-2: Long-temporal audio-video cost drivers and reduction strategies*
 
 | Processing stage | Resource profile | Cost drivers | Cost-reduction strategy |
 | :--- | :--- | :--- | :--- |
@@ -207,7 +207,7 @@ This case reinforces the core conclusion of Chapter 1: **without strict data pre
 
 ### 10.5.2 Chapter Summary and Bridge
 
-From text cleaning in Parts 1 and 2, to image-pixel alignment in Chapters 8 and 9, and now long-temporal video and audio data, we have systematically covered preprocessing methods for heterogeneous data: video frame extraction, ASR transcription, audio-video alignment, event labeling, and quality filtering.
+From text cleaning in Parts I and II, to image-pixel alignment in Chapters 8 and 9, and now long-temporal video and audio data, we have systematically covered preprocessing methods for heterogeneous data: video frame extraction, ASR transcription, audio-video alignment, event labeling, and quality filtering.
 
 Video and audio pipelines solve slicing, transcription, and temporal synchronization for long-temporal samples. Multimodal training still needs to answer another question: how do image, text, audio, and video signals form stable correspondences in the same semantic space? The next chapter, **Chapter 11: Cross-Modal Alignment and Fusion**, discusses object-level, segment-level, and document-level aligned sample construction.
 
@@ -343,9 +343,9 @@ The log content is anonymized; production environments should combine shard writ
 
 Table 10-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 10-3: Audio-video pipeline error types and remediation strategies. Source: compiled by the authors*
-
 The error codes and remediation strategies summarize anonymized engineering patterns.
+
+*Table 10-3: Audio-video pipeline error types and remediation strategies*
 
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |

@@ -123,7 +123,7 @@ def register_ingestion(record: DataIngestionRecord, metadata_db_path: str):
 
 表3-1汇总了相应的对比和工程要点。
 
-*表3-1：Apache Spark vs Ray Data 核心特性对比。来源：本书基于开源框架公开文档与 LLM 数据处理实践整理*
+*表3-1：Apache Spark vs Ray Data 核心特性对比*
 
 | 对比维度 | Apache Spark | Ray Data |
 | :--- | :--- | :--- |
@@ -186,7 +186,7 @@ LLM 数据栈要同时管理三种性质截然不同的数据，每种数据对�
 
 表3-2汇总了相应的对比和工程要点。
 
-*表3-2：数据湖表格式选型对比。来源：本书整理*
+*表3-2：数据湖表格式选型对比*
 
 | 特性 | Apache Iceberg | Delta Lake | Apache Hudi |
 | :--- | :--- | :--- | :--- |
@@ -313,7 +313,7 @@ $$\text{数据工程 ROI} = \frac{\Delta\text{模型性能} \times \text{模型�
 
 表3-3汇总了相应的对比和工程要点。
 
-*表3-3：三类团队数据栈选型矩阵。来源：本书整理*
+*表3-3：三类团队数据栈选型矩阵*
 
 | 团队规模 | 建议存储方案 | 建议计算框架 | 建议编排工具 | 建议版本管理 | 预计搭建周期 |
 | :--- | :--- | :--- | :--- | :--- | :--- |

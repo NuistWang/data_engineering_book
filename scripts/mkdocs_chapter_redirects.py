@@ -1,6 +1,6 @@
 """mkdocs hook: write <meta refresh> stub pages at old chapter URLs.
 
-Phase 4.1 of the optimization plan renamed Part 4-9 chapter files from
+Phase 4.1 of the optimization plan renamed Part IV-IX chapter files from
 `X_Y_slug.md` (and `ChXX_slug.md` in part9) to `chXX_slug.md`. To keep
 external links working, this hook generates HTML stub files at the old
 URLs that redirect to the new URLs.

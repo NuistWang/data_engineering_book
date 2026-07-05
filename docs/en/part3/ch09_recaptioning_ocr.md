@@ -107,7 +107,7 @@ At the highest-value layer of the funnel, automation scripts mainly perform cand
 
 These human labels should not rely only on low-barrier crowdsourcing. Multimodal alignment requires high noun precision and hierarchical structure, so annotators usually need systematic training and a dedicated internal labeling tool to confirm small regions one by one. Although this portion is tiny, it forms the **golden truth** used later for training recaptioning reward models or fine-tuning base models.
 
-*Table 9-1: Automated recaptioning production tiers. Source: compiled by the authors*
+*Table 9-1: Automated recaptioning production tiers*
 
 | Recaptioning tier | Cost drivers | Throughput constraints | Complex-scene and chart ability | Advantages and deployment risks |
 | :--- | :--- | :--- | :--- | :--- |
@@ -173,7 +173,7 @@ Production environments should add data source, model version, review status, li
 
 ![Figure 9-1: Recaptioning and OCR dual-track enhancement](../../images/part3/Yu-Chap09-Fig01.svg)
 
-*Figure 9-1: Recaptioning and OCR dual-track enhancement. Source: drawn for this book*
+*Figure 9-1: Recaptioning and OCR dual-track enhancement*
 
 At this point, a recaptioning pipeline for natural images and pure scenes has been established. The next category, high-density text, most strongly affects enterprise VLM deployment: long-document reading and complex business-report structured parsing.
 
@@ -207,7 +207,7 @@ Figure 9-2 illustrates the corresponding workflow or structure.
 
 ![Figure 9-2: Document structure layout-to-token mapping](../../images/part3/Yu-Chap09-Fig02.svg)
 
-*Figure 9-2: Document structure layout-to-token mapping. Source: drawn for this book*
+*Figure 9-2: Document structure layout-to-token mapping*
 
 ### 9.3.2 How Text Engines Reduce Ultra-High-Resolution Input Burden
 
@@ -241,7 +241,7 @@ These experts not only judge quality but also provide error-attribution reports 
 
 Table 9-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 9-2: OCR error attribution and remediation matrix. Source: compiled by the authors*
+*Table 9-2: OCR error attribution and remediation matrix*
 
 | Error pattern in model output | Root-cause diagnosis in expert workstation | Core remediation strategy and architectural iteration |
 | :--- | :--- | :--- |
@@ -266,7 +266,7 @@ The postmortem showed that **without rigorous data engineering, even a strong al
 
 ### 9.5.2 From Static Documents to Long Temporal Data
 
-From the text cleaning and filtering in Parts 1 and 2, to image-text alignment in Chapter 8, and then to recaptioning and document structuring in this chapter, a relatively complete processing chain for static two-dimensional data engineering is now in place. Through OCR, layout parsing, BBox labeling, and long-text reconstruction, document images can become trainable, traceable, and measurable high-density supervision signals.
+From the text cleaning and filtering in Parts I and II, to image-text alignment in Chapter 8, and then to recaptioning and document structuring in this chapter, a relatively complete processing chain for static two-dimensional data engineering is now in place. Through OCR, layout parsing, BBox labeling, and long-text reconstruction, document images can become trainable, traceable, and measurable high-density supervision signals.
 
 But the real world is not only a static image or one electronic invoice page. Many important scenarios contain continuous temporal logic, motion trajectories, and multi-band audio signals. Although AnyRes and other static-image strategies can handle high-resolution images, video at 30-60 frames per second over minutes or hours quickly increases visual tokens, decoding I/O, audio transcription, and temporal-alignment cost, and can trigger out-of-memory failures and data-loading bottlenecks.
 

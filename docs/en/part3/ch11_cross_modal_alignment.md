@@ -71,7 +71,7 @@ Figure 11-1 illustrates the corresponding workflow or structure.
 
 ![Figure 11-1: Three-level cross-modal alignment pyramid](../../images/part3/Wang-Chap11-Fig01.svg)
 
-*Figure 11-1: Three-level cross-modal alignment pyramid. Source: drawn for this book*
+*Figure 11-1: Three-level cross-modal alignment pyramid*
 
 #### 1. Object-level / micro-alignment: anchoring boxes to words
 
@@ -93,7 +93,7 @@ Here the object is no longer an isolated segment, but a manual, paper, research 
 
 Table 11-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-1: Heterogeneous alignment strategies and applicable tasks. Source: compiled by the authors*
+*Table 11-1: Heterogeneous alignment strategies and applicable tasks*
 
 | Alignment granularity | Main method and feature expression | Data construction cost | Typical tasks |
 | :--- | :--- | :--- | :--- |
@@ -131,7 +131,7 @@ Figure 11-2 illustrates the corresponding workflow or structure.
 
 ![Figure 11-2: Multimodal fusion and hard-negative mining pipeline](../../images/part3/Wang-Chap11-Fig02.svg)
 
-*Figure 11-2: Multimodal fusion sample design. Source: drawn for this book*
+*Figure 11-2: Multimodal fusion sample design*
 
 ### 11.3.2 Multimodal Data Mixing: Controlling Capability Forgetting
 
@@ -158,7 +158,7 @@ In contrastive alignment (Dufumier et al. 2025 (ICLR) argue that effective multi
 
 Table 11-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-2: Comparison of hard-negative mining strategies. Source: compiled by the authors*
+*Table 11-2: Comparison of hard-negative mining strategies*
 
 | Strategy | Generation method | Granularity | Main advantage | Main risk |
 | :--- | :--- | :--- | :--- | :--- |
@@ -176,7 +176,7 @@ Cross-modal fusion data is expensive to build and should not enter training with
 
 Cross-modal evaluation must look beyond single-modality quality and measure whether mappings between modalities are stable. Table 11-3 lists common metrics and governance actions.
 
-*Table 11-3: Evaluation metrics and governance-action mapping. Source: compiled by the authors*
+*Table 11-3: Evaluation metrics and governance-action mapping*
 
 | Metric | Physical meaning and business mapping | Risk threshold and error source | Governance action |
 | :--- | :--- | :--- | :--- |
@@ -361,9 +361,9 @@ The log content is anonymized; production environments should freeze placeholder
 
 Table 11-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-4: Cross-modal alignment error types and remediation strategies. Source: compiled by the authors*
-
 The error types and remediation strategies summarize anonymized engineering patterns.
+
+*Table 11-4: Cross-modal alignment error types and remediation strategies*
 
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |

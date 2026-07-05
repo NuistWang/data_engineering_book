@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand the data lifecycle in Part I and the main data objects from Parts 2 to 7. Readers from platform or engineering-management backgrounds may focus on organizational collaboration, version governance, and observability loops, rather than understanding DataOps as a single scheduling tool.
+Before reading this part, readers should understand the data lifecycle in Part I and the main data objects from Parts II to VII. Readers from platform or engineering-management backgrounds may focus on organizational collaboration, version governance, and observability loops, rather than understanding DataOps as a single scheduling tool.
 
 ## Chapter Logic
 

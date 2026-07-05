@@ -168,7 +168,7 @@ The choice of data format has a direct, order-of-magnitude impact on DataLoader 
 
 Table 6-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 6-1: Data formats, compression, and access patterns. Source: compiled by the authors*
+*Table 6-1: Data formats, compression, and access patterns*
 
 | Format | Type | Sequential Read Speed | Random Access | Compression Support | Cross-Framework Support | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -249,7 +249,7 @@ $$p_i = \frac{n_i^{1/T}}{\sum_j n_j^{1/T}}$$
 
 When $T = 1$, weights are proportional to data volume and large sources completely dominate; as $T \to \infty$, all source weights approach uniform. In practice, $T = 2$ is commonly used (the multilingual sampling setting of mT5 (Xue et al. 2021)), upsampling small sources while avoiding excessive deviation from the original data distribution. Table 6-2 compares the benefits and trade-offs of common sampling and mixing strategies.
 
-*Table 6-2: Sampling and mixing strategy benefits. Source: compiled by the authors*
+*Table 6-2: Sampling and mixing strategy benefits*
 
 | Mixing Strategy | Principle | Advantages | Disadvantages | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- |
@@ -342,7 +342,7 @@ When GPU utilization falls below expectations, follow these systematic steps to 
 
 ![Figure 6-1: Throughput Bottleneck Diagnosis Flowchart](../../images/part2/Wang-Chap06-Fig01.svg)
 
-*Figure 6-1: Throughput bottleneck diagnosis flowchart. Source: original illustration from this book*
+*Figure 6-1: Throughput bottleneck diagnosis flowchart*
 
 **Step 1 — Confirm whether the GPU is waiting for data**: Run `nvidia-smi dmon -s u` to monitor SM utilization; if SM utilization periodically drops to 0 and `sm_active` is intermittently 0, the GPU is waiting. Also check the MFU (Model FLOPS Utilization) metric and compare it with the project's historical baseline.
 
@@ -421,7 +421,7 @@ Figure 6-2 illustrates the corresponding workflow or structure.
 
 ![Figure 6-2: Training Input Pipeline Layer Diagram](../../images/part2/Wang-Chap06-Fig02.svg)
 
-*Figure 6-2: Layered architecture of the LLM training input pipeline. Source: original illustration from this book*
+*Figure 6-2: Layered architecture of the LLM training input pipeline*
 
 ### Case Study: Migration Benefits from JSONL + Online Tokenization to MDS + Offline Tokenization
 

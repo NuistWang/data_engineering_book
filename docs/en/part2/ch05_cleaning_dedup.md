@@ -56,7 +56,7 @@ Figure 5-1 illustrates the corresponding workflow or structure.
 
 ![Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline](../../images/part2/Yu-Chap05-Fig01.svg)
 
-*Figure 5-1: Cleaning and decontamination pipeline overview. Source: original illustration from this book*
+*Figure 5-1: Cleaning and decontamination pipeline overview*
 
 ### 5.2.1 The First Gate: Rule-Based Filtering
 
@@ -423,7 +423,7 @@ Figure 5-2 illustrates the corresponding workflow or structure.
 
 ![Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop](../../images/part2/Yu-Chap05-Fig02.svg)
 
-*Figure 5-2: Quality filtering funnel and spot-check feedback loop. Source: original illustration from this book*
+*Figure 5-2: Quality filtering funnel and spot-check feedback loop*
 
 After each cleaning batch is completed, the following "quality snapshot" procedure is executed on a fixed schedule: randomly sample a batch of records for manual annotation by data engineers (OK / noise / missed PII / erroneously discarded high-quality content / near-duplicate slippage), tally the occurrence rate of each error type, and trace which filtering step caused the error (false positive or false negative). When the error rate for any category exceeds the project waterline for multiple consecutive batches, a review and update of the corresponding rule or model threshold must be triggered. This mechanism transforms the cleaning pipeline from a "one-time engineering artifact" into a "continuously iterating quality engine."
 
@@ -433,7 +433,7 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 
 Table 5-1 summarizes common corpus defects, detection methods, missed-detection costs, and recommended thresholds or tools.
 
-*Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors*
+*Table 5-1: Common defects, detection methods, and cost matrix*
 
 | Defect Type | Typical Manifestation | Detection Method | Cost of Miss | Recommended Threshold/Tool |
 | :--- | :--- | :--- | :--- | :--- |
@@ -446,7 +446,7 @@ Table 5-1 summarizes common corpus defects, detection methods, missed-detection 
 | **Benchmark contamination** | Test set questions mixed into training set | 13-gram comparison against evaluation sets | Inflated benchmark scores; integrity risk | Isolate high-overlap samples and review manually |
 | **Low lexical diversity** | Extremely low Type-Token Ratio (boilerplate text) | TTR distribution anomaly | Model vocabulary use becomes rigid | Set TTR baselines by language and content type |
 
-*Table 5-2: Impact of cleaning actions on training outcomes. Source: compiled by the authors*
+*Table 5-2: Impact of cleaning actions on training outcomes*
 
 | Cleaning Action | Typical Model Symptoms When Skipped | Risk-Mitigation Direction When Fully Applied | Cost/Timeline |
 | :--- | :--- | :--- | :--- |
@@ -502,7 +502,7 @@ The lightweight solution focuses on "holding the baseline," filtering out the mo
 
 Table 5-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 5-3: Minimum viable combination for lightweight cleaning. Source: compiled by the authors*
+*Table 5-3: Minimum viable combination for lightweight cleaning*
 
 | Step | Implementation | Tools | Required? |
 |:--- |:--- |:--- |:--- |

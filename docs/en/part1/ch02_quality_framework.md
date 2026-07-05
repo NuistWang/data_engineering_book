@@ -60,7 +60,7 @@ This contract document is not a static file but a versioned document that evolve
 
 Quality is by no means a static standard; it presents entirely different core requirements at different stages as the data lifecycle progresses. Applying a fixed standard to measure data across the entire lifecycle will inevitably produce serious misjudgments. As shown in Table 2-1, the core quality requirements and detection metrics differ significantly across the four stages of pre-training, instruction fine-tuning, preference alignment, and RAG deployment.
 
-*Table 2-1: Four-stage quality objective evolution matrix. Source: compiled by the authors*
+*Table 2-1: Four-stage quality objective evolution matrix*
 
 | Training Stage | Typical Data Scale | Core Quality Requirements | Primary Detection Metrics | Typical Defects and Risks | Primary Processing Tools |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -107,7 +107,7 @@ To resolve the problem of an inconsistent quality language, we must establish cl
 
 ![Figure 2-1: Multi-dimensional quality layering architecture from a lifecycle perspective, showing how metric weights shift across stages from scale and diversity toward truthfulness and helpfulness](../../images/part1/Yu-Chap02-Fig01.svg)
 
-*Figure 2-1: Multi-dimensional quality layering architecture. Source: original illustration from this book*
+*Figure 2-1: Multi-dimensional quality layering architecture*
 
 ### 2.2.1 Quality Objective Differences Across Stages
 
@@ -150,7 +150,7 @@ To establish shared governance actions, the vague notion of "bad data" must be t
 
 ![Figure 2-2: Cross-mapping diagram of large language model data defects and quality metrics, showing the relationships between six defect classes and accuracy, consistency, diversity, coverage, and traceability](../../images/part1/Yu-Chap02-Fig02.svg)
 
-*Figure 2-2: Cross-mapping matrix of data defects and quality metrics. Source: original illustration from this book*
+*Figure 2-2: Cross-mapping matrix of data defects and quality metrics*
 
 ### 2.3.1 Six Core Defect Classes (Six Core Defect Classes)
 
@@ -319,7 +319,7 @@ A quality assessment framework must ultimately materialize as concrete, engineer
 
 ![Figure 2-3: Automated blocking and governance flow driven by the data scorecard, showing hard gates, soft gates, manual review, and rollback actions](../../images/part1/Yu-Chap02-Fig03.svg)
 
-*Figure 2-3: Automated blocking and governance flow driven by the data scorecard. Source: original illustration from this book*
+*Figure 2-3: Automated blocking and governance flow driven by the data scorecard*
 
 ### 2.4.1 Scorecard Design and Implementation
 

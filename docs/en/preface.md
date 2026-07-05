@@ -14,7 +14,7 @@ This handbook is organized into **14 parts, 48 chapters, 15 projects, and 8 appe
 
 ![Book architecture of Data Engineering for Large Foundation Models, showing the data lifecycle, foundation layer, data collection and processing layer, cross-cutting capabilities, model alignment and capability enhancement layer, application governance layer, security and specialized practice layer, project case layer, DataOps flywheel, and platform support capabilities](../images/Yu-FrontMatter-Fig02-EN.png)
 
-*Figure FM-1: Book architecture. Source: original illustration by the authors*
+*Figure FM-1: Book architecture*
 
 Parts I to III form the foundation layer. They discuss the data lifecycle, infrastructure, text data, multimodal images, video, audio, optical character recognition, and cross-modal alignment. Parts IV to VI form the training-signal layer, covering instruction fine-tuning, preference data, synthetic data, distillation, reasoning chains, tool use, and agent interaction data. Parts VII to XI place data engineering inside application systems, organizational operations, data assets, intelligent agents, privacy compliance, and federated learning.
 

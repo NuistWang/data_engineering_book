@@ -230,7 +230,7 @@ Figure 21-4 illustrates the corresponding workflow or structure.
 
 ![Figure 21-4: The bucket-stave effect on RAG system performance](../../images/part7/Du-Chap21-Fig04-EN.svg)
 
-*Figure 21-4: The bucket-stave effect on RAG system performance(copyright:DooFi, Public domain, via Wikimedia Commons)*
+*Figure 21-4: The bucket-stave effect on RAG system performance*
 
 
 

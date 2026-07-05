@@ -64,7 +64,7 @@ Figure 4-1 illustrates the corresponding workflow or structure.
 
 ![Figure 4-1: Layered map of pre-training data sources](../../images/part2/Yu-Chap04-Fig01.svg)
 
-*Figure 4-1: Layered map of pre-training data sources. Source: original illustration from this book*
+*Figure 4-1: Layered map of pre-training data sources*
 
 The three-layer taxonomy positions mainstream sources by processing complexity, knowledge density, and license risk, with typical reference ranges for mixing.
 
@@ -90,9 +90,9 @@ The three-layer taxonomy positions mainstream sources by processing complexity, 
 
 In practical engineering decisions, source selection cannot be based on quality alone; license risk and acquisition feasibility must also be incorporated into the framework. Table 4-1 summarizes a risk-profile matrix for major data sources.
 
-*Table 4-1: Source type, license, and risk matrix. Source: compiled by the authors*
-
 License risk should be assessed against specific source terms, robots.txt, service agreements, and legal-review conclusions.
+
+*Table 4-1: Source type, license, and risk matrix*
 
 | Source type | Representative sources | License pattern | Commercial risk | Knowledge density | Scale potential |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -110,7 +110,7 @@ License risk should be assessed against specific source terms, robots.txt, servi
 
 Data mix ratio is one of the most strategic decisions in pretraining data engineering. There is no universal fixed mix, because different business objectives require different data combinations. The following are reference mixing strategies for four typical business objectives:
 
-*Table 4-2: Data mix strategy by business objective. Source: compiled by the authors*
+*Table 4-2: Data mix strategy by business objective*
 
 | Business objective | General web | Code | Academic papers | Books / encyclopedia | Vertical data | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -282,7 +282,7 @@ Figure 4-2 illustrates the corresponding workflow or structure.
 
 ![Figure 4-2: Data ingestion and provenance chain](../../images/part2/Yu-Chap04-Fig02.svg)
 
-*Figure 4-2: Data ingestion and provenance chain. Source: original illustration from this book*
+*Figure 4-2: Data ingestion and provenance chain*
 
 From source contact to final archive, each processing stage appends metadata records to the Provenance Ledger, forming a complete auditable data-lineage chain.
 

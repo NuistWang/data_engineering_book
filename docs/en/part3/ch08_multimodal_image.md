@@ -59,7 +59,7 @@ Figure 8-1 illustrates the corresponding workflow or structure.
 
 ![Figure 8-1: Overview of image-text data engineering](../../images/part3/Yu-Chap08-Fig01.svg)
 
-*Figure 8-1: Overview of multimodal image-text data engineering. Source: drawn for this book*
+*Figure 8-1: Overview of multimodal image-text data engineering*
 
 ---
 
@@ -124,7 +124,7 @@ For real business use cases such as reading financial reports or invoices, natur
 
 Table 8-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 8-1: Image-text sample types and applicable tasks. Source: compiled by the authors*
+*Table 8-1: Image-text sample types and applicable tasks*
 
 | Sample type | Data characteristics | Core acquisition method | Best-fit stage | Key capability gained |
 | :--- | :--- | :--- | :--- | :--- |
@@ -265,7 +265,7 @@ Modern large-model engineering usually applies a **multi-granularity recaptionin
 
 ![Figure 8-2: Image semantic alignment and filtering flow](../../images/part3/Yu-Chap08-Fig02.svg)
 
-*Figure 8-2: Image semantic alignment and filtering flow. Source: drawn for this book*
+*Figure 8-2: Image semantic alignment and filtering flow*
 
 ---
 
@@ -283,7 +283,7 @@ Figure 8-3 illustrates the corresponding workflow or structure.
 
 ![Figure 8-3: AnyRes dynamic multi-resolution patching](../../images/part3/Yu-Chap08-Fig03.svg)
 
-*Figure 8-3: AnyRes dynamic multi-resolution patching. Source: drawn for this book*
+*Figure 8-3: AnyRes dynamic multi-resolution patching*
 
 **AnyRes principles and core strategies:**
 
@@ -303,7 +303,7 @@ A balanced MLLM pretraining mix must allocate weights to different sources caref
 
 Table 8-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 8-2: Image-cleaning strategies and cost comparison. Source: compiled by the authors*
+*Table 8-2: Image-cleaning strategies and cost comparison*
 
 | Cleaning strategy | Compute cost | Core function and benefit | Residual risks and side effects |
 | :--- | :--- | :--- | :--- |

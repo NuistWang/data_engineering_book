@@ -32,11 +32,11 @@ Throughout this part, "project case study" denotes a runnable, verifiable, and a
 
 ## Capability Mapping
 
-P01–P04 correspond to raw data materials, domain instruction tuning, multimodal instruction tuning, and synthetic data capabilities, primarily building on Parts 2 through 5.
+P01–P04 correspond to raw data materials, domain instruction tuning, multimodal instruction tuning, and synthetic data capabilities, primarily building on Parts II through V.
 
-P05–P07 correspond to multimodal RAG, process supervision, and Agent Tool-Use, primarily building on Parts 6 and 7.
+P05–P07 correspond to multimodal RAG, process supervision, and Agent Tool-Use, primarily building on Parts VI and VII.
 
-P08–P10 correspond to DataOps, privacy protection, and data flywheels, primarily building on Parts 8 through 11.
+P08–P10 correspond to DataOps, privacy protection, and data flywheels, primarily building on Parts VIII through XI.
 
 P11–P15 correspond to open-source model data recipes, reasoning flywheels, multimodal instruction tuning, video generation, and enterprise-grade Agent applications, primarily building on Part XIII and extending into the delivery templates in the appendices.
 

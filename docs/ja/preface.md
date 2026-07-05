@@ -19,4 +19,4 @@
 
 複数の国際トップ会議（IJCAI/AAAI/CVPR/ICCV/ICML/NeurIPS/MM/ICLR）のSPCメンバー、Huawei MindSpore技術委員会メンバー。唯一の指導教員として、World Robot Contestで2回優勝、「Challenge Cup」特別競技で国際一等賞2件、Huawei Ascend AI Innovation Competition銀賞、MindSpore Outstanding Developer 2名を輩出。  
 
-学部生向けに「データ構造とアルゴリズム」「パターン認識入門」「人工知能入門」「デジタル論理回路」を担当、大学院生向けに「コンピュータビジョン」を担当。年間平均350時間の講義、うち4科目がHuawei Intelligent Base計画に選出。教育部–Huawei共同教育プロジェクトや省レベルの質向上プロジェクト9件を主導。8冊の教科書を編集、うち1冊がHuawei ICT Excellent Textbook Awardを受賞。Huawei MindSpore Face Suite (MindFace, [GitHub](https://github.com/mindspore-lab/mindface)) の開発を主導し、MindSpore OCR Suite (MindOCR, [GitHub](https://github.com/mindspore-lab/mindocr)) にも関与。
+学部生向けに「データ構造とアルゴリズム」「パターン認識入門」「人工知能入門」「デジタル論理回路」を担当、大学院生向けに「コンピュータビジョン」を担当。年間平均350時間の講義、うち4科目がHuawei Intelligent Base計画に選出。教育部–Huawei共同教育プロジェクトや省レベルの質向上プロジェクト9件を主導。8冊の教科書を編集、うち1冊がHuawei ICT Excellent Textbook Awardを受賞。Huawei MindSpore Face Suite (MindFace, [GitHub](https://gitee.com/mindspore-lab/mindface)) の開発を主導し、MindSpore OCR Suite (MindOCR, [GitHub](https://gitee.com/mindspore-lab/mindocr)) にも関与。

@@ -6,7 +6,7 @@ Part XIII transitions from specialized case studies to open-source model data re
 
 This part covers five categories of recipes: pretraining data recipes, post-training data recipes, RL/reasoning data recipes, VLM data recipes, and T2I/T2V generative model data recipes. These correspond respectively to the questions of "what raw materials does the model learn from," "how is controllable behavior acquired," "how is verifiable reasoning formed," "how is vision-language alignment achieved," and "how generative models absorb high-quality image-text/video supervision."
 
-Looking backward, this part builds on the methods, platforms, evaluation frameworks, and compliance foundations established in Parts 1 through 12. Looking forward, it provides recipe coordinates for the open-source model reproduction, inference flywheels, multimodal instruction factories, video generation pipelines, and DataAgent application cases in Part XIV (P11–P15).
+Looking backward, this part builds on the methods, platforms, evaluation frameworks, and compliance foundations established in Parts I through XII. Looking forward, it provides recipe coordinates for the open-source model reproduction, inference flywheels, multimodal instruction factories, video generation pipelines, and DataAgent application cases in Part XIV (P11–P15).
 
 ## Terminology Conventions
 
