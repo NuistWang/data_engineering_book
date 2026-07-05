@@ -8,9 +8,9 @@ P10 focuses on organizing data, supervision, training, applications, platform go
 
 The chapter does not add one more isolated capability.
 
-It integrates the project assets, interfaces, stages, and control points in Part 14 into one unified system.
+It integrates the project assets, interfaces, stages, and control points in Part XIV into one unified system.
 
-As this part expands to P01-P15, P10's publication framing should be updated from the early "assembly of the previous nine projects" to the "assembly layer for the Part 14 projects": it covers the foundational data-engineering work in P01-P09 and also reserves space for P11-P15's open-source recipes, reasoning flywheel, multimodal instruction, video generation, and enterprise question-answering capabilities.
+As this part expands to P01-P15, P10's publication framing should be updated from the early "assembly of the previous nine projects" to the "assembly layer for the Part XIV projects": it covers the foundational data-engineering work in P01-P09 and also reserves space for P11-P15's open-source recipes, reasoning flywheel, multimodal instruction, video generation, and enterprise question-answering capabilities.
 
 This chapter can be read through four main threads:
 
@@ -67,9 +67,7 @@ Listing P10-1 provides a process flow example.
 project assets -> registry -> stage plan -> training/evaluation feedback -> data revision -> release decision -> flywheel report
 ```
 
-*Listing P10-1: Process flow example.*
-
-
+*Listing P10-1: Process flow example*
 Sample records should at least preserve `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`.
 
 Exact fields should be refined according to the data type, downstream task, and acceptance method.
@@ -90,8 +88,7 @@ For production, course, or public reproduction settings, reports should also rec
 
 Table P10-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P10-1: Publication acceptance table for the LLM data flywheel.*
-
+*Table P10-1: Publication acceptance table for the LLM data flywheel*
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Asset integration | Upstream project coverage, registry completeness, and interface mapping records | Every upstream asset should explain its source, owner, version, and reuse path |
@@ -166,7 +163,7 @@ Once the system expands, this absence makes stable operation difficult.
 
 Therefore, P10 builds an **end-to-end LLM data flywheel assembly layer**.
 
-It aggregates the outputs, stages, interfaces, control points, and governance mechanisms from P01-P15 in Part 14 into one system structure.
+It aggregates the outputs, stages, interfaces, control points, and governance mechanisms from P01-P15 in Part XIV into one system structure.
 
 The early code prototype included only P01-P09 and can be understood as a minimum assembly implementation. The current publication narrative should explain P10 against the full P01-P15 project set.
 
@@ -184,7 +181,7 @@ The reusable object is the system method of asset aggregation, stage planning, s
 
 This project focuses on four goals.
 
-**Goal 1: organize the Part 14 projects into one system map.**
+**Goal 1: organize the Part XIV projects into one system map.**
 
 The outputs scattered across directories, reports, and task forms should enter a traceable registry and stage system.
 
@@ -216,7 +213,7 @@ To keep the project reproducible, P10 sets several explicit boundaries.
 
 The current flywheel focuses on offline integration of existing project artifacts rather than rerunning all upstream training workflows.
 
-The early implementation uses P01-P09 as the minimum closed loop; the current Part 14 publication framing should expand to P01-P15 and mark P11-P15 as new recipe, reasoning, multimodal, video, and enterprise-application capabilities.
+The early implementation uses P01-P09 as the minimum closed loop; the current Part XIV publication framing should expand to P01-P15 and mark P11-P15 as new recipe, reasoning, multimodal, video, and enterprise-application capabilities.
 
 It is best understood as a **system assembly map and engineering review layer**.
 
@@ -278,8 +275,7 @@ Figure P10-1 shows end-to-end llm data flywheel overview.
 
 ![Figure P10-1: End-to-end LLM data flywheel overview](../../images/part14/p10/Wang-Project10-Fig01.svg)
 
-*Figure P10-1: End-to-end LLM data flywheel overview.*
-
+*Figure P10-1: End-to-end LLM data flywheel overview*
 From an engineering perspective, this project should be viewed as five layers instead of a linear data-input to model-output chain.
 
 ### 4.1 Data Source Layer
@@ -349,7 +345,7 @@ The registry specifies upstream project lists, stage ownership, output assets, a
 
 It turns scattered projects into traceable and composable system assets.
 
-P10's registry should be maintained according to the full P01-P15 directory in Part 14.
+P10's registry should be maintained according to the full P01-P15 directory in Part XIV.
 
 The early implementation already brings P01-P09 into one aggregation system and forms the project registry and phase inventory. In the current manuscript, P10-P15 need to be added as new assembly objects.
 
@@ -396,8 +392,7 @@ Figure P10-2 shows upstream project registry and interface mapping.
 
 ![Figure P10-2: Upstream project registry and interface mapping](../../images/part14/p10/Wang-Project10-Fig02.svg)
 
-*Figure P10-2: Upstream project registry and interface mapping.*
-
+*Figure P10-2: Upstream project registry and interface mapping*
 ---
 
 ## 6. Code Expansion 1: Aggregating Upstream Project Assets
@@ -433,8 +428,7 @@ PROJECT_SPECS = [
 ]
 ```
 
-*Listing P10-2: Python implementation excerpt.*
-
+*Listing P10-2: Python implementation excerpt*
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure reflects several basic requirements for upstream asset aggregation:
@@ -456,8 +450,7 @@ Figure P10-3 shows structured upstream project specs.
 
 ![Figure P10-3: Structured upstream project specs](../../images/part14/p10/Wang-Project10-Fig03.svg)
 
-*Figure P10-3: Structured upstream project specs.*
-
+*Figure P10-3: Structured upstream project specs*
 ---
 
 ## 7. Stage Planning: Five-stage Advancement Structure
@@ -503,13 +496,12 @@ Figure P10-4 shows five-stage plan and milestone relationships.
 
 ![Figure P10-4: Five-stage plan and milestone relationships](../../images/part14/p10/Wang-Project10-Fig04.svg)
 
-*Figure P10-4: Five-stage plan and milestone relationships.*
-
+*Figure P10-4: Five-stage plan and milestone relationships*
 ---
 
 ## 8. Code Expansion 2: Building Flywheel Architecture and Stage Planning
 
-`src/build_flywheel.py` maps the Part 14 projects into the flywheel structure.
+`src/build_flywheel.py` maps the Part XIV projects into the flywheel structure.
 
 The early minimum implementation covered only P01-P09. The current publication framing should continue mapping P10-P15 into phases such as governance, foundation recipe, reasoning, multimodal instruction, generative media, and enterprise application.
 
@@ -543,8 +535,7 @@ def build_architecture(registry: list[dict]) -> dict:
     }
 ```
 
-*Listing P10-3: Python implementation excerpt.*
-
+*Listing P10-3: Python implementation excerpt*
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure shows that the flywheel relies on explicit mapping to maintain consistency.
@@ -576,8 +567,7 @@ Figure P10-5 shows five-layer flywheel code mapping.
 
 ![Figure P10-5: Five-layer flywheel code mapping](../../images/part14/p10/Wang-Project10-Fig05.svg)
 
-*Figure P10-5: Five-layer flywheel code mapping.*
-
+*Figure P10-5: Five-layer flywheel code mapping*
 ---
 
 ## 9. System Boundaries and Control Points
@@ -625,8 +615,7 @@ Figure P10-6 shows system boundaries and control points.
 
 ![Figure P10-6: System boundaries and control points](../../images/part14/p10/Wang-Project10-Fig06.svg)
 
-*Figure P10-6: System boundaries and control points.*
-
+*Figure P10-6: System boundaries and control points*
 ---
 
 ## 10. Run Records and Milestones
@@ -660,8 +649,7 @@ Figure P10-7 shows run records and milestone board.
 
 ![Figure P10-7: Run records and milestone board](../../images/part14/p10/Wang-Project10-Fig07.svg)
 
-*Figure P10-7: Run records and milestone board.*
-
+*Figure P10-7: Run records and milestone board*
 ---
 
 ## 11. Metric Interpretation: Meaning of System-level Signals
@@ -683,7 +671,7 @@ These numbers mainly support three system-level conclusions.
 
 First, the early P01-P09 minimum loop is ready to be included in the assembly layer.
 
-The `103/103` upstream checks show that the foundation projects are currently in an integrable state. After Part 14 expands to P15, the recipe, reasoning, multimodal, video, and enterprise-application artifacts from P11-P15 still need to be added to the same registry, with equivalent check criteria established for the new projects.
+The `103/103` upstream checks show that the foundation projects are currently in an integrable state. After Part XIV expands to P15, the recipe, reasoning, multimodal, video, and enterprise-application artifacts from P11-P15 still need to be added to the same registry, with equivalent check criteria established for the new projects.
 
 Second, the flywheel is not merely "many projects."
 
@@ -762,8 +750,7 @@ Figure P10-8 shows flywheel bottleneck map.
 
 ![Figure P10-8: Flywheel bottleneck map](../../images/part14/p10/Wang-Project10-Fig08.svg)
 
-*Figure P10-8: Flywheel bottleneck map.*
-
+*Figure P10-8: Flywheel bottleneck map*
 ---
 
 ## 13. Cost and Shared Benefits
@@ -825,9 +812,7 @@ bottlenecks = [
 ]
 ```
 
-*Listing P10-4: Python implementation excerpt.*
-
-
+*Listing P10-4: Python implementation excerpt*
 This computation turns system-level judgment into structured metrics and structured conclusions.
 
 The main report conclusions are supported by the registry, runs, and intermediate artifacts.
@@ -848,8 +833,7 @@ Figure P10-9 shows system-level metric generation logic.
 
 ![Figure P10-9: System-level metric generation logic](../../images/part14/p10/Wang-Project10-Fig09.svg)
 
-*Figure P10-9: System-level metric generation logic.*
-
+*Figure P10-9: System-level metric generation logic*
 ---
 
 ## 15. Validation Loop: Consistency Check Mechanism
@@ -915,9 +899,7 @@ def run_command(command: list[str], name: str) -> dict:
     }
 ```
 
-*Listing P10-5: Process flow example.*
-
-
+*Listing P10-5: Process flow example*
 This structure reflects several requirements:
 
 - command results should be structurally recorded;
@@ -943,8 +925,7 @@ Figure P10-10 shows check scripts and system contracts.
 
 ![Figure P10-10: Check scripts and system contracts](../../images/part14/p10/Wang-Project10-Fig10.svg)
 
-*Figure P10-10: Check scripts and system contracts.*
-
+*Figure P10-10: Check scripts and system contracts*
 ---
 
 ## 17. Main Deliverables: System Delivery List
@@ -1187,7 +1168,7 @@ It represents these system capabilities:
 - the system preserves structure, boundaries, and memory across iterations;
 - the organization moves from project stacking toward capability-system construction.
 
-P10's value is not only summarizing the Part 14 projects.
+P10's value is not only summarizing the Part XIV projects.
 
 It reorganizes them into an explainable, checkable, and extensible end-to-end system chain.
 
@@ -1287,7 +1268,7 @@ It needs feedback that has somewhere to go.
 
 A project like P10 exposes many things worth doing at once.
 
-Since the projects in Part 14 all offer extension directions, the team must answer what to invest in first and why.
+Since the projects in Part XIV all offer extension directions, the team must answer what to invest in first and why.
 
 ### Priority Should Not Look Only at Point Effect
 
@@ -1620,9 +1601,9 @@ It does not replace a single model-training system or a complete MLOps platform.
 
 In larger-scale, higher-risk, or stricter compliance scenarios, teams should reassess data sources, permission status, human-review ratio, runtime cost, and failure rollback plans.
 
-As part of Part 14, this chapter validates earlier methods at project level.
+As part of Part XIV, this chapter validates earlier methods at project level.
 
-Readers can combine this case with the data recipes in Part 13, the platform-governance chapters earlier in the book, and the appendices' checklists to form a closed loop from method understanding to engineering delivery.
+Readers can combine this case with the data recipes in Part XIII, the platform-governance chapters earlier in the book, and the appendices' checklists to form a closed loop from method understanding to engineering delivery.
 
 ## References
 

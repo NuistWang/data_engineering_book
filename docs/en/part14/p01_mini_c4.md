@@ -16,7 +16,7 @@ When read in engineering order, this chapter corresponds to a complete processin
 
 **Web Archive → Body Text Extraction → Basic Cleaning → Near-Duplicate Deduplication → Language Splitting → Quality Filtering → Training Packaging → Evaluation and Validation**
 
-This structure corresponds to the core objective: reproducing an interpretable and reusable web pretraining data pipeline under single-machine CPU and Ray Data conditions. The design of Mini-C4 draws on the fundamental idea from C4/T5 of "constructing trainable text data from web corpora" (Raffel et al. 2020), but this chapter emphasizes small-scale engineering reproduction rather than replicating the full C4 dataset.
+This structure corresponds to the core objective: reproducing an interpretable and reusable web pretraining data pipeline under single-machine CPU and Ray Data conditions.
 
 ---
 
@@ -45,8 +45,7 @@ Listing P01-1 provides a process or path example to illustrate the input/output 
 Common Crawl WARC -> HTML Response -> Body Text -> Deduplicated Corpus -> Language Subset -> train/val JSONL -> Manifest and Evaluation Report
 ```
 
-*Listing P01-1: Process or path example.*
-
+*Listing P01-1: Process or path example*
 The purpose of this snippet is to transform the above process into a checkable, structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by this project's data types, downstream tasks, and acceptance criteria.
@@ -84,6 +83,7 @@ Therefore, the core of pretraining data engineering is not "obtaining more text,
 
 This is where Mini-C4's significance lies. It is not a replacement for the industrial-scale full C4, but rather a **minimally reproducible, runnable, and explainable miniature version**.
 Through it, readers can reproduce end-to-end the key problems in large-scale web pretraining data processing under single-shard, single-machine CPU conditions, thereby establishing a methodological foundation for subsequent larger-scale data engineering.
+The design of Mini-C4 draws on the fundamental idea from C4/T5 of "constructing trainable text data from web corpora" (Raffel et al. 2020), but this project emphasizes small-scale engineering reproduction rather than replicating the full C4 dataset.
 
 ---
 
@@ -132,9 +132,7 @@ At smaller data scales, it is easier to inspect intermediate artifacts, conduct 
 Figure P01-1 illustrates the corresponding workflow or structure.
 
 ![Figure P01-1: Mini-C4 Data Pipeline Overview](../../images/part14/p01/Xu-Project01-Fig01.svg)
-*Figure P01-1: Mini-C4 Data Pipeline Overview.*
-
-
+*Figure P01-1: Mini-C4 Data Pipeline Overview*
 ### 3.1 Process Overview
 
 The overall project process can be summarized in 10 steps:
@@ -232,13 +230,10 @@ Therefore, the goal of the body text extraction phase is not "to capture as many
 Figure P01-2 illustrates the corresponding workflow or structure.
 
 ![Figure P01-2: Parsing Path from WARC to Body Text](../../images/part14/p01/Xu-Project01-Fig02.svg)
-*Figure P01-2: Parsing Path from WARC to Body Text.*
-
-
+*Figure P01-2: Parsing Path from WARC to Body Text*
 Table P01-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P01-1: Component and Reason for Choice Reference Table.*
-
+*Table P01-1: Component and Reason for Choice Reference Table*
 | Component | Selection | Reason for Choice |
 |---|---|---|
 | WARC reading | `warcio` | Standard WARC reading library with streaming support, avoiding the memory pressure of loading large files all at once |
@@ -277,8 +272,7 @@ def extract_text_from_warc(warc_path, output_path):
             )
 ```
 
-*Listing P01-2: Python implementation excerpt.*
-
+*Listing P01-2: Python implementation excerpt*
 The purpose of this snippet is to transform the above process into a checkable, structured representation.
 
 Several parameters here are intentional:
@@ -306,9 +300,7 @@ From an engineering perspective, this stage answers:
 Figure P01-3 illustrates the corresponding workflow or structure.
 
 ![Figure P01-3: Heuristic Cleaning Rules Illustration](../../images/part14/p01/Xu-Project01-Fig03.svg)
-*Figure P01-3: Heuristic Cleaning Rules Illustration.*
-
-
+*Figure P01-3: Heuristic Cleaning Rules Illustration*
 ### 6.1 The Necessity of Heuristic Cleaning
 
 Even after successful body text extraction, the resulting text is far from being high-quality corpus.
@@ -354,8 +346,7 @@ Listing P01-3 provides a process or path example to illustrate the input/output 
 { } [ ] < > \
 ```
 
-*Listing P01-3: Process or path example.*
-
+*Listing P01-3: Process or path example*
 The purpose of this snippet is to transform the above process into a checkable, structured representation.
 
 When the proportion of these symbols is too high, the text typically resembles structural fragments more than natural language paragraphs.
@@ -399,9 +390,7 @@ The significance of this stage is:
 Figure P01-4 illustrates the corresponding workflow or structure.
 
 ![Figure P01-4: MinHash + LSH Deduplication Approach](../../images/part14/p01/Xu-Project01-Fig04.svg)
-*Figure P01-4: MinHash + LSH Deduplication Approach.*
-
-
+*Figure P01-4: MinHash + LSH Deduplication Approach*
 ### 7.1 How Severe Is the Duplication Problem
 
 Internet text contains large amounts of duplication, including but not limited to:
@@ -466,8 +455,7 @@ futures = [process_batch.remote(batch, i) for i, batch in enumerate(batches)]
 processed_batches = ray.get(futures)
 ```
 
-*Listing P01-4: Python implementation excerpt.*
-
+*Listing P01-4: Python implementation excerpt*
 The purpose of this snippet is to transform the above process into a checkable, structured representation.
 
 ### 7.5 The Most Common Pitfall Here
@@ -498,8 +486,7 @@ On the contrary, the importance of deduplication is reflected in its ability to 
 Figure P01-5 illustrates the corresponding workflow or structure.
 
 ![Figure P01-5: Language Splitting and Branch Processing](../../images/part14/p01/Xu-Project01-Fig05.svg)
-*Figure P01-5: Language Splitting and Branch Processing.*
-
+*Figure P01-5: Language Splitting and Branch Processing*
 ### 8.1 Different Languages Cannot Share the Same Quality Gate
 
 Quality judgment of web text is highly dependent on the language itself.
@@ -535,8 +522,7 @@ From an engineering organization perspective, language splitting elevates the pi
 Figure P01-6 illustrates the corresponding workflow or structure.
 
 ![Figure P01-6: Quality Filtering Decision Illustration](../../images/part14/p01/Xu-Project01-Fig06.svg)
-*Figure P01-6: Quality Filtering Decision Illustration.*
-
+*Figure P01-6: Quality Filtering Decision Illustration*
 ### 9.1 Why Quality Filtering Is the Most Critical Gate
 
 Heuristic cleaning and deduplication resolve many explicit problems, but still cannot guarantee that text is truly suitable for training.
@@ -599,8 +585,7 @@ This also means that in industrial-scale multilingual data engineering, language
 Figure P01-7 illustrates the corresponding workflow or structure.
 
 ![Figure P01-7: Three-Round Experimental Iteration Path](../../images/part14/p01/Xu-Project01-Fig07.svg)
-*Figure P01-7: Three-Round Experimental Iteration Path.*
-
+*Figure P01-7: Three-Round Experimental Iteration Path*
 If the project is understood only as a series of script calls, the trade-offs behind these design decisions are not easy to discern.
 A more authentic representation of the actual engineering process is to restore it as several rounds of progressively tightened experiments.
 
@@ -718,16 +703,14 @@ Its significance lies in making the dataset not merely a collection of scattered
 Figure P01-8 illustrates the corresponding workflow or structure.
 
 ![Figure P01-8: Data Retention Funnel](../../images/part14/p01/Xu-Project01-Fig08.svg)
-*Figure P01-8: Data Retention Funnel.*
-
+*Figure P01-8: Data Retention Funnel*
 ### 12.1 Data Retention Funnel
 
 The final retention funnel obtained by this project is as follows:
 
 Table P01-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table P01-2: Stage and Typical Interception Reasons Reference Table.*
-
+*Table P01-2: Stage and Typical Interception Reasons Reference Table*
 | Stage | Record Count | Retention Rate (based on extracted) | Typical Interception Reasons |
 |---|---:|---:|---|
 | Extracted | 3028 | 100.0% | HTML parsing failure, empty content |
@@ -769,8 +752,7 @@ This indicates that the final dataset is no longer merely a collection of texts,
 Figure P01-9 illustrates the corresponding workflow or structure.
 
 ![Figure P01-9: Resource and Cost Breakdown](../../images/part14/p01/Xu-Project01-Fig09.svg)
-*Figure P01-9: Resource and Cost Breakdown.*
-
+*Figure P01-9: Resource and Cost Breakdown*
 In many introductory projects, developers focus more on "whether the chain can be completed" and less on "what the cost is."
 But in real production environments, cost awareness and engineering awareness are bound together.
 
@@ -802,8 +784,7 @@ If the process design is unreasonable, CPU and I/O will quickly become real bott
 Figure P01-10 illustrates the corresponding workflow or structure.
 
 ![Figure P01-10: Project Validation Loop](../../images/part14/p01/Xu-Project01-Fig10.svg)
-*Figure P01-10: Project Validation Loop.*
-
+*Figure P01-10: Project Validation Loop*
 ### 14.1 The Role of Project Checks
 
 If a data engineering project has only output files and no inspection mechanism, it is actually difficult to say whether it is truly correct.
@@ -927,8 +908,7 @@ This way, when tuning parameters, developers know not only "results changed" but
 Figure P01-11 illustrates the corresponding workflow or structure.
 
 ![Figure P01-11: Mini-C4 Engineering Methodology Summary](../../images/part14/p01/Xu-Project01-Fig11.svg)
-*Figure P01-11: Mini-C4 Engineering Methodology Summary.*
-
+*Figure P01-11: Mini-C4 Engineering Methodology Summary*
 What this project truly aims to convey is not the usage of a particular library, but a more general data engineering methodology:
 
 1. **First complete full-chain validation within controlled boundaries**

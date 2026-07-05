@@ -142,9 +142,7 @@ Listing 19-1 provides an error-log example.
 }
 ```
 
-*Listing 19-1: JSON data example.*
-
-
+*Listing 19-1: JSON data example*
 Parameter schema design must pay special attention to decidability. Benchmarks such as the Berkeley Function Calling Leaderboard (BFCL) also treat function, parameter, and call structure as core evaluation objects (Patil et al. 2025). Parameter names should avoid semantic overlap; field types must be explicit; whether a field is required, its allowable value range, default behavior, mutual exclusions, and dependencies should all be expressed explicitly. For example, a "search calendar events" tool that simultaneously includes fields such as `date`, `start_time`, `end_time`, and `timezone` should clearly define their coverage relationships and the interpretation rules when any of them is absent. Otherwise, the model will easily oscillate between related fields, producing calls that are formally valid but semantically incorrect.
 
 Error code design should also serve training data and recovery strategies, not merely back-end debugging (Li et al. 2023; Yao et al. 2025). Explicitly distinguishing failure types—"missing parameter," "insufficient permissions," "resource does not exist," "rate limit," "timeout," "internal error"—provides stable anchors for failure samples and recovery samples. Systems without layered error semantics tend to force the model to guess the cause from ambiguous error text, which greatly undermines recovery capability.
@@ -253,9 +251,7 @@ Listing 19-2 provides a JSON tool-use trajectory example.
 }
 ```
 
-*Listing 19-2: JSON tool-use trajectory example.*
-
-
+*Listing 19-2: JSON tool-use trajectory example*
 If these layers of information are scattered across different sample systems, training will easily produce fragmentation. For example, natural-language understanding data is placed in one location, function-call format data in another, and error recovery data somewhere else—the result is a model that learns each local capability but cannot connect them within the same context. The value of a unified format is that it lets the model see the continuous process from "language to action, action to observation, observation back to action" (Schick et al. 2023).
 
 In practice, many teams adopt a message-sequence format to organize samples, using role markers such as `user`, `assistant`, `tool_call`, `tool_result`, and `assistant_followup` to indicate different states. The advantage of this approach is not only that it closely mirrors inference interfaces, but more importantly that it facilitates expressing temporal order and environmental feedback (Shinn et al. 2023).
@@ -295,8 +291,7 @@ For example, online logs can automatically filter out samples where "first param
 For this reason, log structure should be planned concurrently with sample structure design, not added as a patch after the system goes live. Once key states are not recorded, reconstructing the trajectories required for training from real-world behavior later becomes very difficult. For Tool-Use teams, sample format and log format are best organized from the start according to the same state model, so that offline and online can be connected. The typical tasks, core input fields, environment feedback fields, and recovery-related fields for different tool types are shown in Table 19-1.
 
 
-*Table 19-1: Tool Type and Sample Field Reference.*
-
+*Table 19-1: Tool Type and Sample Field Reference*
 | Tool Type | Typical Tasks | Core Input Fields | Core Environment Feedback Fields | Recovery-Related Fields | Notes |
 |---|---|---|---|---|---|
 | Search tools | Web search, document retrieval, knowledge query | query, filters, top_k, time_range | hits, source, snippet, empty_result | reformulated_query, fallback_source | Emphasize query rewriting and empty-result recovery |
@@ -315,9 +310,7 @@ When referring to the tool field table, it should not be treated as a fixed fiel
 
 ![Figure 19-1: Tool-Use Data Construction State Machine Diagram](../../images/part6/Yu-Chap19-Fig01-EN.svg)
 
-*Figure 19-1: Tool-Use Data Construction State Machine Diagram.*
-
-
+*Figure 19-1: Tool-Use Data Construction State Machine Diagram*
 Modeling Tool-Use data as a state machine is more useful for describing real execution processes than treating it as a set of independent function calls. As shown in Figure 19-1, after a user request enters the system, it does not jump directly to the "generate some function call" step. Instead, it sequentially passes through stages such as task understanding, judgment of whether a tool is needed, tool selection, parameter generation, parameter validation, call execution, environment feedback parsing, and result integration. Each stage corresponds to an observable state and also to a set of potential failure modes. When states and transitions are clearly written into the data, the model is more likely to learn stable execution paths rather than merely imitating local call formats.
 
 The most important value of the state-machine perspective is that it places successful, failure, and recovery trajectories into the same framework (Yao et al. 2025; Shinn et al. 2023). For a real agent, failure cannot be treated as an ignorable edge case—it is a common component of system operation. A parameter error means the state has transitioned from "parameter generation" to "validation failure"; a timeout means the state has transitioned from "call execution" to "execution exception"; insufficient permissions mean the system should not continue advancing the main path but should instead enter a state of explaining the constraint or safe termination. If training data only preserves the main path without explicitly expressing these failure transitions, the model cannot truly learn behavioral choices in abnormal situations.
@@ -452,8 +445,7 @@ In other words, log feedback cannot stop at the simple export layer—it is fund
 
 ![Figure 19-2: Call Failure Recovery Process Diagram](../../images/part6/Yu-Chap19-Fig02-EN.svg)
 
-*Figure 19-2: Call Failure Recovery Process Diagram.*
-
+*Figure 19-2: Call Failure Recovery Process Diagram*
 Abstracting the failure-recovery process separately rather than scattering it across various failure samples helps data teams clearly identify which nodes compose recovery capability. A single tool failure is not an indivisible event—it typically includes at least the stages of failure detection, failure attribution, recovery action selection, recovery execution, and recovery result judgment. If these stages are collapsed in the data into a single "retry after failure," the model will find it very hard to learn the internal structure of recovery. Conversely, if the process is clearly laid out, the model will more easily form a behavioral pattern of "different failures enter different branches, different branches correspond to different actions, different actions then lead to continuation or termination."
 
 What makes this type of process especially important is that it transforms "the correct behavior after failure" from a vague intuition into something that can be expressed, repeated, and evaluated. Parameter errors should not follow the same recovery path as permission failures; empty results should not be handled the same way as tool rejections; conflicting return results should not simply be equated with timeout retries. For data teams, explicitly organizing these differences into the recovery process is in effect providing the model with a behavioral map for after a failure. What the model learns will no longer be "try something when a problem arises," but "identify which category the current failure belongs to and enter the recovery or termination branch that matches it."
@@ -491,8 +483,7 @@ The tool layer is not static. Tool names change, fields are added or deprecated,
 Therefore, tool data governance must include a version management mechanism. Training samples need to mark the tool version; evaluation sets should roll forward with the online version; call logs should also retain the version information at the time of actual execution. Otherwise, teams fall into a common pitfall: the model performs well on offline evaluation, yet online calls continue failing inexplicably—the actual reason being only that training data and real tools are no longer on the same semantic plane.
 
 
-*Table 19-2: Security Risk and Constraint Mechanism Reference.*
-
+*Table 19-2: Security Risk and Constraint Mechanism Reference*
 | Risk Type | Typical Manifestation | Possible Consequence | Constraint Mechanism | Data Sample Requirement |
 |---|---|---|---|---|
 | Unauthorized access | Requesting to read unauthorized resources, modify restricted objects | Data leakage, compliance risk | Permission validation, read-only mode, explicit rejection | Must include rejection-call and safety-explanation samples |

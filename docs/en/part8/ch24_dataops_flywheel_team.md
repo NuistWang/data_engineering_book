@@ -5,9 +5,9 @@
 ---
 
 ## Abstract
-Scaling LLM data engineering is not merely a matter of tools and processes—it is fundamentally an organizational challenge. The shared experience of DevOps and DataOps demonstrates that stable delivery capability emerges from the co-design of processes, feedback loops, automation, and organizational collaboration, not from replacing individual tools (Kim et al. 2021; DataOps Manifesto, accessed 2026). When a team evolves from "a single person maintaining data scripts" to "multiple teams collaborating to produce high-quality training data," organizational structure, role boundaries, collaboration interfaces, and operational cadence become real bottlenecks. This chapter is addressed to managers responsible for designing data team organization, processes, and coordination mechanisms. It systematically explains how to build a scalable DataOps team and collaboration flywheel for LLM data engineering.
+Scaling LLM data engineering is not merely a matter of tools and processes; it is fundamentally an organizational challenge. Stable delivery capability emerges from the co-design of processes, feedback loops, automation, and organizational collaboration, not from replacing individual tools. When a team evolves from "a single person maintaining data scripts" to "multiple teams collaborating to produce high-quality training data," organizational structure, role boundaries, collaboration interfaces, and operational cadence become real bottlenecks. This chapter is addressed to managers responsible for designing data team organization, processes, and coordination mechanisms. It systematically explains how to build a scalable DataOps team and collaboration flywheel for LLM data engineering.
 
-The chapter unfolds across four dimensions. Research on high-performing technology organizations shows that delivery frequency, change lead time, recovery time, and failure rate are, at their core, reflections of team collaboration, feedback velocity, and the capacity for continuous improvement (Forsgren, Humble and Kim 2018). First, the chapter explains why traditional data team structures break down in LLM projects and reveals the design logic behind new organizational forms. Second, it establishes role divisions, interface protocols, and a RACI responsibility matrix so teams can be clear on "who does what, who decides, and who approves." Third, it introduces the operating mechanism and weekly cadence of the DataOps flywheel, including meeting systems, SLA settings, and version freezes. Finally, it discusses practical approaches to cross-team data asset sharing, risk governance, and knowledge preservation.
+The chapter unfolds across four dimensions. First, it explains why traditional data team structures break down in LLM projects and reveals the design logic behind new organizational forms. Second, it establishes role divisions, interface protocols, and a RACI responsibility matrix so teams can be clear on "who does what, who decides, and who approves." Third, it introduces the operating mechanism and weekly cadence of the DataOps flywheel, including meeting systems, SLA settings, and version freezes. Finally, it discusses practical approaches to cross-team data asset sharing, risk governance, and knowledge preservation.
 
 After reading this chapter, readers will have a directly applicable organizational template: a role map for LLM data teams, a RACI matrix, a meeting cadence and deliverables table, and design principles for cross-team interfaces.
 
@@ -35,6 +35,8 @@ This is not an extreme case—it is the normal state of LLM data projects after 
 
 The DataOps flywheel exists precisely to fill this gap in organizational language. It draws on the continuous-delivery idea of "placing changes into a repeatable, verifiable pipeline," and absorbs the SRE emphasis on service levels, incident response, and post-mortem mechanisms (Humble and Farley 2010; Beyer et al. 2016).
 
+The shared experience of DevOps and DataOps demonstrates that stable delivery capability emerges from the co-design of processes, feedback loops, automation, and organizational collaboration rather than from replacing individual tools (Kim et al. 2021; DataOps Manifesto, accessed 2026). Research on high-performing technology organizations also shows that delivery frequency, change lead time, recovery time, and failure rate reflect team collaboration, feedback velocity, and the capacity for continuous improvement (Forsgren, Humble and Kim 2018).
+
 ---
 
 ## 24.1 Why LLM Data Teams Need a New Organizational Form
@@ -59,8 +61,7 @@ This problem is especially pronounced in LLM data projects. Model training requi
 
 Therefore, the first step in DataOps organizational design is not to immediately procure tools or build platforms, but to identify friction points in the existing organization. Friction points are usually hidden in daily work—for example: "Is this field mandatory?", "Can this sample batch be used for online evaluation?", "Does a change to the annotation standard by an outsourcing vendor require approval?", "Is it permissible for the algorithm team to access unvalidated data on an ad-hoc basis?" Each of these questions looks minor in isolation, but without unified rules they become hidden costs that continuously drain the team's attention. Table 24-1 shows the five structural limitations of traditional data teams, their typical manifestations, and corresponding DataOps improvement directions.
 
-*Table 24-1: Traditional Data Team Limitations and DataOps Improvement Directions.*
-
+*Table 24-1: Traditional Data Team Limitations and DataOps Improvement Directions*
 | Structural Limitation | Typical Manifestation | Impact on LLM Data Projects | DataOps Improvement Direction |
 |---|---|---|---|
 | Overlapping responsibilities | Multiple roles can modify data, but no single ultimate owner exists | Quality problems are difficult to trace after the fact; remediation actions are duplicated | Establish RACI matrices and a data-ownership mechanism |
@@ -99,8 +100,7 @@ These principles manifest differently at different organizational stages. Early-
 
 The new organizational form can therefore be understood as a progressive maturation process. Stage 1 is **scripted collaboration**, whose core objective is enabling a small number of people to get things done. Stage 2 is **standardized collaboration**, whose core objective is enabling different roles to deliver according to unified interfaces. Stage 3 is **platform-driven collaboration**, whose core objective is having processes, permissions, quality, and version management carried by systems. Stage 4 is **metrics-driven collaboration**, whose core objective is continuously optimizing organizational capability through metrics and post-mortems. The four stages are not simple replacements of one another but a progressive layering of capabilities. Table 24-2 shows the organizational characteristics, primary risks, and priority capability-building activities at each maturity stage.
 
-*Table 24-2: DataOps Maturity Stages for LLM Data Teams.*
-
+*Table 24-2: DataOps Maturity Stages for LLM Data Teams*
 | Maturity Stage | Organizational Characteristics | Primary Risks | Priority Capability Building | What to Avoid Investing in Too Early |
 |---|---|---|---|---|
 | Scripted collaboration | A small number of members rely on personal experience to complete collection, cleaning, and annotation | Single-point dependency; results are not reproducible | Basic version records, minimal quality checks, key-role confirmation | Complex approvals, excessive metrics, heavyweight platforms |
@@ -144,8 +144,7 @@ In practice, the most commonly overlooked role is "Algorithm Engineer as data co
 
 Similarly, the legal compliance role should not be understood as an end-of-pipeline approver. For LLM data projects, compliance judgments often directly affect data-collection scope, desensitization strategy, retention periods, and authorization approaches. If compliance requirements are discovered only after data production is complete, the team may need to discard data that has already been cleaned and annotated, incurring substantial waste. More mature teams therefore front-load compliance requirements as data-admission rules and incorporate them into collection-task templates, dataset specification documents, and quality-check checklists. In this way, compliance is no longer merely an approval action but becomes part of the data-production system. Table 24-3 summarizes the core responsibilities, key inputs and outputs, and common failure modes for each of the seven core roles.
 
-*Table 24-3: Extended Description of LLM Data Team Role Responsibilities.*
-
+*Table 24-3: Extended Description of LLM Data Team Role Responsibilities*
 | Role | Core Responsibilities | Key Inputs | Key Outputs | Common Failure Modes |
 |---|---|---|---|---|
 | Data Owner | Data strategy, prioritization, final release decisions | Business objectives, model roadmap, risk reports | Data-version decisions, resource allocation, conflict arbitration | Approves but does not steward; lacks long-term attention to quality and reuse |
@@ -162,8 +161,7 @@ Clear interface protocols are the foundation of smooth multi-team collaboration.
 
 Take the interface between Data Engineer and Annotation Engineer as an example. Table 24-4 shows its deliverable, format specification, acceptance criteria, and delivery SLA:
 
-*Table 24-4: "Data Engineer – Annotation Engineer" Interface Example.*
-
+*Table 24-4: "Data Engineer – Annotation Engineer" Interface Example*
 | Element | Content |
 |---|---|
 | Deliverable | Cleaned raw sample pool; list of files awaiting annotation |
@@ -173,8 +171,7 @@ Take the interface between Data Engineer and Annotation Engineer as an example. 
 
 Take the interface between Annotation Engineer and Algorithm Engineer as an example. Table 24-5 shows its interface elements:
 
-*Table 24-5: "Annotation Engineer – Algorithm Engineer" Interface Example.*
-
+*Table 24-5: "Annotation Engineer – Algorithm Engineer" Interface Example*
 | Element | Content |
 |---|---|
 | Deliverable | Completed annotated training set, including annotation metadata |
@@ -188,8 +185,7 @@ The value of interface protocols lies in transforming "I assumed you would deliv
 
 A mature interface protocol should contain at least three layers of information. The first is the **structural layer**: field names, data types, required-field constraints, enumeration values, and handling of missing values. The second is the **semantic layer**: the business meaning of each field, boundary conditions, and representative examples. The third is the **operational layer**: delivery frequency, acceptance method, anomaly-feedback path, and change-notification mechanism. Many teams write only the structural layer and neglect the semantic and operational layers, causing schemas to appear consistent while the actual data semantics have already drifted. For example, the field `source` may carry entirely different meanings across projects: some teams use it to denote the data-collection website, others the business system, and still others the annotation-task origin. Without semantic-boundary documentation in the interface protocol, downstream algorithm teams may draw erroneous conclusions during data-stratified evaluation. Interface protocols in DataOps should therefore be not merely technical schemas, but contractual documents oriented toward cross-role collaboration. Table 24-6 shows the content and verification methods for the structural, semantic, operational, and change layers of an interface protocol.
 
-*Table 24-6: Four-Layer Structure of Data Role Interface Protocols.*
-
+*Table 24-6: Four-Layer Structure of Data Role Interface Protocols*
 | Interface Layer | Questions to Address | Recommended Medium | Verification Method |
 |---|---|---|---|
 | Structural layer | Do fields exist? Are types correct? Are enumerations compliant? | JSON Schema, Avro Schema, database table definitions | Automated validation, CI checks |
@@ -210,8 +206,7 @@ The RACI model (Responsible, Accountable, Consulted, Informed) is a classic resp
 **C (Consulted)**: The party consulted—whose input must be sought before a decision is made.
 **I (Informed)**: The party notified—who must be informed of the outcome after a decision is made.
 
-*Table 24-7: RACI Responsibility Matrix for LLM Data Teams.*
-
+*Table 24-7: RACI Responsibility Matrix for LLM Data Teams*
 | Item | Data Owner | Data Engineer | Annotation Engineer | Quality Evaluator | Algorithm Engineer | Platform Engineer | Legal / Compliance |
 |---|---|---|---|---|---|---|---|
 | Data requirement definition | A | C | C | I | R | I | C |
@@ -241,8 +236,7 @@ To give RACI real traction, teams can bind it to daily systems. For example, in 
 
 Table 24-8 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-8: Applications of RACI in Everyday DataOps Scenarios.*
-
+*Table 24-8: Applications of RACI in Everyday DataOps Scenarios*
 | Application Scenario | Specific Use of RACI | Management Benefit | Problems to Avoid |
 |---|---|---|---|
 | Data requirement initiation | Clarify who raises the requirement, who confirms priority, who assesses resources | Reduce requirement queue-jumping and verbal commitments | Avoid requiring all requirements to be approved by the highest-level accountable party |
@@ -267,8 +261,7 @@ In practice, exceptions can be classified into three types. The first is **time 
 
 Table 24-9 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-9: DataOps Exception Approval Types and Handling Requirements.*
-
+*Table 24-9: DataOps Exception Approval Types and Handling Requirements*
 | Exception Type | Applicable Scenarios | Required Records | Approval Requirements | Upon Expiry |
 |---|---|---|---|---|
 | Time exception | Critical experiment window approaching; full acceptance not yet complete | Batch used, outstanding check items, risk statement | Data Owner or on-call lead approval | Complete acceptance; confirm whether to promote to official status |
@@ -290,8 +283,7 @@ Figure 24-2 illustrates the corresponding workflow or structure.
 
 ![Figure 24-2: DataOps Team Organization Overview](../../images/part8/Yu-Chap24-Fig02-EN.svg)
 
-*Figure 24-2: LLM Data Team DataOps Overview—An Integrated View of Roles, Interfaces, Flywheel, and Governance.*
-
+*Figure 24-2: LLM Data Team DataOps Overview—An Integrated View of Roles, Interfaces, Flywheel, and Governance*
 In LLM data projects, the flywheel is driven by four core "pools":
 
 **Demand Pool**: Aggregates data requirements from algorithm, product, business, and other stakeholders; sorts them by priority into an executable task list.
@@ -312,8 +304,7 @@ Flywheel design should therefore emphasize traceability relationships between ob
 
 Table 24-10 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-10: Management Fields and Linkage Relationships of the Four DataOps Flywheel Pools.*
-
+*Table 24-10: Management Fields and Linkage Relationships of the Four DataOps Flywheel Pools*
 | Flywheel Object | Key Fields | Relationships to Other Objects | Management Focus |
 |---|---|---|---|
 | Demand Pool | Requirement ID, requester, priority, target metrics, deadline | Linked to data tasks, experiment plans, and business objectives | Prevent requirement proliferation; ensure each requirement is actionable |
@@ -327,8 +318,7 @@ Figure 24-3 illustrates the corresponding workflow or structure.
 
 ![Figure 24-3: DataOps Flywheel Four-Pool Coordination Diagram](../../images/part8/Yu-Chap24-Fig03-EN.svg)
 
-*Figure 24-3: DataOps Flywheel Operating Mechanism—The Coordinated Cycle of Demand Pool, Data Pool, Experiment Pool, and Issue Pool.*
-
+*Figure 24-3: DataOps Flywheel Operating Mechanism—The Coordinated Cycle of Demand Pool, Data Pool, Experiment Pool, and Issue Pool*
 ### 24.3.2 Weekly Cadence Design
 
 For the flywheel to keep running, fixed time nodes are needed to drive it. Continuous delivery practice emphasizes fixed cadence, automated validation, and small-batch changes precisely to reduce delivery risk and improve feedback velocity (Humble and Farley 2010; Humble, Molesky and O'Reilly 2015). The following is a weekly cadence design suitable for a medium-sized LLM data team (10–30 people):
@@ -364,8 +354,7 @@ For the flywheel to keep running, fixed time nodes are needed to drive it. Conti
 
 Table 24-11 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-11: DataOps Meeting Cadence and Deliverables.*
-
+*Table 24-11: DataOps Meeting Cadence and Deliverables*
 | Cadence | Time | Participants | Core Deliverable |
 |---|---|---|---|
 | Monday requirement sync | Every Monday 9:30, 30 min | Owner + Algorithm + Product | Current-week task list |
@@ -380,8 +369,7 @@ More mature teams further distinguish "decision meetings" from "learning meeting
 
 Table 24-12 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-12: Inputs, Outputs, and Common Deviations at DataOps Operational Nodes.*
-
+*Table 24-12: Inputs, Outputs, and Common Deviations at DataOps Operational Nodes*
 | Node | Recommended Input | Recommended Output | Success Criteria | Common Deviation |
 |---|---|---|---|---|
 | Monday requirement sync | Demand Pool candidates, last week's incomplete tasks, latest algorithm-side conclusions | Current-week commitment list, priority ranking, resource adjustments | Are requirements actionable? Is responsibility clear? | Meeting becomes impromptu requirement collection |
@@ -400,8 +388,7 @@ The following is a reference SLA framework:
 
 Table 24-13 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-13: SLA Framework Example.*
-
+*Table 24-13: SLA Framework Example*
 | Data Type | Processing Deadline | Quality Target | Notes |
 |---|---|---|---|
 | Urgent-demand data (P0) | Cleaning within 24 h; annotation within 48 h | Spot-check pass rate > 90% | Requires Data Owner approval to trigger |
@@ -424,8 +411,7 @@ SLA settings must also distinguish among different types of data tasks. Explorat
 
 Table 24-14 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-14: Multi-Dimensional SLA Design for DataOps.*
-
+*Table 24-14: Multi-Dimensional SLA Design for DataOps*
 | SLA Dimension | Core Question | Example Metrics | Management Significance |
 |---|---|---|---|
 | Time | When is delivery or response completed? | P0 requirements delivered within 48 h; routine batches within 5 business days | Helps algorithm and product teams schedule experiment windows |
@@ -446,8 +432,7 @@ A reasonably comprehensive metrics system can be organized into four layers. The
 
 Table 24-15 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-15: Layered Metrics System for the DataOps Flywheel.*
-
+*Table 24-15: Layered Metrics System for the DataOps Flywheel*
 | Metric Layer | Example Metrics | Data Source | Interpretation | Risk of Misuse |
 |---|---|---|---|---|
 | Flow efficiency | Requirement delivery cycle, queue wait time, SLA achievement rate | Demand Pool, task system, version release records | Determine whether work is flowing smoothly | Pursuing speed only, sacrificing quality |
@@ -464,8 +449,7 @@ A sound practice is to accompany each metric with explanatory documentation spec
 
 Table 24-16 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-16: Basic Requirements for DataOps Metrics Governance.*
-
+*Table 24-16: Basic Requirements for DataOps Metrics Governance*
 | Metrics Governance Requirement | Specific Description | Example |
 |---|---|---|
 | Define the formula | The calculation method must be stable; changes must be recorded | Is the spot-check pass rate calculated by sample count or by batch count? |
@@ -496,8 +480,7 @@ Cross-team sharing should therefore follow a closed loop of "discoverable → re
 
 Table 24-17 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-17: Governance Closed Loop for Cross-Team Data Sharing.*
-
+*Table 24-17: Governance Closed Loop for Cross-Team Data Sharing*
 | Governance Stage | Key Questions | Responsible Role | Recommended Mechanism |
 |---|---|---|---|
 | Data registration | Is the dataset formally included in the asset registry? | Data Owner, Data Engineer | Dataset specification, quality summary, lineage records |
@@ -529,8 +512,7 @@ For LLM data teams, knowledge-preservation objects include not only incidents bu
 
 Table 24-18 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-18: DataOps Knowledge-Preservation Objects and Maintenance Mechanisms.*
-
+*Table 24-18: DataOps Knowledge-Preservation Objects and Maintenance Mechanisms*
 | Document Type | Recorded Content | Maintenance Responsibility | Update Frequency | Primary Use |
 |---|---|---|---|---|
 | Incident post-mortem | Incident timeline, impact scope, root cause, remediation, and preventive measures | Incident owner, Quality Evaluator | Event-triggered | Prevent recurrence of similar problems |
@@ -558,8 +540,7 @@ The design of risk-escalation mechanisms should follow a tiered principle. Low-r
 
 Table 24-19 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-19: DataOps Risk Tiering and Response Mechanisms.*
-
+*Table 24-19: DataOps Risk Tiering and Response Mechanisms*
 | Risk Level | Typical Scenarios | Response Deadline | Decision Authority | Handling Requirements |
 |---|---|---|---|---|
 | P0 | Privacy breach, major copyright risk, critical online data seriously incorrect | Immediate response; remediation conclusion within 24 h | Temporary decision committee, Legal/Compliance, Data Owner | Suspend use, isolate data, produce formal incident report |
@@ -577,8 +558,7 @@ Access control design should follow the principle of minimum necessary privilege
 
 Table 24-20 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-20: LLM Data Sensitivity Levels and Access Governance.*
-
+*Table 24-20: LLM Data Sensitivity Levels and Access Governance*
 | Data Sensitivity Level | Example | Default Access Policy | Audit Requirements |
 |---|---|---|---|
 | Public data | Open-source datasets, public web text | Project members may apply on demand | Record version citations and download behavior |
@@ -593,8 +573,7 @@ The most common mistake in outsourcing management is specifying only delivery vo
 
 Table 24-21 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-21: DataOps Control Points for Outsourcing Annotation Collaboration.*
-
+*Table 24-21: DataOps Control Points for Outsourcing Annotation Collaboration*
 | Outsourcing Governance Stage | Key Control Points | Recommended Evidence |
 |---|---|---|
 | Onboarding | Have confidentiality, compliance, and tool-training been completed? | Training records, permission approvals, test-task results |
@@ -645,8 +624,7 @@ To resolve this, the team placed annotation guides under version control and sti
 
 Table 24-22 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-22: Company E Phase-1 Role and Interface Clarification Results.*
-
+*Table 24-22: Company E Phase-1 Role and Interface Clarification Results*
 | Clarification Object | Pre-Restructuring State | Post-Restructuring Rules |
 |---|---|---|
 | Data requirements | Raised ad hoc in instant messaging; no IDs | All requirements enter the Demand Pool with priorities and acceptance criteria |
@@ -682,8 +660,7 @@ On knowledge preservation, Company E split post-mortem documents into two parts:
 
 Table 24-23 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-23: Company E DataOps Restructuring Phases and Organizational Benefits.*
-
+*Table 24-23: Company E DataOps Restructuring Phases and Organizational Benefits*
 | Phase | Primary Objective | Key Actions | Organizational Benefit |
 |---|---|---|---|
 | Months 1–2 | Clarify roles and interfaces | Workshop, RACI, interface protocols, annotation guide versioning | Reduce ambiguous responsibilities and verbal agreement costs |
@@ -696,8 +673,7 @@ Six months later, the main indicators for Company E's data team showed significa
 
 Table 24-24 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-24: Company E Core Metrics Before and After DataOps Restructuring.*
-
+*Table 24-24: Company E Core Metrics Before and After DataOps Restructuring*
 | Metric | Before Restructuring | After Restructuring |
 |---|---|---|
 | Data delivery delay rate | ~40% (estimated) | < 10% |
@@ -718,8 +694,7 @@ Company E's case also suggests that DataOps construction should not pursue a com
 
 Table 24-25 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-25: Transferable Lessons from Company E's Case.*
-
+*Table 24-25: Transferable Lessons from Company E's Case*
 | Experience Theme | Specific Practice | Transferable Insight |
 |---|---|---|
 | Govern interfaces before building platforms | First unify schema, annotation guides, and delivery rules; then go live with tools | Tools only produce governance value when they carry established processes |
@@ -734,8 +709,7 @@ For companies preparing to replicate similar practices, starting with a lightwei
 
 Table 24-26 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-26: Lightweight DataOps Transformation Checklist.*
-
+*Table 24-26: Lightweight DataOps Transformation Checklist*
 | Checklist Dimension | Key Question | Initial State Manifestation | Target State After Improvement |
 |---|---|---|---|
 | Role responsibility | Is there a clear ultimate accountable party for each type of data decision? | Multiple participants but no one willing to make the call | Each critical item has a unique A and an explicit R |
@@ -759,8 +733,7 @@ In management communication, the benefits of DataOps can be broken down into thr
 
 Table 24-27 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-27: Layered Communication of DataOps Transformation Benefits.*
-
+*Table 24-27: Layered Communication of DataOps Transformation Benefits*
 | Benefit Type | Typical Metrics | Primary Beneficiaries | Communication Approach |
 |---|---|---|---|
 | Short-term efficiency benefits | Delivery cycle, delay rate, rework rate, issue-localization time | Data team, algorithm team | Explain how process improvements reduce waiting and repetitive work |
@@ -774,8 +747,7 @@ In actual deployment, teams can also break the transformation plan into short cy
 
 Table 24-28 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-28: Twelve-Week DataOps Pilot Transformation Roadmap.*
-
+*Table 24-28: Twelve-Week DataOps Pilot Transformation Roadmap*
 | Week | Key Tasks | Deliverables | Acceptance Criteria |
 |---|---|---|---|
 | Week 1 | Interview core roles; map current data flows and main blockers | Current-state problem list, data-flow sketch | Covers major data-production and data-consumption roles |
@@ -799,8 +771,7 @@ When the pilot moves to the rollout phase, the team should avoid mechanically co
 
 Table 24-29 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-29: Tiered Governance Intensity for Different Data Scenarios.*
-
+*Table 24-29: Tiered Governance Intensity for Different Data Scenarios*
 | Rollout Scenario | Recommended Governance Intensity | Applicable Processes | Rationale |
 |---|---|---|---|
 | Formal training corpus | High | Complete requirement, quality, version, compliance, and release processes | Affects model capability and subsequent experiment reproducibility |
@@ -816,8 +787,7 @@ To facilitate self-assessment after the transformation concludes, teams can also
 
 Table 24-30 summarizes the corresponding comparison and engineering considerations.
 
-*Table 24-30: Self-Assessment Questions for DataOps Operational Status.*
-
+*Table 24-30: Self-Assessment Questions for DataOps Operational Status*
 | Self-Assessment Question | Ideal Evidence |
 |---|---|
 | Who ultimately approved the most recent data release, and on what basis? | Release records, quality summaries, approval records |

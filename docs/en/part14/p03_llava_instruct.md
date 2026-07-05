@@ -32,7 +32,7 @@ This project uses the "LLaVA Multimodal Instruction Data Factory" as its central
 
 The project is grounded in licensable images and controlled task templates, without attempting to cover all visual question answering types. These boundaries make the case study reproducible and auditable. When data scale, data sources, permission scope, or deployment environment change, the sampling strategy, quality thresholds, operational costs, and compliance requirements must be re-evaluated.
 
-Within Part 14, this project demonstrates the classic engineering workflow for LLaVA-style multimodal instruction data (Liu et al. 2023): starting from image assets, captions, OCR, bounding boxes, and conversation templates to produce supervised samples that are trainable, spot-checkable, and replayable. It does not incorporate the capabilities of the newer instruction factory described in P13, which targets Qwen-VL, self-consistency, multilingual scaling, and large-scale automated filtering. Readers may treat P03 as the classic workflow baseline and P13 as an extended version built on stronger foundation models and more sophisticated quality mechanisms.
+Within Part XIV, this project demonstrates the classic engineering workflow for LLaVA-style multimodal instruction data (Liu et al. 2023): starting from image assets, captions, OCR, bounding boxes, and conversation templates to produce supervised samples that are trainable, spot-checkable, and replayable. It does not incorporate the capabilities of the newer instruction factory described in P13, which targets Qwen-VL, self-consistency, multilingual scaling, and large-scale automated filtering. Readers may treat P03 as the classic workflow baseline and P13 as an extended version built on stronger foundation models and more sophisticated quality mechanisms.
 
 ## Architectural Decisions
 
@@ -47,8 +47,7 @@ Listing P03-1 provides a workflow or path example illustrating the input/output 
 Image/document/chart assets → caption and OCR cues → instruction templates → multi-turn conversation samples → quality checks → VLM instruction dataset
 ```
 
-*Listing P03-1: Process or path example.*
-
+*Listing P03-1: Process or path example*
 This excerpt transforms the above workflow into a checkable structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -63,8 +62,7 @@ Acceptance metrics include image-text consistency, task type coverage, OCR evide
 
 Table P03-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P03-1: LLaVA Multimodal Instruction Data Factory Publication Acceptance Table.*
-
+*Table P03-1: LLaVA Multimodal Instruction Data Factory Publication Acceptance Table*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Task boundary | Coverage records for LLaVA-style conversation templates, image descriptions, OCR, chart reading, bbox grounding, and multi-image comparison | State that this project is the classic LLaVA workflow baseline and does not include Qwen-VL factory-scale extension capabilities in project conclusions |
@@ -187,8 +185,7 @@ In this sense, the most important aspect of this chapter is not "the model can s
 Figure P03-1 illustrates the corresponding workflow or structure.
 
 ![Figure P03-1: LLaVA Multimodal Instruction Data Factory Overview](../../images/part14/p03/Yu-Project03-Fig01.svg)
-*Figure P03-1: LLaVA Multimodal Instruction Data Factory Overview.*
-
+*Figure P03-1: LLaVA Multimodal Instruction Data Factory Overview*
 From an engineering perspective, this project can be decomposed into three layers.
 
 ### 4.1 Layer 1: Asset Processing Layer
@@ -269,8 +266,7 @@ Therefore, writing out these responsibility domains clearly is essentially stati
 Figure P03-2 illustrates the corresponding workflow or structure.
 
 ![Figure P03-2: Multimodal Data Factory Responsibility Collaboration Diagram](../../images/part14/p03/Yu-Project03-Fig02.svg)
-*Figure P03-2: Multimodal Data Factory Responsibility Collaboration Diagram.*
-
+*Figure P03-2: Multimodal Data Factory Responsibility Collaboration Diagram*
 ---
 
 ## 6. Asset Layer Design: Building the Multimodal Asset Pool
@@ -312,12 +308,10 @@ Therefore, this project does not remain at COCO natural images but further deriv
 Figure P03-3 illustrates the corresponding workflow or structure.
 
 ![Figure P03-3: Multimodal Asset Layering Diagram](../../images/part14/p03/Yu-Project03-Fig03.svg)
-*Figure P03-3: Multimodal Asset Layering Diagram.*
-
+*Figure P03-3: Multimodal Asset Layering Diagram*
 Table P03-2 summarizes the relationship between different asset types and their task mappings.
 
-*Table P03-2: Asset Types and Primary Risks Reference Table.*
-
+*Table P03-2: Asset Types and Primary Risks Reference Table*
 | Asset Type | Typical Source | Compatible Tasks | Primary Risks |
 | --- | --- | --- | --- |
 | `general_image` | COCO natural images, general scene photographs | Image description, counting, visual QA, local grounding | Hallucinated descriptions, missed objects, category confusion |
@@ -452,8 +446,7 @@ Therefore, the significance of document image tasks in this project extends beyo
 Figure P03-4 illustrates the corresponding workflow or structure.
 
 ![Figure P03-4: Document Image Task Layering Diagram](../../images/part14/p03/Yu-Project03-Fig04.svg)
-*Figure P03-4: Document Image Task Layering Diagram.*
-
+*Figure P03-4: Document Image Task Layering Diagram*
 ---
 
 ## 10. Chart Image Tasks: The Chart Reading Task Layer
@@ -543,8 +536,7 @@ def convert_bbox(bbox, width, height):
     ]
 ```
 
-*Listing P03-2: Python implementation excerpt.*
-
+*Listing P03-2: Python implementation excerpt*
 This excerpt transforms the above workflow into a checkable structured representation.
 
 ### 11.5 The True Engineering Significance of This Step
@@ -556,8 +548,7 @@ The importance of bounding box alignment lies not merely in "knowing how to writ
 Figure P03-5 illustrates the corresponding workflow or structure.
 
 ![Figure P03-5: Bounding Box Coordinate Conversion and Normalization Diagram](../../images/part14/p03/Yu-Project03-Fig05.svg)
-*Figure P03-5: Bounding Box Coordinate Conversion and Normalization Diagram.*
-
+*Figure P03-5: Bounding Box Coordinate Conversion and Normalization Diagram*
 ---
 
 ## 12. Multi-Image Interleaved Samples: Constructing Comparison Tasks
@@ -618,8 +609,7 @@ def generate_comparison(img1_path, img2_path):
     return messages
 ```
 
-*Listing P03-3: Python implementation excerpt.*
-
+*Listing P03-3: Python implementation excerpt*
 This excerpt transforms the above workflow into a checkable structured representation.
 
 ### 12.4 Why the Number of Interleaved Samples Is Usually Small
@@ -674,8 +664,7 @@ Listing P03-4 provides a JSON data structure example illustrating the input/outp
 }
 ```
 
-*Listing P03-4: JSON data structure example.*
-
+*Listing P03-4: JSON data structure example*
 This excerpt transforms the above workflow into a checkable structured representation.
 
 The focus of this format is not the field structure itself, but ensuring that both training and inspection scripts can consume it reliably.
@@ -731,8 +720,7 @@ In multimodal projects, the low-quality sample library provides at least three b
 Figure P03-6 illustrates the corresponding workflow or structure.
 
 ![Figure P03-6: Sample Quality Inspection and Rollback Closure Loop Diagram](../../images/part14/p03/Yu-Project03-Fig06.svg)
-*Figure P03-6: Sample Quality Inspection and Rollback Closure Loop Diagram.*
-
+*Figure P03-6: Sample Quality Inspection and Rollback Closure Loop Diagram*
 ---
 
 ## 15. Visual Verification: Bounding Box Back-Rendering
@@ -847,8 +835,7 @@ This indicates:
 
 Table P03-3 summarizes the relationships among task types, coverage capability, and engineering value.
 
-*Table P03-3: Task Types and Engineering Value Reference Table.*
-
+*Table P03-3: Task Types and Engineering Value Reference Table*
 | Task Type | Primary Input | Primary Output | Coverage Capability | Engineering Value |
 | --- | --- | --- | --- | --- |
 | `image_description` | General images | Scene description | Whole-image understanding | Builds visual subject and scene expression capability |
@@ -884,8 +871,7 @@ These figures are modest, but they already reflect the cost structure of a small
 
 Table P03-4 summarizes the current project's costs, time investment, and manual effort.
 
-*Table P03-4: Project Items and Notes Reference Table.*
-
+*Table P03-4: Project Items and Notes Reference Table*
 | Item | Current Result | Notes |
 | --- | ---: | --- |
 | Total assets | 87 | Three asset categories, balanced at 29 each |
@@ -947,12 +933,10 @@ These failure samples can be classified into at least the following types:
 Figure P03-7 illustrates the corresponding workflow or structure.
 
 ![Figure P03-7: Failure Sample Attribution Diagram](../../images/part14/p03/Yu-Project03-Fig07.svg)
-*Figure P03-7: Failure Sample Attribution Diagram.*
-
+*Figure P03-7: Failure Sample Attribution Diagram*
 Table P03-5 summarizes typical failure sample types and priority repair directions.
 
-*Table P03-5: Failure Types and Priority Repair Directions Reference Table.*
-
+*Table P03-5: Failure Types and Priority Repair Directions Reference Table*
 | Failure Type | Typical Manifestation | Most Likely Source | Priority Repair Direction |
 | --- | --- | --- | --- |
 | Visual hallucination | Response describes objects or relationships not present in the image | Open-ended generation over-diverging, re-captioning too expansive | Tighten prompt, add constraints on salient objects |
@@ -1004,8 +988,7 @@ From the perspective of engineering reuse, this type of closure information ofte
 Figure P03-8 illustrates the corresponding workflow or structure.
 
 ![Figure P03-8: Project Validation Closure Loop Diagram](../../images/part14/p03/Yu-Project03-Fig08.svg)
-*Figure P03-8: Project Validation Closure Loop Diagram.*
-
+*Figure P03-8: Project Validation Closure Loop Diagram*
 ---
 
 ## 21. Correspondence with Project 2: A Consistent Methodological Framework Across Projects
@@ -1095,8 +1078,7 @@ As sample scale grows, pure manual spot-checking quickly becomes a bottleneck. T
 
 Table P03-6 summarizes the categories and roles of this project's deliverables.
 
-*Table P03-6: Categories and Roles Reference Table.*
-
+*Table P03-6: Categories and Roles Reference Table*
 | Category | Representative Files | Role |
 | --- | --- | --- |
 | Assets and intermediate layer | `asset_manifest.jsonl`, `llava_alignment.jsonl`, `llava_interleaved.jsonl` | Records asset provenance, task derivation, and intermediate sample state |
@@ -1158,7 +1140,7 @@ This chapter examined the LLaVA Multimodal Instruction Data Factory as an engine
 
 The case is grounded in licensable images and controlled task templates, and it does not claim to cover every form of visual question answering. At larger scale or under stronger compliance constraints, data sources, permission status, manual review proportions, operational costs, and rollback plans should be reviewed again.
 
-As part of Part 14, this chapter corresponds to the project-level validation of the methods presented earlier in the book. Readers may use this case study in conjunction with the data recipes from Part 13, the platform governance chapters from earlier sections, and the inspection checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
+As part of Part XIV, this chapter corresponds to the project-level validation of the methods presented earlier in the book. Readers may use this case study in conjunction with the data recipes from Part XIII, the platform governance chapters from earlier sections, and the inspection checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 
 ## References
 

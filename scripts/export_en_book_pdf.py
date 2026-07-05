@@ -55,7 +55,6 @@ PRE_CONTENTS_FRONT_PATHS = {
     "acknowledgments.md",
     "competing_interests.md",
     "ethics_approval.md",
-    "front_matter_guide.md",
 }
 POST_CONTENTS_FRONT_PATHS = {"contributors.md", "abbreviations.md"}
 
@@ -924,9 +923,8 @@ def prepare_pdf_items(items: list[NavItem]) -> list[NavItem]:
         "acknowledgments.md": 3,
         "competing_interests.md": 4,
         "ethics_approval.md": 5,
-        "front_matter_guide.md": 6,
-        "contributors.md": 7,
-        "abbreviations.md": 8,
+        "contributors.md": 6,
+        "abbreviations.md": 7,
     }
     front = [item for item in filtered if item.group_slug == "front-matter"]
     rest = [item for item in filtered if item.group_slug != "front-matter"]
@@ -1517,8 +1515,16 @@ def locate_item_pages(
                 needles.append(needle)
         return needles
 
+    def raw_page_text(index: int) -> str:
+        if index not in text_cache:
+            text_cache[index] = pages[index].extract_text() or ""
+        return text_cache[index]
+
+    def page_text(index: int) -> str:
+        return normalize(raw_page_text(index))
+
     def page_starts_with_title(index: int, needles: list[str], title: str) -> bool:
-        raw_text = pages[index].extract_text() or ""
+        raw_text = raw_page_text(index)
         lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
         if not lines:
             return False
@@ -1544,11 +1550,6 @@ def locate_item_pages(
         except Exception:
             pass
 
-    def page_text(index: int) -> str:
-        if index not in text_cache:
-            text_cache[index] = normalize(pages[index].extract_text() or "")
-        return text_cache[index]
-
     current = 3 if start_after_toc and page_count > 3 else 0
     for item in items:
         if is_part_overview(item):
@@ -1560,9 +1561,6 @@ def locate_item_pages(
         for idx in range(current, page_count):
             if page_starts_with_title(idx, needles, item.title):
                 found = idx
-                break
-        for idx in range(current, page_count):
-            if found is not None:
                 break
             text = page_text(idx)
             if any(needle in text for needle in needles):

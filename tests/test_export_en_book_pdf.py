@@ -128,11 +128,11 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
         )
         self.assertIn("<h1>Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray</h1>", project)
 
-    def test_submission_page_labels_use_absolute_pdf_pages(self):
+    def test_submission_page_labels_use_front_matter_roman_and_body_decimal_pages(self):
         exporter = load_exporter()
 
-        self.assertEqual("3", exporter.build_page_number_label(3, first_body_page=17))
-        self.assertEqual("19", exporter.build_page_number_label(19, first_body_page=17))
+        self.assertEqual("ii", exporter.build_page_number_label(3, first_body_page=17))
+        self.assertEqual("3", exporter.build_page_number_label(19, first_body_page=17))
 
     def test_submission_pdfs_are_limited_to_actual_manuscript_units(self):
         exporter = load_exporter()
@@ -150,7 +150,7 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
         self.assertNotIn("part1/index.md", paths)
         self.assertNotIn("index.md", paths)
 
-    def test_formal_pdf_front_matter_includes_publication_reading_guide(self):
+    def test_formal_pdf_front_matter_excludes_nonstandard_reading_guide(self):
         exporter = load_exporter()
         config = yaml.safe_load((ROOT / "mkdocs.yml").read_text(encoding="utf-8"))
         items = exporter.flatten_nav(exporter.find_en_nav(config))
@@ -159,7 +159,7 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
 
         self.assertIn("preface.md", paths)
         self.assertIn("acknowledgments.md", paths)
-        self.assertIn("front_matter_guide.md", paths)
+        self.assertNotIn("front_matter_guide.md", paths)
         self.assertIn("contributors.md", paths)
         self.assertIn("abbreviations.md", paths)
 
@@ -181,8 +181,8 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
         self.assertLess(contributors_index, abbreviations_index)
         self.assertNotIn("Half Title", front_html)
         self.assertNotIn("Copyright page placeholder", front_html)
-        self.assertNotIn("Declaration of Competing Interests", front_html)
-        self.assertNotIn("Ethics Approval", front_html)
+        self.assertIn("Declaration of Competing Interests", front_html)
+        self.assertIn("Ethics Approval", front_html)
 
     def test_springer_reference_pdf_sets_include_front_and_back_matter(self):
         exporter = load_exporter()
@@ -194,7 +194,7 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
 
         self.assertIn("preface.md", front_paths)
         self.assertIn("acknowledgments.md", front_paths)
-        self.assertIn("front_matter_guide.md", front_paths)
+        self.assertNotIn("front_matter_guide.md", front_paths)
         self.assertIn("contributors.md", front_paths)
         self.assertIn("abbreviations.md", front_paths)
         self.assertIn("afterword.md", back_paths)
@@ -491,7 +491,7 @@ class ExportEnglishBookLatexTest(unittest.TestCase):
             self.assertTrue((exporter.CHAPTERS_DIR / "01-part1-ch01-data-change.tex").exists())
             self.assertTrue((exporter.CHAPTERS_DIR / "63-part14-p15-dataagent-semantic-nl2sql-agent.tex").exists())
             self.assertIn("part1/ch01_data_change.md", chapter_readme)
-            self.assertIn(r"\input{../chapters/01-part1-ch01-data-change.tex}", main_part_text)
+            self.assertIn(r"\subimport{../chapters/}{01-part1-ch01-data-change.tex}", main_part_text)
 
     def test_latex_asset_manager_converts_svg_to_png(self):
         exporter = load_latex_exporter()

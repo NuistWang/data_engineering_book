@@ -1,8 +1,8 @@
-# Part 4: Instruction Fine-tuning and Preference Data
+# Part IV: Instruction Fine-tuning and Preference Data
 
 ## Overview
 
-Part 4 focuses on supervised data construction for post-alignment models, covering supervised fine-tuning, preference learning, reward signals, annotation platforms, quality assurance, and data operations mechanisms.
+Part IV focuses on supervised data construction for post-alignment models, covering supervised fine-tuning, preference learning, reward signals, annotation platforms, quality assurance, and data operations mechanisms.
 
 ## Terminology
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand text data governance from Part 2 and multimodal sample structures from Part 3. Readers focused on model training may pay special attention to how raw task requirements are converted into stable supervision signals. Readers from annotation or operations teams may focus on sample definitions, acceptance standards, and dispute-handling mechanisms.
+Before reading this part, readers should understand text data governance from Part II and multimodal sample structures from Part III. Readers focused on model training may pay special attention to how raw task requirements are converted into stable supervision signals. Readers from annotation or operations teams may focus on sample definitions, acceptance standards, and dispute-handling mechanisms.
 
 ## Chapter Logic
 

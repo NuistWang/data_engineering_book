@@ -7,3 +7,19 @@ This book takes **data engineering** as its central thread. It follows the workf
 Each chapter combines engineering discussion with concrete cases. The emphasis is on pipeline design, data quality control, versioning, evaluation, reproducibility, and the handoff between research code and deliverable assets. Readers will see why large-model data work is difficult in practice, and how teams can build systems that are scalable, efficient, and reviewable.
 
 The intended readers include academic researchers, industrial engineers, data scientists, platform teams, and students who need to understand how data assets shape model capability. The book is meant to be used both as a reference and as a project companion for building, evaluating, and maintaining large-model data pipelines.
+
+## Book Structure and Reading Paths
+
+This handbook is organized into **14 parts, 48 chapters, 15 projects, and 8 appendices**. The structure follows the sequence from data raw material to training signals, application systems, platform governance, specialized validation, recipe abstraction, and project review.
+
+![Book architecture of Data Engineering for Large Foundation Models, showing the data lifecycle, foundation layer, data collection and processing layer, cross-cutting capabilities, model alignment and capability enhancement layer, application governance layer, security and specialized practice layer, project case layer, DataOps flywheel, and platform support capabilities](../images/Yu-FrontMatter-Fig02-EN.png)
+
+*Figure FM-1: Book architecture. Source: original illustration by the authors*
+
+Parts I to III form the foundation layer. They discuss the data lifecycle, infrastructure, text data, multimodal images, video, audio, optical character recognition, and cross-modal alignment. Parts IV to VI form the training-signal layer, covering instruction fine-tuning, preference data, synthetic data, distillation, reasoning chains, tool use, and agent interaction data. Parts VII to XI place data engineering inside application systems, organizational operations, data assets, intelligent agents, privacy compliance, and federated learning.
+
+Part XII validates the earlier methods through specialized datasets, including text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio, and reasoning traces. Part XIII abstracts transferable data recipes for open-source large models, while Part XIV turns key capabilities into runnable project cases. Appendices A-H provide tools, compliance checklists, cost templates, engineering conversion guidance, debugging notes, terminology mappings, DataGallery reproduction notes, and a MindSpore technical appendix.
+
+Readers focused on research experiments may start with Parts I-III and then enter Parts IV-VI according to the data type or training signal they need. Industrial platform teams may prioritize Parts VII-XI before returning to earlier chapters for pipeline details. Readers reproducing open-source models may start from Part XIII and use the projects in Part XIV as comparison cases. Course organizers can combine the part overviews, project chapters, and appendices to build labs, grading criteria, data-permission notes, and cost budgets.
+
+Figures and tables in this book are intended to support engineering decisions, not to decorate the text. Each figure or table should have a number, concise caption, in-text mention, source note where needed, alternative text, and permission status. Companion resources, including code, check scripts, sample data, run instructions, and delivery checklists, are maintained through the online resources listed at the beginning of the book.

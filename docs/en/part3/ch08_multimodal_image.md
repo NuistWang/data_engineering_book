@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter discusses the fundamental engineering problems behind image-text pairs and interleaved image-text data, with a particular focus on why visual data cannot simply reuse the cleaning paradigm of pure text. It first explains the engineering challenges created by visual noise, semantic mismatch, resolution cost, and image representation. It then compares three sample paradigms: image-caption pairs, interleaved image-text documents, and document-grounded screenshots. The cleaning section begins with image decoding, resolution and aspect-ratio filtering, and NSFW, watermark, and privacy blocking, then introduces CLIP/SigLIP-based semantic matching and multi-granularity recaptioning. The second half of the chapter discusses AnyRes dynamic patching, aspect-ratio grouping, multimodal data mixing, and quality risks. An anonymized composite case illustrates why stock-photo watermark contamination and secondary cleaning are necessary. By the end, readers should be able to design a traceable, measurable, and cost-controlled image-text preprocessing pipeline.
+This chapter discusses the fundamental engineering problems behind image-text pairs and interleaved image-text data, with a particular focus on why visual data cannot simply reuse the cleaning paradigm of pure text. It first explains the engineering challenges created by visual noise, semantic mismatch, resolution cost, and image representation. It then compares three sample paradigms: image-caption pairs, interleaved image-text documents, and document-grounded screenshots. The cleaning section begins with image decoding, resolution and aspect-ratio filtering, and not-safe-for-work (NSFW) content, watermark, and privacy blocking, then introduces Contrastive Language-Image Pretraining (CLIP) / Sigmoid Language-Image Pretraining (SigLIP)-based semantic matching and multi-granularity recaptioning. The second half of the chapter discusses any-resolution (AnyRes) dynamic patching, aspect-ratio grouping, multimodal data mixing, and quality risks. An anonymized composite case illustrates why stock-photo watermark contamination and secondary cleaning are necessary. By the end, readers should be able to design a traceable, measurable, and cost-controlled image-text preprocessing pipeline.
 
 ## Keywords
 
@@ -59,8 +59,7 @@ Figure 8-1 illustrates the corresponding workflow or structure.
 
 ![Figure 8-1: Overview of image-text data engineering](../../images/part3/Yu-Chap08-Fig01.svg)
 
-*Figure 8-1: Overview of multimodal image-text data engineering. The pipeline starts from DOM-tree crawling and PDF parsing, then moves through format parsing, watermark filtering, CLIP semantic alignment, interleaved-sequence assembly, and tokenized representation. Distributed computing and metadata form the foundation across the pipeline. Source: drawn for this book.*
-
+*Figure 8-1: Overview of multimodal image-text data engineering. The pipeline starts from DOM-tree crawling and PDF parsing, then moves through format parsing, watermark filtering, CLIP semantic alignment, interleaved-sequence assembly, and tokenized representation. Distributed computing and metadata form the foundation across the pipeline. Source: drawn for this book*
 ---
 
 ## 8.2 Image-Text Sample Paradigms: From Pairs to Interleaving
@@ -108,8 +107,7 @@ for node in all_nodes_sorted_by_y_axis():
             save_to_image_db(node.url, node.id)
 ```
 
-*Listing 8-1: Example code for DOM interleaved-node extraction. Production environments should add DOM cleaning, image-download validation, retention of alt/title fields, and failed-sample isolation.*
-
+*Listing 8-1: Example code for DOM interleaved-node extraction. Production environments should add DOM cleaning, image-download validation, retention of alt/title fields, and failed-sample isolation*
 If the DOM structure is extracted out of order, the model learns the wrong image-text correspondence.
 
 ### 8.2.3 Long-Document Understanding and Screenshot Grounding
@@ -122,8 +120,7 @@ For real business use cases such as reading financial reports or invoices, natur
 
 Table 8-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 8-1: Image-text sample types, characteristics, and applicable tasks. Source: compiled by the authors; applicable tasks are engineering generalizations, and production environments should review them against model architecture, the vision encoder, and data licensing.*
-
+*Table 8-1: Image-text sample types, characteristics, and applicable tasks. Source: compiled by the authors; applicable tasks are engineering generalizations, and production environments should review them against model architecture, the vision encoder, and data licensing*
 | Sample type | Data characteristics | Core acquisition method | Best-fit stage | Key capability gained |
 | :--- | :--- | :--- | :--- | :--- |
 | **Pure image-caption** | One-to-one text/image pairs, high noise | Web `<img alt>`, public-cloud OSS crawling | Alignment pretraining | Basic feature perception and cross-modal retrieval |
@@ -238,8 +235,7 @@ def filter_by_semantic_score(image, text_caption, threshold=0.25):
     return similarity >= threshold, similarity
 ```
 
-*Listing 8-2: Example code for SigLIP/CLIP image-text alignment filtering. The threshold is illustrative; production environments should calibrate it by model version, data domain, and manual spot-check results.*
-
+*Listing 8-2: Example code for SigLIP/CLIP image-text alignment filtering. The threshold is illustrative; production environments should calibrate it by model version, data domain, and manual spot-check results*
 ### 8.4.2 Saving Valuable Images: Multi-Granularity Synthetic Recaptioning
 
 When an image has high resolution, good composition, and rare entities, but its original web text is only a label such as "IMG_20230401.jpg," discarding it wastes a data asset. If compute allows, using expert VLMs such as LLaVA-1.5 (Liu et al. 2024), Qwen2.5-VL (Bai et al. 2025), InternVL3 (Zhu et al. 2025), or GPT-4V to regenerate descriptions is an important way to improve image-text training quality. Recaptioning is not an unconditional gain: generated captions can introduce hallucinations, stylistic bias, and safety-policy refusals, so the generation model, prompt version, temperature parameter, and spot-check conclusion must be recorded.
@@ -261,8 +257,7 @@ Modern large-model engineering usually applies a **multi-granularity recaptionin
 
 ![Figure 8-2: Image semantic alignment and filtering flow](../../images/part3/Yu-Chap08-Fig02.svg)
 
-*Figure 8-2: Image semantic alignment and filtering flow. A CLIP- and heuristic-rule-based quantitative decision tree filters out low-match samples, sends medium-match but high-value images to the recaptioning pipeline, and finally stores zero-padded or dynamically sliced images in the training pool. Source: drawn for this book.*
-
+*Figure 8-2: Image semantic alignment and filtering flow. A CLIP- and heuristic-rule-based quantitative decision tree filters out low-match samples, sends medium-match but high-value images to the recaptioning pipeline, and finally stores zero-padded or dynamically sliced images in the training pool. Source: drawn for this book*
 ---
 
 ## 8.5 Sampling Mixes, Representations, and Training Adaptation
@@ -279,8 +274,7 @@ Figure 8-3 illustrates the corresponding workflow or structure.
 
 ![Figure 8-3: AnyRes dynamic multi-resolution patching](../../images/part3/Yu-Chap08-Fig03.svg)
 
-*Figure 8-3: AnyRes dynamic multi-resolution patching. The core idea is that the high-resolution panoramic input on the left is no longer forced into a square. Instead, it is divided by an adaptive grid into $1 \times 3$ native-resolution local patches and paired with a global thumbnail in the upper-right corner before entering the vision encoder, preserving both high-frequency local features and global semantics. Source: drawn for this book.*
-
+*Figure 8-3: AnyRes dynamic multi-resolution patching. The core idea is that the high-resolution panoramic input on the left is no longer forced into a square. Instead, it is divided by an adaptive grid into $1 \times 3$ native-resolution local patches and paired with a global thumbnail in the upper-right corner before entering the vision encoder, preserving both high-frequency local features and global semantics. Source: drawn for this book*
 **AnyRes principles and core strategies:**
 
 1. **Zero-padding / letterboxing**: for images whose original aspect ratio should be preserved and whose resolution does not overflow, add black or mean-color borders around the image to form a square, allowing the model to learn undistorted geometry.
@@ -299,8 +293,7 @@ A balanced MLLM pretraining mix must allocate weights to different sources caref
 
 Table 8-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 8-2: Image-cleaning strategies and cost comparison. Source: compiled by the authors; cost descriptions are relative complexity, and actual cost depends on image resolution, model version, concurrency, and manual spot-check ratio.*
-
+*Table 8-2: Image-cleaning strategies and cost comparison. Source: compiled by the authors; cost descriptions are relative complexity, and actual cost depends on image resolution, model version, concurrency, and manual spot-check ratio*
 | Cleaning strategy | Compute cost | Core function and benefit | Residual risks and side effects |
 | :--- | :--- | :--- | :--- |
 | **Basic resolution cutoff** | Very low, I/O intensive | Remove meaningless color blocks and reduce storage and downstream decoding overhead | May wrongly remove historically meaningful documentary images that only survived in low resolution |
@@ -331,7 +324,7 @@ This data asset is not just a JSON file on disk. It is a long-term engineering c
 
 ## Chapter Summary
 
-As the opening chapter of Part 3, this chapter systematically described four types of challenges that distinguish multimodal data from pure text, then introduced three major structural paradigms for image-text engineering. To reduce the throughput pressure caused by image archives, it discussed GPU-side decoding and preprocessing with DALI.
+As the opening chapter of Part III, this chapter systematically described four types of challenges that distinguish multimodal data from pure text, then introduced three major structural paradigms for image-text engineering. To reduce the throughput pressure caused by image archives, it discussed GPU-side decoding and preprocessing with DALI.
 
 For complex semantic alignment, the chapter used a diagram to explain the combined workflow of CLIP Score filtering and VLM recaptioning (see Figure 8-2). Finally, through data-mix tuning and an anonymized composite case, it described the quality boundaries that enterprise-grade vision-language model training must maintain.
 

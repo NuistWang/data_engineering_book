@@ -1,8 +1,8 @@
-# Part 5: Synthetic Data Engineering
+# Part V: Synthetic Data Engineering
 
 ## Positioning of This Part
 
-Part 5 focuses on the process of building a reusable synthetic data factory from seed samples, covering knowledge distillation, teacher model collaboration, quality control, and the risk of model collapse.
+Part V focuses on the process of building a reusable synthetic data factory from seed samples, covering knowledge distillation, teacher model collaboration, quality control, and the risk of model collapse.
 
 ## Terminology
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand the SFT, preference-data, and QA conventions from Part 4. Readers with synthetic data experience may focus on whether their own process is reproducible, auditable, and rollbackable, rather than only on generation scale.
+Before reading this part, readers should understand the SFT, preference-data, and QA conventions from Part IV. Readers with synthetic data experience may focus on whether their own process is reproducible, auditable, and rollbackable, rather than only on generation scale.
 
 ## Chapter Logic
 

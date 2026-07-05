@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter addresses the challenges of continuous evaluation, version governance, and operational iteration for pre-training data after the cleaning phase is complete. The chapter opens with an anonymized composite case study illustrating that "cleaner" data does not necessarily yield better model performance, then establishes the foundational framework for Data Operations (DataOps): offline proxy metrics, representative sampling, quality dashboards, issue sample pools, version comparison, and upstream strategy write-back (for data lifecycle management in production machine learning, see Polyzotis et al. 2018; Whang et al. 2023; Liang et al. 2022). The metrics section focuses on explaining the applicable boundaries of perplexity, type-token ratio, toxicity and PII density, benchmark contamination, and domain coverage, emphasizing that these are proxy signals only and must be combined with small-scale validator models and manual spot-checks. The latter half of the chapter covers 5 Whys root-cause retrospectives, weekly operational cadences, dashboard alerting, and pathways for reusing data assets in SFT and RAG pipelines. Readers should be able to extend data processing from a one-time delivery into a traceable, rollback-capable, auditable continuous operations system (for the labor and organizational challenges of data work in AI teams, see Sambasivan et al. 2021; industrial DataOps platforms such as Data-Juicer 2.0 (Chen et al. 2025) provide 200+ operators and end-to-end rollback-capable operations).
+This chapter addresses the challenges of continuous evaluation, version governance, and operational iteration for pre-training data after the cleaning phase is complete. It opens with an anonymized composite case study showing that "cleaner" data does not necessarily yield better model performance. The chapter then establishes the foundational framework for Data Operations (DataOps): offline proxy metrics, representative sampling, quality dashboards, issue sample pools, version comparison, and upstream strategy write-back. The metrics section explains the applicable boundaries of perplexity, type-token ratio, toxicity and personally identifiable information (PII) density, benchmark contamination, and domain coverage. These metrics are proxy signals and must be combined with small-scale validator models and manual spot-checks. The latter half of the chapter covers 5 Whys retrospectives, weekly operational cadences, dashboard alerting, and reuse pathways for supervised fine-tuning (SFT) and retrieval-augmented generation (RAG) data assets. Readers should be able to extend data processing from one-time delivery into a traceable, rollback-capable, and auditable continuous operations system.
 
 ## Keywords
 
@@ -64,8 +64,7 @@ Figure 7-1 illustrates the corresponding workflow or structure.
 
 ![Figure 7-1: Data Operations Flywheel](../../images/part2/Wang-Chap07-Fig01.svg)
 
-*Figure 7-1: Data Operations Flywheel — The left side shows the high-cost startup zone; the right side shows the gradually accumulated cycle of automated, high-quality data assets formed after long-term model evaluation and root-cause analysis feedback. Source: Original illustration by the authors.*
-
+*Figure 7-1: Data Operations Flywheel — The left side shows the high-cost startup zone; the right side shows the gradually accumulated cycle of automated, high-quality data assets formed after long-term model evaluation and root-cause analysis feedback. Source: Original illustration by the authors*
 ---
 
 ## 7.2 Offline Evaluation and Proxy Metric Design
@@ -121,8 +120,7 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
     return ppl_results  # Returns an array for downstream histogram generation
 ```
 
-*Listing 7-1: Example code for offline perplexity sampling computation. Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions.*
-
+*Listing 7-1: Example code for offline perplexity sampling computation. Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions*
 #### 2. Diversity Sparsity (Type-Token Ratio, TTR & Vocabulary Coverage)
 - **Detection objective**: Confirm whether the cleaning pipeline, due to overly aggressive threshold settings or excessively strict deduplication (MinHash), has permanently eliminated niche knowledge or specific long-tail vocabulary.
 - **Validation method**: Compute the ratio of unique word types (distinct word stems within the vocabulary) to the total token count in the document collection described above. TTR tends to be lower across long passages, so a windowed averaging algorithm must be applied (e.g., MATTR (Covington and McFall 2010)).
@@ -149,8 +147,7 @@ def calculate_ttr(texts, tokenizer=None):
     return unique_types / total_tokens
 ```
 
-*Listing 7-2: Example code for offline Type-Token Ratio computation. This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata.*
-
+*Listing 7-2: Example code for offline Type-Token Ratio computation. This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata*
 - **Advanced validation — Vocabulary Coverage**: Teams should compile a domain-specific vocabulary list (e.g., rare disease names, recently introduced niche code frameworks, or the complete roster of characters from a specific literary work). If the coverage of such targeted vocabulary in the sandbox is significantly lower than the historical baseline or the manually specified minimum coverage requirement, whitelist weights should be added to the upstream crawlers for the corresponding domains, and the next spot-check should verify whether noise has been introduced.
 
 #### 3. Toxicity and Adverse Leakage Rate (Toxicity & PII Density)
@@ -176,8 +173,7 @@ Evaluation must never stop at merely "looking at metrics." A qualified evaluatio
 
 Table 7-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-1: Evaluation Metric to Governance Action Mapping. Source: compiled by the authors; metric thresholds and governance actions should be calibrated according to project goals, historical baselines, and manual review results.*
-
+*Table 7-1: Evaluation Metric to Governance Action Mapping. Source: compiled by the authors; metric thresholds and governance actions should be calibrated according to project goals, historical baselines, and manual review results*
 | Metric Observation (Offline/Online) | Common Root Cause and Manifestation | Corresponding Governance Action |
 | :--- | :--- | :--- |
 | **Overall decline in sampled TTR (diversity)** | MinHash deduplication may be overly aggressive, eliminating reasonable overlap in general domains | **Raise the duplicate-decision threshold or switch to a stricter definition of duplication, and introduce domain-specific vocabulary protection** |
@@ -257,8 +253,7 @@ This costly training interruption demonstrates that the data operations team mus
 
 Table 7-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-2: Version Iteration Log Template. Source: compiled by the authors; the fields form a data-version retrospective template that production environments can extend according to auditing, experiment tracking, and permission workflows.*
-
+*Table 7-2: Version Iteration Log Template. Source: compiled by the authors; the fields form a data-version retrospective template that production environments can extend according to auditing, experiment tracking, and permission workflows*
 In a formal business iteration system, every data batch deployed to the main training cluster must be accompanied by a release log as rigorous as a software release note. The table below provides a benchmark log template from a production pipeline.
 
 | Evaluation Dimension | Version Log Field Example |
@@ -289,8 +284,7 @@ Figure 7-2 illustrates the corresponding workflow or structure.
 
 ![Figure 7-2: Data Evaluation Feedback Loop](../../images/part2/Wang-Chap07-Fig02.svg)
 
-*Figure 7-2: Data Evaluation Feedback Loop — A circular architecture proceeding from sampling-based blind review to root-cause investigation triggered by metric anomalies, followed by targeted system governance actions. Source: Original illustration by the authors.*
-
+*Figure 7-2: Data Evaluation Feedback Loop — A circular architecture proceeding from sampling-based blind review to root-cause investigation triggered by metric anomalies, followed by targeted system governance actions. Source: Original illustration by the authors*
 ### 7.4.2 Automated Quality Alert System Architecture
 
 If the dashboard is merely a static report requiring daily manual inspection, oversight gaps are inevitable. A mature large-model data factory requires not only a static dashboard but also an active blocking and alerting mechanism. This alerting architecture is typically built on a distributed stream-processing framework (such as Apache Flink or Spark Streaming) to achieve low-latency interception of anomalous data.
@@ -391,7 +385,7 @@ This chapter has articulated the data asset governance logic centered on "data e
 
 To address this, the chapter systematically explained the necessity of establishing "offline proxy metrics (PPL/TTR, etc.)," and from there introduced DVC version comparison, issue sample pool retention, and A/B testing, ultimately distilling everything into an agile workflow comprising four operational action cycles. This ensures that data development for large language models is no longer an isolated black-box process, but rather a quality feedback loop in which capability gaps can be traced upstream to drive improvements in collection and cleaning strategies.
 
-From raw web pages through quality control, cleaning and deduplication, and data mixing to efficient delivery to the GPU, Part 2 has covered the main pipeline of text pre-training data engineering. The next chapter begins Part 3, which addresses multimodal data engineering—structurally more complex, more costly, and subject to stricter alignment requirements: **Chapter 8: Image-Text Pair Data Engineering**.
+From raw web pages through quality control, cleaning and deduplication, and data mixing to efficient delivery to the GPU, Part II has covered the main pipeline of text pre-training data engineering. The next chapter begins Part III, which addresses multimodal data engineering—structurally more complex, more costly, and subject to stricter alignment requirements: **Chapter 8: Image-Text Pair Data Engineering**.
 
 ## References
 

@@ -223,7 +223,7 @@ def unit_from_path(path: Path, refs: list[ImageRef]) -> str:
         project = int(match.group(1))
         return f"part14/p{project:02d}_"
     if rel.startswith("docs/images/book_structure"):
-        return "front_matter_guide.md"
+        return "preface.md"
     if rel.startswith("images/structure"):
         return "book"
     return rel

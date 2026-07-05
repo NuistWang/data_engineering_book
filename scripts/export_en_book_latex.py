@@ -405,9 +405,8 @@ def prepare_latex_items(items: list[NavItem]) -> list[NavItem]:
         "acknowledgments.md": 4,
         "competing_interests.md": 5,
         "ethics_approval.md": 6,
-        "front_matter_guide.md": 7,
-        "contributors.md": 8,
-        "abbreviations.md": 9,
+        "contributors.md": 7,
+        "abbreviations.md": 8,
     }
     front = [
         item
@@ -490,7 +489,7 @@ def group_items(items: list[NavItem]) -> list[tuple[str, list[NavItem]]]:
 
 
 def is_submission_latex_unit(item: NavItem) -> bool:
-    if item.path in {"index.md", "front_matter_guide.md", "translation-status.md"}:
+    if item.path in {"index.md", "translation-status.md"}:
         return False
     if not re.search(r"part\d+/", item.path) and not item.path.startswith("appendix_") and item.path != "afterword.md":
         return False

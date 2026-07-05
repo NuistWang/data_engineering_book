@@ -53,8 +53,7 @@ Figure 34-1 illustrates the corresponding workflow or structure.
 
 ![Alert-to-root-cause agent flow](../../images/part10/Luo-Chap34-Fig01.svg)
 
-*Figure 34-1: Alert-to-root-cause agent flow.*
-
+*Figure 34-1: Alert-to-root-cause agent flow*
 Data sources:
 
 1. **Metrics:** job latency, volume, error rate, resource usage.
@@ -68,8 +67,7 @@ The agent aligns timelines and uses causal signals to generate candidates.
 
 Table 34-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-1: Root cause candidate types and detection logic.*
-
+*Table 34-1: Root cause candidate types and detection logic*
 | Root cause type | Pattern | Detection logic | Confidence |
 | --- | --- | --- | --- |
 | Upstream schema change | Change precedes first alert and affects all downstream tasks | Cross-check change records and alert timeline | 0.90 |
@@ -94,8 +92,7 @@ Calibration methods:
 
 Table 34-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-2: Confidence-to-action mapping.*
-
+*Table 34-2: Confidence-to-action mapping*
 | Raw confidence | Calibrated confidence | Automation action |
 | --- | --- | --- |
 | > 0.90 | Usually consistent | Push root cause and repair suggestion |
@@ -127,8 +124,7 @@ Aggregation strategies:
 
 Table 34-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-3: Example alert aggregation effect.*
-
+*Table 34-3: Example alert aggregation effect*
 | Raw alerts | Aggregated alerts | Aggregation rate | Daily alerts handled by engineers |
 | --- | --- | --- | --- |
 | 200+ | 15-20 | ~90% | From 50+ to 12 |
@@ -155,12 +151,10 @@ Figure 34-2 illustrates the corresponding workflow or structure.
 
 ![Rollback approval workflow](../../images/part10/Luo-Chap34-Fig02.svg)
 
-*Figure 34-2: Rollback approval workflow.*
-
+*Figure 34-2: Rollback approval workflow*
 Table 34-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-4: Approval matrix for rollback and repair.*
-
+*Table 34-4: Approval matrix for rollback and repair*
 | Operation | Risk | Approval | Rollback plan |
 | --- | --- | --- | --- |
 | Field-level data repair | Low | Agent automatic plus post-hoc audit | Keep original values |
@@ -178,8 +172,7 @@ Self-healing is bounded. The agent may only execute operations in a predefined s
 
 Table 34-5 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-5: Self-healing permissions by data classification.*
-
+*Table 34-5: Self-healing permissions by data classification*
 | Self-healing operation | L0 public data | L1 internal data | L2 sensitive data | L3 confidential data |
 | --- | --- | --- | --- | --- |
 | Job rerun | Automatic | Automatic | Automatic, once | Approval |
@@ -193,8 +186,7 @@ Figure 34-3 illustrates the corresponding workflow or structure.
 
 ![Pipeline self-healing decision flow](../../images/part10/Luo-Chap34-Fig03.svg)
 
-*Figure 34-3: Pipeline self-healing decision flow.*
-
+*Figure 34-3: Pipeline self-healing decision flow*
 The key principle is: **repair known failure patterns; do not explore unknown problems autonomously.** If a new failure pattern appears, the agent escalates it and records the pattern. After human-confirmed repair, that pattern may enter the future self-healing set.
 
 ### 34.2.4 Data Consistency During Rollback
@@ -212,8 +204,7 @@ Rollback plans must include:
 
 Table 34-6 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-6: Rollback versus repair decision support.*
-
+*Table 34-6: Rollback versus repair decision support*
 | Factor | Rollback option | Repair option | Agent analysis |
 | --- | --- | --- | --- |
 | Time cost | Snapshot restore plus downstream reruns | Script development plus validation | Estimate both using historical data |
@@ -241,8 +232,7 @@ Data platform cost is often ignored because billing is monthly. By the time the 
 
 Table 34-7 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-7: Cost anomaly detection and optimization suggestions.*
-
+*Table 34-7: Cost anomaly detection and optimization suggestions*
 | Cost anomaly | Detection | Suggestion | Estimated saving |
 | --- | --- | --- | --- |
 | Intermediate table growth | Table size growth > daily mean by 5% | Set TTL and archive old partitions | 20-40% storage |
@@ -267,8 +257,7 @@ Optimization requires knowing who spends what. Agents allocate platform cost by 
 
 Table 34-8 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-8: Cost attribution dimensions.*
-
+*Table 34-8: Cost attribution dimensions*
 | Attribution dimension | Cost types | Attribution method |
 | --- | --- | --- |
 | Team | Storage, compute, labeling labor | Resource owner tags |
@@ -299,8 +288,7 @@ Postmortems are central to the DataOps flywheel, but engineers often skip them a
 
 Table 34-9 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-9: Postmortem draft template.*
-
+*Table 34-9: Postmortem draft template*
 | Element | Auto-fill source |
 | --- | --- |
 | Event timeline | Alert times, operation logs, approval records |
@@ -375,8 +363,7 @@ The rollout is gradual:
 
 Table 34-10 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-10: Continuous MTTR Improvement.*
-
+*Table 34-10: Continuous MTTR Improvement*
 | Stage | MTTR | Agent automation | Engineer satisfaction |
 | --- | --- | --- | --- |
 | Manual baseline | 45 min | 0% | 3.2/5, alert fatigue |
@@ -423,8 +410,7 @@ Technical path:
 
 Table 34-11 summarizes the corresponding comparison and engineering considerations.
 
-*Table 34-11: Reactive versus predictive operations.*
-
+*Table 34-11: Reactive versus predictive operations*
 | Dimension | Reactive operations | Predictive operations |
 | --- | --- | --- |
 | Trigger | After failure | Before failure |

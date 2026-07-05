@@ -31,8 +31,7 @@ Listing P12-1 provides a process or path example illustrating the input/output r
 Reasoning seeds -> Long-CoT generation -> Multi-candidate sampling -> Verification/scoring -> Rejection sampling -> Recirculated SFT dataset
 ```
 
-*Listing P12-1: Process or path example.*
-
+*Listing P12-1: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -47,8 +46,7 @@ Acceptance metrics include reasoning accuracy, candidate retention rate, verific
 
 Table P12-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P12-1: Publication Acceptance Table for the Pedagogical R1 Reasoning Data Flywheel.*
-
+*Table P12-1: Publication Acceptance Table for the Pedagogical R1 Reasoning Data Flywheel*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criterion |
 | --- | --- | --- |
 | Candidate generation | Number of multi-path samples, long-chain length distribution, and task-source coverage | Describe the differences between mock, vLLM, and real model sampling |
@@ -90,8 +88,7 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
   -> LoRA training and evaluation
 ```
 
-*Listing P12-2: Process or path example.*
-
+*Listing P12-2: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Upon completing this project, readers should understand three things. First, the key engineering objects in an R1-style system are not individual model weights but the task pool, sampled traces, verifier, rejection-sampling results, and training data manifest. Second, the reasoning data flywheel can be validated first using rule-based rewards and supervised recirculation, without entering full RL from the outset. Third, as long as the target task can construct an automatic verifier, this structure can be transferred to SQL generation, code repair, structured extraction, tool calls, or an enterprise-internal question bank.
@@ -103,8 +100,7 @@ This project's architecture can be decomposed into six components: cold-start da
 Figure P12-1 illustrates the corresponding workflow or structure.
 
 ![Figure P12-1: The closed-loop structure from cold-start data extraction, multi-path reasoning sampling, verifier pool, and rejection sampling to second-round SFT merging and training evaluation](../../images/part14/p12/Wang-Project12-Fig01.svg)
-*Figure P12-1: The closed-loop structure from cold-start data extraction, multi-path reasoning sampling, verifier pool, and rejection sampling to second-round SFT merging and training evaluation.*
-
+*Figure P12-1: The closed-loop structure from cold-start data extraction, multi-path reasoning sampling, verifier pool, and rejection sampling to second-round SFT merging and training evaluation*
 The first component is **cold-start data extraction**. The corresponding script is `cold_start_data.py`. It extracts samples suitable for SFT from existing data sources and normalizes them into the `messages` format. Math samples are organized with `Reasoning:` and `Final Answer:` sections; code samples are organized with `Reasoning:` and a fenced Python code block. The purpose of cold-start data is not to directly train the highest-performance model, but to give the model a basic reasoning output structure, language style, and parseable format.
 
 The second component is **multi-path reasoning sampling**. The corresponding script is `sample_traces.py`. It generates multiple candidate reasoning traces for the same prompt and records `prompt_id`, `sample_idx`, `raw_trace`, `parsed_answer`, and `generation_params`. The project supports three backends simultaneously: mock, local vLLM Python API, and an external OpenAI-compatible API. In a production environment, the inference service and data processing scripts can be deployed separately to reduce conflicts among CUDA, torch, and vLLM dependencies.
@@ -121,8 +117,7 @@ The main artifacts are as follows:
 
 Table P12-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table P12-2: Stage and Description Reference Table.*
-
+*Table P12-2: Stage and Description Reference Table*
 | Stage | Default Artifact | Description |
 | --- | --- | --- |
 | Cold-start extraction | `data/processed/cold_start_5k.jsonl` | First-round SFT samples |
@@ -149,8 +144,7 @@ conda env create -f environment.yml
 conda activate p12-r1-flywheel
 ```
 
-*Listing P12-3: Command-line run example.*
-
+*Listing P12-3: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Before formal sampling, run the tests first to confirm that the mock pipeline and base modules are intact:
@@ -160,8 +154,7 @@ Listing P12-4 provides a command-line run example illustrating the input/output 
 pytest -q
 ```
 
-*Listing P12-4: Command-line run example.*
-
+*Listing P12-4: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The current `tests/test_pipeline.py` covers cold-start extraction, math/code/format verifiers, mock sampling, rejection sampling, SFT merging, mock LoRA training, and mock evaluation. A passing test only indicates that the engineering skeleton is intact; it does not mean that real vLLM sampling or large-scale training has been completed. However, if the tests do not pass, one should not proceed directly to long-running tasks.
@@ -183,8 +176,7 @@ python cold_start_data.py \
   --max-code 100
 ```
 
-*Listing P12-5: Command-line run example.*
-
+*Listing P12-5: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The default output files are:
@@ -195,8 +187,7 @@ data/processed/cold_start_5k.jsonl
 data/processed/cold_start_summary.json
 ```
 
-*Listing P12-6: Process or path example.*
-
+*Listing P12-6: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Each cold-start sample contains `record_id`, `source_dataset`, `domain`, `prompt`, `reference_reasoning`, `reference_answer`, and `messages`. The `messages` field is what training actually consumes; its structure is approximately as follows:
@@ -218,8 +209,7 @@ record = {
 }
 ```
 
-*Listing P12-7: Python implementation excerpt.*
-
+*Listing P12-7: Python implementation excerpt*
 This excerpt translates the above process into an inspectable, structured representation.
 
 For coding tasks, the `assistant` content becomes:
@@ -235,9 +225,7 @@ def solve(...):
 ```
 ````
 
-*Listing P12-8: Code-task assistant-response format example.*
-
-
+*Listing P12-8: Code-task assistant-response format example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 There is an easily overlooked detail here. The `canonical_solution` in `HumanEval` often contains only the function body; if used directly for training, the model may learn incomplete code fragments. The project implements `render_humaneval_solution(...)` in `pipeline_utils.py`, which concatenates the function signature from the prompt with the `canonical_solution` to form a complete function definition, making `reference_answer` more suitable for training and verification.
@@ -261,8 +249,7 @@ python sample_traces.py \
   --force-mock
 ```
 
-*Listing P12-9: Command-line run example.*
-
+*Listing P12-9: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The mock backend is not used for evaluating real model capability; it is used only to check whether the data pipeline can continue flowing downstream. For real sampling, the vLLM service can be started and called via the OpenAI-compatible API:
@@ -272,8 +259,7 @@ Listing P12-10 provides a command-line run example illustrating the input/output
 bash scripts/serve_qwen_vllm.sh
 ```
 
-*Listing P12-10: Command-line run example.*
-
+*Listing P12-10: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Then run the sampling script:
@@ -289,8 +275,7 @@ python sample_traces.py \
   --parallel-prompts 4
 ```
 
-*Listing P12-11: Command-line run example.*
-
+*Listing P12-11: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The core fields of a sampling record are as follows:
@@ -314,8 +299,7 @@ sample = {
 }
 ```
 
-*Listing P12-12: Python implementation excerpt.*
-
+*Listing P12-12: Python implementation excerpt*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The most important aspect of the sampling stage is retaining the complete `raw_trace` rather than keeping only the final answer. The complete trace has three downstream uses: first, it is passed to the verifier to determine correctness; second, high-quality candidates are recirculated for training; third, it serves as an error analysis sample to help identify whether the model failed due to format errors, answer errors, or reasoning-path errors.
@@ -351,8 +335,7 @@ verdict = {
 }
 ```
 
-*Listing P12-13: Python implementation excerpt.*
-
+*Listing P12-13: Python implementation excerpt*
 This excerpt translates the above process into an inspectable, structured representation.
 
 This structure is more valuable than a single score. If the rejection-sampling pass rate drops suddenly later on, the `verification_reason` field allows one to diagnose whether the problem originates from format drift, answer parsing, code execution, or the task itself being too difficult. For a data flywheel, interpretable failure reasons are just as important as successful samples.
@@ -372,8 +355,7 @@ python rejection_sampling.py \
   --min-reward 0.8
 ```
 
-*Listing P12-14: Command-line run example.*
-
+*Listing P12-14: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The filtering priority is:
@@ -389,8 +371,7 @@ Listing P12-15 provides a process or path example illustrating the input/output 
 data/processed/rejection_selected_10k_30k.jsonl
 ```
 
-*Listing P12-15: Process or path example.*
-
+*Listing P12-15: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Meanwhile, the verification results for each prompt are written to:
@@ -400,8 +381,7 @@ Listing P12-16 provides a process or path example illustrating the input/output 
 data/verified_candidates/*.jsonl
 ```
 
-*Listing P12-16: Process or path example.*
-
+*Listing P12-16: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The output samples from rejection sampling are reorganized into SFT format:
@@ -423,8 +403,7 @@ selected = {
 }
 ```
 
-*Listing P12-17: Python implementation excerpt.*
-
+*Listing P12-17: Python implementation excerpt*
 This excerpt translates the above process into an inspectable, structured representation.
 
 One misconception must be avoided here: rejection sampling is not simply "deleting all failed samples." The current training data uses only successful traces, but failed traces are still saved in `verified_candidates`. They can be used to analyze the model's common errors, fix verifier bugs, build a hard-case pool, or train a reward model in subsequent stages.
@@ -442,8 +421,7 @@ Listing P12-18 provides a command-line run example illustrating the input/output
 python merge_sft_data.py
 ```
 
-*Listing P12-18: Command-line run example.*
-
+*Listing P12-18: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Default output:
@@ -454,8 +432,7 @@ data/training/merged_sft_data.jsonl
 data/training/training_manifest.json
 ```
 
-*Listing P12-19: Process or path example.*
-
+*Listing P12-19: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 During merging, deduplication is performed on prompt and assistant content, and the source distribution is recorded. Cold-start data and recirculated data should retain different `source_stage` values in training, because the two serve different roles. Cold-start samples primarily provide a stable format and baseline reasoning style, while recirculated samples come from model sampling and verifier filtering, representing successful traces already explored by the current policy.
@@ -471,8 +448,7 @@ python train_lora.py \
   --epochs 2
 ```
 
-*Listing P12-20: Command-line run example.*
-
+*Listing P12-20: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 The evaluation command is:
@@ -487,8 +463,7 @@ python eval_gsm8k_math.py \
   --backend openai
 ```
 
-*Listing P12-21: Command-line run example.*
-
+*Listing P12-21: Command-line run example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 Evaluation results are written by default to:
@@ -498,8 +473,7 @@ Listing P12-22 provides a process or path example illustrating the input/output 
 data/reports/eval_results_gsm8k_math.json
 ```
 
-*Listing P12-22: Process or path example.*
-
+*Listing P12-22: Process or path example*
 This excerpt translates the above process into an inspectable, structured representation.
 
 It should be emphasized that LoRA and the evaluation script in this project are primarily used to validate the data closed loop, not to guarantee stable metric gains from a single training run. Final gains depend heavily on sample scale, sampling quality, verifier strictness, training data proportions, learning rate, and evaluation set isolation. Engineering closed-loop validation and model performance improvement are two related but non-equivalent outcomes.
@@ -512,8 +486,7 @@ The final output of this project is not a single score table but a set of review
 
 Table P12-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table P12-3: Artifact and Checkpoint Reference Table.*
-
+*Table P12-3: Artifact and Checkpoint Reference Table*
 | Artifact | Checkpoint |
 | --- | --- |
 | `cold_start_5k.jsonl` | Fields are complete; `messages` can be used directly for SFT |
@@ -531,8 +504,7 @@ In terms of cost, the primary expenses come from multi-path sampling and trainin
 
 Table P12-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table P12-4: Resource Bottleneck and Fallback Strategy Reference Table.*
-
+*Table P12-4: Resource Bottleneck and Fallback Strategy Reference Table*
 | Resource Bottleneck | Fallback Strategy |
 | --- | --- |
 | Insufficient VRAM | Reduce `max_model_len`, `max_num_seqs`, or concurrent prompts |
@@ -548,7 +520,7 @@ This chapter presented the Pedagogical R1 Reasoning Data Flywheel as a closed-lo
 
 The focus is a pedagogical, small-scale reasoning data engineering pipeline. It does not cover a complete reinforcement learning platform, large-scale online training, or full DeepSeek-R1 reproduction. Larger-scale, higher-risk, or stricter compliance settings require reassessment of data sources, permission status, manual review rates, operating costs, and rollback plans.
 
-As part of Part 14, this chapter corresponds to the project-level validation of the methods presented in earlier parts. Readers can use this case alongside the data recipes of Part 13, the platform governance chapters in the earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
+As part of Part XIV, this chapter corresponds to the project-level validation of the methods presented in earlier parts. Readers can use this case alongside the data recipes of Part XIII, the platform governance chapters in the earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 
 ## References
 

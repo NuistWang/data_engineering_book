@@ -1,4 +1,4 @@
-# Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation
+# Chapter 39: Image-Text Data Engineering
 
 <div class="chapter-authors">Guanlin Mu; Xuhong Cao</div>
 
@@ -6,7 +6,7 @@
 
 The largest difference between image-text foundation corpora and pure-text corpora is not simply the addition of image files, but that each sample is split into multiple channels that must all hold at the same time. The text channel must explain how the image is described; the visual channel must explain whether the image can be downloaded and whether its size and content are usable; the alignment channel must explain whether image and text are related; and the risk channel must explain whether there are watermark, NSFW, toxicity, privacy, or authorization risks. If any one channel fails, the image-text pair may be unsuitable for training.
 
-LAION-5B is a large-scale image-text candidate pool derived from Common Crawl. It parses IMG tags and alt text from Web WAT metadata, then uses language identification, image downloading, CLIP or multilingual CLIP similarity filtering, watermark and NSFW detection, nearest-neighbor indexing, and Parquet metadata release to organize open Web image-text pairs into a searchable, filterable, and reviewable data asset. This chapter decomposes LAION-5B into five channels - text, visual, alignment, risk, and release - and then discusses how candidate pools are filtered into training views, evaluation views, and governance views. DataComp is not the main dataset of this chapter; it serves as an evaluation-protocol reference showing how to compare different image-text filtering strategies under fixed models and fixed downstream evaluations.
+LAION-5B is a large-scale image-text candidate pool derived from Common Crawl. It parses IMG tags and alt text from Web WAT metadata, then uses language identification, image downloading, Contrastive Language-Image Pretraining (CLIP) or multilingual CLIP similarity filtering, watermark and NSFW detection, nearest-neighbor indexing, and Parquet metadata release to organize open Web image-text pairs into a searchable, filterable, and reviewable data asset. This chapter decomposes LAION-5B into five channels - text, visual, alignment, risk, and release - and then discusses how candidate pools are filtered into training views, evaluation views, and governance views. DataComp is not the main dataset of this chapter; it serves as an evaluation-protocol reference showing how to compare different image-text filtering strategies under fixed models and fixed downstream evaluations.
 
 ## Keywords
 
@@ -56,8 +56,7 @@ The LAION-5B paper reports 5.85B CLIP-filtered image-text pairs, including appro
 
 Table 39-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 39-1: Public Subset Structure of LAION-5B.*
-
+*Table 39-1: Public Subset Structure of LAION-5B*
 | Subset | Scale | Text-language Form | Engineering Meaning | Typical Use |
 | --- | ---: | --- | --- | --- |
 | LAION-2B-en | 2.32B | English | Higher language-identification confidence, filtered with English CLIP | English CLIP, image-text retrieval, English T2I data candidates |
@@ -79,12 +78,10 @@ Figure 39-1 illustrates the corresponding workflow or structure.
 
 ![Figure 39-1 Multi-channel schema for LAION-5B image-text candidate records](../../images/part12/Mu-Chap39-Fig01-EN.svg)
 
-*Figure 39-1: Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec.*
-
+*Figure 39-1: Multi-channel schema for LAION-5B image-text candidate records. Source: original illustration based on the LAION-5B paper and LAION dataset-spec*
 Table 39-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 39-2: Image-text Candidate Record Schema.*
-
+*Table 39-2: Image-text Candidate Record Schema*
 | Channel | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Text channel | `text`, `language`, `text_length`, `text_hash` | Alt text, language identification, hash | Text filtering, language bucketing, contamination detection |
@@ -119,9 +116,7 @@ Listing 39-1 provides a JSON data example.
 }
 ```
 
-*Listing 39-1: JSON data example.*
-
-
+*Listing 39-1: JSON data example*
 Channelized modeling locates failure sources. If generated text does not match the image, the issue usually lies in the alignment channel. If many samples cannot be downloaded during training, the issue lies in the visual channel or release view. If the model outputs watermark-like textures, the issue may lie in the risk channel. If evaluation contamination is hard to check, the issue lies in text hashes, image hashes, and version manifests.
 
 ## 39.4 From Common Crawl to Candidate Records
@@ -130,8 +125,7 @@ LAION-5B construction can be divided into six stages: extract candidates from Co
 
 Table 39-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 39-3: LAION-5B Construction Flow.*
-
+*Table 39-3: LAION-5B Construction Flow*
 | Stage | Input | Processing Action | Output | Corresponding Channel |
 | ---: | --- | --- | --- | --- |
 | 1 | Common Crawl WAT metadata | Parse HTML IMG tags and retain image candidates with alt text | `<url, text>` candidate pairs | Text channel, visual channel |
@@ -187,9 +181,7 @@ def build_image_text_candidates(wat_records, clip_model, lang_detector, threshol
             }
 ```
 
-*Listing 39-2: Python implementation excerpt.*
-
-
+*Listing 39-2: Python implementation excerpt*
 This flow decomposes sample retention into a set of auditable filtering gates. Each gate should enter configuration and manifests rather than remaining only as a script parameter.
 
 Common image-text data distribution formats in the LAION ecosystem include Parquet metadata and WebDataset shards. Parquet is suitable for storing URLs, text, scores, and labels. WebDataset places images, captions, and JSON metadata into tar shards, making sequential reading by training programs convenient. A shard of 10k samples can contain file combinations such as `0.jpg`, `0.txt`, and `0.json`, where the JSON records URL, original dimensions, safety labels, and other fields.
@@ -216,12 +208,10 @@ Figure 39-2 illustrates the corresponding workflow or structure.
 
 ![Figure 39-2 Image-text candidate-pool quality evaluation and closed-loop repair](../../images/part12/Mu-Chap39-Fig02-EN.svg)
 
-*Figure 39-2: Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design.*
-
+*Figure 39-2: Image-text candidate-pool quality evaluation and closed-loop repair. Source: original illustration based on the LAION-5B paper and DataComp benchmark design*
 Table 39-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 39-4: Quality-evaluation Metrics for Image-text Candidate Pools.*
-
+*Table 39-4: Quality-evaluation Metrics for Image-text Candidate Pools*
 | Channel | Core Question | Automatic Metrics | Human-review Focus | Handling of Failed Samples |
 | --- | --- | --- | --- | --- |
 | Text channel | Is the caption usable? | Language confidence, length, template hits, repetition rate | Whether it is advertising, filename, or SEO text | Text-rule filtering, source downweighting |
@@ -246,8 +236,7 @@ This formula shifts the question from "do samples look clean" to "under the same
 
 Risks in image-text data are easier for the public to perceive and harder to fully automate. Images may contain faces, children, license plates, home environments, medical images, identity documents, trademarks, artworks, and watermarks. Even if the caption does not contain PII, the image itself may leak privacy. A public URL does not mean authorization is clear; a high CLIP score does not mean the content is safe; and a low NSFW score does not mean risk is zero.
 
-*Table 39-5: Risk-control Checklist for LAION-5B-like Image-text Data.*
-
+*Table 39-5: Risk-control Checklist for LAION-5B-like Image-text Data*
 | Risk Type | Trigger Scenario | Control Measures | Audit Evidence |
 | --- | --- | --- | --- |
 | URL decay | Images cannot be downloaded or content changes when rerun | Preserve hash, download time, failure logs, and snapshot strategy | Download manifest |

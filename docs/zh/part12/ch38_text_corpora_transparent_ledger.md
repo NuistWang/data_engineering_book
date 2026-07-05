@@ -1,4 +1,4 @@
-# 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本
+# 第38章：文本语料数据工程
 
 <div class="chapter-authors">穆冠霖（Guanlin Mu）；曹旭宏（Xuhong Cao）</div>
 
@@ -71,8 +71,7 @@ FineWeb 的公开形态包括完整数据集、按 Common Crawl dump 切分的�
 
 表38-1汇总了相应的对比和工程要点。
 
-*表38-1：FineWeb 公开数据形态和工程用途。*
-
+*表38-1：FineWeb 公开数据形态和工程用途*
 | 形态 | 公开口径 | 工程用途 | 使用注意 |
 | --- | ---: | --- | --- |
 | FineWeb full dataset | 论文初版报告 15T tokens，官方数据卡持续列出后续 dump | 大规模英文 Web 预训练、数据消融、过滤策略研究 | 数据持续更新，引用规模时要说明数据卡访问时间和口径 |
@@ -117,8 +116,7 @@ FineWeb 官方数据卡说明，样本会带有 `language`、`language_score` �
 
 表38-2汇总了相应的对比和工程要点。
 
-*表38-2：FineWeb 类 Web 文档记录 schema。*
-
+*表38-2：FineWeb 类 Web 文档记录 schema*
 | 字段组 | 典型字段 | 来源或生成方式 | 工程用途 |
 | --- | --- | --- | --- |
 | 来源字段 | `url`、`dump`、`warc_record_id`、`fetch_time` | WARC 元数据和读取器补充 | 追溯原始网页、定位 crawl、响应撤回 |
@@ -168,9 +166,7 @@ FineWeb 官方数据卡说明，样本会带有 `language`、`language_score` �
 }
 ```
 
-*代码清单38-1：JSON 数据示例。*
-
-
+*代码清单38-1：JSON 数据示例*
 这个例子展示了 FineWeb 类语料的基本思想：`text` 是训练入口，但它不能单独解释样本质量。真正支撑复查的是来源、语言分数、过滤状态、去重范围和隐私处理记录。
 
 #### 案例A.3.2 schema 与训练评估的关系
@@ -199,8 +195,7 @@ FineWeb 的一个重要特点是处理过程有公开脚本。DataTrove 仓库�
 
 表38-3汇总了相应的对比和工程要点。
 
-*表38-3：FineWeb 主处理流水线中的关键模块。*
-
+*表38-3：FineWeb 主处理流水线中的关键模块*
 | 顺序 | DataTrove 模块 | 输入 | 输出 | 作用 |
 | ---: | --- | --- | --- | --- |
 | 1 | `WarcReader` | Common Crawl WARC segments | 原始 HTML 文档流 | 从 `s3://commoncrawl/crawl-data/.../warc/` 读取网页快照 |
@@ -233,9 +228,7 @@ pipeline = [
 ]
 ```
 
-*代码清单38-2：Python 实现片段。*
-
-
+*代码清单38-2：Python 实现片段*
 这段是概念化伪代码，用于说明 FineWeb 示例脚本中的模块顺序；真实参数、日志目录、S3 路径、任务数和 Slurm 资源配置以 DataTrove 仓库脚本为准。
 
 #### 案例A.4.2 去重和隐私处理流水线
@@ -252,8 +245,7 @@ MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去�
 
 ![图38-1 FineWeb MinHash 去重和 PII 处理流程](../../images/part12/Mu-Chap38-Fig01-ZH.svg)
 
-*图38-1：FineWeb MinHash 去重和 PII 处理流程。Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and FineWeb dataset card.*
-
+*图38-1：FineWeb MinHash 去重和 PII 处理流程。Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and FineWeb dataset card*
 #### 案例A.4.3 FineWeb 按 crawl 独立去重的判断
 
 直觉上，全局去重似乎更彻底：把 96 个 crawl 放在一起，删除所有近似重复文档。FineWeb 的消融实验却给了相反信号。论文描述了一个关键现象：从最新 crawl 开始向旧 crawl 做全局去重时，旧 crawl 会被大量删除；在某个旧 snapshot 中，保留下来的 10% 数据反而比被删除的 90% 更差，包含更多广告、关键词列表和格式异常文本。最终，FineWeb 选择对每个 crawl 独立 MinHash 去重。
@@ -264,8 +256,7 @@ MinHash 用多个哈希函数近似这个相似度。FineWeb 论文说明其去�
 
 ![图38-2 FineWeb 数据处理选择的消融评估回路](../../images/part12/Mu-Chap38-Fig02-ZH.svg)
 
-*图38-2：FineWeb 数据处理选择的消融评估回路。Source: original illustration based on FineWeb paper Section 3.1.*
-
+*图38-2：FineWeb 数据处理选择的消融评估回路。Source: original illustration based on FineWeb paper Section 3.1*
 ### 案例A.5：FineWeb 的数据处理选择评估
 
 FineWeb 的评估方法与一般数据集介绍不同。它把数据处理步骤当成实验变量，通过训练 ablation models 比较不同数据版本。论文说明，数据消融模型在模型参数、架构超参数、训练 token 数和训练步数上保持一致；为了降低随机抽样影响，每个数据版本训练两个模型，使用不同随机子集和不同初始化种子，然后比较平均分。
@@ -274,8 +265,7 @@ FineWeb 的评估方法与一般数据集介绍不同。它把数据处理步骤
 
 FineWeb 的评估协议可以抽象为表38-4。
 
-*表38-4：FineWeb 数据消融评估协议。*
-
+*表38-4：FineWeb 数据消融评估协议*
 | 控制项 | FineWeb 论文做法 | 数据工程意义 |
 | --- | --- | --- |
 | 模型规模 | ablation 模型为 1.82B 参数，Llama 架构 | 避免模型规模变化掩盖数据差异 |
@@ -310,8 +300,7 @@ FineWeb 的经验可以转化为一张 Web 预训练语料错误归因表。它�
 
 表38-5汇总了相应的对比和工程要点。
 
-*表38-5：FineWeb 类 Web 语料常见失败与修复动作。*
-
+*表38-5：FineWeb 类 Web 语料常见失败与修复动作*
 | 错误类型 | 现象 | 可能根因 | 数据工程修复动作 |
 | --- | --- | --- | --- |
 | 页面模板残留 | 模型复读菜单、页脚、cookie 文案 | 直接使用 WET 或正文抽取质量差 | 回到 WARC，用 Trafilatura 或同类工具重新抽取，并抽样检查模板残留 |
@@ -391,8 +380,7 @@ Dolma 不是单一静态文件，而是带版本演进的语料资产。Hugging 
 
 表38-6汇总了相应的对比和工程要点。
 
-*表38-6：Dolma 公开版本和用途。*
-
+*表38-6：Dolma 公开版本和用途*
 | 版本 | 发布时间 | 压缩体积 | 数据卡说明 | 工程用途 |
 | --- | --- | ---: | --- | --- |
 | `v1` | 2023-08-18 | 6.0 TB | Dolma 第一版 | 追溯最早公开语料形态 |
@@ -408,8 +396,7 @@ Dolma 不是单一静态文件，而是带版本演进的语料资产。Hugging 
 
 Dolma 的来源覆盖 Web、代码、论文、社交媒体、书籍和百科。为了避免不同版本混淆，表38-7 使用数据卡中 v1.6 summary statistics 的大类统计。v1.7 的来源更加细分，新增 Refined Web、StarCoder、arXiv、StackExchange、Flan、OpenWebMath、Algebraic Stack、MegaWika 等 source；后续写作或实验应明确使用哪个版本。
 
-*表38-7：Dolma v1.6 来源统计。*
-
+*表38-7：Dolma v1.6 来源统计*
 | 来源 | 文档类型 | UTF-8 bytes | 文档数 | Unicode words | Llama tokens |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Common Crawl | web pages | 9,022 GB | 3,370M | 1,775B | 2,281B |
@@ -475,8 +462,7 @@ Dolma v1.7 数据卡中同时列出 source token 数和 sample proportion，正�
 
 表38-8汇总了相应的对比和工程要点。
 
-*表38-8：Dolma 类透明语料记录 schema。*
-
+*表38-8：Dolma 类透明语料记录 schema*
 | 层级 | 典型字段 | 来源或生成方式 | 工程用途 |
 | --- | --- | --- | --- |
 | 文档级 | `id`、`source`、`text`、`text_hash` | 数据读取和哈希计算 | 定位样本、去重、训练读取 |
@@ -518,9 +504,7 @@ Dolma v1.7 数据卡中同时列出 source token 数和 sample proportion，正�
 }
 ```
 
-*代码清单38-3：JSON 数据示例。*
-
-
+*代码清单38-3：JSON 数据示例*
 这条记录不能只看单层字段。放到 Dolma 中，文档层、source 层和训练层必须能相互指回。若文档有 `source` 但没有 source card，只能定位样本，不能解释来源；若 source card 有统计但没有训练 manifest，只能说明数据集里有什么，不能说明模型实际看了什么；若 manifest 有采样比例但没有文档 hash，撤回和污染检查就会断链。
 
 ### 案例B.4：Dolma Toolkit 让证据链可执行
@@ -533,8 +517,7 @@ Dolma Toolkit 文档把数据整理概括为四个动作：tag、dedup、mix、t
 
 表38-9汇总了相应的对比和工程要点。
 
-*表38-9：Dolma Toolkit 处理动作与证据输出。*
-
+*表38-9：Dolma Toolkit 处理动作与证据输出*
 | 顺序 | 动作 | 官方文档说明 | 证据输出 | 主要风险 |
 | ---: | --- | --- | --- | --- |
 | 1 | Taggers | 给文档 span 打语言、毒性、perplexity 等属性标签 | 文档质量标签和风险标签 | tagger 版本变化会改变过滤结果 |
@@ -548,8 +531,7 @@ Dolma Toolkit 文档把数据整理概括为四个动作：tag、dedup、mix、t
 
 ![图38-3 Dolma 透明语料证据链](../../images/part12/Mu-Chap38-Fig03-ZH.svg)
 
-*图38-3：Dolma 透明语料证据链。Source: original illustration based on AllenAI Dolma Toolkit documentation.*
-
+*图38-3：Dolma 透明语料证据链。Source: original illustration based on AllenAI Dolma Toolkit documentation*
 这里要注意工具链和人工审计的边界。工具链能稳定地产生统计、标签、hash 和 manifest，但它不能替代所有审计。许可边界、PII removal、评测污染和 source 代表性仍需要人工规则、抽样复核或专门的检测任务介入。
 
 这也是 Dolma 类透明语料和普通“清洗脚本集合”的区别。普通脚本只回答“我删掉了什么”，透明工具链还要回答“为什么删、删后分布怎么变、训练是否真的受益、后续能否撤回”。如果某个处理动作不能留下可解释证据，它就很难支撑透明训练。
@@ -572,14 +554,12 @@ $$
 
 ![图38-4 Dolma source mix 与训练诊断回路](../../images/part12/Mu-Chap38-Fig04-ZH.svg)
 
-*图38-4：Dolma source mix 与训练诊断回路。Source: original illustration based on Dolma dataset card and OLMo training use.*
-
+*图38-4：Dolma source mix 与训练诊断回路。Source: original illustration based on Dolma dataset card and OLMo training use*
 #### 案例B.5.2 诊断清单
 
 表38-10汇总了相应的对比和工程要点。
 
-*表38-10：Dolma 类透明语料评估和诊断表。*
-
+*表38-10：Dolma 类透明语料评估和诊断表*
 | 评估问题 | 所需记录 | 指标或证据 | 可能动作 |
 | --- | --- | --- | --- |
 | 某类能力来自哪个 source | source mix、sample proportion、seen tokens | source ablation、任务得分差 $\Delta_s$ | 调整 source 权重或补充数据 |
@@ -592,8 +572,7 @@ $$
 
 表38-11汇总了相应的对比和工程要点。
 
-*表38-11：Dolma 类透明语料常见失败与修复动作。*
-
+*表38-11：Dolma 类透明语料常见失败与修复动作*
 | 失败模式 | 表现 | 可能根因 | 治理方式 |
 | --- | --- | --- | --- |
 | source mix 漂移 | 新版本某类任务突然退化 | sample proportion 或过滤规则变化 | 比较 manifest diff，回滚或分层重采样 |

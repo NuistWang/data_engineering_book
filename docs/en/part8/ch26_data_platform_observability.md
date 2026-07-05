@@ -5,9 +5,9 @@
 ---
 
 ## Abstract
-"Scheduled successfully" and "data is healthy" are two entirely different things. SRE practice emphasizes that system health cannot be measured solely by whether processes are running, but by whether services continuously meet user-perceptible reliability objectives (Beyer et al. 2016). Jobs on a data platform may run with all-green status while the quality of training data has quietly deteriorated — until the algorithm team notices anomalous model performance, the data team begins investigating, and discovers that problems have been accumulating for weeks.
+"Scheduled successfully" and "data is healthy" are two entirely different things. System health cannot be measured solely by whether processes are running; it must also account for whether services and data continuously meet user-perceptible reliability objectives. Jobs on a data platform may run with all-green status while the quality of training data has quietly deteriorated, until the algorithm team notices anomalous model performance, the data team begins investigating, and discovers that problems have been accumulating for weeks.
 
-This chapter is addressed to engineering teams responsible for platform stability, job monitoring, and quality alerting. It systematically describes how to establish an observability framework for an LLM data platform. Observability typically requires combining metrics, logs, traces, and contextual information to explain *why* a system is in its current state, rather than merely reporting that state (Sigelman et al. 2010; OpenTelemetry Authors 2024). The chapter proceeds along four lines: first, it analyzes why job success does not equal data health and identifies failure modes unique to LLM data platforms; second, it establishes a layered metric hierarchy that integrates task metrics, quality metrics, and business metrics into a unified observability framework; third, it covers alert strategy design, anomaly attribution workflows, and incident response mechanisms; and finally, it discusses capacity forecasting, cost alerting, and operational dashboard design.
+This chapter is addressed to engineering teams responsible for platform stability, job monitoring, and quality alerting. It systematically describes how to establish an observability framework for an LLM data platform. The chapter proceeds along four lines: first, it analyzes why job success does not equal data health and identifies failure modes unique to LLM data platforms; second, it establishes a layered metric hierarchy that integrates task metrics, quality metrics, and business metrics into a unified observability framework; third, it covers alert strategy design, anomaly attribution workflows, and incident response mechanisms; and finally, it discusses capacity forecasting, cost alerting, and operational dashboard design.
 
 Upon completing this chapter, readers will have a complete observability design for a data platform: a tiered monitoring-metrics reference table, an alert-severity-to-remediation-action table, a ready-to-reuse incident post-mortem template, and a full post-mortem walkthrough of a real platform incident.
 
@@ -35,6 +35,8 @@ The findings are alarming. Three weeks earlier, a dependency library in the data
 
 This case reveals the central thesis of data platform observability: **"whether a job ran successfully" cannot substitute for "whether the data is healthy."** Silent errors and data-dependency issues in production machine learning systems regularly bypass traditional infrastructure monitoring and ultimately manifest as model quality degradation (Sculley et al. 2015; Polyzotis et al. 2017). These are problems at different layers, and they require monitoring systems at different layers.
 
+SRE practice emphasizes that system health cannot be measured solely by whether processes are running, but by whether services continuously meet user-perceptible reliability objectives (Beyer et al. 2016). Observability therefore requires combining metrics, logs, traces, and contextual information to explain *why* a system is in its current state rather than merely reporting that state (Sigelman et al. 2010; OpenTelemetry Authors 2024).
+
 ---
 
 ## 26.1 Why Job Success Does Not Equal Data Health
@@ -51,8 +53,7 @@ Understanding the distinction between these three layers is a prerequisite for b
 
 Table 26-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-1: Three-Layer Definitions of Success and Typical Blind Spots.*
-
+*Table 26-1: Three-Layer Definitions of Success and Typical Blind Spots*
 | Layer | What Is Inspected | Typical Tools | Common Blind Spots |
 |-------|-------------------|---------------|--------------------|
 | Schedule success | Whether the task was started | Airflow/Dagster status | Task starts but immediately exits with an error |
@@ -153,8 +154,7 @@ Business metrics assess the overall health of data assets from a business-value 
 
 Table 26-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-2: Tiered Monitoring Metrics.*
-
+*Table 26-2: Tiered Monitoring Metrics*
 | Metric Layer | Typical Metrics | Update Frequency | Primary Audience |
 |--------------|-----------------|------------------|------------------|
 | Task metrics | Success rate, duration, throughput | Real-time / minute-level | Platform engineers, SRE |
@@ -189,8 +189,7 @@ The four core observability tools — Logs, Traces, Audit Logs, and Lineage — 
 
 Table 26-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-3: Characteristics of Typical Observability Information.*
-
+*Table 26-3: Characteristics of Typical Observability Information*
 | Tool | Records | Timeliness | Primary Use |
 |------|---------|------------|-------------|
 | Logs | Processing-event details | Real-time | Fault investigation, filter-reason analysis |
@@ -245,9 +244,7 @@ dataset_slo:
   on_violation: page_on_call
 ```
 
-*Listing 26-1: YAML configuration example.*
-
-
+*Listing 26-1: YAML configuration example*
 This SLO-driven data asset monitoring enables data quality issues to be discovered before training rather than being traced back after model performance has declined. A dataset SLO should not contain only metrics, thresholds, and alert channels; it should also include operational closure fields: `owner` identifies the ultimate responsible party; `steward` identifies the day-to-day maintainer; `runbook_url` points to the troubleshooting guide; `severity` determines the alert tier; `escalation_policy` defines the escalation path; `dataset_version` binds the currently controlled version; and `contract_id` links to the data contract or data product interface. Without these fields, an SLO can detect problems but cannot ensure they are correctly handed off, escalated, and resolved.
 
 Dataset SLO design must be tailored to usage context. An SLO for a general pre-training corpus might emphasize language distribution, deduplication rate, toxic content ratio, and source diversity. An SLO for a customer service SFT dataset might emphasize business category coverage, annotation consistency, historical process retention, and sensitive information desensitization. An SLO for an evaluation set might emphasize contamination prevention, question stability, and version freeze. Applying the same set of metrics to every dataset creates the appearance of uniformity while failing to cover the critical risks specific to each.
@@ -290,8 +287,7 @@ Alert systems also require ongoing review. Each week or month, teams can track m
 
 Table 26-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-4: Alert Tiers and Corresponding Remediation Actions.*
-
+*Table 26-4: Alert Tiers and Corresponding Remediation Actions*
 | Tier | Name | Example Trigger Conditions | Response Time | Notification Method | Remediation Action |
 |------|------|---------------------------|---------------|---------------------|--------------------|
 | P0 | Critical | Core pipeline fully down; training set accidentally deleted; large-scale compliance violation discovered | Within 15 minutes | Phone + SMS + instant message | Immediately page on-call engineer; initiate incident response procedure |
@@ -347,8 +343,7 @@ Figure 26-1 illustrates the corresponding workflow or structure.
 
 ![Figure 26-1: Anomaly Attribution Decision Tree](../../images/part8/Du-Chap26-Fig01-EN.svg)
 
-*Figure 26-1: LLM Data Platform Anomaly Attribution Decision Tree — Four-Level Diagnostic Path from Alert Trigger to Root-Cause Identification.*
-
+*Figure 26-1: LLM Data Platform Anomaly Attribution Decision Tree — Four-Level Diagnostic Path from Alert Trigger to Root-Cause Identification*
 ### 26.3.4 Tiered Incident Response and Runbooks
 
 A data incident is defined as a situation in which data quality or platform state has deteriorated severely enough to affect the availability or reliability of training data. Incident response should not focus only on rapid repair; it should also document the timeline, impact scope, root cause, and preventive actions to form an organizational learning loop (Beyer et al. 2016; Nygard 2018). The following is a standardized incident response procedure:
@@ -428,8 +423,7 @@ The main cost categories of an LLM data platform are four. The cost of a cloud-b
 
 Table 26-5 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-5: Cost Driver and Optimization Direction Design.*
-
+*Table 26-5: Cost Driver and Optimization Direction Design*
 | Cost Category | Primary Cost Drivers | Optimization Direction |
 |---------------|----------------------|------------------------|
 | Compute cost | CPU/GPU usage for data processing, format conversion, and quality assessment | Batch consolidation, off-peak scheduling, algorithmic optimization to reduce compute density |
@@ -501,8 +495,7 @@ Figure 26-2 illustrates the corresponding workflow or structure.
 
 ![Figure 26-2: Data Platform Observability Panorama](../../images/part8/Du-Chap26-Fig02-EN.svg)
 
-*Figure 26-2: LLM Data Platform Observability Panorama — Architecture of the Three-Layer Metric Hierarchy and the Three-Dimensional Operational Dashboard.*
-
+*Figure 26-2: LLM Data Platform Observability Panorama — Architecture of the Three-Layer Metric Hierarchy and the Three-Dimensional Operational Dashboard*
 ---
 
 ## 26.5 Case Study: Post-Mortem of a Platform Incident
@@ -523,8 +516,7 @@ The incident also exhibited clear latency. The code change occurred on May 15; t
 
 Table 26-6 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-6: Case Timeline.*
-
+*Table 26-6: Case Timeline*
 | Time | Event |
 |------|-------|
 | May 15, 09:00 | Data engineer Zhang made a "minor optimization" to the crawler filter rules: the keyword list in the filter rule was changed from an external JSON file to hardcoded values, with the goal of reducing configuration file dependencies |
@@ -593,8 +585,7 @@ The following is a standardized incident post-mortem template applicable to all 
 
 Table 26-7 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-7: Incident Post-Mortem Report.*
-
+*Table 26-7: Incident Post-Mortem Report*
 | Field | Content |
 |-------|---------|
 | Incident ID | INC-2024-0521-001 |
@@ -622,8 +613,7 @@ Through the remediation of this incident, the team improved the following monito
 
 Table 26-8 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-8: Metric Improvements.*
-
+*Table 26-8: Metric Improvements*
 | Improvement Item | Before | After |
 |-----------------|--------|-------|
 | Detection latency for category coverage anomalies | ~6 days (in this incident, sufficient cumulative deviation was needed before the alert fired) | Target < 6 hours (target detection time after adding trend alerting) |
@@ -640,8 +630,7 @@ Observability construction should also follow a risk-first principle. Not every 
 
 Table 26-9 summarizes the corresponding comparison and engineering considerations.
 
-*Table 26-9: Data Platform Observability Build Stages and Acceptance Questions.*
-
+*Table 26-9: Data Platform Observability Build Stages and Acceptance Questions*
 | Build Stage | Primary Objective | Key Capabilities | Acceptance Question |
 |-------------|-------------------|------------------|---------------------|
 | Foundation | Make platform problems visible | Task status, basic logs, quality summary, version records | Can you determine when the core dataset is produced and whether it passes basic quality checks? |

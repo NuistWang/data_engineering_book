@@ -1,8 +1,8 @@
-# Part 9: Data Assets, Data Products, and Data Contracts
+# Part IX: Data Assets, Data Products, and Data Contracts
 
 ## Part Overview
 
-Part 9 addresses data asset management, data products, value assessment, and enterprise-wide sharing governance, enabling the data pipelines described in preceding parts to be further consolidated into organizational-level assets that are discoverable, reusable, and auditable.
+Part IX addresses data asset management, data products, value assessment, and enterprise-wide sharing governance, enabling the data pipelines described in preceding parts to be further consolidated into organizational-level assets that are discoverable, reusable, and auditable.
 
 ## Terminology Conventions
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand data operations and platform construction from Part 8. Readers from enterprise data governance or platform teams may focus on asset objects, service boundaries, authorization mechanisms, and reuse costs, rather than only on catalog pages or data lists.
+Before reading this part, readers should understand data operations and platform construction from Part VIII. Readers from enterprise data governance or platform teams may focus on asset objects, service boundaries, authorization mechanisms, and reuse costs, rather than only on catalog pages or data lists.
 
 ## Chapter Logic
 

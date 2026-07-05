@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter discusses the critical steps for transforming raw corpora into training-ready text pretraining data, covering rule-based filtering, model quality scoring, text normalization, exact deduplication, fuzzy deduplication, semantic deduplication, PII redaction, and benchmark decontamination. The chapter begins by explaining how repetition, low information density, privacy leakage, and evaluation contamination are amplified during training, then presents a cleaning framework that combines rules, models, and manual spot-checks. The deduplication section extends from SHA-256 exact matching to MinHash LSH and embedding similarity, emphasizing the dual risks of under- and over-deduplication. The privacy and decontamination sections address the detection of structured PII, named entities, and secrets such as API keys, as well as N-gram fingerprint isolation of evaluation sets. Finally, the chapter illustrates practical deployment paths for cleaning pipelines through anonymized composite case studies and three-tier team configurations. Readers should be able to design text cleaning schemes with traceability, spot-check capability, and iterative refinement, tailored to their data scale, team resources, and target model capabilities.
+This chapter discusses the critical steps for transforming raw corpora into training-ready text pretraining data, covering rule-based filtering, model quality scoring, text normalization, exact deduplication, fuzzy deduplication, semantic deduplication, personally identifiable information (PII) redaction, and benchmark decontamination. The chapter begins by explaining how repetition, low information density, privacy leakage, and evaluation contamination are amplified during training, then presents a cleaning framework that combines rules, models, and manual spot-checks. The deduplication section extends from SHA-256 exact matching to MinHash LSH and embedding similarity, emphasizing the dual risks of under- and over-deduplication. The privacy and decontamination sections address the detection of structured PII, named entities, and secrets such as API keys, as well as N-gram fingerprint isolation of evaluation sets. Finally, the chapter illustrates practical deployment paths for cleaning pipelines through anonymized composite case studies and three-tier team configurations. Readers should be able to design text cleaning schemes with traceability, spot-check capability, and iterative refinement, tailored to their data scale, team resources, and target model capabilities.
 
 ## Keywords
 
@@ -56,8 +56,7 @@ Figure 5-1 illustrates the corresponding workflow or structure.
 
 ![Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline](../../images/part2/Yu-Chap05-Fig01.svg)
 
-*Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline — A multi-stage quality gate gradually refines raw corpus into candidate training corpus. The proportions in the figure are illustrative only; real retention rates depend on source quality, filtering thresholds, and compliance requirements. Source: original illustration from this book.*
-
+*Figure 5-1: Overview Flowchart of the Cleaning and Decontamination Pipeline — A multi-stage quality gate gradually refines raw corpus into candidate training corpus. The proportions in the figure are illustrative only; real retention rates depend on source quality, filtering thresholds, and compliance requirements. Source: original illustration from this book*
 ### 5.2.1 The First Gate: Rule-Based Filtering
 
 Rule-Based Filtering is the first line of defense in the cleaning pipeline and the most cost-effective stage. Based on a set of quantifiable heuristic rules, it rapidly eliminates obviously low-quality documents without running any model. The filtering proportion depends on source quality and cannot be reused across projects.
@@ -105,8 +104,7 @@ class HeuristicQualityFilter:
         return True, 'pass'
 ```
 
-*Listing 5-1: Example code for multi-rule heuristic quality filtering. Thresholds are demonstration configurations; production environments should calibrate them by language, source, and manual spot-check results.*
-
+*Listing 5-1: Example code for multi-rule heuristic quality filtering. Thresholds are demonstration configurations; production environments should calibrate them by language, source, and manual spot-check results*
 ### 5.2.2 The Second Gate: Model-Based Quality Scoring
 
 Rule-based filtering can quickly eliminate "obviously" low-quality content, but it is generally powerless against a passage that is grammatically correct and well-formatted yet is essentially meaningless keyword stuffing or SEO filler text. This is where **Model-Based Filtering** is needed — using trained scoring models to make finer-grained judgments about the linguistic quality of documents.
@@ -172,8 +170,7 @@ def normalize_text(text: str, to_simplified: bool = False) -> str:
     return text.strip()
 ```
 
-*Listing 5-2: Sample Code for Text Normalization.*
-
+*Listing 5-2: Sample Code for Text Normalization*
 Although text normalization has an inconspicuous effect on individual documents, at the scale of a TB-level corpus it effectively reduces vocabulary fragmentation in the tokenizer, decreases the diversity of token representations for semantically equivalent content in the training set, and allows the model to focus its attention on genuine semantic learning rather than formatting differences. This is a step in the cleaning pipeline with extremely low cost and consistently stable returns; it is recommended as a standard step in projects of any scale.
 
 ---
@@ -269,8 +266,7 @@ class MinHashLSH:
         return duplicates
 ```
 
-*Listing 5-3: Example code for MinHash LSH fuzzy deduplication. This snippet illustrates the algorithm structure; production environments should persist bucket structures, candidate pairs, and review results to distributed storage.*
-
+*Listing 5-3: Example code for MinHash LSH fuzzy deduplication. This snippet illustrates the algorithm structure; production environments should persist bucket structures, candidate pairs, and review results to distributed storage*
 ### 5.3.4 Semantic Deduplication: Embedding Similarity Beyond Literal Matching
 
 Both exact hash deduplication and N-gram-based MinHash LSH are fundamentally capturing the "literal features" of text. But if the same news story is rewritten by two media outlets using entirely different vocabulary (synonym substitution, sentence restructuring), with very low literal overlap, traditional LSH will fail entirely. To address this, **Semantic Deduplication** introduces embedding models.
@@ -326,8 +322,7 @@ def detect_and_redact_pii(text: str) -> tuple[str, list]:
     return text, found
 ```
 
-*Listing 5-4: Sample Code for Structured PII Detection and Redaction.*
-
+*Listing 5-4: Sample Code for Structured PII Detection and Redaction*
 **Named Entity Recognition (NER) models** cover PII types that are difficult to enumerate with rules, such as real personal names, addresses, and organization names. It is recommended to use spaCy (Honnibal et al. 2023) with its Chinese model (`zh_core_web_trf`) or open-source Chinese NER models available on HuggingFace to identify named entities such as persons (PER), locations (LOC), and organizations (ORG), then determine based on context whether redaction is necessary.
 
 ---
@@ -370,8 +365,7 @@ def contamination_score(doc: str, eval_ngrams: set[str], n=13) -> float:
     return hits / len(doc_ngrams)
 ```
 
-*Listing 5-5: Sample Code for Evaluation Set N-gram Fingerprints and Contamination Rate Computation.*
-
+*Listing 5-5: Sample Code for Evaluation Set N-gram Fingerprints and Contamination Rate Computation*
 Decontamination work should be systematically completed before the formal training set is established, not patched incrementally during training. Because the scope of evaluation sets expands over time as new benchmarks continually emerge, engineering teams need to periodically update the fingerprint database and re-scan.
 
 ---
@@ -407,8 +401,7 @@ class DocumentQualityScore:
         return "low"
 ```
 
-*Listing 5-6: Sample Code for a Multi-Dimensional Document Quality Score Object.*
-
+*Listing 5-6: Sample Code for a Multi-Dimensional Document Quality Score Object*
 Stratified sampling strategy: High-tier data is given a 2x sampling weight during training, Medium-tier 1x, and Low-tier 0.3x (rather than discarding entirely, preserving diversity).
 
 ### 5.6.2 Manual Spot-Check Feedback Loop
@@ -419,8 +412,7 @@ Figure 5-2 illustrates the corresponding workflow or structure.
 
 ![Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop](../../images/part2/Yu-Chap05-Fig02.svg)
 
-*Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop — The funnel on the left shows the data retention rate at each stage; the feedback loop on the right shows how manual spot-checks drive continuous iterative optimization of filtering rules. Source: original illustration.*
-
+*Figure 5-2: Quality Filtering Funnel and Spot-Check Feedback Loop — The funnel on the left shows the data retention rate at each stage; the feedback loop on the right shows how manual spot-checks drive continuous iterative optimization of filtering rules. Source: original illustration*
 After each cleaning batch is completed, the following "quality snapshot" procedure is executed on a fixed schedule: randomly sample a batch of records for manual annotation by data engineers (OK / noise / missed PII / erroneously discarded high-quality content / near-duplicate slippage), tally the occurrence rate of each error type, and trace which filtering step caused the error (false positive or false negative). When the error rate for any category exceeds the project waterline for multiple consecutive batches, a review and update of the corresponding rule or model threshold must be triggered. This mechanism transforms the cleaning pipeline from a "one-time engineering artifact" into a "continuously iterating quality engine."
 
 ---
@@ -429,8 +421,7 @@ After each cleaning batch is completed, the following "quality snapshot" procedu
 
 Table 5-1 summarizes common corpus defects, detection methods, missed-detection costs, and recommended thresholds or tools.
 
-*Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors; detection cost is a relative description of engineering complexity, and actual cost depends on data scale, model calls, and infrastructure configuration.*
-
+*Table 5-1: Common defects, detection methods, and cost matrix. Source: compiled by the authors; detection cost is a relative description of engineering complexity, and actual cost depends on data scale, model calls, and infrastructure configuration*
 | Defect Type | Typical Manifestation | Detection Method | Cost of Miss | Recommended Threshold/Tool |
 | :--- | :--- | :--- | :--- | :--- |
 | **HTML/noise residue** | Tags such as `<div>`, CSS, and JS code mixed into body text | Special-character ratio percentiles; regex rules | Model outputs garbled text/tags | Calibrate the project waterline on manually confirmed samples |
@@ -442,8 +433,7 @@ Table 5-1 summarizes common corpus defects, detection methods, missed-detection 
 | **Benchmark contamination** | Test set questions mixed into training set | 13-gram comparison against evaluation sets | Inflated benchmark scores; integrity risk | Isolate high-overlap samples and review manually |
 | **Low lexical diversity** | Extremely low Type-Token Ratio (boilerplate text) | TTR distribution anomaly | Model vocabulary use becomes rigid | Set TTR baselines by language and content type |
 
-*Table 5-2: Impact comparison of cleaning actions on training outcomes. Source: compiled by the authors; impact directions are engineering-experience summaries, and specific gains must be validated through same-configuration training or proxy-model experiments.*
-
+*Table 5-2: Impact comparison of cleaning actions on training outcomes. Source: compiled by the authors; impact directions are engineering-experience summaries, and specific gains must be validated through same-configuration training or proxy-model experiments*
 | Cleaning Action | Typical Model Symptoms When Skipped | Risk-Mitigation Direction When Fully Applied | Cost/Timeline |
 | :--- | :--- | :--- | :--- |
 | Language filtering | Model mixes languages; Chinese responses interspersed with English | Improved language consistency | CPU, hours |
@@ -498,8 +488,7 @@ The lightweight solution focuses on "holding the baseline," filtering out the mo
 
 Table 5-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 5-3: Minimum viable combination for the lightweight cleaning solution. Source: compiled by the authors; the combination is a starting recommendation, and production environments should extend it according to risk level, corpus source, and compliance requirements.*
-
+*Table 5-3: Minimum viable combination for the lightweight cleaning solution. Source: compiled by the authors; the combination is a starting recommendation, and production environments should extend it according to risk level, corpus source, and compliance requirements*
 | Step | Implementation | Tools | Required? |
 |:--- |:--- |:--- |:--- |
 | Language filtering | FastText identification, confidence threshold calibrated by language | fasttext | Required |

@@ -84,9 +84,6 @@ function classifyFile(file) {
   } else if (base === "ethics_approval.md") {
     unit = "伦理审批";
     order = 3005;
-  } else if (base === "front_matter_guide.md") {
-    unit = "卷前导读";
-    order = 3006;
   } else if (base === "index.md") {
     unit = "全书总目录";
     order = 3007;

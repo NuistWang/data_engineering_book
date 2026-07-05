@@ -4,7 +4,7 @@
 
 ## Abstract
 
-As the closing chapter of Part 3, this chapter discusses how to build cross-modal alignment and fusion training samples after image, text, audio, and video have each gone through single-modality cleaning. It first explains why independent cleaning does not automatically create cross-modal reasoning ability: without semantic, spatial, or temporal binding, a model may still learn false correspondences. The chapter then establishes a three-level alignment framework across object-level, segment-level, and document-level data, covering BBox-word anchoring, audio-video timeline synchronization, and long-document interleaved ordering. The engineering section introduces placeholder design, feature-path decoupling, multimodal sample mixing, and hard-negative mining. It then defines quality metrics such as cross-modal recall, temporal continuity, hallucination rate, and entailment conflict. Finally, anonymized composite cases illustrate risks from object misalignment, segment misalignment, and semantic mismatch before the book transitions to Part 4 on instruction alignment and preference data systems.
+As the closing chapter of Part III, this chapter discusses how to build cross-modal alignment and fusion training samples after image, text, audio, and video have each gone through single-modality cleaning. It first explains why independent cleaning does not automatically create cross-modal reasoning ability: without semantic, spatial, or temporal binding, a model may still learn false correspondences. The chapter then establishes a three-level alignment framework across object-level, segment-level, and document-level data, covering bounding-box (BBox)-word anchoring, audio-video timeline synchronization, and long-document interleaved ordering. The engineering section introduces placeholder design, feature-path decoupling, multimodal sample mixing, and hard-negative mining. It then defines quality metrics such as cross-modal recall, temporal continuity, hallucination rate, and entailment conflict. Finally, anonymized composite cases illustrate risks from object misalignment, segment misalignment, and semantic mismatch before the book transitions to Part IV on instruction alignment and preference data systems.
 
 ## Keywords
 
@@ -22,7 +22,7 @@ After single-modality cleaning in Chapters 8 and 9 for image-text data and Chapt
 
 However, mechanically stacking cleaned images, waveforms, and text tokens into a model context window does not make the model learn **cross-modal reasoning**. Missing correspondences between modalities make training signals interfere with one another and can trigger cross-modal hallucination.
 
-As the closing chapter of **Part 3: High-Quality Multimodal Data Engineering**, this chapter focuses on the core problem of multimodal data engineering: how to create **cross-modal fusion and alignment supervision samples** so that encoders from different modalities can form effective correspondences in the same semantic space.
+As the closing chapter of **Part III: High-Quality Multimodal Data Engineering**, this chapter focuses on the core problem of multimodal data engineering: how to create **cross-modal fusion and alignment supervision samples** so that encoders from different modalities can form effective correspondences in the same semantic space.
 
 ## 11.1 Problem Scenario: Alignment Failure and Physical Meaning
 
@@ -32,7 +32,7 @@ The following is an anonymized composite case. Cost, cycle, and symptoms are use
 
 ### 11.1.2 The Modality Gap and Heterogeneous Spaces
 
-"Alignment" has broad meanings in AI. In Part 4, it will refer more to human preferences and value alignment. In this chapter's low-level data preparation, alignment means solving the **heterogeneity gap** between modalities.
+"Alignment" has broad meanings in AI. In Part IV, it will refer more to human preferences and value alignment. In this chapter's low-level data preparation, alignment means solving the **heterogeneity gap** between modalities.
 
 Text in embedding space is a highly abstract vector representing semantics. An image pixel matrix encoded by a vision encoder often represents a collection of edges, colors, and texture features. A waveform maps to high- and low-frequency amplitude space.
 
@@ -71,8 +71,7 @@ Figure 11-1 illustrates the corresponding workflow or structure.
 
 ![Figure 11-1: Three-level cross-modal alignment pyramid](../../images/part3/Wang-Chap11-Fig01.svg)
 
-*Figure 11-1: Three-level cross-modal alignment pyramid. From micro to macro, the bottom is object-level alignment based on BBox, the middle is segment-level alignment based on DTW temporal synchronization, and the top is document-level alignment based on long-context interleaved ordering. Source: drawn for this book.*
-
+*Figure 11-1: Three-level cross-modal alignment pyramid. From micro to macro, the bottom is object-level alignment based on BBox, the middle is segment-level alignment based on DTW temporal synchronization, and the top is document-level alignment based on long-context interleaved ordering. Source: drawn for this book*
 #### 1. Object-level / micro-alignment: anchoring boxes to words
 
 Object-level alignment is the foundation for building visual-vocabulary mapping in a multimodal base model. The key is precise geometric coordinate mapping. If a cat appears in an image, a bounding box such as `[x1:100, y1:200, x2:350, y2:450]` should mark the region, and the corresponding text JSON should include `<box> cat </box>`.
@@ -93,8 +92,7 @@ Here the object is no longer an isolated segment, but a manual, paper, research 
 
 Table 11-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-1: Three heterogeneous alignment strategies, cost characteristics, and applicable tasks. Source: compiled by the authors; cost characteristics are relative descriptions, and actual solutions should be evaluated according to modality type, sequence length, and annotation budget.*
-
+*Table 11-1: Three heterogeneous alignment strategies, cost characteristics, and applicable tasks. Source: compiled by the authors; cost characteristics are relative descriptions, and actual solutions should be evaluated according to modality type, sequence length, and annotation budget*
 | Alignment granularity | Main method and feature expression | Data construction cost | Typical tasks |
 | :--- | :--- | :--- | :--- |
 | **Object-level** | Human or model-assisted BBox labeling with region-word coordinate mapping. | High; depends on fine-grained annotation, review, and local visual reasoning. | Region grounding, medical-image localization, industrial defect detection. |
@@ -121,16 +119,14 @@ In synthetic training streams, JSON samples usually do not directly store massiv
 }
 ```
 
-*Listing 11-1: Multimodal fusion sample JSON record schema example. Fields are illustrative; production environments should add source, license, modality validation, placeholder version, and review status.*
-
+*Listing 11-1: Multimodal fusion sample JSON record schema example. Fields are illustrative; production environments should add source, license, modality validation, placeholder version, and review status*
 This JSONL schema is a foundation for fusion training data. It decouples text and visual pipelines: data engineers maintain metadata and placeholder logic in JSON, while the deep-learning framework's DataLoader reads the dense tensor from `visual_features_path` only at the final step and injects it into the computation graph.
 
 Figure 11-2 illustrates the corresponding workflow or structure.
 
 ![Figure 11-2: Multimodal fusion and hard-negative mining pipeline](../../images/part3/Wang-Chap11-Fig02.svg)
 
-*Figure 11-2: Multimodal fusion sample design. Independent image, audio, and text pools are assembled into JSONL in the middle. Placeholder grids map them into discrete tokens, and the final result is packed into uniform fusion tensor blocks for downstream pretraining. Source: drawn for this book.*
-
+*Figure 11-2: Multimodal fusion sample design. Independent image, audio, and text pools are assembled into JSONL in the middle. Placeholder grids map them into discrete tokens, and the final result is packed into uniform fusion tensor blocks for downstream pretraining. Source: drawn for this book*
 ### 11.3.2 Multimodal Data Mixing: Controlling Capability Forgetting
 
 If training data is dominated by a single modality or task type for too long, the model may degrade on other capabilities. For example, overemphasizing image-text alignment while lacking high-quality pure-text and complex instruction data may weaken language reasoning, code, and mathematical ability. This can be viewed as capability forgetting risk in cross-modal training. Data mixing is therefore a key engineering decision.
@@ -156,8 +152,7 @@ In contrastive alignment (Dufumier et al. 2025 (ICLR) argue that effective multi
 
 Table 11-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-2: Comparison of five hard-negative mining strategies. Source: compiled by the authors; strategy effects should be validated jointly through manual review, training stability, and downstream cross-modal evaluations.*
-
+*Table 11-2: Comparison of five hard-negative mining strategies. Source: compiled by the authors; strategy effects should be validated jointly through manual review, training stability, and downstream cross-modal evaluations*
 | Strategy | Generation method | Granularity | Main advantage | Main risk |
 | :--- | :--- | :--- | :--- | :--- |
 | Subtle replacement | Dictionary or attribute replacement | Word/attribute | Precise control of replacement position | Requires fine-grained dictionaries |
@@ -174,8 +169,7 @@ Cross-modal fusion data is expensive to build and should not enter training with
 
 Cross-modal evaluation must look beyond single-modality quality and measure whether mappings between modalities are stable. Table 11-3 lists common metrics and governance actions.
 
-*Table 11-3: Core evaluation metrics, error sources, and governance-action mapping. Source: compiled by the authors; metric interpretation and governance actions should be calibrated according to model architecture, task type, and data version.*
-
+*Table 11-3: Core evaluation metrics, error sources, and governance-action mapping. Source: compiled by the authors; metric interpretation and governance actions should be calibrated according to model architecture, task type, and data version*
 | Metric | Physical meaning and business mapping | Risk threshold and error source | Governance action |
 | :--- | :--- | :--- | :--- |
 | **Cross-modal recall (R@1 / R@5)** | Given an image or video, retrieve the corresponding text description. | A significant drop usually indicates systematic mismatch in object coordinates or dictionary mapping. | Pause the problematic batch; resample-check BBox, captions, and assembly links. |
@@ -219,11 +213,11 @@ Before sending a multimodal dataset to the training cluster, review the followin
 - [ ] **Format sentinel integrity**: are placeholders such as `<IMG_TK>` in JSONL accidentally HTML-escaped? Does every segment contain `<|image_start|>`?
 - [ ] **Data-mix safety net**: does the training package retain high-quality pure-text, code, or mathematical corpora to monitor and mitigate cross-modal forgetting?
 
-### 11.5.5 Part 3 Summary and Bridge to Part 4
+### 11.5.5 Part III Summary and Bridge to Part IV
 
-Part 3 began with image cleaning, image-text semantic filtering, and recaptioning; then it discussed OCR and document structuring, audio-video slicing and temporal alignment; finally, this chapter consolidated the material into a three-level cross-modal alignment framework across object, segment, and document levels. Multimodal data engineering has now moved from "are samples clean" to "is there verifiable supervision between modalities."
+Part III began with image cleaning, image-text semantic filtering, and recaptioning; then it discussed OCR and document structuring, audio-video slicing and temporal alignment; finally, this chapter consolidated the material into a three-level cross-modal alignment framework across object, segment, and document levels. Multimodal data engineering has now moved from "are samples clean" to "is there verifiable supervision between modalities."
 
-Perception is only the first step. A pretrained model still needs explicit instruction guidance, preference feedback, and value alignment before it can serve real user tasks. This is the focus of **Part 4: Alignment and Instruction Data**, from SFT data design in Chapter 12 to RLAIF, PPO, and end-to-end human-feedback systems.
+Perception is only the first step. A pretrained model still needs explicit instruction guidance, preference feedback, and value alignment before it can serve real user tasks. This is the focus of **Part IV: Alignment and Instruction Data**, from SFT data design in Chapter 12 to RLAIF, PPO, and end-to-end human-feedback systems.
 
 ---
 
@@ -248,8 +242,7 @@ Loss scaled to NaN. Global step 14510 aborted.
 Cross-Modal Feature Match Score dropped from 0.89 to 0.00000000003.
 ```
 
-*Listing 11-2: Alignment loss divergence error log example. The log content is anonymized and is intended to illustrate troubleshooting patterns rather than reproduce a public incident.*
-
+*Listing 11-2: Alignment loss divergence error log example. The log content is anonymized and is intended to illustrate troubleshooting patterns rather than reproduce a public incident*
 **Root cause and fix**
 
 - **Root cause**: a tiny number of abnormal samples with squealing noise or all-black frames enter the batch, triggering zero-division polarization in cross-attention weights. Noisy negatives also interfere with contrastive loss.
@@ -271,8 +264,7 @@ IoU score: 0.00. Entire partition eval batch rejected.
 Suspected data augmentation mirror flip applied AFTER bbox annotation.
 ```
 
-*Listing 11-3: BBox coordinate flip error log example. The log content is anonymized; production environments should record coordinate-system conventions and conversion versions.*
-
+*Listing 11-3: BBox coordinate flip error log example. The log content is anonymized; production environments should record coordinate-system conventions and conversion versions*
 **Root cause and fix**
 
 - **Root cause**: random horizontal flip was applied after image transformation but BBox x coordinates were not updated. Correct transformation should replace `x1` with `W - x2` and `x2` with `W - x1`. Medical X-ray films may also have scanner-generated physical mirror output.
@@ -294,8 +286,7 @@ CLIP cross-modal similarity threshold set too aggressively: 0.92, too many true 
 Contrastive loss variance: 4.82 (expected < 0.8). Training instability detected.
 ```
 
-*Listing 11-4: Hard-negative contamination error log example. The log content is anonymized; negative-sample strategies should be calibrated through manual review and downstream evaluation.*
-
+*Listing 11-4: Hard-negative contamination error log example. The log content is anonymized; negative-sample strategies should be calibrated through manual review and downstream evaluation*
 **Root cause and fix**
 
 - **Root cause**: the hard-negative similarity threshold, 0.92, is too aggressive. Many true positive pairs are incorrectly classified as hard negatives, creating false-negative contamination.
@@ -316,8 +307,7 @@ MemoryError: Cannot allocate ndarray of shape (4500, 6200) dtype float32.
 Queue depth at crash: 14,382 pending segments. Estimated loss: 890h of aligned audio-visual data.
 ```
 
-*Listing 11-5: DTW memory overflow error log example. The log content is anonymized; window size and downsampling strategy should be set according to sequence length and memory budget.*
-
+*Listing 11-5: DTW memory overflow error log example. The log content is anonymized; window size and downsampling strategy should be set according to sequence length and memory budget*
 **Root cause and fix**
 
 - **Root cause**: standard DTW has O(N x M) time and space complexity. A matrix for 4500 frames by 6200 words reaches about 94 GB; input length was not capped.
@@ -338,8 +328,7 @@ JSONL sample malformed: missing <|image_start|> sentinel in sample_id: mm_004839
 Affected batch: 256 samples. Training step 28,441 aborted.
 ```
 
-*Listing 11-6: Placeholder parsing failure error log example. The log content is anonymized; production environments should freeze placeholder syntax and run pre-training parsing validation.*
-
+*Listing 11-6: Placeholder parsing failure error log example. The log content is anonymized; production environments should freeze placeholder syntax and run pre-training parsing validation*
 **Root cause and fix**
 
 - **Root cause**: the JSONL packing script HTML-escaped placeholders containing special characters such as `<`, `>`, and `|`, producing `&lt;` and similar strings that the tokenizer cannot recognize. Some samples also missed the `<|image_start|>` prefix.
@@ -349,8 +338,7 @@ Affected batch: 256 samples. Training step 28,441 aborted.
 
 Table 11-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 11-4: Frequent cross-modal alignment error types and remediation strategies. Source: compiled by the authors; error types and remediation strategies are anonymized engineering patterns.*
-
+*Table 11-4: Frequent cross-modal alignment error types and remediation strategies. Source: compiled by the authors; error types and remediation strategies are anonymized engineering patterns*
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |
 | ERR_CROSS_MDL_FUSION_7XXXX | Contrastive Loss NaN | Noise samples trigger attention zero-division | Feature norm clipping plus gradient clipping |
@@ -363,7 +351,7 @@ Table 11-4 summarizes the corresponding comparison and engineering consideration
 
 ## Chapter Summary
 
-As the closing chapter of Part 3, this chapter argued that cleaning each modality separately does not automatically create cross-modal reasoning ability: if images, text, and audio lack rigid semantic, spatial, or temporal bindings, contrastive learning reinforces false associations and triggers cross-modal hallucination. To address the heterogeneity gap, the chapter established a three-level alignment framework across object, segment, and document levels. Object-level alignment anchors BBox coordinates to words; segment-level alignment uses DTW/FastDTW to map unequal-length frames, waveforms, and text; document-level alignment interleaves image, text, and audio signals within long-context windows. In engineering implementation, placeholders and feature paths decouple representations, ablation studies determine multimodal mixing to suppress cross-modal forgetting, and five hard-negative mining methods expose their false-negative risks.
+As the closing chapter of Part III, this chapter argued that cleaning each modality separately does not automatically create cross-modal reasoning ability: if images, text, and audio lack rigid semantic, spatial, or temporal bindings, contrastive learning reinforces false associations and triggers cross-modal hallucination. To address the heterogeneity gap, the chapter established a three-level alignment framework across object, segment, and document levels. Object-level alignment anchors BBox coordinates to words; segment-level alignment uses DTW/FastDTW to map unequal-length frames, waveforms, and text; document-level alignment interleaves image, text, and audio signals within long-context windows. In engineering implementation, placeholders and feature paths decouple representations, ablation studies determine multimodal mixing to suppress cross-modal forgetting, and five hard-negative mining methods expose their false-negative risks.
 
 On the quality side, this chapter mapped cross-modal recall, temporal continuity, hallucination rate (CHAIR), and entailment conflict rate to governance actions. Through three postmortems, it showed how geometric augmentation, weakly consistent storage, and templated annotations can pollute alignment relationships through body-side mismatch, segment offset, and intersection semantic mismatch. At this point, multimodal data engineering has moved from "are the samples clean" to "do modalities have verifiable supervision relationships"; the next part turns to instruction-alignment data systems such as SFT, preference data, and human feedback.
 

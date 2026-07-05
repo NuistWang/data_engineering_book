@@ -1,8 +1,8 @@
-# Part 11: Privacy Compliance and Data Security
+# Part XI: Privacy Compliance and Data Security
 
 ## Overview
 
-Part 11 focuses on data compliance, privacy protection, federated learning, and security boundaries. It emphasizes placing regulatory requirements, risk controls, and auditability at the forefront of the data lifecycle within engineering workflows.
+Part XI focuses on data compliance, privacy protection, federated learning, and security boundaries. It emphasizes placing regulatory requirements, risk controls, and auditability at the forefront of the data lifecycle within engineering workflows.
 
 ## Terminology
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand the data lifecycle from Part 1, platform governance from Part 8, and agent security boundaries from Part 10. Readers from compliance or security teams may focus on how engineering actions produce evidence, rather than only adding declarations at the end of a project.
+Before reading this part, readers should understand the data lifecycle from Part I, platform governance from Part VIII, and agent security boundaries from Part X. Readers from compliance or security teams may focus on how engineering actions produce evidence, rather than only adding declarations at the end of a project.
 
 ## Chapter Logic
 

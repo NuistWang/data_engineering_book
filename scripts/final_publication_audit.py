@@ -106,7 +106,7 @@ def book_files() -> list[Path]:
         if "superpowers" in path.parts or path.name in {"translation-status.md", "index.md"}:
             continue
         name = path.name
-        if name == "front_matter_guide.md" or name.startswith("ch") or re.match(r"p\d+", name) or "appendix" in name:
+        if name.startswith("ch") or re.match(r"p\d+", name) or "appendix" in name:
             files.append(path)
     return files
 
@@ -383,7 +383,7 @@ def main() -> int:
     missing_reference_files = [
         rel(path)
         for path in files
-        if path.name != "front_matter_guide.md" and not extract_references(path)
+        if not extract_references(path)
     ]
     broken_figures = [row for row in figures if not row.exists]
 

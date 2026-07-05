@@ -298,9 +298,7 @@ Listing 14-1 provides an error-log example.
 }
 ```
 
-*Listing 14-1: JSON data example.*
-
-
+*Listing 14-1: JSON data example*
 For example, if a comparative annotation project retains only "A was selected," it is later difficult to know whether this was because A was more accurate or simply more fluent. If a review-style task retains only the revised text without preserving original-answer problem tags and revision rationales, it is impossible to analyze whether the team was primarily revising facts, structure, or tone. If a multi-turn task retains only a final holistic score without turn-level problem localization, subsequent training can only be very general. The leaner the submission structure, the harder it is for the organization to derive actionable insights from the data.
 
 Therefore, submission structure should serve not only the process node of "task completed" but also downstream QA, training, process optimization, and model iteration. It determines the depth of the organization's understanding of this data batch and determines whether the platform is a simple recorder or a data operation system that genuinely supports continuous improvement.
@@ -380,13 +378,10 @@ Figure 14-1 illustrates the corresponding workflow or structure.
 
 ![Figure 14-1: LLM Annotation Platform Workflow Diagram](../../images/part4/Zhang-Chap14-Fig01-EN.svg)
 
-*Figure 14-1: LLM Annotation Platform Workflow Diagram.*
-
-
+*Figure 14-1: LLM Annotation Platform Workflow Diagram*
 Table 14-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 14-1: Annotation Role Responsibilities and Permissions.*
-
+*Table 14-1: Annotation Role Responsibilities and Permissions*
 | Role | Core Responsibilities | Primary Permissions | Key Boundaries |
 |---|---|---|---|
 | Platform Administrator | Maintain the system, configure processes, manage templates and permissions | Create templates, configure workflows, manage accounts, view full audit logs | Does not directly participate in routine quality adjudication to avoid role conflicts |
@@ -458,9 +453,7 @@ if __name__ == "__main__":
     print("kappa =", round(cohen_kappa(r1, r2), 4))
 ```
 
-*Listing 14-2: Process flow example.*
-
-
+*Listing 14-2: Process flow example*
 ### 14.3.3 How to Use Golden Sets, Trap Questions, and Audit Samples
 
 In any large-scale annotation system, routine review is insufficient on its own. Once the process becomes familiar to participants, the team may exhibit mechanical responses, sycophantic answers, declining attention, or "only being careful about the parts most likely to be observed." To prevent the system from gradually distorting behind a surface appearance of stability, organizations need to actively plant special samples with calibration and audit functions into the process. The three most important types are golden sets, trap questions, and audit samples. Crowdsourcing annotation research commonly uses expert labels, redundant annotation, task design, and behavioral verification to improve or assess annotation quality, providing the methodological basis for the use of golden sets and trap questions (Snow et al. 2008; Sheng et al. 2008; Kittur et al. 2008).
@@ -488,9 +481,7 @@ Figure 14-2 illustrates the corresponding workflow or structure.
 
 ![Figure 14-2: Human–Machine Collaborative QA Loop Diagram](../../images/part4/Zhang-Chap14-Fig02-EN.svg)
 
-*Figure 14-2: Human–Machine Collaborative QA Loop Diagram.*
-
-
+*Figure 14-2: Human–Machine Collaborative QA Loop Diagram*
 ## 14.4 Operational Metrics and Vendor Governance
 
 ### 14.4.1 Four Core Operational Metric Categories: Productivity, Quality, Cycle Time, and Cost
@@ -543,9 +534,7 @@ SELECT
 FROM base;
 ```
 
-*Listing 14-3: SQL query example.*
-
-
+*Listing 14-3: SQL query example*
 ### 14.4.2 Outsourced Team Selection, Training, Assessment, and Replacement Mechanisms
 
 Once LLM data production scales up, organizations almost inevitably need to work with outsourced or vendor teams. Many projects that suddenly destabilize after expansion typically do not fail because the tasks themselves changed; the root cause is that organizations underestimate the complexity of vendor governance. Treating vendors as "more hands" is extremely dangerous, because they are in fact extensions of the quality system—the true execution-layer carriers of the platform, processes, and knowledge base.
@@ -596,8 +585,7 @@ Therefore, productivity governance and cost governance must be considered jointl
 
 Table 14-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 14-2: Operational Metrics and SLA Reference Table.*
-
+*Table 14-2: Operational Metrics and SLA Reference Table*
 | Metric Category | Metric Name | Definition | Typical Monitoring Frequency | Reference SLA Example | Typical Governance Action |
 |---|---|---|---|---|---|
 | Productivity | Effective output per person-hour | Ratio of samples passing QA to person-hours worked | Daily / Weekly | Establish baselines by task type and continuously calibrate | Optimize templates, adjust distribution, strengthen human–machine collaboration |

@@ -4,7 +4,7 @@
 
 ## Abstract
 
-As architectural innovations in Vision-Language Models (VLMs) converge, the sophistication of data recipes has become the primary dividing line between leading models and their followers. This chapter systematically deconstructs the data engineering practices of mainstream VLMs—including Qwen2.5-VL, InternVL3, LLaVA-OneVision, and MiniCPM-V—through the lens of "recipes." The discussion first establishes a three-stage pipeline covering pre-training, multi-task high-resolution alignment, and Supervised Fine-Tuning (SFT), explaining the order-of-magnitude differences in data scale, quality requirements, and freezing strategies at each stage. It then cross-compares these models' data composition ratios across image-text pairs, interleaved image-text documents, OCR-Rich data, visual grounding data, and video data, identifying key trends such as the primacy of re-captioning, safe thresholds for OCR data, and the evolution of video data from optional to mandatory. The chapter subsequently analyzes the data engineering divergence between the Dynamic Hi-Res Patching and Native Resolution camps with respect to token-length management and bucketing, as well as quality-improvement mechanisms combining CLIP-score filtering with strong-VLM re-annotation. The chapter emphasizes that transforming raw alt-text into executable visual supervision signals is the central challenge for reproducibility in modern VLM data recipes.
+As architectural innovations in vision-language models (VLMs) converge, the sophistication of data recipes has become the primary dividing line between leading models and their followers. This chapter systematically deconstructs the data engineering practices of mainstream VLMs—including Qwen2.5-VL, InternVL3, LLaVA-OneVision, and MiniCPM-V—through the lens of "recipes." The discussion first establishes a three-stage pipeline covering pre-training, multi-task high-resolution alignment, and supervised fine-tuning (SFT), explaining the order-of-magnitude differences in data scale, quality requirements, and freezing strategies at each stage. It then cross-compares these models' data composition ratios across image-text pairs, interleaved image-text documents, optical-character-recognition-rich (OCR-Rich) data, visual grounding data, and video data, identifying key trends such as the primacy of re-captioning, safe thresholds for optical character recognition (OCR) data, and the evolution of video data from optional to mandatory. The chapter subsequently analyzes the data engineering divergence between the Dynamic Hi-Res Patching and Native Resolution camps with respect to token-length management and bucketing, as well as quality-improvement mechanisms combining Contrastive Language-Image Pretraining (CLIP)-score filtering with strong-VLM re-annotation. The chapter emphasizes that transforming raw alt-text into executable visual supervision signals is the central challenge for reproducibility in modern VLM data recipes.
 
 ## Keywords
 
@@ -36,8 +36,7 @@ This case reveals the core proposition of current VLM engineering research and d
 
 ![Figure 47-1: Multimodal Data Engineering Panorama](../../images/part13/Cao-Chap47-Fig01.png)
 
-*Figure 47-1: Multimodal Data Engineering Panorama (adapted from Chapter 8 base figure).*
-
+*Figure 47-1: Multimodal Data Engineering Panorama (adapted from Chapter 8 base figure)*
 ---
 
 ## 47.1 The Three-Stage VLM Data Pipeline
@@ -46,8 +45,7 @@ A close reading of the technical reports for Qwen2.5-VL or InternVL3 reveals tha
 
 ![Figure 47-2: VLM Three-Stage Data Engineering Pipeline](../../images/part13/Cao-Chap47-Fig02-EN.svg)
 
-*Figure 47-2: VLM Three-Stage Data Pipeline.*
-
+*Figure 47-2: VLM Three-Stage Data Pipeline*
 **Stage 1: Pre-training (Feature Alignment)**
 
 The core objective of this stage is **coarse-grained alignment between visual concepts and text vocabulary**. Data scale is typically in the range of hundreds of millions to billions of image-text pairs, with primary sources including CLIP-filtered LAION subsets (Schuhmann et al. 2022), DataComp-1B (Gadre et al. 2023), COYO-700M, and re-captioned datasets that emerged over the past two years (e.g., ShareGPT4V-1.2M, LLaVA-Recap-558K).
@@ -74,8 +72,7 @@ As with pure-text foundation models, the data barriers between multimodal models
 
 *(Note: Annotation convention in the table: [D] = explicitly disclosed in report; [I] = inferred; [E] = estimated.)*
 
-*Table 47-1: Cross-Comparison of Mainstream VLM Data Compositions (4 rows × 8 columns).*
-
+*Table 47-1: Cross-Comparison of Mainstream VLM Data Compositions (4 rows × 8 columns)*
 | Model Family              | Pre-training Pair Scale | Pre-training Cleaning Strategy    | Interleaved Document Ratio | SFT Multimodal Instruction Volume | Video Data Scale              | OCR/Doc Specialization      | Hi-Res Resolution Support |
 | :------------------------ | :---------------------- | :-------------------------------- | :------------------------- | :-------------------------------- | :---------------------------- | :--------------------------- | :------------------------ |
 | **Qwen2.5-VL**      | ~2B+ Pairs [I]          | Proprietary image filtering + rewrite | Very high (~30%) [I]   | ~5M+ [E]                          | Very high, variable-length clips [D] | Strong, multilingual OCR | Native Resolution         |
@@ -115,8 +112,7 @@ Figure 47-3 illustrates the corresponding workflow or structure.
 
 ![Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison](../../images/part13/Cao-Chap47-Fig03-EN.svg)
 
-*Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison.*
-
+*Figure 47-3: Native vs. Dynamic Resolution Data Pipeline Comparison*
 **Camp 1: Dynamic Hi-Res Patching (AnyRes)**
 
 Represented by InternVL and LLaVA series models. During data input preprocessing, the system keeps the input resolution of the visual encoder (e.g., CLIP-ViT) fixed (e.g., 448×448). For a tall image of 1000×2000, the data engine dynamically crops it into multiple 448×448 patch sub-images without distorting the aspect ratio, while additionally generating a low-resolution global thumbnail.
@@ -131,8 +127,7 @@ This recipe preserves the most complete global and local information, entirely e
 
 Table 47-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 47-2: Native Resolution vs. Dynamic Hi-Res Data Processing Differences (2 rows × 6 columns).*
-
+*Table 47-2: Native Resolution vs. Dynamic Hi-Res Data Processing Differences (2 rows × 6 columns)*
 | Resolution Approach         | Representative Model | Image Data Preprocessing Action              | Visual Encoder Modification       | LLM-side Token Sequence Characteristics | Strengths and Weaknesses                                            |
 | :-------------------------- | :------------------- | :------------------------------------------- | :-------------------------------- | :-------------------------------------- | :------------------------------------------------------------------ |
 | **Native Res.**       | Qwen2.5-VL           | Retain original image, dynamically unfold by patch size | Remove fixed positional embedding | 2D absolute coordinate mapping (M-RoPE) | Highest precision, no boundary discontinuity / Very high engineering complexity, prone to memory fragmentation |
@@ -148,8 +143,7 @@ At the SFT stage, high-quality instruction data becomes the final piece that det
 
 ![Figure 47-4: Multimodal Instruction Synthesis Pipeline](../../images/part13/Cao-Chap47-Fig04-EN.svg)
 
-*Figure 47-4: Multimodal Instruction Synthesis Pipeline.*
-
+*Figure 47-4: Multimodal Instruction Synthesis Pipeline*
 As shown in Figure 47-4, multimodal instruction synthesis has long surpassed the simplistic approach of "having GPT-4V look at an image and compose a sentence." A modern data synthesis pipeline typically involves the coordination of the following components:
 
 1. **Foundational visual perception networks**: Use readily available specialized small models—such as Grounding DINO (Liu et al. 2023) to extract all object bounding boxes, PaddleOCR to extract dense text, and even depth estimation models to extract 3D depth information.
@@ -159,8 +153,7 @@ As shown in Figure 47-4, multimodal instruction synthesis has long surpassed the
 
 Table 47-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 47-3: Comparison of Multimodal Instruction Data Synthesis Methods (3 rows × 5 columns).*
-
+*Table 47-3: Comparison of Multimodal Instruction Data Synthesis Methods (3 rows × 5 columns)*
 | Synthesis Approach                        | Core Dependent Models                    | Typical Application Scenarios              | Cost Estimate                    | Noise and Hallucination Risk                                   |
 | :---------------------------------------- | :--------------------------------------- | :----------------------------------------- | :------------------------------- | :------------------------------------------------------------- |
 | **GPT-4V Distillation**             | External closed-source VLM API           | Complex logical reasoning, long summarization | Very high (API quota dependent) | Relatively low, but constrained by teacher model's inherent biases |
@@ -199,9 +192,7 @@ def recaption_batch(image_paths: list[str], model, processor) -> list[str]:
     return results
 ```
 
-*Listing 47-1: Process flow example.*
-
-
+*Listing 47-1: Process flow example*
 **Key Engineering Notes**:
 
 - `temperature=0.7` is a critical parameter for preventing caption mode collapse; values below 0.5 cause generated styles to become homogeneous.

@@ -125,9 +125,8 @@ def prepare_items(items: list[NavItem]) -> list[NavItem]:
         "acknowledgments.md": 4,
         "competing_interests.md": 5,
         "ethics_approval.md": 6,
-        "front_matter_guide.md": 7,
-        "contributors.md": 8,
-        "abbreviations.md": 9,
+        "contributors.md": 7,
+        "abbreviations.md": 8,
     }
     kept = [item for item in items if item.path not in excluded and not re.search(r"part\d+/index\.md$", item.path)]
     front = [item for item in kept if item.path in front_order]

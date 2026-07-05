@@ -1,4 +1,4 @@
-# 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估
+# 第39章：图文数据工程
 
 <div class="chapter-authors">穆冠霖（Guanlin Mu）；曹旭宏（Xuhong Cao）</div>
 
@@ -6,7 +6,7 @@
 
 图文基础语料和纯文本语料最大的差异，不在于多了图片文件，而在于样本被拆成了多个必须同时成立的通道。文本通道要说明图片被怎样描述，视觉通道要说明图片是否能下载、尺寸和内容是否可用，对齐通道要说明图文是否相关，风险通道要说明是否含有水印、NSFW、毒性、隐私或授权风险。任何一个通道失效，图文对都可能不适合训练。
 
-LAION-5B 是由 Common Crawl 衍生的大规模图文候选池。它从网页 WAT 元数据中解析 IMG 标签和 alt text，通过语言识别、图片下载、CLIP 或多语言 CLIP 相似度过滤、水印与 NSFW 检测、近邻索引和 Parquet 元数据发布，将开放网页图文对组织成可查询、可筛选、可复查的数据资产。本章把 LAION-5B 拆成文本、视觉、对齐、风险和发布五条通道，再讨论候选池如何被筛选成训练视图、评测视图和治理视图。DataComp 不作为本章主线数据集，而作为评估协议参照，用来说明如何在固定模型和固定下游评测中比较不同图文筛选策略。
+LAION-5B 是由 Common Crawl 衍生的大规模图文候选池。它从网页 WAT 元数据中解析 IMG 标签和 alt text，通过语言识别、图片下载、对比式图文预训练（Contrastive Language-Image Pretraining，CLIP）或多语言 CLIP 相似度过滤、水印与 NSFW 检测、近邻索引和 Parquet 元数据发布，将开放网页图文对组织成可查询、可筛选、可复查的数据资产。本章把 LAION-5B 拆成文本、视觉、对齐、风险和发布五条通道，再讨论候选池如何被筛选成训练视图、评测视图和治理视图。DataComp 不作为本章主线数据集，而作为评估协议参照，用来说明如何在固定模型和固定下游评测中比较不同图文筛选策略。
 
 ## 关键词
 
@@ -56,8 +56,7 @@ LAION-5B 论文报告它包含 5.85B 个 CLIP 过滤后的图文对，其中英�
 
 表39-1汇总了相应的对比和工程要点。
 
-*表39-1：LAION-5B 的公开子集结构。*
-
+*表39-1：LAION-5B 的公开子集结构*
 | 子集 | 规模 | 文本语言形态 | 工程含义 | 典型用途 |
 | --- | ---: | --- | --- | --- |
 | LAION-2B-en | 2.32B | 英文 | 语言识别置信度较高，使用英文 CLIP 过滤 | 英文 CLIP、图文检索、英文 T2I 数据候选 |
@@ -79,12 +78,10 @@ LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是�
 
 ![图39-1 LAION-5B 图文候选记录的多通道 schema](../../images/part12/Mu-Chap39-Fig01-ZH.svg)
 
-*图39-1：LAION-5B 图文候选记录的多通道 schema。Source: original illustration based on LAION-5B paper and LAION dataset-spec.*
-
+*图39-1：LAION-5B 图文候选记录的多通道 schema。Source: original illustration based on LAION-5B paper and LAION dataset-spec*
 表39-2汇总了相应的对比和工程要点。
 
-*表39-2：图文候选记录 schema。*
-
+*表39-2：图文候选记录 schema*
 | 通道 | 典型字段 | 来源或生成方式 | 工程用途 |
 | --- | --- | --- | --- |
 | 文本通道 | `text`、`language`、`text_length`、`text_hash` | alt text、语言识别、哈希 | 文本过滤、语言分桶、污染检测 |
@@ -119,9 +116,7 @@ LAION-5B 的公开形态不是把所有图片文件集中托管起来，而是�
 }
 ```
 
-*代码清单39-1：JSON 数据示例。*
-
-
+*代码清单39-1：JSON 数据示例*
 分通道建模能够定位失败来源。若模型生成文本与图片不匹配，问题通常在对齐通道；若训练时大量样本无法下载，问题在视觉通道或发布视图；若模型输出带水印纹理，问题可能在风险通道；若评测污染难以排查，问题在文本 hash、image hash 和版本 manifest。
 
 ## 39.4 从 Common Crawl 到候选记录
@@ -130,8 +125,7 @@ LAION-5B 的构建可以拆成六个阶段：从 Common Crawl 中抽取候选，
 
 表39-3汇总了相应的对比和工程要点。
 
-*表39-3：LAION-5B 构建流程。*
-
+*表39-3：LAION-5B 构建流程*
 | 阶段 | 输入 | 处理动作 | 输出 | 对应通道 |
 | ---: | --- | --- | --- | --- |
 | 1 | Common Crawl WAT 元数据 | 解析 HTML IMG 标签，保留带 alt text 的图片候选 | `<url, text>` 候选对 | 文本通道、视觉通道 |
@@ -187,9 +181,7 @@ def build_image_text_candidates(wat_records, clip_model, lang_detector, threshol
             }
 ```
 
-*代码清单39-2：Python 实现片段。*
-
-
+*代码清单39-2：Python 实现片段*
 这个流程把是否保留样本拆成若干可审计的筛选闸门。每个闸门都应进入配置和 manifest，而不应只停留在脚本参数里。
 
 LAION 生态中常见的图文数据分发方式包括 Parquet 元数据和 WebDataset 分片。Parquet 适合保存 URL、文本、分数和标签；WebDataset 则把图片、caption 和 json 元数据放入 tar 分片，方便训练程序顺序读取。一个 10k 样本的 shard 可以包含 `0.jpg`、`0.txt`、`0.json` 这样的文件组合，json 中记录 URL、原始尺寸和安全标签等字段。
@@ -216,12 +208,10 @@ $$
 
 ![图39-2 图文候选池质量评估与闭环修复](../../images/part12/Mu-Chap39-Fig02-ZH.svg)
 
-*图39-2：图文候选池质量评估与闭环修复。Source: original illustration based on LAION-5B paper and DataComp benchmark design.*
-
+*图39-2：图文候选池质量评估与闭环修复。Source: original illustration based on LAION-5B paper and DataComp benchmark design*
 表39-4汇总了相应的对比和工程要点。
 
-*表39-4：图文候选池质量评估指标。*
-
+*表39-4：图文候选池质量评估指标*
 | 通道 | 核心问题 | 自动指标 | 人工复核要点 | 不合格处理 |
 | --- | --- | --- | --- | --- |
 | 文本通道 | caption 是否可用 | 语言置信度、长度、模板命中、重复率 | 是否为广告、文件名、SEO 文本 | 文本规则过滤、source 降权 |
@@ -246,8 +236,7 @@ $$
 
 图文数据的风险更容易被公众感知，也更难完全自动化处理。图片中可能出现人脸、儿童、车牌、家庭环境、医疗影像、身份证件、商标、艺术作品和水印。caption 即使不含 PII，图像本身也可能泄露隐私。URL 公开不等于授权清晰，CLIP 分数高不等于内容安全，NSFW 分数低也不等于风险为零。
 
-*表39-5：LAION-5B 类图文数据风险控制清单。*
-
+*表39-5：LAION-5B 类图文数据风险控制清单*
 | 风险类型 | 触发场景 | 控制措施 | 审计证据 |
 | --- | --- | --- | --- |
 | URL 衰减 | 复跑时图片不可下载或内容替换 | 保存 hash、下载时间、失败日志和快照策略 | download manifest |

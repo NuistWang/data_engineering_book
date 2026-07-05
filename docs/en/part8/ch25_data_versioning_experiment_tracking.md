@@ -5,9 +5,9 @@
 ## Abstract
 "Our model performed worse last week than the week before, but the data team says nothing changed"—this complaint arises far more often in LLM projects than most teams expect. The insidious nature of data engineering lies in the fact that data changes tend to be cumulative and incremental rather than discrete and conspicuous. Without systematic version management, a team lacks the ability to answer even the most fundamental question—"what changed?"—let alone attribute causality to "why it changed."
 
-This chapter is written for teams responsible for data versioning, experiment logging, and traceability. It systematically explains how to connect data versions, sample changes, and experiment outcomes to form a complete, end-to-end traceable chain. Experience from production machine learning systems shows that data dependencies, configuration drift, and missing experiment records are major sources of technical debt that must be explicitly governed through versioning and metadata management (Sculley et al. 2015; Polyzotis et al. 2017). The chapter unfolds across four dimensions: first, an analysis of why version management is a prerequisite for reviewable iteration; second, the establishment of a version granularity hierarchy and naming conventions; third, an engineering treatment of experiment tracking, result write-back, and audit trails; and finally, a discussion of lineage visualization and governance rule design.
+This chapter is written for teams responsible for data versioning, experiment logging, and traceability. It systematically explains how to connect data versions, sample changes, and experiment outcomes to form a complete, end-to-end traceable chain. The chapter unfolds across four dimensions: first, an analysis of why version management is a prerequisite for reviewable iteration; second, the establishment of a version granularity hierarchy and naming conventions; third, an engineering treatment of experiment tracking, result write-back, and audit trails; and finally, a discussion of lineage visualization and governance rule design.
 
-Upon completing this chapter, readers should have mastered a complete metadata design scheme, version naming conventions, and an experiment card template, and should be able to understand—through a failed-experiment retrospective case study—how to locate the root cause of data problems in real engineering contexts. The fundamental requirement of reproducible research is that the relationships among data, code, parameters, environment, and results can be independently re-confirmed by others (Peng 2011; Sandve et al. 2013).
+Upon completing this chapter, readers should have mastered a complete metadata design scheme, version naming conventions, and an experiment card template. They should also be able to understand, through a failed-experiment retrospective case study, how to locate the root cause of data problems in real engineering contexts.
 
 ## Keywords
 
@@ -33,6 +33,8 @@ After a large-scale experiment, an algorithm team at a company discovered that t
 The investigation lasted five full days. The root cause was ultimately identified: a boundary-condition modification in the data-cleaning logic had inadvertently filtered out a large number of high-quality samples containing mathematical formulas. This modification had been a "minor optimization" made four weeks earlier and left no change record whatsoever.
 
 This case reveals the core cost of lacking version management: **there is an enormous information black hole between the moment a problem is discovered and the time spent investigating it.** Without version management, there is no reviewable iteration. The design of experiment management systems and machine learning lifecycle platforms exists precisely to address the difficulty of tracking the relationships among models, data, parameters, and results (Vartak et al. 2016; Zaharia et al. 2018).
+
+Experience from production machine learning systems shows that data dependencies, configuration drift, and missing experiment records are major sources of technical debt that must be explicitly governed through versioning and metadata management (Sculley et al. 2015; Polyzotis et al. 2017). The fundamental requirement of reproducible research is that the relationships among data, code, parameters, environment, and results can be independently re-confirmed by others (Peng 2011; Sandve et al. 2013).
 
 ---
 
@@ -99,8 +101,7 @@ Figure 25-1 illustrates the corresponding workflow or structure.
 
 ![Figure 25-1: Overview of the Version Management System](../../images/part8/Du-Chap25-Fig01-EN.svg)
 
-*Figure 25-1: Panoramic view of the data version management and experiment tracking system—five-level version granularity with bidirectional association architecture.*
-
+*Figure 25-1: Panoramic view of the data version management and experiment tracking system—five-level version granularity with bidirectional association architecture*
 The Data Management Body of Knowledge typically treats data assets, metadata, lineage, quality, and lifecycle as shared governance objects; accordingly, version granularity should span multiple levels from individual samples to release packages (DAMA International 2017):
 
 **Sample level (Sample)**: A single training sample. Version information includes sample ID, source URL/document ID, creation time, last modification time, and current status (active/deprecated/under_review). Sample-level versioning is primarily used for annotation quality traceability and compliance auditing.
@@ -115,8 +116,7 @@ The Data Management Body of Knowledge typically treats data assets, metadata, li
 
 Table 25-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-1: Data version granularity and applicable scenarios.*
-
+*Table 25-1: Data version granularity and applicable scenarios*
 | Version Granularity | Primary Use | Key Fields | Retention Policy |
 |---|---|---|---|
 | Sample level | Compliance auditing, annotation traceability | sample_id, source, status | Permanent retention |
@@ -133,8 +133,7 @@ Granularity design must also account for cost. Sample-level versioning is the mo
 
 Table 25-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-2: Recommended version granularity by data type.*
-
+*Table 25-2: Recommended version granularity by data type*
 | Data Type | Recommended Minimum Granularity | Rationale | Records That May Be Simplified |
 |---|---|---|---|
 | Formal training set | Shard level + Dataset level | Need to explain data recipe and quality changes | Temporary cleaning intermediate files may be cleaned up according to policy |
@@ -234,8 +233,7 @@ The following is a standard experiment card field design:
 
 Table 25-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-3: Field Design for Experiment Cards.*
-
+*Table 25-3: Field Design for Experiment Cards*
 | Field | Type | Description |
 |---|---|---|
 | experiment_id | string | Unique experiment identifier |
@@ -249,8 +247,7 @@ Table 25-3 summarizes the corresponding comparison and engineering consideration
 
 Table 25-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-4: Field Design for Experiment Cards.*
-
+*Table 25-4: Field Design for Experiment Cards*
 | Field | Type | Description |
 |---|---|---|
 | dataset_id | string | ID of the dataset used |
@@ -263,8 +260,7 @@ Table 25-4 summarizes the corresponding comparison and engineering consideration
 
 Table 25-5 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-5: Field Design for Experiment Cards.*
-
+*Table 25-5: Field Design for Experiment Cards*
 | Field | Type | Description |
 |---|---|---|
 | base_model | string | Base model name and version |
@@ -276,8 +272,7 @@ Table 25-5 summarizes the corresponding comparison and engineering consideration
 
 Table 25-6 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-6: Field Design for Experiment Cards.*
-
+*Table 25-6: Field Design for Experiment Cards*
 | Field | Type | Description |
 |---|---|---|
 | runtime_env | object | Python, OS, training framework, and key runtime versions |
@@ -292,8 +287,7 @@ Table 25-6 summarizes the corresponding comparison and engineering consideration
 
 Table 25-7 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-7: Field Design for Experiment Cards.*
-
+*Table 25-7: Field Design for Experiment Cards*
 | Field | Type | Description |
 |---|---|---|
 | eval_datasets | list | List of evaluation sets used |
@@ -305,8 +299,7 @@ Table 25-7 summarizes the corresponding comparison and engineering consideration
 
 Table 25-8 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-8: Sample experiment card fields.*
-
+*Table 25-8: Sample experiment card fields*
 | Field | Type | Description |
 |---|---|---|
 | hypothesis | string | Experiment hypothesis (what this experiment aims to validate) |
@@ -379,8 +372,7 @@ For example, an experiment that terminates due to insufficient VRAM during train
 
 Table 25-9 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-9: Failed experiment types and preservation requirements.*
-
+*Table 25-9: Failed experiment types and preservation requirements*
 | Failure Type | Typical Manifestation | Should Re-Run? | Information to Preserve |
 |---|---|---|---|
 | Execution failure | Training interrupted, logs missing, insufficient resources | Usually should re-run | Resource configuration, failure cause, re-run conditions |
@@ -399,8 +391,7 @@ A complete audit trail must be able to answer the following core questions. Rese
 
 Table 25-10 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-10: Audit trail information requirements.*
-
+*Table 25-10: Audit trail information requirements*
 | Question | Information Required |
 |---|---|
 | What data was used to train this model? | Release package → Experiment → Dataset version |
@@ -456,8 +447,7 @@ Figure 25-2 illustrates the corresponding workflow or structure.
 
 ![Figure 25-2: Data Lineage and Experiment Tracking Graph](../../images/part8/Du-Chap25-Fig02-EN.svg)
 
-*Figure 25-2: Complete data lineage graph from data sources to model release, showing forward and reverse tracking paths.*
-
+*Figure 25-2: Complete data lineage graph from data sources to model release, showing forward and reverse tracking paths*
 ### 25.4.2 Change Audit Workflow
 
 Every change to a dataset version should go through a standardized audit workflow to ensure the change is authorized, recorded, and verified.
@@ -474,8 +464,7 @@ The standard change audit workflow is as follows:
 
 Table 25-11 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-11: Data change audit workflow.*
-
+*Table 25-11: Data change audit workflow*
 | Step | Executor | Tool | Output |
 |---|---|---|---|
 | Change request | Requesting party | Change request form | Completed request form |
@@ -531,8 +520,7 @@ Governance rule enforcement should also be tiered. Low-risk operations can be co
 
 Table 25-12 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-12: Lineage governance rules by data lifecycle stage.*
-
+*Table 25-12: Lineage governance rules by data lifecycle stage*
 | Lifecycle Stage | Permitted Focus | Key Constraints | Primary Evidence |
 |---|---|---|---|
 | Collection | Explore data sources, build sample pools | Source, authorization, and sensitivity classification must be recorded | Source manifest, authorization records, collection logs |
@@ -623,8 +611,7 @@ With version management, the retrospection path flows from model to experiment, 
 
 Table 25-13 summarizes the corresponding comparison and engineering considerations.
 
-*Table 25-13: Comparison of retrospection approaches with and without version management.*
-
+*Table 25-13: Comparison of retrospection approaches with and without version management*
 | Retrospection Step | Typical Approach Without Version Management | Approach With Version Management | Difference |
 |---|---|---|---|
 | Locate training data | Ask experiment owner; search file folders | Find dataset version through experiment card | Starting point changes from memory to record |

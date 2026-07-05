@@ -22,7 +22,7 @@ This project builds a production pipeline from public video sources to a trainab
 
 Data engineering for text-to-video (T2V) generation models is generally more difficult than for text-to-image (T2I) generation. T2I data typically treats "single image — text description" as the basic unit, with data cleaning centered on image quality, text relevance, safety filtering, and resolution bucketing. T2V must deal with continuous frames: in addition to static visual content, training samples must capture motion changes, temporal ordering, camera movement, and scene continuity. Determining whether a video clip is suitable for training requires more than checking whether a single frame is sharp — the entire clip must be examined for valid motion, stable imagery, complete actions, and temporal consistency of subjects.
 
-Accordingly, video must undergo finer processing before entering a training set. The pipeline first selects usable videos from public sources, proprietary crawled data, or stock footage libraries, then uses shot segmentation to decompose long videos into semantically coherent single-shot clips. Subsequent filtering based on optical flow, motion intensity, blur, jitter, watermarks, and OCR coverage removes low-quality clips, reducing the interference of static frames, severe jitter, and invalid motion on training. Video captions also cannot remain at the level of "what is in the frame" — they must clearly describe the sequence of actions, subject position changes, camera movement style, and cinematic language such as push/pull, pan, tilt, overhead, close-up, and wide shot.
+Accordingly, video must undergo finer processing before entering a training set. The pipeline first selects usable videos from public sources, proprietary crawled data, or stock footage libraries, then uses shot segmentation to decompose long videos into semantically coherent single-shot clips. Subsequent filtering based on optical flow, motion intensity, blur, jitter, watermarks, and optical character recognition (OCR) coverage removes low-quality clips, reducing the interference of static frames, severe jitter, and invalid motion on training. Video captions also cannot remain at the level of "what is in the frame" — they must clearly describe the sequence of actions, subject position changes, camera movement style, and cinematic language such as push/pull, pan, tilt, overhead, close-up, and wide shot.
 
 This project covers the process from video sources to a trainable T2V dataset, transforming raw video into training samples with structured captions, spatiotemporal alignment information, and quality labels. Output samples record not only subjects and scenes, but also action sequences, spatial relationships, and cinematic presentation — providing the supervision needed for video generation models to learn "how to move" and "how to shoot."
 
@@ -52,9 +52,7 @@ Listing P14-1 provides a video-data pipeline flow example.
 Video sources -> Clip segmentation -> Frames/subtitles/motion features -> Caption and quality scoring -> Filtering and deduplication -> T2V training samples
 ```
 
-*Listing P14-1: Video-data pipeline flow example.*
-
-
+*Listing P14-1: Video-data pipeline flow example*
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
 
 ## Core Implementation Excerpts
@@ -85,8 +83,7 @@ Figure P14-1 shows the English-annotated architecture diagram for this project. 
 
 ![P14 Video Generation Data Pipeline](../../images/part14/Luo-Project14-Fig04-EN.svg)
 
-*Figure P14-1: English architecture diagram of the video generation data pipeline.*
-
+*Figure P14-1: English architecture diagram of the video generation data pipeline*
 The entire pipeline can be broken down into six components. The first is **video source loading**. It reads a Pexels manifest or local video filenames, re-probes each video for duration, fps, resolution, frame count, and file size, and writes the author, page URL, and license fields into a unified manifest. This component provides the foundational information for subsequent provenance tracing, resolution statistics, duration statistics, and authorization status checks.
 
 The second is **shot segmentation**. T2V models typically do not train directly on raw long videos, because long videos may contain multiple shots, scene cuts, and semantic discontinuities. The pipeline uses PySceneDetect's ContentDetector to detect shot boundaries, then uses ffmpeg to split videos into single-shot clips; interface and parameter details should follow the official PySceneDetect documentation (PySceneDetect Contributors 2026). Each clip is assigned a `shot_id` and records its start and end timestamps, parent video, clip index, and local path. All subsequent filtering, captioning, and shot tagging are organized around `shot_id` as the primary key.
@@ -101,8 +98,7 @@ The sixth is **cinematic language annotation**. A regular caption describes cont
 
 Table P14-1 summarizes the artifacts of each stage. The publication manuscript must retain these filenames, as they serve as the index by which readers map the main text, code, and reproduced artifacts to one another.
 
-*Table P14-1: Stage artifacts and field contracts of the video generation data pipeline.*
-
+*Table P14-1: Stage artifacts and field contracts of the video generation data pipeline*
 | Stage | Code Entry Point | Primary Input | Primary Output | Key Fields |
 | --- | --- | --- | --- | --- |
 | Video source loading | `load_pexels.py` | `pexels_manifest.jsonl` or `pexels_*.mp4` | `source_videos.jsonl` | `video_id`, `path`, `license`, `duration`, `fps`, `width`, `height` |
@@ -146,9 +142,7 @@ def load_source_videos(src_dir: Path) -> list[dict]:
     return records
 ```
 
-*Listing P14-2: Process flow example.*
-
-
+*Listing P14-2: Process flow example*
 Two points deserve attention here. First, all source videos are organized into structurally consistent JSONL rows; subsequent stages no longer scan the mp4 directory directly but instead read from this manifest. Second, the loading process supports checkpoint resumption: `video_id` entries already written are not reprocessed, and new videos are only appended to the end of the file. At the scale of 1,000+ videos, this approach is more robust than a full rerun and makes it easier to remove corrupted videos mid-process.
 
 ---
@@ -179,9 +173,7 @@ def split_one_video(record: dict, out_root: Path, min_shot_len: float = 1.0):
     return [build_shot_record(record, idx, scene, path) for idx, (scene, path) in enumerate(zip(kept, sorted(shot_dir.glob("*.mp4"))))]
 ```
 
-*Listing P14-3: Python implementation excerpt.*
-
-
+*Listing P14-3: Python implementation excerpt*
 In practice, if 1,000 videos average 8 to 15 shots each, approximately 10,000 clips are produced. This figure is only a reference for experimental scale, not a fixed requirement. Note that PySceneDetect's threshold significantly affects the number of clips: a lower threshold yields finer segmentation; a higher threshold is more conservative. It is advisable to first inspect a sample of segmentation results and then fix the threshold, to avoid producing large numbers of semantically incomplete fragments.
 
 ---
@@ -215,9 +207,7 @@ def motion_filter_one(shot: dict, threshold: float = 0.5) -> dict:
         return failed_motion_record(shot["shot_id"], str(exc))
 ```
 
-*Listing P14-4: Process flow example.*
-
-
+*Listing P14-4: Process flow example*
 The motion threshold should not be fixed solely by intuition in a single pass. It is advisable to first compute the `motion_strength` distribution across all clips, then spot-check low-, mid-, and high-scoring samples. For typical public videos, starting experiments around a threshold of 0.5 is reasonable; if the data contains many slow-motion, natural scenery, or micro-motion clips, the threshold should be lowered to avoid discarding valid samples. At this stage, failed clips need not be immediately deleted — records with `pass_motion=False` can be retained and the decision deferred to the training stage.
 
 ---
@@ -252,9 +242,7 @@ def score_shot_aesthetic(segment_path, clip_model, clip_processor, aesthetic_mlp
     return {"aesthetic_score": avg, "pass_aesthetic": avg >= 5.0, "status": "ok"}
 ```
 
-*Listing P14-5: Process flow example.*
-
-
+*Listing P14-5: Process flow example*
 Engineering implementation must also handle multi-GPU sharding and GPU memory degradation. In this project, scripts use deterministic sharding: samples are first sorted by `shot_id`, then assigned by index modulo `num_shards`, with each GPU processing only its own shard. This sharding approach avoids redundant computation and facilitates resumption from a specific shard upon failure. Aesthetic thresholds should not be used solely as deletion criteria. Scores can be written into the manifest first, with sampling weights or data buckets set by score at the training stage.
 
 ---
@@ -286,9 +274,7 @@ def generate_video_caption(frame_paths, model, processor, frames_n=8):
     return {"caption_en": caption, "n_words": len(caption.split()), "caption_short": len(caption.split()) < 50}
 ```
 
-*Listing P14-6: Python implementation excerpt.*
-
-
+*Listing P14-6: Python implementation excerpt*
 If a caption is too short on the first attempt, increasing the temperature and retrying up to twice is acceptable, but unlimited retries are not recommended. Excessive retries may make captions longer without improving accuracy. For training data, it is preferable to retain the `caption_short` flag and handle it uniformly in a post-processing stage, preventing the model from fabricating details not present in the frame in order to fill word count. InternVL3 integration is similar to Qwen2.5-VL — only the model loading and input organization interfaces need to be replaced; the data-level workflow remains "sample multiple frames in temporal order → generate a single video description."
 
 ---
@@ -320,9 +306,7 @@ def tag_shot_language(shot_id: str, segment_path: str, frame_paths: list[str]) -
     }
 ```
 
-*Listing P14-7: Process flow example.*
-
-
+*Listing P14-7: Process flow example*
 Using a controlled vocabulary is strongly recommended here, to avoid letting the model generate tags freely. Free-text tags appear richer but are difficult to use for retrieval, bucketing, and training sampling; controlled tags have a limited expressive range but group similar samples under consistent fields. For example, `close_up`, `medium`, and `wide` can be used directly for shot-size stratification; `golden_hour`, `backlit`, and `low_key` can be used for lighting distribution statistics; `pan_left`, `zoom_in`, and `jitter` can be used to construct camera motion control samples. In T2V training, these structured fields enter engineering workflows more readily than a polished but uncontrollable prose description.
 
 After completing Step 6, the final sample can be organized as follows:
@@ -346,9 +330,7 @@ final_sample = {
 }
 ```
 
-*Listing P14-8: Python implementation excerpt.*
-
-
+*Listing P14-8: Python implementation excerpt*
 This structure already has the basic form of trainable data. Safety filtering (NSFW), OCR/watermark filtering, deduplication, class resampling, and WebDataset packaging can all be added subsequently. The key principle to keep in mind throughout this pipeline is the sample organization approach: video samples progressively accumulate learnable supervision signals at each stage, and are finally organized into training data. Shot segmentation provides temporal boundaries, motion filtering provides dynamic quality, aesthetic filtering provides visual quality, multi-frame captioning provides semantic supervision, and cinematic language annotation provides shooting control information. Used together, these fields make it substantially easier for T2V models to establish stable "text—action—shot" correspondences.
 
 ## 4. Engineering Execution: Resumable Processing, Sharding, and GPU Memory Degradation
@@ -369,8 +351,7 @@ QWEN_PATH=/data0/qwen-vl \
 bash run_pipeline.sh
 ```
 
-*Listing P14-9: Command-line run example.*
-
+*Listing P14-9: Command-line run example*
 This command serves to fix the runtime context rather than to demonstrate all parameters. A true production run must also record the versions of CUDA, PyTorch, Transformers, PySceneDetect, ffmpeg, CLIP weights, Qwen2.5-VL weights, and the LAION-Aesthetic MLP weights.
 
 Three categories of engineering controls in the script deserve individual explanation. The first is **checkpoint resumption**. Each stage uses `repair_tail` to fix potentially corrupted JSONL tails, `scan_done_ids` to scan already-completed `video_id` or `shot_id` entries, and `SafeJsonlWriter` to append new results. This design allows scripts to resume after a mid-run failure without discarding already-processed clips.
@@ -381,8 +362,7 @@ The third is **GPU memory degradation**. `aesthetic_filter.py`, `caption_with_vl
 
 Table P14-2 summarizes the key runtime parameters and their effects.
 
-*Table P14-2: Key runtime parameters of the video generation data pipeline.*
-
+*Table P14-2: Key runtime parameters of the video generation data pipeline*
 | Parameter | Default or Example | Scope of Effect | Tuning Recommendation |
 | --- | --- | --- | --- |
 | `scene_detect.py --threshold` | `27.0` | Number and completeness of detected shots | Inspect a sample of segmentation results before fixing the threshold |
@@ -400,8 +380,7 @@ Table P14-2 summarizes the key runtime parameters and their effects.
 
 Accepting a video generation dataset cannot be reduced to "checking whether captions were generated." For T2V training, at minimum, provenance, clips, motion, visual quality, text, cinematic tags, and safety boundaries must all be simultaneously verified. Table P14-3 provides the publication-grade acceptance criteria for this project.
 
-*Table P14-3: Publication acceptance checklist for the video generation data pipeline.*
-
+*Table P14-3: Publication acceptance checklist for the video generation data pipeline*
 | Acceptance Dimension | Metric / Evidence | Pre-Release Check |
 | --- | --- | --- |
 | Provenance compliance | `license`, `page_url`, `author_name`, source file path | Randomly sample and trace back to original pages; confirm authorization and attribution fields are complete |
@@ -431,8 +410,7 @@ After the first six stages are complete, the project must merge the distributed 
 
 Table P14-4 presents the recommended field structure for the final manifest.
 
-*Table P14-4: Recommended field structure for the T2V final manifest.*
-
+*Table P14-4: Recommended field structure for the T2V final manifest*
 | Field Group | Fields | Source Stage | Purpose |
 | --- | --- | --- | --- |
 | Identity fields | `shot_id`, `video_id`, `idx` | scene detect | Sample primary key and join key |
@@ -449,8 +427,7 @@ When integrating with training, it is not advisable to immediately write all fie
 
 Table P14-5 presents three common training integration approaches.
 
-*Table P14-5: Training integration approaches for video generation datasets.*
-
+*Table P14-5: Training integration approaches for video generation datasets*
 | Integration Approach | Data Organization | Applicable Scenario | Notes |
 | --- | --- | --- | --- |
 | JSONL manifest + local video | JSONL pointing to `segment_path` | Single-machine teaching, internal experiments | Manifest must be rewritten if paths are migrated |
@@ -463,8 +440,7 @@ If the training framework only accepts a simple "video path + caption" format, t
 
 P14 deliverables should not consist solely of the final manifest. A video data pipeline involves video clips, sampled frames, model outputs, quality scores, and logs — any missing component will impair reproducibility. Table P14-6 presents the recommended directory structure.
 
-*Table P14-6: Deliverable directory for the video generation data pipeline.*
-
+*Table P14-6: Deliverable directory for the video generation data pipeline*
 | Path | Contents | Publication Recommendation |
 | --- | --- | --- |
 | `source_videos.jsonl` | Source video manifest and ffprobe metadata | Publish a de-identified version |
@@ -486,8 +462,7 @@ Version freezing must include at minimum four categories of information. The fir
 
 Before a video dataset enters training, it is advisable to establish a lightweight data dashboard. The dashboard need not be a complex system — even a set of statistical scripts and a Markdown report can significantly improve review efficiency. Table P14-7 presents the recommended dashboard metrics.
 
-*Table P14-7: Dashboard metrics for the video generation data pipeline.*
-
+*Table P14-7: Dashboard metrics for the video generation data pipeline*
 | Dashboard Metric | Computed From | Purpose |
 | --- | --- | --- |
 | Number of video sources | `source_videos.jsonl` | Check source material coverage |
@@ -507,8 +482,7 @@ Video data requires retraction mechanisms more urgently than plain text or singl
 
 Table P14-8 presents the video sample retraction workflow.
 
-*Table P14-8: Video generation data sample retraction workflow.*
-
+*Table P14-8: Video generation data sample retraction workflow*
 | Step | Action | Affected Objects |
 | --- | --- | --- |
 | Log the request | Record video URL, author, requester, reason, and timestamp | request ticket |
@@ -526,8 +500,7 @@ The P14 pipeline can be transferred to scenarios such as e-commerce, education, 
 
 Table P14-9 presents the adjustment directions for domain transfer.
 
-*Table P14-9: Domain transfer considerations for the video generation data pipeline.*
-
+*Table P14-9: Domain transfer considerations for the video generation data pipeline*
 | Domain | Video Type | Stages Requiring Adjustment | Additional Acceptance |
 | --- | --- | --- | --- |
 | E-commerce | Product showcases, livestream clips | Watermark/OCR, product subject stability, brand authorization | Check for product attribute claims and exaggerated descriptions |
@@ -545,8 +518,7 @@ P14 produces high-quality video shots and structured video metadata; P13 produce
 
 Table P14-10 presents the integration approach between the two.
 
-*Table P14-10: Integration of P14 video fields into the P13 instruction factory.*
-
+*Table P14-10: Integration of P14 video fields into the P13 instruction factory*
 | P14 Field | How P13 Can Use It | Example Task |
 | --- | --- | --- |
 | `caption_en` | As base video description or answer draft | "Describe the video in detail." |
@@ -563,8 +535,7 @@ This integration avoids rebuilding video instruction data from scratch. P14 hand
 
 Table P14-11 summarizes the corresponding comparison and engineering considerations.
 
-*Table P14-11: Example of multi-frame sampling from a video clip.*
-
+*Table P14-11: Example of multi-frame sampling from a video clip*
 | frame1 | frame2 |
 |---|---|
 | ![frame1](../../images/part14/Luo-Project14-Fig01.jpg) | ![frame2](../../images/part14/Luo-Project14-Fig02.jpg) |
@@ -579,7 +550,7 @@ This chapter followed a video generation data pipeline from video sources throug
 
 The scope is public video samples and a small-scale pipeline. It does not cover full commercial copyright management or large-scale video platforms. Larger-scale, higher-risk, or stricter compliance settings require renewed review of data sources, permission status, manual review proportions, operating costs, and rollback strategies.
 
-As part of Part 14, this chapter corresponds to the project-level validation of the methods presented earlier in this book. Readers may combine this case with the data recipes in Part 13, the platform governance chapters earlier in the book, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
+As part of Part XIV, this chapter corresponds to the project-level validation of the methods presented earlier in this book. Readers may combine this case with the data recipes in Part XIII, the platform governance chapters earlier in the book, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 
 ## References
 

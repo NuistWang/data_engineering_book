@@ -4,7 +4,7 @@
 
 ## 摘要
 
-在视觉语言模型（Vision-Language Model，VLM）的架构创新逐渐收敛的背景下，数据配方的精细程度已成为头部模型与跟随者之间的主要分界。本章以"配方"视角，系统拆解 Qwen2.5-VL、InternVL3、LLaVA-OneVision 与 MiniCPM-V 等主流 VLM 的数据工程实践。内容首先建立预训练、多任务高分辨率对齐与监督微调（Supervised Fine-Tuning，SFT）三阶段流水线，说明各阶段在数据规模、质量要求与冻结策略上的数量级差异；继而横向对照各模型在预训练图文对、交错图文文档、富光学字符识别信息（OCR-Rich）数据、视觉定位（Grounding）与视频数据上的配比，归纳重描述（Re-captioning）优先、OCR 数据安全阈值、视频数据从可选转为必选等关键趋势；随后剖析动态高分切片（Dynamic Hi-Res）与原生分辨率（Native Resolution）两派在 Token 长度管控与分桶（Bucketing）上的数据工程分歧，以及对比式图文预训练（CLIP）打分过滤与强 VLM 重标注的质量提升机制。本章强调，从原始 alt-text 到可执行视觉监督信号的转化，是现代 VLM 数据配方可复现性的核心环节。
+在视觉语言模型（vision-language model，VLM）的架构创新逐渐收敛的背景下，数据配方的精细程度已成为头部模型与跟随者之间的主要分界。本章以"配方"视角，系统拆解 Qwen2.5-VL、InternVL3、LLaVA-OneVision 与 MiniCPM-V 等主流 VLM 的数据工程实践。内容首先建立预训练、多任务高分辨率对齐与监督微调（supervised fine-tuning，SFT）三阶段流水线，说明各阶段在数据规模、质量要求与冻结策略上的数量级差异；继而横向对照各模型在预训练图文对、交错图文文档、富光学字符识别信息（optical-character-recognition-rich，OCR-Rich）数据、视觉定位（Grounding）与视频数据上的配比，归纳重描述（Re-captioning）优先、OCR 数据安全阈值、视频数据从可选转为必选等关键趋势；随后剖析动态高分切片（Dynamic Hi-Res）与原生分辨率（Native Resolution）两派在 Token 长度管控与分桶（Bucketing）上的数据工程分歧，以及对比式图文预训练（Contrastive Language-Image Pretraining，CLIP）打分过滤与强 VLM 重标注的质量提升机制。本章强调，从原始 alt-text 到可执行视觉监督信号的转化，是现代 VLM 数据配方可复现性的核心环节。
 
 ## 关键词
 
@@ -36,8 +36,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 
 ![图47-1：多模态数据工程全景图](../../images/part13/Cao-Chap47-Fig01.png)
 
-*图47-1：多模态数据工程全景图（改绘自第8章基础图）。*
-
+*图47-1：多模态数据工程全景图*
 ---
 
 ## 47.1 VLM 数据三阶段流水线
@@ -46,8 +45,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 
 ![图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)](../../images/part13/Cao-Chap47-Fig02-EN.svg)
 
-*图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Pipeline)。*
-
+*图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)*
 **阶段一：预训练（Pre-training / Feature Alignment）**
 
 此阶段的核心目标是**视觉概念与文本词汇的粗粒度对齐**。数据规模通常在数亿至数十亿图文对（Image-Text Pairs）量级，主要来源包括经过对比式图文预训练（CLIP）强过滤的 LAION 子集 (Schuhmann et al. 2022)、DataComp-1B (Gadre et al. 2023)、COYO-700M，以及近两年兴起的 Re-captioning 数据（如 ShareGPT4V-1.2M、LLaVA-Recap-558K）。
@@ -72,10 +70,9 @@ SFT 阶段对数据质量的要求达到三个阶段之最。Qwen2.5-VL 的技�
 
 与纯文本基座模型类似，多模态模型之间的数据壁垒同样极高。表47-1 展示了基于当前最新技术报告（截至 2026 年 4 月）和开源社区推断得出的头部 VLM 数据配方对比。这不仅仅是数字的堆砌，而是各家对于"到底什么是视觉智能"在工程信仰上的不同折射。
 
-*(注：表格中具体数字标注规范为：[D] = 报告明确披露；[I] = 推断；[E] = 估算。)*
+*表 47-1：主流 VLM 数据组成横向对比 (4 行 × 8 列)*
 
-*表 47-1：主流 VLM 数据组成横向对比 (4 行 × 8 列)。*
-
+*(注：表中标注约定：[D] = 报告明确披露；[I] = 推断；[E] = 估算。)*
 | 模型系                    | 预训练图文对规模 | 预训练清洗策略        | Interleaved 文档占比 | SFT 多模态指令量   | 视频数据规模       | OCR/Doc特化    | 高清分辨率支持度  |
 | :------------------------ | :--------------- | :-------------------- | :------------------- | :----------------- | :----------------- | :------------- | :---------------- |
 | **Qwen2.5-VL**      | ~2B+ Pairs [I]   | 自研图像过滤+重写     | 极高 (~30%) [I]      | ~5M+ [E]           | 极高, 变长片段 [D] | 强，多语言OCR  | Native Resolution |
@@ -89,7 +86,7 @@ SFT 阶段对数据质量的要求达到三个阶段之最。Qwen2.5-VL 的技�
 
 Qwen 和 InternVL 已经不再信任原始爬网图文对的文本部分。他们动用了数以万计的 GPU 小时，利用上一代强模型对几十亿张图片进行了重新看图说话（Re-captioning），这带来的性能提升远超增加百亿参数。LLaVA-OneVision (Li et al. 2024) 的论文明确指出 [D]，在预训练阶段使用 GPT-4V 重写后的 Caption 替换原始 alt-text，MMMU 提升了 4.2 个点，而增加 50% 数据量仅提升了 1.1 个点。数据质量的杠杆效应，在视觉领域被放大了数倍。
 
-**趋势二：Interleaved 数据是图文推理的桥梁**
+**趋势二：交错数据是图文推理的桥梁**
 
 让模型看懂一张图和一句话是基础，但让模型看懂"网页排版中图文交错的逻辑"才是进阶。交错文档数据（如 MMC4 (Zhu et al. 2023)、OBELICS (Laurençon et al. 2023)）的占比，直接决定了模型在 In-context Learning 和长文档推理中的表现。Qwen2.5-VL 在 Interleaved Web Data 上的投入显著高于同期竞品 [I]，这是其在 MMMU-Pro 等复杂多图推理任务上领先的关键数据侧原因之一。
 
@@ -115,8 +112,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 ![图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)](../../images/part13/Cao-Chap47-Fig03-EN.svg)
 
-*图47-3：Native vs Dynamic Resolution 数据 pipeline 对比。*
-
+*图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)*
 **派系一：动态高分切片（Dynamic Hi-Res Patching / AnyRes）**
 
 以 InternVL 和 LLaVA 系列为代表。在数据输入预处理阶段，系统保持视觉编码器（如 CLIP-ViT）的输入分辨率（如 448×448）不变。对于一张 1000×2000 的长图，数据引擎会在不破坏宽高比的情况下，将其动态切割（Crop）成多个 448×448 的 Patch 子图，并额外生成一张低分辨率的全局缩略图（Thumbnail）。
@@ -131,8 +127,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 表47-2汇总了本节的关键对象、工程要点与复核口径。
 
-*表 47-2：Native Resolution vs Dynamic Hi-Res 数据处理差异 (2 行 × 6 列)。*
-
+*表 47-2：原生分辨率与动态高分辨率数据处理差异 (2 行 × 6 列)*
 | 解决流派                   | 代表模型          | 图像数据预处理动作               | 视觉编码器改造         | LLM 端 Token 序列特征                   | 优劣势评估                                        |
 | :------------------------- | :---------------- | :------------------------------- | :--------------------- | :-------------------------------------- | :------------------------------------------------ |
 | **Native Res.**      | Qwen2.5-VL        | 保持原图，按 Patch Size 动态展开 | 移除固定 Pos Embedding | 二维绝对坐标映射 (M-RoPE)               | 精度最高，无边界断裂 / 工程难度极大，内存易碎片化 |
@@ -148,8 +143,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 ![图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)](../../images/part13/Cao-Chap47-Fig04-EN.svg)
 
-*图47-4：多模态指令合成 pipeline。*
-
+*图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)*
 如图47-4 所示，多模态指令合成已经远超简单的"让 GPT-4V 看看图并造句"。一个现代的数据合成管线通常包含以下组件的协同：
 
 1. **基础视觉感知网络**：利用现成的专有小模型，如 Grounding DINO (Liu et al. 2023) 提取所有物体的边界框（Bounding Boxes），利用 PaddleOCR 提取密集文本，甚至利用深度估计模型提取 3D 景深。
@@ -159,8 +153,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 
 表47-3汇总了本节的关键对象、工程要点与复核口径。
 
-*表 47-3：多模态指令数据合成方法对比 (3 行 × 5 列)。*
-
+*表 47-3：多模态指令数据合成方法对比 (3 行 × 5 列)*
 | 合成流派                             | 核心依赖模型              | 典型应用场景                   | 成本估算              | 噪声与幻觉风险                      |
 | :----------------------------------- | :------------------------ | :----------------------------- | :-------------------- | :---------------------------------- |
 | **GPT-4V 蒸馏法**              | 外部闭源 VLM API          | 复杂逻辑推理题、长文摘要       | 极高 (依赖 API Quota) | 较低，但受限于教师模型固有偏见      |
@@ -198,9 +191,7 @@ def recaption_batch(image_paths: list[str], model, processor) -> list[str]:
     return results
 ```
 
-*代码清单47-1：流程示例。*
-
-
+*代码清单47-1：流程示例*
 **工程要点说明**：
 
 - `temperature=0.7` 是防止 Caption 模式坍塌的关键参数，低于 0.5 时生成风格趋于同质化；

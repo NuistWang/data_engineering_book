@@ -4,30 +4,29 @@
 
 The current Chinese mainline uses the 2026 Springer-size publication structure. The main text covers 48 chapters, 15 end-to-end projects, and 8 appendices (A-H). To reduce friction when reading across parts, this edition adds online resource entry points, a unified abbreviation table in the front matter, and a contents page for each part.
 
-- [Title Page](title_page.md)
-- [Author Affiliations](author_affiliations.md)
+- [Data Engineering for Large Foundation Models](title_page.md)
+- [Author Affiliations and Contact Details](author_affiliations.md)
 - [Online Resources and Community](online_resources.md)
 - [Preface](preface.md)
 - [Acknowledgments](acknowledgments.md)
 - [Declaration of Competing Interests](competing_interests.md)
 - [Ethics Approval](ethics_approval.md)
-- [Front-Matter Guide: Book Structure, Reading Paths, and Edition Notes](front_matter_guide.md)
 - [Contributors](contributors.md)
 - [Abbreviations](abbreviations.md)
-- [Part 1: Overview and Infrastructure](part1/index.md)
-- [Part 2: Text Pre-training Data Engineering](part2/index.md)
-- [Part 3: Multimodal Data Engineering](part3/index.md)
-- [Part 4: Instruction Fine-tuning and Preference Data](part4/index.md)
-- [Part 5: Synthetic Data Engineering](part5/index.md)
-- [Part 6: Reasoning and Agent Data Engineering](part6/index.md)
-- [Part 7: Application-Level Data Engineering](part7/index.md)
-- [Part 8: Data Operations and Platform Development](part8/index.md)
-- [Part 9: Data Assets, Data Products, and Data Contracts](part9/index.md)
-- [Part 10: Intelligent Data Engineering and Data Engineering Agents](part10/index.md)
-- [Part 11: Privacy Compliance and Data Security](part11/index.md)
-- [Part 12: Specialized Datasets and Multimodal Data Engineering Practice](part12/index.md)
-- [Part 13: Open-source LLM Data Engineering Recipes and Paradigms](part13/index.md)
-- [Part 14: Practical Projects](part14/index.md)
+- [Part I: Overview and Infrastructure](part1/index.md)
+- [Part II: Text Pre-training Data Engineering](part2/index.md)
+- [Part III: Multimodal Data Engineering](part3/index.md)
+- [Part IV: Instruction Fine-tuning and Preference Data](part4/index.md)
+- [Part V: Synthetic Data Engineering](part5/index.md)
+- [Part VI: Reasoning and Agent Data Engineering](part6/index.md)
+- [Part VII: Application-Level Data Engineering](part7/index.md)
+- [Part VIII: Data Operations and Platform Development](part8/index.md)
+- [Part IX: Data Assets, Data Products, and Data Contracts](part9/index.md)
+- [Part X: Intelligent Data Engineering and Data Engineering Agents](part10/index.md)
+- [Part XI: Privacy Compliance and Data Security](part11/index.md)
+- [Part XII: Specialized Datasets and Multimodal Data Engineering Practice](part12/index.md)
+- [Part XIII: Open-source LLM Data Engineering Recipes and Paradigms](part13/index.md)
+- [Part XIV: Practical Projects](part14/index.md)
 - [Appendix A: Tools and Frameworks Quick Reference](appendix_a_tools_and_frameworks_quick_reference.md)
 - [Appendix B: Compliance and Release Checklist](appendix_b_compliance_and_release_checklist.md)
 - [Appendix C: Cost Estimation and Resource Templates](appendix_c_cost_estimation_and_resource_templates.md)
@@ -39,7 +38,7 @@ The current Chinese mainline uses the 2026 Springer-size publication structure. 
 
 ## Part-by-Part Contents
 
-## Part 1: Overview and Infrastructure
+## Part I: Overview and Infrastructure
 
 This part establishes the core framework for large-model data engineering: how the data lifecycle, quality evaluation, AI-native data stack, and cost governance fit together.
 
@@ -48,7 +47,7 @@ This part establishes the core framework for large-model data engineering: how t
 - [Chapter 2: LLM Data Lifecycle and Quality Assessment Framework](part1/ch02_quality_framework.md)
 - [Chapter 3: AI-Native Data Stack and Cost Governance](part1/ch03_data_stack.md)
 
-## Part 2: Text Pre-training Data Engineering
+## Part II: Text Pre-training Data Engineering
 
 This part focuses on large-scale text corpora, including data sources, acquisition and copyright, cleaning, deduplication, decontamination, tokenization, serialization, efficient loading, and quality operations.
 
@@ -58,7 +57,7 @@ This part focuses on large-scale text corpora, including data sources, acquisiti
 - [Chapter 6: Tokenization, Serialization, and Efficient Data Loading](part2/ch06_tokenization_loading.md)
 - [Chapter 7: Data Evaluation, Quality Feedback Loops, and Operational Iteration](part2/ch07_data_operations.md)
 
-## Part 3: Multimodal Data Engineering
+## Part III: Multimodal Data Engineering
 
 This part covers image-text, document, video, audio, and cross-modal alignment data, with attention to sample structure, quality control, annotation augmentation, and fusion training.
 
@@ -68,7 +67,7 @@ This part covers image-text, document, video, audio, and cross-modal alignment d
 - [Chapter 10: Video and Audio Data Engineering](part3/ch10_video_audio.md)
 - [Chapter 11: Cross-Modal Alignment and Fusion](part3/ch11_cross_modal_alignment.md)
 
-## Part 4: Instruction Fine-tuning and Preference Data
+## Part IV: Instruction Fine-tuning and Preference Data
 
 This part centers on model alignment data, covering SFT instruction systems, preference data, reward signals, annotation platforms, QA, and data operations.
 
@@ -77,7 +76,7 @@ This part centers on model alignment data, covering SFT instruction systems, pre
 - [Chapter 13: Preference Data and Reward Signals](part4/ch13_preference.md)
 - [Chapter 14: Annotation Platforms, Quality Assurance Systems, and Data Operations](part4/ch14_qa.md)
 
-## Part 5: Synthetic Data Engineering
+## Part V: Synthetic Data Engineering
 
 This part explains the path from seed samples to a synthetic data factory, including knowledge distillation, model collaboration, quality control, and model-collapse risks.
 
@@ -86,7 +85,7 @@ This part explains the path from seed samples to a synthetic data factory, inclu
 - [Chapter 16: Knowledge Distillation and Model Collaboration](part5/ch16_distillation.md)
 - [Chapter 17: Synthetic Data Quality Control and Model Collapse](part5/ch17_quality.md)
 
-## Part 6: Reasoning and Agent Data Engineering
+## Part VI: Reasoning and Agent Data Engineering
 
 This part covers chain-of-thought data, reasoning traces, tool use, function calling, agent memory, and multi-turn interaction data.
 
@@ -95,7 +94,7 @@ This part covers chain-of-thought data, reasoning traces, tool use, function cal
 - [Chapter 19: Tool-Use and Function Calling Data](part6/ch19_tool.md)
 - [Chapter 20: Agent Memory and Multi-Turn Interaction Data](part6/ch20_agent.md)
 
-## Part 7: Application-Level Data Engineering
+## Part VII: Application-Level Data Engineering
 
 This part targets RAG and online knowledge systems, including document parsing, visual retrieval, multimodal RAG, online feedback loops, and knowledge updates.
 
@@ -104,7 +103,7 @@ This part targets RAG and online knowledge systems, including document parsing, 
 - [Chapter 22: Multimodal RAG and Visual Retrieval](part7/ch22_multimodal_rag_visual_retrieval.md)
 - [Chapter 23: Online Feedback Loops and Knowledge Updates](part7/ch23_online_feedback_knowledge_update.md)
 
-## Part 8: Data Operations and Platform Development
+## Part VIII: Data Operations and Platform Development
 
 This part builds sustainable data platform capabilities through team organization, version management, experiment tracking, and observability.
 
@@ -113,7 +112,7 @@ This part builds sustainable data platform capabilities through team organizatio
 - [Chapter 25: Data Version Management and Experiment Tracking](part8/ch25_data_versioning_experiment_tracking.md)
 - [Chapter 26: Data Platform Observability](part8/ch26_data_platform_observability.md)
 
-## Part 9: Data Assets, Data Products, and Data Contracts
+## Part IX: Data Assets, Data Products, and Data Contracts
 
 This part turns data pipelines into discoverable, reusable, auditable organizational assets through catalogs, metadata governance, data products, contracts, valuation, reuse, and internal data markets.
 
@@ -123,7 +122,7 @@ This part turns data pipelines into discoverable, reusable, auditable organizati
 - [Chapter 29: Data Valuation and Reuse Mechanisms](part9/ch29_data_valuation_and_reuse.md)
 - [Chapter 30: Internal Data Markets and Sharing Governance](part9/ch30_internal_data_market_and_sharing_governance.md)
 
-## Part 10: Intelligent Data Engineering and Data Engineering Agents
+## Part X: Intelligent Data Engineering and Data Engineering Agents
 
 This part discusses how data engineering agents participate in acquisition, parsing, cleaning, annotation, synthesis, evaluation, DataOps, security, permissions, and human-AI collaboration.
 
@@ -134,7 +133,7 @@ This part discusses how data engineering agents participate in acquisition, pars
 - [Chapter 34: DataOps Agents and Platform Autonomy](part10/ch34_dataops_agent.md)
 - [Chapter 35: Security, Permissions, and Human-AI Collaboration for Data Engineering Agents](part10/ch35_security_permission_collaboration.md)
 
-## Part 11: Privacy Compliance and Data Security
+## Part XI: Privacy Compliance and Data Security
 
 This part focuses on compliance frameworks, privacy protection, federated learning, security boundaries, and auditable controls across the data lifecycle.
 
@@ -142,19 +141,19 @@ This part focuses on compliance frameworks, privacy protection, federated learni
 - [Chapter 36: Data Compliance Frameworks and Governance](part11/ch36_compliance_framework_and_governance.md)
 - [Chapter 37: Federated Learning and Privacy-Preserving Technologies](part11/ch37_federated_learning_and_privacy_preserving_technologies.md)
 
-## Part 12: Specialized Datasets and Multimodal Data Engineering Practice
+## Part XII: Specialized Datasets and Multimodal Data Engineering Practice
 
-Part 12 follows a modality-explicit path across text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio, and reasoning traces. It explains how specialized datasets are defined, constructed, evaluated, released, governed, and reproduced, while connecting project case studies with open-source model data recipes.
+Part XII follows a modality-explicit path across text corpora, image-text candidate pools, visual documents and tables, visual reasoning, speech and audio, and reasoning traces. It explains how specialized datasets are defined, constructed, evaluated, released, governed, and reproduced, while connecting project case studies with open-source model data recipes.
 
 - [Part Contents](part12/index.md)
-- [Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers](part12/ch38_text_corpora_transparent_ledger.md)
-- [Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation](part12/ch39_image_text_candidate_pool_data_engineering.md)
-- [Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints](part12/ch40_visual_document_table_data_engineering.md)
-- [Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories](part12/ch41_visual_reasoning_tool_data_engineering.md)
-- [Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries](part12/ch42_speech_audio_interaction_data_engineering.md)
-- [Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks](part12/ch43_reasoning_trace_compression_data_engineering.md)
+- [Chapter 38: Text Corpus Data Engineering](part12/ch38_text_corpora_transparent_ledger.md)
+- [Chapter 39: Image-Text Data Engineering](part12/ch39_image_text_candidate_pool_data_engineering.md)
+- [Chapter 40: Visual Document and Table Data Engineering](part12/ch40_visual_document_table_data_engineering.md)
+- [Chapter 41: Visual Reasoning Data Engineering](part12/ch41_visual_reasoning_tool_data_engineering.md)
+- [Chapter 42: Speech and Audio Data Engineering](part12/ch42_speech_audio_interaction_data_engineering.md)
+- [Chapter 43: Reasoning Trace Data Engineering](part12/ch43_reasoning_trace_compression_data_engineering.md)
 
-## Part 13: Open-source LLM Data Engineering Recipes and Paradigms
+## Part XIII: Open-source LLM Data Engineering Recipes and Paradigms
 
 This part focuses on data recipes, training paradigms, and engineering organization for open-source large models, covering pre-training, post-training, reasoning RL, VLMs, and T2I/T2V generation.
 
@@ -165,7 +164,7 @@ This part focuses on data recipes, training paradigms, and engineering organizat
 - [Chapter 47: Multimodal Large Model (VLM) Data Recipes: From Pre-Training to Visual Alignment](part13/ch47_vlm_data_recipes.md)
 - [Chapter 48: Data Engineering for Multimodal Generative Models: T2I and T2V Data Pipelines](part13/ch48_t2i_t2v.md)
 
-## Part 14: Practical Projects
+## Part XIV: Practical Projects
 
 This part connects acquisition, cleaning, synthesis, RAG, agents, DataOps, privacy, data flywheels, open-source model reproduction, video-generation data pipelines, and enterprise semantic data agents into runnable projects.
 

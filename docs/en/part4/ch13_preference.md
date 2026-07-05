@@ -4,18 +4,7 @@
 
 ## Abstract
 
-After supervised fine-tuning, a model can already follow instructions and produce formatted responses. Whether it can consistently respond in the manner an organization expects, however, depends on the design of preference data and reward signals. This chapter is addressed to teams responsible for constructing preference data and building reward models. It explains how preference data determines a model's behavioral style and why preference alignment is still necessary after SFT. The chapter first distinguishes three supervision paradigms—pairwise preference, scalar score, and process reward—along with their respective data requirements. It then discusses sources of preference (expert annotation, user feedback, model-as-judge, and rule-based arbitration) and strategies for mixing online, offline, and synthetic preference data. It proceeds to address annotation disagreement, style bias, and score drift, offering consistency governance methods including arbitration, re-labeling, annotator calibration, and golden sets. Finally, it establishes an interface mapping between preference data and training methods such as DPO, RM, RLAIF, and PRM, clarifying when to use pairwise preferences and when to use process supervision.
-
-
-After SFT, a model can typically handle basic tasks: it understands instructions and produces answers in a given format. But in real-world deployment, the question is rarely whether the model can answer at all—it is whether the model will consistently answer in the way the organization expects.
-
-The "choices" referred to here do not point to the low-level sampling behavior of which token the model selects from the search space. More precisely, they concern how a model, when faced with multiple response paths that are all "basically correct," will favor a particular style, follow a particular ordering of values, prioritize certain objectives, and make trade-offs when objectives conflict. A model that has not undergone preference alignment may be factually sound yet still exhibit verbosity, sycophancy, excessive conservatism, vagueness, overconfidence, over-templating, loosening of risk boundaries, or inconsistent business messaging. It can be used—but it cannot be used stably, at scale, or with confidence.
-
-This is precisely why preference data and reward signals occupy an independent position in the model lifecycle. Their role is not to teach the model "what knowledge exists in the world," nor "what the correct answers to tasks are." They further specify: given multiple candidate behaviors that are all acceptable, what should be encouraged, what must be suppressed, what is acceptable in ordinary contexts but impermissible in high-risk ones, and what may please users yet violates business norms. In other words, the focus of preference learning is not knowledge acquisition—it is shaping a value ordering (Christiano et al. 2017; Ziegler et al. 2019).
-
-For teams responsible for data design, annotation specifications, training interfaces, and deployment governance, this means preference data cannot be treated as a simple extension of SFT data. SFT is more like specifying what the model "can do," while preference data specifies "how the model does those things, whose needs it prioritizes, how it handles conflicts, and when it should stop." The former primarily addresses capability; the latter further addresses controllability, consistency, and organizational fit. Many teams, having completed SFT, feel the model is "good enough." Truly mature teams recognize that the preference phase is the critical engineering step for translating abstract business requirements, risk boundaries, and brand voice into training signals.
-
-This chapter is addressed to team members who need to take preference learning from concept to concrete data construction and training interfaces. It systematically discusses the role of preference data, the relationship between preference pairs and reward models, process reward design, multi-objective preference aggregation and Pareto trade-offs, preference sources and supervision modes, noise and consistency governance, and how this data maps to training methods such as DPO, RM, RLAIF, and PRM (Lightman et al. 2024; Uesato et al. 2022). We emphasize a core thesis: preference learning should not be understood as "one more round of human feedback"—the focus is on explicitly constructing an organization-level behavioral ranking system. Reward signals, likewise, should not be treated as scores casually appended during training; they are the critical interface for formally converting that ranking system into learnable training objectives.
+After supervised fine-tuning, a model can already follow instructions and produce formatted responses. Whether it can consistently respond in the manner an organization expects, however, depends on the design of preference data and reward signals. This chapter is addressed to teams responsible for constructing preference data and building reward models. It explains how preference data determines a model's behavioral style and why preference alignment is still necessary after supervised fine-tuning (SFT). The chapter first distinguishes three supervision paradigms—pairwise preference, scalar score, and process reward—along with their respective data requirements. It then discusses sources of preference (expert annotation, user feedback, model-as-judge, and rule-based arbitration) and strategies for mixing online, offline, and synthetic preference data. It proceeds to address annotation disagreement, style bias, and score drift, offering consistency governance methods including arbitration, re-labeling, annotator calibration, and golden sets. Finally, it establishes an interface mapping between preference data and training methods such as direct preference optimization (DPO), reward modeling (RM), reinforcement learning from AI feedback (RLAIF), and process reward modeling (PRM), clarifying when to use pairwise preferences and when to use process supervision.
 
 ## Keywords
 
@@ -28,6 +17,17 @@ Preference data and reward signals; supervised fine-tuning; preference data; ali
 - Compare the different dependencies of direct preference optimization and reward modeling on "comparison quality" and "scale stability," and design candidate construction strategies accordingly.
 - Identify conflicts in multi-objective preferences, and apply Pareto trade-off thinking to design multi-layer reward systems.
 - Govern annotation disagreement, style bias, and score drift—improving preference data reliability through arbitration, re-labeling, annotator calibration, and golden sets.
+
+
+After SFT, a model can typically handle basic tasks: it understands instructions and produces answers in a given format. But in real-world deployment, the question is rarely whether the model can answer at all—it is whether the model will consistently answer in the way the organization expects.
+
+The "choices" referred to here do not point to the low-level sampling behavior of which token the model selects from the search space. More precisely, they concern how a model, when faced with multiple response paths that are all "basically correct," will favor a particular style, follow a particular ordering of values, prioritize certain objectives, and make trade-offs when objectives conflict. A model that has not undergone preference alignment may be factually sound yet still exhibit verbosity, sycophancy, excessive conservatism, vagueness, overconfidence, over-templating, loosening of risk boundaries, or inconsistent business messaging. It can be used—but it cannot be used stably, at scale, or with confidence.
+
+This is precisely why preference data and reward signals occupy an independent position in the model lifecycle. Their role is not to teach the model "what knowledge exists in the world," nor "what the correct answers to tasks are." They further specify: given multiple candidate behaviors that are all acceptable, what should be encouraged, what must be suppressed, what is acceptable in ordinary contexts but impermissible in high-risk ones, and what may please users yet violates business norms. In other words, the focus of preference learning is not knowledge acquisition—it is shaping a value ordering (Christiano et al. 2017; Ziegler et al. 2019).
+
+For teams responsible for data design, annotation specifications, training interfaces, and deployment governance, this means preference data cannot be treated as a simple extension of SFT data. SFT is more like specifying what the model "can do," while preference data specifies "how the model does those things, whose needs it prioritizes, how it handles conflicts, and when it should stop." The former primarily addresses capability; the latter further addresses controllability, consistency, and organizational fit. Many teams, having completed SFT, feel the model is "good enough." Truly mature teams recognize that the preference phase is the critical engineering step for translating abstract business requirements, risk boundaries, and brand voice into training signals.
+
+This chapter is addressed to team members who need to take preference learning from concept to concrete data construction and training interfaces. It systematically discusses the role of preference data, the relationship between preference pairs and reward models, process reward design, multi-objective preference aggregation and Pareto trade-offs, preference sources and supervision modes, noise and consistency governance, and how this data maps to training methods such as DPO, RM, RLAIF, and PRM (Lightman et al. 2024; Uesato et al. 2022). We emphasize a core thesis: preference learning should not be understood as "one more round of human feedback"—the focus is on explicitly constructing an organization-level behavioral ranking system. Reward signals, likewise, should not be treated as scores casually appended during training; they are the critical interface for formally converting that ranking system into learnable training objectives.
 
 ## 13.1 The Role of Preference Data
 
@@ -86,8 +86,7 @@ Figure 13-1 illustrates the corresponding workflow or structure.
 
 ![Figure 13-1: Flowchart from preference data to reward signal](../../images/part4/Yu-Chap13-Fig01-EN.svg)
 
-*Figure 13-1: Flowchart from preference data to reward signal.*
-
+*Figure 13-1: Flowchart from preference data to reward signal*
 ## 13.2 Pairwise Preferences, Scalar Rewards, and Process Rewards
 
 ### Definitions of Pairwise Preference, Scalar Score, and Process Reward
@@ -132,9 +131,7 @@ Listing 13-1 provides a JSON data example.
 ],"meta":{"task":"rag_agent","unit":"step"}}
 ```
 
-*Listing 13-1: JSON data example.*
-
-
+*Listing 13-1: JSON data example*
 ### Which Tasks Are Suited to Each of the Three Reward Signal Types
 
 From the perspective of task types, pairwise preference, scalar reward, and process reward do not have an absolute hierarchy—they are better understood as three interfaces suited to different problem levels.
@@ -243,9 +240,7 @@ Listing 13-2 provides a JSON data example.
 }
 ```
 
-*Listing 13-2: JSON data example.*
-
-
+*Listing 13-2: JSON data example*
 ### Multi-Objective Preference Cannot Rely on an "Overall Score" to Mask Conflicts
 
 Many teams, when designing preference data, want to compress all dimensions into a single overall score, believing this makes training simpler and more convenient. The problem is that as long as system objectives are genuinely multi-dimensional, an overall score will inherently lose critical information. At best it tells you "things seem generally better"—it cannot tell you whether helpfulness improved while compliance declined, or whether conciseness increased while interpretability was sacrificed.
@@ -288,8 +283,7 @@ Figure 13-2 illustrates the corresponding workflow or structure.
 
 ![Figure 13-2: Schematic of multi-objective preference trade-offs](../../images/part4/Yu-Chap13-Fig02-EN.svg)
 
-*Figure 13-2: Schematic of multi-objective preference trade-offs.*
-
+*Figure 13-2: Schematic of multi-objective preference trade-offs*
 ## 13.3 Preference Sources and Supervision Modes
 
 ### Expert Annotation, Ordinary User Feedback, Model-as-Judge, and Rule-Based Arbitration
@@ -397,9 +391,7 @@ if __name__ == "__main__":
     print("Samples requiring arbitration:", disagreed)
 ```
 
-*Listing 13-3: Process flow example.*
-
-
+*Listing 13-3: Process flow example*
 ### Debiasing Preference Data and Confidence Modeling
 
 Once a team has accepted the fact that "preference data is inherently noisy," the next step is no longer to treat all samples as equally trustworthy. A more reasonable approach is to perform **confidence modeling** on the samples themselves—in addition to process governance—and to apply systematic debiasing when necessary (Dawid & Skene 1979; Northcutt et al. 2021). Because preference data cannot be treated as binary facts—it is a class of observations carrying source, context, difficulty, and judgment stability. For data teams, this means the training set should not be a simple list of samples but a collection of reward signals with attached weights, confidence levels, and source labels.
@@ -416,8 +408,7 @@ Preference data governance should not stop at "improving agreement rates"; it sh
 
 Table 13-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 13-1: Reward Noise Sources and Governance Actions.*
-
+*Table 13-1: Reward Noise Sources and Governance Actions*
 | Noise Source | Typical Manifestation | Impact on Training | Governance Action |
 |---|---|---|---|
 | Annotation disagreement | Win/lose labels on the same sample frequently reverse | Weakens preference signal, reduces DPO/RM stability | Establish arbitration pool, re-label, increase task specification granularity |
@@ -447,8 +438,7 @@ In practice, many mature teams do not treat DPO, RM, RLAIF, and PRM as mutually 
 
 Table 13-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 13-2: Correspondence Between Preference Types and Training Methods.*
-
+*Table 13-2: Correspondence Between Preference Types and Training Methods*
 | Preference/Reward Type | Typical Data Structure | Best-Matched Method(s) | Advantages | Key Challenges |
 |---|---|---|---|---|
 | Pairwise Preference | `(x, y_w, y_l)` | DPO, ranking-based RM, some RLAIF | Annotation is intuitive, consistency is generally higher, fast to implement | Requires high-quality candidate construction; difficult to express fine-grained rationale |

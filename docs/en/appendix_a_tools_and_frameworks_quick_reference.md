@@ -66,7 +66,7 @@ Object storage stores files but does not automatically provide version semantics
 | lakeFS | Branches and commits over object storage | Lakehouse-style data governance and collaboration |
 | Delta Lake / Apache Iceberg | Large tabular data governance | Large-scale structured samples and metadata |
 
-For cross-institution dataset construction, public evaluation, and teaching reproduction, a minimal combination is often enough: **Git for scripts and specifications, DVC or an equivalent for data versions, object storage for large files, and release pages for external documentation**. This combination is easy to hand off, easy to reproduce in courses, and consistent with the governance language used in Part 8 and Part 12. Concrete data-versioning commands, remote configuration, and pipeline syntax should follow the official DVC documentation (DVC Contributors 2026).
+For cross-institution dataset construction, public evaluation, and teaching reproduction, a minimal combination is often enough: **Git for scripts and specifications, DVC or an equivalent for data versions, object storage for large files, and release pages for external documentation**. This combination is easy to hand off, easy to reproduce in courses, and consistent with the governance language used in Part VIII and Part XII. Concrete data-versioning commands, remote configuration, and pipeline syntax should follow the official DVC documentation (DVC Contributors 2026).
 
 ## A.4 Cleaning, Validation, and Training Preparation Tools
 
@@ -95,7 +95,7 @@ Quality validation is not about achieving zero errors. It is about classifying e
 | Semantics | Is the sample self-consistent and on task? | LLM judges, human spot checks |
 | Task | Does it still satisfy training or evaluation protocols? | Special scripts, task validators |
 
-For the specialized datasets in Part 12, validators should ideally output three objects: a failed-sample pool, failure-reason categories, and repair suggestions. Cleaning then becomes a process of translating problems into next actions.
+For the specialized datasets in Part XII, validators should ideally output three objects: a failed-sample pool, failure-reason categories, and repair suggestions. Cleaning then becomes a process of translating problems into next actions.
 
 ### A.4.3 Deduplication, Decontamination, and Splitting Should Be Governed Separately
 
@@ -141,7 +141,7 @@ With these fields, experiment tracking moves from "what was run" to "why it was 
 
 ### A.5.3 Evaluation Frameworks Need Slices and Evidence Preservation
 
-Large-model evaluation tools are multiplying, but the engineering needs in Part 12 are broader than a single benchmark run. We need reproducible metrics, explainable slices, saved evidence, and traceable versions.
+Large-model evaluation tools are multiplying, but the engineering needs in Part XII are broader than a single benchmark run. We need reproducible metrics, explainable slices, saved evidence, and traceable versions.
 
 Evaluation frameworks should:
 

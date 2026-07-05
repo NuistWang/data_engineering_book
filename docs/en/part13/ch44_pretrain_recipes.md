@@ -37,8 +37,7 @@ In contrast to naive scaled-down trial-and-error, DeepSeek-V3 (Liu et al. 2024) 
 Before examining specific pretraining data recipes, it is necessary to establish a credibility scale for the available information. Intensifying commercial competition has produced wide variation in how today's "open-source models" disclose their data. Without filtering out promotional language in technical reports, engineers can easily misread marketing claims as genuine data engineering documentation. This chapter therefore classifies the degree of data disclosure by leading open-source LLMs along a "transparency spectrum" defined by four dimensions: **Sources**, **Mixture/Ratio**, **Cleaning Pipeline**, and **Downloadability**.
 
 ![Figure 44-1: Data Recipe Funnel](../../images/part13/Wang-Chap44-Fig01-EN.svg)
-*Figure 44-1: Data Recipe Funnel.*
-
+*Figure 44-1: Data Recipe Funnel*
 As shown in Figure 44-1, the data recipe funnel narrows progressively from top to bottom. The macro-level figures disclosed in technical reports (e.g., 14.8T tokens) represent only the surface layer; being able to infer the precise mixture ratios for each domain goes one level deeper; and what can actually be translated into engineering actions—such as heuristic filter thresholds and cleaning scripts—lies at the finest level of detail.
 
 1. **White-box (fully transparent)**:
@@ -51,19 +50,16 @@ As shown in Figure 44-1, the data recipe funnel narrows progressively from top t
 Figure 44-2 illustrates the corresponding workflow or structure.
 
 ![Figure 44-2: Data Transparency Spectrum for Large Language Models](../../images/part13/Wang-Chap44-Fig02-EN.svg)
-*Figure 44-2: Data Transparency Spectrum for Large Language Models.*
-
+*Figure 44-2: Data Transparency Spectrum for Large Language Models*
 > **Note**: The foundational methodologies for general data collection, cleaning (e.g., MinHash LSH deduplication), and tokenization have already been covered in detail in Ch04 (Data Sources), Ch05 (Cleaning), and Ch06 (Tokenization). The hierarchical map of pretraining data sources presented in Chapter 4, for instance, forms the foundation for the discussions in this chapter. This chapter and this section of the book will not revisit those lower-level infrastructures, focusing instead on the specific engineering trade-offs each model makes at the recipe stage.
 
 Figure 44-3 illustrates the corresponding workflow or structure.
 
 ![Figure 44-3: Hierarchical Map of Pretraining Data Sources](../../images/part13/Wang-Chap44-Fig03.png)
-*Figure 44-3: Hierarchical Map of Pretraining Data Sources (redrawn from the foundational figure in Chapter 4).*
-
+*Figure 44-3: Hierarchical Map of Pretraining Data Sources (redrawn from the foundational figure in Chapter 4)*
 Table 44-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 44-1: Data Transparency Spectrum of Leading Open-Source LLMs (6 rows × 5 columns).*
-
+*Table 44-1: Data Transparency Spectrum of Leading Open-Source LLMs (6 rows × 5 columns)*
 | Model Family | Source Category Disclosure | Mixture Ratio Disclosure | Cleaning Rules / Code Disclosure | Pretraining Data Downloadable | Overall Transparency Rating |
 |---|---|---|---|---|---|
 | DeepSeek-V3 | Detailed high-level categories | Macro ratios disclosed | High-level strategy descriptions only | No | Grey-box (partially transparent) |
@@ -79,8 +75,7 @@ After filtering out promotional language in technical reports, the critical ques
 
 *(Note: Figures in the table follow the annotation convention: [D] = explicitly disclosed in the report; [I] = reasonable inference based on model behavior and known information; [E] = community or author estimate.)*
 
-*Table 44-2: Pretraining Data Composition Comparison for Leading Open-Source LLMs (6 rows × 8 columns).*
-
+*Table 44-2: Pretraining Data Composition Comparison for Leading Open-Source LLMs (6 rows × 8 columns)*
 | Data Category | Subcategory / Characteristics | Quality Requirements | DeepSeek-V3 (14.8T) | Qwen2.5 (18T) | Qwen3 (inferred) | Llama-3.1/3.3 (inferred) | OLMo-2 (inferred) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **General Web Text** | High-quality web pages | Very high; deduplicated, marketing content removed | ~50% [I] | ~55% [I] | ~50% [E] | ~50% [I], used in phased manner; high-frequency front-loaded | High proportion; strict deduplication, multi-tier filtering |
@@ -91,8 +86,7 @@ After filtering out promotional language in technical reports, the critical ques
 | **Academic Literature** | ArXiv / medical / legal | Professional terminology, formula parsing | ~5% [I] | ~5–8% [I] | ~8% [I] | ~5% [I], primarily high-quality journals and open-access papers | ~5–8% [I], concentrated in Dolmino Mix academic phase |
 
 ![Figure 44-4: Estimated Data Mixture Ratios — Pie Chart Comparison Across Three Models](../../images/part13/Wang-Chap44-Fig04-EN.svg)
-*Figure 44-4: Estimated Data Mixture Ratios — Pie Chart Comparison Across Three Models.*
-
+*Figure 44-4: Estimated Data Mixture Ratios — Pie Chart Comparison Across Three Models*
 Examining this comparison table horizontally (as illustrated in Figure 44-4) yields **three important observations**:
 
 1. **Rising proportions of code and math data as a key driver of reasoning capability**:
@@ -153,8 +147,7 @@ OLMo-2 emphasizes multi-language coverage and project structure preservation in 
 
 Table 44-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 44-3: Code Data Sources and Scale for Leading Models (4 rows × 6 columns).*
-
+*Table 44-3: Code Data Sources and Scale for Leading Models (4 rows × 6 columns)*
 | Model Family | Estimated Total Code Scale | GitHub Source Code Share | Interactive Notebooks / Q&A Share | Cross-File Parsing (Repo-level) | Format Preservation Strategy |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **DeepSeek-V3** | ~2.5T tokens [E] | ~70% [E] | ~30% [E] | Strong support, topological sorting [D] | Indentation and directory tree preserved |
@@ -213,8 +206,7 @@ This multi-strategy approach to long-text construction embodies the principle of
 
 Table 44-4 summarizes the corresponding comparison and engineering considerations.
 
-*Table 44-4: Long-Context Data Strategies for Leading Models (4 rows × 6 columns).*
-
+*Table 44-4: Long-Context Data Strategies for Leading Models (4 rows × 6 columns)*
 | Model Family | Maximum Context Window | Long-Text Data Sources | Short-Document Packing Strategy | RoPE Scaling and Fine-Tuning Phase | Performance Penalty Control |
 |---|---:|---|---|---|---|
 | DeepSeek-V3 | 128K [D] | Long-form books / repo-level code | Cross-document packing with isolation | RoPE base frequency extended in final annealing phase [D] | YaRN (Peng et al. 2023); minimal precision loss |
@@ -263,8 +255,7 @@ Therefore, when reproducing a large model under a 1B-token or smaller budget, on
 Figure 44-5 illustrates the corresponding workflow or structure.
 
 ![Figure 44-5: Llama-3 Annealing Phase Data Composition Timeline (Curriculum Learning Schedule)](../../images/part13/Wang-Chap44-Fig05-EN.svg)
-*Figure 44-5: Llama-3 Annealing Phase Data Composition Timeline (Curriculum Learning Schedule).*
-
+*Figure 44-5: Llama-3 Annealing Phase Data Composition Timeline (Curriculum Learning Schedule)*
 Qwen2.5's data sampling strategy also embodies the classic principles of Curriculum Learning (Bengio et al. 2009). In Phase 1 (Foundation Building), the model is exposed primarily to massive general web data and base corpora, focusing on learning the statistical distribution of language and commonsense knowledge. In Phase 2 (High-Quality Refinement), the quality filtering threshold is substantially raised: the proportion of general text decreases while the density of code, math, and rigorous academic documents increases—this is the critical period for capability improvement. In Phase 3 (Annealing and Ultra-Long Context), the learning rate declines (annealing), and a higher proportion of synthetic data, domain-specific high-precision human instruction data, and ultra-long sequence data are introduced, enabling a smooth transition from pretraining to alignment.
 
 ---
@@ -291,7 +282,7 @@ Starting from the opening scenario of a 1B-token reproduction failure, this chap
 
 Around the four data categories of code, math, long-form text, and multilingual content, the chapter further analyzed repository-level cross-file dependency parsing, verifier and self-consistency verification, the trade-offs between natural long-form text and short-document packing, and the two sampling strategies of Chinese–English dual-core versus pan-multilingual coverage. Curriculum-based multi-stage scheduling ties these data components together: coverage, capability consolidation, long-context extension, and annealing each serve a distinct role.
 
-The core implication for reproduction engineering is as follows: when reproducing large models under a limited token budget, the budget should be partitioned according to the training cadence into multiple phases, so the model encounters data of appropriate difficulty and quality at the appropriate time—rather than diluting everything via proportional uniform sampling. This chapter provides the recipe-level methodological foundation for the reproducible project case studies in Part 14.
+The core implication for reproduction engineering is as follows: when reproducing large models under a limited token budget, the budget should be partitioned according to the training cadence into multiple phases, so the model encounters data of appropriate difficulty and quality at the appropriate time—rather than diluting everything via proportional uniform sampling. This chapter provides the recipe-level methodological foundation for the reproducible project case studies in Part XIV.
 
 ## References
 

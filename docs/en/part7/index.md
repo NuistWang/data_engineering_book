@@ -1,8 +1,8 @@
-# Part 7: Application-Level Data Engineering
+# Part VII: Application-Level Data Engineering
 
 ## Scope of This Part
 
-Part 7 approaches data engineering from an application-systems perspective, covering RAG, visual retrieval, multimodal evidence fusion, online feedback loops, and knowledge updates—focusing on data engineering design for real-world production use cases.
+Part VII approaches data engineering from an application-systems perspective, covering RAG, visual retrieval, multimodal evidence fusion, online feedback loops, and knowledge updates—focusing on data engineering design for real-world production use cases.
 
 ## Terminology Conventions
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand text processing from Part 2, multimodal samples from Part 3, and tool/agent data from Part 6. Readers from business application teams may focus on evidence objects, version updates, and feedback write-back rather than reducing RAG to vector-database integration.
+Before reading this part, readers should understand text processing from Part II, multimodal samples from Part III, and tool/agent data from Part VI. Readers from business application teams may focus on evidence objects, version updates, and feedback write-back rather than reducing RAG to vector-database integration.
 
 ## Chapter Logic
 

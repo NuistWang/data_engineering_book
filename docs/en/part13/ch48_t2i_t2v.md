@@ -32,7 +32,7 @@ Video generation is even more dependent on this kind of "executable language." A
 
 This chapter addresses precisely this data chain: how T2I and T2V generative models transform raw images and video footage into training-ready, controllable, and auditable data. A boundary must be drawn with Chapter 10. Chapter 10 has already addressed general audio-visual sample engineering, including scene segmentation, shot boundary detection, keyframe selection, ASR, subtitle alignment, unified timelines, and clip-level/segment-level/frame-level sample organization. This chapter assumes that foundational processing has already been completed, and focuses on data stages unique to generative models: caption rewriting, aesthetic and quality scoring, safety and copyright filtering, video motion filtering, spatiotemporal caption augmentation, training bucketing, and data routing.
 
-This chapter also does not expand on video generation model architectures, nor does it discuss the details of DiT, U-Net, Transformer, Flow Matching, or VAE; multimodal understanding tasks are addressed in Chapter 47 and the foundational chapters in Part 3. The concern here is a different and more subtle form of engineering capability: how to transform raw media into the kind of generative supervision that a model can truly learn from.
+This chapter also does not expand on video generation model architectures, nor does it discuss the details of DiT, U-Net, Transformer, Flow Matching, or VAE; multimodal understanding tasks are addressed in Chapter 47 and the foundational chapters in Part III. The concern here is a different and more subtle form of engineering capability: how to transform raw media into the kind of generative supervision that a model can truly learn from.
 
 ---
 
@@ -92,8 +92,7 @@ Wan2.2 (Wan Team 2025) places greater emphasis on aesthetic direction for high-q
 
 Comparing these models together reveals three relatively clear approaches. The first is the image recaptioning approach represented by DALL·E 3 and SD3, focused on making training text more granular and more closely aligned with user prompts. The second is the video engineering approach represented by HunyuanVideo and Open-Sora, focused on unifying motion, shot language, quality, OCR, watermarks, and structured captions into a single pipeline. The third is the industry model approach represented by FLUX and Wan2.2—publicly disclosed effects are strong, data chain details are limited, but one can observe trends toward high aesthetics, stringent safety constraints, and orientation toward creative use cases. For the purposes of this chapter, Table 48-1 serves primarily to consolidate these differences; what readers truly need to understand is this: generative model data pipelines have evolved from "data collection" to "supervisory signal production." Data no longer passively enters training sets; after filtering, rewriting, stratification, and routing, it actively shapes the generative capabilities of models.
 
-*Table 48-1: Comparative Overview of Mainstream T2I/T2V Model Data Pipelines.*
-
+*Table 48-1: Comparative Overview of Mainstream T2I/T2V Model Data Pipelines*
 | Model / Project | Modality | Data Ingestion & Disclosure Level | Filtering & Governance Focus | Caption / Annotation Strategy | Implications for Data Engineering |
 |---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023; OpenAI 2023) | T2I | Data pool not fully disclosed; public materials emphasize high-quality image-text supervision | Safety filtering, personal information reduction, inference-side prompt rewriting | Highly descriptive captions; user prompts expanded at inference time | Demonstrates that highly descriptive captions are critical for prompt following |
@@ -141,8 +140,7 @@ SD3's 50/50 mixing strategy is particularly worth emulating. Replacing all origi
 
 Table 48-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 48-2: Comparison of Caption Rewriting Approaches (DALL·E 3 / SD3 / CogVLM2 Distillation).*
-
+*Table 48-2: Comparison of Caption Rewriting Approaches (DALL·E 3 / SD3 / CogVLM2 Distillation)*
 | Approach | Training-side caption generator | Original caption retention strategy | Output form | Inference-side prompt rewriting | Advantages | Risks and costs |
 |---|---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023) | Specially trained highly descriptive captioner | Not fully disclosed in public materials | High-density natural-language caption | Yes, user prompt expanded with GPT-4 | Marked improvement in prompt following; short prompts converted into executable descriptions | System is closed; captioner training details and data thresholds cannot be reproduced |
@@ -160,8 +158,7 @@ Figure 48-1 illustrates the corresponding workflow or structure.
 
 ![Figure 48-1: T2I Data Pipeline](../../images/part13/Zhang-Chap48-Fig01.svg)
 
-*Figure 48-1: T2I Data Pipeline.*
-
+*Figure 48-1: T2I Data Pipeline*
 ---
 
 ## 48.4 T2V Data Pipeline
@@ -239,8 +236,7 @@ Spatiotemporal alignment does not mean this chapter re-examines long-video timel
 
 Table 48-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 48-3: Spatiotemporal Alignment Strategies for Video Captioning.*
-
+*Table 48-3: Spatiotemporal Alignment Strategies for Video Captioning*
 | Strategy | Method | Representative Projects | Advantages | Limitations | Applicable Position |
 |---|---|---|---|---|---|
 | Single-shot single caption | One overall description per single-shot clip | HunyuanVideo, Open-Sora | High throughput; suitable for large-scale pretraining | Intra-shot details and action order easily compressed | Large-scale pretraining main data |
@@ -273,9 +269,7 @@ Figure 48-2 illustrates the corresponding workflow or structure.
 
 ![Figure 48-2: T2V Data Pipeline](../../images/part13/Zhang-Chap48-Fig02.svg)
 
-*Figure 48-2: T2V Data Pipeline.*
-
-
+*Figure 48-2: T2V Data Pipeline*
 ---
 
 ## 48.5 Comparative Dataset Disclosure: From SD3 to Open-Source Video Pipelines
@@ -380,10 +374,7 @@ Figure 48-3 illustrates the corresponding workflow or structure.
 
 ![Figure 48-3: Multi-Tier Aesthetic / Copyright / Safety Filtering Architecture](../../images/part13/Zhang-Chap48-Fig03.svg)
 
-*Figure 48-3: Multi-Tier Aesthetic / Copyright / Safety Filtering Architecture.*
-
-
-
+*Figure 48-3: Multi-Tier Aesthetic / Copyright / Safety Filtering Architecture*
 ---
 
 ## 48.7 Implementation Risks, Costs, and Boundaries
@@ -398,7 +389,7 @@ The fourth category of risk is deferred copyright and privacy handling. Addressi
 
 On the cost side, offline captioning for T2V is the most easily underestimated expense. Video decoding, multi-frame sampling, VLM inference, OCR, optical flow, deduplication, aesthetic scoring, and manual spot-checking all consume substantial GPU resources and storage bandwidth. Open-Sora-Plan's disclosed captioner inference speeds already demonstrate that video captioning is not a lightweight step. Engineering practice must use tiered approaches: deploy cheaper models for lower-value samples, route boundary samples to review, and reserve strong captioners and structured annotation only for high-value samples.
 
-The scope boundaries of this chapter must also be respected. General video segmentation, ASR, speaker diarization, and subtitle timelines have been addressed in Chapter 10; multimodal understanding, video question answering, and event detection are handled by Chapter 47 and the foundational chapters in Part 3. This chapter addresses only how training data for generative models is filtered, rewritten, routed, and audited. Maintaining this boundary avoids chapter redundancy and allows readers to see what is genuinely new in generative data engineering.
+The scope boundaries of this chapter must also be respected. General video segmentation, ASR, speaker diarization, and subtitle timelines have been addressed in Chapter 10; multimodal understanding, video question answering, and event detection are handled by Chapter 47 and the foundational chapters in Part III. This chapter addresses only how training data for generative models is filtered, rewritten, routed, and audited. Maintaining this boundary avoids chapter redundancy and allows readers to see what is genuinely new in generative data engineering.
 
 ---
 
@@ -408,7 +399,7 @@ Data engineering for T2I and T2V has evolved from the early "collect and clean" 
 
 For engineering practice, what matters most is not memorizing specific fixed thresholds, but establishing a transferable set of data judgment criteria: whether raw media is safe, compliant, sharp, worth learning from, accurately described, and capable of entering the correct data bucket according to training stage. Only when these questions are systematically resolved does the ceiling imposed by model architecture have the opportunity to be fully realized.
 
-This chapter also concludes Part 13. The preceding chapters addressed the collection, organization, understanding, and evaluation of multimodal data; this chapter shifts the perspective to the data pipelines of generative models. Generative AI data engineering is no longer merely "preparing more raw material"; it is evolving into a more refined capability for data orchestration—writing the world into a language that models can learn, keeping risks out of training sets, and transforming quality and style into controllable training variables.
+This chapter also concludes Part XIII. The preceding chapters addressed the collection, organization, understanding, and evaluation of multimodal data; this chapter shifts the perspective to the data pipelines of generative models. Generative AI data engineering is no longer merely "preparing more raw material"; it is evolving into a more refined capability for data orchestration—writing the world into a language that models can learn, keeping risks out of training sets, and transforming quality and style into controllable training variables.
 
 ## References
 

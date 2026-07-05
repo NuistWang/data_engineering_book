@@ -89,8 +89,7 @@ In 2022, a DeepMind paper titled "Training Compute-Optimal Large Language Models
 
 The DeepMind team conducted rigorously controlled compute-optimal experiments. Their results showed that the 70B-parameter Chinchilla model, trained on approximately 1.4T tokens, outperformed the previously larger 280B-parameter Gopher model (Rae et al. 2021) on a wide range of evaluations. The contrast between the two model families in terms of parameter count and training data is presented in Table 1-1.
 
-*Table 1-1: Comparison of Data Resources Between DeepMind's Old-Paradigm and New-Paradigm Models. Source: compiled from publicly available information in Rae et al. (2021) and Hoffmann et al. (2022).*
-
+*Table 1-1: Comparison of Data Resources Between DeepMind's Old-Paradigm and New-Paradigm Models. Source: compiled from publicly available information in Rae et al. (2021) and Hoffmann et al. (2022)*
 | Model (Organization) | Parameter Count $N$ | Training Token Count $D$ | Estimated Training Compute (relative) | Inference-Side Characteristics |
 | :--- | :--- | :--- | :--- | :--- |
 | **Gopher** (Rae et al. 2021) | 280B | 300B tokens (~0.3T) | Equal controlled variable | Larger parameter count; higher inference deployment cost |
@@ -115,8 +114,7 @@ When training data has higher information density, less noise, and clearer task 
 
 The research trajectory described above reveals that, under the LLM data engineering paradigm, the true constraint on the capability frontier of a model is not a single dimension but the combined trade-off among **scale, quality, and diversity**. Within a limited budget and limited time, all three cannot be simultaneously maximized; pushing any one to an extreme typically incurs costs in the other two or in engineering overhead. Table 1-2 presents a cost-constraint matrix for all three dimensions, showing data processing methods, direct benefits, and primary constraints.
 
-*Table 1-2: Cost-Constraint Matrix for Scale, Quality, and Diversity in LLM Data Engineering. Source: compiled by the authors based on public research trajectories and engineering practice.*
-
+*Table 1-2: Cost-Constraint Matrix for Scale, Quality, and Diversity in LLM Data Engineering. Source: compiled by the authors based on public research trajectories and engineering practice*
 | Core Dimension | Primary Data Processing Methods | Direct Benefits | Primary Constraints |
 | :--- | :--- | :--- | :--- |
 | **Scale** | Large-scale collection via Common Crawl, proprietary crawlers, code-repository mirrors, and licensed corpora, followed by a first-pass filter using MinHash LSH, language identification, and basic quality filtering. | Provides broad world knowledge and multi-domain language patterns; a necessary condition for the model to operate in the effective range of Scaling Laws. | Storage, network, and preprocessing costs grow rapidly; if scale expansion lacks quality gates, low-value tokens translate directly into wasted training compute. |
@@ -129,8 +127,7 @@ Because it is impossible to simultaneously push scale, quality, and diversity to
 
 For engineering teams with long experience in recommendation systems, search ranking, or industrial computer vision, transitioning to LLM training often involves significant methodological friction. Traditional data warehouses and machine learning pipelines primarily handle structured tables, log features, and finite label spaces, whereas LLM training involves unstructured text, code, documents, multimodal long sequences, and open-ended generation objectives. Much of the traditional ETL experience remains valuable, but it cannot directly substitute for the LLM-specific work of data cleaning, deduplication, contamination detection, mixing, version management, and training I/O optimization. Table 1-3 highlights the differences between the two data paradigms in terms of core data types, physical volume, and quality-control challenges.
 
-*Table 1-3: Traditional Machine Learning Data Pipelines vs. LLM-Native Data Systems. Source: compiled by the authors based on engineering differences between traditional data platforms and LLM data pipelines.*
-
+*Table 1-3: Traditional Machine Learning Data Pipelines vs. LLM-Native Data Systems. Source: compiled by the authors based on engineering differences between traditional data platforms and LLM data pipelines*
 | Comparison Dimension | Traditional ML Data Pipeline (e.g., recommendation systems) | LLM-Native Data System |
 | :--- | :--- | :--- |
 | **Core data type** | Primarily user behavior tables, business event tables, sensor logs, and wide feature tables; relatively stable structure. | Primarily web text, code, papers, PDFs, image-text pairs, audio/video, and interaction logs; diverse formats with unstable boundaries. |
@@ -152,12 +149,10 @@ The data flywheel refers to a continuously self-reinforcing data loop: after a m
 
 ![Figure 1-1: LLM-Era Data Engineering Role Restructuring Diagram, showing the closed-loop interfaces among platform, data, algorithms, annotation, product, and compliance roles](../../images/part1/Yu-Chap01-Fig01.svg)
 
-*Figure 1-1: LLM-Era Data Engineering Role Restructuring Diagram. Source: original illustration. The figure depicts the role flywheel loop spanning platform architecture, data collection, model fine-tuning and validation, and product-research iteration.*
-
+*Figure 1-1: LLM-Era Data Engineering Role Restructuring Diagram. Source: original illustration. The figure depicts the role flywheel loop spanning platform architecture, data collection, model fine-tuning and validation, and product-research iteration*
 The prerequisite for this flywheel to operate at high speed is the existence of **clear, executable data handoff SLAs (service-level agreements)** between every pair of roles. Without them, any ambiguous interface—for example, "the product side says it will pass feedback data to the data team, but the format and field definitions are unspecified"—will stall the flywheel at its weakest link. Table 1-4 defines the data responsibilities, upstream/downstream deliverables, and key SLA metrics for the six core roles.
 
-*Table 1-4: Core Role and Data Interface Responsibility Definitions for Six LLM Project Roles. Source: compiled by the authors based on LLM project collaboration interfaces and data governance practices.*
-
+*Table 1-4: Core Role and Data Interface Responsibility Definitions for Six LLM Project Roles. Source: compiled by the authors based on LLM project collaboration interfaces and data governance practices*
 | Role | Core Data Responsibilities | Data Inputs from Upstream | Data Deliverables to Downstream | Key SLA Metrics |
 | :--- | :--- | :--- | :--- | :--- |
 | **Platform Architect / MLOps** | Build and operate the underlying compute scheduling, distributed file systems (e.g., Lustre / HDFS), and training cluster stability | Data package paths, format specifications, and size estimates submitted by data engineers | Stable GPU/TPU training cluster access interface; DataLoader optimization recommendations | Training stability, I/O wait time, and GPU utilization targets should be defined against the project baseline |
@@ -193,9 +188,7 @@ Listing 1-1 gives a timeline example of how feedback, data cleaning, compliance 
 [Week T+5] Product team confirms that key problem cases reproduce less often and no new high-risk regressions appear → Expand release and enter the next flywheel cycle
 ```
 
-*Listing 1-1: Timeline example for a minimum viable data-flywheel cycle.*
-
-
+*Listing 1-1: Timeline example for a minimum viable data-flywheel cycle*
 The above is the complete timeline of a minimum viable data flywheel (MVP Data Flywheel). Without this level of role division and SLA constraints, the flywheel will experience information distortion or time delays at some stage, ultimately extending the model iteration cycle from weeks to months.
 
 ### 1.3.2 Team Capability Model and Role Evolution
@@ -209,8 +202,7 @@ The modern **LLM data engineer** has differentiated from the intersection of tra
 
 Table 1-5 compares the capability boundaries of LLM data engineers and traditional ML data engineers across dimensions including core technology stack, data-volume experience, and quality assessment ability.
 
-*Table 1-5: Capability Boundary Comparison Between LLM Data Engineers and Traditional ML Data Engineers. Source: compiled by the authors based on role capability boundaries and toolchain evolution.*
-
+*Table 1-5: Capability Boundary Comparison Between LLM Data Engineers and Traditional ML Data Engineers. Source: compiled by the authors based on role capability boundaries and toolchain evolution*
 | Capability Dimension | Traditional ML Data Engineer | LLM Data Engineer |
 | :--- | :--- | :--- |
 | **Core technology stack** | SQL / Pandas / Spark ETL / BI dashboards | Ray Data / datatrove / MinHash / KenLM / LakeFS |
@@ -230,19 +222,17 @@ With the above paradigm shift in mind, a global map is needed to orient the read
 
 ![Figure 1-2: Full Fourteen-Part Lifecycle Map, showing the knowledge structure spanning general principles, pretraining, multimodal, alignment, applications, platform, compliance, and hands-on projects](../../images/part1/Yu-Chap01-Fig02.svg)
 
-*Figure 1-2: Full Fourteen-Part Lifecycle Map. Source: original illustration. The figure uses infrastructure as its foundation, threading through pretraining, multimodal data, alignment, applications, platform governance, compliance, and hands-on projects.*
-
-
+*Figure 1-2: Full Fourteen-Part Lifecycle Map. Source: original illustration. The figure uses infrastructure as its foundation, threading through pretraining, multimodal data, alignment, applications, platform governance, compliance, and hands-on projects*
 ### 1.4.1 How the Fourteen Parts Cover Pain Points at Each Stage
 
-1. **Part 1 (General Principles and Infrastructure)**: Establishes problem awareness, the quality vocabulary, and the infrastructure coordinate system.
-2. **Part 2 (Text Pretraining Data Engineering)**: Covers collection, cleaning, deduplication, tokenization, serialization, and efficient data loading.
-3. **Part 3 (Multimodal Data Engineering)**: Handles image-text pairs, document OCR, video and audio, and cross-modal alignment.
+1. **Part I (General Principles and Infrastructure)**: Establishes problem awareness, the quality vocabulary, and the infrastructure coordinate system.
+2. **Part II (Text Pretraining Data Engineering)**: Covers collection, cleaning, deduplication, tokenization, serialization, and efficient data loading.
+3. **Part III (Multimodal Data Engineering)**: Handles image-text pairs, document OCR, video and audio, and cross-modal alignment.
 4. **Parts 4-6 (Alignment, Synthetic, and Reasoning Data)**:
-    * **Part 4 (Instruction Fine-tuning and Preference Data)** discusses SFT, preference data, reward signals, and annotation QA.
-    * **Part 5 (Synthetic Data Engineering)** discusses how to build a controllable synthetic data factory using strong models, rule-based verification, and data auditing.
-    * **Part 6 (Reasoning and Agent Data Engineering)** focuses on chain-of-thought (CoT), tool-use, agent memory, and multi-turn interaction data.
-5. **Part 7 (Application-Level Data Engineering)**: Discusses RAG, multimodal retrieval, online feedback, and knowledge updates.
+    * **Part IV (Instruction Fine-tuning and Preference Data)** discusses SFT, preference data, reward signals, and annotation QA.
+    * **Part V (Synthetic Data Engineering)** discusses how to build a controllable synthetic data factory using strong models, rule-based verification, and data auditing.
+    * **Part VI (Reasoning and Agent Data Engineering)** focuses on chain-of-thought (CoT), tool-use, agent memory, and multi-turn interaction data.
+5. **Part VII (Application-Level Data Engineering)**: Discusses RAG, multimodal retrieval, online feedback, and knowledge updates.
 6. **Parts 8-11 (Platform, Assets, and Compliance Governance)**: Covers DataOps, data versioning, observability, data assets, data contracts, privacy compliance, and federated learning.
 7. **Parts 12-14 (Specialized Datasets, Projects, and Open-Source Practice)**: Uses specialized datasets and project pipelines to present the complete path from dataset design to engineering deployment.
 
@@ -254,27 +244,26 @@ The remaining chapters of this book cover pretraining data, multimodal data, ali
 
 ### 1.5.1 Recommended Reading Paths for Different Roles
 
-**Path A: Platform Engineering / MLOps Focus.** Platform engineers should read Chapters 1 through 3 first, then proceed to the distributed cleaning and DataLoader optimization content in Part 2, followed by a systematic reading of Part 8 (DataOps Platform Development) and Part 9 (Data Assets and Data Contracts). The goal of this path is to build an infrastructure-level perspective on throughput, versioning, lineage, and observability.
+**Path A: Platform Engineering / MLOps Focus.** Platform engineers should read Chapters 1 through 3 first, then proceed to the distributed cleaning and DataLoader optimization content in Part II, followed by a systematic reading of Part VIII (DataOps Platform Development) and Part IX (Data Assets and Data Contracts). The goal of this path is to build an infrastructure-level perspective on throughput, versioning, lineage, and observability.
 
-**Path B: Traditional Machine Learning Background Transition.** Readers with experience in recommendation systems, search ranking, or traditional machine learning should complete the paradigm shift in Part 1 and then focus on Part 2 (Text Pretraining Data Engineering) and Part 4 (Instruction Fine-tuning and Preference Data). This path helps transfer structured feature engineering experience into unstructured semantic cleaning, deduplication, contamination detection, and sample design.
+**Path B: Traditional Machine Learning Background Transition.** Readers with experience in recommendation systems, search ranking, or traditional machine learning should complete the paradigm shift in Part I and then focus on Part II (Text Pretraining Data Engineering) and Part IV (Instruction Fine-tuning and Preference Data). This path helps transfer structured feature engineering experience into unstructured semantic cleaning, deduplication, contamination detection, and sample design.
 
-**Path C: Full-Stack LLM Data Expert.** Readers who need to lead data engineering decisions may read in the following order: "Part 1 foundational framework -> Parts 2 and 3 data acquisition and processing -> Parts 4-6 alignment and reasoning data -> Part 7 application-level data engineering -> Parts 8, 9, and 11 platform and governance -> Parts 13 and 14 hands-on projects." This path emphasizes end-to-end capabilities spanning data sourcing, quality assessment, platform interfaces, and compliance auditing. As shown in Table 1-6, different reader types exhibit markedly different reading priorities across the parts.
+**Path C: Full-Stack LLM Data Expert.** Readers who need to lead data engineering decisions may read in the following order: "Part I foundational framework -> Parts 2 and 3 data acquisition and processing -> Parts 4-6 alignment and reasoning data -> Part VII application-level data engineering -> Parts 8, 9, and 11 platform and governance -> Parts 13 and 14 hands-on projects." This path emphasizes end-to-end capabilities spanning data sourcing, quality assessment, platform interfaces, and compliance auditing. As shown in Table 1-6, different reader types exhibit markedly different reading priorities across the parts.
 
-*Table 1-6: Chapter Priority Recommendations by Reader Type (1 = Low, 5 = High). Source: compiled by the authors; scores are reading-path recommendations rather than measured evaluations.*
-
+*Table 1-6: Chapter Priority Recommendations by Reader Type (1 = Low, 5 = High). Source: compiled by the authors; scores are reading-path recommendations rather than measured evaluations*
 | Part | Platform / MLOps Engineer | Transitioning ML Engineer | Full-Stack LLM Data Expert |
 | :--- | :---: | :---: | :---: |
-| Part 1 (This Part): Paradigm and Overview | 5 | 5 | 5 |
-| Part 2: Pretraining Text Data | 5 | 5 | 5 |
-| Part 3: Multimodal Data | 3 | 3 | 5 |
-| Part 4: SFT and Preference Data | 2 | 4 | 5 |
-| Part 5: Synthetic Data Factory | 2 | 3 | 5 |
-| Part 6: CoT and Agent Data | 2 | 3 | 5 |
-| Part 7: RAG Application-Level Data Stack | 3 | 5 | 5 |
-| Part 8: DataOps Platform | 5 | 3 | 5 |
-| Part 9: Data Assets and Data Contracts | 4 | 3 | 5 |
-| Part 11: Privacy and Compliance | 4 | 3 | 5 |
-| Part 14: Hands-On Projects | 4 | 4 | 5 |
+| Part I (This Part): Paradigm and Overview | 5 | 5 | 5 |
+| Part II: Pretraining Text Data | 5 | 5 | 5 |
+| Part III: Multimodal Data | 3 | 3 | 5 |
+| Part IV: SFT and Preference Data | 2 | 4 | 5 |
+| Part V: Synthetic Data Factory | 2 | 3 | 5 |
+| Part VI: CoT and Agent Data | 2 | 3 | 5 |
+| Part VII: RAG Application-Level Data Stack | 3 | 5 | 5 |
+| Part VIII: DataOps Platform | 5 | 3 | 5 |
+| Part IX: Data Assets and Data Contracts | 4 | 3 | 5 |
+| Part XI: Privacy and Compliance | 4 | 3 | 5 |
+| Part XIV: Hands-On Projects | 4 | 4 | 5 |
 
 ### 1.5.2 Common Parochialism Pitfalls to Avoid
 
@@ -287,7 +276,7 @@ When training loss fluctuates, the common reflex is to adjust the learning rate 
 In practice, an LLM training dataset is a continuously evolving asset, not a one-time, static file. Copyright and compliance requirements may oblige the team to remove corpora from a particular source; newly publicized adversarial prompts require timely updates to safety alignment data; new vertical domain requirements demand supplementary specialized corpora. Without rigorous data quality scoring mechanisms and version rollback capability, a team will struggle to build a sustainable data engineering system.
 
 **Pitfall 3: Equating "synthetic data" with "low-quality data."**
-Influenced by early low-quality synthetic samples, many engineers tend to underestimate the value of synthetic data. Modern synthetic data, however—particularly the knowledge distillation paradigm in which strong models guide weaker ones—is fundamentally different from simple random augmentation. A carefully designed combination of well-crafted prompts, strong-model generation, rule-based verification, and human auditing can produce samples with substantial value in terms of logical rigor and scenario coverage. Part 5 will systematically discuss the engineering practice of synthetic data factories.
+Influenced by early low-quality synthetic samples, many engineers tend to underestimate the value of synthetic data. Modern synthetic data, however—particularly the knowledge distillation paradigm in which strong models guide weaker ones—is fundamentally different from simple random augmentation. A carefully designed combination of well-crafted prompts, strong-model generation, rule-based verification, and human auditing can produce samples with substantial value in terms of logical rigor and scenario coverage. Part V will systematically discuss the engineering practice of synthetic data factories.
 
 ### 1.5.3 Looking Ahead: What Does the Next Chapter Cover?
 
@@ -295,7 +284,7 @@ Chapter 1 has established the fundamental problems, role interfaces, and global 
 
 In the next chapter (**Chapter 2: LLM Data Lifecycle and Quality Assessment Framework**), we establish a quality dictionary for LLM data: starting from a unified quality vocabulary, we systematically analyze the quality standards for each of the four stages—pretraining, SFT, RLHF, and RAG—and introduce the Data Release Scorecard, elevating quality assessment from experiential judgment to a quantifiable, automatically triggerable engineering gate. Chapter 3 will then discuss how infrastructure components such as Ray, Apache Iceberg, and S3/MinIO object storage support this data quality governance system.
 
-Only by establishing quality consensus and a foundational platform infrastructure can the pretraining data engineering in Part 2—covering Common Crawl, web text, code, and specialized corpora—operate on a stable execution coordinate.
+Only by establishing quality consensus and a foundational platform infrastructure can the pretraining data engineering in Part II—covering Common Crawl, web text, code, and specialized corpora—operate on a stable execution coordinate.
 
 ---
 

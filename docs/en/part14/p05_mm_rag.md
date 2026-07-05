@@ -47,8 +47,7 @@ Listing P05-1 provides a process or path example illustrating the input/output r
 Financial Report PDF → Page Images → Multimodal Index → Top-K Page Evidence → Multi-Image Reasoning → Answer with Source Citations and Evaluation Records
 ```
 
-*Listing P05-1: Process or path example.*
-
+*Listing P05-1: Process or path example*
 This snippet converts the above process into a structured representation that can be inspected.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -63,8 +62,7 @@ Acceptance metrics include retrieval hit rate, citation accuracy, answer keyword
 
 Table P05-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P05-1: Multimodal RAG Publication Acceptance Table.*
-
+*Table P05-1: Multimodal RAG Publication Acceptance Table*
 | Acceptance Dimension | Metric / Evidence | Publication Verification Criteria |
 | --- | --- | --- |
 | Evidence Retrieval | Top-K hit rate, table-of-contents page false recall rate, cross-page recall coverage, and evidence page stability | Each answer should be traceable to a page image, page number, retrieval score, and match rationale |
@@ -181,8 +179,7 @@ In this sense, this chapter answers a larger question:
 Figure P05-1 illustrates the corresponding workflow or structure.
 
 ![Figure P05-1: Overall architecture diagram of the multimodal RAG financial report assistant](../../images/part14/p05/Cao-Project05-Fig01.svg)
-*Figure P05-1: Overall architecture diagram of the multimodal RAG financial report assistant.*
-
+*Figure P05-1: Overall architecture diagram of the multimodal RAG financial report assistant*
 From an engineering perspective, this project can be decomposed into three layers.
 
 ### 4.1 Layer One: Page Asset Layer
@@ -265,8 +262,7 @@ The key to this design lies not in the model names themselves, but in the separa
 Figure P05-2 illustrates the corresponding workflow or structure.
 
 ![Figure P05-2: Comparison of Vision-First and OCR-First approaches](../../images/part14/p05/Cao-Project05-Fig02.svg)
-*Figure P05-2: Comparison of Vision-First and OCR-First approaches.*
-
+*Figure P05-2: Comparison of Vision-First and OCR-First approaches*
 ---
 
 ## 6. Technology Selection: ColPali, Byaldi, and Qwen2.5-VL
@@ -355,8 +351,7 @@ The current project generates page-level assets and index-related artifacts, suc
 Figure P05-3 illustrates the corresponding workflow or structure.
 
 ![Figure P05-3: Page assets and page number mapping diagram](../../images/part14/p05/Cao-Project05-Fig03.svg)
-*Figure P05-3: Page assets and page number mapping diagram.*
-
+*Figure P05-3: Page assets and page number mapping diagram*
 ---
 
 ## 8. Index Construction: Organization of the Multimodal Index
@@ -390,8 +385,7 @@ In complex document projects, indexing is not a preparatory step but part of the
 Figure P05-4 illustrates the corresponding workflow or structure.
 
 ![Figure P05-4: PDF page rendering and visual index construction diagram](../../images/part14/p05/Cao-Project05-Fig04.svg)
-*Figure P05-4: PDF page rendering and visual index construction diagram.*
-
+*Figure P05-4: PDF page rendering and visual index construction diagram*
 ---
 
 ## 9. Retrieval Design: Top-K Multi-Page Recall
@@ -445,8 +439,7 @@ For example, numerical questions can prioritize pages with dense tables; trend q
 Figure P05-5 illustrates the corresponding workflow or structure.
 
 ![Figure P05-5: Top-K multi-page recall and table-of-contents page filtering diagram](../../images/part14/p05/Cao-Project05-Fig05.svg)
-*Figure P05-5: Top-K multi-page recall and table-of-contents page filtering diagram.*
-
+*Figure P05-5: Top-K multi-page recall and table-of-contents page filtering diagram*
 ---
 
 ## 10. Prompt Design: Noise-Suppression Constraints in the Generation Stage
@@ -519,8 +512,7 @@ Therefore, in multi-image scenarios it is especially important to prompt the mod
 Figure P05-6 illustrates the corresponding workflow or structure.
 
 ![Figure P05-6: Multi-image context injection and answer constraint diagram](../../images/part14/p05/Cao-Project05-Fig06.svg)
-*Figure P05-6: Multi-image context injection and answer constraint diagram.*
-
+*Figure P05-6: Multi-image context injection and answer constraint diagram*
 ---
 
 ## 12. Step-by-Step Practice: The Minimal Reproducible Pipeline from Indexing to Question Answering
@@ -555,8 +547,7 @@ def build_index():
     )
 ```
 
-*Listing P05-2: Python implementation excerpt.*
-
+*Listing P05-2: Python implementation excerpt*
 This snippet converts the above process into a structured representation that can be inspected.
 
 ### 12.2 Phase Two: Multi-Page Retrieval
@@ -570,8 +561,7 @@ RETRIEVAL_K = 4
 results = RAG.search(user_query, k=RETRIEVAL_K)
 ```
 
-*Listing P05-3: Python implementation excerpt.*
-
+*Listing P05-3: Python implementation excerpt*
 This snippet converts the above process into a structured representation that can be inspected.
 
 ### 12.3 Phase Three: Multi-Image Reasoning
@@ -600,8 +590,7 @@ for res in results:
     })
 ```
 
-*Listing P05-4: Python implementation excerpt.*
-
+*Listing P05-4: Python implementation excerpt*
 This snippet converts the above process into a structured representation that can be inspected.
 
 ### 12.4 Phase Four: Result Return and Evidence Organization
@@ -687,8 +676,7 @@ Because chart comprehension is not equivalent to text extraction. A model may be
 Figure P05-7 illustrates the corresponding workflow or structure.
 
 ![Figure P05-7: Dual-layer evaluation framework for retrieval and answer quality](../../images/part14/p05/Cao-Project05-Fig07.svg)
-*Figure P05-7: Dual-layer evaluation framework for retrieval and answer quality.*
-
+*Figure P05-7: Dual-layer evaluation framework for retrieval and answer quality*
 ---
 
 ## 15. Metric Interpretation: Boundaries of Current Results
@@ -836,8 +824,7 @@ This facilitates integration with downstream systems.
 Figure P05-8 illustrates the corresponding workflow or structure.
 
 ![Figure P05-8: Multimodal RAG optimization roadmap](../../images/part14/p05/Cao-Project05-Fig08.svg)
-*Figure P05-8: Multimodal RAG optimization roadmap.*
-
+*Figure P05-8: Multimodal RAG optimization roadmap*
 ---
 
 ## 19. Engineering Deployment: Suitability for High-Value, Low-Frequency Scenarios
@@ -902,8 +889,7 @@ This preserves the efficiency advantages of text RAG while using multimodal RAG 
 Figure P05-9 illustrates the corresponding workflow or structure.
 
 ![Figure P05-9: Collaborative architecture of text RAG and multimodal RAG](../../images/part14/p05/Cao-Project05-Fig09.svg)
-*Figure P05-9: Collaborative architecture of text RAG and multimodal RAG.*
-
+*Figure P05-9: Collaborative architecture of text RAG and multimodal RAG*
 ---
 
 ## 21. Quality Baselines: Usability Standards for the Multimodal Financial Report Assistant

@@ -6,13 +6,12 @@
 | --- | --- | ---: | --- | --- |
 | `docs/zh/appendix_a_tools_and_frameworks_quick_reference.md` | 附录A：工具与框架速查表 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/appendix_b_compliance_and_release_checklist.md` | 附录B：合规与上线检查清单 | 17 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/appendix_c_cost_estimation_and_resource_templates.md` | 附录C：成本估算与资源模板 | 22 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/appendix_d_paper_to_implementation_guide.md` | 附录D：论文到工程化转换指南 | 20 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/appendix_c_cost_estimation_and_resource_templates.md` | 附录C：成本估算与资源模板 | 21 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/appendix_d_paper_to_implementation_guide.md` | 附录D：论文到工程化转换指南 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/appendix_e_common_bug_debugging_manual.md` | 附录E：常见数据工程 Bug 调试手册 | 30 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/appendix_f_terminology_and_chinese_english_mapping.md` | 附录F：术语表与中英文对照 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/appendix_g_datagallery_note.md` | 附录G：DataGallery 开源生态简介 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/appendix_h_mindspore_note.md` | 附录H：MindSpore 技术附录与致谢 | 21 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/front_matter_guide.md` | 卷前导读：出版版结构说明与阅读路径 | 1 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/appendix_g_datagallery_note.md` | 附录G：DataGallery 开源生态与复现说明 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/appendix_h_mindspore_note.md` | 附录H：MindSpore 技术附录与致谢 | 20 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part1/ch01_data_change.md` | 第1章 大模型时代的数据变革 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part1/ch02_quality_framework.md` | 第2章：LLM数据生命周期与质量评估框架 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part1/ch03_data_stack.md` | 第3章 AI原生数据栈与成本治理 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -23,17 +22,17 @@
 | `docs/zh/part10/ch35_security_permission_collaboration.md` | 第35章：数据工程 Agent 的安全、权限与人机协同 | 6 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch36_compliance_framework_and_governance.md` | 第36章：数据合规框架与治理 | 30 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part11/ch37_federated_learning_and_privacy_preserving_technologies.md` | 第37章：联邦学习与隐私保护技术 | 44 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch38_text_corpora_transparent_ledger.md` | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 24 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md` | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch40_visual_document_table_data_engineering.md` | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 28 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 38 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 16 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch38_text_corpora_transparent_ledger.md` | 第38章：文本语料数据工程 | 24 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch39_image_text_candidate_pool_data_engineering.md` | 第39章：图文数据工程 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch40_visual_document_table_data_engineering.md` | 第40章：视觉文档与表格数据工程 | 24 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch41_visual_reasoning_tool_data_engineering.md` | 第41章：视觉推理数据工程 | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch42_speech_audio_interaction_data_engineering.md` | 第42章：语音与音频数据工程 | 13 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part12/ch43_reasoning_trace_compression_data_engineering.md` | 第43章：推理轨迹数据工程 | 15 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch44_pretrain_recipes.md` | 第44章：LLM 预训练数据工程实战：从配方到落地 | 10 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch45_posttrain_recipes.md` | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 19 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch46_rl_reasoning_data.md` | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 23 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch46_rl_reasoning_data.md` | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 22 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part13/ch47_vlm_data_recipes.md` | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part13/ch48_t2i_t2v.md` | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 34 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part13/ch48_t2i_t2v.md` | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 33 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p01_mini_c4.md` | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 26 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p02_legal_sft.md` | 项目二：垂直领域专家 SFT（法律） | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part14/p03_llava_instruct.md` | 项目三：LLaVA 多模态指令数据工厂 | 45 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
@@ -58,17 +57,17 @@
 | `docs/zh/part3/ch10_video_audio.md` | 第10章 视频与音频数据工程 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part3/ch11_cross_modal_alignment.md` | 第11章 跨模态对齐与融合 | 4 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch12_sft.md` | 第12章：SFT数据设计与指令体系 | 0 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part4/ch13_preference.md` | 第13章：偏好数据与奖励信号 | 51 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part4/ch13_preference.md` | 第13章：偏好数据与奖励信号 | 49 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part4/ch14_qa.md` | 第14章 标注平台、质量保障体系与数据运营 | 2 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part5/ch15_data_synthesis.md` | 第15章：合成数据工厂：从种子到验证 | 53 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part5/ch15_data_synthesis.md` | 第15章：合成数据工厂：从种子到验证 | 52 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part5/ch16_distillation.md` | 第16章：知识蒸馏与模型协作 | 5 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part5/ch17_quality.md` | 第17章：合成数据质量控制与模型坍缩 | 1 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part6/ch18_cot.md` | 第18章：思维链与推理数据工程 | 3 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part6/ch19_tool.md` | 第19章：Tool-Use 与函数调用数据 | 47 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part6/ch20_agent.md` | 第20章：Agent记忆与多轮交互数据 | 40 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part6/ch19_tool.md` | 第19章：Tool-Use 与函数调用数据 | 45 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part6/ch20_agent.md` | 第20章：Agent记忆与多轮交互数据 | 37 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part7/ch21_rag_pipeline.md` | 第21章：RAG 数据流水线 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part7/ch22_multimodal_rag_visual_retrieval.md` | 第22章：多模态 RAG 与视觉检索 | 35 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
-| `docs/zh/part7/ch23_online_feedback_knowledge_update.md` | 第23章：在线反馈闭环与知识更新 | 44 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part7/ch22_multimodal_rag_visual_retrieval.md` | 第22章：多模态 RAG 与视觉检索 | 33 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
+| `docs/zh/part7/ch23_online_feedback_knowledge_update.md` | 第23章：在线反馈闭环与知识更新 | 43 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part8/ch24_dataops_flywheel_team.md` | 第24章：DataOps 飞轮与团队组织 | 36 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part8/ch25_data_versioning_experiment_tracking.md` | 第25章：数据版本管理与实验追踪 | 21 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |
 | `docs/zh/part8/ch26_data_platform_observability.md` | 第26章：数据平台可观测性 | 8 | 语言风格；术语统一；章节逻辑；图表引用；参考文献；Springer 体例 | 待人工签核 |

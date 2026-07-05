@@ -45,8 +45,7 @@ Agent Tool-Use；工具调用；执行轨迹；恢复建模；安全阻断
 工具 schema -> 任务规格 -> 模拟环境 -> success/recovery/block 轨迹 -> 质量检查 -> Agent 数据集
 ```
 
-*代码清单P07-1：流程或路径示例。*
-
+*代码清单P07-1：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
@@ -104,8 +103,7 @@ Agent Tool-Use；工具调用；执行轨迹；恢复建模；安全阻断
 图P07-1展示了相应的流程或结构。
 
 ![图 P07-1：Agent Tool-Use 数据工厂总览](../../images/part14/p07/Yu-Project07-Fig01.svg)
-*图 P07-1：Agent Tool-Use 数据工厂总览。*
-
+*图 P07-1：Agent Tool-Use 数据工厂总览*
 ---
 
 ## 2. 项目目标与边界
@@ -222,8 +220,7 @@ Agent 不只是工具调用器，它还涉及多轮上下文和持久状态管�
 图P07-2展示了相应的流程或结构。
 
 ![图 P07-2：Agent Tool-Use 三层架构图](../../images/part14/p07/Yu-Project07-Fig02.svg)
-*图 P07-2：Agent Tool-Use 三层架构图。*
-
+*图 P07-2：Agent Tool-Use 三层架构图*
 ---
 
 ## 5. 工程前置：Agent 数据工厂的关键面
@@ -263,8 +260,7 @@ Agent Tool-Use 数据工厂的难点，并不只是“把工具调用样本做�
 图P07-3展示了相应的流程或结构。
 
 ![图 P07-3：Agent 数据工厂关键工程面示意图](../../images/part14/p07/Yu-Project07-Fig03.svg)
-*图 P07-3：Agent 数据工厂关键工程面示意图。*
-
+*图 P07-3：Agent 数据工厂关键工程面示意图*
 ---
 
 ## 6. 工具规范层：schema 作为训练起点
@@ -319,8 +315,7 @@ def build_tool_schemas() -> list[dict]:
     ]
 ```
 
-*代码清单P07-2：Python 实现片段。*
-
+*代码清单P07-2：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段结构说明，项目并没有把工具看成“给模型的一段自然语言说明”，而是看成一组**可以驱动后续数据构造的结构化对象**。这也解释了为什么当前项目虽然只有 `6` 个工具 schema，但已经能够覆盖 search、db、calendar、code、memory、unsafe 等多类行为边界。
@@ -341,8 +336,7 @@ schema 不是为了好看，而是为了让“工具定义—轨迹生成—环�
 图P07-4展示了相应的流程或结构。
 
 ![图 P07-4：工具 schema 结构示意图](../../images/part14/p07/Yu-Project07-Fig04.svg)
-*图 P07-4：工具 schema 结构示意图。*
-
+*图 P07-4：工具 schema 结构示意图*
 ---
 
 ## 7. 任务规格与轨迹模板：任务日志之外的监督结构
@@ -396,8 +390,7 @@ def build_templates() -> list[dict]:
     ]
 ```
 
-*代码清单P07-3：Python 实现片段。*
-
+*代码清单P07-3：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这样的写法把“轨迹模板”从抽象概念变成了**可直接落盘、可直接检查、可直接被下游读取的结构**。后面 `run_p7_checks.py` 之所以能检查 `templates_cover_single_multi_and_safety`，就是因为模板层已经被显式结构化了。
@@ -420,8 +413,7 @@ def build_templates() -> list[dict]:
 图P07-5展示了相应的流程或结构。
 
 ![图 P07-5：任务规格与轨迹模板关系图](../../images/part14/p07/Yu-Project07-Fig05.svg)
-*图 P07-5：任务规格与轨迹模板关系图。*
-
+*图 P07-5：任务规格与轨迹模板关系图*
 ---
 
 ## 8. 轨迹类型设计：success、recovery、block 并行建设
@@ -475,8 +467,7 @@ def build_search_recovery(task: dict) -> list[dict]:
     ]
 ```
 
-*代码清单P07-4：Python 实现片段。*
-
+*代码清单P07-4：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段实现把“失败—分析—重试”的中间决策显式写了出来。对训练来说，这比只保留两次工具调用结果更有价值。
@@ -495,8 +486,7 @@ def build_blocked(task: dict, reason: str) -> list[dict]:
     ]
 ```
 
-*代码清单P07-5：Python 实现片段。*
-
+*代码清单P07-5：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这说明 block 并不是“工具调用失败”的副产物，而是一个独立的正当行为分支。
@@ -516,8 +506,7 @@ def build_blocked(task: dict, reason: str) -> list[dict]:
 图P07-6展示了相应的流程或结构。
 
 ![图 P07-6：success / recovery / block 轨迹分层图](../../images/part14/p07/Yu-Project07-Fig06.svg)
-*图 P07-6：success / recovery / block 轨迹分层图。*
-
+*图 P07-6：success / recovery / block 轨迹分层图*
 ---
 
 ## 9. 模拟执行环境：环境层作为约束面
@@ -574,8 +563,7 @@ def execute_trajectory(trajectory: dict, task_specs: dict[str, dict]) -> tuple[d
                 ...
 ```
 
-*代码清单P07-6：Python 实现片段。*
-
+*代码清单P07-6：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段逻辑的关键价值在于：项目把轨迹、环境、工具日志和最终指标连在了一起。这样一来，“恢复成功率”和“unsafe block rate”这些指标才不是纸面统计，而是执行后的真实结果。
@@ -591,8 +579,7 @@ def execute_trajectory(trajectory: dict, task_specs: dict[str, dict]) -> tuple[d
 图P07-7展示了相应的流程或结构。
 
 ![图 P07-7：模拟工具环境执行闭环图](../../images/part14/p07/Yu-Project07-Fig07.svg)
-*图 P07-7：模拟工具环境执行闭环图。*
-
+*图 P07-7：模拟工具环境执行闭环图*
 ---
 
 ## 10. 流程拆解：P07 是如何从定义到评估逐步落盘的
@@ -627,8 +614,7 @@ def execute_trajectory(trajectory: dict, task_specs: dict[str, dict]) -> tuple[d
 图P07-8展示了相应的流程或结构。
 
 ![图 P07-8：P07 六步流水线图](../../images/part14/p07/Yu-Project07-Fig08.svg)
-*图 P07-8：P07 六步流水线图。*
-
+*图 P07-8：P07 六步流水线图*
 ---
 
 ## 11. 恢复机制：failure 到 recovery 的监督价值
@@ -659,8 +645,7 @@ recovery 训练的本质，不是教模型“犯错”，而是教模型“如�
 图P07-9展示了相应的流程或结构。
 
 ![图 P07-9：参数修复与重试流程图](../../images/part14/p07/Yu-Project07-Fig09.svg)
-*图 P07-9：参数修复与重试流程图。*
-
+*图 P07-9：参数修复与重试流程图*
 ---
 
 ## 12. Memory 轨迹：记忆行为建模
@@ -699,8 +684,7 @@ memory 解决的是状态问题。它让系统能够：
 图P07-10展示了相应的流程或结构。
 
 ![图 P07-10：Memory 读写轨迹示意图](../../images/part14/p07/Yu-Project07-Fig10.svg)
-*图 P07-10：Memory 读写轨迹示意图。*
-
+*图 P07-10：Memory 读写轨迹示意图*
 ---
 
 ## 13. 安全阻断：block 样本的边界作用
@@ -736,8 +720,7 @@ block 样本的价值，不只是让模型学会说“不行”，而是让它�
 图P07-11展示了相应的流程或结构。
 
 ![图 P07-11：Unsafe block 决策分流图](../../images/part14/p07/Yu-Project07-Fig11.svg)
-*图 P07-11：Unsafe block 决策分流图。*
-
+*图 P07-11：Unsafe block 决策分流图*
 ---
 
 ## 14. 数据重组与训练封装：日志到训练接口
@@ -779,8 +762,7 @@ def render_context(events: list[dict]) -> list[str]:
     return rendered
 ```
 
-*代码清单P07-7：Python 实现片段。*
-
+*代码清单P07-7：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这一步很像把“系统日志”翻译成“训练可消费语境”。
@@ -802,8 +784,7 @@ def render_context(events: list[dict]) -> list[str]:
 图P07-12展示了相应的流程或结构。
 
 ![图 P07-12：事件日志到训练样本重组图](../../images/part14/p07/Yu-Project07-Fig12.svg)
-*图 P07-12：事件日志到训练样本重组图。*
-
+*图 P07-12：事件日志到训练样本重组图*
 ---
 
 ## 15. 指标体系：工具成功率之外的信号
@@ -925,8 +906,7 @@ def render_context(events: list[dict]) -> list[str]:
 图P07-13展示了相应的流程或结构。
 
 ![图 P07-13：评估与检查双闭环图](../../images/part14/p07/Yu-Project07-Fig13.svg)
-*图 P07-13：评估与检查双闭环图。*
-
+*图 P07-13：评估与检查双闭环图*
 ---
 
 ## 18. 当前项目的局限与风险：方法样板的边界
@@ -978,8 +958,7 @@ def render_context(events: list[dict]) -> list[str]:
 图P07-14展示了相应的流程或结构。
 
 ![图 P07-14：P07 后续演进路线图](../../images/part14/p07/Yu-Project07-Fig14.svg)
-*图 P07-14：P07 后续演进路线图。*
-
+*图 P07-14：P07 后续演进路线图*
 ---
 
 ## 20. P07 的关键位置：连接“会说”与“会做”的能力层

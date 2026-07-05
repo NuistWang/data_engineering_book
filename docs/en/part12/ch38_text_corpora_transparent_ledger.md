@@ -1,4 +1,4 @@
-# Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers
+# Chapter 38: Text Corpus Data Engineering
 
 <div class="chapter-authors">Guanlin Mu; Xuhong Cao</div>
 
@@ -71,8 +71,7 @@ FineWeb is publicly available as a full dataset, configurations split by Common 
 
 Table 38-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-1: Public FineWeb Forms and Engineering Uses.*
-
+*Table 38-1: Public FineWeb Forms and Engineering Uses*
 | Form | Public Description | Engineering Use | Usage Notes |
 | --- | ---: | --- | --- |
 | FineWeb full dataset | The initial paper reports 15T tokens; the official dataset card continues listing later dumps | Large-scale English Web pre-training, data ablation, filtering-strategy research | The data continues to update; cite the dataset-card access time and scale convention |
@@ -117,8 +116,7 @@ The official FineWeb dataset card states that samples include `language`, `langu
 
 Table 38-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-2: FineWeb-like Web Document Record Schema.*
-
+*Table 38-2: FineWeb-like Web Document Record Schema*
 | Field Group | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Provenance fields | `url`, `dump`, `warc_record_id`, `fetch_time` | WARC metadata and reader supplements | Trace original Web pages, locate crawls, respond to removals |
@@ -168,9 +166,7 @@ Listing 38-1 provides a JSON data example.
 }
 ```
 
-*Listing 38-1: JSON data example.*
-
-
+*Listing 38-1: JSON data example*
 This example illustrates the basic idea of a FineWeb-like corpus: `text` is the training entry point, but by itself it cannot explain sample quality. What supports review is the combination of provenance, language score, filtering status, deduplication scope, and privacy-processing records.
 
 #### Case A.3.2 Relationship Between Schema and Training Evaluation
@@ -199,8 +195,7 @@ The main processing pipeline can be abstracted in the following order. Class nam
 
 Table 38-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-3: Key Modules in the FineWeb Main Processing Pipeline.*
-
+*Table 38-3: Key Modules in the FineWeb Main Processing Pipeline*
 | Order | DataTrove Module | Input | Output | Role |
 | ---: | --- | --- | --- | --- |
 | 1 | `WarcReader` | Common Crawl WARC segments | Raw HTML document stream | Reads Web snapshots from `s3://commoncrawl/crawl-data/.../warc/` |
@@ -233,9 +228,7 @@ pipeline = [
 ]
 ```
 
-*Listing 38-2: Python implementation excerpt.*
-
-
+*Listing 38-2: Python implementation excerpt*
 This is conceptual pseudocode used to explain the module order in the FineWeb example script. Real parameters, log directories, S3 paths, task counts, and Slurm resource configurations should follow the DataTrove repository script.
 
 #### Case A.4.2 Deduplication and Privacy-processing Pipeline
@@ -252,8 +245,7 @@ Figure 38-1 illustrates the corresponding workflow or structure.
 
 ![Figure 38-1 FineWeb MinHash deduplication and PII-processing flow](../../images/part12/Mu-Chap38-Fig01-EN.svg)
 
-*Figure 38-1: FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card.*
-
+*Figure 38-1: FineWeb MinHash deduplication and PII-processing flow. Source: original illustration based on Hugging Face DataTrove `examples/fineweb.py` and the FineWeb dataset card*
 #### Case A.4.3 FineWeb's Per-crawl Deduplication Judgment
 
 Intuitively, global deduplication seems more thorough: put all 96 crawls together and remove all near-duplicate documents. FineWeb's ablation experiments, however, produce the opposite signal. The paper describes a key phenomenon: when global deduplication is performed from the newest crawls toward older crawls, older crawls are heavily removed; in one older snapshot, the retained 10% of the data is actually worse than the removed 90%, containing more advertisements, keyword lists, and abnormally formatted text. FineWeb ultimately chooses to run MinHash deduplication independently for each crawl.
@@ -264,8 +256,7 @@ Figure 38-2 illustrates the corresponding workflow or structure.
 
 ![Figure 38-2 FineWeb data-processing-choice ablation loop](../../images/part12/Mu-Chap38-Fig02-EN.svg)
 
-*Figure 38-2: FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1.*
-
+*Figure 38-2: FineWeb data-processing-choice ablation loop. Source: original illustration based on FineWeb paper Section 3.1*
 ### Case A.5: Evaluating FineWeb Data-processing Choices
 
 FineWeb's evaluation method differs from a typical dataset introduction. It treats data-processing steps as experimental variables and trains ablation models to compare different data versions. The paper states that ablation models keep model parameters, architecture hyperparameters, training token count, and training steps consistent. To reduce random-sampling effects, each data version is used to train two models with different random subsets and different initialization seeds, and their average scores are compared.
@@ -274,8 +265,7 @@ FineWeb's evaluation method differs from a typical dataset introduction. It trea
 
 FineWeb's evaluation protocol can be summarized in Table 38-4.
 
-*Table 38-4: FineWeb Data-ablation Evaluation Protocol.*
-
+*Table 38-4: FineWeb Data-ablation Evaluation Protocol*
 | Control Item | FineWeb Paper Practice | Data-engineering Meaning |
 | --- | --- | --- |
 | Model scale | Ablation model has 1.82B parameters and Llama architecture | Prevents model-scale changes from hiding data differences |
@@ -310,8 +300,7 @@ FineWeb's experience can be converted into an error-attribution table for Web pr
 
 Table 38-5 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-5: Common Failures and Repair Actions for FineWeb-like Web Corpora.*
-
+*Table 38-5: Common Failures and Repair Actions for FineWeb-like Web Corpora*
 | Error Type | Symptom | Possible Root Cause | Data-engineering Repair Action |
 | --- | --- | --- | --- |
 | Page-template residue | Model repeats menus, footers, or cookie text | Direct WET usage or poor main-text extraction | Return to WARC, re-extract with Trafilatura or similar tools, and sample-check template residue |
@@ -391,8 +380,7 @@ Dolma is not a single static file, but a corpus asset with version evolution. Th
 
 Table 38-6 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-6: Public Dolma Versions and Uses.*
-
+*Table 38-6: Public Dolma Versions and Uses*
 | Version | Release Date | Compressed Size | Dataset-card Description | Engineering Use |
 | --- | --- | ---: | --- | --- |
 | `v1` | 2023-08-18 | 6.0 TB | First Dolma release | Trace the earliest public corpus form |
@@ -408,8 +396,7 @@ Source: Versions section of the Hugging Face `allenai/dolma` dataset card.
 
 Dolma covers Web, code, papers, social media, books, and encyclopedic sources. To avoid mixing versions, Table 38-7 uses the coarse-grained statistics from the dataset card's v1.6 summary statistics. The v1.7 sources are more fine-grained, adding Refined Web, StarCoder, arXiv, StackExchange, Flan, OpenWebMath, Algebraic Stack, MegaWika, and other sources. Subsequent writing or experiments should explicitly state which version is used.
 
-*Table 38-7: Dolma v1.6 Source Statistics.*
-
+*Table 38-7: Dolma v1.6 Source Statistics*
 | Source | Document Type | UTF-8 Bytes | Documents | Unicode Words | Llama Tokens |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Common Crawl | web pages | 9,022 GB | 3,370M | 1,775B | 2,281B |
@@ -475,8 +462,7 @@ Transparent corpora do not end with packaging and uploading `text`. At least thr
 
 Table 38-8 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-8: Dolma-like Transparent Corpus Record Schema.*
-
+*Table 38-8: Dolma-like Transparent Corpus Record Schema*
 | Layer | Typical Fields | Source or Generation Method | Engineering Use |
 | --- | --- | --- | --- |
 | Document level | `id`, `source`, `text`, `text_hash` | Data reader and hash computation | Locate samples, deduplicate, read during training |
@@ -518,9 +504,7 @@ Listing 38-3 provides a JSON data example.
 }
 ```
 
-*Listing 38-3: JSON data example.*
-
-
+*Listing 38-3: JSON data example*
 This record cannot be read at only one layer. In Dolma, the document layer, source layer, and training layer must point back to one another. If a document has a `source` but no source card, it can locate a sample but cannot explain the origin. If a source card has statistics but no training manifest, it can explain what is in the dataset but not what the model actually saw. If a manifest has sampling proportions but no document hash, removal and contamination checks break.
 
 ### Case B.4: Dolma Toolkit Makes the Evidence Chain Executable
@@ -533,8 +517,7 @@ Dolma Toolkit documentation summarizes data organization as four actions: tag, d
 
 Table 38-9 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-9: Dolma Toolkit Processing Actions and Evidence Outputs.*
-
+*Table 38-9: Dolma Toolkit Processing Actions and Evidence Outputs*
 | Order | Action | Official Documentation Description | Evidence Output | Main Risk |
 | ---: | --- | --- | --- | --- |
 | 1 | Taggers | Assign language, toxicity, perplexity, and other attribute tags to document spans | Document quality labels and risk labels | Tagger-version changes alter filtering results |
@@ -548,8 +531,7 @@ Figure 38-3 illustrates the corresponding workflow or structure.
 
 ![Figure 38-3 Dolma transparent-corpus evidence chain](../../images/part12/Mu-Chap38-Fig03-EN.svg)
 
-*Figure 38-3: Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation.*
-
+*Figure 38-3: Dolma transparent-corpus evidence chain. Source: original illustration based on AllenAI Dolma Toolkit documentation*
 The boundary between toolchains and manual audits matters. A toolchain can stably generate statistics, tags, hashes, and manifests, but it cannot replace all audits. License boundaries, PII removal, evaluation contamination, and source representativeness still require human rules, sample review, or dedicated detection tasks.
 
 This is also the difference between a Dolma-like transparent corpus and an ordinary "collection of cleaning scripts." Ordinary scripts only answer "what did I delete"; a transparent toolchain must also answer "why was it deleted, how did the post-deletion distribution change, did training actually benefit, and can it be removed later." If a processing action cannot leave interpretable evidence, it is hard for it to support transparent training.
@@ -572,14 +554,12 @@ Figure 38-4 illustrates the corresponding workflow or structure.
 
 ![Figure 38-4 Dolma source mix and training-diagnosis loop](../../images/part12/Mu-Chap38-Fig04-EN.svg)
 
-*Figure 38-4: Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use.*
-
+*Figure 38-4: Dolma source mix and training-diagnosis loop. Source: original illustration based on the Dolma dataset card and OLMo training use*
 #### Case B.5.2 Diagnosis Checklist
 
 Table 38-10 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-10: Dolma-like Transparent Corpus Evaluation and Diagnosis Table.*
-
+*Table 38-10: Dolma-like Transparent Corpus Evaluation and Diagnosis Table*
 | Evaluation Question | Required Records | Metric or Evidence | Possible Action |
 | --- | --- | --- | --- |
 | Which source drives a capability | Source mix, sample proportion, seen tokens | Source ablation, task-score difference $\Delta_s$ | Adjust source weight or add data |
@@ -592,8 +572,7 @@ Table 38-10 summarizes the corresponding comparison and engineering consideratio
 
 Table 38-11 summarizes the corresponding comparison and engineering considerations.
 
-*Table 38-11: Common Failures and Repair Actions for Dolma-like Transparent Corpora.*
-
+*Table 38-11: Common Failures and Repair Actions for Dolma-like Transparent Corpora*
 | Failure Mode | Symptom | Possible Root Cause | Governance Action |
 | --- | --- | --- | --- |
 | Source-mix drift | A task category suddenly regresses in a new version | Sample proportion or filtering rules changed | Compare manifest diff, roll back, or resample by strata |

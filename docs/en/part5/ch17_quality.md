@@ -6,13 +6,6 @@
 
 Synthetic data delivers productivity gains, long-tail coverage, and reduced annotation costs, yet its strong self-reinforcing properties can ultimately erode model capability. When generators, judges, template systems, and trainers are coupled into a closed loop, the sample space becomes increasingly driven by the system's internal preferences rather than by the real world, ultimately triggering model collapse—defined in this chapter as the gradual capability degradation common in engineering practice: a model that increasingly resembles its own generated data and decreasingly resembles the real world. Rather than rejecting synthetic data outright, this chapter addresses a governance imperative: how to keep synthetic data as a source of gain and prevent it from becoming a risk amplifier. Six dimensions are examined: (1) the mechanism by which model self-bootstrapping yields simultaneous benefits and risks, explaining why early results nearly always appear positive and why closed loops progressively narrow; (2) the formation pathways of stylistic uniformity, knowledge drift, and error amplification, along with early signals of model collapse in long-tail scenarios and the divergence between offline stability and online volatility; (3) attribution of risk roots to diversity decay from overly narrow data loops, judge bias, template rigidity, growing sample self-similarity, and excessively high synthetic ratios; (4) detection metrics including distributional divergence, repetition rate, perplexity, and evaluation degradation, paired with synthetic-ratio gradient experiments and ablation designs; (5) risk gates and rollback procedures including synthetic-ratio caps, freeze strategies, real-data infusion, version rollback, and template revision; and (6) post-mortems on question-bank and customer-service corpora, with an on-deployment checklist to institutionalize governance red lines. The conclusion is that the key to synthetic data governance lies in continuously identifying when it supplements reality versus when it replaces reality, and maintaining the real-distribution boundary through metrics and gates that can trigger governance actions.
 
-
-When teams begin using synthetic data at scale, the first sensation is typically one of efficiency dividends: data production accelerates, long-tail coverage broadens, annotation costs drop visibly, and sample structure becomes easier to standardize. These advantages have rapidly made synthetic data one of the core infrastructure components of modern model engineering (Tan et al. 2024; Long et al. 2024). But precisely because synthetic data appears efficient, controllable, and scalable, teams can easily hand increasing training responsibility to the synthetic data pipeline—without adequate governance—until a tool intended to accelerate model evolution ends up eroding model capability itself.
-
-The central focus of this chapter is not a blanket rejection of synthetic data, but rather an explanation of a problem with genuine engineering relevance: why synthetic data can simultaneously deliver benefits while progressively creating risks such as stylistic uniformity, knowledge drift, growing sample self-similarity, training instability, and model collapse. The "model collapse" referred to here (Shumailov et al. 2024) is not limited to the extreme distributional degradation described in theory; it also encompasses the slower but persistent capability decay more common in engineering practice—a model that increasingly resembles its own generated data and decreasingly resembles the real world, gradually losing its ability to adapt to complex inputs, unfamiliar styles, and real business fluctuations even while offline metrics appear acceptable.
-
-For teams responsible for synthetic data generation, quality control, training mixture, and deployment governance, the truly important question is not the binary choice of "whether to use synthetic data," but the governance question of "how to keep synthetic data as a source of gain and prevent it from becoming a risk amplifier." Accordingly, this chapter systematically discusses the engineering methods for synthetic data governance across six dimensions: risk formation mechanisms, detection metrics, controlled experiments, risk gates, rollback strategies, and representative case studies.
-
 ## Keywords
 
 Synthetic data quality; model collapse; self-bootstrapping training; distribution drift; risk gates; rollback strategies
@@ -25,6 +18,13 @@ Synthetic data quality; model collapse; self-bootstrapping training; distributio
 - Design risk gates and rollback procedures—including synthetic-ratio caps, model freezing, real-data infusion, version rollback, and template revision—to maintain the real-distribution boundary.
 
 ---
+
+
+When teams begin using synthetic data at scale, the first sensation is typically one of efficiency dividends: data production accelerates, long-tail coverage broadens, annotation costs drop visibly, and sample structure becomes easier to standardize. These advantages have rapidly made synthetic data one of the core infrastructure components of modern model engineering (Tan et al. 2024; Long et al. 2024). But precisely because synthetic data appears efficient, controllable, and scalable, teams can easily hand increasing training responsibility to the synthetic data pipeline—without adequate governance—until a tool intended to accelerate model evolution ends up eroding model capability itself.
+
+The central focus of this chapter is not a blanket rejection of synthetic data, but rather an explanation of a problem with genuine engineering relevance: why synthetic data can simultaneously deliver benefits while progressively creating risks such as stylistic uniformity, knowledge drift, growing sample self-similarity, training instability, and model collapse. The "model collapse" referred to here (Shumailov et al. 2024) is not limited to the extreme distributional degradation described in theory; it also encompasses the slower but persistent capability decay more common in engineering practice—a model that increasingly resembles its own generated data and decreasingly resembles the real world, gradually losing its ability to adapt to complex inputs, unfamiliar styles, and real business fluctuations even while offline metrics appear acceptable.
+
+For teams responsible for synthetic data generation, quality control, training mixture, and deployment governance, the truly important question is not the binary choice of "whether to use synthetic data," but the governance question of "how to keep synthetic data as a source of gain and prevent it from becoming a risk amplifier." Accordingly, this chapter systematically discusses the engineering methods for synthetic data governance across six dimensions: risk formation mechanisms, detection metrics, controlled experiments, risk gates, rollback strategies, and representative case studies.
 
 ## 17.1 Why Synthetic Data Can Weaken Model Capability
 
@@ -321,8 +321,7 @@ If synthetic data long-term dilutes this friction, the model will progressively 
 Therefore, the value of real data lies not only in "providing more samples"—it lies in "providing real resistance that cannot easily be regularized." This resistance is uncomfortable for training, but it is irreplaceable for capability formation. Table 17-1 summarizes the early risk signals, common manifestations, and priority investigation directions for excessive use of synthetic data.
 
 
-*Table 17-1: Risk Signals and Possible Causes Reference Table.*
-
+*Table 17-1: Risk Signals and Possible Causes Reference Table*
 | Early Risk Signal | Common Manifestations | Possible Causes | Priority Investigation Direction |
 |---|---|---|---|
 | Highly uniform output style | Increasingly similar sentence patterns, structures, and wording | Template rigidity, single-teacher dominance, singular judge preference | Template versions, teacher source distribution, judge scoring standards |
@@ -337,9 +336,7 @@ To more intuitively present the risk formation mechanism, the propagation path o
 
 ![Figure 17-1: Synthetic Data Risk Propagation Mechanism Diagram](../../images/part5/Zhang-Chap17-Fig01-EN.svg)
 
-*Figure 17-1: Synthetic Data Risk Propagation Mechanism Diagram.*
-
-
+*Figure 17-1: Synthetic Data Risk Propagation Mechanism Diagram*
 ---
 
 ## 17.3 Detection Metrics and Controlled Experiments
@@ -397,9 +394,7 @@ if __name__ == "__main__":
     print("Proportion of nearest-neighbor similarities >= threshold:", ratio)
 ```
 
-*Listing 17-1: Process flow example.*
-
-
+*Listing 17-1: Process flow example*
 Perplexity and evaluation degradation metrics provide another angle. If the model's perplexity on synthetic data continuously declines but performance on real validation sets, long-tail validation sets, or cross-distribution validation sets does not improve in tandem (Shumailov et al. 2024), or even begins to decline, this usually indicates the model is overfitting to the synthetic distribution. A genuinely healthy synthetic data system should keep "better on real tasks" and "more fluent on training sets" basically consistent, avoiding the two progressively diverging.
 
 ### Synthetic Ratio Gradient Experiments and Ablation Design
@@ -447,9 +442,7 @@ if __name__ == "__main__":
     print(run_experiment(plans))
 ```
 
-*Listing 17-2: Process flow example.*
-
-
+*Listing 17-2: Process flow example*
 Ablation design must also revolve around risk mechanisms rather than only around model architecture. For example, one can separately remove judge filtering, remove template diversification, remove real-data infusion, and remove retention of failed samples, then observe the manner in which the system degrades. The purpose is to identify "which governance link is truly suppressing collapse." Without such controlled experiments, even if degradation is observed, it is very difficult to know whether the problem comes from an excessively high synthetic ratio, judge bias, template rigidity, or an aging validation set.
 
 ### Correlation Analysis Between Online Effect Degradation and Offline Metric Drift
@@ -460,8 +453,7 @@ One viable approach is to establish a mapping between "online problem types" and
 
 Table 17-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 17-2: Detection Metrics, Thresholds, and Governance Actions.*
-
+*Table 17-2: Detection Metrics, Thresholds, and Governance Actions*
 | Metric Category | Representative Metrics | Risk Signal | Recommended Action |
 |---|---|---|---|
 | Distribution metrics | Length distribution divergence, topic coverage divergence, task type proportion | Synthetic data concentrated in few patterns | Expand real samples, diversify templates, add hard samples |
@@ -510,10 +502,7 @@ To more intuitively present the governance chain, the decision process by which 
 
 ![Figure 17-2: Synthetic Data Quality Gate and Rollback Strategy Flowchart](../../images/part5/Zhang-Chap17-Fig02-EN.svg)
 
-*Figure 17-2: Synthetic Data Quality Gate and Rollback Strategy Flowchart.*
-
-
-
+*Figure 17-2: Synthetic Data Quality Gate and Rollback Strategy Flowchart*
 ### Rollback Represents System Maturity, Not a Failure Signal
 
 Many teams are reluctant to roll back when facing risk, because rollback appears to be acknowledging that the previous version of the work was ineffective. But for synthetic data systems, rollback is precisely an important marker of mature governance. A system that cannot roll back cannot be called truly robust—it is fundamentally just high-risk. Especially in scenarios where distributional contamination is possible, quickly rolling back to the previous safe version is often more prudent than continuing to apply local patches.
@@ -560,8 +549,7 @@ Post-mortem review reveals that this incident was not simply due to "low-quality
 The value of a governance checklist (Gebru et al. 2021; Mitchell et al. 2019; Raji et al. 2020) lies in converting abstract principles into actionable inspection items. A major reason synthetic data systems can easily lose control is that teams often continue to expand in a state of "overall feeling acceptable." The significance of deployment red lines is to clearly specify which problems, once they appear, require the system to pause, roll back, or undergo re-review, rather than allowing continued reliance on optimistic subjective judgment. Table 17-3 lists required inspection questions and corresponding deployment red lines across dimensions such as data source, sample distribution, and repetition and similarity.
 
 
-*Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training.*
-
+*Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training*
 | Inspection Dimension | Required Inspection Questions | Deployment Red Line |
 |---|---|---|
 | Data source | Does it long-term rely on few teachers/few templates? | Single source dominates long-term without external correction |

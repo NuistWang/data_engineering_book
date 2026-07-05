@@ -151,9 +151,7 @@ Listing 20-1 provides a JSON data example.
 }
 ```
 
-*Listing 20-1: JSON data example.*
-
-
+*Listing 20-1: JSON data example*
 The current state snapshot tells us what the system currently knows, what it is doing, and what it lacks. The triggering input may be a new user message, a tool observation, or a feedback signal. The decision action encompasses generating a response, invoking a tool, writing to memory, switching threads, suspending a task, and so on. The updated state records the changes that should occur internally in the system after this step. Only by linking these four parts together does the data truly form a "observe–decide–update" learning unit. If a sample contains only triggering input and response text without pre- and post-states, the model learns only "how to follow one sentence with another," not "how to advance a task given a state."
 
 This minimal closed-loop unit also serves an important secondary purpose: it endows multi-turn data with natural replayability. Once every step has a pre-state and a post-state, teams can check during replay testing whether state has transitioned correctly, where drift began, at which step an error was written into memory, and at which step the state was not updated after feedback. Without this layer, multi-turn data can still be used for training, but diagnosis becomes very difficult.
@@ -174,9 +172,7 @@ For a more intuitive illustration, Figure 20-1 shows a multi-turn state-transiti
 
 ![Figure 20-1: Multi-Turn Agent State Transition Diagram](../../images/part6/Zhang-Chap20-Fig01-EN.svg)
 
-*Figure 20-1: Multi-Turn Agent State Transition Diagram.*
-
-
+*Figure 20-1: Multi-Turn Agent State Transition Diagram*
 ## 20.3 Memory Write, Update, and Recall
 
 ### Which Information Should Enter Memory and Which Should Only Remain in Context
@@ -220,9 +216,7 @@ Listing 20-2 provides a JSON data example.
 }
 ```
 
-*Listing 20-2: JSON data example.*
-
-
+*Listing 20-2: JSON data example*
 ### The Relationship Between Memory Writes and the Task Closed Loop
 
 At a deeper level, memory writes are not an add-on function external to the task workflow; they are an integral part of the task closed loop. When a system writes a memory entry, it is in fact preparing for future state recovery, plan continuation, and personalized execution (Wang et al. 2023). For example, when a user explicitly states in this turn "in the future, always keep English column names in tables for me," this is not only a condition for the current response; it also pre-embeds a behavioral constraint for multiple future tasks. If the system fails to extract it, future tasks will depend on random context collisions; if the system writes it too early or too broadly in an unstable form, it may generate long-term misdirection.
@@ -275,8 +269,7 @@ For example, if the user's long-term preference is "default output in Chinese," 
 
 ![Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents](../../images/part6/Zhang-Chap20-Fig02-EN.svg)
 
-*Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents.*
-
+*Figure 20-2: Memory Layering and Update Flow for Task-Oriented Agents*
 ### Recall Hit Rate, Erroneous Recall, and Forgetting Strategies
 
 When evaluating a memory system, it is insufficient to ask only "whether there was a recall." One must ask "whether the right things were recalled, at the right moment, with the right weight" (Lewis et al. 2020). Recall hit rate is therefore only the most superficial metric. More important questions are: did the recalled information genuinely serve the current task; did it advance state and prevent state contamination; did recalling too much obscure the truly important clues? For multi-turn agents, recall has already moved beyond a pure retrieval problem and is closer to a decision-support problem (Lewis et al. 2020; Asai et al. 2024). If what the system recalls does not help the current thread plan its next step more accurately, even semantically relevant content may constitute an "empty hit."
@@ -341,9 +334,7 @@ if __name__ == "__main__":
     print(detect_contamination(replay))
 ```
 
-*Listing 20-3: Process flow example.*
-
-
+*Listing 20-3: Process flow example*
 ### The Basic Unit of Replay Evaluation Should Be State Transition, Not Response
 
 If multi-turn evaluation continues to score each turn's response individually, it easily reverts to a single-turn mindset. Agent replay evaluation is better anchored in "whether the state transition is correct" as its basic unit. That is, each step should be evaluated not only on whether the response is correct, but also on whether the current state was read correctly, whether the correct action was selected, and whether the subsequent state was correctly updated. This evaluation approach is more complex than pure text scoring, but it more accurately reflects the actual working mechanism of the system.
@@ -389,8 +380,7 @@ To prevent red-line tests from remaining at the level of principled rhetoric, te
 These scenarios matter because they represent high-frequency stress points that multi-turn agents will readily encounter once they enter real usage environments—they are not edge cases. If the model repeatedly fails at these points, no amount of high accuracy on static question-answering benchmarks can conceal the systemic shortfall. Table 20-1 summarizes common multi-turn failure patterns along with their typical manifestations, likely root causes, and corresponding detection actions.
 
 
-*Table 20-1: Multi-Turn Failure Patterns and Detection Actions.*
-
+*Table 20-1: Multi-Turn Failure Patterns and Detection Actions*
 | Failure Pattern | Typical Manifestation | Likely Root Cause | Detection Action |
 |---|---|---|---|
 | State Drift | Deviates from original task goal as conversation lengthens | Missing state fields; weak trajectory supervision | Run long-horizon replay and compare goal consistency at key checkpoints |
@@ -460,8 +450,7 @@ Accordingly, multi-turn data engineering must specify not only write content, wr
 To support practical data modeling, Table 20-2 provides a set of foundational field designs:
 
 
-*Table 20-2: Session Fields and Memory Fields.*
-
+*Table 20-2: Session Fields and Memory Fields*
 | Field Category | Example Field Name | Description | Recommended Layer | Decayable |
 |---|---|---|---|---|
 | Session field | session_id | Identifier for a single continuous interaction container | session | No |

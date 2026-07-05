@@ -202,7 +202,6 @@ def polish_unit_tex(tex: str, item: zh_latex.NavItem) -> str:
         "title_page.md",
         "author_affiliations.md",
         "online_resources.md",
-        "front_matter_guide.md",
         "contributors.md",
     }:
         tex = wrap_ragged_frontmatter(tex)

@@ -45,8 +45,7 @@ Under the combined pressure of data silos and strong regulation, the old paradig
 Figure 37-1 illustrates the corresponding workflow or structure.
 
 ![Figure 37-1: Privacy and compliance conflict in cross-institutional medical data collaboration](../../images/part11/Wang-Chap37-Fig01-EN.svg)
-*Figure 37-1: Privacy and compliance conflict in cross-institutional medical data collaboration.*
-
+*Figure 37-1: Privacy and compliance conflict in cross-institutional medical data collaboration*
 ---
 
 ## 37.1 Why Privacy Protection Must Enter Architecture Design Early
@@ -76,8 +75,7 @@ Architecture design does not eliminate this tension. It finds the **minimum nece
 Figure 37-2 illustrates the corresponding workflow or structure.
 
 ![Figure 37-2: Structural tension between data utility and privacy protection](../../images/part11/Wang-Chap37-Fig02-EN.svg)
-*Figure 37-2: Structural tension between data utility and privacy protection.*
-
+*Figure 37-2: Structural tension between data utility and privacy protection*
 ### 37.1.3 Privacy Budget in Engineering Systems
 
 Differential privacy provides a quantifiable engineering expression for this trade-off: the privacy budget. The budget is usually denoted by $\epsilon$. It is not a financial budget, but an upper-bound measure of allowed leakage risk. Smaller $\epsilon$ usually means stronger protection but greater utility loss. Larger $\epsilon$ means less noise and better model usefulness, but higher leakage risk (Dwork 2011; Abadi et al. 2016).
@@ -93,8 +91,7 @@ The security target shifts from protecting databases to protecting training proc
 Figure 37-3 illustrates the corresponding workflow or structure.
 
 ![Figure 37-3: Governance focus moves from data security to training security](../../images/part11/Wang-Chap37-Fig03-EN.svg)
-*Figure 37-3: Governance focus moves from data security to training security.*
-
+*Figure 37-3: Governance focus moves from data security to training security*
 ---
 
 ## 37.2 Technology Landscape
@@ -104,14 +101,12 @@ The industry has evolved five main technical families for privacy-preserving com
 Figure 37-4 illustrates the corresponding workflow or structure.
 
 ![Figure 37-4: Landscape matrix of privacy-enhancing technologies](../../images/part11/Wang-Chap37-Fig04-EN.svg)
-*Figure 37-4: Landscape matrix of privacy-enhancing technologies.*
-
+*Figure 37-4: Landscape matrix of privacy-enhancing technologies*
 ### 37.2.1 Core Technologies and Comparison
 
 Table 37-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 37-1: Core Technologies and Comparison.*
-
+*Table 37-1: Core Technologies and Comparison*
 | Technology Family | Core Principle | Protection Target | Applicable Phase | Implementation Cost and Main Bottlenecks |
 | :--- | :--- | :--- | :--- | :--- |
 | **Federated Learning (FL)** | Data stays local while models move; nodes train locally and exchange gradients or parameters | Raw training data does not directly leave its domain | Model training and fine-tuning | High communication cost; gradient leakage risk; sensitive to node heterogeneity |
@@ -143,8 +138,7 @@ This round-based flow resembles distributed training, but the assumptions differ
 Figure 37-5 illustrates the corresponding workflow or structure.
 
 ![Figure 37-5: Basic federated-learning training loop](../../images/part11/Wang-Chap37-Fig05-EN.svg)
-*Figure 37-5: Basic federated-learning training loop.*
-
+*Figure 37-5: Basic federated-learning training loop*
 #### 2. FedAvg and Local Updates
 
 The classic federated-learning algorithm is FedAvg. Each client trains locally for several steps and uploads model updates. The central side averages them, often weighted by sample count, to form a new global model. FedAvg is widely used because it is simple, easy to implement, and converges well in many medium-complexity scenarios (McMahan et al. 2017).
@@ -182,8 +176,7 @@ The common training approach is DP-SGD. First, per-sample gradients are clipped 
 Figure 37-6 illustrates the corresponding workflow or structure.
 
 ![Figure 37-6: DP-SGD training flow](../../images/part11/Wang-Chap37-Fig06-EN.svg)
-*Figure 37-6: DP-SGD training flow.*
-
+*Figure 37-6: DP-SGD training flow*
 #### 4. Why DP Is Hard to Tune
 
 The hard part of DP is not whether noise can be added. It is finding an acceptable region across utility, budget, and stability. Parameters that look elegant in theory may ruin a production model. Increasing epsilon to preserve metrics can remove meaningful protection. DP projects often stall not because the theory fails, but because the business cannot accept the accuracy loss.
@@ -253,8 +246,7 @@ Common strategies include **gradient compression**, such as uploading top-k impo
 Figure 37-7 illustrates the corresponding workflow or structure.
 
 ![Figure 37-7: Communication cost breakdown in federated training](../../images/part11/Wang-Chap37-Fig07-EN.svg)
-*Figure 37-7: Communication cost breakdown in federated training.*
-
+*Figure 37-7: Communication cost breakdown in federated training*
 ### 37.3.4 Accuracy Optimization
 
 After DP or other privacy constraints are introduced, teams often need active accuracy compensation. A simple and often effective approach is to start from a stronger pretrained base model and run lighter downstream optimization under privacy constraints. Stronger base models are more likely to keep acceptable performance with limited budget and limited data.
@@ -286,8 +278,7 @@ Vertical FL is usually harder to engineer than horizontal FL. It involves not on
 Figure 37-8 illustrates the corresponding workflow or structure.
 
 ![Figure 37-8: Horizontal FL versus vertical FL](../../images/part11/Wang-Chap37-Fig08-EN.svg)
-*Figure 37-8: Horizontal FL versus vertical FL.*
-
+*Figure 37-8: Horizontal FL versus vertical FL*
 ### 37.4.3 Federated Fine-Tuning
 
 For large models, more systems use federated fine-tuning rather than full-parameter federated training. The reason is practical: full-parameter training is communication-heavy, costly, and exposes a larger privacy surface. Federated fine-tuning often combines PEFT methods such as LoRA, Adapter, and Prefix Tuning, exchanging smaller adapter parameters across institutions rather than all base-model weights (Hu et al. 2022; Kuang et al. 2024).
@@ -327,8 +318,7 @@ This attack breaks a common misconception: data not uploaded does not mean infor
 Figure 37-9 illustrates the corresponding workflow or structure.
 
 ![Figure 37-9: Gradient inversion attack](../../images/part11/Wang-Chap37-Fig09-EN.svg)
-*Figure 37-9: Gradient inversion attack.*
-
+*Figure 37-9: Gradient inversion attack*
 ### 37.5.3 Model Poisoning and Backdoor Attacks
 
 In federated environments, attackers may not steal data. They can upload manipulated model updates from malicious clients and corrupt the global model. If the goal is to degrade overall performance, the attack is model poisoning. If the goal is to produce wrong output under specific triggers, it is a backdoor attack (Bagdasaryan et al. 2020).
@@ -364,8 +354,7 @@ A mature system does not pile these capabilities into one service. It separates 
 Figure 37-10 illustrates the corresponding workflow or structure.
 
 ![Figure 37-10: Overall federated system architecture](../../images/part11/Wang-Chap37-Fig10-EN.svg)
-*Figure 37-10: Overall federated system architecture.*
-
+*Figure 37-10: Overall federated system architecture*
 ### 37.6.2 Data Flow and Control Flow
 
 A critical design point is distinguishing **data flow** from **control flow**. Data flow describes how raw data, local samples, intermediate features, gradients, or parameter updates move. Control flow describes who issues training tasks, who decides participation rounds, who approves policy changes, who records budget consumption, and who may terminate training.
@@ -407,8 +396,7 @@ Across the book, the loop is clear. Ch27 provides the institutional compliance f
 Figure 37-11 illustrates the corresponding workflow or structure.
 
 ![Figure 37-11: Closed loop across compliance governance, privacy pipeline, federated training, and application capability](../../images/part11/Wang-Chap37-Fig11-EN.svg)
-*Figure 37-11: Closed loop across compliance governance, privacy pipeline, federated training, and application capability.*
-
+*Figure 37-11: Closed loop across compliance governance, privacy pipeline, federated training, and application capability*
 ### 37.7.4 Why This Connection Matters
 
 Many projects fail because pre-governance is done by one team and the training system by another, without shared strategy. Classification and isolation may be completed upstream while downstream training reintroduces risk through caching, debugging, parameter synchronization, or output logs. P09 and federated systems should not be isolated modules. They should share classification levels, audit policy, risk thresholds, and incident handling logic. Only then is privacy a consistent lifecycle boundary rather than a safe-looking segment.
@@ -434,8 +422,7 @@ If the task is set intersection or intersection statistics, MPC/PSI is usually t
 Figure 37-12 illustrates the corresponding workflow or structure.
 
 ![Figure 37-12: Privacy technology routes in medical and financial scenarios](../../images/part11/Wang-Chap37-Fig12-EN.svg)
-*Figure 37-12: Privacy technology routes in medical and financial scenarios.*
-
+*Figure 37-12: Privacy technology routes in medical and financial scenarios*
 ---
 
 ## 37.9 From Training to Inference: A Full-Lifecycle View

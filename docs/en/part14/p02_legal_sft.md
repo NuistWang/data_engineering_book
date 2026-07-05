@@ -45,8 +45,7 @@ Listing P02-1 provides a process or path example to illustrate the input-output 
 Legal text/PDF → Document cleaning → Domain task schema → Instruction samples → Compliance and quality checks → SFT dataset
 ```
 
-*Listing P02-1: Process or path example.*
-
+*Listing P02-1: Process or path example*
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 A sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance methods of this project.
@@ -172,8 +171,7 @@ In this sense, the most important question this chapter addresses is not a "tech
 Figure P02-1 illustrates the corresponding workflow or structure.
 
 ![Figure P02-1: Legal-Domain SFT Data Factory Overview](../../images/part14/p02/Xu-Project02-Fig01.svg)
-*Figure P02-1: Legal-Domain SFT Data Factory Overview.*
-
+*Figure P02-1: Legal-Domain SFT Data Factory Overview*
 From an engineering perspective, this project can be decomposed into three layers.
 
 ### 4.1 Layer 1: Knowledge Processing Layer
@@ -252,8 +250,7 @@ Clearly articulating role assignments is, in essence, a statement that **industr
 Figure P02-2 illustrates the corresponding workflow or structure.
 
 ![Figure P02-2: Legal SFT Data Factory Role Assignment Diagram](../../images/part14/p02/Xu-Project02-Fig02.svg)
-*Figure P02-2: Legal SFT Data Factory Role Assignment Diagram.*
-
+*Figure P02-2: Legal SFT Data Factory Role Assignment Diagram*
 ---
 
 ## 6. Seed Data: The Seed Layer as the Starting Point for Supervision
@@ -304,8 +301,7 @@ This not only degrades sample readability, but also causes downstream Self-Instr
 
 Table P02-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P02-1: Components and Selection Rationale.*
-
+*Table P02-1: Components and Selection Rationale*
 | Component | Choice | Function | Rationale |
 | --- | --- | --- | --- |
 | PDF parsing | `pdfplumber` | Read page text and coordinates | Supports bounding-box-based header/footer trimming; well-suited for institutional PDFs |
@@ -335,8 +331,7 @@ with pdfplumber.open(file_path) as pdf:
         text = page_crop.extract_text()
 ```
 
-*Listing P02-2: Python implementation excerpt.*
-
+*Listing P02-2: Python implementation excerpt*
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 ### 7.4 Removing Embedded Page Numbers
@@ -348,8 +343,7 @@ Listing P02-3 provides a process or path example to illustrate the input-output 
 ……shall bear corresponding legal liability. - 195 - The parties concerned……
 ```
 
-*Listing P02-3: Process or path example.*
-
+*Listing P02-3: Process or path example*
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 A naive rule that simply "deletes dash-number-dash patterns" will readily misfire on legitimate numbering or list structures within the body text. Therefore, this project applies more carefully constrained regular expressions to enforce context boundaries around page numbers, deleting only fragments that more closely resemble standalone page-number blocks, without touching body-text numbering.
@@ -368,8 +362,7 @@ legal provisions
 contractual relationship
 ```
 
-*Listing P02-4: Process or path example.*
-
+*Listing P02-4: Process or path example*
 This excerpt serves to transform the above process into an inspectable, structured representation.
 
 For humans this does not impede reading, but for models it disrupts tokenization statistics, degrades generation fluency, and reduces the usability of downstream samples. Accordingly, this project applies rule-based repair to anomalous spaces between adjacent Chinese characters, and handles consecutive word breaks through multiple substitution passes.
@@ -381,13 +374,11 @@ The first step in industry SFT is never "figure out how to generate more data," 
 Figure P02-3 illustrates the corresponding workflow or structure.
 
 ![Figure P02-3: Legal PDF Intelligent Cleaning Pipeline Diagram](../../images/part14/p02/Xu-Project02-Fig03.svg)
-*Figure P02-3: Legal PDF Intelligent Cleaning Pipeline Diagram.*
-
+*Figure P02-3: Legal PDF Intelligent Cleaning Pipeline Diagram*
 Figure P02-4 illustrates the corresponding workflow or structure.
 
 ![Figure P02-4: Examples of Embedded Page Number Removal and Chinese Word-Break Repair](../../images/part14/p02/Xu-Project02-Fig04.svg)
-*Figure P02-4: Examples of Embedded Page Number Removal and Chinese Word-Break Repair.*
-
+*Figure P02-4: Examples of Embedded Page Number Removal and Chinese Word-Break Repair*
 ---
 
 ## 8. Chunking and Schema: Structuring Legal Seeds
@@ -437,8 +428,7 @@ The schema is the foundation of an industry SFT factory, not an accessory.
 Figure P02-5 illustrates the corresponding workflow or structure.
 
 ![Figure P02-5: Legal Seed Sample Schema Diagram](../../images/part14/p02/Xu-Project02-Fig05.svg)
-*Figure P02-5: Legal Seed Sample Schema Diagram.*
-
+*Figure P02-5: Legal Seed Sample Schema Diagram*
 ---
 
 ## 9. Task Taxonomy: Task Stratification in Legal SFT
@@ -495,8 +485,7 @@ In the legal domain, this problem of "superficially diverse but substantively un
 Figure P02-6 illustrates the corresponding workflow or structure.
 
 ![Figure P02-6: Legal Task Taxonomy Stratification Diagram](../../images/part14/p02/Xu-Project02-Fig06.svg)
-*Figure P02-6: Legal Task Taxonomy Stratification Diagram.*
-
+*Figure P02-6: Legal Task Taxonomy Stratification Diagram*
 ---
 
 ## 10. Task Distribution and Sample Structure: Controlling Distribution Balance
@@ -524,8 +513,7 @@ A total sample count can only answer "how large is the scale," not "toward what 
 Figure P02-7 illustrates the corresponding workflow or structure.
 
 ![Figure P02-7: Task Distribution vs. Legal Domain Coverage Comparison Chart](../../images/part14/p02/Xu-Project02-Fig07.svg)
-*Figure P02-7: Task Distribution vs. Legal Domain Coverage Comparison Chart.*
-
+*Figure P02-7: Task Distribution vs. Legal Domain Coverage Comparison Chart*
 ---
 
 ## 11. Self-Instruct: The Necessity of Controlled Synthesis
@@ -560,8 +548,7 @@ The value of this approach is that it turns "data distribution" into a controlla
 Figure P02-8 illustrates the corresponding workflow or structure.
 
 ![Figure P02-8: Weighted Roulette Task Sampling Diagram](../../images/part14/p02/Xu-Project02-Fig08.svg)
-*Figure P02-8: Weighted Roulette Task Sampling Diagram.*
-
+*Figure P02-8: Weighted Roulette Task Sampling Diagram*
 ---
 
 ## 12. Chain-of-Thought (CoT) Externalization: Expression Constraints for Legal Reasoning
@@ -600,8 +587,7 @@ Within this project, CoT value is reflected primarily in two respects:
 Figure P02-9 illustrates the corresponding workflow or structure.
 
 ![Figure P02-9: CoT Structure Diagram for Case Analysis Tasks](../../images/part14/p02/Xu-Project02-Fig09.svg)
-*Figure P02-9: CoT Structure Diagram for Case Analysis Tasks.*
-
+*Figure P02-9: CoT Structure Diagram for Case Analysis Tasks*
 ---
 
 ## 13. Preference Pairs and Review Records: Multi-Layer Supervisory Signals
@@ -641,8 +627,7 @@ Accordingly, this project includes review records as part of its artifacts. The 
 Figure P02-10 illustrates the corresponding workflow or structure.
 
 ![Figure P02-10: Relationship Between Preference Pairs and Review Records](../../images/part14/p02/Xu-Project02-Fig10.svg)
-*Figure P02-10: Relationship Between Preference Pairs and Review Records.*
-
+*Figure P02-10: Relationship Between Preference Pairs and Review Records*
 ---
 
 ## 14. Risk Refusal: Boundary Control Data
@@ -677,8 +662,7 @@ The existing artifacts contain 6 risk refusal samples and 6 risk register entrie
 Figure P02-11 illustrates the corresponding workflow or structure.
 
 ![Figure P02-11: Legal Scenario Risk Refusal Routing Diagram](../../images/part14/p02/Xu-Project02-Fig11.svg)
-*Figure P02-11: Legal Scenario Risk Refusal Routing Diagram.*
-
+*Figure P02-11: Legal Scenario Risk Refusal Routing Diagram*
 ---
 
 ## 15. QA Protocol: The Quality Gate for Legal Data
@@ -727,13 +711,11 @@ Without documenting QA protocols alongside generation logic, industry SFT degrad
 Figure P02-12 illustrates the corresponding workflow or structure.
 
 ![Figure P02-12: QA Review Closed-Loop Diagram](../../images/part14/p02/Xu-Project02-Fig12.svg)
-*Figure P02-12: QA Review Closed-Loop Diagram.*
-
+*Figure P02-12: QA Review Closed-Loop Diagram*
 Figure P02-13 illustrates the corresponding workflow or structure.
 
 ![Figure P02-13: QA Accept / Revise / Reject Decision Table](../../images/part14/p02/Xu-Project02-Fig13.svg)
-*Figure P02-13: QA Accept / Revise / Reject Decision Table.*
-
+*Figure P02-13: QA Accept / Revise / Reject Decision Table*
 ---
 
 ## 16. Vendor Collaboration and Human-Machine Division of Labor: Review Mechanisms at Scale
@@ -770,8 +752,7 @@ The word "factory" in "data factory" must ultimately be grounded in a collaborat
 Figure P02-14 illustrates the corresponding workflow or structure.
 
 ![Figure P02-14: Human-in-the-Loop and Vendor Tiered Review Diagram](../../images/part14/p02/Xu-Project02-Fig14.svg)
-*Figure P02-14: Human-in-the-Loop and Vendor Tiered Review Diagram.*
-
+*Figure P02-14: Human-in-the-Loop and Vendor Tiered Review Diagram*
 ---
 
 ## 17. Training Packaging: From Supervised Samples to Training Interfaces
@@ -809,8 +790,7 @@ The value of a smoke test is not to evaluate model performance, but to surface o
 Figure P02-15 illustrates the corresponding workflow or structure.
 
 ![Figure P02-15: Training Packaging and Delivery Interface Diagram](../../images/part14/p02/Xu-Project02-Fig15.svg)
-*Figure P02-15: Training Packaging and Delivery Interface Diagram.*
-
+*Figure P02-15: Training Packaging and Delivery Interface Diagram*
 ---
 
 ## 18. Results Overview: Example Project Output Summary
@@ -868,8 +848,7 @@ This indicates that the project's output is not merely "a collection of JSONL fi
 Figure P02-16 illustrates the corresponding workflow or structure.
 
 ![Figure P02-16: P02 Core Metrics Dashboard](../../images/part14/p02/Xu-Project02-Fig16.svg)
-*Figure P02-16: P02 Core Metrics Dashboard.*
-
+*Figure P02-16: P02 Core Metrics Dashboard*
 ---
 
 ## 19. Lightweight Downstream Validation: Minimal Validation Design
@@ -954,8 +933,7 @@ The emphasis in this type of experiment is not on claiming some extreme result, 
 Figure P02-17 illustrates the corresponding workflow or structure.
 
 ![Figure P02-17: 50-Sample Validation Protocol Diagram](../../images/part14/p02/Xu-Project02-Fig17.svg)
-*Figure P02-17: 50-Sample Validation Protocol Diagram.*
-
+*Figure P02-17: 50-Sample Validation Protocol Diagram*
 ---
 
 ## 20. Interpreting Results: Structural Signals from the Current Data Factory
@@ -1055,8 +1033,7 @@ It demonstrates very clearly that: a data factory does not emerge fully formed a
 Figure P02-18 illustrates the corresponding workflow or structure.
 
 ![Figure P02-18: P02 Version Evolution Roadmap](../../images/part14/p02/Xu-Project02-Fig18.svg)
-*Figure P02-18: P02 Version Evolution Roadmap.*
-
+*Figure P02-18: P02 Version Evolution Roadmap*
 ---
 
 ## 23. Cost Optimization: Primary Cost Drivers in Legal Data
@@ -1118,8 +1095,7 @@ It embodies a very important engineering habit: the completion standard for a da
 Figure P02-19 illustrates the corresponding workflow or structure.
 
 ![Figure P02-19: Code–Artifact–Report Consistency Validation Diagram](../../images/part14/p02/Xu-Project02-Fig19.svg)
-*Figure P02-19: Code–Artifact–Report Consistency Validation Diagram.*
-
+*Figure P02-19: Code–Artifact–Report Consistency Validation Diagram*
 ---
 
 ## 25. Limitations and Risks: Constraints of the Current Factory
@@ -1180,8 +1156,7 @@ What is truly transferable is not any specific prompt, but this methodology chai
 Figure P02-20 illustrates the corresponding workflow or structure.
 
 ![Figure P02-20: Cross-Industry Transfer Methodology Chain Diagram](../../images/part14/p02/Xu-Project02-Fig20.svg)
-*Figure P02-20: Cross-Industry Transfer Methodology Chain Diagram.*
-
+*Figure P02-20: Cross-Industry Transfer Methodology Chain Diagram*
 ---
 
 ## 27. Primary Deliverables Checklist
@@ -1264,7 +1239,7 @@ This chapter presented a legal-domain expert SFT data factory for turning regula
 
 Its boundary is limited to publicly available or licensed legal texts. It does not cover real legal consultation liability or production-grade case management systems. For larger, riskier, or more tightly regulated deployments, teams should reassess sources, permissions, manual review ratios, operating costs, and rollback plans.
 
-As part of Part 14, this chapter corresponds to the project-level validation of the methods introduced earlier in the book. Readers may use this case together with the data recipes from Part 13, the platform governance chapters from earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
+As part of Part XIV, this chapter corresponds to the project-level validation of the methods introduced earlier in the book. Readers may use this case together with the data recipes from Part XIII, the platform governance chapters from earlier sections, and the checklists in the appendix to form a closed loop from methodological understanding to engineering delivery.
 
 ## References
 

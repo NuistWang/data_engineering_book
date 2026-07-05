@@ -24,7 +24,7 @@
 
 文本到视频生成（T2V）模型的数据工程，通常比文本到图像生成（T2I）更难处理。T2I 数据通常以“单张图像—文本描述”为基本单元，数据清洗主要围绕图像质量、文本匹配度、安全过滤和分辨率分桶展开。T2V 面对的是连续画面，训练样本除了静态视觉内容，还要包含动作变化、时间顺序、镜头运动和场景连续性。判断一个视频片段能否用于训练，不能只看某一帧是否清晰，还要检查整段视频是否存在有效运动，画面是否稳定，动作是否完整，主体在时间维度上是否保持一致。
 
-因此，视频进入训练集之前需要经过更细的处理。流程首先从公开视频源、自建采集数据或素材库中筛选可用视频，再通过镜头切分把长视频拆成语义相对完整的 single-shot clips。随后，利用光流、运动强度、模糊度、抖动、水印和 OCR 面积等指标过滤低质量片段，减少静止画面、剧烈抖动和无效运动对训练的干扰。视频 caption 也不能停留在“画面里有什么”，还要写清动作发生顺序、主体位置变化、相机运动方式和镜头语言，例如推拉、平移、俯拍、特写、远景等信息。
+因此，视频进入训练集之前需要经过更细的处理。流程首先从公开视频源、自建采集数据或素材库中筛选可用视频，再通过镜头切分把长视频拆成语义相对完整的 single-shot clips。随后，利用光流、运动强度、模糊度、抖动、水印和 光学字符识别（optical character recognition，OCR）面积等指标过滤低质量片段，减少静止画面、剧烈抖动和无效运动对训练的干扰。视频 caption 也不能停留在“画面里有什么”，还要写清动作发生顺序、主体位置变化、相机运动方式和镜头语言，例如推拉、平移、俯拍、特写、远景等信息。
 
 本项目围绕从视频源到可训练 T2V 数据集的处理过程展开，将原始视频转化为带有结构化 caption、时空对齐信息和质量标签的训练样本。输出样本不仅记录主体和场景，也覆盖动作过程、空间关系和镜头表现，从而为视频生成模型学习“如何运动”和“如何拍摄”提供监督。
 
@@ -54,9 +54,7 @@
 视频源 -> 片段切分 -> 帧/字幕/运动特征 -> caption 与质量评分 -> 过滤去重 -> T2V 训练样本
 ```
 
-*代码清单P14-1：流程示例。*
-
-
+*代码清单P14-1：流程示例*
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
 
 ## 核心实现片段
@@ -87,8 +85,7 @@
 
 ![P14 Video Generation Data Pipeline](../../images/part14/Luo-Project14-Fig04-EN.svg)
 
-*图 P14-1：视频生成数据流水线英文架构图。*
-
+*图 P14-1：视频生成数据流水线英文架构图*
 整条流水线可以拆成六个组件。第一是**视频源加载**。它读取 Pexels manifest 或本地视频文件名，重新探测视频时长、fps、分辨率、帧数和文件大小，并将作者、页面链接、许可字段写入统一清单。该组件为后续来源回溯、分辨率统计、时长统计和授权状态检查提供基础信息。
 
 第二是**镜头切分**。T2V 模型通常不直接使用原始长视频训练，因为长视频内部可能包含多个镜头、场景跳转和语义断裂。流水线使用 PySceneDetect 的 ContentDetector 检测镜头边界，再用 ffmpeg 将视频切成 single-shot clips；接口与参数细节应以 PySceneDetect 官方文档为准（PySceneDetect Contributors 2026）。每个片段被赋予 `shot_id`，并记录起止时间、所属视频、片段序号和本地路径。此后，所有过滤、caption 和镜头标签都以 `shot_id` 为主键展开。
@@ -146,9 +143,7 @@ def load_source_videos(src_dir: Path) -> list[dict]:
     return records
 ```
 
-*代码清单P14-2：流程示例。*
-
-
+*代码清单P14-2：流程示例*
 这里需要注意两点。第一，所有源视频都被整理成结构一致的 JSONL 行，后续阶段不再直接扫描 mp4 目录，而是读取这份 manifest。第二，加载过程支持断点续跑：已经写入的 `video_id` 不重复处理，新视频只追加到文件末尾。在 1000+ 视频规模下，这种方式比一次性全量重跑更稳，也便于中途清除损坏视频。
 
 ---
@@ -179,9 +174,7 @@ def split_one_video(record: dict, out_root: Path, min_shot_len: float = 1.0):
     return [build_shot_record(record, idx, scene, path) for idx, (scene, path) in enumerate(zip(kept, sorted(shot_dir.glob("*.mp4"))))]
 ```
 
-*代码清单P14-3：Python 实现片段。*
-
-
+*代码清单P14-3：Python 实现片段*
 实际运行时，1000 条视频如果平均切出 8 到 15 个镜头，就能得到约 10000 个片段。这个数量只是实验规模上的参考，并不是固定要求。需要注意的是，PySceneDetect 的阈值会明显影响片段数量：阈值低，切分更细；阈值高，切分更保守。建议先抽样观察切分结果，再固定阈值，避免产生大量语义不完整的碎片。
 
 ---
@@ -215,9 +208,7 @@ def motion_filter_one(shot: dict, threshold: float = 0.5) -> dict:
         return failed_motion_record(shot["shot_id"], str(exc))
 ```
 
-*代码清单P14-4：流程示例。*
-
-
+*代码清单P14-4：流程示例*
 运动阈值不宜只凭经验一次确定。可以先统计所有片段的 `motion_strength` 分布，再抽查低分、中分和高分样本。对于普通公开视频，阈值可以从 0.5 附近开始试验；若数据中包含大量慢镜头、自然风光或微动作，需要降低阈值，避免误删有效样本。这个阶段的输出不一定马上删除失败片段，也可以保留 `pass_motion=False` 的记录，后续按训练阶段决定是否使用。
 
 ---
@@ -252,9 +243,7 @@ def score_shot_aesthetic(segment_path, clip_model, clip_processor, aesthetic_mlp
     return {"aesthetic_score": avg, "pass_aesthetic": avg >= 5.0, "status": "ok"}
 ```
 
-*代码清单P14-5：流程示例。*
-
-
+*代码清单P14-5：流程示例*
 工程实现中还需要处理多 GPU 分片和显存退化。在本项目中脚本采用确定性分片：先按 `shot_id` 排序，再根据样本序号对 `num_shards` 取模，每个 GPU 只处理自己的 shard。这种分片方式可以避免重复计算，也便于失败后从指定 shard 继续恢复。审美阈值也不应只作为删除条件使用。可以先把分数写入 manifest，再在训练阶段按分数设置采样权重或数据分桶。
 
 ---
@@ -286,9 +275,7 @@ def generate_video_caption(frame_paths, model, processor, frames_n=8):
     return {"caption_en": caption, "n_words": len(caption.split()), "caption_short": len(caption.split()) < 50}
 ```
 
-*代码清单P14-6：Python 实现片段。*
-
-
+*代码清单P14-6：Python 实现片段*
 若第一次 caption 过短，可以提高 temperature 重试两次，但不建议无限重试。过度重试可能让 caption 变长，但不一定提高准确性。对于训练数据，可以保留 `caption_short` 标记，在后处理阶段统一处理，避免模型为了凑长度补写画面中不存在的细节。InternVL3 的接入方式与 Qwen2.5-VL 类似，只需要替换模型加载和输入组织接口；数据层面的流程仍保持为“按时间顺序采样多帧 → 生成单段视频描述”。
 
 ---
@@ -320,9 +307,7 @@ def tag_shot_language(shot_id: str, segment_path: str, frame_paths: list[str]) -
     }
 ```
 
-*代码清单P14-7：流程示例。*
-
-
+*代码清单P14-7：流程示例*
 这里建议使用受控词表，避免让模型自由生成标签。自由文本标签看起来更丰富，但很难用于检索、分桶和训练采样；受控标签的表达范围有限，却能把同类样本归到同一字段下。例如，`close_up`、`medium`、`wide` 可以直接用于景别分层；`golden_hour`、`backlit`、`low_key` 可以用于光照分布统计；`pan_left`、`zoom_in`、`jitter` 可以用于相机运动控制样本构建。在 T2V 训练中，这类结构化字段比一段漂亮但不可控的描述更容易进入工程流程。
 
 完成 Step 6 后，最终样本可以组织为如下形式：
@@ -346,9 +331,7 @@ final_sample = {
 }
 ```
 
-*代码清单P14-8：Python 实现片段。*
-
-
+*代码清单P14-8：Python 实现片段*
 这个结构已经具备可训练数据的基本形态。后续可以继续加入 NSFW 过滤、OCR/水印过滤、去重、类别重采样和 WebDataset 打包。在这条流水线中，需要把握的是样本组织方式：视频样本会在每个阶段逐步积累可学习的监督信号，最后再被组织成训练数据。镜头切分提供时间边界，运动过滤提供动态质量，美学过滤提供视觉质量，多帧 caption 提供语义监督，镜头语言标注提供拍摄控制信息。这些字段配合使用后，T2V 模型更容易建立稳定的“文本—动作—镜头”对应关系。
 
 ## 4. 工程运行：可恢复、分片与显存降级
@@ -369,8 +352,7 @@ QWEN_PATH=/data0/qwen-vl \
 bash run_pipeline.sh
 ```
 
-*代码清单P14-9：命令行运行示例。*
-
+*代码清单P14-9：命令行运行示例*
 这段命令的作用是固定运行上下文，而不是展示所有参数。真正的生产运行还需要记录 CUDA、PyTorch、Transformers、PySceneDetect、ffmpeg、CLIP 权重、Qwen2.5-VL 权重和 LAION-Aesthetic MLP 权重版本。
 
 脚本中有三类工程控制值得单独说明。第一是**断点恢复**。各阶段通过 `repair_tail` 修复可能损坏的 JSONL 尾部，通过 `scan_done_ids` 扫描已经完成的 `video_id` 或 `shot_id`，通过 `SafeJsonlWriter` 追加新结果。这种设计允许脚本在中途失败后继续运行，而不必删除已经处理完成的片段。

@@ -45,8 +45,7 @@ Listing P06-1 provides a process or path example illustrating the input/output r
 Reasoning Task → Multi-path CoT Trajectories → Step Segmentation → Validation & Labeling → PRM Training Samples → Evaluation Report
 ```
 
-*Listing P06-1: Process or path example.*
-
+*Listing P06-1: Process or path example*
 This excerpt transforms the above process into a checkable, structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -61,8 +60,7 @@ Acceptance metrics include step annotation consistency, validation pass rate, po
 
 Table P06-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table P06-1: Process Supervision Data Publication Acceptance Table.*
-
+*Table P06-1: Process Supervision Data Publication Acceptance Table*
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Process Labels | Step annotation consistency, reward bucket distribution, and validation pass rate | Verify that positive, negative, and repair trajectories each have independent evidence upon spot-check |
@@ -186,8 +184,7 @@ In this sense, the most important contribution of this chapter is not "training 
 Figure P06-1 illustrates the corresponding workflow or structure.
 
 ![Figure P06-1: CoT and PRM Data Factory Overview](../../images/part14/p06/Wang-Project06-Fig01.svg)
-*Figure P06-1: CoT and PRM Data Factory Overview.*
-
+*Figure P06-1: CoT and PRM Data Factory Overview*
 ---
 
 ## 4. Overall Architecture: A Process Supervision Pipeline from Seed Tasks to PRM Training Assets
@@ -235,8 +232,7 @@ Only at this stage does the project transition from "having generated some reaso
 Figure P06-2 illustrates the corresponding workflow or structure.
 
 ![Figure P06-2: Step-Level Validation and Training Feedback Loop](../../images/part14/p06/Wang-Project06-Fig02.svg)
-*Figure P06-2: Step-Level Validation and Training Feedback Loop.*
-
+*Figure P06-2: Step-Level Validation and Training Feedback Loop*
 ---
 
 ## 5. Seed Tasks: The Task Layer as the Supervision Starting Point
@@ -296,8 +292,7 @@ for index, record in enumerate(gsm8k):
     )
 ```
 
-*Listing P06-2: Python implementation excerpt.*
-
+*Listing P06-2: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 `task_spec` encodes project constraints as structured configuration:
@@ -320,8 +315,7 @@ task_spec = {
 }
 ```
 
-*Listing P06-3: Python implementation excerpt.*
-
+*Listing P06-3: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 The first step in the project pipeline is `src/sampler.py`: sample tasks and generate specifications, then proceed to reasoning trajectory generation. P06 treats "data distribution" as an engineering object that must be explicitly managed from the very beginning, rather than leaving it to model randomness.
@@ -358,8 +352,7 @@ The current project explicitly produces `seed_pool.jsonl` and `task_spec.json`, 
 Figure P06-3 illustrates the corresponding workflow or structure.
 
 ![Figure P06-3: Task Sampling and Specification Generation Flowchart](../../images/part14/p06/Wang-Project06-Fig03.svg)
-*Figure P06-3: Task Sampling and Specification Generation Flowchart.*
-
+*Figure P06-3: Task Sampling and Specification Generation Flowchart*
 ---
 
 ## 7. Trajectory Generation: Parallel Construction of Positive, Negative, and Repair Trajectories
@@ -392,8 +385,7 @@ repair_steps.append(
 )
 ```
 
-*Listing P06-4: Python implementation excerpt.*
-
+*Listing P06-4: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 This implementation shows that a repair trace is not a separately constructed new problem, but is formed by explicitly appending a repair step after a negative trace. The logic for code tasks is analogous, except that errors originate from `mutate_python_code` and validation relies on subsequent unit test execution.
@@ -435,8 +427,7 @@ Existing metrics show that the project generated 108 trajectories, with the thre
 Figure P06-4 illustrates the corresponding workflow or structure.
 
 ![Figure P06-4: Schematic of the Three Trajectory Types](../../images/part14/p06/Wang-Project06-Fig04.svg)
-*Figure P06-4: Schematic of the Three Trajectory Types.*
-
+*Figure P06-4: Schematic of the Three Trajectory Types*
 ---
 
 ## 8. Step Segmentation and Schema: The Minimal Unit of Process Supervision
@@ -491,8 +482,7 @@ From this perspective, the step schema is not an ancillary design element—it i
 Figure P06-5 illustrates the corresponding workflow or structure.
 
 ![Figure P06-5: PRM Step Schema Schematic](../../images/part14/p06/Wang-Project06-Fig05.svg)
-*Figure P06-5: PRM Step Schema Schematic.*
-
+*Figure P06-5: PRM Step Schema Schematic*
 ---
 
 ## 9. Automatic Validation: Result Verification for Process Supervision
@@ -517,8 +507,7 @@ enriched["trace_score"] = round(score, 4)
 enriched["reward_bucket"] = bucket
 ```
 
-*Listing P06-5: Python implementation excerpt.*
-
+*Listing P06-5: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 The reward bucket is also not a black-box score, but a rule-interpretable piecewise function:
@@ -535,8 +524,7 @@ def reward_bucket(score: float) -> str:
     return "zero"
 ```
 
-*Listing P06-6: Python implementation excerpt.*
-
+*Listing P06-6: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 Writing it this way makes the signals on which validation depends, the origin of buckets, and the relationships among them all transparent.
@@ -573,8 +561,7 @@ Existing metrics show that the overall trajectory validation pass rate is `67.59
 Figure P06-6 illustrates the corresponding workflow or structure.
 
 ![Figure P06-6: Step Validation and Result Comparison Pipeline](../../images/part14/p06/Wang-Project06-Fig06.svg)
-*Figure P06-6: Step Validation and Result Comparison Pipeline.*
-
+*Figure P06-6: Step Validation and Result Comparison Pipeline*
 ---
 
 ## 10. Step Label Design: Operationalizing Process Fields
@@ -609,8 +596,7 @@ This is precisely why a PRM data factory is not simply "breaking answers into pi
 Figure P06-7 illustrates the corresponding workflow or structure.
 
 ![Figure P06-7: Step Labels and Process-Only Signal Schematic](../../images/part14/p06/Wang-Project06-Fig07.svg)
-*Figure P06-7: Step Labels and Process-Only Signal Schematic.*
-
+*Figure P06-7: Step Labels and Process-Only Signal Schematic*
 ---
 
 ## 11. Reward Buckets: A Stratified Scoring Mechanism
@@ -668,8 +654,7 @@ record = {
 }
 ```
 
-*Listing P06-7: Python implementation excerpt.*
-
+*Listing P06-7: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 With this excerpt, the main text reads more like an engineering implementation than a results summary.
@@ -712,8 +697,7 @@ These artifacts do not directly improve model scores, but significantly improve 
 Figure P06-8 illustrates the corresponding workflow or structure.
 
 ![Figure P06-8: PRM Data Packaging and Training Interface](../../images/part14/p06/Wang-Project06-Fig08.svg)
-*Figure P06-8: PRM Data Packaging and Training Interface.*
-
+*Figure P06-8: PRM Data Packaging and Training Interface*
 ---
 
 ## 13. Data Scale and Structure: Signals That the Current Factory Has Taken Shape
@@ -787,8 +771,7 @@ This indicates that the next optimization direction is already clear, rather tha
 Figure P06-9 illustrates the corresponding workflow or structure.
 
 ![Figure P06-9: Validation Pass Rate vs. Trajectory Type Comparison](../../images/part14/p06/Wang-Project06-Fig09.svg)
-*Figure P06-9: Validation Pass Rate vs. Trajectory Type Comparison.*
-
+*Figure P06-9: Validation Pass Rate vs. Trajectory Type Comparison*
 ---
 
 ## 15. Evaluation and Project Inspection: The Self-Checking Layer
@@ -819,8 +802,7 @@ dataset_checks = [
 ]
 ```
 
-*Listing P06-8: Python implementation excerpt.*
-
+*Listing P06-8: Python implementation excerpt*
 This excerpt transforms the above process into a checkable, structured representation.
 
 These checks operationalize "project inspection" as executable engineering constraints.
@@ -890,8 +872,7 @@ This is a very important engineering conclusion, because it narrows "what to do 
 Figure P06-10 illustrates the corresponding workflow or structure.
 
 ![Figure P06-10: Noise Sources in Negative and Repair Trajectories](../../images/part14/p06/Wang-Project06-Fig10.svg)
-*Figure P06-10: Noise Sources in Negative and Repair Trajectories.*
-
+*Figure P06-10: Noise Sources in Negative and Repair Trajectories*
 ---
 
 ## 17. Cost and Benefit: The Priority of Structural Closure

@@ -1,8 +1,8 @@
-# Part 8: Data Operations and Platform Development
+# Part VIII: Data Operations and Platform Development
 
 ## Positioning of This Part
 
-Part 8 focuses on platform-oriented construction, covering team organization, data versioning, experiment tracking, observability, and governance mechanisms. The goal is to elevate discrete data projects into a sustainably evolving platform capability.
+Part VIII focuses on platform-oriented construction, covering team organization, data versioning, experiment tracking, observability, and governance mechanisms. The goal is to elevate discrete data projects into a sustainably evolving platform capability.
 
 ## Terminology Standards
 
@@ -19,7 +19,7 @@ After completing this part, readers should be able to:
 
 ## Prerequisites
 
-Before reading this part, readers should understand the data lifecycle in Part 1 and the main data objects from Parts 2 to 7. Readers from platform or engineering-management backgrounds may focus on organizational collaboration, version governance, and observability loops, rather than understanding DataOps as a single scheduling tool.
+Before reading this part, readers should understand the data lifecycle in Part I and the main data objects from Parts 2 to 7. Readers from platform or engineering-management backgrounds may focus on organizational collaboration, version governance, and observability loops, rather than understanding DataOps as a single scheduling tool.
 
 ## Chapter Logic
 

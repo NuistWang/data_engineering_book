@@ -4,14 +4,13 @@
 
 本书当前中文出版稿采用 2026 年冻结结构，正文覆盖 48 章、15 个端到端项目与 8 个附录（A–H）。为降低跨篇阅读门槛，本版在前置部分新增在线资源入口和统一的缩写表，并为每一篇补充了分册目录页。
 
-- [题名页](title_page.md)
-- [作者机构信息](author_affiliations.md)
+- [大模型数据工程](title_page.md)
+- [作者机构与联系方式](author_affiliations.md)
 - [在线资源与讨论入口](online_resources.md)
 - [序言](preface.md)
 - [致谢](acknowledgments.md)
 - [利益冲突声明](competing_interests.md)
 - [伦理审批](ethics_approval.md)
-- [卷前导读：全书结构、阅读路径与版本说明](front_matter_guide.md)
 - [贡献者](contributors.md)
 - [缩写表](abbreviations.md)
 - [第一篇：总论与基础设施](part1/index.md)
@@ -139,12 +138,12 @@
 第十二篇以文本语料、图文候选池、视觉文档与表格、视觉推理、语音音频和推理轨迹为主线，讨论专项数据集如何被定义、构建、评测、发布和复现。各章围绕任务定义、样本 schema、构建流水线、质量控制、评测协议和合规风险展开，并向后连接项目案例研究与开源模型数据配方。
 
 - [本篇目录](part12/index.md)
-- [第38章：文本语料数据工程：开放 Web、过滤去重与透明账本](part12/ch38_text_corpora_transparent_ledger.md)
-- [第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估](part12/ch39_image_text_candidate_pool_data_engineering.md)
-- [第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束](part12/ch40_visual_document_table_data_engineering.md)
-- [第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹](part12/ch41_visual_reasoning_tool_data_engineering.md)
-- [第42章：语音与音频数据工程：交互控制、风格标签与安全边界](part12/ch42_speech_audio_interaction_data_engineering.md)
-- [第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码](part12/ch43_reasoning_trace_compression_data_engineering.md)
+- [第38章：文本语料数据工程](part12/ch38_text_corpora_transparent_ledger.md)
+- [第39章：图文数据工程](part12/ch39_image_text_candidate_pool_data_engineering.md)
+- [第40章：视觉文档与表格数据工程](part12/ch40_visual_document_table_data_engineering.md)
+- [第41章：视觉推理数据工程](part12/ch41_visual_reasoning_tool_data_engineering.md)
+- [第42章：语音与音频数据工程](part12/ch42_speech_audio_interaction_data_engineering.md)
+- [第43章：推理轨迹数据工程](part12/ch43_reasoning_trace_compression_data_engineering.md)
 
 ## 第十三篇：开源大模型数据工程配方与范式
 

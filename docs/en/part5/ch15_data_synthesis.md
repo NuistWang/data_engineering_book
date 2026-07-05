@@ -97,9 +97,7 @@ Listing 15-1 provides a JSON data example.
 }
 ```
 
-*Listing 15-1: JSON data example.*
-
-
+*Listing 15-1: JSON data example*
 ### Differences Between Synthetic Data Engineering and Traditional Data Augmentation
 
 Many teams, when conceptualizing synthetic data, conflate it with traditional data augmentation—as if it were simply replacing image flips, text substitutions, and word-order perturbations with "having the model write a bit more." The two, however, differ fundamentally in their engineering nature. Traditional data augmentation is essentially a transformation applied to existing samples, typically aimed at broadening distributional coverage and improving robustness; the augmentation process is usually governed by relatively strong rule-based constraints, so controllability is comparatively high. Surveys of data augmentation in both image processing and NLP generally characterize it as methods for transforming, perturbing, or recombining existing data (Feng et al. 2021; Shorten and Khoshgoftaar 2019). Synthetic data engineering, by contrast, is not a pure "transformation"; it is more akin to re-producing task samples—or even creating new samples that did not previously exist.
@@ -166,18 +164,14 @@ A truly effective scheduling system should treat training feedback as an importa
 
 ![Figure 15-1: Synthetic Data Factory Flow Diagram](../../images/part5/Wang-Chap15-Fig01-EN.svg)
 
-*Figure 15-1: Synthetic Data Factory Flow Diagram.*
-
-
-
+*Figure 15-1: Synthetic Data Factory Flow Diagram*
 ### Cost, Throughput, and Quality Balance Table
 
 No factory configuration is universally superior or inferior; each represents an optimal solution under specific phases, task types, and budget conditions. The table below is intended to help teams understand the core of a synthetic data system—how to design a production pipeline matched to business objectives—rather than to provide a single answer or to reduce the problem to "which model to pick."
 
 Table 15-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 15-1: Cost, Throughput, and Quality Balance Table.*
-
+*Table 15-1: Cost, Throughput, and Quality Balance Table*
 | Factory Configuration Strategy | Typical Approach | Cost | Throughput | Quality Ceiling | Primary Risk | Best-Suited Scenarios |
 |---|---|---:|---:|---:|---|---|
 | Strong single-model direct output | High-end model generates directly; lightweight rule filtering before intake | High | Medium | High | Excessive cost; uniform style; difficult to scale | Cold-start phase; curated set construction; benchmark sample creation |
@@ -307,8 +301,7 @@ The table below is intended to help teams develop the basic understanding that "
 
 Table 15-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 15-2: Seed Sources and Applicable Task Table.*
-
+*Table 15-2: Seed Sources and Applicable Task Table*
 | Seed Source | Typical Content | Advantages | Primary Risks | Best-Suited Tasks | Usage Recommendation |
 |---|---|---|---|---|---|
 | Human-annotated premium samples | Expert-authored Q&A, reasoning, refusal, and tool-invocation samples | High quality; clear boundaries; usable as gold standard | High cost; limited coverage | High-risk tasks; complex reasoning; alignment data; first-round template abstraction | Use as core anchors; quantity need not be large, but precision is essential |
@@ -501,9 +494,7 @@ if __name__ == "__main__":
     print("Dedup gate: kept =", kept, "dropped =", dropped)
 ```
 
-*Listing 15-2: Process flow example.*
-
-
+*Listing 15-2: Process flow example*
 ### Readability Validation Focuses on Training-Friendliness, Not Aesthetics
 
 When some teams hear "readability," they worry this will turn the data factory into an "essay-polishing factory." In fact, readability here means training-friendliness, not literary quality. That is, whether a data sample has clear hierarchy, explicit expression, stable format, and appropriate information density—whether it enables the model to learn a clear rather than a confused supervision signal.
@@ -526,10 +517,7 @@ The significance of difficulty validation is to force the factory to confront th
 
 ![Figure 15-2: Quality Gate and Feedback Loop Diagram](../../images/part5/Wang-Chap15-Fig02-EN.svg)
 
-*Figure 15-2: Quality Gate and Feedback Loop Diagram.*
-
-
-
+*Figure 15-2: Quality Gate and Feedback Loop Diagram*
 ## 15.4 Feedback Loops, Versioning, and the Control Panel
 
 ### Feeding Synthetic Failure Samples Back to Template and Seed Revision

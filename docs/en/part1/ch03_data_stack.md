@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter discusses the AI-native data stack and cost-governance methods that support large-model data engineering. Unlike traditional data warehouses, which mainly serve analytical queries, an LLM data stack is designed to provide traceable, evaluable, versioned data assets to training and application pipelines at stable and low cost. The chapter first compares traditional data warehouses and large-model data stacks in their goals, workloads, and cost constraints. It then decomposes the data stack into five layers: ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security. It also discusses the appropriate boundaries of tools such as Spark, Ray Data, Iceberg, object storage, vector databases, DVC, and MLflow. Finally, the chapter provides a cost model, ROI decision framework, and three team-architecture patterns to help readers choose infrastructure that matches startup, mid-sized, and large-organization stages.
+This chapter discusses the AI-native data stack and cost-governance methods that support large-model data engineering. Unlike traditional data warehouses, which mainly serve analytical queries, an LLM data stack is designed to provide traceable, evaluable, versioned data assets to training and application pipelines at stable and low cost. The chapter first compares traditional data warehouses and large-model data stacks in their goals, workloads, and cost constraints. It then decomposes the data stack into five layers: ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security. It also discusses the appropriate boundaries of tools such as Spark, Ray Data, Iceberg, object storage, vector databases, DVC, and MLflow. Finally, the chapter provides a cost model, return-on-investment (ROI) decision framework, and three team-architecture patterns to help readers choose infrastructure that matches startup, mid-sized, and large-organization stages.
 
 ## Keywords
 
@@ -73,8 +73,7 @@ Figure 3-1 illustrates the corresponding workflow or structure.
 
 ![Figure 3-1: Five-layer architecture of an AI-native data stack](../../images/part1/Yu-Chap03-Fig01.svg)
 
-*Figure 3-1: Five-layer architecture of an AI-native data stack. Source: original illustration from this book. The figure shows how ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security layers jointly move data from raw corpus to trainable datasets.*
-
+*Figure 3-1: Five-layer architecture of an AI-native data stack. Source: original illustration from this book. The figure shows how ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security layers jointly move data from raw corpus to trainable datasets*
 ### 3.2.1 Ingestion and Access Layer: Turning "Data Everywhere" into "Traceable Data"
 
 The ingestion and access layer is the entry point of the stack. It brings data scattered across sources into platform management in a unified and controlled way. It may sound ordinary, but it is one of the easiest layers to neglect and one of the most expensive to fix later.
@@ -113,8 +112,7 @@ def register_ingestion(record: DataIngestionRecord, metadata_db_path: str):
         f.write(json.dumps(record_dict, ensure_ascii=False) + "\n")
 ```
 
-*Listing 3-1: Example data-ingestion metadata registration. In production, this should write to a transactional metadata database and include permission, audit, and idempotency controls.*
-
+*Listing 3-1: Example data-ingestion metadata registration. In production, this should write to a transactional metadata database and include permission, audit, and idempotency controls*
 ### 3.2.2 Processing Orchestration Layer: The Scheduler of the Data Factory
 
 After data enters the platform, it must go through serial processing steps to become training-ready. These steps usually include HTML tag stripping and text extraction, language identification and filtering, rule-based noise filtering, such as removing URL-dense or advertisement-heavy spans, approximate deduplication with MinHash LSH, exact deduplication, quality scoring with PPL or classifiers, and final tokenization and serialization.
@@ -125,8 +123,7 @@ Two mainstream industrial choices are **Apache Spark** (Zaharia et al. 2016) and
 
 Table 3-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-1: Core feature comparison of Apache Spark vs. Ray Data. Source: compiled by the authors based on public documentation of open-source frameworks and LLM data-processing practice.*
-
+*Table 3-1: Core feature comparison of Apache Spark vs. Ray Data. Source: compiled by the authors based on public documentation of open-source frameworks and LLM data-processing practice*
 | Dimension | Apache Spark | Ray Data |
 | :--- | :--- | :--- |
 | **Core language runtime** | Scala/Java core; Python through PySpark, with JVM-Python serialization overhead | Python-native, no JVM overhead, seamless with PyTorch and Hugging Face |
@@ -178,8 +175,7 @@ ds = (
 ds.write_parquet("s3://my-bucket/processed/cc_cleaned/")
 ```
 
-*Listing 3-2: Ray Data cleaning pipeline example. Production systems should add retry logic, metric reporting, data versions, and output validation.*
-
+*Listing 3-2: Ray Data cleaning pipeline example. Production systems should add retry logic, metric reporting, data versions, and output validation*
 ### 3.2.3 Storage and Indexing Layer: Different Strategies for Three Data Types
 
 An LLM data stack must manage three very different kinds of data. Each has distinct storage requirements, so the storage and indexing layer needs differentiated technical choices.
@@ -190,8 +186,7 @@ The three mainstream lakehouse formats each have their own appropriate scenarios
 
 Table 3-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-2: Lakehouse table format selection comparison: Apache Iceberg vs. Delta Lake vs. Apache Hudi. Source: compiled by the authors based on public documentation of open-source projects and lakehouse architecture practice.*
-
+*Table 3-2: Lakehouse table format selection comparison: Apache Iceberg vs. Delta Lake vs. Apache Hudi. Source: compiled by the authors based on public documentation of open-source projects and lakehouse architecture practice*
 | Feature | Apache Iceberg | Delta Lake | Apache Hudi |
 | :--- | :--- | :--- | :--- |
 | **Core maintainer** | Netflix to Apache Foundation | Databricks, core commercial open source | Uber to Apache Foundation |
@@ -219,8 +214,7 @@ dvc push  # Push actual data to S3 remote storage.
 # Other engineers can use dvc pull to fetch the exact same data.
 ```
 
-*Listing 3-3: Example DVC commands for dataset version tracking. Production environments should combine this with object-storage permissions, data-hash validation, and release approval.*
-
+*Listing 3-3: Example DVC commands for dataset version tracking. Production environments should combine this with object-storage permissions, data-hash validation, and release approval*
 ### 3.2.4 Evaluation Operations Layer: Making Data Quality Visible
 
 The evaluation operations layer provides observability for the entire data platform. It lets teams see pipeline status, data-quality trends, and experiment records in real time. It is the dashboard that keeps the data flywheel turning.
@@ -277,8 +271,7 @@ Figure 3-2 illustrates the corresponding workflow or structure.
 
 ![Figure 3-2: Training-data cost-governance loop](../../images/part1/Yu-Chap03-Fig02.svg)
 
-*Figure 3-2: Training-data cost-governance loop. Source: original illustration from this book. The figure shows a cross-version iteration cycle that starts from budget planning, passes through cost monitoring, ROI evaluation, and optimization decisions, and returns to budget review.*
-
+*Figure 3-2: Training-data cost-governance loop. Source: original illustration from this book. The figure shows a cross-version iteration cycle that starts from budget planning, passes through cost monitoring, ROI evaluation, and optimization decisions, and returns to budget review*
 ---
 
 ## 3.4 Three Team Architecture Patterns
@@ -315,8 +308,7 @@ An important lesson is that large-team data platforms should be built in **three
 
 Table 3-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-3: Quick selection matrix for data stacks across three team types. Source: compiled by the authors; setup cycles are empirical planning ranges, and actual cycles depend on team experience, permission workflows, and data-source complexity.*
-
+*Table 3-3: Quick selection matrix for data stacks across three team types. Source: compiled by the authors; setup cycles are empirical planning ranges, and actual cycles depend on team experience, permission workflows, and data-source complexity*
 | Team size | Recommended storage | Recommended compute | Recommended orchestration | Recommended version management | Estimated build cycle |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1-5 people, startup | S3/MinIO + Parquet | DuckDB / Polars | Prefect / Dagster | DVC | 1-2 weeks |
@@ -329,13 +321,13 @@ Table 3-3 summarizes the corresponding comparison and engineering considerations
 
 The AI-native data stack built in this chapter is not an isolated menu of technical options. It is the **shared infrastructure foundation** for the engineering content in the rest of the book. Understanding this helps readers map later technical details to the corresponding layer in the architecture blueprint.
 
-In **Part 2: Text Pretraining Data Engineering**, large-scale MinHash deduplication in Chapter 5, KenLM perplexity filtering in Chapter 6, and DataLoader I/O optimization in Chapter 7 all run on the **processing orchestration layer** described in Section 3.2.2, using Ray Data or Spark clusters, and depend on the **metadata ingestion layer** in Section 3.2.1 for lineage tracking.
+In **Part II: Text Pretraining Data Engineering**, large-scale MinHash deduplication in Chapter 5, KenLM perplexity filtering in Chapter 6, and DataLoader I/O optimization in Chapter 7 all run on the **processing orchestration layer** described in Section 3.2.2, using Ray Data or Spark clusters, and depend on the **metadata ingestion layer** in Section 3.2.1 for lineage tracking.
 
-In **Part 3: Multimodal Data Engineering**, image-text cleaning and video slicing require GPU scheduling, which is supported by the GPU-native scheduling capability of Ray Data discussed in Section 3.2.2.
+In **Part III: Multimodal Data Engineering**, image-text cleaning and video slicing require GPU scheduling, which is supported by the GPU-native scheduling capability of Ray Data discussed in Section 3.2.2.
 
-In **Part 7: RAG Application Data Engineering**, real-time knowledge-base update pipelines rely on the vector-database choices in Section 3.2.3, such as Milvus or Qdrant, to host vector indexes, and on the compliance-audit capability in Section 3.2.5 to ensure documents entering the knowledge base do not carry copyright risk.
+In **Part VII: RAG Application Data Engineering**, real-time knowledge-base update pipelines rely on the vector-database choices in Section 3.2.3, such as Milvus or Qdrant, to host vector indexes, and on the compliance-audit capability in Section 3.2.5 to ensure documents entering the knowledge base do not carry copyright risk.
 
-**Part 8: DataOps Platform Development** is an expanded version of this chapter: it will build on the five-layer architecture to discuss end-to-end observability for data pipelines, automated governance of data assets, and deep integration of quality scorecards with CI/CD pipelines, upgrading the platform from a manual workshop to an intelligent data factory.
+**Part VIII: DataOps Platform Development** is an expanded version of this chapter: it will build on the five-layer architecture to discuss end-to-end observability for data pipelines, automated governance of data assets, and deep integration of quality scorecards with CI/CD pipelines, upgrading the platform from a manual workshop to an intelligent data factory.
 
 The core principle for capability boundaries is: **capabilities needed by multiple projects or multiple data stages should be platformized**, such as deduplication operator libraries, quality-scorecard frameworks, and data-version management; **capabilities highly customized to one business scenario should remain project-specific**, such as entity-recognition rules for one vertical domain or parsing logic for one source. Bigger platform boundaries are not automatically better. Over-abstraction reduces iteration speed and forces project teams to adapt to platform interfaces instead of letting the platform serve real needs.
 
@@ -345,7 +337,7 @@ The core principle for capability boundaries is: **capabilities needed by multip
 
 This chapter established a full architecture blueprint for an AI-native data stack. It first analyzed why traditional warehouse technology stacks designed for BI cannot be directly moved into LLM data engineering, using three dimensions: goal differences, workload characteristics, and cost constraints. On that basis, it decomposed the stack into five functional layers: ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security. Each layer included mainstream industrial choices and concrete comparison criteria. The cost-model section revealed five cost dimensions, stage-based accounting, and a quantified ROI decision framework. Finally, the chapter provided differentiated architecture patterns for startup, mid-sized, and large teams, helping readers avoid introducing platform complexity beyond team capability and business need during early stages.
 
-With this infrastructure blueprint in place, the next chapter begins Part 2: Text Pretraining Data Engineering, where we will discuss how to build trainable, traceable, and evaluable pretraining datasets from large-scale public corpora on top of this stack.
+With this infrastructure blueprint in place, the next chapter begins Part II: Text Pretraining Data Engineering, where we will discuss how to build trainable, traceable, and evaluable pretraining datasets from large-scale public corpora on top of this stack.
 
 ## Chapter Summary
 

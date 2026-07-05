@@ -31,8 +31,7 @@ R1；项目实战；可复现数据工程；数据流水线；验收指标
 推理种子 -> Long-CoT 生成 -> 多候选采样 -> 验证/打分 -> 拒绝采样 -> 回流 SFT 数据集
 ```
 
-*代码清单P12-1：流程或路径示例。*
-
+*代码清单P12-1：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
@@ -92,8 +91,7 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
   -> LoRA training and evaluation
 ```
 
-*代码清单P12-2：流程或路径示例。*
-
+*代码清单P12-2：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 完成本项目后，读者应能理解三件事。第一，R1 风格系统中的关键工程对象不是单个模型权重，而是任务池、采样轨迹、verifier、拒绝采样结果和训练数据 manifest。第二，推理数据飞轮可以先用规则奖励和监督回流验证，不必一开始就进入完整 RL。第三，只要目标任务能够构造自动 verifier，这套结构就可以迁移到 SQL 生成、代码修复、结构化抽取、工具调用或企业内部题库。
@@ -105,8 +103,7 @@ OpenThoughts / GSM8K / MATH-500 / HumanEval
 图P12-1展示了相应的流程或结构。
 
 ![图 P12-1：从冷启动数据抽取、多路推理采样、verifier 池、拒绝采样到二轮 SFT 合并与训练评估的闭环结构](../../images/part14/p12/Wang-Project12-Fig01.svg)
-*图 P12-1：从冷启动数据抽取、多路推理采样、verifier 池、拒绝采样到二轮 SFT 合并与训练评估的闭环结构。*
-
+*图 P12-1：从冷启动数据抽取、多路推理采样、verifier 池、拒绝采样到二轮 SFT 合并与训练评估的闭环结构*
 第一个组件是 **冷启动数据抽取**。对应脚本为 `cold_start_data.py`。它负责从已有数据源中抽取适合 SFT 的样本，并统一为 `messages` 格式。数学样本会组织成 `Reasoning:` 和 `Final Answer:`，代码样本会组织成 `Reasoning:` 和 fenced Python code block。冷启动数据的作用不是直接训练出最高性能模型，而是让模型具备基本的推理输出结构、语言风格和可解析格式。
 
 第二个组件是 **多路推理采样**。对应脚本为 `sample_traces.py`。它让同一个 prompt 生成多条候选推理轨迹，并记录 `prompt_id`、`sample_idx`、`raw_trace`、`parsed_answer` 和 `generation_params`。项目同时支持 mock、本地 vLLM Python API 和外部 OpenAI 兼容 API 三种后端。在生产环境中，推理服务和数据处理脚本可以拆开部署，减少 CUDA、torch、vLLM 依赖互相牵制。
@@ -154,8 +151,7 @@ conda env create -f environment.yml
 conda activate p12-r1-flywheel
 ```
 
-*代码清单P12-3：命令行运行示例。*
-
+*代码清单P12-3：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 在正式采样之前，可以先运行测试，确认 mock 管线和基础模块没有断：
@@ -165,8 +161,7 @@ conda activate p12-r1-flywheel
 pytest -q
 ```
 
-*代码清单P12-4：命令行运行示例。*
-
+*代码清单P12-4：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 当前 `tests/test_pipeline.py` 覆盖冷启动抽取、math/code/format verifier、mock 采样、拒绝采样、SFT 合并、mock LoRA 训练和 mock 评估。测试通过只能说明工程骨架没有断，并不代表真实 vLLM 采样或大规模训练已经完成；但如果测试不通过，不应直接进入长任务。
@@ -188,8 +183,7 @@ python cold_start_data.py \
   --max-code 100
 ```
 
-*代码清单P12-5：命令行运行示例。*
-
+*代码清单P12-5：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 输出文件默认为：
@@ -200,8 +194,7 @@ data/processed/cold_start_5k.jsonl
 data/processed/cold_start_summary.json
 ```
 
-*代码清单P12-6：流程或路径示例。*
-
+*代码清单P12-6：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 每条冷启动样本包含 `record_id`、`source_dataset`、`domain`、`prompt`、`reference_reasoning`、`reference_answer` 和 `messages`。其中 `messages` 是训练真正消费的字段，结构大致如下：
@@ -223,8 +216,7 @@ record = {
 }
 ```
 
-*代码清单P12-7：Python 实现片段。*
-
+*代码清单P12-7：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 对于代码任务，`assistant` 内容会变成：
@@ -240,9 +232,7 @@ def solve(...):
 ```
 ````
 
-*代码清单P12-8：代码任务 assistant 回复格式示例。*
-
-
+*代码清单P12-8：代码任务 assistant 回复格式示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这里有一个容易忽略的细节。`HumanEval` 中的 `canonical_solution` 往往只包含函数体，如果直接拿来训练，模型可能学到不完整代码片段。项目在 `pipeline_utils.py` 中实现了 `render_humaneval_solution(...)`，把 prompt 中的函数签名和 `canonical_solution` 拼成完整函数定义，从而让 `reference_answer` 更适合训练和验证。
@@ -266,8 +256,7 @@ python sample_traces.py \
   --force-mock
 ```
 
-*代码清单P12-9：命令行运行示例。*
-
+*代码清单P12-9：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 mock 后端不用于评估真实模型能力，只用于检查数据链路是否能继续向下游流动。真实采样时，可以启动 vLLM 服务，并通过 OpenAI 兼容 API 调用：
@@ -277,8 +266,7 @@ mock 后端不用于评估真实模型能力，只用于检查数据链路是否
 bash scripts/serve_qwen_vllm.sh
 ```
 
-*代码清单P12-10：命令行运行示例。*
-
+*代码清单P12-10：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 随后执行采样脚本：
@@ -294,8 +282,7 @@ python sample_traces.py \
   --parallel-prompts 4
 ```
 
-*代码清单P12-11：命令行运行示例。*
-
+*代码清单P12-11：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 采样记录的核心字段如下：
@@ -319,8 +306,7 @@ sample = {
 }
 ```
 
-*代码清单P12-12：Python 实现片段。*
-
+*代码清单P12-12：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 采样阶段最重要的是保留完整 `raw_trace`，而不是只保留最终答案。完整轨迹后续有三种用途：第一，进入 verifier 判断是否正确；第二，作为高质量候选回流训练；第三，作为错误分析样本，帮助定位模型是格式失败、答案失败，还是推理路径失败。
@@ -356,8 +342,7 @@ verdict = {
 }
 ```
 
-*代码清单P12-13：Python 实现片段。*
-
+*代码清单P12-13：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这个结构比单一分数更有价值。后续如果拒绝采样通过率突然下降，可以根据 `verification_reason` 判断问题来自格式漂移、答案解析、代码执行，还是任务本身过难。对一个数据飞轮来说，可解释的失败原因和成功样本同样重要。
@@ -377,8 +362,7 @@ python rejection_sampling.py \
   --min-reward 0.8
 ```
 
-*代码清单P12-14：命令行运行示例。*
-
+*代码清单P12-14：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 筛选优先级为：
@@ -394,8 +378,7 @@ python rejection_sampling.py \
 data/processed/rejection_selected_10k_30k.jsonl
 ```
 
-*代码清单P12-15：流程或路径示例。*
-
+*代码清单P12-15：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 同时，每个 prompt 的验证结果会写入：
@@ -405,8 +388,7 @@ data/processed/rejection_selected_10k_30k.jsonl
 data/verified_candidates/*.jsonl
 ```
 
-*代码清单P12-16：流程或路径示例。*
-
+*代码清单P12-16：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 拒绝采样的输出样本会被重新组织成 SFT 格式：
@@ -428,8 +410,7 @@ selected = {
 }
 ```
 
-*代码清单P12-17：Python 实现片段。*
-
+*代码清单P12-17：Python 实现片段*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这里需要避免一个误区：拒绝采样不是简单地“删除所有失败样本”。当前训练数据只使用成功轨迹，但失败轨迹仍然会保存在 `verified_candidates` 中。它们可以用于分析模型常见错误、修复 verifier 漏洞、构建 hard case 池或后续训练过程奖励模型。
@@ -447,8 +428,7 @@ selected = {
 python merge_sft_data.py
 ```
 
-*代码清单P12-18：命令行运行示例。*
-
+*代码清单P12-18：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 默认输出：
@@ -459,8 +439,7 @@ data/training/merged_sft_data.jsonl
 data/training/training_manifest.json
 ```
 
-*代码清单P12-19：流程或路径示例。*
-
+*代码清单P12-19：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 合并时会按 prompt 和 assistant 内容去重，并记录来源分布。冷启动数据和回流数据在训练中应当保留不同 `source_stage`，因为二者承担的作用不同。冷启动样本主要提供稳定格式和基础推理风格，回流样本则来自模型采样和 verifier 筛选，代表当前策略已经探索出的成功轨迹。
@@ -476,8 +455,7 @@ python train_lora.py \
   --epochs 2
 ```
 
-*代码清单P12-20：命令行运行示例。*
-
+*代码清单P12-20：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 评估命令如下：
@@ -492,8 +470,7 @@ python eval_gsm8k_math.py \
   --backend openai
 ```
 
-*代码清单P12-21：命令行运行示例。*
-
+*代码清单P12-21：命令行运行示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 评估结果默认写入：
@@ -503,8 +480,7 @@ python eval_gsm8k_math.py \
 data/reports/eval_results_gsm8k_math.json
 ```
 
-*代码清单P12-22：流程或路径示例。*
-
+*代码清单P12-22：流程或路径示例*
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 需要强调的是，LoRA 与评估脚本在本项目中主要用于验证数据闭环，而不是保证一次训练就获得稳定涨分。最终收益高度依赖样本规模、采样质量、verifier 严格程度、训练比例、学习率和评估集隔离情况。工程闭环验证和模型效果提升是两件相关但不等价的事。

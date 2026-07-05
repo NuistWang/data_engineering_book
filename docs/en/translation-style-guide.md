@@ -60,20 +60,20 @@ Use these fixed part titles:
 
 | ID | English title |
 | --- | --- |
-| Part 1 | Overview and Infrastructure |
-| Part 2 | Text Pre-training Data Engineering |
-| Part 3 | Multimodal Data Engineering |
-| Part 4 | Instruction Fine-tuning and Preference Data |
-| Part 5 | Synthetic Data Engineering |
-| Part 6 | Reasoning and Agent Data Engineering |
-| Part 7 | Application-Level Data Engineering |
-| Part 8 | Data Operations and Platform Development |
-| Part 9 | Data Assets, Data Products, and Data Contracts |
-| Part 10 | Agentic Data Engineering and Data Engineering Agents |
-| Part 11 | Privacy, Compliance, and Data Security |
-| Part 12 | Specialized Datasets and Data Engineering Practice |
-| Part 13 | Open-Source Large-Model Data Engineering Recipes and Paradigms |
-| Part 14 | Hands-on Projects |
+| Part I | Overview and Infrastructure |
+| Part II | Text Pre-training Data Engineering |
+| Part III | Multimodal Data Engineering |
+| Part IV | Instruction Fine-tuning and Preference Data |
+| Part V | Synthetic Data Engineering |
+| Part VI | Reasoning and Agent Data Engineering |
+| Part VII | Application-Level Data Engineering |
+| Part VIII | Data Operations and Platform Development |
+| Part IX | Data Assets, Data Products, and Data Contracts |
+| Part X | Agentic Data Engineering and Data Engineering Agents |
+| Part XI | Privacy, Compliance, and Data Security |
+| Part XII | Specialized Datasets and Data Engineering Practice |
+| Part XIII | Open-Source Large-Model Data Engineering Recipes and Paradigms |
+| Part XIV | Hands-on Projects |
 
 ## Quality Gates
 
