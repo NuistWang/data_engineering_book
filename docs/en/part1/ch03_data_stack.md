@@ -73,7 +73,8 @@ Figure 3-1 illustrates the corresponding workflow or structure.
 
 ![Figure 3-1: Five-layer architecture of an AI-native data stack](../../images/part1/Yu-Chap03-Fig01.svg)
 
-*Figure 3-1: Five-layer architecture of an AI-native data stack. Source: original illustration from this book. The figure shows how ingestion and access, processing orchestration, storage and indexing, evaluation operations, and governance and security layers jointly move data from raw corpus to trainable datasets*
+*Figure 3-1: Five-layer architecture of an AI-native data stack. Source: original illustration from this book*
+
 ### 3.2.1 Ingestion and Access Layer: Turning "Data Everywhere" into "Traceable Data"
 
 The ingestion and access layer is the entry point of the stack. It brings data scattered across sources into platform management in a unified and controlled way. It may sound ordinary, but it is one of the easiest layers to neglect and one of the most expensive to fix later.
@@ -112,7 +113,10 @@ def register_ingestion(record: DataIngestionRecord, metadata_db_path: str):
         f.write(json.dumps(record_dict, ensure_ascii=False) + "\n")
 ```
 
-*Listing 3-1: Example data-ingestion metadata registration. In production, this should write to a transactional metadata database and include permission, audit, and idempotency controls*
+*Listing 3-1: Example data-ingestion metadata registration*
+
+In production, this should write to a transactional metadata database and include permission, audit, and idempotency controls.
+
 ### 3.2.2 Processing Orchestration Layer: The Scheduler of the Data Factory
 
 After data enters the platform, it must go through serial processing steps to become training-ready. These steps usually include HTML tag stripping and text extraction, language identification and filtering, rule-based noise filtering, such as removing URL-dense or advertisement-heavy spans, approximate deduplication with MinHash LSH, exact deduplication, quality scoring with PPL or classifiers, and final tokenization and serialization.
@@ -123,7 +127,10 @@ Two mainstream industrial choices are **Apache Spark** (Zaharia et al. 2016) and
 
 Table 3-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-1: Core feature comparison of Apache Spark vs. Ray Data. Source: compiled by the authors based on public documentation of open-source frameworks and LLM data-processing practice*
+*Table 3-1: Core feature comparison of Apache Spark and Ray Data. Source: compiled by the authors*
+
+The comparison is based on open-source framework documentation and LLM data-processing practice.
+
 | Dimension | Apache Spark | Ray Data |
 | :--- | :--- | :--- |
 | **Core language runtime** | Scala/Java core; Python through PySpark, with JVM-Python serialization overhead | Python-native, no JVM overhead, seamless with PyTorch and Hugging Face |
@@ -176,6 +183,7 @@ ds.write_parquet("s3://my-bucket/processed/cc_cleaned/")
 ```
 
 *Listing 3-2: Ray Data cleaning pipeline example. Production systems should add retry logic, metric reporting, data versions, and output validation*
+
 ### 3.2.3 Storage and Indexing Layer: Different Strategies for Three Data Types
 
 An LLM data stack must manage three very different kinds of data. Each has distinct storage requirements, so the storage and indexing layer needs differentiated technical choices.
@@ -186,7 +194,8 @@ The three mainstream lakehouse formats each have their own appropriate scenarios
 
 Table 3-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-2: Lakehouse table format selection comparison: Apache Iceberg vs. Delta Lake vs. Apache Hudi. Source: compiled by the authors based on public documentation of open-source projects and lakehouse architecture practice*
+*Table 3-2: Lakehouse table format selection comparison. Source: compiled by the authors*
+
 | Feature | Apache Iceberg | Delta Lake | Apache Hudi |
 | :--- | :--- | :--- | :--- |
 | **Core maintainer** | Netflix to Apache Foundation | Databricks, core commercial open source | Uber to Apache Foundation |
@@ -214,7 +223,10 @@ dvc push  # Push actual data to S3 remote storage.
 # Other engineers can use dvc pull to fetch the exact same data.
 ```
 
-*Listing 3-3: Example DVC commands for dataset version tracking. Production environments should combine this with object-storage permissions, data-hash validation, and release approval*
+*Listing 3-3: Example DVC commands for dataset version tracking*
+
+Production environments should combine this with object-storage permissions, data-hash validation, and release approval.
+
 ### 3.2.4 Evaluation Operations Layer: Making Data Quality Visible
 
 The evaluation operations layer provides observability for the entire data platform. It lets teams see pipeline status, data-quality trends, and experiment records in real time. It is the dashboard that keeps the data flywheel turning.
@@ -271,7 +283,8 @@ Figure 3-2 illustrates the corresponding workflow or structure.
 
 ![Figure 3-2: Training-data cost-governance loop](../../images/part1/Yu-Chap03-Fig02.svg)
 
-*Figure 3-2: Training-data cost-governance loop. Source: original illustration from this book. The figure shows a cross-version iteration cycle that starts from budget planning, passes through cost monitoring, ROI evaluation, and optimization decisions, and returns to budget review*
+*Figure 3-2: Training-data cost-governance loop. Source: original illustration from this book*
+
 ---
 
 ## 3.4 Three Team Architecture Patterns
@@ -308,7 +321,8 @@ An important lesson is that large-team data platforms should be built in **three
 
 Table 3-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 3-3: Quick selection matrix for data stacks across three team types. Source: compiled by the authors; setup cycles are empirical planning ranges, and actual cycles depend on team experience, permission workflows, and data-source complexity*
+*Table 3-3: Data stack selection matrix for three team types. Source: compiled by the authors*
+
 | Team size | Recommended storage | Recommended compute | Recommended orchestration | Recommended version management | Estimated build cycle |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1-5 people, startup | S3/MinIO + Parquet | DuckDB / Polars | Prefect / Dagster | DVC | 1-2 weeks |

@@ -1,4 +1,4 @@
-# Chapter 12: SFT Data Design and Instruction Systems
+# Chapter 12: Supervised Fine-Tuning Data Design and Instruction Systems
 
 <div class="chapter-authors">Jun Yu; Ran Zhang; Yang Luo</div>
 
@@ -181,6 +181,7 @@ Listing 12-1 provides a JSON metadata example.
 ```
 
 *Listing 12-1: JSON metadata example*
+
 ### 12.2.3 Template Design for Single-Turn, Multi-Turn, Tool-Assisted, and Constrained-Output Formats
 
 Templates are the core of SFT engineering. Without templates, a dataset quickly degrades into a chaotic accumulation of samples with inconsistent style, missing constraints, and little extensibility. Nor can templates be reduced to mechanical sentence substitution; their function is to solidify task objectives into reusable sample frameworks.
@@ -223,6 +224,7 @@ Listing 12-2 provides a JSON instruction sample example.
 ```
 
 *Listing 12-2: JSON instruction sample example*
+
 The following snippet focuses on Multi-Turn Clarification Template (Ask for "Minimum Necessary Information" First).
 
 When information is insufficient, the model should not "guess a reasonable answer"; it should be trained to ask for the minimum necessary information. In the example below, the assistant asks only one key question, avoiding repeated interrogation.
@@ -246,6 +248,7 @@ Listing 12-3 provides a JSON data example.
 ```
 
 *Listing 12-3: JSON data example*
+
 ### 12.2.4 Common Errors in Template Design
 
 Many SFT projects end up with mediocre results, and the reason often lies not in how hard the team worked or whether the sample count was sufficient, but in the fact that the templates were skewed from the start. Once a template is wrong, the more samples are built on it, the more the deviation is amplified—it does not self-correct.
@@ -281,6 +284,7 @@ To help teams develop a unified understanding, Figure 12-1 provides an architect
 ![Figure 12-1: Architecture Diagram of the SFT Instruction System](../../images/part4/Yu-Chap12-Fig01-EN.svg)
 
 *Figure 12-1: Architecture Diagram of the SFT Instruction System*
+
 ### 12.2.6 How to Implement the Four-Element Structure in Annotation Specifications
 
 Clearly understanding system, instruction, context, and response in a methodology discussion is not enough; the real challenge is whether, once written into annotation specifications, the team can consistently execute the same approach over the long term. Many projects verbally understand the importance of the four-element structure, but in practice still prefer to mix content together, and the model ends up learning a blurry set of conditions rather than clear behavioral boundaries.
@@ -354,6 +358,7 @@ Therefore, mature teams typically establish dedicated discovery, archiving, and 
 To help teams establish task mapping relationships, Table 12-1 provides example relationships between instruction types and applicable tasks.
 
 *Table 12-1: Instruction Types and Applicable Tasks*
+
 | Instruction Type | Typical Input Form | Target Output Form | Applicable Tasks | Annotation Focus | Common Risks |
 |---|---|---|---|---|---|
 | Direct Q&A | Question, or question with brief background | Natural-language answer | General Q&A, knowledge explanation, customer service reply | Accurate intent recognition; complete answer without excessive elaboration | Hallucination fill-in, off-topic response |
@@ -483,6 +488,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 12-4: Process flow example*
+
 ### 12.4.2 Supplementary Quality Dimensions Beyond the Core Three
 
 Looking only at clarity, correctness, and format consistency, many samples may superficially pass—yet when placed in the training set, problems still emerge. The reason is that some samples are "not wrong" in terms of their answers but are not necessarily appropriate for training a model. In industry-specific scenarios, such samples are not uncommon.
@@ -546,6 +552,7 @@ datasets/
 ```
 
 *Listing 12-5: Directory or artifact path example*
+
 Listing 12-6 provides an error-log example.
 
 ```json
@@ -582,9 +589,11 @@ Listing 12-6 provides an error-log example.
 ```
 
 *Listing 12-6: JSON data example*
+
 To facilitate practical acceptance, Table 12-2 provides an example quality dimension scoring rubric for supervised fine-tuning.
 
 *Table 12-2: Supervised Fine-Tuning Quality Dimension Scoring Rubric*
+
 | Scoring Dimension | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
 | Instruction Clarity | Task is ambiguous; constraints missing; objective unclear | Task broadly intelligible but with obvious ambiguity | Task mostly clear; some implicit requirements remain | Task is clear; input-output relationship well-defined | Task boundaries extremely clear; constraints complete; no ambiguity |
@@ -602,6 +611,7 @@ To help teams understand the overall flow from generation to revision, Figure 12
 ![Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop](../../images/part4/Yu-Chap12-Fig02-EN.svg)
 
 *Figure 12-2: Schematic of the Sample Generation and Acceptance Feedback Loop*
+
 ### 12.4.5 Embedding Quality Evaluation into Routine Production Workflows
 
 A hallmark of a high-quality SFT team is that quality evaluation has long transcended the role of a final "spot-check action" and is embedded throughout routine production workflows. Templates should undergo specification review before being finalized; automated rule validation should run during sample generation; human review should score along quality dimensions; samples should pass regression checks before entering the main repository; and after training, evaluation results should be used to trace data weaknesses back to their source.

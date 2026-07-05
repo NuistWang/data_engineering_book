@@ -64,7 +64,8 @@ Figure 7-1 illustrates the corresponding workflow or structure.
 
 ![Figure 7-1: Data Operations Flywheel](../../images/part2/Wang-Chap07-Fig01.svg)
 
-*Figure 7-1: Data Operations Flywheel — The left side shows the high-cost startup zone; the right side shows the gradually accumulated cycle of automated, high-quality data assets formed after long-term model evaluation and root-cause analysis feedback. Source: Original illustration by the authors*
+*Figure 7-1: Data operations flywheel. Source: original illustration from this book*
+
 ---
 
 ## 7.2 Offline Evaluation and Proxy Metric Design
@@ -120,7 +121,10 @@ def calculate_perplexity_batch(texts, cache_model_path="llama-1b-ref"):
     return ppl_results  # Returns an array for downstream histogram generation
 ```
 
-*Listing 7-1: Example code for offline perplexity sampling computation. Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions*
+*Listing 7-1: Example code for offline perplexity sampling computation*
+
+Production environments should fix the language model version, tokenization method, and sampling definition, and record batch-level distributions.
+
 #### 2. Diversity Sparsity (Type-Token Ratio, TTR & Vocabulary Coverage)
 - **Detection objective**: Confirm whether the cleaning pipeline, due to overly aggressive threshold settings or excessively strict deduplication (MinHash), has permanently eliminated niche knowledge or specific long-tail vocabulary.
 - **Validation method**: Compute the ratio of unique word types (distinct word stems within the vocabulary) to the total token count in the document collection described above. TTR tends to be lower across long passages, so a windowed averaging algorithm must be applied (e.g., MATTR (Covington and McFall 2010)).
@@ -147,7 +151,10 @@ def calculate_ttr(texts, tokenizer=None):
     return unique_types / total_tokens
 ```
 
-*Listing 7-2: Example code for offline Type-Token Ratio computation. This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata*
+*Listing 7-2: Example code for offline Type-Token Ratio computation*
+
+This snippet illustrates a diversity proxy metric; production environments should interpret it by language, domain, and sample-length strata.
+
 - **Advanced validation — Vocabulary Coverage**: Teams should compile a domain-specific vocabulary list (e.g., rare disease names, recently introduced niche code frameworks, or the complete roster of characters from a specific literary work). If the coverage of such targeted vocabulary in the sandbox is significantly lower than the historical baseline or the manually specified minimum coverage requirement, whitelist weights should be added to the upstream crawlers for the corresponding domains, and the next spot-check should verify whether noise has been introduced.
 
 #### 3. Toxicity and Adverse Leakage Rate (Toxicity & PII Density)
@@ -173,7 +180,8 @@ Evaluation must never stop at merely "looking at metrics." A qualified evaluatio
 
 Table 7-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-1: Evaluation Metric to Governance Action Mapping. Source: compiled by the authors; metric thresholds and governance actions should be calibrated according to project goals, historical baselines, and manual review results*
+*Table 7-1: Evaluation metric to governance action mapping. Source: compiled by the authors*
+
 | Metric Observation (Offline/Online) | Common Root Cause and Manifestation | Corresponding Governance Action |
 | :--- | :--- | :--- |
 | **Overall decline in sampled TTR (diversity)** | MinHash deduplication may be overly aggressive, eliminating reasonable overlap in general domains | **Raise the duplicate-decision threshold or switch to a stricter definition of duplication, and introduce domain-specific vocabulary protection** |
@@ -253,7 +261,8 @@ This costly training interruption demonstrates that the data operations team mus
 
 Table 7-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 7-2: Version Iteration Log Template. Source: compiled by the authors; the fields form a data-version retrospective template that production environments can extend according to auditing, experiment tracking, and permission workflows*
+*Table 7-2: Version iteration log template. Source: compiled by the authors*
+
 In a formal business iteration system, every data batch deployed to the main training cluster must be accompanied by a release log as rigorous as a software release note. The table below provides a benchmark log template from a production pipeline.
 
 | Evaluation Dimension | Version Log Field Example |
@@ -284,7 +293,8 @@ Figure 7-2 illustrates the corresponding workflow or structure.
 
 ![Figure 7-2: Data Evaluation Feedback Loop](../../images/part2/Wang-Chap07-Fig02.svg)
 
-*Figure 7-2: Data Evaluation Feedback Loop — A circular architecture proceeding from sampling-based blind review to root-cause investigation triggered by metric anomalies, followed by targeted system governance actions. Source: Original illustration by the authors*
+*Figure 7-2: Data evaluation feedback loop. Source: original illustration from this book*
+
 ### 7.4.2 Automated Quality Alert System Architecture
 
 If the dashboard is merely a static report requiring daily manual inspection, oversight gaps are inevitable. A mature large-model data factory requires not only a static dashboard but also an active blocking and alerting mechanism. This alerting architecture is typically built on a distributed stream-processing framework (such as Apache Flink or Spark Streaming) to achieve low-latency interception of anomalous data.

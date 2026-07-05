@@ -120,6 +120,7 @@ end_of_life: 2025-12-31                      # planned retirement date
 ```
 
 *Listing 27-1: YAML configuration example*
+
 The `restrictions` field is particularly noteworthy: it explicitly declares what the data "must not be used for." In a traditional file inventory, such constraints typically exist only in the memory of select individuals; once written into metadata, however, they become hard rules that can be enforced by systems and tracked in audits. It is precisely this contextual information that elevates a collection of files into a data asset that can be used with confidence.
 
 ### 27.1.4 Section Summary
@@ -143,6 +144,7 @@ A data asset typically passes through a standardized registration process before
 ![Complete workflow from data asset creation to use](../../images/part9/Zhang-Chap27-Fig01-EN.svg)
 
 *Figure 27-1: Data Asset Registration and Onboarding Workflow*
+
 ### 27.2.2 Complete Definition of the Metadata Model
 
 A production-grade dataset registry typically organizes metadata fields into the following categories. The design of these fields must serve both discovery and usage while also supporting governance and compliance.
@@ -150,6 +152,7 @@ A production-grade dataset registry typically organizes metadata fields into the
 Table 27-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 27-1: Core Metadata Field Categories for the Data Asset Registry*
+
 | Field Category | Representative Fields | Purpose |
 | --- | --- | --- |
 | **Identity** | asset_id, asset_name, description, asset_type | Globally unique identifier and basic description |
@@ -281,6 +284,7 @@ impact_analysis:
 ```
 
 *Listing 27-2: Process flow example*
+
 The example above is highly condensed for brevity, but retains the essential skeleton of a lineage record. In production environments, each transformation step would also record more detailed processing logic, execution time, data volume ratios, and field changes. The **`impact_analysis` field** is particularly critical—it explicitly captures both "which downstream assets would be affected by an upstream change" and "which downstream systems would be impacted if this dataset has a problem," along with severity levels and mitigation actions. It is this field that transforms lineage from a static "data flow diagram" into a governance tool capable of driving incident investigation and change assessment.
 
 As shown in Figure 27-2, a single piece of raw data may simultaneously enter multiple processing chains and flow through multiple layers of transformation before reaching downstream applications such as training, retrieval, and evaluation, forming a directed acyclic graph (DAG). Complete lineage records enable an organization to trace data destinations forward along this graph and locate problem sources in reverse.
@@ -290,6 +294,7 @@ The true power of lineage is most fully realized in impact analysis scenarios. C
 ![Data Lineage Graph](../../images/part9/Zhang-Chap27-Fig02-EN.svg)
 
 *Figure 27-2: Data Lineage Graph*
+
 ### 27.3.2 Permissions Governance and Access Control
 
 Data permissions management must answer: who can access what data, in what context, for what reason, and how are access records audited. This involves not only technical implementation (e.g., dataset-level permissions, row-level permissions, column-level permissions) but also organizational processes (e.g., approval, periodic review, anomaly alerts).
@@ -330,6 +335,7 @@ permissions:
 ```
 
 *Listing 27-3: YAML configuration example*
+
 The example above lists only the access level for each team; a complete configuration would also include a justification for the grant, accessible fields, row-level conditions, approval requirements, and audit sampling rate for each entry. The design logic is: the training team needs full raw data for best results, but this comes with full-coverage access auditing; the RAG team uses only de-identified text and features; the business analytics team can only run aggregation queries to prevent reverse-engineering of individuals from aggregate results; the governance team has administrative access including audit logs. Through this purpose-scoped control at the field, row, and query levels, the organization minimizes exposure of sensitive information while meeting the data needs of all parties.
 
 **Access approval and periodic review:**
@@ -352,6 +358,7 @@ The importance of lifecycle management stems from the fact that the "exit" of a 
 Table 27-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 27-2: Lifecycle States of a Data Asset*
+
 | State | Characteristics | Typical Duration | Transition Condition | User Action |
 | --- | --- | --- | --- | --- |
 | **CREATED** | Newly created; metadata complete but not yet live | 0–2 weeks | Passes quality check and security review | Awaiting activation |
@@ -367,6 +374,7 @@ As shown in Figure 27-3, the states above can be abstracted as a state machine: 
 ![Data Asset Lifecycle State Transition Diagram](../../images/part9/Zhang-Chap27-Fig03-EN.svg)
 
 *Figure 27-3: Data Asset Lifecycle State Machine*
+
 **Key activities during lifecycle transitions:**
 
 **From ACTIVE to DEPRECATED** — Requires:
@@ -405,6 +413,7 @@ Lineage, permissions, and lifecycle are the three pillars of data asset governan
 To illustrate how data asset governance is applied in practice, this section uses the data asset catalog of an e-commerce recommendation system to present cases involving diverse data types and governance requirements. The recommendation system is chosen because it naturally touches virtually all governance dimensions discussed in this chapter: it simultaneously depends on real-time streaming data, offline feature tables, training datasets, evaluation benchmarks, RAG knowledge bases, and compliance audit logs. These assets belong to different teams, are updated at different frequencies, carry different sensitivity levels, and are interconnected by complex lineage dependencies. Table 27-3 excerpts representative assets from this catalog, spanning multiple types including streaming data, feature tables, vector stores, training sets, evaluation sets, and knowledge bases.
 
 *Table 27-3: Data Asset Catalog Example for an E-Commerce Recommendation System*
+
 | Asset ID | Type | Quality Score | Status | Primary Use |
 | --- | --- | --- | --- | --- |
 | `raw_user_click` | Stream | 0.91 | ACTIVE | Real-time recommendation, training data source |
@@ -479,6 +488,7 @@ expected_active_until: 2026-12-31
 ```
 
 *Listing 27-4: YAML configuration example*
+
 The structural definition documents each field's type and value range; version history records each change and its compatibility; quality metrics provide numerical values for each dimension alongside known issues; and the permissions, usage records, and lifecycle modules are each detailed down to the team, downstream application, and individual timestamps.
 
 This example conveys a core principle: **the metadata of a mature data asset is itself a compact specification document**. It consolidates all the information needed to answer "what is this data, can it be used, how should it be used, and for how long" into a machine-readable, machine-verifiable structure, making the discovery, evaluation, and governance of data no longer dependent on informal oral transmission.
@@ -488,6 +498,7 @@ This example conveys a core principle: **the metadata of a mature data asset is 
 In a mature data organization, a data asset catalog may contain hundreds or even thousands of assets. Managers need an aggregate view of the health of the data asset portfolio, which is typically achieved through a dashboard. Table 27-4 lists key metrics commonly used in governance dashboards, organized along five dimensions—coverage, quality, compliance, lifecycle, and usage—with a target value and alert threshold specified for each metric.
 
 *Table 27-4: Key Metrics for the Data Asset Governance Dashboard (Selected)*
+
 | Dimension | Representative Metric | Target | Alert Threshold |
 | --- | --- | --- | --- |
 | **Coverage** | Percentage of assets with metadata / with lineage | >95% / >90% | <90% / <80% |
@@ -505,6 +516,7 @@ In cross-team governance practice, the health of the permissions dimension is pa
 ![Permissions Management Matrix Based on Roles and Purposes](../../images/part9/Zhang-Chap27-Fig04-EN.svg)
 
 *Figure 27-4: Permissions Management Matrix Example*
+
 ### 27.4.4 Section Summary
 
 Through concrete cases, we have seen how data asset catalogs are applied in real organizations. The key is to build a governance framework that is both comprehensive (covering all data assets) and detailed (with complete metadata for each asset), while establishing a monitoring dashboard to maintain a real-time view of governance health.
@@ -550,6 +562,7 @@ To translate the foregoing methods into actionable acceptance criteria, a govern
 Table 27-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 27-5: Data Asset Governance Implementation Checklist*
+
 | Check Category | Key Question | Acceptance Criterion |
 | --- | --- | --- |
 | Identity and Ownership | Is there a unique identifier, a clear owner, and a clear steward? | Every asset can be traced to a responsible party |

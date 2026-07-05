@@ -214,7 +214,7 @@
 | `docs/zh/part14/p10_flywheel.md` | 632 | `docs/images/part14/p10/Wang-Project10-Fig10.svg` | unknown | 91.5 | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 是 | needs-rights-ai-review, needs-high-res-confirmation |
 | `docs/zh/part14/p11_mini_deepseek.md` | 84 | `docs/images/part14/Yu-Project11-Fig02-EN.svg` | unknown | 10.9 | missing-register | unknown | missing-figure-register, needs-high-res-confirmation |
 | `docs/zh/part14/p12_r1_reasoning_flywheel.md` | 105 | `docs/images/part14/p12/Wang-Project12-Fig01.svg` | unknown | 91.0 | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 是 | needs-rights-ai-review, needs-high-res-confirmation |
-| `docs/zh/part14/p13_multimodal_instruction_factory.md` | 88 | `docs/images/part14/Yu-Project13-Fig02-EN.svg` | unknown | 15.1 | missing-register | unknown | missing-figure-register, needs-high-res-confirmation |
+| `docs/zh/part14/p13_multimodal_instruction_factory.md` | 88 | `docs/images/part14/Yu-Project13-Fig01-EN.svg` | unknown | 15.1 | missing-register | unknown | missing-figure-register, needs-high-res-confirmation |
 | `docs/zh/part14/p14_video_generation.md` | 86 | `docs/images/part14/Luo-Project14-Fig04-EN.svg` | unknown | 549.0 | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 是 | needs-rights-ai-review, needs-high-res-confirmation |
 | `docs/zh/part14/p14_video_generation.md` | 558 | `docs/images/part14/Luo-Project14-Fig01.jpg` | 448x252 | 44.7 | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 是 | needs-rights-ai-review, needs-high-res-confirmation |
 | `docs/zh/part14/p14_video_generation.md` | 558 | `docs/images/part14/Luo-Project14-Fig02.jpg` | 448x252 | 43.2 | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 是 | needs-rights-ai-review, needs-high-res-confirmation |

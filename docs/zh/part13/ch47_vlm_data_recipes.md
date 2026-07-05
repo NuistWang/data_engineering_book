@@ -1,4 +1,4 @@
-# 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐
+# 第47章：视觉语言模型数据配方
 
 <div class="chapter-authors">曹旭宏（Xuhong Cao）；王柯（Ke Wang）；Qingsong Liu</div>
 
@@ -37,6 +37,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 ![图47-1：多模态数据工程全景图](../../images/part13/Cao-Chap47-Fig01.png)
 
 *图47-1：多模态数据工程全景图*
+
 ---
 
 ## 47.1 VLM 数据三阶段流水线
@@ -46,6 +47,7 @@ VLM 数据配方；视觉语言模型；重描述；高分辨率训练；OCR-Ric
 ![图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)](../../images/part13/Cao-Chap47-Fig02-EN.svg)
 
 *图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline)*
+
 **阶段一：预训练（Pre-training / Feature Alignment）**
 
 此阶段的核心目标是**视觉概念与文本词汇的粗粒度对齐**。数据规模通常在数亿至数十亿图文对（Image-Text Pairs）量级，主要来源包括经过对比式图文预训练（CLIP）强过滤的 LAION 子集 (Schuhmann et al. 2022)、DataComp-1B (Gadre et al. 2023)、COYO-700M，以及近两年兴起的 Re-captioning 数据（如 ShareGPT4V-1.2M、LLaVA-Recap-558K）。
@@ -113,6 +115,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 ![图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)](../../images/part13/Cao-Chap47-Fig03-EN.svg)
 
 *图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling)*
+
 **派系一：动态高分切片（Dynamic Hi-Res Patching / AnyRes）**
 
 以 InternVL 和 LLaVA 系列为代表。在数据输入预处理阶段，系统保持视觉编码器（如 CLIP-ViT）的输入分辨率（如 448×448）不变。对于一张 1000×2000 的长图，数据引擎会在不破坏宽高比的情况下，将其动态切割（Crop）成多个 448×448 的 Patch 子图，并额外生成一张低分辨率的全局缩略图（Thumbnail）。
@@ -128,6 +131,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 表47-2汇总了本节的关键对象、工程要点与复核口径。
 
 *表 47-2：原生分辨率与动态高分辨率数据处理差异 (2 行 × 6 列)*
+
 | 解决流派                   | 代表模型          | 图像数据预处理动作               | 视觉编码器改造         | LLM 端 Token 序列特征                   | 优劣势评估                                        |
 | :------------------------- | :---------------- | :------------------------------- | :--------------------- | :-------------------------------------- | :------------------------------------------------ |
 | **Native Res.**      | Qwen2.5-VL        | 保持原图，按 Patch Size 动态展开 | 移除固定 Pos Embedding | 二维绝对坐标映射 (M-RoPE)               | 精度最高，无边界断裂 / 工程难度极大，内存易碎片化 |
@@ -144,6 +148,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 ![图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)](../../images/part13/Cao-Chap47-Fig04-EN.svg)
 
 *图47-4：多模态指令合成 pipeline (Multi-modal Instruction Synthesis)*
+
 如图47-4 所示，多模态指令合成已经远超简单的"让 GPT-4V 看看图并造句"。一个现代的数据合成管线通常包含以下组件的协同：
 
 1. **基础视觉感知网络**：利用现成的专有小模型，如 Grounding DINO (Liu et al. 2023) 提取所有物体的边界框（Bounding Boxes），利用 PaddleOCR 提取密集文本，甚至利用深度估计模型提取 3D 景深。
@@ -154,6 +159,7 @@ MiniCPM-V 提供了一个截然不同的数据配方范式：在总体规模受�
 表47-3汇总了本节的关键对象、工程要点与复核口径。
 
 *表 47-3：多模态指令数据合成方法对比 (3 行 × 5 列)*
+
 | 合成流派                             | 核心依赖模型              | 典型应用场景                   | 成本估算              | 噪声与幻觉风险                      |
 | :----------------------------------- | :------------------------ | :----------------------------- | :-------------------- | :---------------------------------- |
 | **GPT-4V 蒸馏法**              | 外部闭源 VLM API          | 复杂逻辑推理题、长文摘要       | 极高 (依赖 API Quota) | 较低，但受限于教师模型固有偏见      |
@@ -192,6 +198,7 @@ def recaption_batch(image_paths: list[str], model, processor) -> list[str]:
 ```
 
 *代码清单47-1：流程示例*
+
 **工程要点说明**：
 
 - `temperature=0.7` 是防止 Caption 模式坍塌的关键参数，低于 0.5 时生成风格趋于同质化；

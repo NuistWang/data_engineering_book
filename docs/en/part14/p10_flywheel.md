@@ -68,6 +68,7 @@ project assets -> registry -> stage plan -> training/evaluation feedback -> data
 ```
 
 *Listing P10-1: Process flow example*
+
 Sample records should at least preserve `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`.
 
 Exact fields should be refined according to the data type, downstream task, and acceptance method.
@@ -89,6 +90,7 @@ For production, course, or public reproduction settings, reports should also rec
 Table P10-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table P10-1: Publication acceptance table for the LLM data flywheel*
+
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Asset integration | Upstream project coverage, registry completeness, and interface mapping records | Every upstream asset should explain its source, owner, version, and reuse path |
@@ -276,6 +278,7 @@ Figure P10-1 shows end-to-end llm data flywheel overview.
 ![Figure P10-1: End-to-end LLM data flywheel overview](../../images/part14/p10/Wang-Project10-Fig01.svg)
 
 *Figure P10-1: End-to-end LLM data flywheel overview*
+
 From an engineering perspective, this project should be viewed as five layers instead of a linear data-input to model-output chain.
 
 ### 4.1 Data Source Layer
@@ -393,6 +396,7 @@ Figure P10-2 shows upstream project registry and interface mapping.
 ![Figure P10-2: Upstream project registry and interface mapping](../../images/part14/p10/Wang-Project10-Fig02.svg)
 
 *Figure P10-2: Upstream project registry and interface mapping*
+
 ---
 
 ## 6. Code Expansion 1: Aggregating Upstream Project Assets
@@ -429,6 +433,7 @@ PROJECT_SPECS = [
 ```
 
 *Listing P10-2: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure reflects several basic requirements for upstream asset aggregation:
@@ -451,6 +456,7 @@ Figure P10-3 shows structured upstream project specs.
 ![Figure P10-3: Structured upstream project specs](../../images/part14/p10/Wang-Project10-Fig03.svg)
 
 *Figure P10-3: Structured upstream project specs*
+
 ---
 
 ## 7. Stage Planning: Five-stage Advancement Structure
@@ -497,6 +503,7 @@ Figure P10-4 shows five-stage plan and milestone relationships.
 ![Figure P10-4: Five-stage plan and milestone relationships](../../images/part14/p10/Wang-Project10-Fig04.svg)
 
 *Figure P10-4: Five-stage plan and milestone relationships*
+
 ---
 
 ## 8. Code Expansion 2: Building Flywheel Architecture and Stage Planning
@@ -536,6 +543,7 @@ def build_architecture(registry: list[dict]) -> dict:
 ```
 
 *Listing P10-3: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This structure shows that the flywheel relies on explicit mapping to maintain consistency.
@@ -568,6 +576,7 @@ Figure P10-5 shows five-layer flywheel code mapping.
 ![Figure P10-5: Five-layer flywheel code mapping](../../images/part14/p10/Wang-Project10-Fig05.svg)
 
 *Figure P10-5: Five-layer flywheel code mapping*
+
 ---
 
 ## 9. System Boundaries and Control Points
@@ -616,6 +625,7 @@ Figure P10-6 shows system boundaries and control points.
 ![Figure P10-6: System boundaries and control points](../../images/part14/p10/Wang-Project10-Fig06.svg)
 
 *Figure P10-6: System boundaries and control points*
+
 ---
 
 ## 10. Run Records and Milestones
@@ -650,6 +660,7 @@ Figure P10-7 shows run records and milestone board.
 ![Figure P10-7: Run records and milestone board](../../images/part14/p10/Wang-Project10-Fig07.svg)
 
 *Figure P10-7: Run records and milestone board*
+
 ---
 
 ## 11. Metric Interpretation: Meaning of System-level Signals
@@ -751,6 +762,7 @@ Figure P10-8 shows flywheel bottleneck map.
 ![Figure P10-8: Flywheel bottleneck map](../../images/part14/p10/Wang-Project10-Fig08.svg)
 
 *Figure P10-8: Flywheel bottleneck map*
+
 ---
 
 ## 13. Cost and Shared Benefits
@@ -813,6 +825,7 @@ bottlenecks = [
 ```
 
 *Listing P10-4: Python implementation excerpt*
+
 This computation turns system-level judgment into structured metrics and structured conclusions.
 
 The main report conclusions are supported by the registry, runs, and intermediate artifacts.
@@ -834,6 +847,7 @@ Figure P10-9 shows system-level metric generation logic.
 ![Figure P10-9: System-level metric generation logic](../../images/part14/p10/Wang-Project10-Fig09.svg)
 
 *Figure P10-9: System-level metric generation logic*
+
 ---
 
 ## 15. Validation Loop: Consistency Check Mechanism
@@ -900,6 +914,7 @@ def run_command(command: list[str], name: str) -> dict:
 ```
 
 *Listing P10-5: Process flow example*
+
 This structure reflects several requirements:
 
 - command results should be structurally recorded;
@@ -926,6 +941,7 @@ Figure P10-10 shows check scripts and system contracts.
 ![Figure P10-10: Check scripts and system contracts](../../images/part14/p10/Wang-Project10-Fig10.svg)
 
 *Figure P10-10: Check scripts and system contracts*
+
 ---
 
 ## 17. Main Deliverables: System Delivery List

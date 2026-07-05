@@ -148,6 +148,7 @@ Listing 18-1 provides a JSON data example.
 ```
 
 *Listing 18-1: JSON data example*
+
 For code tasks, the schema is better suited to a structure of "problem localization—root cause analysis—fix plan—code change—verification result"; SWE-bench organizes GitHub issues, code repositories, and corresponding patches as real-world software engineering solving tasks, providing a canonical reference for this type of schema (Jimenez et al. 2024). Unlike mathematics, the intermediate process in code tasks more closely resembles a solution process directly tied to program state rather than an abstract chain of thought. A high-quality code sample should ideally contain not only the code snippet before and after the fix, but also the test that triggered the error, the failure log, the localization rationale, candidate fix strategies, and the final verification result. Otherwise, the model tends to remain at the level of local patch mapping and struggles to form complete debugging logic.
 
 In logic tasks, the schema should emphasize premises, rule invocations, local conclusions, and conflict checks. Logical errors often stem from incomplete reasoning evidence, incorrect conditions of rule applicability, or cross-step jumps; surface language issues are merely external manifestations. If "which premises led to which step" is not written out explicitly, many apparently coherent chains are not genuinely logically valid. For more complex logic tasks, fields such as branch discussions, counterexample tests, and changes to the assumption set can also be added to make trajectories more suitable for downstream verification.
@@ -187,6 +188,7 @@ From an engineering standpoint, the degree of structure in reasoning trajectorie
 
 
 *Table 18-1: Reasoning Sample Types and Applicable Tasks*
+
 | Reasoning Sample Type | Primary Representation | Applicable Tasks | Advantages | Limitations |
 |---|---|---|---|---|
 | Answer-only sample | Problem + final answer | Simple Q&A, classification, low-reasoning-depth tasks | Low cost, high throughput | Cannot expose process deficiencies |
@@ -202,6 +204,7 @@ From an engineering standpoint, the degree of structure in reasoning trajectorie
 ![Figure 18-1: Reasoning Data Construction and Verification Workflow](../../images/part6/Yu-Chap18-Fig01-EN.svg)
 
 *Figure 18-1: Reasoning Data Construction and Verification Workflow*
+
 ## 18.3 Automated Verification and Error Classification
 
 ### Why Reasoning Data Cannot Be Generated Without Verification
@@ -284,6 +287,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 18-2: Process flow example*
+
 Unit tests primarily serve code repair, program synthesis, and structured tool-invocation tasks; HumanEval, APPS, and MBPP all treat test cases or program behavior as important criteria for evaluating code generation (Chen et al. 2021; Austin et al. 2021). They check not only whether the final program runs, but whether the fix truly satisfies expected behavior. For code tasks, looking at the generated text alone is often insufficient; the true quality standard lies in whether the program behavior is correct, whether edge conditions are covered, and whether new side effects have been introduced. Unit tests serve the role of "behavioral ground truth" here—they are closer to real-world usage standards than text similarity or superficial explanation quality.
 
 Judge models (Zheng et al. 2023; Liu et al. 2023) are used to supplement semantic judgments that rules and execution together cannot cover. For example: whether an explanation truly supports the next conclusion, whether a logic step constitutes a jump, whether a code repair rationale is consistent with the patch behavior, and whether a self-reflection has genuinely identified the root cause of an error. Such questions are often impossible to fully formalize, yet cannot be left unchecked. The value of judge models is that they provide an approximate semantic review capability at scale. They are not absolutely reliable, of course, and should therefore generally be used in conjunction with rule-based and execution verification, rather than serving alone as the final criterion.
@@ -331,11 +335,13 @@ In many pipelines, whole-problem correctness naturally becomes the most salient 
 
 ![Figure 18-2: Illustration of Process Supervision Labels](../../images/part6/Yu-Chap18-Fig02-EN.svg)
 *Figure 18-2: Illustration of Process Supervision Labels*
+
 For example, a sample may ultimately produce an incorrect answer, but if ninety percent of the preceding steps are correct and the final step's error is clearly correctable, it still has substantial value for training local correction capability and process robustness. Conversely, a sample may ultimately produce the correct answer, but if it is filled with jumps, pseudo-explanations, and implicit hallucinations, it may not deserve a high score despite passing on the result. In other words, process scoring must be willing to assign low scores to samples that are "correct but process-poor," and must also be willing to distinguish "wrong but process-mainly-good" samples from ordinary failures. Only in this way does the scoring system avoid reinforcing old result-oriented habits. Systematic handling of typical manifestations, common causes, and recommended corrective actions for different error types can be done with reference to Table 18-2.
 
 
 
 *Table 18-2: Error Types and Corrective Actions*
+
 | Error Type | Typical Manifestations | Common Causes | Recommended Corrective Actions |
 |---|---|---|---|
 | Arithmetic error | Incorrect calculation result, copied sign error, substitution mistake | Unstable basic computation, local errors from excessively long trajectories | Use executor to recompute, replace erroneous step and replay subsequent chain |

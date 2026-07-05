@@ -1,4 +1,4 @@
-# Chapter 48: Data Engineering for Multimodal Generative Models: T2I and T2V Data Pipelines
+# Chapter 48: Multimodal Generative Data Engineering
 
 <div class="chapter-authors">Ran Zhang; Jianqing Sun; Fan Yu</div>
 
@@ -93,6 +93,7 @@ Wan2.2 (Wan Team 2025) places greater emphasis on aesthetic direction for high-q
 Comparing these models together reveals three relatively clear approaches. The first is the image recaptioning approach represented by DALL·E 3 and SD3, focused on making training text more granular and more closely aligned with user prompts. The second is the video engineering approach represented by HunyuanVideo and Open-Sora, focused on unifying motion, shot language, quality, OCR, watermarks, and structured captions into a single pipeline. The third is the industry model approach represented by FLUX and Wan2.2—publicly disclosed effects are strong, data chain details are limited, but one can observe trends toward high aesthetics, stringent safety constraints, and orientation toward creative use cases. For the purposes of this chapter, Table 48-1 serves primarily to consolidate these differences; what readers truly need to understand is this: generative model data pipelines have evolved from "data collection" to "supervisory signal production." Data no longer passively enters training sets; after filtering, rewriting, stratification, and routing, it actively shapes the generative capabilities of models.
 
 *Table 48-1: Comparative Overview of Mainstream T2I/T2V Model Data Pipelines*
+
 | Model / Project | Modality | Data Ingestion & Disclosure Level | Filtering & Governance Focus | Caption / Annotation Strategy | Implications for Data Engineering |
 |---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023; OpenAI 2023) | T2I | Data pool not fully disclosed; public materials emphasize high-quality image-text supervision | Safety filtering, personal information reduction, inference-side prompt rewriting | Highly descriptive captions; user prompts expanded at inference time | Demonstrates that highly descriptive captions are critical for prompt following |
@@ -141,6 +142,7 @@ SD3's 50/50 mixing strategy is particularly worth emulating. Replacing all origi
 Table 48-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 48-2: Comparison of Caption Rewriting Approaches (DALL·E 3 / SD3 / CogVLM2 Distillation)*
+
 | Approach | Training-side caption generator | Original caption retention strategy | Output form | Inference-side prompt rewriting | Advantages | Risks and costs |
 |---|---|---|---|---|---|---|
 | DALL·E 3 (Betker et al. 2023) | Specially trained highly descriptive captioner | Not fully disclosed in public materials | High-density natural-language caption | Yes, user prompt expanded with GPT-4 | Marked improvement in prompt following; short prompts converted into executable descriptions | System is closed; captioner training details and data thresholds cannot be reproduced |
@@ -159,6 +161,7 @@ Figure 48-1 illustrates the corresponding workflow or structure.
 ![Figure 48-1: T2I Data Pipeline](../../images/part13/Zhang-Chap48-Fig01.svg)
 
 *Figure 48-1: T2I Data Pipeline*
+
 ---
 
 ## 48.4 T2V Data Pipeline
@@ -237,6 +240,7 @@ Spatiotemporal alignment does not mean this chapter re-examines long-video timel
 Table 48-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 48-3: Spatiotemporal Alignment Strategies for Video Captioning*
+
 | Strategy | Method | Representative Projects | Advantages | Limitations | Applicable Position |
 |---|---|---|---|---|---|
 | Single-shot single caption | One overall description per single-shot clip | HunyuanVideo, Open-Sora | High throughput; suitable for large-scale pretraining | Intra-shot details and action order easily compressed | Large-scale pretraining main data |
@@ -270,6 +274,7 @@ Figure 48-2 illustrates the corresponding workflow or structure.
 ![Figure 48-2: T2V Data Pipeline](../../images/part13/Zhang-Chap48-Fig02.svg)
 
 *Figure 48-2: T2V Data Pipeline*
+
 ---
 
 ## 48.5 Comparative Dataset Disclosure: From SD3 to Open-Source Video Pipelines
@@ -375,6 +380,7 @@ Figure 48-3 illustrates the corresponding workflow or structure.
 ![Figure 48-3: Multi-Tier Aesthetic / Copyright / Safety Filtering Architecture](../../images/part13/Zhang-Chap48-Fig03.svg)
 
 *Figure 48-3: Multi-Tier Aesthetic / Copyright / Safety Filtering Architecture*
+
 ---
 
 ## 48.7 Implementation Risks, Costs, and Boundaries

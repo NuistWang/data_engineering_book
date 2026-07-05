@@ -89,7 +89,10 @@ To prevent smaller open-source models from generating unfocused descriptions, pr
 [Constraint]: Do NOT use any generic filler words like 'This is an image of' or 'I can see'. Do NOT guess the location if no text is shown. Keep the entire response strictly under 50 words. Focus solely on visible facts.
 ```
 
-*Listing 9-1: Recaptioning prompt template example. This template illustrates the constraint style; production environments should A/B validate it according to model version, image type, and safety policy*
+*Listing 9-1: Recaptioning prompt template example*
+
+This template illustrates the constraint style; production environments should A/B validate it according to model version, image type, and safety policy.
+
 #### 2. Middle layer: multi-model-as-a-judge
 
 For complex interleaved scenes, dense environments, or images containing subtle cultural details, a single open-source model may hallucinate, for example identifying a black garden hose on the ground as a snake. To reduce hidden defects from one model, the pipeline upgrades such batches into **three-blind mutual review**, or MoE-Judge:
@@ -104,7 +107,8 @@ At the highest-value layer of the funnel, automation scripts mainly perform cand
 
 These human labels should not rely only on low-barrier crowdsourcing. Multimodal alignment requires high noun precision and hierarchical structure, so annotators usually need systematic training and a dedicated internal labeling tool to confirm small regions one by one. Although this portion is tiny, it forms the **golden truth** used later for training recaptioning reward models or fine-tuning base models.
 
-*Table 9-1: Comparison and accounting dimensions for automated recaptioning production tiers. Source: compiled by the authors; cost and throughput must be recalculated according to model version, API pricing, concurrency limits, and annotation region*
+*Table 9-1: Automated recaptioning production tiers. Source: compiled by the authors*
+
 | Recaptioning tier | Cost drivers | Throughput constraints | Complex-scene and chart ability | Advantages and deployment risks |
 | :--- | :--- | :--- | :--- | :--- |
 | **Small VLM local batch** | GPU card-hours, model quantization method, image resolution | Local inference concurrency and I/O | Weak, especially for tables | **Advantage**: low cost and rapid object alignment.<br>**Risk**: hallucination, not suited to fine-grained training. |
@@ -127,7 +131,10 @@ The downstream text assembly script no longer outputs only a sentence such as "a
 On the lower-left side of the wooden square table in the back of the image, there is an <object name="apple" bbox="[[320, 550, 450, 690]]">apple</object>; to its left is a stack of <object name="book" bbox="[[500, 520, 680, 750]]">medical books</object>.
 ```
 
-*Listing 9-2: XML grounding localization markup example. Coordinates and objects are illustrative samples; production environments should constrain them jointly through detector outputs, manual spot-checks, and coordinate normalization rules*
+*Listing 9-2: XML grounding localization markup example*
+
+Coordinates and objects are illustrative samples; production environments should constrain them jointly through detector outputs, manual spot-checks, and coordinate normalization rules.
+
 The reason is that a Transformer does not naturally possess absolute spatial awareness of near/far, left/right, and high/low. After many samples extend natural-language words into discrete coordinate tokens such as `[Bbox_xx_yy]` and enter the SFT pipeline, the model can not only answer "what is in the image" but also output coordinates or region references for tasks such as "point to the apple." This is the foundation for reducing spatial hallucination and supporting web visual automation agents.
 
 *Industrial recaptioning JSONL sample (Recaptioning Schema). The fields and paths below are anonymized examples.*
@@ -153,7 +160,10 @@ The final VLM-generated recaptioning data is packaged as JSONL with strict metad
 }
 ```
 
-*Listing 9-3: Anonymized recaptioning JSON record schema example. Production environments should add data source, model version, review status, license, and safety-filter records*
+*Listing 9-3: Anonymized recaptioning JSON record schema example*
+
+Production environments should add data source, model version, review status, license, and safety-filter records.
+
 **Field notes**
 
 - `original_caption`: the low-information label crawled from the source.
@@ -163,7 +173,8 @@ The final VLM-generated recaptioning data is packaged as JSONL with strict metad
 
 ![Figure 9-1: Recaptioning and OCR dual-track enhancement](../../images/part3/Yu-Chap09-Fig01.svg)
 
-*Figure 9-1: Recaptioning and OCR dual-track enhancement. The left side shows a semantic vision track for dense narrative descriptions; the right side shows a structural text track containing DOM layout segmentation and table matrices. The two streams are fused into a unified hybrid supervision template. Source: drawn for this book*
+*Figure 9-1: Recaptioning and OCR dual-track enhancement. Source: drawn for this book*
+
 At this point, a recaptioning pipeline for natural images and pure scenes has been established. The next category, high-density text, most strongly affects enterprise VLM deployment: long-document reading and complex business-report structured parsing.
 
 ---
@@ -196,7 +207,8 @@ Figure 9-2 illustrates the corresponding workflow or structure.
 
 ![Figure 9-2: Document structure layout-to-token mapping](../../images/part3/Yu-Chap09-Fig02.svg)
 
-*Figure 9-2: Document structure layout-to-token mapping. The left side shows a fragment of a two-column academic report. The system first uses bounding-box arrays to locate titles, body text, charts, and formula regions. The right side shows how outputs from specialized models such as Nougat and PaddleOCR are post-processed into hierarchical Markdown text and rich text streams with discrete coordinates `[x_y]`. Source: drawn for this book*
+*Figure 9-2: Document structure layout-to-token mapping. Source: drawn for this book*
+
 ### 9.3.2 How Text Engines Reduce Ultra-High-Resolution Input Burden
 
 This preprocessing mechanism, based on visual feature extraction, bounding boxes, and structured discrete strings, significantly reduces the character-recognition burden on the training cluster. Characters that would otherwise need to be recognized by the visual model during training have already been parsed by a CPU/GPU hybrid OCR pipeline into a long text prompt and provided as context. The vision model can then process the full page at a lower resolution and focus on **macro layout and physical-space features**.
@@ -229,7 +241,8 @@ These experts not only judge quality but also provide error-attribution reports 
 
 Table 9-2 summarizes the corresponding comparison and engineering considerations.
 
-*Table 9-2: OCR core error attribution and remediation matrix for cross-modal and advanced document recognition. Source: compiled by the authors from anonymized engineering patterns; error types and remediation actions should be reviewed by document type and OCR model version*
+*Table 9-2: OCR error attribution and remediation matrix. Source: compiled by the authors*
+
 | Error pattern in model output | Root-cause diagnosis in expert workstation | Core remediation strategy and architectural iteration |
 | :--- | :--- | :--- |
 | **Small mathematical formulas or table decimals are read incorrectly** | Upstream OCR or table-recognition engine has insufficient extraction accuracy. | Replace or fine-tune Paddle/Mathpix/Table OCR; add dense-table samples; raise document input resolution when necessary. |

@@ -64,7 +64,10 @@ Figure 4-1 illustrates the corresponding workflow or structure.
 
 ![Figure 4-1: Layered map of pre-training data sources](../../images/part2/Yu-Chap04-Fig01.svg)
 
-*Figure 4-1: Layered map of pre-training data sources. The three-layer taxonomy positions mainstream sources by processing complexity, knowledge density, and license risk, with typical reference ranges for mixing. Source: original illustration from this book*
+*Figure 4-1: Layered map of pre-training data sources. Source: original illustration from this book*
+
+The three-layer taxonomy positions mainstream sources by processing complexity, knowledge density, and license risk, with typical reference ranges for mixing.
+
 ### 4.2.1 Eight Core Source Categories
 
 **Open web** is the largest and most difficult source category, represented by Common Crawl. Since 2008, Common Crawl has continuously crawled the web and released monthly snapshots containing billions of pages. Its accumulated scale is beyond the petabyte level, and many large pre-training corpora use it as an upstream source. Raw web quality varies dramatically: according to FineWeb, a limited portion of raw Common Crawl is dense body text, while large portions are navigation, ads, SEO spam, JavaScript, and boilerplate. Strict cleaning is mandatory.
@@ -87,7 +90,10 @@ Figure 4-1 illustrates the corresponding workflow or structure.
 
 In practical engineering decisions, source selection cannot be based on quality alone; license risk and acquisition feasibility must also be incorporated into the framework. Table 4-1 summarizes a risk-profile matrix for major data sources.
 
-*Table 4-1: Source type, license, and risk matrix. Source: compiled by the authors; license risk should be based on specific source terms, robots.txt, service agreements, and legal-review conclusions*
+*Table 4-1: Source type, license, and risk matrix. Source: compiled by the authors*
+
+License risk should be assessed against specific source terms, robots.txt, service agreements, and legal-review conclusions.
+
 | Source type | Representative sources | License pattern | Commercial risk | Knowledge density | Scale potential |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Open web | Common Crawl, RefinedWeb | CC-BY / mixed page licenses | Medium: page-specific | Low to medium | PB-level |
@@ -104,7 +110,8 @@ In practical engineering decisions, source selection cannot be based on quality 
 
 Data mix ratio is one of the most strategic decisions in pretraining data engineering. There is no universal fixed mix, because different business objectives require different data combinations. The following are reference mixing strategies for four typical business objectives:
 
-*Table 4-2: Data mix strategy by business objective. Source: compiled by the authors; mixing recommendations are a strategic framework and should be calibrated in production through proxy-model evaluation and ablation experiments*
+*Table 4-2: Data mix strategy by business objective. Source: compiled by the authors*
+
 | Business objective | General web | Code | Academic papers | Books / encyclopedia | Vertical data | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **General Chinese base model** | High | Medium | Low-medium | Medium | Low | Pursues broad knowledge coverage; code should not be too low because it affects reasoning capability. |
@@ -178,7 +185,10 @@ class AsyncEthicalCrawler:
             return await asyncio.gather(*(bounded_fetch(url) for url in urls))
 ```
 
-*Listing 4-1: Example code for asynchronous concurrent ingestion and robots.txt checks. Production environments should add rate limiting, failed retries, audit logs, and source-policy whitelists*
+*Listing 4-1: Example code for asynchronous concurrent ingestion and robots.txt checks*
+
+Production environments should add rate limiting, failed retries, audit logs, and source-policy whitelists.
+
 This design can raise single-machine throughput to hundreds of QPS while preventing accidental access to disallowed paths. Production systems should add rate limits, audit logs, exception retries, and legal-policy controls.
 
 ### 4.3.2 Parsing Heterogeneous Sources
@@ -229,7 +239,10 @@ def parse_warc_to_clean_text(warc_path: str) -> list[dict]:
     return records
 ```
 
-*Listing 4-2: Example code for WARC body parsing and source metadata preservation. This snippet shows the parsing path; production environments should add encoding detection, anomalous-sample isolation, and parsing-quality spot checks*
+*Listing 4-2: Example code for WARC body parsing and source metadata preservation*
+
+This snippet shows the parsing path; production environments should add encoding detection, anomalous-sample isolation, and parsing-quality spot checks.
+
 **PDFs.** Academic papers, books, and enterprise documents are harder because PDF is a page-layout format rather than a semantic-text format. Simple extraction with `pdfplumber` or `PyMuPDF` often interleaves columns in academic papers. Scientific papers may require GROBID, Nougat, or Mathpix; enterprise PDFs should receive manual sampling after parsing to verify paragraph and table structure.
 
 **Git repositories.** Code should normally be obtained by cloning repositories rather than through partial API pulls. The parser should identify language by extension and content, filter generated or very large files, validate syntax where possible, and read license files. For Python, AST parsing can reject corrupted files; for repository-level governance, permissive license whitelists such as MIT and Apache-2.0 are essential.
@@ -261,12 +274,18 @@ Each ingested batch should write standard fields to the metadata database at the
 }
 ```
 
-*Listing 4-3: Example metadata provenance fields for an ingestion batch. Field values are illustrative examples; production environments should extend them according to authorization method, audit requirements, and data-source type*
+*Listing 4-3: Example metadata provenance fields for an ingestion batch*
+
+Field values are illustrative examples; production environments should extend them according to authorization method, audit requirements, and data-source type.
+
 Figure 4-2 illustrates the corresponding workflow or structure.
 
 ![Figure 4-2: Data ingestion and provenance chain](../../images/part2/Yu-Chap04-Fig02.svg)
 
-*Figure 4-2: Data ingestion and provenance chain. From source contact to final archive, each processing stage appends metadata records to the "Provenance Ledger," forming a complete auditable data-lineage chain. Source: original illustration from this book*
+*Figure 4-2: Data ingestion and provenance chain. Source: original illustration from this book*
+
+From source contact to final archive, each processing stage appends metadata records to the Provenance Ledger, forming a complete auditable data-lineage chain.
+
 ### 4.3.4 Resumability and Job Reliability
 
 Large ingestion jobs often run for days. Node failures, network interruptions, and expired cloud tokens are normal events. Without resumability, every interruption forces a full rerun.
@@ -317,7 +336,10 @@ def is_url_allowed(url: str) -> bool:
     return not any(domain.endswith(blocked) for blocked in COPYRIGHT_BLACKLIST_DOMAINS)
 ```
 
-*Listing 4-4: Example code for copyright blacklist interception at the ingestion entrance. In production, the list should be maintained by legal and data-governance teams, and hit reasons and review time should be recorded*
+*Listing 4-4: Example code for copyright blacklist interception at the ingestion entrance*
+
+In production, the list should be maintained by legal and data-governance teams, and hit reasons and review time should be recorded.
+
 ### 4.4.3 Automatic License Classification
 
 For code data, license information is usually stored in `LICENSE` or `LICENSE.md` at the repository root and can be automatically identified through rules or classifiers. Listing 4-5 shows a simplified implementation; production systems should use stricter license-parsing libraries and legal-review workflows.
@@ -351,7 +373,10 @@ def classify_license(license_text: str) -> dict:
     return {"license": "Unknown", "commercial_safe": False, "risk_level": "high"}
 ```
 
-*Listing 4-5: Example code for automatic license-type classification. This snippet is only used to illustrate rule-based recognition; production environments should use mature license-parsing libraries and retain a manual review chain*
+*Listing 4-5: Example code for automatic license-type classification*
+
+This snippet is only used to illustrate rule-based recognition; production environments should use mature license-parsing libraries and retain a manual review chain.
+
 ---
 
 ## 4.5 Case Review and Practical Recommendations

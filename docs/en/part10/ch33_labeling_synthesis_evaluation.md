@@ -52,6 +52,7 @@ Figure 33-1 illustrates the corresponding workflow or structure.
 ![Four dimensions of labeling-assistance agents](../../images/part10/Wang-Chap33-Fig01.svg)
 
 *Figure 33-1: Four dimensions of labeling-assistance agents*
+
 **Task explanation.** When annotation guidelines change or new dimensions are added, the agent parses updates, generates examples, and highlights common mistakes. For complex tasks, such as multi-turn dialogue quality scoring, it decomposes standards into checklists.
 
 **Example recommendation.** For gray-zone cases, the agent retrieves similar historical annotations and shows labels and rationales, helping annotators make more consistent decisions.
@@ -67,6 +68,7 @@ Inter-annotator agreement is a core quality metric. Agents can monitor each anno
 Table 33-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-1: Annotator consistency monitoring metrics*
+
 | Metric | Calculation | Alert threshold | Suggested action |
 | --- | --- | --- | --- |
 | Individual-group consistency | Cohen's Kappa / Fleiss' Kappa | < 0.7 | Notify annotator and push calibration samples |
@@ -81,6 +83,7 @@ Annotation quality cannot be pursued without cost constraints. The key principle
 Table 33-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-2: Annotation cost structure comparison*
+
 | Cost item | Manual mode | Agent-assisted mode | Savings source |
 | --- | --- | --- | --- |
 | Annotator hourly wage | $15-25/hr | $15-25/hr | No change |
@@ -105,6 +108,7 @@ Agents can assign the right samples to the right annotators.
 Table 33-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-3: Annotator-profile dimensions for assignment*
+
 | Annotator profile dimension | Collection method | Assignment logic |
 | --- | --- | --- |
 | Domain proficiency | Historical accuracy by domain | Prefer samples in strong domains |
@@ -126,6 +130,7 @@ Figure 33-2 illustrates the corresponding workflow or structure.
 ![Synthetic data agent closed-loop pipeline](../../images/part10/Wang-Chap33-Fig02.svg)
 
 *Figure 33-2: Synthetic data agent closed-loop pipeline*
+
 **Seed expansion.** Diversity depends on seed diversity. The agent extracts semantic features, intent types, and difficulty levels from high-quality labeled samples, then identifies under-covered types and sparse difficulty bands.
 
 **Prompt generation.** The agent generates diverse prompts from seeds and expansion strategy. Prompt generation must control:
@@ -139,6 +144,7 @@ Figure 33-2 illustrates the corresponding workflow or structure.
 Table 33-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-4: Multi-layer validation for synthetic data*
+
 | Layer | Check | Tool or method |
 | --- | --- | --- |
 | Format | Conforms to schema | Structured validation |
@@ -184,6 +190,7 @@ Difficulty control prevents synthetic data from collapsing into trivial or impos
 Table 33-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-5: Difficulty-control dimensions for synthetic data*
+
 | Dimension | Evaluation method | L1: basic | L3: medium | L5: difficult |
 | --- | --- | --- | --- | --- |
 | Reasoning steps | Minimum steps needed to answer | 1-2 | 3-4 | 5+ |
@@ -234,6 +241,7 @@ Red-team testing belongs in continuous integration.
 Table 33-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-6: Frequency and Triggers for Red-Team Testing*
+
 | Trigger | Scope | Depth |
 | --- | --- | --- |
 | Every model release | Full red-team set | Deep |
@@ -251,6 +259,7 @@ Evaluation agents should slice results along multiple dimensions to locate weakn
 Table 33-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-7: Evaluation slicing dimensions*
+
 | Slice dimension | Examples | Use |
 | --- | --- | --- |
 | Capability | Reasoning, knowledge, generation, safety | Locate capability gaps |
@@ -266,6 +275,7 @@ Evaluation sets need continuous health monitoring.
 Table 33-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-8: Evaluation set health metrics*
+
 | Metric | Calculation | Healthy threshold | If unhealthy |
 | --- | --- | --- | --- |
 | Discriminative power | Score variance across models | Variance > 0.05 | Add harder questions if variance is too small |
@@ -289,6 +299,7 @@ When agents participate in both generation and evaluation, self-evaluation risk 
 Table 33-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 33-9: Human-agent evaluation consistency matrix*
+
 | Evaluation dimension | Agent-only scoring accuracy | Human scoring accuracy | Agent-human consistency | Suggested use |
 | --- | --- | --- | --- | --- |
 | Factual accuracy | 82% | 95% | 0.78 | Agent prescreen plus human review |

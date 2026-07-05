@@ -10,7 +10,7 @@ But as agents receive more autonomy, a deeper question appears: **where are the 
 
 This chapter defines a layered architecture for data engineering agents. It centers on six components: Planner, Tool Executor, Verifier, Human Gate, Memory, and Lineage. For each component, we define responsibility boundaries, communication protocols, and failure isolation strategies. The chapter inherits the reasoning, tool-use, and memory mechanisms from Chapters 18-20, and builds on the platform, versioning, and observability foundations from Chapters 24-26.
 
-To keep the discussion concrete, the chapter uses DataAgent as a running reference. Its YAML orchestration, FlexAgent, NL2SQL sub-agent, Semantic Service, workspace, and A2A/SDK/CLI entry points map well to the path from "can call tools" to "configurable, auditable, and serviceable." The point is not to make one agent "smarter." It is to make a group of agents collaborate in a more orderly way.
+To keep the discussion concrete, the chapter uses DataAgent as a running reference. Its YAML orchestration, FlexAgent, natural-language-to-SQL (NL2SQL) sub-agent, Semantic Service, workspace, and A2A/SDK/CLI entry points map well to the path from "can call tools" to "configurable, auditable, and serviceable." The point is not to make one agent "smarter." It is to make a group of agents collaborate in a more orderly way.
 
 ## Keywords
 
@@ -65,6 +65,7 @@ Four high-frequency task categories in LLM data engineering are naturally suited
 Table 31-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-1: Benefit and risk assessment for agentizing high-frequency data engineering tasks*
+
 | Task type | Average manual time | Time after agentization | Risk level | Suggested automation level |
 | --- | --- | --- | --- | --- |
 | Parser exception detection and attribution | 30 min | 2 min | Low | Semi-automatic: agent suggests, human confirms |
@@ -125,9 +126,11 @@ Figure 31-1 illustrates the corresponding workflow or structure.
 ![Six-layer architecture for data engineering agents](../../images/part10/Yu-Chap31-Fig01.svg)
 
 *Figure 31-1: Six-layer architecture for data engineering agents*
+
 Table 31-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-2: Responsibility boundaries and failure modes of six layers*
+
 | Layer | Core responsibility | Boundary that must not be crossed | Typical failure mode |
 | --- | --- | --- | --- |
 | Planner | Generate task plans, split substeps, select tools | Must not execute tools directly | Bad plan not detected before execution |
@@ -157,6 +160,7 @@ The Tool Executor maps abstract plan steps to concrete tool calls. It maintains 
 Table 31-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-3: Example agent tool registry*
+
 | Tool | Capability | Risk | Required permission | Rollback support |
 | --- | --- | --- | --- | --- |
 | `data_profiler` | Generate data quality report | Low | read | N/A |
@@ -249,6 +253,7 @@ Listing 31-1 provides a JSON data example.
 ```
 
 *Listing 31-1: JSON data example*
+
 **Executor to Verifier:**
 
 Listing 31-2 provides a JSON schema example.
@@ -268,6 +273,7 @@ Listing 31-2 provides a JSON schema example.
 ```
 
 *Listing 31-2: JSON schema example*
+
 **Verifier to Human Gate:** the Verifier submits a `VerificationReport` containing format, statistical, and semantic checks, confidence scores, and recommended action.
 
 Hard constraints:
@@ -281,6 +287,7 @@ Hard constraints:
 Table 31-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-4: Degradation strategies for six-layer failures*
+
 | Failed layer | Failure type | Degradation strategy | Recovery condition |
 | --- | --- | --- | --- |
 | Planner | Plan generation timeout or unreasonable plan | Use templated plan based on known successful plans | Resume after three successful manual plans |
@@ -299,6 +306,7 @@ DataAgent can be understood as an Agentic Data Engineering framework for enterpr
 Table 31-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-5: Mapping DataAgent to the six-layer architecture*
+
 | Architecture layer | DataAgent capability | Meaning for data engineering agents |
 | --- | --- | --- |
 | Planner | FlexAgent, ReAct main agent, `SCENARIO`, task prompts | Convert business questions into executable steps and decide when to call tools or sub-agents |
@@ -325,6 +333,7 @@ Not all data engineering tasks are suitable for fully automatic execution. This 
 Table 31-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-6: Four-level automation matrix*
+
 | Level | Name | Agent role | Human role | Typical tasks | Hard constraint |
 | --- | --- | --- | --- | --- | --- |
 | L1 | Recommendation | Analyze and suggest | Decide and execute | Alert attribution, quality report interpretation | Agent performs no writes |
@@ -349,6 +358,7 @@ Figure 31-2 illustrates the corresponding workflow or structure.
 ![Human-AI collaboration flow by risk level](../../images/part10/Yu-Chap31-Fig02.svg)
 
 *Figure 31-2: Human-AI collaboration flow by risk level*
+
 ## 31.4 Minimum Viable Data Engineering Agent
 
 ### 31.4.1 MVP Definition
@@ -366,6 +376,7 @@ A minimum viable Data Engineering Agent should complete this loop independently:
 Table 31-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-7: Technology choices for MVP components*
+
 | Component | Minimal implementation | Recommended implementation |
 | --- | --- | --- |
 | Planner | Rule-based step templates | LLM plus few-shot prompts and tool descriptions |
@@ -392,11 +403,13 @@ Business question
 ```
 
 *Listing 31-3: Data-agent task flow example*
+
 This usually maps to L1-L2. The agent may read metadata, generate SQL, execute read-only queries, and save results, but it should not rewrite schemas, publish metric definitions, or trigger downstream production pipelines.
 
 Table 31-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-8: Configuration gates for a DataAgent semantic query MVP*
+
 | Configuration surface | Typical content | MVP gate |
 | --- | --- | --- |
 | `MODEL` | chat model, temperature, base URL, API key | Config loads; secrets are not stored in repository or written config |
@@ -428,6 +441,7 @@ Input quality report for `orders`:
 Table 31-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-9: Planner output*
+
 | Step | Tool | Target | Estimated rows | Risk |
 | --- | --- | --- | --- | --- |
 | Step 1 | `field_fixer` | Normalize `order_date` | ~1500 | Low |
@@ -488,6 +502,7 @@ The architecture assumes every layer can fail and prevents one failure from beco
 Table 31-10 summarizes the corresponding comparison and engineering considerations.
 
 *Table 31-10: Data engineering agent maturity model*
+
 | Maturity | Characteristics | Automation | Human intervention | Typical timeline |
 | --- | --- | --- | --- | --- |
 | L0: Manual | All tasks done by humans | 0% | 100% | Baseline |

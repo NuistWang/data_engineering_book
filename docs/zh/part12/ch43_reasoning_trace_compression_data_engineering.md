@@ -35,6 +35,7 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 ![图43-1：Latent-Switch-69K 构建流水线图](../../images/part12/Li-Chap43-Fig01.svg)
 
 *图43-1：Latent-Switch-69K 构建流水线图*
+
 本章承接第五篇的合成数据工程和第六篇的推理数据工程。第15章到第17章讨论如何生成、蒸馏和质检高质量训练样本，第18章讨论显式 CoT 的组织方式，第19章和第20章讨论工具与 Agent 轨迹中“中间状态”的记录方式。Latent-Switch-69K 则把这些线索推进到一个更细的层次：中间推理不一定都要以自然语言存储，数据集也可以显式为隐藏计算预留槽位。向后看，它会自然连接到第45章的后训练数据配方、第46章的 RL 推理数据工程，以及第十四篇 P06、P10、P12 中的推理飞轮项目。
 
 ### 43.2 数据集概览：规模、难度与领域构成
@@ -46,6 +47,7 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 表43-1汇总了该数据集的规模、难度分布、压缩率和 latent steps 统计。
 
 *表43-1：Latent-Switch-69K 的规模、难度与领域构成概览*
+
 | 统计项 | 数值 | 占比 / 说明 |
 | --- | ---: | --- |
 | Total examples | 69,745 | 100.0% |
@@ -64,6 +66,7 @@ Latent-Switch-69K 正是在这个问题背景下出现的。它不是一个简�
 ![图43-2：Latent-Switch-69K 数据来源与领域组成](../../images/part12/Li-Chap43-Fig02.png)
 
 *图43-2：Latent-Switch-69K 数据来源与领域组成*
+
 从数据工程角度看，这里有三类统计必须同时保留。第一类是规模统计，说明训练集足够大，可以作为一个专门的 latent reasoning 监督语料，而不是少量 prompt 模板。第二类是难度统计，说明数据并非随机堆叠，而是服务于 curriculum 和 latent budget 的稳定性。第三类是领域统计，说明该数据集更适合训练和评估数学、代码、科学、复杂指令等推理任务，不应被误读为覆盖所有对话场景的通用 SFT 数据。
 
 需要特别说明的是，本章对 Latent-Switch-69K、Dolci-Think-SFT-32B、Latent-Switch MindSpore 和 OpenAI-compatible API 的讨论，均用于说明推理轨迹数据工程方法。实际复用时，团队应分别核查原始数据集许可、模型服务条款、teacher 输出留存策略、隐私数据处理要求和机构内部审查流程；不应仅凭本章示例代码将第三方数据或 API 输出直接并入生产训练集。若业务数据包含用户输入、代码仓库、日志或内部文档，还应在 source trace 阶段记录脱敏、授权、访问时间和数据版本，以便后续审计。
@@ -122,6 +125,7 @@ for row in sampled:
 ```
 
 *代码清单43-1：Python 实现片段*
+
 第一阶段是提取 solution intuition。数据构建提示要求 teacher 只抽取关键洞见，不要写成短 CoT，也不要直接给最终答案。这个字段应该描述“解决这道题的高层计划”，例如应该建立什么方程、应该枚举哪类状态、代码题应该使用什么数据结构、科学题应该抓住哪条因果关系。它的颗粒度介于标签和完整推导之间：比领域标签更具体，但比逐步推理更压缩。这样做的核心价值是把 Long-CoT 中可被内化的 planning signal 提取出来，为后续 latent budget 提供依据。
 
 第二阶段是生成压缩显式 CoT。teacher 在原始问题和 solution intuition 的条件下继续解题，输出较短的推理过程和最终答案。由于 teacher 已经拿到高层计划，它不需要重新展开全部探索过程，也不需要重复原始轨迹中的无效分支。保留样本因此包含四个主要内容：problem、intuition、compressed CoT、final answer。与普通摘要不同，compressed CoT 的目标不是“把原文变短”，而是留下足够的可见验证路径，让模型在 latent reasoning 之后仍能用文本完成符号检查。
@@ -193,11 +197,13 @@ record = asyncio.run(
 ```
 
 *代码清单43-2：Python 实现片段*
+
 图43-3展示了相应的流程或结构。
 
 ![图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比](../../images/part12/Li-Chap43-Fig03.svg)
 
 *图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比*
+
 压缩率定义为：
 
 $$
@@ -212,6 +218,7 @@ $$
 ![图43-4：原始与蒸馏后推理长度及压缩率统计](../../images/part12/Li-Chap43-Fig04.png)
 
 *图43-4：原始与蒸馏后推理长度及压缩率统计*
+
 样本保留标准应围绕三个问题展开。第一，source trace 是否有足够可信的最终答案。如果原始答案无法抽取、明显和 ground truth 不一致，或 teacher 后续无法稳定复现答案，样本就不适合进入最终集。第二，solution intuition 是否只表达高层计划。如果 intuition 中直接泄露答案或写成完整 CoT，它就不再适合作为 latent budget 的代理。第三，compressed CoT 是否仍能连接问题和答案。如果压缩过度，显式推理会变成几个跳跃句，模型虽然能模仿答案，却学不到从隐式规划切换到显式验证的边界。
 
 这套蒸馏过程给数据工程团队一个重要提示：推理数据压缩不能只看 token 数。更可靠的压缩必须同时检查 intent preservation、answer consistency 和 verification sufficiency。也就是说，压缩后的样本既要保留问题求解意图，又要保留足够的可见验证路径，还要在最终答案上保持一致。
@@ -284,6 +291,7 @@ if reason != "ok":
 ```
 
 *代码清单43-3：Python 实现片段*
+
 生产预处理还会依据压缩率和字段完整性过滤样本，并记录 CoT、answer 的 loss weight。更重要的是，渲染后的记录仍需交给 `dataset.py` 中的 `materialize_sample` 或 `LatentSwitchSFTSource` 重新定位 special-token spans 和构造 supervision masks；仅仅拼出这段字符串，并不意味着样本已经可以安全训练。
 
 如果运行环境已安装 MindSpore，最终可以把构造好的 JSONL 直接包装为 `mindspore.dataset.GeneratorDataset`。下面的示例展示了最小加载方式，batch 中会包含 `input_ids`、`labels`、`teacher_kl_mask`、`latent_positions` 等训练侧需要的列。
@@ -314,6 +322,7 @@ for batch in dataset.create_dict_iterator(output_numpy=True, num_epochs=1):
 ```
 
 *代码清单43-4：Python 实现片段*
+
 下面是一个教学化的简化样本序列示例。它只用于说明 schema 和 mask 关系，不是数据集中某条真实训练样本。
 
 代码清单43-5给出了隐式推理轨迹样本。
@@ -338,6 +347,7 @@ a_4 = 3 * 22 + 1 = 67。
 ```
 
 *代码清单43-5：隐式推理轨迹样本*
+
 这条示例里，`<latent_think>` 和 `</latent_think>` 是结构边界；中间四个 `<|endoftext|>` 只是占位符，真实样本中的数量由 `n_latent_steps` 决定；`<think>` 到 `</think>` 之间是可见压缩 CoT；之后是答案。对于训练来说，最重要的不是这段文本看起来像不像自然对话，而是每个 token 区间是否能被稳定定位。[Latent-Switch MindSpore](https://github.com/yuki10033/latent_switch_mindspore) 中的 `build_spans` 会检查一条样本中恰好包含一个 `<latent_think>`、一个 `</latent_think>`、一个 `<think>` 和一个 `</think>`，并保证它们满足：
 
 代码清单43-6给出了隐式边界顺序约束示例。
@@ -347,6 +357,7 @@ assistant_content_start <= latent_start < latent_end < think_start < think_end
 ```
 
 *代码清单43-6：隐式边界顺序约束示例*
+
 这个顺序约束关键。如果边界 token 缺失、重复或顺序错乱，mask 就会错位，latent placeholder 可能被误当作普通答案 token，或者 answer 区间被截断。对于普通 SFT 数据，边界错一处也许只是格式问题；对于 latent-switch 数据，边界错位会直接改变训练目标。
 
 在实际数据仓库中，student sequence 不应只作为一个长字符串保存。更稳妥的做法是同时保存结构化字段和渲染后文本。结构化字段包括 `messages`、`assistant_cot`、`assistant_answer`、`n_latent_steps`、`latent_pad_token`、`state_align_reference_messages` 等；渲染后文本则用于快速查看和兼容普通训练框架。`LatentSwitchSFTSource` 会优先使用结构化字段构造 token ids，`materialize_sample` 再生成 labels、loss weights 和各类 mask。这个设计反映了一个经验：latent-special-token 边界太重要，不应完全依赖已经拼好的文本。
@@ -378,6 +389,7 @@ $$
 ![图43-5：Supervision mask 示意图](../../images/part12/Li-Chap43-Fig05.svg)
 
 *图43-5：Supervision mask 示意图*
+
 `latent_boundary_mask` 标出 `<latent_think>` 和 `</latent_think>` 两个边界位置。边界 token 本身仍然需要监督，因为模型必须学会什么时候进入 latent 区间，什么时候从 latent 区间退出。如果不监督边界，模型可能无法稳定切换到 `<think>`，或者在推理时生成不完整的结构。
 
 `cot_mask` 覆盖 `<think>` 到 answer_start 之前的区间。论文训练目标中，内部显式 CoT tokens 可以使用不同权重，例如用 $\lambda_{CoT}$ 降低显式 reasoning 对总 CE 的支配程度。这样做符合数据集目标：显式 CoT 仍然重要，因为它承担验证和可解释输出；但训练不应退化为“越像长 CoT 越好”。模型还需要优先学会结构边界和最终答案行为。
@@ -389,6 +401,7 @@ $$
 表43-2列出了主要 token 区间、对应 mask 以及训练含义。
 
 *表43-2：Supervision masks 与训练目标对应关系*
+
 | 区间 | 示例 token | 普通 CE label | 主要 mask | 工程含义 |
 | --- | --- | --- | --- | --- |
 | Prompt 与 assistant prefix | user question `<\|im_start\|>assistant` | `-100` | `prompt_mask` | 作为条件，不作为输出目标 |
@@ -416,6 +429,7 @@ Latent-Switch-69K 的质量控制不只是过滤脏文本。由于它同时包�
 表43-3给出了推理轨迹压缩、边界对齐和领域偏置等常见风险的检查口径。
 
 *表43-3：压缩、边界与偏置的五类质量风险及修复动作*
+
 | 风险类型 | 典型症状 | 影响 | 修复动作 |
 | --- | --- | --- | --- |
 | 压缩过度 | compressed CoT 只有结论，没有可见验证链 | 模型学不到从 latent 规划切换到显式验证的过程 | 增加 verification sufficiency 检查；拒绝跳步样本 |

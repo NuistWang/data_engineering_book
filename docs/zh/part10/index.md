@@ -31,7 +31,7 @@
 - [第32章：自动化采集、解析与清洗 Agent](ch32_auto_collection_parsing_cleaning.md)
 - [第33章：标注、合成与评测 Agent](ch33_labeling_synthesis_evaluation.md)
 - [第34章：DataOps Agent 与平台自治](ch34_dataops_agent.md)
-- [第35章：数据工程 Agent 的安全、权限与人机协同](ch35_security_permission_collaboration.md)
+- [第35章：Agent 安全与人机协同](ch35_security_permission_collaboration.md)
 
 ## 建议阅读顺序
 

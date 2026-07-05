@@ -1,4 +1,4 @@
-# Chapter 35: Security, Permissions, and Human-AI Collaboration for Data Engineering Agents
+# Chapter 35: Agent Security and Human-AI Collaboration
 
 <div class="chapter-authors">Yang Luo; Zhili Wang; Jun Yu</div>
 
@@ -52,6 +52,7 @@ The core principle is **least privilege**: at any moment, the agent should hold 
 Table 35-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-1: Data classification and agent permission matrix*
+
 | Data level | Definition | Example | Agent read | Agent write | Approval |
 | --- | --- | --- | --- | --- | --- |
 | L0 public | No sensitive information; freely shareable | Public datasets, open-source code | Automatic | Automatic within bounded scope | Post-hoc audit |
@@ -66,6 +67,7 @@ Tool calls must be controlled by allowlists. The allowlist defines not only whic
 Table 35-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-2: Agent tool allowlist and call conditions*
+
 | Tool | Default state | Automatic-call condition | Approval required when |
 | --- | --- | --- | --- |
 | Data read | Open | Most scenarios | Reading L3 data |
@@ -84,6 +86,7 @@ Figure 35-1 illustrates the corresponding workflow or structure.
 ![Layered approval flow for agent permissions](../../images/part10/Luo-Chap35-Fig01.svg)
 
 *Figure 35-1: Layered approval flow for agent permissions*
+
 ## 35.2 Prompt Injection and Unauthorized Tool Call Defense
 
 ### 35.2.1 Attack Vector Analysis
@@ -93,6 +96,7 @@ Data engineering agents process many untrusted sources, so their prompt injectio
 Table 35-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-3: Prompt injection attack vectors for agents*
+
 | Attack vector | Injection channel | Risk | Real-world analogy |
 | --- | --- | --- | --- |
 | Web content injection | Hidden instruction text in crawled pages | Medium | White text on white background |
@@ -127,6 +131,7 @@ Figure 35-2 illustrates the corresponding workflow or structure.
 ![Layered prompt injection defense flow](../../images/part10/Luo-Chap35-Fig02.svg)
 
 *Figure 35-2: Layered prompt injection defense flow*
+
 ### 35.2.3 Engineering Implementation
 
 Prompt injection defense must be implemented in code and configuration, not only in documentation.
@@ -159,6 +164,7 @@ Analyze the data region according to the task in the instruction region.
 ```
 
 *Listing 35-1: Secure prompt template example*
+
 **Output verification checklist:**
 
 1. Does the rule or operation contain instruction text that appears only in the data region?
@@ -195,6 +201,7 @@ Agent audit logs differ from ordinary application logs. They must record not onl
 Table 35-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-4: Agent audit log field specification*
+
 | Field | Meaning | Example |
 | --- | --- | --- |
 | `event_id` | Unique event ID | `evt_20240601_001` |
@@ -227,6 +234,7 @@ In regulated industries, audit logs must serve as legal evidence.
 Table 35-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-5: Compliance audit requirements for agent logs*
+
 | Compliance need | Log requirement | Example |
 | --- | --- | --- |
 | Source traceability | Every training item traces to original source | Data A came from page 3 of PDF X collected on 2024-03-15 |
@@ -250,11 +258,13 @@ Figure 35-3 illustrates the corresponding workflow or structure.
 ![Agent security incident response flow](../../images/part10/Luo-Chap35-Fig03.svg)
 
 *Figure 35-3: Agent security incident response flow*
+
 *Incident response SLA*
 
 Table 35-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-6: Incident response SLA*
+
 | Stage | Target time | Owner |
 | --- | --- | --- |
 | Incident confirmation to agent pause | Within 15 minutes | On-call security engineer |
@@ -273,6 +283,7 @@ The collaboration question is which tasks agents can perform, which require huma
 Table 35-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-7: Human-AI task allocation matrix*
+
 | Decision dimension | Agent autonomous decision | Human review | Multi-person approval |
 | --- | --- | --- | --- |
 | Operation risk | Low, affects a few rows | Medium, affects hundreds to thousands | High, affects tens of thousands or cross-table |
@@ -334,6 +345,7 @@ Table 35-7 summarizes the corresponding comparison and engineering consideration
 Table 35-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-8: Remediation Results*
+
 | Metric | Before | After |
 | --- | --- | --- |
 | Rule release approval coverage | 60%, some low-risk rules auto-passed | 100%, every rule receives at least single review |
@@ -366,6 +378,7 @@ Trust is quantifiable.
 Table 35-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 35-9: Human-AI collaboration trust metrics*
+
 | Trust metric | Measurement | Healthy value | Improvement action |
 | --- | --- | --- | --- |
 | Approval rejection rate | Share of agent suggestions rejected in Human Gate | 5-15% | > 20% means poor agent quality; < 2% means rubber-stamping |

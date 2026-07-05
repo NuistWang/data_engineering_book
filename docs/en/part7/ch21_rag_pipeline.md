@@ -53,6 +53,7 @@ Against this backdrop, the simplistic understanding of RAG as merely "retrieval 
 ![Figure 21-1: Data transformation pipeline in a RAG system](../../images/part7/Du-Chap21-Fig01-EN.svg)
 
 *Figure 21-1: Data transformation pipeline in a RAG system*
+
 ### 21.1.2 Definition and Engineering Meaning of Document Engineering
 
 Recent document-intelligence research further shows that joint modeling of layout, visual, and textual information is an important foundation for understanding complex documents, not merely an auxiliary step attached to plain-text extraction (Kim et al. 2022). Therefore, the primary task in building a production-grade RAG system is not blindly comparing embedding-model scores on evaluation leaderboards, but rather re-examining and firmly establishing the core position of Document Engineering throughout the entire pipeline (Xu et al. 2020).
@@ -83,6 +84,7 @@ Figure 21-2 illustrates the corresponding workflow or structure.
 
 
 *Figure 21-2: Structural changes from a raw document to RAG-usable knowledge units*
+
 ### 21.1.4 Mathematical Abstraction and System Constraints of the RAG Data Pipeline
 
 From the perspective of explainable, modular knowledge ingestion, work such as REALM has explicitly incorporated retrieval into the language-model computation process, showing that RAG can be understood as a combined system of a data-transformation pipeline and a generation function (Guu et al. 2020). From the perspective of system control and information theory, the final output of RAG can be viewed as the terminal expression of the raw dataset after multiple nonlinear mappings. If we take the raw document set $D$ as the initial input, the full pipeline can be abstracted as the following composite function:
@@ -120,6 +122,7 @@ Figure 21-3 illustrates the corresponding workflow or structure.
 ![Figure 21-3: How RAG errors accumulate along the data pipeline](../../images/part7/Du-Chap21-Fig03-EN.svg)
 
 *Figure 21-3: How RAG errors accumulate along the data pipeline*
+
 To enable quantitative intervention and control of system errors, we can decompose the "total error" of the RAG system into modular components. The following formula is a **diagnostic decomposition and engineering attribution framework** for helping teams identify whether problems may originate in parsing, structuring, chunking, retrieval, or generation. It does not mean that these error types are strictly independent in a statistical sense, nor does it imply that errors must be added together in a simple linear way:
 
 $$
@@ -194,6 +197,7 @@ Retrieval benchmark research shows that retrieval models vary significantly acro
 Table 21-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-1: Typical issues in RAG document engineering and their system-level manifestations*
+
 | Missing aspect of document engineering           | Upstream data-layer manifestation                                                                  | Downstream application-layer (user-side) manifestation                                                                 |
 | :----------------------------------------------- | :------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
 | **Complex-table parsing failure**                | The 2D row/column topology of the table is flattened into an unordered string; cross-page tables break at their boundaries. | For numerical comparison queries on financial reports, spec parameters, etc., the system frequently outputs incorrect conclusions or mismatches data. |
@@ -265,6 +269,7 @@ To this end, establishing a unified **knowledge source registry** is critical. A
 
 
 *Table 21-2: Common knowledge sources for RAG systems and their ingestion characteristics*
+
 | Knowledge source type             | Common formats              | Core processing focus                                | Main risks                                                                |
 | --------------------------------- | --------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------- |
 | Policy and regulatory documents   | PDF / Word                  | Hierarchy, clauses, versions, permissions            | Clauses detached from parent context; old versions mistakenly recalled    |
@@ -295,6 +300,7 @@ Figure 21-5 illustrates the corresponding workflow or structure.
 ![Figure 21-5: Layout parsing and structure reconstruction of complex documents](../../images/part7/Du-Chap21-Fig05-EN.svg)
 
 *Figure 21-5: Layout parsing and structure reconstruction of complex documents*
+
 In engineering implementation, different document types usually require different parsing strategies. For well-structured HTML or Markdown documents, the system can directly use the DOM tree or heading markers to recover structure. For Word documents, style information and paragraph numbering can be used to parse hierarchy. For PDFs, it is usually necessary to combine text coordinates, font sizes, spatial distances, and vision models to determine reading order. For scanned files, OCR must be performed first, followed by layout detection and structure reconstruction.
 
 Table parsing is more complex. Each cell in a table is not standalone text; its meaning is jointly defined by the row header, column header, unit, notes, and surrounding context. A value of "800" has almost no semantic meaning detached from its row/column coordinates; only when bound with "Tier 1 city," "accommodation standard," and "CNY/day" does it become knowledge that can answer a question.
@@ -316,6 +322,7 @@ Listing 21-1 provides a JSON data example.
 ```
 
 *Listing 21-1: JSON data example*
+
 At the same time, a natural-language representation suitable for retrieval can be generated:
 
 > "According to Table 3 on page 12 of the Corporate Travel Management Policy, the accommodation standard for Tier 1 cities is 800 CNY per day."
@@ -345,6 +352,7 @@ Metadata completion is the closing stage of cleaning, and the key to enabling co
 Table 21-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-3: Recommended metadata fields for RAG knowledge units*
+
 | Field             | Meaning                                | Main purpose                                  |
 | ----------------- | -------------------------------------- | --------------------------------------------- |
 | `doc_id`          | Unique document identifier             | Version management, lineage tracking          |
@@ -385,6 +393,7 @@ Figure 21-6 illustrates the corresponding workflow or structure.
 ![Figure 21-6: How different chunking strategies affect semantic integrity](../../images/part7/Du-Chap21-Fig06-EN.svg)
 
 *Figure 21-6: How different chunking strategies affect semantic integrity*
+
 The choice of chunk granularity requires trading off several objectives. Granularity that is too coarse causes each chunk to contain too much information, making the vector representation unfocused, so recall is relevant but not precise. Granularity that is too fine leaves insufficient context, making it hard for the model to answer questions that require a full background. Production systems therefore rarely use a single granularity and instead adopt multi-granularity indexing.
 
 The basic idea of multi-granularity indexing is to retain knowledge units at multiple levels simultaneously. For example, for the same document, build chapter-level, paragraph-level, and table-level chunks. At retrieval time, first use coarse-grained recall to locate the chapter, then use fine-grained retrieval to obtain specific evidence. This balances recall coverage and answer precision. In practical design, "answerability" of chunks must also be considered. A good chunk is not only semantically complete; it should also be able to support answering a specific class of questions. For example, if a user asks "Can probation-period employees apply for travel allowances?", the system must recall fragments that include not only "travel allowance standards" but also "applicable groups" or "employee-type restrictions." If such information is scattered across multiple chunks, the retrieval system must have combinatorial recall ability; otherwise the model can only respond based on incomplete evidence.
@@ -444,6 +453,7 @@ Figure 21-7 illustrates the corresponding workflow or structure.
 ![Figure 21-7: Parent–child indexes and multi-granularity retrieval](../../images/part7/Du-Chap21-Fig07-EN.svg)
 
 *Figure 21-7: Parent–child indexes and multi-granularity retrieval*
+
 Multi-granularity indexes can also support more complex retrieval strategies. For example, the system can first do coarse-grained recall to locate potentially relevant documents or chapters, then perform fine-grained retrieval within these candidates. Such two-stage retrieval can significantly reduce search space, improve precision, and avoid blind similarity searches across all chunks.
 
 From engineering practice, parent–child and multi-granularity indexes are particularly suitable for long documents, policies, contracts, technical manuals, and report knowledge bases. The knowledge in these documents typically has clear hierarchical structure. Ignoring hierarchy and laying all chunks into a single vector space makes it hard for the retrieval system to distinguish local evidence from global context, and even harder to handle cross-paragraph, cross-table, or cross-chapter questions.
@@ -465,6 +475,7 @@ Production-grade RAG systems therefore rarely choose between vector, keyword, an
 Table 21-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-4: Applicability boundaries of different retrieval methods*
+
 | Retrieval method   | Main strengths                                            | Main weaknesses                                      | Typical use cases                                                          |
 | ------------------ | ---------------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------- |
 | Vector retrieval   | Strong semantic generalization; handles synonyms           | Unstable for precise numbers, versions, codes        | Concept Q&A, natural-language questions, fuzzy queries                     |
@@ -492,6 +503,7 @@ Figure 21-8 illustrates the corresponding workflow or structure.
 ![Figure 21-8: Two-stage retrieval with hybrid search and reranking](../../images/part7/Du-Chap21-Fig08-EN.svg)
 
 *Figure 21-8: Two-stage retrieval with hybrid search and reranking*
+
 In practice, reranking must balance effectiveness and latency. Cross-encoders or LLM-based rerankers are usually more accurate than vector retrieval but more expensive. A common practice is to first do cheap recall on a large candidate set, then rerank to compress it. For example, recall top-100, rerank to top-10, and finally select top-3 to top-5 based on context budget.
 
 Beyond relevance ranking, the reranking stage can also incorporate more business constraints. For example, prefer the latest version, prefer authoritative sources, down-weight low-quality chunks, filter out content that does not match user permissions, and avoid duplicate fragments of the same document filling up the context. These strategies make reranking not only a model-ranking problem but a comprehensive decision point combining retrieval quality, business rules, and security governance.
@@ -521,6 +533,7 @@ Citability evaluation focuses on whether evidence has a clear source, page, chap
 Table 21-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-5: Core metrics for RAG retrieval evaluation*
+
 | Evaluation dimension | Typical metrics                  | Question of interest                                |
 | -------------------- | -------------------------------- | --------------------------------------------------- |
 | Relevance            | Recall@k, Precision@k, MRR       | Did we find relevant fragments?                     |
@@ -576,6 +589,7 @@ Generation-layer evaluation focuses on whether the model produced a correct answ
 Table 21-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-6: Layered evaluation metrics for RAG systems*
+
 | Evaluation layer | Core question                          | Typical metrics                                              | Common failure modes                                                              |
 | ---------------- | -------------------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------- |
 | Retrieval        | Did we find correct evidence?          | Recall@k, MRR, Evidence Hit Rate                             | Missed key fragments; recalled semantically similar but unanswerable content      |
@@ -600,6 +614,7 @@ All three should be combined. The manual golden set is for stable regression tes
 Table 21-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-7: Sources of RAG evaluation data and their use cases*
+
 | Data source           | Pros                                          | Cons                            | Use cases                              |
 | --------------------- | --------------------------------------------- | ------------------------------- | -------------------------------------- |
 | Manual golden set     | High quality, accurate evidence, regression-ready | Expensive, limited scale     | Core capability evaluation, regression |
@@ -624,6 +639,7 @@ Online feedback must therefore be combined with full-pipeline logging. As shown 
 ![Figure 21-9: Evaluation, feedback, and optimization loop in a RAG system](../../images/part7/Du-Chap21-Fig09-EN.svg)
 
 *Figure 21-9: Evaluation, feedback, and optimization loop in a RAG system*
+
 The core value of this closed loop is that it turns scattered user feedback into actionable data assets. Feedback is no longer just "user dissatisfaction"; it enters a failure-sample bank, the evaluation set, the knowledge-update queue, and the system-optimization backlog. As feedback accumulates, the system progressively covers the real question distribution and forms continuous-improvement capability.
 
 ---
@@ -756,6 +772,7 @@ Listing 21-2 provides a JSON schema example.
 ```
 
 *Listing 21-2: JSON schema example*
+
 This schema preserves natural-language text, structured fields, and a citation anchor. `chunk_text` is used for semantic retrieval and generation context, `structured_fields` for precise filtering and numerical judgments, `citation_anchor` for answer traceability, `access_level` for permission control, and `quality_score` for ranking and quality monitoring.
 
 Below is a simplified Python example showing how to turn a parsed table row into a knowledge unit. A real production system will be more complex, but this example helps illustrate the core logic.
@@ -870,6 +887,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 21-3: Process flow example*
+
 This code embodies an important idea: a knowledge unit is not a plain text fragment but a data object carrying structure, context, source, permission, and quality information. It can enter vector retrieval, participate in structured filtering, and serve as citable evidence during generation.
 
 In real engineering, such code rarely runs standalone; it is embedded into the parsing and cleaning pipeline. The system obtains the table structure from the parser, then performs field normalization, unit validation, version attachment, and permission judgment to produce an indexable knowledge unit. For paragraphs, FAQs, process diagrams, and code blocks, similar schemas apply — only the `content_type` and `structured_fields` differ.
@@ -883,6 +901,7 @@ To turn the above methods into actionable engineering practice, we can establish
 Table 21-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 21-8: Production-grade RAG data pipeline checklist*
+
 | Category              | Key question                                         | Acceptance criterion                                       |
 | --------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | Data ingestion        | Source, version, owner, permissions recorded?        | Each source has a registration record and a named owner    |

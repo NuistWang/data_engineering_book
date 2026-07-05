@@ -101,7 +101,10 @@ Figure 25-1 illustrates the corresponding workflow or structure.
 
 ![Figure 25-1: Overview of the Version Management System](../../images/part8/Du-Chap25-Fig01-EN.svg)
 
-*Figure 25-1: Panoramic view of the data version management and experiment tracking system—five-level version granularity with bidirectional association architecture*
+*Figure 25-1: Data version management and experiment tracking system*
+
+The system uses five-level version granularity with a bidirectional association architecture.
+
 The Data Management Body of Knowledge typically treats data assets, metadata, lineage, quality, and lifecycle as shared governance objects; accordingly, version granularity should span multiple levels from individual samples to release packages (DAMA International 2017):
 
 **Sample level (Sample)**: A single training sample. Version information includes sample ID, source URL/document ID, creation time, last modification time, and current status (active/deprecated/under_review). Sample-level versioning is primarily used for annotation quality traceability and compliance auditing.
@@ -117,6 +120,7 @@ The Data Management Body of Knowledge typically treats data assets, metadata, li
 Table 25-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-1: Data version granularity and applicable scenarios*
+
 | Version Granularity | Primary Use | Key Fields | Retention Policy |
 |---|---|---|---|
 | Sample level | Compliance auditing, annotation traceability | sample_id, source, status | Permanent retention |
@@ -134,6 +138,7 @@ Granularity design must also account for cost. Sample-level versioning is the mo
 Table 25-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-2: Recommended version granularity by data type*
+
 | Data Type | Recommended Minimum Granularity | Rationale | Records That May Be Simplified |
 |---|---|---|---|
 | Formal training set | Shard level + Dataset level | Need to explain data recipe and quality changes | Temporary cleaning intermediate files may be cleaned up according to policy |
@@ -234,6 +239,7 @@ The following is a standard experiment card field design:
 Table 25-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-3: Field Design for Experiment Cards*
+
 | Field | Type | Description |
 |---|---|---|
 | experiment_id | string | Unique experiment identifier |
@@ -248,6 +254,7 @@ Table 25-3 summarizes the corresponding comparison and engineering consideration
 Table 25-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-4: Field Design for Experiment Cards*
+
 | Field | Type | Description |
 |---|---|---|
 | dataset_id | string | ID of the dataset used |
@@ -261,6 +268,7 @@ Table 25-4 summarizes the corresponding comparison and engineering consideration
 Table 25-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-5: Field Design for Experiment Cards*
+
 | Field | Type | Description |
 |---|---|---|
 | base_model | string | Base model name and version |
@@ -273,6 +281,7 @@ Table 25-5 summarizes the corresponding comparison and engineering consideration
 Table 25-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-6: Field Design for Experiment Cards*
+
 | Field | Type | Description |
 |---|---|---|
 | runtime_env | object | Python, OS, training framework, and key runtime versions |
@@ -288,6 +297,7 @@ Table 25-6 summarizes the corresponding comparison and engineering consideration
 Table 25-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-7: Field Design for Experiment Cards*
+
 | Field | Type | Description |
 |---|---|---|
 | eval_datasets | list | List of evaluation sets used |
@@ -300,6 +310,7 @@ Table 25-7 summarizes the corresponding comparison and engineering consideration
 Table 25-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-8: Sample experiment card fields*
+
 | Field | Type | Description |
 |---|---|---|
 | hypothesis | string | Experiment hypothesis (what this experiment aims to validate) |
@@ -373,6 +384,7 @@ For example, an experiment that terminates due to insufficient VRAM during train
 Table 25-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-9: Failed experiment types and preservation requirements*
+
 | Failure Type | Typical Manifestation | Should Re-Run? | Information to Preserve |
 |---|---|---|---|
 | Execution failure | Training interrupted, logs missing, insufficient resources | Usually should re-run | Resource configuration, failure cause, re-run conditions |
@@ -392,6 +404,7 @@ A complete audit trail must be able to answer the following core questions. Rese
 Table 25-10 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-10: Audit trail information requirements*
+
 | Question | Information Required |
 |---|---|
 | What data was used to train this model? | Release package → Experiment → Dataset version |
@@ -443,11 +456,12 @@ Lineage graphs also need complexity control. LLM data pipelines often contain la
 
 Edge semantics should also be carefully designed. Edges are not merely "connections"—they should also specify the type of relationship. For example, `derived_from` denotes derivation, `filtered_by` denotes filtering, `annotated_by` denotes annotation, `evaluated_with` denotes evaluation, `approved_by` denotes approval, and `released_as` denotes release. The more clearly edge semantics are defined, the more precise queries become. Otherwise, a lineage graph can only display paths without explaining the governance meaning of those paths.
 
-Figure 25-2 illustrates the corresponding workflow or structure.
+Figure 25-2 shows a complete lineage graph from data sources to model release. It also marks forward and reverse tracking paths.
 
 ![Figure 25-2: Data Lineage and Experiment Tracking Graph](../../images/part8/Du-Chap25-Fig02-EN.svg)
 
-*Figure 25-2: Complete data lineage graph from data sources to model release, showing forward and reverse tracking paths*
+*Figure 25-2: Data lineage and experiment tracking graph*
+
 ### 25.4.2 Change Audit Workflow
 
 Every change to a dataset version should go through a standardized audit workflow to ensure the change is authorized, recorded, and verified.
@@ -465,6 +479,7 @@ The standard change audit workflow is as follows:
 Table 25-11 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-11: Data change audit workflow*
+
 | Step | Executor | Tool | Output |
 |---|---|---|---|
 | Change request | Requesting party | Change request form | Completed request form |
@@ -521,6 +536,7 @@ Governance rule enforcement should also be tiered. Low-risk operations can be co
 Table 25-12 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-12: Lineage governance rules by data lifecycle stage*
+
 | Lifecycle Stage | Permitted Focus | Key Constraints | Primary Evidence |
 |---|---|---|---|
 | Collection | Explore data sources, build sample pools | Source, authorization, and sensitivity classification must be recorded | Source manifest, authorization records, collection logs |
@@ -612,6 +628,7 @@ With version management, the retrospection path flows from model to experiment, 
 Table 25-13 summarizes the corresponding comparison and engineering considerations.
 
 *Table 25-13: Comparison of retrospection approaches with and without version management*
+
 | Retrospection Step | Typical Approach Without Version Management | Approach With Version Management | Difference |
 |---|---|---|---|
 | Locate training data | Ask experiment owner; search file folders | Find dataset version through experiment card | Starting point changes from memory to record |

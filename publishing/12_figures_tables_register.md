@@ -13,7 +13,7 @@
 
 - 当前扫描：48 个正文章、15 个项目、8 个附录。
 - 图片条目：288；表格编号/表题条目：200。
-- Part 10、Part 12、Part 14 标记为高优先级，终稿前优先复核高清源、alt text 和图源权限。
+- Part X、Part XII、Part XIV 标记为高优先级，终稿前优先复核高清源、alt text 和图源权限。
 
 | 单元 | 标题 | 图片数 | 表格条目数 | 优先级 |
 | --- | --- | ---: | ---: | --- |
@@ -55,23 +55,23 @@
 | Ch35 | 第35章：数据工程 Agent 的安全、权限与人机协同 | 3 | 6 | 高 |
 | Ch36 | 第36章：数据合规框架与治理 | 8 | 0 | 常规 |
 | Ch37 | 第37章：联邦学习与隐私保护技术 | 12 | 0 | 常规 |
-| Ch38 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 4 | 表格随正文保留 | 高 |
-| Ch39 | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | 2 | 表格随正文保留 | 高 |
-| Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 6 | 3 | 高 |
-| Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 9 | 表格随正文保留 | 高 |
-| Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 3 | 4 | 高 |
-| Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 5 | 表格随正文保留 | 高 |
+| Ch38 | 第38章：文本语料数据工程 | 4 | 表格随正文保留 | 高 |
+| Ch39 | 第39章：图文数据工程 | 2 | 表格随正文保留 | 高 |
+| Ch40 | 第40章：视觉文档与表格数据工程 | 6 | 3 | 高 |
+| Ch41 | 第41章：视觉推理数据工程 | 9 | 表格随正文保留 | 高 |
+| Ch42 | 第42章：语音与音频数据工程 | 3 | 4 | 高 |
+| Ch43 | 第43章：推理轨迹数据工程 | 5 | 表格随正文保留 | 高 |
 | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 5 | 5 | 常规 |
 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 3 | 3 | 常规 |
-| Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 3 | 2 | 常规 |
+| Ch46 | 第46章：推理模型与强化学习数据工程 | 3 | 2 | 常规 |
 | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 4 | 3 | 常规 |
 | Ch48 | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 3 | 3 | 常规 |
 | P01 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 11 | 0 | 高 |
-| P02 | 项目二：垂直领域专家 SFT（法律） | 20 | 0 | 高 |
+| P02 | 项目二：垂直领域专家监督微调（法律） | 20 | 0 | 高 |
 | P03 | 项目三：LLaVA 多模态指令数据工厂 | 8 | 0 | 高 |
 | P04 | 项目四：合成数学与代码教材工厂 | 11 | 1 | 高 |
 | P05 | 项目五：多模态 RAG 企业财报助手 | 9 | 1 | 高 |
-| P06 | 项目六：CoT 推理数据集构建与 PRM 训练 | 10 | 1 | 高 |
+| P06 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 10 | 1 | 高 |
 | P07 | 项目七：Agent Tool-Use 数据工厂 | 14 | 1 | 高 |
 | P08 | 项目八：企业级 DataOps 平台搭建：从数据项目到组织级治理能力 | 11 | 1 | 高 |
 | P09 | 项目九：隐私保护数据流水线 | 12 | 1 | 高 |
@@ -80,7 +80,7 @@
 | P12 | 项目十二：R1 推理飞轮 | 1 | 1 | 高 |
 | P13 | 项目十三：多模态指令工厂 | 1 | 1 | 高 |
 | P14 | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 2 | 0 | 高 |
-| P15 | 项目十五：基于 DataAgent 构建企业级语义问数助手 | 2 | 0 | 高 |
+| P15 | 项目十五：DataAgent 企业级语义问数助手 | 2 | 0 | 高 |
 | appendix_a_tools_and_frameworks_quick_reference | 附录A：工具与框架速查表 | 0 | 1 | 常规 |
 | appendix_b_compliance_and_release_checklist | 附录B：合规与上线检查清单 | 0 | 2 | 常规 |
 | appendix_c_cost_estimation_and_resource_templates | 附录C：成本估算与资源模板 | 0 | 3 | 常规 |
@@ -130,35 +130,35 @@
 | 图37-10 | 图 | 图37-10：联邦系统整体架构图 | Ch37 | 第37章：联邦学习与隐私保护技术 | 本书资源：`docs/images/part11/Wang-Chap37-Fig10-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图37-10：联邦系统整体架构图 | 是 |
 | 图37-11 | 图 | 图37-11：合规治理、隐私流水线、联邦训练与应用能力闭环图 | Ch37 | 第37章：联邦学习与隐私保护技术 | 本书资源：`docs/images/part11/Wang-Chap37-Fig11-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图37-11：合规治理、隐私流水线、联邦训练与应用能力闭环图 | 是 |
 | 图37-12 | 图 | 图37-12：医疗与金融场景的隐私技术路线对比图 | Ch37 | 第37章：联邦学习与隐私保护技术 | 本书资源：`docs/images/part11/Wang-Chap37-Fig12-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图37-12：医疗与金融场景的隐私技术路线对比图 | 是 |
-| 图38-1 | 图 | 图38-1 FineWeb MinHash 去重和 PII 处理流程 | Ch38 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 本书资源：`docs/images/part12/Mu-Chap38-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-1 FineWeb MinHash 去重和 PII 处理流程 | 是 |
-| 图38-2 | 图 | 图38-2 FineWeb 数据处理选择的消融评估回路 | Ch38 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 本书资源：`docs/images/part12/Mu-Chap38-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-2 FineWeb 数据处理选择的消融评估回路 | 是 |
-| 图38-3 | 图 | 图38-3 Dolma 透明语料证据链 | Ch38 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 本书资源：`docs/images/part12/Mu-Chap38-Fig03-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-3 Dolma 透明语料证据链 | 是 |
-| 图38-4 | 图 | 图38-4 Dolma source mix 与训练诊断回路 | Ch38 | 第38章：文本语料数据工程：开放 Web、过滤去重与透明账本 | 本书资源：`docs/images/part12/Mu-Chap38-Fig04-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-4 Dolma source mix 与训练诊断回路 | 是 |
-| 图39-1 | 图 | 图39-1 LAION-5B 图文候选记录的多通道 schema | Ch39 | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | 本书资源：`docs/images/part12/Mu-Chap39-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图39-1 LAION-5B 图文候选记录的多通道 schema | 是 |
-| 图39-2 | 图 | 图39-2 图文候选池质量评估与闭环修复 | Ch39 | 第39章：图文数据工程：候选池构建、多模态筛选与 DataComp 评估 | 本书资源：`docs/images/part12/Mu-Chap39-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图39-2 图文候选池质量评估与闭环修复 | 是 |
-| 图40-1 | 图 | 图40-1：Schema 到 JSON 的结构化映射 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig01-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-1：Schema 到 JSON 的结构化映射 | 是 |
-| 图40-2 | 图 | 图40-2：StructBill-CN 数据集构建流水线 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig02-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-2：StructBill-CN 数据集构建流水线 | 是 |
-| 图40-3 | 图 | 图40-3：结构一致性校验门禁 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig03-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-3：结构一致性校验门禁 | 是 |
-| 图40-4 | 图 | 图40-4：表格样本三类监督信号结构图 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig04-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-4：表格样本三类监督信号结构图 | 是 |
-| 图40-5 | 图 | 图40-5：SparseTable-Bench 四阶段构建流水线图 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig05-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-5：SparseTable-Bench 四阶段构建流水线图 | 是 |
-| 图40-6 | 图 | 图40-6：STB-Mask-Stress 遮挡生成与评测流程图 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书资源：`docs/images/part12/Liu-Chap40-Fig06-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-6：STB-Mask-Stress 遮挡生成与评测流程图 | 是 |
-| 图41-1 | 图 | 图41-1：多图表信息图推理数据集领域覆盖分布 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig01-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-1：多图表信息图推理数据集领域覆盖分布 | 是 |
-| 图41-2 | 图 | 图41-2：多图表信息图推理数据集子图表类型分布 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig02-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-2：多图表信息图推理数据集子图表类型分布 | 是 |
-| 图41-3 | 图 | 图41-3：多图表信息图推理数据集子问题类型分布 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig03-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-3：多图表信息图推理数据集子问题类型分布 | 是 |
-| 图41-4 | 图 | 图41-4：多图表信息图样本（鲨鱼袭击） | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig04-Alt01.jpg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-4：多图表信息图样本（鲨鱼袭击） | 是 |
-| 图41-5 | 图 | 图41-5：多图标信息图推理数据集四阶段构建流水线图 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig05-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-5：多图标信息图推理数据集四阶段构建流水线图 | 是 |
-| 图41-6 | 图 | 图41-6：MedImage-ToolVQA 数据构建概念流程 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig06-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-6：MedImage-ToolVQA 数据构建概念流程 | 是 |
-| 图41-7 | 图 | 图41-7：工具调用多轮轨迹结构 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig07-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-7：工具调用多轮轨迹结构 | 是 |
-| 图41-8 | 图 | 图41-8：SFT schema 中的真实图像与 bbox 证据 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig08-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-8：SFT schema 中的真实图像与 bbox 证据 | 是 |
-| 图41-9 | 图 | 图41-9：质量控制与人工复核门禁 | Ch41 | 第41章：视觉推理数据工程：图表证据、医学图像与工具调用轨迹 | 本书资源：`docs/images/part12/Xu-Chap41-Fig09-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-9：质量控制与人工复核门禁 | 是 |
-| 图42-1 | 图 | 图42-1：语义响应与风格控制双通道 schema | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书资源：`docs/images/part12/Chen-Chap42-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-1：语义响应与风格控制双通道 schema | 是 |
-| 图42-2 | 图 | 图42-2：VoiceStyleControl 数据构建流水线 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书资源：`docs/images/part12/Chen-Chap42-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-2：VoiceStyleControl 数据构建流水线 | 是 |
-| 图42-3 | 图 | 图42-3：质量评估与数据飞轮闭环 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书资源：`docs/images/part12/Chen-Chap42-Fig03-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-3：质量评估与数据飞轮闭环 | 是 |
-| 图43-1 | 图 | 图43-1：Latent-Switch-69K 构建流水线图 | Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 本书资源：`docs/images/part12/Li-Chap43-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-1：Latent-Switch-69K 构建流水线图 | 是 |
-| 图43-2 | 图 | 图43-2：Latent-Switch-69K 数据来源与领域组成 | Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 本书资源：`docs/images/part12/Li-Chap43-Fig02.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-2：Latent-Switch-69K 数据来源与领域组成 | 是 |
-| 图43-3 | 图 | 图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比 | Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 本书资源：`docs/images/part12/Li-Chap43-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比 | 是 |
-| 图43-4 | 图 | 图43-4：原始与蒸馏后推理长度及压缩率统计 | Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 本书资源：`docs/images/part12/Li-Chap43-Fig04.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-4：原始与蒸馏后推理长度及压缩率统计 | 是 |
-| 图43-5 | 图 | 图43-5：Supervision mask 示意图 | Ch43 | 第43章：推理轨迹数据工程：长链压缩、隐式计算与监督掩码 | 本书资源：`docs/images/part12/Li-Chap43-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-5：Supervision mask 示意图 | 是 |
+| 图38-1 | 图 | 图38-1 FineWeb MinHash 去重和 PII 处理流程 | Ch38 | 第38章：文本语料数据工程 | 本书资源：`docs/images/part12/Mu-Chap38-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-1 FineWeb MinHash 去重和 PII 处理流程 | 是 |
+| 图38-2 | 图 | 图38-2 FineWeb 数据处理选择的消融评估回路 | Ch38 | 第38章：文本语料数据工程 | 本书资源：`docs/images/part12/Mu-Chap38-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-2 FineWeb 数据处理选择的消融评估回路 | 是 |
+| 图38-3 | 图 | 图38-3 Dolma 透明语料证据链 | Ch38 | 第38章：文本语料数据工程 | 本书资源：`docs/images/part12/Mu-Chap38-Fig03-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-3 Dolma 透明语料证据链 | 是 |
+| 图38-4 | 图 | 图38-4 Dolma source mix 与训练诊断回路 | Ch38 | 第38章：文本语料数据工程 | 本书资源：`docs/images/part12/Mu-Chap38-Fig04-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图38-4 Dolma source mix 与训练诊断回路 | 是 |
+| 图39-1 | 图 | 图39-1 LAION-5B 图文候选记录的多通道 schema | Ch39 | 第39章：图文数据工程 | 本书资源：`docs/images/part12/Mu-Chap39-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图39-1 LAION-5B 图文候选记录的多通道 schema | 是 |
+| 图39-2 | 图 | 图39-2 图文候选池质量评估与闭环修复 | Ch39 | 第39章：图文数据工程 | 本书资源：`docs/images/part12/Mu-Chap39-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图39-2 图文候选池质量评估与闭环修复 | 是 |
+| 图40-1 | 图 | 图40-1：Schema 到 JSON 的结构化映射 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig01-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-1：Schema 到 JSON 的结构化映射 | 是 |
+| 图40-2 | 图 | 图40-2：StructBill-CN 数据集构建流水线 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig02-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-2：StructBill-CN 数据集构建流水线 | 是 |
+| 图40-3 | 图 | 图40-3：结构一致性校验门禁 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig03-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-3：结构一致性校验门禁 | 是 |
+| 图40-4 | 图 | 图40-4：表格样本三类监督信号结构图 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig04-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-4：表格样本三类监督信号结构图 | 是 |
+| 图40-5 | 图 | 图40-5：SparseTable-Bench 四阶段构建流水线图 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig05-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-5：SparseTable-Bench 四阶段构建流水线图 | 是 |
+| 图40-6 | 图 | 图40-6：STB-Mask-Stress 遮挡生成与评测流程图 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书资源：`docs/images/part12/Liu-Chap40-Fig06-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图40-6：STB-Mask-Stress 遮挡生成与评测流程图 | 是 |
+| 图41-1 | 图 | 图41-1：多图表信息图推理数据集领域覆盖分布 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig01-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-1：多图表信息图推理数据集领域覆盖分布 | 是 |
+| 图41-2 | 图 | 图41-2：多图表信息图推理数据集子图表类型分布 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig02-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-2：多图表信息图推理数据集子图表类型分布 | 是 |
+| 图41-3 | 图 | 图41-3：多图表信息图推理数据集子问题类型分布 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig03-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-3：多图表信息图推理数据集子问题类型分布 | 是 |
+| 图41-4 | 图 | 图41-4：多图表信息图样本（鲨鱼袭击） | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig04-Alt01.jpg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-4：多图表信息图样本（鲨鱼袭击） | 是 |
+| 图41-5 | 图 | 图41-5：多图标信息图推理数据集四阶段构建流水线图 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig05-ZH.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-5：多图标信息图推理数据集四阶段构建流水线图 | 是 |
+| 图41-6 | 图 | 图41-6：MedImage-ToolVQA 数据构建概念流程 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig06-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-6：MedImage-ToolVQA 数据构建概念流程 | 是 |
+| 图41-7 | 图 | 图41-7：工具调用多轮轨迹结构 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig07-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-7：工具调用多轮轨迹结构 | 是 |
+| 图41-8 | 图 | 图41-8：SFT schema 中的真实图像与 bbox 证据 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig08-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-8：SFT schema 中的真实图像与 bbox 证据 | 是 |
+| 图41-9 | 图 | 图41-9：质量控制与人工复核门禁 | Ch41 | 第41章：视觉推理数据工程 | 本书资源：`docs/images/part12/Xu-Chap41-Fig09-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图41-9：质量控制与人工复核门禁 | 是 |
+| 图42-1 | 图 | 图42-1：语义响应与风格控制双通道 schema | Ch42 | 第42章：语音与音频数据工程 | 本书资源：`docs/images/part12/Chen-Chap42-Fig01-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-1：语义响应与风格控制双通道 schema | 是 |
+| 图42-2 | 图 | 图42-2：VoiceStyleControl 数据构建流水线 | Ch42 | 第42章：语音与音频数据工程 | 本书资源：`docs/images/part12/Chen-Chap42-Fig02-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-2：VoiceStyleControl 数据构建流水线 | 是 |
+| 图42-3 | 图 | 图42-3：质量评估与数据飞轮闭环 | Ch42 | 第42章：语音与音频数据工程 | 本书资源：`docs/images/part12/Chen-Chap42-Fig03-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图42-3：质量评估与数据飞轮闭环 | 是 |
+| 图43-1 | 图 | 图43-1：Latent-Switch-69K 构建流水线图 | Ch43 | 第43章：推理轨迹数据工程 | 本书资源：`docs/images/part12/Li-Chap43-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-1：Latent-Switch-69K 构建流水线图 | 是 |
+| 图43-2 | 图 | 图43-2：Latent-Switch-69K 数据来源与领域组成 | Ch43 | 第43章：推理轨迹数据工程 | 本书资源：`docs/images/part12/Li-Chap43-Fig02.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-2：Latent-Switch-69K 数据来源与领域组成 | 是 |
+| 图43-3 | 图 | 图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比 | Ch43 | 第43章：推理轨迹数据工程 | 本书资源：`docs/images/part12/Li-Chap43-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-3：原始 CoT、压缩 CoT 与 latent placeholder 对比 | 是 |
+| 图43-4 | 图 | 图43-4：原始与蒸馏后推理长度及压缩率统计 | Ch43 | 第43章：推理轨迹数据工程 | 本书资源：`docs/images/part12/Li-Chap43-Fig04.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-4：原始与蒸馏后推理长度及压缩率统计 | 是 |
+| 图43-5 | 图 | 图43-5：Supervision mask 示意图 | Ch43 | 第43章：推理轨迹数据工程 | 本书资源：`docs/images/part12/Li-Chap43-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图43-5：Supervision mask 示意图 | 是 |
 | 图44-1 | 图 | 图44-1：数据配方漏斗 (Data Recipe Funnel) | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书资源：`docs/images/part13/Wang-Chap44-Fig01-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图44-1：数据配方漏斗 (Data Recipe Funnel) | 是 |
 | 图44-2 | 图 | 图44-2：大模型数据透明度光谱 (Data Transparency Spectrum) | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书资源：`docs/images/part13/Wang-Chap44-Fig02-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图44-2：大模型数据透明度光谱 (Data Transparency Spectrum) | 是 |
 | 图44-3 | 图 | 图44-3：预训练数据源分层地图 | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书资源：`docs/images/part13/Wang-Chap44-Fig03.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图44-3：预训练数据源分层地图 | 是 |
@@ -167,9 +167,9 @@
 | 图45-1 | 图 | 图45-1：LLM 后训练三阶段流水线示意图 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书资源：`docs/images/part13/Wang-Chap45-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图45-1：LLM 后训练三阶段流水线示意图 | 是 |
 | 图45-2 | 图 | 图45-2：Self-Instruct、Evol-Instruct 与 Magpie 三流派 pipeline 对比 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书资源：`docs/images/part13/Wang-Chap45-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图45-2：Self-Instruct、Evol-Instruct 与 Magpie 三流派 pipeline 对比 | 是 |
 | 图45-3 | 图 | 图45-3：Tülu-3 三阶段数据流与规模示意 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书资源：`docs/images/part13/Wang-Chap45-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图45-3：Tülu-3 三阶段数据流与规模示意 | 是 |
-| 图46-1 | 图 | 图46-1：R1 风格推理数据飞轮四阶段 | Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 本书资源：`docs/images/part13/Xu-Chap46-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-1：R1 风格推理数据飞轮四阶段 | 是 |
-| 图46-2 | 图 | 图46-2：推理数据奖励信号与验证器结构 | Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 本书资源：`docs/images/part13/Xu-Chap46-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-2：推理数据奖励信号与验证器结构 | 是 |
-| 图46-3 | 图 | 图46-3：Long-CoT 数据样例剖面 | Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 本书资源：`docs/images/part13/Xu-Chap46-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-3：Long-CoT 数据样例剖面 | 是 |
+| 图46-1 | 图 | 图46-1：R1 风格推理数据飞轮四阶段 | Ch46 | 第46章：推理模型与强化学习数据工程 | 本书资源：`docs/images/part13/Xu-Chap46-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-1：R1 风格推理数据飞轮四阶段 | 是 |
+| 图46-2 | 图 | 图46-2：推理数据奖励信号与验证器结构 | Ch46 | 第46章：推理模型与强化学习数据工程 | 本书资源：`docs/images/part13/Xu-Chap46-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-2：推理数据奖励信号与验证器结构 | 是 |
+| 图46-3 | 图 | 图46-3：Long-CoT 数据样例剖面 | Ch46 | 第46章：推理模型与强化学习数据工程 | 本书资源：`docs/images/part13/Xu-Chap46-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图46-3：Long-CoT 数据样例剖面 | 是 |
 | 图47-1 | 图 | 图47-1：多模态数据工程全景图 | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书资源：`docs/images/part13/Cao-Chap47-Fig01.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图47-1：多模态数据工程全景图 | 是 |
 | 图47-2 | 图 | 图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline) | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书资源：`docs/images/part13/Cao-Chap47-Fig02-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图47-2：VLM 数据三阶段流水线 (3-Stage VLM Data Engineering Pipeline) | 是 |
 | 图47-3 | 图 | 图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling) | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书资源：`docs/images/part13/Cao-Chap47-Fig03-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图47-3：Native vs Dynamic Resolution 数据 pipeline 对比 (Resolution Handling) | 是 |
@@ -177,45 +177,45 @@
 | 图48-1 | 图 | 图48-1：T2I 数据流水线 | Ch48 | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 本书资源：`docs/images/part13/Zhang-Chap48-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图48-1：T2I 数据流水线 | 是 |
 | 图48-2 | 图 | 图48-2：T2V 数据流水线 | Ch48 | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 本书资源：`docs/images/part13/Zhang-Chap48-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图48-2：T2V 数据流水线 | 是 |
 | 图48-3 | 图 | 图48-3：美学/版权/安全多级过滤架构 | Ch48 | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 本书资源：`docs/images/part13/Zhang-Chap48-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图48-3：美学/版权/安全多级过滤架构 | 是 |
-| 图 P01-1 | 图 | 图 P01-1 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig01.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-1 | 是 |
-| 图 P01-2 | 图 | 图 P01-2 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig02.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-2 | 是 |
-| 图 P01-3 | 图 | 图 P01-3 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig03.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-3 | 是 |
-| 图 P01-4 | 图 | 图 P01-4 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig04.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-4 | 是 |
-| 图 P01-5 | 图 | 图 P01-5 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig05.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-5 | 是 |
-| 图 P01-6 | 图 | 图 P01-6 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig06.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-6 | 是 |
-| 图 P01-7 | 图 | 图 P01-7 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig07.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-7 | 是 |
-| 图 P01-8 | 图 | 图 P01-8 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig08.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-8 | 是 |
-| 图 P01-9 | 图 | 图 P01-9 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig09.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-9 | 是 |
-| 图 P01-10 | 图 | 图 P01-10 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig10.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-10 | 是 |
-| 图 P01-11 | 图 | 图 P01-11 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/Xu-Project01-Fig11.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-11 | 是 |
-| 图 P02-1 | 图 | 图 P02-1 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig01.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-1 | 是 |
-| 图 P02-2 | 图 | 图 P02-2 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig02.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-2 | 是 |
-| 图 P02-3 | 图 | 图 P02-3 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig03.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-3 | 是 |
-| 图 P02-4 | 图 | 图 P02-4 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig04.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-4 | 是 |
-| 图 P02-5 | 图 | 图 P02-5 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig05.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-5 | 是 |
-| 图 P02-6 | 图 | 图 P02-6 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig06.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-6 | 是 |
-| 图 P02-7 | 图 | 图 P02-7 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig07.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-7 | 是 |
-| 图 P02-8 | 图 | 图 P02-8 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig08.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-8 | 是 |
-| 图 P02-9 | 图 | 图 P02-9 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig09.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-9 | 是 |
-| 图 P02-10 | 图 | 图 P02-10 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig10.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-10 | 是 |
-| 图 P02-11 | 图 | 图 P02-11 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig11.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-11 | 是 |
-| 图 P02-12 | 图 | 图 P02-12 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig12.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-12 | 是 |
-| 图 P02-13 | 图 | 图 P02-13 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig13.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-13 | 是 |
-| 图 P02-14 | 图 | 图 P02-14 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig14.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-14 | 是 |
-| 图 P02-15 | 图 | 图 P02-15 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig15.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-15 | 是 |
-| 图 P02-16 | 图 | 图 P02-16 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig16.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-16 | 是 |
-| 图 P02-17 | 图 | 图 P02-17 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig17.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-17 | 是 |
-| 图 P02-18 | 图 | 图 P02-18 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig18.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-18 | 是 |
-| 图 P02-19 | 图 | 图 P02-19 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig19.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-19 | 是 |
-| 图 P02-20 | 图 | 图 P02-20 | P2 | 项目二：垂直领域专家 SFT（法律） | 本书资源：`docs/images/part14/Xu-Project02-Fig20.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-20 | 是 |
-| 图 P03-1 | 图 | 图 P03-1 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig01.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-1 | 是 |
-| 图 P03-2 | 图 | 图 P03-2 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig02.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-2 | 是 |
-| 图 P03-3 | 图 | 图 P03-3 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig03.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-3 | 是 |
-| 图 P03-4 | 图 | 图 P03-4 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig04.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-4 | 是 |
-| 图 P03-5 | 图 | 图 P03-5 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig05.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-5 | 是 |
-| 图 P03-6 | 图 | 图 P03-6 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig06.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-6 | 是 |
-| 图 P03-7 | 图 | 图 P03-7 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig07.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-7 | 是 |
-| 图 P03-8 | 图 | 图 P03-8 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/Yu-Project03-Fig08.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-8 | 是 |
+| 图 P01-1 | 图 | 图 P01-1 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-1 | 是 |
+| 图 P01-2 | 图 | 图 P01-2 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-2 | 是 |
+| 图 P01-3 | 图 | 图 P01-3 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-3 | 是 |
+| 图 P01-4 | 图 | 图 P01-4 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-4 | 是 |
+| 图 P01-5 | 图 | 图 P01-5 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-5 | 是 |
+| 图 P01-6 | 图 | 图 P01-6 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig06.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-6 | 是 |
+| 图 P01-7 | 图 | 图 P01-7 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-7 | 是 |
+| 图 P01-8 | 图 | 图 P01-8 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-8 | 是 |
+| 图 P01-9 | 图 | 图 P01-9 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-9 | 是 |
+| 图 P01-10 | 图 | 图 P01-10 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig10.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-10 | 是 |
+| 图 P01-11 | 图 | 图 P01-11 | P1 | 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线 | 本书资源：`docs/images/part14/p01/Xu-Project01-Fig11.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P01-11 | 是 |
+| 图 P02-1 | 图 | 图 P02-1 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-1 | 是 |
+| 图 P02-2 | 图 | 图 P02-2 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-2 | 是 |
+| 图 P02-3 | 图 | 图 P02-3 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-3 | 是 |
+| 图 P02-4 | 图 | 图 P02-4 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-4 | 是 |
+| 图 P02-5 | 图 | 图 P02-5 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-5 | 是 |
+| 图 P02-6 | 图 | 图 P02-6 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig06.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-6 | 是 |
+| 图 P02-7 | 图 | 图 P02-7 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-7 | 是 |
+| 图 P02-8 | 图 | 图 P02-8 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-8 | 是 |
+| 图 P02-9 | 图 | 图 P02-9 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-9 | 是 |
+| 图 P02-10 | 图 | 图 P02-10 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig10.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-10 | 是 |
+| 图 P02-11 | 图 | 图 P02-11 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig11.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-11 | 是 |
+| 图 P02-12 | 图 | 图 P02-12 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig12.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-12 | 是 |
+| 图 P02-13 | 图 | 图 P02-13 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig13.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-13 | 是 |
+| 图 P02-14 | 图 | 图 P02-14 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig14.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-14 | 是 |
+| 图 P02-15 | 图 | 图 P02-15 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig15.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-15 | 是 |
+| 图 P02-16 | 图 | 图 P02-16 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig16.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-16 | 是 |
+| 图 P02-17 | 图 | 图 P02-17 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig17.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-17 | 是 |
+| 图 P02-18 | 图 | 图 P02-18 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig18.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-18 | 是 |
+| 图 P02-19 | 图 | 图 P02-19 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig19.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-19 | 是 |
+| 图 P02-20 | 图 | 图 P02-20 | P2 | 项目二：垂直领域专家监督微调（法律） | 本书资源：`docs/images/part14/p02/Xu-Project02-Fig20.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P02-20 | 是 |
+| 图 P03-1 | 图 | 图 P03-1 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-1 | 是 |
+| 图 P03-2 | 图 | 图 P03-2 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-2 | 是 |
+| 图 P03-3 | 图 | 图 P03-3 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-3 | 是 |
+| 图 P03-4 | 图 | 图 P03-4 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-4 | 是 |
+| 图 P03-5 | 图 | 图 P03-5 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-5 | 是 |
+| 图 P03-6 | 图 | 图 P03-6 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig06.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-6 | 是 |
+| 图 P03-7 | 图 | 图 P03-7 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-7 | 是 |
+| 图 P03-8 | 图 | 图 P03-8 | P3 | 项目三：LLaVA 多模态指令数据工厂 | 本书资源：`docs/images/part14/p03/Yu-Project03-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P03-8 | 是 |
 | 图 P04-1 | 图 | 图 P04-1 | P4 | 项目四：合成数学与代码教材工厂 | 本书资源：`docs/images/part14/p04/Xu-Project04-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P04-1 | 是 |
 | 图 P04-2 | 图 | 图 P04-2 | P4 | 项目四：合成数学与代码教材工厂 | 本书资源：`docs/images/part14/p04/Xu-Project04-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P04-2 | 是 |
 | 图 P04-3 | 图 | 图 P04-3 | P4 | 项目四：合成数学与代码教材工厂 | 本书资源：`docs/images/part14/p04/Xu-Project04-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P04-3 | 是 |
@@ -236,16 +236,16 @@
 | 图 P05-7 | 图 | 图 P05-7 | P5 | 项目五：多模态 RAG 企业财报助手 | 本书资源：`docs/images/part14/p05/Cao-Project05-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P05-7 | 是 |
 | 图 P05-8 | 图 | 图 P05-8 | P5 | 项目五：多模态 RAG 企业财报助手 | 本书资源：`docs/images/part14/p05/Cao-Project05-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P05-8 | 是 |
 | 图 P05-9 | 图 | 图 P05-9 | P5 | 项目五：多模态 RAG 企业财报助手 | 本书资源：`docs/images/part14/p05/Cao-Project05-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P05-9 | 是 |
-| 图 P06-1 | 图 | 图 P06-1 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-1 | 是 |
-| 图 P06-2 | 图 | 图 P06-2 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-2 | 是 |
-| 图 P06-3 | 图 | 图 P06-3 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-3 | 是 |
-| 图 P06-4 | 图 | 图 P06-4 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-4 | 是 |
-| 图 P06-5 | 图 | 图 P06-5 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-5 | 是 |
-| 图 P06-6 | 图 | 图 P06-6 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig06.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-6 | 是 |
-| 图 P06-7 | 图 | 图 P06-7 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-7 | 是 |
-| 图 P06-8 | 图 | 图 P06-8 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-8 | 是 |
-| 图 P06-9 | 图 | 图 P06-9 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-9 | 是 |
-| 图 P06-10 | 图 | 图 P06-10 | P6 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig10.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-10 | 是 |
+| 图 P06-1 | 图 | 图 P06-1 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-1 | 是 |
+| 图 P06-2 | 图 | 图 P06-2 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-2 | 是 |
+| 图 P06-3 | 图 | 图 P06-3 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-3 | 是 |
+| 图 P06-4 | 图 | 图 P06-4 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-4 | 是 |
+| 图 P06-5 | 图 | 图 P06-5 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig05.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-5 | 是 |
+| 图 P06-6 | 图 | 图 P06-6 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig06.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-6 | 是 |
+| 图 P06-7 | 图 | 图 P06-7 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig07.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-7 | 是 |
+| 图 P06-8 | 图 | 图 P06-8 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-8 | 是 |
+| 图 P06-9 | 图 | 图 P06-9 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-9 | 是 |
+| 图 P06-10 | 图 | 图 P06-10 | P6 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书资源：`docs/images/part14/p06/Wang-Project06-Fig10.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P06-10 | 是 |
 | 图 P07-1 | 图 | 图 P07-1 | P7 | 项目七：Agent Tool-Use 数据工厂 | 本书资源：`docs/images/part14/p07/Yu-Project07-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P07-1 | 是 |
 | 图 P07-2 | 图 | 图 P07-2 | P7 | 项目七：Agent Tool-Use 数据工厂 | 本书资源：`docs/images/part14/p07/Yu-Project07-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P07-2 | 是 |
 | 图 P07-3 | 图 | 图 P07-3 | P7 | 项目七：Agent Tool-Use 数据工厂 | 本书资源：`docs/images/part14/p07/Yu-Project07-Fig03.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P07-3 | 是 |
@@ -293,15 +293,15 @@
 | 图 P10-8 | 图 | 图 P10-8 | P10 | 项目十：端到端 LLM 数据飞轮 | 本书资源：`docs/images/part14/p10/Wang-Project10-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P10-8 | 是 |
 | 图 P10-9 | 图 | 图 P10-9 | P10 | 项目十：端到端 LLM 数据飞轮 | 本书资源：`docs/images/part14/p10/Wang-Project10-Fig09.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P10-9 | 是 |
 | 图 P10-10 | 图 | 图 P10-10 | P10 | 项目十：端到端 LLM 数据飞轮 | 本书资源：`docs/images/part14/p10/Wang-Project10-Fig10.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P10-10 | 是 |
-| 图 204 | 图 | Mini-DeepSeek Data Pipeline | P11 | 项目十一：Mini-DeepSeek 预训练复现 | 本书资源：`docs/images/part14/Yu-Project11-Fig01-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | Mini-DeepSeek Data Pipeline | 是 |
+| 图 P11-1 | 图 | Mini-DeepSeek Multi-Source Pre-Training Data Pipeline | P11 | 项目十一：Mini-DeepSeek 预训练复现 | 本书资源：`docs/images/part14/Yu-Project11-Fig02-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | Mini-DeepSeek Multi-Source Pre-Training Data Pipeline | 是 |
 | 图 P12-1 | 图 | 图 P12-1 | P12 | 项目十二：教学化 R1 推理数据飞轮 | 本书资源：`docs/images/part14/p12/Wang-Project12-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图 P12-1 | 是 |
-| 图 206 | 图 | Multimodal Instruction Factory | P13 | 项目十三：Qwen-VL 多模态指令工厂 | 本书资源：`docs/images/part14/Yu-Project13-Fig01-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | Multimodal Instruction Factory | 是 |
+| 图 206 | 图 | Multimodal Instruction Factory | P13 | 项目十三：Qwen-VL 多模态指令工厂 | 本书资源：`docs/images/part14/Yu-Project13-Fig01-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | Multimodal Instruction Factory | 是 |
 | 图 207 | 图 | P14 Video Generation Data Pipeline | P14 | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 本书资源：`docs/images/part14/Luo-Project14-Fig04-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | P14 Video Generation Data Pipeline | 是 |
 | 图 208 | 图 | frame1 | P14 | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 本书资源：`docs/images/part14/Luo-Project14-Fig01.jpg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | frame1 | 是 |
 | 图 209 | 图 | frame2 | P14 | 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线 | 本书资源：`docs/images/part14/Luo-Project14-Fig02.jpg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | frame2 | 是 |
-| 图 210 | 图 | DataAgent 企业语义问数助手分层架构 | P15 | 项目十五：基于 DataAgent 构建企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataAgent 企业语义问数助手分层架构 | 是 |
-| 图 211 | 图 | DataAgent 整体架构图 | P15 | 项目十五：基于 DataAgent 构建企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig01.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataAgent 整体架构图 | 是 |
-| 图 212 | 图 | DataAgent 企业语义问数助手运行流程 | P15 | 项目十五：基于 DataAgent 构建企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig06-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataAgent 企业语义问数助手运行流程 | 是 |
+| 图 P15-1 | 图 | DataAgent 语义问数助手工程链路 | P15 | 项目十五：DataAgent 企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig03-EN.png` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataAgent 语义问数助手工程链路 | 是 |
+| 图 P15-2 | 图 | DataGallery 生态架构 | P15 | 项目十五：DataAgent 企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig08.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataGallery 生态架构 | 是 |
+| 图 P15-3 | 图 | DataAgent 企业语义问数助手运行流程 | P15 | 项目十五：DataAgent 企业级语义问数助手 | 本书资源：`docs/images/part14/Cao-Project15-Fig06-ZH.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | DataAgent 企业语义问数助手运行流程 | 是 |
 | 图4-1 | 图 | 图4-1：预训练数据源分层地图 | Ch4 | 第4章 数据源、采集与版权 | 本书资源：`docs/images/part2/Yu-Chap04-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图4-1：预训练数据源分层地图 | 是 |
 | 图4-2 | 图 | 图4-2：数据采集与权属存证流程图 | Ch4 | 第4章 数据源、采集与版权 | 本书资源：`docs/images/part2/Yu-Chap04-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图4-2：数据采集与权属存证流程图 | 是 |
 | 图5-1 | 图 | 图5-1：清洗与去污染全景流程图 | Ch5 | 第5章 清洗、去重与去污染 | 本书资源：`docs/images/part2/Yu-Chap05-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图5-1：清洗与去污染全景流程图 | 是 |
@@ -321,8 +321,8 @@
 | 图10-4 | 图 | 图10-4：跨模态时序校准与几何对齐架构图 | Ch10 | 第10章 视频与音频数据工程 | 本书资源：`docs/images/part3/Wang-Chap10-Fig04.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图10-4：跨模态时序校准与几何对齐架构图 | 是 |
 | 图11-1 | 图 | 图11-1：跨模态对齐的三级金字塔架构 | Ch11 | 第11章 跨模态对齐与融合 | 本书资源：`docs/images/part3/Wang-Chap11-Fig01.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图11-1：跨模态对齐的三级金字塔架构 | 是 |
 | 图11-2 | 图 | 图11-2：多模态融合与负样本挖掘管线 | Ch11 | 第11章 跨模态对齐与融合 | 本书资源：`docs/images/part3/Wang-Chap11-Fig02.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图11-2：多模态融合与负样本挖掘管线 | 是 |
-| 图12-1 | 图 | 图12-1：SFT指令体系的架构示意图 | Ch12 | 第12章：SFT数据设计与指令体系 | 本书资源：`docs/images/part4/Yu-Chap12-Fig01-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图12-1：SFT指令体系的架构示意图 | 是 |
-| 图12-2 | 图 | 图12-2：样本生成与验收的闭环示意图 | Ch12 | 第12章：SFT数据设计与指令体系 | 本书资源：`docs/images/part4/Yu-Chap12-Fig02-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图12-2：样本生成与验收的闭环示意图 | 是 |
+| 图12-1 | 图 | 图12-1：SFT指令体系的架构示意图 | Ch12 | 第12章：监督微调数据设计与指令体系 | 本书资源：`docs/images/part4/Yu-Chap12-Fig01-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图12-1：SFT指令体系的架构示意图 | 是 |
+| 图12-2 | 图 | 图12-2：样本生成与验收的闭环示意图 | Ch12 | 第12章：监督微调数据设计与指令体系 | 本书资源：`docs/images/part4/Yu-Chap12-Fig02-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图12-2：样本生成与验收的闭环示意图 | 是 |
 | 图13-1 | 图 | 图13-1：偏好数据到奖励信号流程图 | Ch13 | 第13章：偏好数据与奖励信号 | 本书资源：`docs/images/part4/Yu-Chap13-Fig01-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图13-1：偏好数据到奖励信号流程图 | 是 |
 | 图13-2 | 图 | 图13-2：多目标偏好权衡示意图 | Ch13 | 第13章：偏好数据与奖励信号 | 本书资源：`docs/images/part4/Yu-Chap13-Fig02-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图13-2：多目标偏好权衡示意图 | 是 |
 | 图14-1 | 图 | 图14-1：大模型标注平台工作流图 | Ch14 | 第14章 标注平台、质量保障体系与数据运营 | 本书资源：`docs/images/part4/Zhang-Chap14-Fig01-EN.svg` | 内部自绘/改绘资源；终稿复核高清源与 AI 使用声明 | 图14-1：大模型标注平台工作流图 | 是 |
@@ -544,13 +544,13 @@
 | 表 35-4 | 表 | 正文表格或清单 | Ch35 | 第35章：数据工程 Agent 的安全、权限与人机协同 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 35-5 | 表 | 正文表格或清单 | Ch35 | 第35章：数据工程 Agent 的安全、权限与人机协同 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 35-6 | 表 | 正文表格或清单 | Ch35 | 第35章：数据工程 Agent 的安全、权限与人机协同 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 40-1 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 40-2 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 40-3 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程：结构化抽取、稀疏表格与 Schema 约束 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 42-1 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 42-2 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 42-3 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 42-4 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程：交互控制、风格标签与安全边界 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 40-1 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 40-2 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 40-3 | 表 | 正文表格或清单 | Ch40 | 第40章：视觉文档与表格数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 42-1 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 42-2 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 42-3 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 42-4 | 表 | 正文表格或清单 | Ch42 | 第42章：语音与音频数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 4-1 | 表 | 正文表格或清单 | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 44-1 | 表 | 正文表格或清单 | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 44-2 | 表 | 正文表格或清单 | Ch44 | 第44章：LLM 预训练数据工程实战：从配方到落地 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
@@ -559,8 +559,8 @@
 | 表 45-1 | 表 | 正文表格或清单 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 45-2 | 表 | 正文表格或清单 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 45-3 | 表 | 正文表格或清单 | Ch45 | 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 46-1 | 表 | 正文表格或清单 | Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
-| 表 46-2 | 表 | 正文表格或清单 | Ch46 | 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 46-1 | 表 | 正文表格或清单 | Ch46 | 第46章：推理模型与强化学习数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
+| 表 46-2 | 表 | 正文表格或清单 | Ch46 | 第46章：推理模型与强化学习数据工程 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 47-1 | 表 | 正文表格或清单 | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 47-2 | 表 | 正文表格或清单 | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 47-3 | 表 | 正文表格或清单 | Ch47 | 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
@@ -569,7 +569,7 @@
 | 表 48-3 | 表 | 正文表格或清单 | Ch48 | 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线 | 本书整理 | 内部整理；终稿复核数据口径 | 表题和字段说明随正文保留 | 否 |
 | 表 P04-1 | 表 | 合成教材工厂出版验收表 | P04 | 项目四：合成数学与代码教材工厂 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
 | 表 P05-1 | 表 | 多模态 RAG 出版验收表 | P05 | 项目五：多模态 RAG 企业财报助手 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
-| 表 P06-1 | 表 | 过程监督数据出版验收表 | P06 | 项目六：CoT 推理数据集构建与 PRM 训练 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
+| 表 P06-1 | 表 | 过程监督数据出版验收表 | P06 | 项目六：思维链推理数据集构建与过程奖励模型训练 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
 | 表 P07-1 | 表 | Agent Tool-Use 出版验收表 | P07 | 项目七：Agent Tool-Use 数据工厂 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
 | 表 P08-1 | 表 | DataOps 平台出版验收表 | P08 | 项目八：企业级 DataOps 平台搭建：从数据项目到组织级治理能力 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |
 | 表 P09-1 | 表 | 隐私流水线出版验收表 | P09 | 项目九：隐私保护数据流水线 | 本书整理 | 内部整理；终稿复核数据口径 | 验收维度、指标证据和出版复核口径 | 否 |

@@ -118,11 +118,13 @@ Figure 36-1 illustrates the corresponding workflow or structure.
 
 ![Figure 36-1: Compliance shift-left and governance coordination architecture](../../images/part11/Wang-Chap36-Fig01-EN.svg)
 *Figure 36-1: Compliance review shifts from pre-launch review into requirements analysis and architecture design*
+
 ### 36.1.4 Traditional Flow vs. Shift-Left Governance
 
 Table 36-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-1: Traditional Flow vs. Shift-Left Governance*
+
 | Stage | Traditional Mode | Shift-Left Governance Mode |
 | :--- | :--- | :--- |
 | Requirements | Focus on business functions; data boundaries are rarely explicit | Define data types, purpose, authorization basis, and output boundaries |
@@ -165,6 +167,7 @@ This chapter uses a three-level baseline:
 Table 36-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-2: Data Classification Architecture*
+
 | Security Level | Definition and Examples | Processing Requirements | Masking and Encryption Strategy |
 | :--- | :--- | :--- | :--- |
 | **L3 high sensitivity (C3)** | Sensitive personal information such as biometrics, medical health, precise location; core trade secrets such as unpublished financials | Separate consent; cannot enter analytics domains without masking; legal may veto | Strong storage encryption such as AES-256; full display masking; “usable but not visible” through privacy computing |
@@ -232,6 +235,7 @@ risk_level = data_sensitivity * processing_intensity * business_impact_scope
 ```
 
 *Listing 36-1: Risk-score formula example*
+
 When the data level is high, the action is strong, and the impact scope is broad, the policy engine should require more approvals, stricter masking, and higher audit levels.
 
 ### 36.2.5 Example Risk Matrix
@@ -239,6 +243,7 @@ When the data level is high, the action is strong, and the impact scope is broad
 Table 36-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-3: Example Risk Matrix*
+
 | Data Level | Purpose | Processing Action | Risk Level | Default Controls |
 | :--- | :--- | :--- | :--- | :--- |
 | C1 | Stability monitoring | Aggregate query | Low | Standard access control |
@@ -251,6 +256,7 @@ Figure 36-2 illustrates the corresponding workflow or structure.
 
 ![Figure 36-2: Risk matrix formed by data level, purpose, and processing action](../../images/part11/Wang-Chap36-Fig02-EN.svg)
 *Figure 36-2: Risk matrix formed by data level, purpose, and processing action*
+
 ### 36.2.6 Accountability Chain: RACI Matrix
 
 Without a clear accountability chain, even good rules distort during execution. Governance must define who proposes the need, who judges legality, who provides technical controls, who is responsible for compliant use, and who audits execution.
@@ -258,6 +264,7 @@ Without a clear accountability chain, even good rules distort during execution. 
 Table 36-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-4: Accountability Chain: RACI Matrix*
+
 | Role | Main Responsibilities | RACI |
 | :--- | :--- | :--- |
 | Legal / Compliance | Interpret regulations, define red lines, approve high-risk scenarios | Accountable |
@@ -324,6 +331,7 @@ Without RoPA, a team cannot explain which data was used by whom and for what rea
 Table 36-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-5: Minimal RoPA Form*
+
 | Field | Description |
 | :--- | :--- |
 | project_id | Unique project identifier |
@@ -379,6 +387,7 @@ DPIA is not about writing a long report. It asks:
 Table 36-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-6: DPIA Risk Scoring Example*
+
 | Dimension | Score Description |
 | :--- | :--- |
 | Data sensitivity | C1=1, C2=2, C3=3 |
@@ -430,6 +439,7 @@ A mature audit system should record:
 Table 36-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-7: Audit Log Design Example*
+
 | Field | Description |
 | :--- | :--- |
 | event_time | Event time |
@@ -467,6 +477,7 @@ Figure 36-3 illustrates the corresponding workflow or structure.
 
 ![Figure 36-3: Compliance gate flow from data onboarding to model training](../../images/part11/Wang-Chap36-Fig03-EN.svg)
 *Figure 36-3: Compliance gate flow from data onboarding to model training*
+
 ### 36.3.7 Governance Pipeline: From Documents to System Execution
 
 Once compliance requirements enter engineering, governance objects must become executable pipeline steps. A minimum governance chain usually contains:
@@ -483,6 +494,7 @@ Figure 36-4 illustrates the corresponding workflow or structure.
 
 ![Figure 36-4: Privacy specification and policy generation flow](../../images/part11/Wang-Chap36-Fig04-EN.svg)
 *Figure 36-4: Privacy specification and policy generation flow*
+
 ### 36.3.8 Translating Governance Metrics into Engineering Language
 
 Governance metrics matter not because of large sample counts, but because they show whether identification, processing, gates, alerts, and checks form a closed loop. For example:
@@ -499,6 +511,7 @@ Figure 36-5 illustrates the corresponding workflow or structure.
 
 ![Figure 36-5: Engineering approval flow for DPIA and RoPA](../../images/part11/Wang-Chap36-Fig05-EN.svg)
 *Figure 36-5: Data compliance lifecycle from business initiation to automated blocking and audit*
+
 ### 36.3.9 Example Compliance Release Gate Checklist
 
 The following pre-release checklist can be used in project review.
@@ -544,6 +557,7 @@ Figure 36-6 illustrates the corresponding workflow or structure.
 
 ![Figure 36-6: Closed loop of audit logs, alerts, incident response, and postmortem review](../../images/part11/Wang-Chap36-Fig06-EN.svg)
 *Figure 36-6: Closed loop of audit logs, alerts, incident response, and postmortem review*
+
 ---
 
 ## 36.4 High-Risk Scenario Governance
@@ -616,6 +630,7 @@ Figure 36-7 illustrates the corresponding workflow or structure.
 
 ![Figure 36-7: Boundary gateway for third-party APIs and large-model calls](../../images/part11/Wang-Chap36-Fig07-EN.svg)
 *Figure 36-7: Boundary gateway for third-party APIs and large-model calls*
+
 ### 36.4.5 Cross-Border Transfer Governance
 
 The difficulty of cross-border transfer is that once data leaves its original jurisdiction, subsequent processing, retention, sharing, and audit become harder to control. Cross-border governance should therefore exist not only in contracts, but also in systems:
@@ -640,6 +655,7 @@ Privacy-preserving methods for prompt tuning, text generation, and LLM services 
 Table 36-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-8: High-Risk Scenario Summary*
+
 | Scenario | Main Risks | Core Controls |
 | :--- | :--- | :--- |
 | Health care | Health-data leakage, purpose drift | Independent encryption zone, fine-grained permissions, strong audit |
@@ -739,10 +755,12 @@ pipeline_gate:
 ```
 
 *Listing 36-2: RoPA declaration template*
+
 Figure 36-8 illustrates the corresponding workflow or structure.
 
 ![Figure 36-8: Full-path propagation and cleanup for user deletion requests](../../images/part11/Wang-Chap36-Fig08-EN.svg)
 *Figure 36-8: Full-path propagation and cleanup for user deletion requests*
+
 ### 36.5.2 Data Classification Policy
 
 Listing 36-3 provides a JSON data example.
@@ -787,6 +805,7 @@ Listing 36-3 provides a JSON data example.
 ```
 
 *Listing 36-3: JSON data example*
+
 ### 36.5.3 Access Control Policy
 
 Listing 36-4 provides a YAML configuration example.
@@ -838,6 +857,7 @@ approval_rules:
 ```
 
 *Listing 36-4: YAML configuration example*
+
 ### 36.5.4 DPIA Template
 
 Listing 36-5 provides a DPIA assessment form template.
@@ -895,6 +915,7 @@ Listing 36-5 provides a DPIA assessment form template.
 ```
 
 *Listing 36-5: DPIA assessment form template*
+
 ### 36.5.5 Audit Log Structure
 
 Listing 36-6 provides an audit-log JSON example.
@@ -907,6 +928,7 @@ Listing 36-6 provides an audit-log JSON example.
 ```
 
 *Listing 36-6: Audit-log JSON example*
+
 ### 36.5.6 Preflight Checklist
 
 Listing 36-7 provides a preflight-checklist JSON example.
@@ -935,6 +957,7 @@ Listing 36-7 provides a preflight-checklist JSON example.
 ```
 
 *Listing 36-7: Preflight-checklist JSON example*
+
 ### 36.5.7 Incident Response and Postmortem Template
 
 Listing 36-8 provides a privacy incident postmortem template.
@@ -982,6 +1005,7 @@ Listing 36-8 provides a privacy incident postmortem template.
 ```
 
 *Listing 36-8: Privacy incident postmortem template*
+
 ### 36.5.8 Governance Deliverable Mapping
 
 Governance templates are not paper designs. Table 36-9 maps common deliverables in a privacy-governance pipeline to the governance capabilities they represent.
@@ -989,6 +1013,7 @@ Governance templates are not paper designs. Table 36-9 maps common deliverables 
 Table 36-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 36-9: Governance Deliverable Mapping*
+
 | Deliverable | Governance Meaning |
 | :--- | :--- |
 | `compliance_scope.json` | Defines compliance scope |

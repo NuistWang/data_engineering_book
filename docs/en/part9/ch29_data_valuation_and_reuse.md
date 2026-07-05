@@ -4,7 +4,7 @@
 
 ## Abstract
 
-Once data can be found and trusted, a sharper question appears: how much is this data actually worth? This chapter discusses valuation and reuse mechanisms for data assets. It first analyzes four illusions that often distort data value: scale, cost, model gain, and business value. It explains why data volume, acquisition cost, model metrics, and business outcomes are not equivalent, and uses scaling-law, data-pruning, and deduplication research to show that value depends on information density and quality rather than size. It then builds a metric system for data-asset value covering reuse rate, coverage, training gain, retrieval hits, labeling savings, risk reduction, and maintenance cost, unified through net value. It also draws on ideas such as Data Shapley to characterize the marginal contribution of an individual data asset. The chapter then explains how one data asset can be reused across pre-training, post-training, RAG, evaluation, and compliance paths, and records cross-path benefits through a full enterprise-domain corpus cost-benefit case. Finally, it provides practical governance tools such as a cost-benefit matrix, asset review card, and valuation pipeline.
+Once data can be found and trusted, a sharper question appears: how much is this data actually worth? This chapter discusses valuation and reuse mechanisms for data assets. It first analyzes four illusions that often distort data value: scale, cost, model gain, and business value. It explains why data volume, acquisition cost, model metrics, and business outcomes are not equivalent, and uses scaling-law, data-pruning, and deduplication research to show that value depends on information density and quality rather than size. It then builds a metric system for data-asset value covering reuse rate, coverage, training gain, retrieval hits, labeling savings, risk reduction, and maintenance cost, unified through net value. It also draws on ideas such as Data Shapley to characterize the marginal contribution of an individual data asset. The chapter then explains how one data asset can be reused across pre-training, post-training, retrieval-augmented generation (RAG), evaluation, and compliance paths, and records cross-path benefits through a full enterprise-domain corpus cost-benefit case. Finally, it provides practical governance tools such as a cost-benefit matrix, asset review card, and valuation pipeline.
 
 ## Keywords
 
@@ -37,6 +37,7 @@ Before defining good valuation, it is useful to name the bad shortcuts. The idea
 The most common misjudgments can be summarized as four value illusions, corresponding to four different viewpoints across the data lifecycle. The first is the **scale illusion**: assuming that larger data volume means higher value and treating bytes, samples, or document counts as natural measures of value. The second is the **cost illusion**: assuming that data purchased or collected at higher cost must be more valuable, confusing input with output. The third is the **model-gain illusion**: assuming that any metric improvement caused by a dataset represents the asset's full value, equating local and short-term gains with durable asset value. The fourth is the **business-value illusion**: assuming that model-metric improvement automatically translates into equivalent business value. Table 29-1 summarizes these illusions and the reasons they fail.
 
 *Table 29-1: Four common illusions about data value*
+
 | Illusion | Naive assumption | Why it fails |
 | --- | --- | --- |
 | Scale illusion | More data is more valuable | Marginal returns decline; redundancy and low quality can reduce performance |
@@ -135,6 +136,7 @@ Here $V_{train}$, $V_{retrieval}$, $V_{label}$, and $V_{risk}$ represent trainin
 Combining the preceding dimensions yields a data asset value metric table that can be used directly for evaluation and registration. Table 29-2 decomposes the abstract idea of "value" into concrete metrics that are measurable, comparable, and decision-oriented, and it marks each metric's view, calculation boundary, and main use.
 
 *Table 29-2: Data asset value metric table*
+
 | Metric | View | Calculation boundary | Main use |
 | --- | --- | --- | --- |
 | Reuse rate | Usage | Number of reuse scenarios or teams, optionally weighted | Identify core assets and leverage |
@@ -165,6 +167,7 @@ This section follows five typical large-model reuse paths: pre-training, post-tr
 ![Multi-scenario data asset reuse paths](../../images/part9/Liu-Chap29-Fig01-EN.svg)
 
 *Figure 29-1: Data asset reuse paths*
+
 ### 29.3.2 Pre-training Reuse
 
 Pre-training is the largest reuse path. Data shapes base language ability and domain knowledge, and value is realized through training gain embedded in model parameters.
@@ -234,6 +237,7 @@ Input cost includes one-time acquisition cost and continuing maintenance cost.
 Table 29-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-3: fin_domain_corpus input costs, annualized where applicable, in RMB 10k units*
+
 | Cost item | Type | Amount | Description |
 | --- | --- | --- | --- |
 | Report licensing | One-time | 80 | Licensed industry research reports |
@@ -257,6 +261,7 @@ The corpus also reduces downstream risk because its provenance, review, anonymiz
 Table 29-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-4: Annual cross-path benefits for fin_domain_corpus, in RMB 10k units*
+
 | Reuse path | Main value dimension | Annual benefit | Measurement basis |
 | --- | --- | --- | --- |
 | Pre-training | Training gain | 30 | Proxy-model financial capability uplift |
@@ -304,6 +309,7 @@ Figure 29-2 illustrates the corresponding workflow or structure.
 ![Data asset cost-benefit matrix](../../images/part9/Liu-Chap29-Fig02-EN.svg)
 
 *Figure 29-2: Cost-benefit matrix*
+
 The advantage of this two-dimensional positioning is that it does not require the fine-grained monetary calculation used in Section 29.4 for every asset. A relative judgment of value level and cost/risk level is enough to quickly classify many assets into quadrants and apply differentiated management strategies.
 
 ### 29.5.2 Four Quadrant Strategies
@@ -339,6 +345,7 @@ Figure 29-3 illustrates the corresponding workflow or structure.
 ![Data asset review card](../../images/part9/Liu-Chap29-Fig03-EN.svg)
 
 *Figure 29-3: Asset review card*
+
 ### 29.6.2 Core Elements of a Review Card
 
 A practical card should include five groups of information:
@@ -383,6 +390,7 @@ The first step in valuation is not calculation; it is forming a unified asset fa
 Table 29-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-5: Example fields for data asset registration*
+
 | Field | Meaning | Valuation role |
 | --- | --- | --- |
 | asset_id | Unique data asset identifier | Primary key for attribution and cross-system joins |
@@ -415,6 +423,7 @@ Each reuse event should record who used the asset, when, how, which version, and
 Table 29-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-6: Example reuse event log fields*
+
 | Field | Example | Description |
 | --- | --- | --- |
 | event_id | reuse_2026_0001 | Unique reuse event identifier |
@@ -454,6 +463,7 @@ Valuation must become an actionable grade. One practical system is S/A/B/C/D:
 Table 29-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-7: Example data asset value grades*
+
 | Grade | Criteria | Management action |
 | --- | --- | --- |
 | S | High benefit, high reuse, low or controlled risk | Protect, prioritize investment, strong SLA |
@@ -475,6 +485,7 @@ Ordinary monitoring asks what happened. Valuation also asks where resources shou
 Table 29-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-8: Data valuation engineering checklist*
+
 | Check item | Passing standard |
 | --- | --- |
 | Asset registration | Key assets have unique ID, owner, source, compliance status, and version |
@@ -511,6 +522,7 @@ RACI stands for Responsible, Accountable, Consulted, and Informed. It reduces am
 Table 29-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 29-9: Example RACI for data value governance*
+
 | Work item | R | A | C | I |
 | --- | --- | --- | --- | --- |
 | Asset registration | Data owner | Data domain lead | Platform team, compliance team | Downstream consumers |

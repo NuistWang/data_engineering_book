@@ -8,7 +8,7 @@ P09 focuses on the governance process for sensitive data before it enters traini
 The chapter can be understood along four main threads:
 
 * Control boundaries and privacy specification: defining the compliance scope, classification policy, access boundaries, and technical options.
-* Sensitive record processing chain: executing PII detection, de-identification, quarantine, and storage partitioning.
+* Sensitive record processing chain: executing personally identifiable information (PII) detection, de-identification, quarantine, and storage partitioning.
 * Operational and response feedback loop: incorporating alerting, auditing, preflight checks, incident simulation, and postmortems into the main workflow.
 * Evaluation and acceptance mechanisms: validating code, artifacts, and reports for consistency through metrics, deliverables, and inspection scripts.
 
@@ -22,7 +22,7 @@ The core objective of this structure is to elevate privacy governance from a set
 
 ## Keywords
 
-Privacy protection; PII detection; de-identification; compliance pipeline; audit response
+Privacy protection; personally identifiable information (PII) detection; de-identification; compliance pipeline; audit response
 
 ## Project Objectives and Reader Outcomes
 
@@ -48,6 +48,7 @@ Raw records → PII detection → Data classification → Redaction/de-identific
 ```
 
 *Listing P09-1: Process or path example*
+
 This fragment converts the above process into a checkable, structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data type, downstream tasks, and acceptance criteria of each project.
@@ -63,6 +64,7 @@ Acceptance metrics include PII detection rate, false-positive/false-negative sam
 Table P09-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table P09-1: Privacy Pipeline Publication Acceptance Table*
+
 | Acceptance Dimension | Metrics / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Detection and handling | PII detection rate, false-positive/false-negative samples, and redacted field coverage | Each sensitive field category should have a rule source, processing action, and verification sample |
@@ -177,6 +179,7 @@ Figure P09-1 illustrates the corresponding workflow or structure.
 
 ![Figure P09-1: P09 Privacy-Preserving Data Pipeline Overall Architecture](../../images/part14/p09/Liu-Project09-Fig01.svg)
 *Figure P09-1: P09 Privacy-Preserving Data Pipeline Overall Architecture*
+
 From an engineering perspective, P09 can be decomposed into three layers.
 
 ### 4.1 Layer 1: Policy and Boundary Definition Layer
@@ -249,6 +252,7 @@ Figure P09-2 illustrates the corresponding workflow or structure.
 
 ![Figure P09-2: Key Engineering Dimensions of the P09 Privacy Pipeline](../../images/part14/p09/Liu-Project09-Fig02.svg)
 *Figure P09-2: Key Engineering Dimensions of the P09 Privacy Pipeline*
+
 ---
 
 ## 6. Privacy Specification Layer: Rules-First Processing Chain
@@ -286,6 +290,7 @@ def build_scope() -> dict:
 ```
 
 *Listing P09-2: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 This structure indicates that P09's starting point is not a redaction action, but control objectives.
@@ -327,6 +332,7 @@ def build_classification_policy() -> dict:
 ```
 
 *Listing P09-3: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 6.3 Access Policy as an Upfront Constraint
@@ -339,6 +345,7 @@ Figure P09-3 illustrates the corresponding workflow or structure.
 
 ![Figure P09-3: Relationships Among the Four Artifact Types in the Privacy Specification Layer](../../images/part14/p09/Liu-Project09-Fig03.svg)
 *Figure P09-3: Relationships Among the Four Artifact Types in the Privacy Specification Layer*
+
 ---
 
 ## 7. Raw Records and Scenario Construction: Governance Coverage with a Small Sample
@@ -389,6 +396,7 @@ def build_raw_records() -> list[dict]:
 ```
 
 *Listing P09-4: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 The advantage of this approach is that the entire pipeline logic can be fully understood without downloading external datasets. It sacrifices some real-world complexity in exchange for stronger reproducibility.
@@ -401,6 +409,7 @@ Figure P09-4 illustrates the corresponding workflow or structure.
 
 ![Figure P09-4: Scenario Coverage of Raw Sensitive Records](../../images/part14/p09/Liu-Project09-Fig04.svg)
 *Figure P09-4: Scenario Coverage of Raw Sensitive Records*
+
 ---
 
 ## 8. PII Detection: Recognition Rules as the Processing Entry Point
@@ -441,6 +450,7 @@ def detect_pii(text: str) -> list[dict]:
 ```
 
 *Listing P09-5: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 8.2 Detection Results as a Data Asset
@@ -457,6 +467,7 @@ Figure P09-5 illustrates the corresponding workflow or structure.
 
 ![Figure P09-5: PII Detection Rules and Hit Distribution](../../images/part14/p09/Liu-Project09-Fig05.svg)
 *Figure P09-5: PII Detection Rules and Hit Distribution*
+
 ---
 
 ## 9. Classification Logic: Joint Determination from Source Type and PII
@@ -483,6 +494,7 @@ def classify_record(record: dict, classification_policy: dict) -> dict:
 ```
 
 *Listing P09-6: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 9.1 What Problem This Logic Solves
@@ -509,6 +521,7 @@ Figure P09-6 illustrates the corresponding workflow or structure.
 
 ![Figure P09-6: Classification Determination and Quarantine Trigger Relationship](../../images/part14/p09/Liu-Project09-Fig06.svg)
 *Figure P09-6: Classification Determination and Quarantine Trigger Relationship*
+
 ---
 
 ## 10. Redaction and De-identification: Differentiated De-identification Strategy
@@ -537,6 +550,7 @@ def redact_payload(text: str, detections: list[dict]) -> str:
 ```
 
 *Listing P09-7: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 10.1 Division of Responsibility Among Tokenize, Mask, and Remove
@@ -557,6 +571,7 @@ def hash_token(value: str) -> str:
 ```
 
 *Listing P09-8: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 The benefit of this approach is that the same original value maps to the same token consistently, which avoids direct exposure of the original identifier while still supporting weak linkage analysis downstream.
@@ -569,6 +584,7 @@ Figure P09-7 illustrates the corresponding workflow or structure.
 
 ![Figure P09-7: De-identification Strategies for Different PII Types](../../images/part14/p09/Liu-Project09-Fig07.svg)
 *Figure P09-7: De-identification Strategies for Different PII Types*
+
 ---
 
 ## 11. Storage Partitioning and Quarantine: Partition Control Between Results and Raw Data
@@ -598,6 +614,7 @@ def build_isolation_plan() -> dict:
 ```
 
 *Listing P09-9: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 11.1 Why the Zone Model Matters
@@ -623,6 +640,7 @@ Figure P09-8 illustrates the corresponding workflow or structure.
 
 ![Figure P09-8: Storage Zones and Role Access Boundaries](../../images/part14/p09/Liu-Project09-Fig08.svg)
 *Figure P09-8: Storage Zones and Role Access Boundaries*
+
 ---
 
 ## 12. Auditing and Alerting: Behavioral Evidence Chain
@@ -655,6 +673,7 @@ def build_alerts() -> list[dict]:
 ```
 
 *Listing P09-10: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 These two alerts are highly representative: one is an unauthorized access attempt to the raw zone, and the other is an unapproved request to export restricted data. They correspond precisely to the two most dangerous types of actions in privacy governance.
@@ -671,6 +690,7 @@ Figure P09-9 illustrates the corresponding workflow or structure.
 
 ![Figure P09-9: Relationships Among Alerts, Audit, and Incident Response](../../images/part14/p09/Liu-Project09-Fig09.svg)
 *Figure P09-9: Relationships Among Alerts, Audit, and Incident Response*
+
 ---
 
 ## 13. Preflight: Pre-run Checks
@@ -693,6 +713,7 @@ preflight = {
 ```
 
 *Listing P09-11: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 13.1 Design of the Preflight Check Items
@@ -719,6 +740,7 @@ Figure P09-10 illustrates the corresponding workflow or structure.
 
 ![Figure P09-10: Preflight Check Process](../../images/part14/p09/Liu-Project09-Fig10.svg)
 *Figure P09-10: Preflight Check Process*
+
 ---
 
 ## 14. Incident Simulation and Postmortem: Anomaly Response Feedback Loop
@@ -744,6 +766,7 @@ incident = {
 ```
 
 *Listing P09-12: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 The corresponding postmortem then continues to record root_cause, what_worked, and follow_ups.
@@ -769,6 +792,7 @@ Figure P09-11 illustrates the corresponding workflow or structure.
 
 ![Figure P09-11: Incident Response and Postmortem Feedback Loop](../../images/part14/p09/Liu-Project09-Fig11.svg)
 *Figure P09-11: Incident Response and Postmortem Feedback Loop*
+
 ---
 
 ## 15. Evaluation Script: Structured Generation of Metrics
@@ -806,6 +830,7 @@ metrics = {
 ```
 
 *Listing P09-13: Python implementation excerpt*
+
 This fragment converts the above process into a checkable, structured representation.
 
 ### 15.2 Why `has_direct_pii()` Is Critical
@@ -993,6 +1018,7 @@ python src/run_p9_checks.py
 ```
 
 *Listing P09-14: Command-line run example*
+
 This fragment converts the above process into a checkable, structured representation.
 
 These five steps correspond respectively to:
@@ -1013,6 +1039,7 @@ Figure P09-12 illustrates the corresponding workflow or structure.
 
 ![Figure P09-12: P09 Minimal Reproducible Execution Chain](../../images/part14/p09/Liu-Project09-Fig12.svg)
 *Figure P09-12: P09 Minimal Reproducible Execution Chain*
+
 ---
 
 ## 22. Methodological Review: System Capabilities Demonstrated by P09

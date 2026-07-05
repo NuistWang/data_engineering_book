@@ -72,6 +72,7 @@ StructBill-CN contains **2,300 high-resolution bill images** across **six busine
 Table 40-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-1: StructBill-CN composition and characteristics*
+
 | Source Subset | Document Type | Count | Table Form |
 | --- | --- | ---: | --- |
 | CHIP-2022 | Inpatient invoice | 680 | Wired grid |
@@ -148,6 +149,7 @@ for epoch in range(EPOCHS):
 ```
 
 *Listing 40-1: Process flow example*
+
 #### 40.2.2 Task Definition
 
 Given a document image $X$ and a schema $S=\{K,T,C\}$, where $K$ is the set of global key fields, $T$ is the table definition, and $C$ is the set of deterministic constraints, the goal is to learn a policy that generates a structured sequence $Y$ maximizing $P(Y\,|\,X,S)$.
@@ -192,7 +194,10 @@ Figure 40-1 illustrates the corresponding workflow or structure.
 
 ![Figure 40-1: Schema-to-JSON mapping](../../images/part12/Liu-Chap40-Fig01-EN.png)
 
-*Figure 40-1: Schema-to-JSON mapping. Key fields and table structure become visible JSON nodes; constraints remain verifiable relationships attached to numeric fields*
+*Figure 40-1: Schema-to-JSON mapping*
+
+Key fields and table structure become visible JSON nodes, while constraints remain verifiable relationships attached to numeric fields.
+
 This “constraints as relationships, not fields” design lets the same JSON serve training and evaluation. Constraints do not change the output format, but they are instantiated during validation as equations. A future schema can add a new rule such as discounted amount = amount x discount rate without changing historical fields.
 
 This design is also the basis for backward-compatible data-contract evolution. A schema can add a new rule in $C$ without changing existing fields or historical annotations. The constraint remains outside the JSON node set but becomes active during construction-time validation and evaluation-time scoring.
@@ -226,6 +231,7 @@ Listing 40-2 provides a JSON data example.
 ```
 
 *Listing 40-2: JSON data example*
+
 In this small sample, `key_information` and `Fee_List` are structure. The row-level and document-level arithmetic equations are logic constraints. Both must be annotated, validated, and evaluated. The construction pipeline, quality checks, and metrics that follow all revolve around making this JSON both structurally legal and arithmetically self-consistent.
 
 Listing 40-3 defines the schema $S=\{K, T, C\}$ as a Python dataclass. Each business document type corresponds to one `Schema` instance. The three constraint fields (`price_field`, `qty_field`, `amount_field`) plus `total_field` encode the arithmetic rules $C$ without modifying the JSON output format.
@@ -256,11 +262,13 @@ expense_schema = Schema(
 ```
 
 *Listing 40-3: Python implementation excerpt*
+
 #### 40.3.4 Field Types, Annotation Rules, and Metrics
 
 Table 40-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-2: Field type, annotation rule, and metric mapping*
+
 | Field Type | Representative Fields | Annotation Rule | Main Metric |
 | --- | --- | --- | --- |
 | Text attribute | `Hospital_Name`, `Item_Name` | Semantic ownership first; tolerate minor OCR noise in long text | ANLS / Entity-Level F1 |
@@ -281,7 +289,10 @@ Figure 40-2 illustrates the corresponding workflow or structure.
 
 
 
-*Figure 40-2: StructBill-CN construction pipeline. Samples that fail logic validation return to annotation rather than entering the training set*
+*Figure 40-2: StructBill-CN construction pipeline*
+
+Samples that fail logic validation return to annotation rather than entering the training set.
+
 **1. Acquisition.** Images come from CHIP-2022 and SIBR-Med and intentionally include borderless tables, sparse layouts, and long expense lists.
 
 **2. Denoising and quality grading.** This stage should include duplicate removal, skew/rotation correction, filtering or bucketing of low-resolution and severely damaged images, and image-quality metadata for later error attribution.
@@ -296,7 +307,10 @@ Figure 40-2 illustrates the corresponding workflow or structure.
 
 ![Figure 40-3: Logic-consistency validation](../../images/part12/Liu-Chap40-Fig03-EN.png)
 
-*Figure 40-3: Logic-consistency validation. The same gate is reused during construction to block inconsistent labels and during evaluation/training to score model output*
+*Figure 40-3: Logic-consistency validation*
+
+The same gate is reused during construction to block inconsistent labels and during evaluation/training to score model output.
+
 Listing 40-4 implements the logic-consistency validation gate. It covers the structure gate ($I_{gate}$), row-level check (Row-ACR), and document-level check (Doc-ACR) from Figure 40-3. The same code is reused in both the construction pipeline (to block inconsistent labels) and the evaluation pipeline (to score model outputs). It takes the `Schema` defined in Listing 40-3.
 
 ```python
@@ -345,6 +359,7 @@ def validate_logic(pred_text: str, schema: Schema, eps: float = 0.01
 ```
 
 *Listing 40-4: Process flow example*
+
 **7. Version split.** The dataset uses an 8:2 train-test split. In practice, the split should preserve the six schema distributions, reserve true cross-layout test samples, and attach data fingerprints and statistics to each version.
 
 #### 40.4.1 Lineage and Metadata
@@ -407,6 +422,7 @@ def compute_scvr(predictions: list, schema: Schema,
 ```
 
 *Listing 40-5: Process flow example*
+
 #### 40.5.2 Engineering Conventions for Reproducible Evaluation
 
 Reproducible evaluation requires a fixed test split fingerprint, fixed schema version, fixed metric implementation, and controlled random seeds. For generative models, decoding parameters and repeated runs matter. The reported setup uses `temperature=0.9`, `top_p=1.0`, and averages **8 independent runs** per model to absorb decoding variance. Engineering teams should archive decoding parameters, run count, and seeds with the results.
@@ -416,6 +432,7 @@ Reproducible evaluation requires a fixed test split fingerprint, fixed schema ve
 Table 40-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-3: Common errors and repair actions*
+
 | Error Type | Symptom | Root Cause | Data-Engineering Repair |
 | --- | --- | --- | --- |
 | Numeric hallucination | Amount or quantity is fabricated or copied wrongly | Token-level approximation, missing logic constraints | Bind P x Q = A and sum = T; use Doc-ACR as a quality gate; create numeric negatives |
@@ -537,6 +554,7 @@ In terms of scale, dataset documentation typically summarizes STB as "approximat
 Table 40-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-5: Case B.2: Dataset Overview and Task Boundaries*
+
 | Split | Image Count | Annotation Format | Primary Purpose |
 |---|---:|---|---|
 | STB-Train | 8,000 | HTML + cell bbox | Multi-task supervised training |
@@ -580,16 +598,19 @@ Listing 40-6 provides a JSON data example.
 ```
 
 *Listing 40-6: JSON data example*
+
 The `[EMPTY_CELL]` token here is not ordinary text; it is a placeholder expressing "structure exists, content is absent." It decouples a cell's structural identity from its semantic content: even if the corresponding image region contains no readable characters, that position still has row-column coordinates, a bounding box, and contextual relationships. For sparse tables, this placeholder prevents the model from treating blank regions as non-existent during generation, thereby reducing the probability of column collapse and left-shift errors. Figure 40-4 summarizes the synchronized relationship among the three supervision signals — HTML, text, and bounding boxes — within the same table sample.
 
 ![Figure 40-4: Three synchronized supervision signals in a table sample](../../images/part12/Liu-Chap40-Fig04-EN.png)
 
 *Figure 40-4: Three synchronized supervision signals in a table sample*
+
 From a data engineering perspective, the sample schema of STB includes at least the following fields and validation rules.
 
 Table 40-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-6: Case B.3: Sample Schema: Synchronized Representation of HTML, Text, and Bounding Boxes*
+
 | Object | Typical Fields | Purpose | Key Quality Checks |
 |---|---|---|---|
 | Image | `image_id`, image file, width/height | Serves as visual input and bbox coordinate reference | Image opens successfully; resolution is consistent with bbox coordinate system; no corrupted pages |
@@ -610,6 +631,7 @@ The construction of SparseTable-Bench can be organized into four stages: table c
 ![Figure 40-5: Four-stage SparseTable-Bench construction pipeline](../../images/part12/Liu-Chap40-Fig05-EN.png)
 
 *Figure 40-5: Four-stage SparseTable-Bench construction pipeline*
+
 #### Case B.4.1 Table Collection
 
 Raw table images are sourced from multi-source documents including scientific publications, financial reports, and clinical trial documents. These sources are chosen because they naturally contain large numbers of irregular tables: scientific papers frequently feature borderless experimental results tables and meta-analysis tables; financial reports commonly contain multi-level headers, blank groupings, and cross-column annotations; clinical trial documents routinely mix metrics, groups, time points, and missing observations within a single table. Compared with templated invoices or fixed-format forms, these tables are more likely to expose VLM dependencies on implicit structure.
@@ -649,6 +671,7 @@ Errors in sparse tables can be classified into five types.
 Table 40-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-7: Case B.5: How Empty Cells and Sparse Layouts Induce Structural Errors*
+
 | Error Type | Manifestation | Primary Cause | Observation Method in STB |
 |---|---|---|---|
 | Missing empty position | Empty `<td>` not generated; column count decreases | Empty cells lack visual text anchors | `[EMPTY_CELL]` recall, TEDS-S, row-column expansion check |
@@ -668,6 +691,7 @@ Figure 40-6 illustrates the basic workflow of STB-Mask-Stress, from column-level
 ![Figure 40-6: STB-Mask-Stress occlusion generation and evaluation workflow](../../images/part12/Liu-Chap40-Fig06-EN.png)
 
 *Figure 40-6: STB-Mask-Stress occlusion generation and evaluation workflow*
+
 The occlusion strategy of STB-Mask-Stress is column-aware. The workflow can be summarized as follows.
 
 1. Parse the original table structure to obtain the row-column index, header/body membership, and bounding box of each cell.
@@ -694,6 +718,7 @@ In extremely sparse tables or tables with many empty cells, lower TEDS/TEDS-S sc
 Table 40-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-8: Case B.7: Evaluation Protocol: TEDS, TEDS-S, and Error Interpretation*
+
 | Metric Pattern | Possible Interpretation | Conclusion That Should Not Be Drawn | Supplementary Check |
 |---|---|---|---|
 | TEDS high, TEDS-S high | Structure and text are broadly stable | Does not imply bboxes are necessarily correct | Cell bbox IoU, row-column geometric alignment |
@@ -733,6 +758,7 @@ For reproducibility, using STB should not stop at the coarse-grained procedure o
 Table 40-9 summarizes the corresponding comparison and engineering considerations.
 
 *Table 40-9: Case B.8: Data Engineering Practice: Using STB for Training and Reproduction*
+
 | Reproduction Stage | Input Objects | Output Objects | Key Checks |
 |---|---|---|---|
 | Data loading | Image, HTML, cells, bbox | Unified sample record | ID alignment, field completeness, correct split assignment |

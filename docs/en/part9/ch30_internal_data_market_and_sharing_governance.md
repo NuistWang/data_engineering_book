@@ -92,6 +92,7 @@ An internal data market is also different from a pure permission system. A permi
 ![Internal data market architecture](../../images/part9/Luo-Chap30-Fig01-EN.svg)
 
 *Figure 30-1: Internal data market architecture*
+
 ### 30.1.7 Section Summary
 
 This section explained why enterprises need internal data markets. Duplicate collection, duplicate cleaning, unclear permissions, and opaque quality create continuing cost, risk, and definition fragmentation. A market turns data from scattered resources into governable internal assets that can flow efficiently within clear boundaries.
@@ -159,6 +160,7 @@ Figure 30-2 illustrates the corresponding workflow or structure.
 ![Authorization approval workflow](../../images/part9/Luo-Chap30-Fig02-EN.svg)
 
 *Figure 30-2: Authorization approval workflow*
+
 ### 30.2.8 Role Responsibility Matrix
 
 A responsibility matrix makes the process executable and auditable. Governance organization design must fit business complexity, centralization, and decision rights; no single model fits all enterprises (Weber, Otto and Osterle 2009; Otto 2011; Alhassan, Sammon and Daly 2016).
@@ -166,6 +168,7 @@ A responsibility matrix makes the process executable and auditable. Governance o
 Table 30-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 30-1: Internal data market role responsibility matrix*
+
 | Governance action | Data provider | Data consumer | Approver | Platform team | Security/compliance team |
 | --- | --- | --- | --- | --- | --- |
 | Product listing | Define definitions, fields, quality, and owner | Provide demand feedback | Confirm business ownership | Provide listing tools and templates | Confirm sensitivity rules |
@@ -245,6 +248,7 @@ Providers and approvers also have obligations. If providers fail to maintain pro
 For implementation, the authorization workflow can be decomposed into executable nodes. Table 30-2 breaks the process from need submission to expiration review and marks each node's main action, responsible role, and output.
 
 *Table 30-2: Authorization workflow nodes*
+
 | Stage | Main action | Responsible role | Output |
 | --- | --- | --- | --- |
 | Need submission | Fill in purpose, scope, duration, and project | Data consumer | Data request |
@@ -292,6 +296,7 @@ A data product catalog is the core interface of the market. It serves both consu
 Table 30-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 30-3: Example shared data product catalog*
+
 | Product name | Domain | Main content | Suitable scenarios | Sensitivity | Quality status | Request method | Owner |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Unified Customer Profile | Customer | Basic attributes, lifecycle, tags | Operations analysis, customer segmentation | Medium | Normal, daily refresh | Subscribe after approval | Customer data team |

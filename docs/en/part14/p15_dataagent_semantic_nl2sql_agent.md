@@ -1,16 +1,13 @@
-# Project 15: Building an Enterprise Semantic BI Assistant with DataAgent
+# Project 15: DataAgent Semantic Business Intelligence Assistant
 
 <div class="chapter-authors">Xuhong Cao; Zhongyi Liu; Jun Yu</div>
 
 ## Abstract
 
-This project uses DataAgent to build a semantic BI assistant for enterprise structured data. The goal is not to let a model directly "guess SQL." Instead, the project organizes natural-language questions, the business semantic layer, database metadata, an NL2SQL sub-agent, result files, report generation, and runtime audit trails into a reusable data engineering chain.
+This project uses DataAgent to build a semantic business intelligence (BI) assistant for enterprise structured data. The goal is not to let a model directly "guess SQL." Instead, the project organizes natural-language questions, the business semantic layer, database metadata, a natural-language-to-SQL (NL2SQL) sub-agent, result files, report generation, and runtime audit trails into a reusable data engineering chain.
 
-Read in engineering order, the project follows a complete chain from business question to trustworthy delivery, as shown in Figure P15-1.
+Read in engineering order, the project follows a complete chain from business question to trustworthy delivery.
 
-![DataAgent semantic BI assistant engineering chain](../../images/part14/Cao-Project15-Fig03-EN.png)
-
-*Figure P15-1: Engineering chain of the DataAgent semantic BI assistant*
 The chain starts with a business question. A scenario prompt and task-planning step then clarifies the analysis goal, metric definitions, filters, and expected output. Semantic-layer schema retrieval supplies the model with table, field, business-description, and relationship context before the main agent delegates structured querying to the NL2SQL sub-agent. The generated SQL is validated and executed, and the resulting SQL and CSV files are persisted as reviewable workspace assets rather than treated as transient intermediate outputs. The main agent uses those assets to summarize results and generate a report. Finally, execution traces, tool states, and acceptance signals are retained for audit, regression testing, and future iteration. The core objective is to turn enterprise BI Q&A from a one-off conversational capability into a configurable, auditable, and extensible data application.
 
 The chapter follows four main threads:
@@ -22,11 +19,17 @@ The chapter follows four main threads:
 
 ## Keywords
 
-DataAgent; semantic layer; NL2SQL; enterprise BI; agent orchestration
+DataAgent; semantic layer; natural-language-to-SQL (NL2SQL); enterprise business intelligence (BI); agent orchestration
 
 ## Project Goals and Reader Takeaways
 
 This project uses the "DataAgent enterprise semantic BI assistant" as the core case. Its goal is to connect natural-language questions, the semantic layer, the NL2SQL sub-agent, result assets, and audit traces into an enterprise BI application. After completing this chapter, readers should be able to identify the key data objects in this scenario, decompose the engineering chain, set acceptance metrics, and transfer the method to adjacent data engineering tasks.
+
+Figure P15-1 summarizes the engineering chain from business question to trustworthy delivery.
+
+![DataAgent semantic BI assistant engineering chain](../../images/part14/Cao-Project15-Fig03-EN.png)
+
+*Figure P15-1: Engineering chain of the DataAgent semantic BI assistant*
 
 ## Scenario Constraints and Data Boundaries
 
@@ -47,6 +50,7 @@ business question -> semantic-layer schema retrieval -> NL2SQL generation and va
 ```
 
 *Listing P15-1: Semantic BI workflow example*
+
 At minimum, the sample schema should retain fields such as `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`. The exact fields should be refined according to the project's data type, downstream task, and acceptance method.
 
 ## Core Implementation Snippets
@@ -139,6 +143,7 @@ Building an enterprise semantic BI assistant with DataAgent
 ```
 
 *Listing P15-2: Project case title example*
+
 This case highlights DataAgent's distinctive capabilities: NL2SQL, Semantic Service, YAML-as-agent, plugin tools, main/sub-agent collaboration, workspace audit, and A2A service exposure.
 
 ## 4. Overall Architecture: From Business Question to Auditable Data Asset
@@ -148,6 +153,7 @@ The semantic BI assistant in this chapter is not an isolated NL2SQL component. I
 ![DataGallery ecosystem architecture around DataAgent, Semantic Service, Data Studio, Data Ops, and foundation infrastructure](../../images/part14/Cao-Project15-Fig08.svg)
 
 *Figure P15-2: DataGallery ecosystem architecture around DataAgent*
+
 At the core of the architecture, DataGallery Core provides the capabilities used most directly by the semantic BI assistant. The Data Intelligence Framework exposes the DataAgent SDK, while the Data Agent Engine is responsible for intent understanding, schema linking, SQL generation, execution validation, reflection and repair, and confidence selection. The Data Agent Shell defines runtime boundaries through privilege control, tool guardrails, and privacy-aware routing. In enterprise BI, these capabilities determine whether the model can understand a business question, select the right tool, and translate natural language into a controlled data operation.
 
 The semantic and data-support layers provide the context needed for reliable query generation. Semantic Distributed Runtime turns metadata ingestion, ontology modeling, and metric registry management into callable semantic services, so NL2SQL can use business descriptions, field meanings, metric definitions, and join relations instead of relying only on table and column names. Data System Service supplies data access, sandboxing, memory storage, and Agent UI/Web support, allowing SQL files, CSV outputs, reports, and runtime traces to become reviewable engineering artifacts.
@@ -188,6 +194,7 @@ if __name__ == "__main__":
 ```
 
 *Listing P15-3: Python implementation excerpt*
+
 ### 4.2 Main Agent Layer
 
 The main agent uses `AGENT_CONFIG.type: "react"`. Its responsibility is not to generate SQL directly, but to understand the user question, decide whether database access is needed, organize tool parameters, and produce the final answer after the tool returns.
@@ -235,6 +242,7 @@ This chapter depends on DataAgent, Semantic Service, a value-match service, and 
 Table P15-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-1: Minimal environment matrix for the DataAgent semantic BI assistant*
+
 | Component | Minimal Reproduction Requirement | Version Record |
 | --- | --- | --- |
 | DataAgent | Install from the same Git tag, commit, or package version. | Record `DATAAGENT_VERSION` or `DATAAGENT_COMMIT` in the report. |
@@ -262,6 +270,7 @@ python -m pip install -U pip uv
 ```
 
 *Listing P15-4: Command-line run example*
+
 Install with `uv`:
 
 Listing P15-5 provides a command-line run example.
@@ -271,6 +280,7 @@ uv sync
 ```
 
 *Listing P15-5: Command-line run example*
+
 Or install with pip:
 
 Listing P15-6 provides a command-line run example.
@@ -280,6 +290,7 @@ pip install -e .
 ```
 
 *Listing P15-6: Command-line run example*
+
 After installation, record at least:
 
 Listing P15-7 provides a command-line run example.
@@ -292,6 +303,7 @@ git rev-parse --short HEAD
 ```
 
 *Listing P15-7: Command-line run example*
+
 ### 5.3 Configure Model Environment Variables
 
 DataAgent model configuration comes from the `MODEL` section of YAML. Put keys in `.env` or environment variables rather than directly in YAML.
@@ -310,6 +322,7 @@ export A2A_AUTH_TOKEN="replace-with-local-dev-token"
 ```
 
 *Listing P15-8: Command-line run example*
+
 On Windows PowerShell, use:
 
 Listing P15-9 provides a powerShell configuration example.
@@ -326,6 +339,7 @@ $env:A2A_AUTH_TOKEN="replace-with-local-dev-token"
 ```
 
 *Listing P15-9: PowerShell configuration example*
+
 ### 5.4 Prepare the Business Database
 
 SQLite is enough for minimal reproduction; enterprise environments can use MySQL, PostgreSQL, or Hive.
@@ -371,6 +385,7 @@ Listing P15-10 provides a directory or artifact path example.
 ```
 
 *Listing P15-10: Directory or artifact path example*
+
 ### 5.7 Minimal Local Run Path
 
 The minimal local run does not require A2A service exposure or production database access. The recommended path is:
@@ -392,6 +407,7 @@ uv run -m dataagent \
 ```
 
 *Listing P15-11: Command-line run example*
+
 This snippet connects installation, configuration, semantic services, and workspace into a reviewable minimal runtime entry point.
 
 ## 6. Configure the Main Agent: YAML as Application
@@ -456,6 +472,7 @@ SWARM:
 ```
 
 *Listing P15-12: YAML configuration example*
+
 Five points matter.
 
 First, the main agent uses `type: "react"`. It plans; it is not a dedicated NL2SQL agent.
@@ -479,6 +496,7 @@ dataagent/agents/nl2sql/nl2sql_agent.yaml
 ```
 
 *Listing P15-13: Directory or artifact path example*
+
 Its core chain is:
 
 Listing P15-14 provides a agent role flow example.
@@ -494,11 +512,13 @@ Coordinator
 ```
 
 *Listing P15-14: Agent role flow example*
+
 Each node has a distinct responsibility.
 
 Table P15-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-2: Core nodes and responsibilities of the NL2SQL sub-agent*
+
 | Node | Role |
 | --- | --- |
 | Coordinator | Organizes NL2SQL task entry and state transitions. |
@@ -544,6 +564,7 @@ CORE:
 ```
 
 *Listing P15-15: Agent role flow example*
+
 When the main agent calls the sub-agent, business users usually do not need to edit this base config directly. It is better to place the business database and Semantic Service addresses in the main-agent YAML and let `nl2sql_sub_agent_tool` overlay them at runtime.
 
 ## 8. Semantic Service: Turning Business Metadata into Retrievable Context
@@ -557,6 +578,7 @@ How did new-customer conversion rate vary by channel in the most recent quarter?
 ```
 
 *Listing P15-16: Business question example*
+
 SQL generation must know:
 
 - Which time field defines "most recent quarter."
@@ -570,6 +592,7 @@ Semantic Service provides this structured context before SQL generation.
 Table P15-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-3: Key Semantic Service capabilities and engineering value*
+
 | Capability | Engineering Value |
 | --- | --- |
 | Table list and table descriptions | Helps the model locate candidate business tables. |
@@ -588,6 +611,7 @@ Semantic Service should not be treated as "extra documentation." It is the upstr
 Table P15-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-4: Input parameters of nl2sql_sub_agent_tool*
+
 | Parameter | Description |
 | --- | --- |
 | `query` | Natural-language query for the NL2SQL sub-agent. It should include business goal, metric definition, filters, grouping, and output fields. |
@@ -625,6 +649,7 @@ Listing P15-17 provides a pre-flight checklist example.
 ```
 
 *Listing P15-17: Pre-flight checklist example*
+
 A complete BI task can be described as:
 
 Figure P15-3 illustrates the corresponding workflow or structure.
@@ -632,6 +657,7 @@ Figure P15-3 illustrates the corresponding workflow or structure.
 ![Runtime flow of the DataAgent enterprise semantic BI assistant](../../images/part14/Cao-Project15-Fig07-EN.svg)
 
 *Figure P15-3: Runtime flow of the DataAgent enterprise semantic BI assistant*
+
 ### 10.2 Run with SDK
 
 Listing P15-18 provides a Python implementation excerpt.
@@ -659,6 +685,7 @@ if __name__ == "__main__":
 ```
 
 *Listing P15-18: Python implementation excerpt*
+
 ### 10.3 Run from the Command Line
 
 Listing P15-19 provides a command-line run example.
@@ -668,6 +695,7 @@ uv run -m dataagent --config dataagent/core/flex/examples/nl2sql_flex_e2e_subage
 ```
 
 *Listing P15-19: Command-line run example*
+
 ### 10.4 Serve with A2A
 
 When the assistant must be called by other agents or business systems, start the A2A service:
@@ -683,6 +711,7 @@ uv run -m dataagent serve-a2a \
 ```
 
 *Listing P15-20: Command-line run example*
+
 External systems can then discover capability through AgentCard and send messages through JSON-RPC or REST.
 
 ## 11. Result Assets: SQL, CSV, Reports, and Traces
@@ -707,6 +736,7 @@ Listing P15-21 provides a directory or artifact path example.
 ```
 
 *Listing P15-21: Directory or artifact path example*
+
 ### 11.2 CSV Result
 
 The CSV file is the basis for follow-up analysis, reports, and human review.
@@ -718,6 +748,7 @@ Listing P15-22 provides a directory or artifact path example.
 ```
 
 *Listing P15-22: Directory or artifact path example*
+
 ### 11.3 Markdown Report
 
 If formal delivery is required, `report_generator` can be added after SQL and CSV. The report must be based on existing analysis files, CSV results, and charts; it must not invent numbers outside the data.
@@ -741,6 +772,7 @@ Semantic BI assistant evaluation should cover SQL, data, answer, and engineering
 Table P15-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-5: Evaluation metrics for the enterprise semantic BI assistant*
+
 | Metric | Description |
 | --- | --- |
 | Schema recall hit rate | Whether the required tables and fields entered candidate context. |
@@ -765,6 +797,7 @@ uv run tests/e2e/test_nl2sql_flex_subagent.py
 ```
 
 *Listing P15-23: Command-line run example*
+
 This test verifies:
 
 - The main agent can load from config.
@@ -777,6 +810,7 @@ Enterprise deployment also needs a business regression set:
 Table P15-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-6: Business regression question types for enterprise BI*
+
 | Type | Example |
 | --- | --- |
 | Single-table aggregation | Monthly order count, order count by status. |
@@ -809,6 +843,7 @@ When the question requires database querying, you must call nl2sql_sub_agent_too
 ```
 
 *Listing P15-24: Tool-use instruction example*
+
 Also require `query`, `sql_filename`, and `csv_filename`.
 
 ### 14.2 Incomplete Schema Recall
@@ -884,6 +919,7 @@ NL2SQL -> CSV -> chart -> Markdown report -> business delivery
 ```
 
 *Listing P15-25: Semantic BI delivery pipeline example*
+
 ### 16.2 Add A2A Service Exposure
 
 After DataAgent is exposed as an A2A service, other agents can call it as an enterprise BI capability. This is suitable for multi-agent platforms, internal copilots, and business-system integration.
@@ -903,6 +939,7 @@ user question -> ontology object recognition -> business relation confirmation -
 ```
 
 *Listing P15-26: Semantic BI reasoning chain example*
+
 This further reduces SQL errors caused by incorrectly guessed business objects.
 
 ### 16.5 Add an Online Feedback Loop
@@ -976,6 +1013,7 @@ Check at least these gates before launch:
 Table P15-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table P15-7: Pre-launch gate checklist for the DataAgent semantic BI assistant*
+
 | Gate | Check Item |
 | --- | --- |
 | Configuration gate | YAML loads; model, database, Semantic Service, and workspace are configured. |

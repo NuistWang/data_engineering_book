@@ -65,7 +65,7 @@
 - [ ] `publishing/final_review/figure_rights_report.md` 中每张图的版权、AI 生成/辅助声明和高清源文件已签核
 - [ ] 参考文献清单
 - [ ] `publishing/final_review/reference_audit_report.md` 中每条参考文献 DOI / URL / 年份 / Springer 样式 / 真实性已终审
-- [ ] `publishing/final_review/manual_review_checklist.md` 中第 12、16、21、24、29、40 章，P11、P12、P13、P15，以及 Part 10/12/14 高风险内容已签核
+- [ ] `publishing/final_review/manual_review_checklist.md` 中第 12、16、21、24、29、40 章，P11、P12、P13、P15，以及 Part X/12/14 高风险内容已签核
 - [ ] 作者信息清单
 - [ ] 配套资源说明
 - [ ] Springer alt text Excel：`publishing/accessibility/springer_alt_text_inventory.xlsx`

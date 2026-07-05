@@ -33,6 +33,7 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 ```
 
 *代码清单P11-1：流程示例*
+
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
 
 ## 核心实现片段
@@ -83,6 +84,7 @@ Mini-DeepSeek；项目实战；可复现数据工程；数据流水线；验收�
 
 ![Mini-DeepSeek Data Pipeline](../../images/part14/Yu-Project11-Fig02-EN.svg)
 *图 P11-1：Mini-DeepSeek 多源预训练数据流水线架构*
+
 流水线的四个核心组件包括：
 
 1. **多源混合采样器 (Multi-source Sampler)**：负责从 Hugging Face 获取多种不同的开源数据集（如 FineWeb-Edu、The Stack v2 等），并根据 DeepSeek-V3 披露的各领域配比进行精确抽样。
@@ -148,6 +150,7 @@ mixed.save_to_disk("./data/mixed_1b_raw")
 ```
 
 *代码清单P11-2：Python 实现片段*
+
 ### Step 2: 跨源 MinHash LSH 去重
 
 多源混合后，最大的隐患是不同来源间存在重复（例如 The Stack v2 中的代码片段，与 arXiv 论文中的代码段重复）。在 项目 1（Mini-C4）中，我们仅在单源内进行了 MinHash 去重；在此，我们需要全局去重。
@@ -181,6 +184,7 @@ unique.save_to_disk("./data/mixed_1b_dedup")
 ```
 
 *代码清单P11-3：Python 实现片段*
+
 ### Step 3: 训练 150K 超大 Tokenizer
 
 DeepSeek-V3 (DeepSeek-AI et al. 2024) 采用了一个规模为 150K 左右的超大词表（相较于 Llama-2 的 32K 提升巨大），这使其在处理中文与代码时效率极高。在此步骤，我们将以混合且去重后的数据训练 BPE Tokenizer。
@@ -208,6 +212,7 @@ train_large_tokenizer(load_stage("mixed_1b_dedup"))
 ```
 
 *代码清单P11-4：Python 实现片段*
+
 ### Step 4: Pack & Shuffle 与 .arrow 分片产出
 
 为了让 GPU 在训练期间不用处理大量的 Padding，我们将变长的 Token 序列拼接成长度为 `4096` 或 `8192` 的连续片段（Pack），并加入特殊分隔符。
@@ -239,6 +244,7 @@ packed.save_to_disk("./data/mixed_1b_final_packed")
 ```
 
 *代码清单P11-5：Python 实现片段*
+
 ## 工程运行与最小复现路径
 
 本项目的最小运行入口是 `run_pipeline.sh`。脚本串联四个阶段：多源采样、跨源去重、tokenizer 训练和 packing。它的价值不只是“省去手动执行四条命令”，而是把阶段顺序、产物路径和失败位置固定下来。对于预训练数据工程，顺序错误会直接改变数据分布。例如，如果先训练 tokenizer 再做跨源去重，tokenizer 会看见本应被删除的重复样本；如果先打包再 shuffle，后续再调整配方会变得难以追踪。
@@ -251,6 +257,7 @@ bash run_pipeline.sh
 ```
 
 *代码清单P11-6：最小运行入口*
+
 这段命令会依次生成 `mixed_1b_raw`、`mixed_1b_dedup`、`mini_deepseek_tokenizer.json` 和 `mixed_1b_final_packed`。若某一阶段失败，不建议直接删除整个 `data/` 目录重跑；更稳妥的做法是先确认失败阶段和上游产物是否完整，再只清理受影响的阶段目录。教学复现可以将 `target_docs` 从 `500000` 降到更小规模，先验证契约和测试，再扩大数据量。
 
 表 P11-3 给出运行前后应记录的最小审计信息。
@@ -499,6 +506,7 @@ P01 关注单源网页清洗，P11 关注多源预训练配方。二者不是重
 
 
 *表 P11-14：P01 Mini-C4 与 P11 Mini-DeepSeek 的差异*
+
 | 维度 | P01 Mini-C4 | P11 Mini-DeepSeek |
 | --- | --- | --- |
 | 数据来源 | 单源或少量网页源 | 网页、代码、数学、学术、中文 |

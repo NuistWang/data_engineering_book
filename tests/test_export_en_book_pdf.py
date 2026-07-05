@@ -163,6 +163,28 @@ class ExportEnglishBookPdfTest(unittest.TestCase):
         self.assertIn("contributors.md", paths)
         self.assertIn("abbreviations.md", paths)
 
+    def test_caption_spacing_is_normalized_before_markdown_conversion(self):
+        exporter = load_exporter()
+
+        text = (
+            "*Table FM-1: General Abbreviations*\n"
+            "| Abbreviation | Full Name |\n"
+            "| --- | --- |\n"
+            "| AI | Artificial Intelligence |\n"
+            "\n"
+            "*Listing 2-3: Example of approximate duplicate detection using MinHash LSH*\n"
+            "**3. Benchmark Contamination**\n"
+        )
+
+        normalized = exporter.normalize_caption_spacing(text)
+
+        self.assertIn("*Table FM-1: General Abbreviations*\n\n| Abbreviation | Full Name |", normalized)
+        self.assertIn(
+            "*Listing 2-3: Example of approximate duplicate detection using MinHash LSH*\n\n"
+            "**3. Benchmark Contamination**",
+            normalized,
+        )
+
     def test_formal_pdf_front_matter_follows_springer_manuscript_order(self):
         exporter = load_exporter()
         front_html = exporter.generated_front_matter_html(include_toc=True)

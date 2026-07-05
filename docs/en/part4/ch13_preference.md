@@ -87,6 +87,7 @@ Figure 13-1 illustrates the corresponding workflow or structure.
 ![Figure 13-1: Flowchart from preference data to reward signal](../../images/part4/Yu-Chap13-Fig01-EN.svg)
 
 *Figure 13-1: Flowchart from preference data to reward signal*
+
 ## 13.2 Pairwise Preferences, Scalar Rewards, and Process Rewards
 
 ### Definitions of Pairwise Preference, Scalar Score, and Process Reward
@@ -132,6 +133,7 @@ Listing 13-1 provides a JSON data example.
 ```
 
 *Listing 13-1: JSON data example*
+
 ### Which Tasks Are Suited to Each of the Three Reward Signal Types
 
 From the perspective of task types, pairwise preference, scalar reward, and process reward do not have an absolute hierarchy—they are better understood as three interfaces suited to different problem levels.
@@ -241,6 +243,7 @@ Listing 13-2 provides a JSON data example.
 ```
 
 *Listing 13-2: JSON data example*
+
 ### Multi-Objective Preference Cannot Rely on an "Overall Score" to Mask Conflicts
 
 Many teams, when designing preference data, want to compress all dimensions into a single overall score, believing this makes training simpler and more convenient. The problem is that as long as system objectives are genuinely multi-dimensional, an overall score will inherently lose critical information. At best it tells you "things seem generally better"—it cannot tell you whether helpfulness improved while compliance declined, or whether conciseness increased while interpretability was sacrificed.
@@ -284,6 +287,7 @@ Figure 13-2 illustrates the corresponding workflow or structure.
 ![Figure 13-2: Schematic of multi-objective preference trade-offs](../../images/part4/Yu-Chap13-Fig02-EN.svg)
 
 *Figure 13-2: Schematic of multi-objective preference trade-offs*
+
 ## 13.3 Preference Sources and Supervision Modes
 
 ### Expert Annotation, Ordinary User Feedback, Model-as-Judge, and Rule-Based Arbitration
@@ -392,6 +396,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 13-3: Process flow example*
+
 ### Debiasing Preference Data and Confidence Modeling
 
 Once a team has accepted the fact that "preference data is inherently noisy," the next step is no longer to treat all samples as equally trustworthy. A more reasonable approach is to perform **confidence modeling** on the samples themselves—in addition to process governance—and to apply systematic debiasing when necessary (Dawid & Skene 1979; Northcutt et al. 2021). Because preference data cannot be treated as binary facts—it is a class of observations carrying source, context, difficulty, and judgment stability. For data teams, this means the training set should not be a simple list of samples but a collection of reward signals with attached weights, confidence levels, and source labels.
@@ -409,6 +414,7 @@ Preference data governance should not stop at "improving agreement rates"; it sh
 Table 13-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 13-1: Reward Noise Sources and Governance Actions*
+
 | Noise Source | Typical Manifestation | Impact on Training | Governance Action |
 |---|---|---|---|
 | Annotation disagreement | Win/lose labels on the same sample frequently reverse | Weakens preference signal, reduces DPO/RM stability | Establish arbitration pool, re-label, increase task specification granularity |
@@ -439,6 +445,7 @@ In practice, many mature teams do not treat DPO, RM, RLAIF, and PRM as mutually 
 Table 13-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 13-2: Correspondence Between Preference Types and Training Methods*
+
 | Preference/Reward Type | Typical Data Structure | Best-Matched Method(s) | Advantages | Key Challenges |
 |---|---|---|---|---|
 | Pairwise Preference | `(x, y_w, y_l)` | DPO, ranking-based RM, some RLAIF | Annotation is intuitive, consistency is generally higher, fast to implement | Requires high-quality candidate construction; difficult to express fine-grained rationale |

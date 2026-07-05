@@ -99,9 +99,9 @@ plugins:
                 - 第11章 跨模态对齐与融合: part3/ch11_cross_modal_alignment.md
             - 第四篇：指令微调与偏好数据:
                 - 本篇目录: part4/index.md
-                - 第12章：SFT数据设计与指令体系: part4/ch12_sft.md
+                - 第12章：监督微调数据设计与指令体系: part4/ch12_sft.md
                 - 第13章：偏好数据与奖励信号: part4/ch13_preference.md
-                - 第14章 标注平台、质量保障体系与数据运营: part4/ch14_qa.md
+                - 第14章：标注平台与质量保障: part4/ch14_qa.md
             - 第五篇：合成数据工程:
                 - 本篇目录: part5/index.md
                 - 第15章：合成数据工厂：从种子到验证: part5/ch15_data_synthesis.md
@@ -134,7 +134,7 @@ plugins:
                 - 第32章：自动化采集、解析与清洗 Agent: part10/ch32_auto_collection_parsing_cleaning.md
                 - 第33章：标注、合成与评测 Agent: part10/ch33_labeling_synthesis_evaluation.md
                 - 第34章：DataOps Agent 与平台自治: part10/ch34_dataops_agent.md
-                - 第35章：数据工程 Agent 的安全、权限与人机协同: part10/ch35_security_permission_collaboration.md
+                - 第35章：Agent 安全与人机协同: part10/ch35_security_permission_collaboration.md
             - 第十一篇：隐私合规与数据安全:
                 - 本篇目录: part11/index.md
                 - 第36章：数据合规框架与治理: part11/ch36_compliance_framework_and_governance.md
@@ -149,28 +149,28 @@ plugins:
                 - 第43章：推理轨迹数据工程: part12/ch43_reasoning_trace_compression_data_engineering.md
             - 第十三篇：开源大模型数据工程配方与范式:
                 - 本篇目录: part13/index.md
-                - 第44章：LLM 预训练数据工程实战：从配方到落地: part13/ch44_pretrain_recipes.md
-                - 第45章：LLM 后训练数据工程实战：SFT 与偏好对齐: part13/ch45_posttrain_recipes.md
-                - 第46章：推理模型与 RL 数据工程：R1 / QwQ 范式: part13/ch46_rl_reasoning_data.md
-                - 第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐: part13/ch47_vlm_data_recipes.md
-                - 第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线: part13/ch48_t2i_t2v.md
+                - 第44章：LLM 预训练数据工程: part13/ch44_pretrain_recipes.md
+                - 第45章：LLM 后训练数据工程: part13/ch45_posttrain_recipes.md
+                - 第46章：推理模型与强化学习数据工程: part13/ch46_rl_reasoning_data.md
+                - 第47章：视觉语言模型数据配方: part13/ch47_vlm_data_recipes.md
+                - 第48章：多模态生成数据工程: part13/ch48_t2i_t2v.md
             - 第十四篇：项目实战:
                 - 本篇目录: part14/index.md
                 - 项目一：基于 Ray 构建分布式 Mini-C4 数据流水线: part14/p01_mini_c4.md
-                - 项目二：垂直领域专家 SFT（法律）: part14/p02_legal_sft.md
+                - 项目二：垂直领域专家监督微调（法律）: part14/p02_legal_sft.md
                 - 项目三：LLaVA 多模态指令数据工厂: part14/p03_llava_instruct.md
                 - 项目四：合成数学与代码教材工厂: part14/p04_synthetic_textbook.md
                 - 项目五：多模态 RAG 企业财报助手: part14/p05_mm_rag.md
-                - 项目六：CoT 推理数据集构建与 PRM 训练: part14/p06_prm.md
+                - 项目六：思维链推理数据集构建与过程奖励模型训练: part14/p06_prm.md
                 - 项目七：Agent Tool-Use 数据工厂: part14/p07_agent_tooluse.md
-                - 项目八：企业级 DataOps 平台搭建：从数据项目到组织级治理能力: part14/p08_dataops.md
+                - 项目八：企业级 DataOps 平台: part14/p08_dataops.md
                 - 项目九：隐私保护数据流水线: part14/p09_privacy_pipeline.md
                 - 项目十：端到端 LLM 数据飞轮: part14/p10_flywheel.md
                 - 项目十一：Mini-DeepSeek 预训练复现: part14/p11_mini_deepseek.md
                 - 项目十二：教学化 R1 推理数据飞轮: part14/p12_r1_reasoning_flywheel.md
                 - 项目十三：Qwen-VL 多模态指令工厂: part14/p13_multimodal_instruction_factory.md
-                - 项目十四：视频生成数据集：从视频源到可用于 T2V 训练的数据流水线: part14/p14_video_generation.md
-                - 项目十五：基于 DataAgent 构建企业级语义问数助手: part14/p15_dataagent_semantic_nl2sql_agent.md
+                - 项目十四：视频生成数据流水线: part14/p14_video_generation.md
+                - 项目十五：DataAgent 企业级语义问数助手: part14/p15_dataagent_semantic_nl2sql_agent.md
             - 附录:
                 - 附录A：工具与框架速查表: appendix_a_tools_and_frameworks_quick_reference.md
                 - 附录B：合规与上线检查清单: appendix_b_compliance_and_release_checklist.md
@@ -232,9 +232,9 @@ plugins:
                 - "Chapter 11: Cross-Modal Alignment and Fusion": part3/ch11_cross_modal_alignment.md
             - "Part IV: Instruction Fine-tuning and Preference Data":
                 - "Part Overview": part4/index.md
-                - "Chapter 12: SFT Data Design and Instruction Systems": part4/ch12_sft.md
+                - "Chapter 12: Supervised Fine-Tuning Data Design and Instruction Systems": part4/ch12_sft.md
                 - "Chapter 13: Preference Data and Reward Signals": part4/ch13_preference.md
-                - "Chapter 14: Annotation Platforms, Quality Assurance Systems, and Data Operations": part4/ch14_qa.md
+                - "Chapter 14: Annotation Platforms and Quality Assurance": part4/ch14_qa.md
             - "Part V: Synthetic Data Engineering":
                 - "Part Overview": part5/index.md
                 - "Chapter 15: The Synthetic Data Factory: From Seeds to Validation": part5/ch15_data_synthesis.md
@@ -267,7 +267,7 @@ plugins:
                 - "Chapter 32: Automated Collection, Parsing, and Cleaning Agents": part10/ch32_auto_collection_parsing_cleaning.md
                 - "Chapter 33: Labeling, Synthesis, and Evaluation Agents": part10/ch33_labeling_synthesis_evaluation.md
                 - "Chapter 34: DataOps Agents and Platform Autonomy": part10/ch34_dataops_agent.md
-                - "Chapter 35: Security, Permissions, and Human-AI Collaboration for Data Engineering Agents": part10/ch35_security_permission_collaboration.md
+                - "Chapter 35: Agent Security and Human-AI Collaboration": part10/ch35_security_permission_collaboration.md
             - "Part XI: Privacy Compliance and Data Security":
                 - "Part Overview": part11/index.md
                 - "Chapter 36: Data Compliance Frameworks and Governance": part11/ch36_compliance_framework_and_governance.md
@@ -282,28 +282,28 @@ plugins:
                 - "Chapter 43: Reasoning Trace Data Engineering": part12/ch43_reasoning_trace_compression_data_engineering.md
             - "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms":
                 - "Part Overview": part13/index.md
-                - "Chapter 44: LLM Pre-Training Data Engineering in Practice: From Recipe to Deployment": part13/ch44_pretrain_recipes.md
-                - "Chapter 45: LLM Post-Training Data Engineering in Practice: SFT and Preference Alignment": part13/ch45_posttrain_recipes.md
-                - "Chapter 46: Reasoning Models and RL Data Engineering: The R1/QwQ Paradigm": part13/ch46_rl_reasoning_data.md
-                - "Chapter 47: Multimodal Large Model (VLM) Data Recipes: From Pre-Training to Visual Alignment": part13/ch47_vlm_data_recipes.md
-                - "Chapter 48: Data Engineering for Multimodal Generative Models: T2I and T2V Data Pipelines": part13/ch48_t2i_t2v.md
+                - "Chapter 44: LLM Pre-Training Data Engineering": part13/ch44_pretrain_recipes.md
+                - "Chapter 45: LLM Post-Training Data Engineering": part13/ch45_posttrain_recipes.md
+                - "Chapter 46: Reasoning Models and Reinforcement Learning Data": part13/ch46_rl_reasoning_data.md
+                - "Chapter 47: Vision-Language Data Recipes": part13/ch47_vlm_data_recipes.md
+                - "Chapter 48: Multimodal Generative Data Engineering": part13/ch48_t2i_t2v.md
             - "Part XIV: Practical Projects":
                 - "Part Overview": part14/index.md
                 - "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray": part14/p01_mini_c4.md
-                - "Project 2: Vertical-Domain Expert SFT (Legal)": part14/p02_legal_sft.md
+                - "Project 2: Vertical-Domain Supervised Fine-Tuning (Legal)": part14/p02_legal_sft.md
                 - "Project 3: LLaVA Multimodal Instruction Data Factory": part14/p03_llava_instruct.md
                 - "Project 4: Synthetic Mathematics and Code Textbook Factory": part14/p04_synthetic_textbook.md
                 - "Project 5: Multimodal RAG Enterprise Financial Report Assistant": part14/p05_mm_rag.md
-                - "Project 6: CoT Reasoning Dataset Construction and PRM Training": part14/p06_prm.md
+                - "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training": part14/p06_prm.md
                 - "Project 7: Agent Tool-Use Data Factory": part14/p07_agent_tooluse.md
-                - "Project 8: Building an Enterprise DataOps Platform: From Data Projects to Organizational Governance": part14/p08_dataops.md
+                - "Project 8: Enterprise DataOps Platform": part14/p08_dataops.md
                 - "Project 9: Privacy-Preserving Data Pipeline": part14/p09_privacy_pipeline.md
                 - "Project 10: End-to-End LLM Data Flywheel": part14/p10_flywheel.md
                 - "Project 11: Mini-DeepSeek Pre-Training Reproduction": part14/p11_mini_deepseek.md
                 - "Project 12: A Pedagogical R1 Reasoning Data Flywheel": part14/p12_r1_reasoning_flywheel.md
                 - "Project 13: Qwen-VL Multimodal Instruction Factory": part14/p13_multimodal_instruction_factory.md
-                - "Project 14: Video Generation Dataset — From Video Sources to a T2V-Training-Ready Data Pipeline": part14/p14_video_generation.md
-                - "Project 15: Building an Enterprise Semantic BI Assistant with DataAgent": part14/p15_dataagent_semantic_nl2sql_agent.md
+                - "Project 14: Video Generation Data Pipeline": part14/p14_video_generation.md
+                - "Project 15: DataAgent Semantic Business Intelligence Assistant": part14/p15_dataagent_semantic_nl2sql_agent.md
             - Appendices:
                 - "Appendix A: Tools and Frameworks Quick Reference": appendix_a_tools_and_frameworks_quick_reference.md
                 - "Appendix B: Compliance and Release Checklist": appendix_b_compliance_and_release_checklist.md

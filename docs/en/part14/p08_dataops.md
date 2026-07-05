@@ -1,4 +1,4 @@
-# Project 8: Building an Enterprise DataOps Platform: From Data Projects to Organizational Governance
+# Project 8: Enterprise DataOps Platform
 
 <div class="chapter-authors">Jun Yu; Xin Xu; Zhili Wang</div>
 
@@ -68,6 +68,7 @@ platform specification -> data version -> experiment record -> lineage event -> 
 ```
 
 *Listing P08-1: Process flow example*
+
 Sample records should at least preserve `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`.
 
 Exact fields should be refined according to the data type, downstream task, and acceptance method.
@@ -89,6 +90,7 @@ If the project enters production, coursework, or public reproduction, reports sh
 Table P08-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table P08-1: Publication acceptance table for the DataOps platform*
+
 | Acceptance dimension | Metric or evidence | Publication review focus |
 | --- | --- | --- |
 | Governance objects | Completeness of tenants, projects, roles, versions, experiments, and events | Platform explanation should prioritize object relationships, not only UI pages or scripts |
@@ -278,6 +280,7 @@ Figure P08-1 shows the platform overview and the main governance objects managed
 ![Figure P08-1: P08 DataOps platform overview](../../images/part14/p08/Yu-Project08-Fig01.svg)
 
 *Figure P08-1: P08 DataOps platform overview*
+
 ---
 
 ## 4. Overall Architecture: Layered Structure of the DataOps Platform
@@ -335,6 +338,7 @@ Figure P08-2 summarizes the four-layer platform architecture.
 ![Figure P08-2: Four-layer platform architecture](../../images/part14/p08/Yu-Project08-Fig02.svg)
 
 *Figure P08-2: Four-layer platform architecture*
+
 ---
 
 ## 5. Platform Flow: Specification Generation, Simulated Run, Evaluation, and Checks
@@ -370,6 +374,7 @@ Figure P08-3 shows how specification generation, simulated operation, evaluation
 ![Figure P08-3: Spec generation, simulated run, evaluation, and check flow](../../images/part14/p08/Yu-Project08-Fig03.svg)
 
 *Figure P08-3: Specification generation, simulated operation, evaluation, and check flow*
+
 ---
 
 ## 6. Object Modeling: Key Object Hierarchy of the Platform
@@ -447,6 +452,7 @@ Figure P08-4 summarizes the relationship among tenants, projects, roles, and API
 ![Figure P08-4: Tenant, project, role, and API relationship](../../images/part14/p08/Yu-Project08-Fig04.svg)
 
 *Figure P08-4: Tenant, project, role, and API relationship*
+
 ---
 
 ## 7. Code Connection: Turning Platform Specifications into Structured Artifacts
@@ -495,6 +501,7 @@ with open(OUTPUT_DIR / "platform_scope.json", "w", encoding="utf-8") as f:
 ```
 
 *Listing P08-2: Python implementation excerpt*
+
 This structure reflects three platform-design characteristics:
 
 1. Platform objects are explicitly modeled.
@@ -565,6 +572,7 @@ dataset_version = {
 ```
 
 *Listing P08-3: Python implementation excerpt*
+
 In this structure, a version is no longer a static label.
 
 It is a governance object that participates in runtime, evaluation, and rollback.
@@ -574,6 +582,7 @@ Figure P08-5 shows the version lifecycle and the release and rollback points tha
 ![Figure P08-5: Version lifecycle with release and rollback points](../../images/part14/p08/Yu-Project08-Fig05.svg)
 
 *Figure P08-5: Version lifecycle with release and rollback points*
+
 ---
 
 ## 9. Experiment Tracking: Run Records and Cause Tracing
@@ -638,6 +647,7 @@ experiment_run = {
 ```
 
 *Listing P08-4: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 Figure P08-6 summarizes experiment status distribution and the corresponding governance actions.
@@ -645,6 +655,7 @@ Figure P08-6 summarizes experiment status distribution and the corresponding gov
 ![Figure P08-6: Experiment status distribution and governance actions](../../images/part14/p08/Yu-Project08-Fig06.svg)
 
 *Figure P08-6: Experiment status distribution and governance actions*
+
 ---
 
 ## 10. Lineage Graph: Linking Versions, Experiments, and Events
@@ -680,6 +691,7 @@ lineage_edge = {
 ```
 
 *Listing P08-5: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 ### 10.3 Why Introduce Lineage During the Prototype Stage
@@ -699,6 +711,7 @@ Figure P08-7 illustrates how versions, experiments, results, and rollback events
 ![Figure P08-7: Version, experiment, result, and rollback lineage](../../images/part14/p08/Yu-Project08-Fig07.svg)
 
 *Figure P08-7: Version, experiment, result, and rollback lineage*
+
 ---
 
 ## 11. Rollback Mechanism: The Platform's Recovery Capability
@@ -748,6 +761,7 @@ Figure P08-8 shows the rollback trigger and recovery flow.
 ![Figure P08-8: Rollback trigger and recovery flow](../../images/part14/p08/Yu-Project08-Fig08.svg)
 
 *Figure P08-8: Rollback trigger and recovery flow*
+
 ---
 
 ## 12. Observability: Judging Platform Health
@@ -811,6 +825,7 @@ alert = {
 ```
 
 *Listing P08-6: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 Figure P08-9 connects metrics, logs, alerts, and audit records into an observability loop.
@@ -818,6 +833,7 @@ Figure P08-9 connects metrics, logs, alerts, and audit records into an observabi
 ![Figure P08-9: Metrics, logs, alerts, and audit loop](../../images/part14/p08/Yu-Project08-Fig09.svg)
 
 *Figure P08-9: Metrics, logs, alerts, and audit loop*
+
 ---
 
 ## 13. Audit and Incident Review: Making Incident Review Part of the Platform
@@ -865,6 +881,7 @@ Figure P08-10 shows how audit logs connect with incident review.
 ![Figure P08-10: Audit logs and incident review](../../images/part14/p08/Yu-Project08-Fig10.svg)
 
 *Figure P08-10: Audit logs and incident review*
+
 ---
 
 ## 14. Console and Operations Views: Panelized Governance Objects
@@ -950,6 +967,7 @@ for path in required_files:
 ```
 
 *Listing P08-7: Python implementation excerpt*
+
 The role of this fragment is to turn the preceding process into a checkable structured representation.
 
 This check looks simple.
@@ -961,6 +979,7 @@ Figure P08-11 presents the check pipeline and consistency validation loop.
 ![Figure P08-11: Check pipeline and consistency validation](../../images/part14/p08/Yu-Project08-Fig11.svg)
 
 *Figure P08-11: Check pipeline and consistency validation*
+
 ---
 
 ## 16. Main Deliverables: The Complete Platform Artifact Chain

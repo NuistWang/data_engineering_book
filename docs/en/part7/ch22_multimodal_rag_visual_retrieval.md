@@ -56,6 +56,7 @@ Figure 22-1 illustrates the corresponding workflow or structure.
 ![Figure 22-1: The Capability Boundary Between OCR and Visual Understanding](../../images/part7/Du-Chap22-Fig01-EN.svg)
 
 *Figure 22-1: The Capability Boundary Between OCR and Visual Understanding*
+
 ---
 
 ### 22.1.3 Three Canonical Forms of Visual Knowledge
@@ -71,6 +72,7 @@ The third category is interface and object knowledge. It exists in software scre
 Table 22-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-1: Major Forms of Visual Knowledge and Their Processing Priorities*
+
 | Visual Knowledge Type      | Common Sources                              | Core Information                                         | Processing Priority                                  |
 | -------------------------- | ------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------- |
 | Document Layout Knowledge  | PDFs, scanned documents, contracts, reports | Heading hierarchy, paragraphs, tables, captions, page numbers | Layout parsing, reading order, region localization   |
@@ -167,6 +169,7 @@ Figure 22-2 illustrates the corresponding workflow or structure.
 ![Figure 22-2: Joint Representation and Alignment of Text and Visual Elements](../../images/part7/Du-Chap22-Fig02-EN.svg)
 
 *Figure 22-2: Joint Representation and Alignment of Text and Visual Elements*
+
 ---
 
 ### 22.2.4 Indexing and Retrieval Strategies for Visual Chunks
@@ -227,6 +230,7 @@ Text recall is similar to visual recall, except that it recalls text data. Given
 Table 22-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-2: Comparison of Visual Recall and Text Recall*
+
 | Characteristic          | Visual Recall                                    | Text Recall                                         |
 | ----------------------- | ------------------------------------------------ | --------------------------------------------------- |
 | Primary Information Type | Image content, image features, visual patterns  | Semantic content, vocabulary, text passages         |
@@ -245,6 +249,7 @@ Figure 22-3 illustrates the corresponding workflow or structure.
 ![Figure 22-3: Cross-modal Retrieval and Reranking Pipeline](../../images/part7/Du-Chap22-Fig03-EN.svg)
 
 *Figure 22-3: Cross-modal Retrieval and Reranking Pipeline*
+
 ---
 
 ### 22.3.3 Retrieval Strategies for Complex Documents, Multi-page Reports, and Chart Q&A
@@ -302,6 +307,7 @@ $R_k$, $L$, $A$, and $E$ come from different evaluation layers, and their raw va
 Table 22-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-3: A Layered Perspective on Multimodal RAG Evaluation*
+
 | Evaluation Layer | Focus                                 | Typical Issues                                        | Representative Metrics                                      |
 | ---------------- | ------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
 | Parsing Layer    | Pages, regions, objects, tables, charts | Missed detection, incorrect detection, OCR misreading, structural fragmentation | Region recall rate, OCR character accuracy, table reconstruction rate |
@@ -340,6 +346,7 @@ In many projects, "answer accuracy" is further decomposed into two levels: one i
 Table 22-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-4: Definitions and Applicable Scenarios for Key Evaluation Metrics*
+
 | Metric Name            | Core Question   | Applicable Granularity  | Common Threshold or Determination Method     | Applicable Scenario                            |
 | ---------------------- | --------------- | ----------------------- | -------------------------------------------- | ---------------------------------------------- |
 | Hit@k                  | Was it found?   | Page-level, region-level | Whether the golden evidence exists in the top k candidates | Recall evaluation, index comparison            |
@@ -356,6 +363,7 @@ Figure 22-4 illustrates the corresponding workflow or structure.
 ![Figure 22-4: Multimodal RAG Evaluation Funnel](../../images/part7/Du-Chap22-Fig04-EN.svg)
 
 *Figure 22-4: Multimodal RAG Evaluation Funnel*
+
 ### 22.4.3 Error Attribution for Missed Detection, Misreading, Mislocalization, and Chart Understanding Failures
 
 With layered metrics in place, the next step is to establish an actionable error attribution framework. Error attribution is not simply recording "it was wrong" but stably mapping errors to fixable engineering causes. For multimodal RAG, the four most common first-level error types are: missed detection, misreading, mislocalization, and chart understanding failure.
@@ -371,6 +379,7 @@ Chart understanding failure is a higher-level problem. It does not necessarily o
 To systematically convert these phenomena into engineering assets, we typically design an error coding table (Table 22-5) where each failure sample is tagged with at least three labels: first-level error type, specific sub-cause, and repair priority. First-level types are for macro-level statistics; sub-causes guide model or rule repairs; and priority helps the team schedule iteration order. For example, missed detection can be subdivided into "not sliced," "sliced but not indexed," and "indexed but not recalled"; misreading can be subdivided into "OCR character error," "header misalignment," and "caption binding error"; chart understanding failure can be subdivided into "axis misparse," "legend mapping error," and "trend description error."
 
 *Table 22-5: Example Error Attribution Coding for Multimodal RAG*
+
 | First-level Type        | Second-level Cause            | Typical Symptom                               | Priority Repair Direction                                        |
 | ----------------------- | ----------------------------- | --------------------------------------------- | ---------------------------------------------------------------- |
 | Missed detection        | Region not segmented          | Correct chart absent from candidate set       | Adjust layout detection, add region-level chunks                 |
@@ -387,6 +396,7 @@ Figure 22-5 illustrates the corresponding workflow or structure.
 ![Figure 22-5: The Closed Loop from Error Attribution to Repair Actions](../../images/part7/Du-Chap22-Fig05-EN.svg)
 
 *Figure 22-5: The Closed Loop from Error Attribution to Repair Actions*
+
 ### 22.4.4 From Online Failure Samples to Replenishment Datasets
 
 The ultimate purpose of evaluation and attribution is not to produce an impressive analysis report but to drive continuous system improvement. The key improvement asset for multimodal RAG is typically not a one-time large-scale comprehensive benchmark set, but rather a replenishment dataset that is continuously accumulated from real online failures. Only online samples truly cover complex layouts, long-tail charts, low-resolution scans, enterprise-proprietary templates, and real user question formulations. Building hard negatives and replenishment datasets from these failure samples is an important practice for continuous improvement of retrieval systems and machine learning systems, and is also consistent with the fundamental requirements of data closed-loop governance in production machine learning (Sculley et al. 2015; Huyen 2022).
@@ -456,6 +466,7 @@ Another lesson is that the financial report assistant must explicitly handle uni
 Table 22-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-6: Evidence Organization Patterns in the Financial Report Assistant*
+
 | Evidence Type           | Primary Question Answered | Typical Source                     | Retrieval Strategy                              | Role in Generation                              |
 | ----------------------- | ------------------------- | ---------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | Body text explanatory evidence | Why                | Management discussion, risk disclosures | Text retrieval + topic expansion             | Generate qualitative explanation                |
@@ -495,6 +506,7 @@ This function reminds us that multimodal solutions should not pile up all models
 Table 22-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-7: Mapping from Chapter 22 Methods to P05 Project Modules*
+
 | Chapter 22 Method Module          | P05 Corresponding Build Item        | Key Deliverables                                         | Primary Acceptance Metrics                            |
 | --------------------------------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
 | Visual chunk & object modeling    | Multimodal data schema              | Page blocks, region blocks, chart blocks, table blocks   | Parse completeness rate, structural consistency       |
@@ -514,6 +526,7 @@ Corresponding to these patterns, there are also several high-frequency anti-patt
 Table 22-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 22-8: Reusable Patterns and Common Anti-patterns for Multimodal RAG*
+
 | Type         | Name                                          | Effect or Consequence                               | Explanation                                                     |
 | ------------ | --------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------- |
 | Pattern      | Coarse page-level recall + fine region-level localization | Balances efficiency and explainability | Find the page first, then find the bounding box—suitable for complex documents |

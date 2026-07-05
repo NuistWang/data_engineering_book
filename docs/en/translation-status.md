@@ -14,20 +14,20 @@ The English edition is synchronized against that structure with a quality-first 
 
 | Part | Chinese mainline scope | English status |
 | --- | --- | --- |
-| Part 1 | Overview and Infrastructure, Ch01-Ch03 | Translated; release-audited |
-| Part 2 | Text Pre-training Data Engineering, Ch04-Ch07 | Translated; release-audited |
-| Part 3 | Multimodal Data Engineering, Ch08-Ch11 | Translated; release-audited |
-| Part 4 | Instruction Fine-tuning and Preference Data, Ch12-Ch14 | Translated; release-audited |
-| Part 5 | Synthetic Data Engineering, Ch15-Ch17 | Translated; release-audited |
-| Part 6 | Reasoning and Agent Data Engineering, Ch18-Ch20 | Translated; release-audited |
-| Part 7 | Application-Level Data Engineering, Ch21-Ch23 | Translated; release-audited |
-| Part 8 | DataOps and Platform Engineering, Ch24-Ch26 | Translated; release-audited |
-| Part 9 | Data Assets, Data Products, and Data Contracts, Ch27-Ch30 | Translated; release-audited |
-| Part 10 | Agentic Data Engineering, Ch31-Ch35 | Translated; release-audited |
-| Part 11 | Privacy, Compliance, and Data Security, Ch36-Ch37 | Translated; release-audited |
-| Part 12 | Specialized Dataset Case Studies, Ch38-Ch43 | Translated; release-audited |
-| Part 13 | Open-source Model Data Recipes, Ch44-Ch48 | Translated; release-audited |
-| Part 14 | Practical Projects, P01-P15 | Translated; release-audited |
+| Part I | Overview and Infrastructure, Ch01-Ch03 | Translated; release-audited |
+| Part II | Text Pre-training Data Engineering, Ch04-Ch07 | Translated; release-audited |
+| Part III | Multimodal Data Engineering, Ch08-Ch11 | Translated; release-audited |
+| Part IV | Instruction Fine-tuning and Preference Data, Ch12-Ch14 | Translated; release-audited |
+| Part V | Synthetic Data Engineering, Ch15-Ch17 | Translated; release-audited |
+| Part VI | Reasoning and Agent Data Engineering, Ch18-Ch20 | Translated; release-audited |
+| Part VII | Application-Level Data Engineering, Ch21-Ch23 | Translated; release-audited |
+| Part VIII | DataOps and Platform Engineering, Ch24-Ch26 | Translated; release-audited |
+| Part IX | Data Assets, Data Products, and Data Contracts, Ch27-Ch30 | Translated; release-audited |
+| Part X | Agentic Data Engineering, Ch31-Ch35 | Translated; release-audited |
+| Part XI | Privacy, Compliance, and Data Security, Ch36-Ch37 | Translated; release-audited |
+| Part XII | Specialized Dataset Case Studies, Ch38-Ch43 | Translated; release-audited |
+| Part XIII | Open-source Model Data Recipes, Ch44-Ch48 | Translated; release-audited |
+| Part XIV | Practical Projects, P01-P15 | Translated; release-audited |
 
 ## Quality Gates
 

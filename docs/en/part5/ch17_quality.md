@@ -322,6 +322,7 @@ Therefore, the value of real data lies not only in "providing more samples"—it
 
 
 *Table 17-1: Risk Signals and Possible Causes Reference Table*
+
 | Early Risk Signal | Common Manifestations | Possible Causes | Priority Investigation Direction |
 |---|---|---|---|
 | Highly uniform output style | Increasingly similar sentence patterns, structures, and wording | Template rigidity, single-teacher dominance, singular judge preference | Template versions, teacher source distribution, judge scoring standards |
@@ -337,6 +338,7 @@ To more intuitively present the risk formation mechanism, the propagation path o
 ![Figure 17-1: Synthetic Data Risk Propagation Mechanism Diagram](../../images/part5/Zhang-Chap17-Fig01-EN.svg)
 
 *Figure 17-1: Synthetic Data Risk Propagation Mechanism Diagram*
+
 ---
 
 ## 17.3 Detection Metrics and Controlled Experiments
@@ -395,6 +397,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 17-1: Process flow example*
+
 Perplexity and evaluation degradation metrics provide another angle. If the model's perplexity on synthetic data continuously declines but performance on real validation sets, long-tail validation sets, or cross-distribution validation sets does not improve in tandem (Shumailov et al. 2024), or even begins to decline, this usually indicates the model is overfitting to the synthetic distribution. A genuinely healthy synthetic data system should keep "better on real tasks" and "more fluent on training sets" basically consistent, avoiding the two progressively diverging.
 
 ### Synthetic Ratio Gradient Experiments and Ablation Design
@@ -443,6 +446,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 17-2: Process flow example*
+
 Ablation design must also revolve around risk mechanisms rather than only around model architecture. For example, one can separately remove judge filtering, remove template diversification, remove real-data infusion, and remove retention of failed samples, then observe the manner in which the system degrades. The purpose is to identify "which governance link is truly suppressing collapse." Without such controlled experiments, even if degradation is observed, it is very difficult to know whether the problem comes from an excessively high synthetic ratio, judge bias, template rigidity, or an aging validation set.
 
 ### Correlation Analysis Between Online Effect Degradation and Offline Metric Drift
@@ -454,6 +458,7 @@ One viable approach is to establish a mapping between "online problem types" and
 Table 17-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 17-2: Detection Metrics, Thresholds, and Governance Actions*
+
 | Metric Category | Representative Metrics | Risk Signal | Recommended Action |
 |---|---|---|---|
 | Distribution metrics | Length distribution divergence, topic coverage divergence, task type proportion | Synthetic data concentrated in few patterns | Expand real samples, diversify templates, add hard samples |
@@ -503,6 +508,7 @@ To more intuitively present the governance chain, the decision process by which 
 ![Figure 17-2: Synthetic Data Quality Gate and Rollback Strategy Flowchart](../../images/part5/Zhang-Chap17-Fig02-EN.svg)
 
 *Figure 17-2: Synthetic Data Quality Gate and Rollback Strategy Flowchart*
+
 ### Rollback Represents System Maturity, Not a Failure Signal
 
 Many teams are reluctant to roll back when facing risk, because rollback appears to be acknowledging that the previous version of the work was ineffective. But for synthetic data systems, rollback is precisely an important marker of mature governance. A system that cannot roll back cannot be called truly robust—it is fundamentally just high-risk. Especially in scenarios where distributional contamination is possible, quickly rolling back to the previous safe version is often more prudent than continuing to apply local patches.
@@ -550,6 +556,7 @@ The value of a governance checklist (Gebru et al. 2021; Mitchell et al. 2019; Ra
 
 
 *Table 17-3: Quality Governance and Deployment Red Lines Checklist for Synthetic Data Training*
+
 | Inspection Dimension | Required Inspection Questions | Deployment Red Line |
 |---|---|---|
 | Data source | Does it long-term rely on few teachers/few templates? | Single source dominates long-term without external correction |

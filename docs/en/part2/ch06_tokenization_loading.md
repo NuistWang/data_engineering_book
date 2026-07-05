@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter discusses how cleaned text is transformed into an input pipeline suitable for efficient large-model training, covering tokenizer design, data format selection, sequence packing, multi-source mixing, DataLoader configuration, caching strategies, and distributed data reading. The chapter opens with an anonymized composite case study illustrating how input/output (I/O) bottlenecks cause GPU idle time and wasted training cost. It then compares the engineering characteristics of Byte Pair Encoding (BPE), WordPiece, and SentencePiece, and analyzes the effects of vocabulary size, domain vocabulary extension, and multilingual balancing on training efficiency and capability distribution. The serialization section compares formats such as JavaScript Object Notation Lines (JSONL), Parquet, Arrow, Mosaic Data Shard (MDS), WebDataset, and memory-mapped files (memmap), emphasizing the role of offline tokenization and binary sharding on throughput. The latter half of the chapter further discusses packing, temperature sampling, curriculum learning, and smoke testing, and provides rank-aware configuration for multi-node data reading. Readers should be able to design stable, diagnosable, and cost-controlled input pipelines for pretraining tasks at different scales.
+This chapter discusses how cleaned text is transformed into an input pipeline suitable for efficient large-model training, covering tokenizer design, data format selection, sequence packing, multi-source mixing, DataLoader configuration, caching strategies, and distributed data reading. The chapter opens with an anonymized composite case study illustrating how input/output (I/O) bottlenecks cause graphics processing unit (GPU) idle time and wasted training cost. It then compares the engineering characteristics of Byte Pair Encoding (BPE), WordPiece, and SentencePiece, and analyzes the effects of vocabulary size, domain vocabulary extension, and multilingual balancing on training efficiency and capability distribution. The serialization section compares formats such as JavaScript Object Notation Lines (JSONL), Parquet, Arrow, Mosaic Data Shard (MDS), WebDataset, and memory-mapped files (memmap), emphasizing the role of offline tokenization and binary sharding on throughput. The latter half of the chapter further discusses packing, temperature sampling, curriculum learning, and smoke testing, and provides rank-aware configuration for multi-node data reading. Readers should be able to design stable, diagnosable, and cost-controlled input pipelines for pretraining tasks at different scales.
 
 ## Keywords
 
@@ -78,7 +78,10 @@ def bpe_train(corpus, num_merges):
     return vocab
 ```
 
-*Listing 6-1: Simplified pseudocode for the BPE merge process. This snippet explains the merge idea and is not a production-grade tokenizer training implementation.* Note: traditional BPE is not aware of morpheme boundaries; in 2025, MorphBPE (Asgari et al. 2025) explored improving tokenization efficiency and training performance in morphologically rich languages by constraining merge rules not to cross morpheme boundaries*
+*Listing 6-1: Simplified pseudocode for the BPE merge process*
+
+This snippet explains the merge idea and is not a production-grade tokenizer training implementation. Note: traditional BPE is not aware of morpheme boundaries; in 2025, MorphBPE (Asgari et al. 2025) explored improving tokenization efficiency and training performance in morphologically rich languages by constraining merge rules not to cross morpheme boundaries.
+
 The byte-level variant of BPE (Byte-level BPE, such as GPT-2's tiktoken) completely resolves the OOV problem by using raw bytes rather than Unicode characters as the base unit, and has been widely adopted by models such as LLaMA 2/3 and Mistral.
 
 **WordPiece** is BERT's tokenization scheme. It is similar to BPE but the merge criterion is not absolute frequency; instead it uses **maximum likelihood estimation based on a language model**. When WordPiece merges $A$ and $B$, it evaluates the score $\frac{P(AB)}{P(A)P(B)}$ (similar to mutual information). This means that if $A$ and $B$ each have relatively low standalone probabilities, but their co-occurrence probability is high, WordPiece will tend to merge them.
@@ -116,7 +119,10 @@ def tokenize_document(doc: dict, max_length: int = 4096) -> dict | None:
     }
 ```
 
-*Listing 6-2: Example code for offline batch tokenization. Production environments should add shard validation, failed retries, vocabulary-version records, and output-consistency checks*
+*Listing 6-2: Example code for offline batch tokenization*
+
+Production environments should add shard validation, failed retries, vocabulary-version records, and output-consistency checks.
+
 ### 6.2.2 Vocabulary Design and Domain Adaptation: More Than "Good Enough"
 
 The vocabulary is the core output of the tokenizer and also the only component of the overall large-model architecture that is nearly impossible to change after training begins. Once the vocabulary is determined, all subsequent data processing, model embedding matrices, and output logit layers are tightly bound to it — changing the vocabulary means re-tokenizing all training data and re-initializing the embedding matrix (discarding the pretrained embedding weights), at enormous cost. Therefore, vocabulary design decisions must be completed before the entire engineering effort begins, rather than being corrected mid-training when a problem is discovered.
@@ -152,14 +158,18 @@ spm.SentencePieceTrainer.train(
 )
 ```
 
-*Listing 6-3: SentencePiece multilingual vocabulary training configuration snippet. Parameters are configuration examples only; production environments should tune them jointly through language coverage, OOV/UNK rate, and downstream evaluation*
+*Listing 6-3: SentencePiece multilingual vocabulary training configuration snippet*
+
+Parameters are configuration examples only; production environments should tune them jointly through language coverage, OOV/UNK rate, and downstream evaluation.
+
 ### 6.2.3 Data Formats and Serialization: A Performance-Defining Choice
 
 The choice of data format has a direct, order-of-magnitude impact on DataLoader throughput. The following summarizes the performance and engineering trade-offs of mainstream formats:
 
 Table 6-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 6-1: Data format, compression, and access pattern comparison. Source: compiled by the authors; performance should be validated through pressure tests on target hardware, storage backend, compression method, and DataLoader implementation*
+*Table 6-1: Data formats, compression, and access patterns. Source: compiled by the authors*
+
 | Format | Type | Sequential Read Speed | Random Access | Compression Support | Cross-Framework Support | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **JSONL (.jsonl)** | Text lines | Slow (requires JSON parsing) | Not supported | No (requires .gz combination) | Excellent | Data exchange, debugging |
@@ -223,7 +233,10 @@ def greedy_pack_sequences(
     return packed
 ```
 
-*Listing 6-4: Example code for greedy sequence packing. This snippet shows the basic strategy; production environments should add sample boundaries, label masks, and reproducible experiment records*
+*Listing 6-4: Example code for greedy sequence packing*
+
+This snippet shows the basic strategy; production environments should add sample boundaries, label masks, and reproducible experiment records.
+
 For training sets containing many short documents, enabling packing can usually improve effective token throughput (tokens/s). Actual gains depend on document length distribution, max sequence length, attention-mask implementation, and hardware configuration, and should be verified on the target dataset using both padding ratio and tokens/s.
 
 ### 6.3.2 Multi-Source Mixing: Temperature Weighting and Domain Ratio Control
@@ -236,7 +249,8 @@ $$p_i = \frac{n_i^{1/T}}{\sum_j n_j^{1/T}}$$
 
 When $T = 1$, weights are proportional to data volume and large sources completely dominate; as $T \to \infty$, all source weights approach uniform. In practice, $T = 2$ is commonly used (the multilingual sampling setting of mT5 (Xue et al. 2021)), upsampling small sources while avoiding excessive deviation from the original data distribution. Table 6-2 compares the benefits and trade-offs of common sampling and mixing strategies.
 
-*Table 6-2: Comparison of sampling and mixing strategy benefits. Source: compiled by the authors; benefit descriptions are summaries of common patterns, and actual effects should be confirmed through data-recipe ablation experiments*
+*Table 6-2: Sampling and mixing strategy benefits. Source: compiled by the authors*
+
 | Mixing Strategy | Principle | Advantages | Disadvantages | Applicable Scenarios |
 | :--- | :--- | :--- | :--- | :--- |
 | **Proportional sampling** (T=1) | Proportional to original data volume | Closest to true data distribution | Small sources overwhelmed by large ones; code/papers are underrepresented | General corpus pretraining (early stages) |
@@ -289,7 +303,10 @@ dataloader = DataLoader(
 )
 ```
 
-*Listing 6-5: MosaicML Streaming Dataset DataLoader configuration snippet. Production environments should pressure-test object-storage bandwidth, cache strategy, and node failure-recovery capability together*
+*Listing 6-5: MosaicML Streaming Dataset DataLoader configuration snippet*
+
+Production environments should pressure-test object-storage bandwidth, cache strategy, and node failure-recovery capability together.
+
 Listing 6-6 presents a sample implementation of a binary token ID dataset based on `np.memmap`.
 
 
@@ -315,14 +332,18 @@ class MemmapDataset(torch.utils.data.Dataset):
         return torch.from_numpy(chunk.astype(np.int64))
 ```
 
-*Listing 6-6: Example code for an `np.memmap`-based token ID dataset. Production environments should add dtype, file-integrity, index-boundary, and cross-platform compatibility checks*
+*Listing 6-6: Example code for an `np.memmap`-based token ID dataset*
+
+Production environments should add dtype, file-integrity, index-boundary, and cross-platform compatibility checks.
+
 ### 6.4.2 Throughput Bottleneck Diagnostics: A Three-Step Systematic Approach
 
 When GPU utilization falls below expectations, follow these systematic steps to diagnose. Figure 6-1 summarizes the corresponding throughput bottleneck diagnosis flow.
 
 ![Figure 6-1: Throughput Bottleneck Diagnosis Flowchart](../../images/part2/Wang-Chap06-Fig01.svg)
 
-*Figure 6-1: Throughput bottleneck diagnosis flowchart — starting from abnormal GPU utilization, a three-level decision tree is used to locate disk I/O bottlenecks, CPU preprocessing bottlenecks, and PCIe transfer bottlenecks, with corresponding remediation steps. Source: original illustration from this book*
+*Figure 6-1: Throughput bottleneck diagnosis flowchart. Source: original illustration from this book*
+
 **Step 1 — Confirm whether the GPU is waiting for data**: Run `nvidia-smi dmon -s u` to monitor SM utilization; if SM utilization periodically drops to 0 and `sm_active` is intermittently 0, the GPU is waiting. Also check the MFU (Model FLOPS Utilization) metric and compare it with the project's historical baseline.
 
 **Step 2 — Locate the I/O level**: Run `iostat -x 1` to monitor disk I/O and compare utilization, queue depth, and wait time with the storage baseline. Simultaneously use `top` or `htop` to check CPU utilization of DataLoader worker processes; if all CPU cores are saturated, online tokenization or decompression is the bottleneck.
@@ -383,6 +404,7 @@ dataloader = DataLoader(
 ```
 
 *Listing 6-7: Multi-node distributed DataLoader configuration snippet. Production environments should combine rank-aware sharding, global shuffle, and token-count consistency checks*
+
 **Avoiding duplicate reads** is a common pitfall in multi-node distributed DataLoaders: if the DataLoaders across nodes are not properly partitioned in a rank-aware manner, each node will independently read the complete dataset, causing all nodes to see the same data order — gradient updates are effectively performed on repeated data, equivalent to batch size not correctly scaling with the number of nodes. For custom datasets that do not use `StreamingDataset`, `DistributedSampler` must be used, and `sampler.set_epoch(epoch)` must be called at the beginning of each epoch to ensure shuffle randomness differs across epochs.
 
 **Global token count consistency check**: In distributed training, the number of tokens actually processed by each rank should be nearly identical (allowing for ±1 batch of error). If token counts across ranks differ significantly (more than 5%), it indicates a problem with data distribution or DataLoader configuration, which should be verified during the smoke test phase by using `dist.all_reduce` to aggregate batch counts across ranks.
@@ -399,7 +421,8 @@ Figure 6-2 illustrates the corresponding workflow or structure.
 
 ![Figure 6-2: Training Input Pipeline Layer Diagram](../../images/part2/Wang-Chap06-Fig02.svg)
 
-*Figure 6-2: LLM training input pipeline layered architecture — the complete five-stage path from tokenization, serialization, data mixing, and packing to DataLoader GPU feeding, with the two highest-frequency bottleneck risk points (disk I/O and CPU-GPU transfer) annotated at the bottom. Source: original illustration from this book*
+*Figure 6-2: Layered architecture of the LLM training input pipeline. Source: original illustration from this book*
+
 ### Case Study: Migration Benefits from JSONL + Online Tokenization to MDS + Offline Tokenization
 
 Continuing the anonymized composite case from the opening, the following gives a pressure-test comparison template after completing the storage-format migration. The table deliberately avoids fixed numbers to prevent results from one cluster from being misread as universal gains; actual results depend on hardware, storage, data format, batch size, and framework implementation.

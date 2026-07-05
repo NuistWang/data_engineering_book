@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter uses Latent-Switch-69K as the case study to explain how reasoning-trace data moves from explicit long chain-of-thought to compressible, supervisable, and transferable implicit computation records. The chapter focuses on teacher traces, latent budgets, student sequences, supervision masks, compression boundaries, and quality control, showing that reasoning traces are not ordinary text fields but key data assets connecting reasoning models, post-training, RL data engineering, and reasoning flywheels. It also uses the Latent-Switch MindSpore data pipeline to show how distilled records become training batches consumable by `mindspore.dataset.GeneratorDataset`.
+This chapter uses Latent-Switch-69K as the case study to explain how reasoning-trace data moves from explicit long chain-of-thought to compressible, supervisable, and transferable implicit computation records. The chapter focuses on teacher traces, latent budgets, student sequences, supervision masks, compression boundaries, and quality control, showing that reasoning traces are not ordinary text fields but key data assets connecting reasoning models, post-training, reinforcement learning (RL) data engineering, and reasoning flywheels. It also uses the Latent-Switch MindSpore data pipeline to show how distilled records become training batches consumable by `mindspore.dataset.GeneratorDataset`.
 
 ## Keywords
 
@@ -34,7 +34,10 @@ Figure 43-1 illustrates the corresponding workflow or structure.
 
 ![Figure 43-1: Latent-Switch-69K Construction Pipeline](../../images/part12/Li-Chap43-Fig01.svg)
 
-*Figure 43-1: Latent-Switch-69K distills reasoning traces from Dolci-Think-SFT-32B into solution intuitions, compressed CoT, latent budgets, student sequences, and mask-aligned SFT records*
+*Figure 43-1: Latent-Switch-69K reasoning-trace distillation pipeline*
+
+The pipeline distills Dolci-Think-SFT-32B reasoning traces into solution intuitions, compressed CoT, latent budgets, student sequences, and mask-aligned SFT records.
+
 This chapter builds on Part V's synthetic data engineering and Part VI's reasoning data engineering. Chapters 15 through 17 discuss how to generate, distill, and quality-check high-quality training samples; Chapter 18 covers the organization of explicit CoT; and Chapters 19 and 20 cover the recording of intermediate states in tool and agent traces. Latent-Switch-69K pushes these threads to a finer level: intermediate reasoning need not always be stored as natural language, and datasets can explicitly reserve slots for hidden computation. Looking ahead, this chapter connects naturally to Chapter 45 on post-training data recipes, Chapter 46 on RL reasoning data engineering, and the reasoning flywheel projects in Part XIV (P06, P10, P12).
 
 ### 43.2 Dataset Overview: Scale, Difficulty, and Domain Composition
@@ -46,6 +49,7 @@ In terms of difficulty distribution, the dataset does not pursue perfect uniform
 Table 43-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 43-1: Dataset Overview: Scale, Difficulty, and Domain Composition*
+
 | Statistic | Value | Share / Notes |
 | --- | ---: | --- |
 | Total examples | 69,745 | 100.0% |
@@ -63,7 +67,10 @@ Figure 43-2 illustrates the corresponding workflow or structure.
 
 ![Figure 43-2: Latent-Switch-69K Data Sources and Domain Composition](../../images/part12/Li-Chap43-Fig02.png)
 
-*Figure 43-2: The final training set contains 69,745 samples; mathematics, code, and precise instruction-following data account for a large share*
+*Figure 43-2: Final training-set composition*
+
+The final training set contains 69,745 samples, with mathematics, code, and precise instruction-following data accounting for a large share.
+
 From a data engineering perspective, three classes of statistics must be preserved simultaneously. The first is scale statistics, which confirm that the training set is large enough to serve as a dedicated latent reasoning supervision corpus rather than a small collection of prompt templates. The second is difficulty statistics, confirming that data is not stacked randomly but serves curriculum stability and latent budget stability. The third is domain statistics, clarifying that this dataset is best suited for training and evaluating reasoning tasks in mathematics, code, science, and complex instructions, and should not be misread as general-purpose SFT data covering all conversational scenarios.
 
 Latent-Switch-69K retains the following fields: `dataset_name`, `source_dataset`, `record_id`, `difficulty`, `domain`, `source_cot_length`, `distilled_cot_length`, `compression_ratio`, `solution_intuition_length`, `n_latent_steps`, `assistant_cot`, `assistant_answer`, and `mask_schema_version`. These fields may appear primarily engineering-oriented, but they determine whether one can later explain whether a given training result stems from a shorter CoT, a latent budget adjustment, or a change in domain proportions.
@@ -120,6 +127,7 @@ for row in sampled:
 ```
 
 *Listing 43-1: Python implementation excerpt*
+
 The first stage is extracting the solution intuition. The data construction prompt asks the teacher to extract only key insights—neither writing a short CoT nor directly providing the final answer. This field should describe "the high-level plan for solving this problem," for example which equations to set up, which state space to enumerate, which data structure to use for a coding problem, or which causal relationship to isolate for a science question. Its granularity sits between a label and a full derivation: more specific than a domain label, yet more compressed than step-by-step reasoning. The core value of this approach is extracting the planning signal from Long-CoT that can be internalized, providing the basis for the subsequent latent budget.
 
 The second stage is generating a compressed explicit CoT. The teacher continues solving the problem conditioned on the original question and the solution intuition, producing a shorter reasoning process and a final answer. Because the teacher already has the high-level plan, it does not need to re-expand the full exploration process or repeat invalid branches from the original trace. Each retained sample therefore contains four main components: problem, intuition, compressed CoT, and final answer. Unlike ordinary summarization, the goal of the compressed CoT is not to "shorten the original text" but to retain sufficient visible verification paths so that the model, after latent reasoning, can still complete symbolic checks using text.
@@ -191,11 +199,15 @@ record = asyncio.run(
 ```
 
 *Listing 43-2: Python implementation excerpt*
+
 Figure 43-3 illustrates the corresponding workflow or structure.
 
 ![Figure 43-3: Comparison of Original CoT, Compressed CoT, and Latent Placeholders](../../images/part12/Li-Chap43-Fig03.svg)
 
-*Figure 43-3: The extensive visible reasoning in the source trace is split into two types of signal: solution intuition is used to estimate the latent budget, and the compressed CoT is used for explicit verification and answer supervision*
+*Figure 43-3: Signal split for latent-budget estimation and compressed-CoT supervision*
+
+The source trace is split into two signal types: solution intuition estimates the latent budget, while the compressed CoT supports explicit verification and answer supervision.
+
 The compression ratio is defined as:
 
 $$
@@ -209,7 +221,10 @@ Figure 43-4 illustrates the corresponding workflow or structure.
 
 ![Figure 43-4: Distributions of Original and Distilled Reasoning Length and Compression Ratio](../../images/part12/Li-Chap43-Fig04.png)
 
-*Figure 43-4: This figure shows the distributions of source CoT length, distilled CoT length, intuition length, ground truth length, and compression ratio*
+*Figure 43-4: Length and compression-ratio distributions*
+
+The distributions cover source CoT length, distilled CoT length, intuition length, ground-truth length, and compression ratio.
+
 Sample retention criteria should revolve around three questions. First, does the source trace have a sufficiently reliable final answer? If the original answer cannot be extracted, is clearly inconsistent with the ground truth, or cannot be stably reproduced by the teacher, the sample is not suitable for the final set. Second, does the solution intuition express only the high-level plan? If the intuition directly discloses the answer or is written as a complete CoT, it is no longer appropriate as a proxy for the latent budget. Third, does the compressed CoT still connect the question to the answer? If compressed too aggressively, the explicit reasoning degenerates into a few disconnected sentences; the model may imitate the answer but fails to learn the boundary between switching from implicit planning to explicit verification.
 
 This distillation process offers an important lesson for data engineering teams: reasoning data compression cannot focus solely on token counts. More reliable compression must simultaneously check intent preservation, answer consistency, and verification sufficiency—that is, compressed samples must retain the problem-solving intent, preserve sufficient visible verification paths, and maintain consistency in the final answer.
@@ -287,6 +302,7 @@ if reason != "ok":
 ```
 
 *Listing 43-3: Python implementation excerpt*
+
 Production preprocessing additionally filters samples according to compression ratio and field completeness and records the loss weights for the CoT and answer. More importantly, the rendered record must still be passed to `materialize_sample` or `LatentSwitchSFTSource` in `dataset.py` to relocate special-token spans and construct supervision masks. Concatenating this string alone does not make the sample safe for training.
 
 If MindSpore is installed in the runtime, the constructed JSONL can be wrapped directly as a `mindspore.dataset.GeneratorDataset`. The minimal loading example below shows the training-side columns such as `input_ids`, `labels`, `teacher_kl_mask`, and `latent_positions`.
@@ -317,6 +333,7 @@ for batch in dataset.create_dict_iterator(output_numpy=True, num_epochs=1):
 ```
 
 *Listing 43-4: Python implementation excerpt*
+
 Below is a pedagogical, simplified sample sequence. It is intended only to illustrate the schema and mask relationships and is not an actual training sample from the dataset.
 
 Listing 43-5 provides a latent-reasoning trace sample.
@@ -341,6 +358,7 @@ The final answer is 67.
 ```
 
 *Listing 43-5: Latent-reasoning trace sample*
+
 In this example, `<latent_think>` and `</latent_think>` are structural boundaries; the four `<|endoftext|>` tokens in between are merely placeholders, and their count in real samples is determined by `n_latent_steps`; the region from `<think>` to `</think>` is the visible compressed CoT; and the following text is the answer. For training purposes, what matters is not whether this text looks like natural conversation, but whether each token span can be stably located. `build_spans` in [Latent-Switch MindSpore](https://github.com/yuki10033/latent_switch_mindspore) checks that a sample contains exactly one `<latent_think>`, one `</latent_think>`, one `<think>`, and one `</think>`, and verifies that they satisfy:
 
 Listing 43-6 provides a latent-boundary ordering constraint example.
@@ -350,6 +368,7 @@ assistant_content_start <= latent_start < latent_end < think_start < think_end
 ```
 
 *Listing 43-6: Latent-boundary ordering constraint example*
+
 This ordering constraint is critical. If a boundary token is missing, duplicated, or out of order, masks will be misaligned: latent placeholders may be mistakenly treated as ordinary answer tokens, or the answer span may be truncated. For ordinary SFT data, a boundary error may be merely a formatting issue; for latent-switch data, a boundary misalignment directly changes the training objective.
 
 In a production data warehouse, student sequences should not be stored solely as long strings. A more robust approach is to save both structured fields and rendered text in parallel. Structured fields include `messages`, `assistant_cot`, `assistant_answer`, `n_latent_steps`, `latent_pad_token`, and `state_align_reference_messages`; rendered text is used for quick inspection and compatibility with standard training frameworks. `LatentSwitchSFTSource` uses structured fields to construct token IDs, and `materialize_sample` then creates labels, loss weights, and the mask columns. This design reflects an empirical lesson: latent special-token boundaries are too important to depend entirely on pre-concatenated text.
@@ -380,7 +399,10 @@ Figure 43-5 illustrates the corresponding workflow or structure.
 
 ![Figure 43-5: Supervision Mask Schematic](../../images/part12/Li-Chap43-Fig05.svg)
 
-*Figure 43-5: Prompt and latent interior tokens are masked from ordinary CE; latent boundaries, explicit CoT, answers, and end tokens are controlled by different weights and masks*
+*Figure 43-5: Supervision masks for latent-switch training*
+
+Prompt and latent interior tokens are masked from ordinary CE. Latent boundaries, explicit CoT, answers, and end tokens are controlled by different weights and masks.
+
 `latent_boundary_mask` marks the two boundary positions `<latent_think>` and `</latent_think>`. The boundary tokens themselves still require supervision, because the model must learn when to enter the latent interval and when to exit it. Without supervision of boundaries, the model may fail to transition stably to `<think>`, or may generate incomplete structure at inference time.
 
 `cot_mask` covers the span from `<think>` to the position before `answer_start`. In the paper's training objective, interior explicit CoT tokens may use a different weight—for example, applying a factor $\lambda_{CoT}$ to reduce the dominance of explicit reasoning over the total CE loss. This is consistent with the dataset's goals: the explicit CoT remains important because it carries verification and interpretable output, but training should not degenerate into "the more it resembles a long CoT, the better." The model must primarily learn structural boundaries and final-answer behavior.
@@ -392,6 +414,7 @@ Figure 43-5 illustrates the corresponding workflow or structure.
 Table 43-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 43-2: Supervision Masks: Which Tokens Contribute to the Loss*
+
 | Span | Example tokens | CE label | Primary mask | Engineering significance |
 | --- | --- | --- | --- | --- |
 | Prompt and assistant prefix | user question `<\|im_start\|>assistant` | `-100` | `prompt_mask` | Serves as conditioning, not as output target |
@@ -419,6 +442,7 @@ Quality control for Latent-Switch-69K is not merely about filtering dirty text. 
 Table 43-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 43-3: Quality Control: Five Categories of Risk in Compression, Boundaries, and Bias*
+
 | Risk type | Typical symptom | Impact | Remediation |
 | --- | --- | --- | --- |
 | Over-compression | Compressed CoT contains only a conclusion with no visible verification chain | Model fails to learn the transition from latent planning to explicit verification | Add verification sufficiency checks; reject samples with missing steps |

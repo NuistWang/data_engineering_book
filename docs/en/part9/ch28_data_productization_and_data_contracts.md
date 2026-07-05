@@ -55,6 +55,7 @@ As shown in Figure 28-1, the canvas organizes the key elements of a data product
 ![Data product canvas](../../images/part9/Liu-Chap28-Fig01-EN.svg)
 
 *Figure 28-1: Data product canvas*
+
 Several elements are central:
 
 - **Inputs** describe the upstream data sources and assets this data product depends on. They make upstream lineage explicit, so that when an upstream source changes, the team can immediately assess whether this product is affected.
@@ -66,6 +67,7 @@ Several elements are central:
 Table 28-1 summarizes the fundamental differences between datasets and data products along these dimensions.
 
 *Table 28-1: Dataset versus data product*
+
 | Dimension | Dataset | Data Product |
 | --- | --- | --- |
 | Delivery form | One-time file or snapshot | Stable service that can be relied on |
@@ -96,6 +98,7 @@ The idea is highly consistent with practice in ML data validation. In production
 A complete data contract usually contains five core clause groups, each covering a different side of data reliability. Table 28-2 summarizes the questions and examples for these five contract types.
 
 *Table 28-2: Focus and examples of five data-contract types*
+
 | Contract Type | Question Answered | Example Clauses |
 | --- | --- | --- |
 | Schema | What does the data look like? | Field names, types, nullability, enum values, primary keys |
@@ -121,6 +124,7 @@ Putting the five clause groups together forms a complete data contract. As shown
 ![Data contract template with five clause groups](../../images/part9/Liu-Chap28-Fig02-EN.svg)
 
 *Figure 28-2: Data contract template*
+
 Listing 28-1 provides a YAML configuration example.
 
 ```yaml
@@ -152,6 +156,7 @@ compatibility:
 ```
 
 *Listing 28-1: YAML configuration example*
+
 The contract is **machine-readable, checkable, and versioned**. It can live in version control, evolve with the data product, be checked by CI before release, and trigger alerts or blocks when violated. It is no longer a passive document; it is an engineering artifact embedded in the production process.
 
 ### 28.2.4 Execution and Responsibility Boundaries
@@ -183,6 +188,7 @@ Change governance turns change from a risk source that may cause silent failure 
 Not all changes are equally dangerous. Based on downstream impact, data changes can be divided into three categories, as shown in Table 28-3.
 
 *Table 28-3: Field change types and compatibility*
+
 | Change Type | Example | Compatibility | Handling |
 | --- | --- | --- | --- |
 | Backward-compatible | Add nullable fields, broaden value range, improve documentation | Safe | Notify; no canary required |
@@ -200,6 +206,7 @@ To judge quickly and consistently how a change should be handled in engineering 
 ![Change compatibility decision tree](../../images/part9/Liu-Chap28-Fig03-EN.svg)
 
 *Figure 28-3: Change compatibility decision tree*
+
 ### 28.3.3 Advance Notice and Canary Validation
 
 For potentially breaking and breaking changes, classification alone is not enough. A mechanism for **advance notice and canary validation** is also needed so that risk is exposed before downstream consumers are truly affected. Consider the four typical change categories emphasized in this section.
@@ -246,6 +253,7 @@ The key field is `interaction_type`, originally an enum with values `{click, lik
 This incident clearly exposes the cost of silent failure. If a consumer registry and impact-analysis capability had existed, the upstream team would have immediately received a list of affected consumers when proposing the change. Table 28-4 shows a retrospective consumer impact analysis.
 
 *Table 28-4: Consumer impact analysis for splitting the interaction_type enum*
+
 | Consumer | Depended Field | Use | Impact | Consequence | Response |
 | --- | --- | --- | --- | --- | --- |
 | preference_training | interaction_type | Filter `== click` as positive samples | Severe | Positive samples nearly disappear; model quality drops | Block change; migrate first |
@@ -257,6 +265,7 @@ This table turns the impact of one change from vague concern into a row-level ch
 ![Consumer impact analysis](../../images/part9/Liu-Chap28-Fig04-EN.svg)
 
 *Figure 28-4: Consumer impact analysis*
+
 ### 28.4.4 How Contracts and Rollback Contain the Damage
 
 With data contracts, the same change would follow a different path.

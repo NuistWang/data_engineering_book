@@ -4,7 +4,7 @@
 
 ## Abstract
 
-This chapter establishes the data quality assessment framework that underpins the entire book. "High-quality data" in large language model projects is not a single metric, but a multi-dimensional set of constraints that shift dynamically with the training stage, task objective, and business context. The chapter begins by explaining why algorithm, data, annotation, and product teams inevitably disagree on the definition of quality, and proposes a data quality terminology contract to unify communication. It then breaks down quality objectives, detection metrics, and typical risks for each of four stages: pre-training, instruction fine-tuning, preference alignment, and RAG deployment. A layered evaluation perspective is then constructed across the sample, batch, dataset, and system-platform levels. Finally, the chapter presents six core defect classes, a data release scorecard, CI/CD quality gates, and anonymized composite case studies to illustrate how quality assessment can be converted into executable governance actions, alerting strategies, and rollback mechanisms.
+This chapter establishes the data quality assessment framework that underpins the entire book. "High-quality data" in large language model projects is not a single metric, but a multi-dimensional set of constraints that shift dynamically with the training stage, task objective, and business context. The chapter begins by explaining why algorithm, data, annotation, and product teams inevitably disagree on the definition of quality, and proposes a data quality terminology contract to unify communication. It then breaks down quality objectives, detection metrics, and typical risks for each of four stages: pre-training, instruction fine-tuning, preference alignment, and retrieval-augmented generation (RAG) deployment. A layered evaluation perspective is then constructed across the sample, batch, dataset, and system-platform levels. Finally, the chapter presents six core defect classes, a data release scorecard, CI/CD quality gates, and anonymized composite case studies to illustrate how quality assessment can be converted into executable governance actions, alerting strategies, and rollback mechanisms.
 
 ## Keywords
 
@@ -60,7 +60,8 @@ This contract document is not a static file but a versioned document that evolve
 
 Quality is by no means a static standard; it presents entirely different core requirements at different stages as the data lifecycle progresses. Applying a fixed standard to measure data across the entire lifecycle will inevitably produce serious misjudgments. As shown in Table 2-1, the core quality requirements and detection metrics differ significantly across the four stages of pre-training, instruction fine-tuning, preference alignment, and RAG deployment.
 
-*Table 2-1: LLM Data Four-Stage Quality Objective Evolution Matrix. Source: compiled by the authors; scale ranges and metric definitions reflect common engineering practice and must be recalibrated for the project dataset in production*
+*Table 2-1: Four-stage quality objective evolution matrix. Source: compiled by the authors*
+
 | Training Stage | Typical Data Scale | Core Quality Requirements | Primary Detection Metrics | Typical Defects and Risks | Primary Processing Tools |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Pre-training** | Hundreds of billions to tens of trillions of tokens | High diversity, low duplication rate, broad knowledge coverage | N-gram duplication rate, PPL distribution, domain proportion, language distribution | Insufficient deduplication ("parrot" effect); benchmark data leaking in (inflated evaluation scores); excessive low-quality SEO content | MinHash / SimHash; fastText language identification; KenLM; Quality Classifier |
@@ -92,6 +93,7 @@ Listing 2-1 provides a process flow example.
 ```
 
 *Listing 2-1: Process flow example*
+
 This amplification effect—"a small upstream error → a midstream distribution anomaly → downstream experience loss"—can be understood as cross-stage error propagation in the data pipeline. The governance solution is the unified quality gate system that this chapter will establish.
 
 3. **Experience Loss**: Because there is no unified defect classification standard, post-mortem conclusions after model failures typically stop at "the data was bad; we need to be more careful next time." Was it because of high duplication rates, imbalanced domain ratios, or benchmark contamination? Without clear classification, these lessons cannot be translated into concrete rule modifications for the next version of the cleaning pipeline. After introducing a unified quality framework, every data issue can be attributed to a specific defect type (see Section 2.3) with corresponding remediation operators and quantified improvement targets. Post-mortem documents should evolve from "the data was bad" to "root cause of this incident: duplication rate exceeded the project threshold; remediation plan: recalibrate deduplication thresholds by domain and remeasure the deduplication rate in the next incremental validation."
@@ -105,7 +107,8 @@ To resolve the problem of an inconsistent quality language, we must establish cl
 
 ![Figure 2-1: Multi-dimensional quality layering architecture from a lifecycle perspective, showing how metric weights shift across stages from scale and diversity toward truthfulness and helpfulness](../../images/part1/Yu-Chap02-Fig01.svg)
 
-*Figure 2-1: Multi-dimensional quality layering architecture from a lifecycle perspective. Source: original illustration from this book. The upper half is a horizontal four-stage pipeline: pre-training (scale/diversity/low duplication), SFT (instruction coverage/format compliance/factual accuracy), RLHF/DPO preference alignment (contrastive signal/annotation consistency/value alignment), and RAG application (timeliness/retrieval accuracy/traceability); the lower half is a triangular mapping structure showing the bidirectional relationships among offline data quality, proxy model evaluation, and real online business metrics*
+*Figure 2-1: Multi-dimensional quality layering architecture. Source: original illustration from this book*
+
 ### 2.2.1 Quality Objective Differences Across Stages
 
 Each stage in the large language model training pipeline has different quality objectives. Pre-training focuses on corpus scale, diversity, and low duplication rate; SFT focuses on instruction coverage, format compliance, and factual accuracy; preference alignment focuses on contrastive signal strength and annotation consistency; RAG deployment focuses on knowledge freshness, retrieval recall, and evidence traceability.
@@ -147,7 +150,8 @@ To establish shared governance actions, the vague notion of "bad data" must be t
 
 ![Figure 2-2: Cross-mapping diagram of large language model data defects and quality metrics, showing the relationships between six defect classes and accuracy, consistency, diversity, coverage, and traceability](../../images/part1/Yu-Chap02-Fig02.svg)
 
-*Figure 2-2: Cross-mapping matrix of large language model data defects and quality metrics. Source: original illustration from this book. The matrix rows are six defect classes: noise, repetition, benchmark contamination, systematic bias, structural incompleteness, and staleness; the columns are five quality metrics: accuracy, consistency, diversity, coverage, and traceability. Each cell uses a filled circle (strong impact), half circle (medium impact), or empty circle (weak impact) to mark impact strength*
+*Figure 2-2: Cross-mapping matrix of data defects and quality metrics. Source: original illustration from this book*
+
 ### 2.3.1 Six Core Defect Classes (Six Core Defect Classes)
 
 For large language model training, we establish the following six core defect dimensions, each accompanied by an automated detection approach:
@@ -175,7 +179,10 @@ def noise_score(text: str) -> float:
 # Example: when noise_score exceeds the project-calibrated threshold, send it to quarantine or manual review.
 ```
 
-*Listing 2-2: Example of text noise ratio detection. In production, add language, encoding, HTML parser version, and exception sample inspection logs*
+*Listing 2-2: Example of text noise ratio detection*
+
+In production, add language, encoding, HTML parser version, and exception sample inspection logs.
+
 **2. Repetition**
 
 Definition: The same content (exact or approximate) appearing a large number of times in the training set, forcing the model to "memorize" these segments, causing memorization-based overfitting, and producing a "parrot" effect at inference time. Industry practice generally uses MinHash LSH for approximate deduplication.
@@ -199,7 +206,10 @@ calibrated_threshold = 0.8
 lsh = MinHashLSH(threshold=calibrated_threshold, num_perm=128)
 ```
 
-*Listing 2-3: Example of approximate duplicate detection using MinHash LSH. In production, record the threshold, partitioning strategy, and sampling review results*
+*Listing 2-3: Example of approximate duplicate detection using MinHash LSH*
+
+In production, record the threshold, partitioning strategy, and sampling review results.
+
 **3. Benchmark Contamination**
 
 Definition: Web crawlers indiscriminately ingesting the original questions and answers from publicly available AI evaluation benchmarks (GSM8K (Cobbe et al. 2021), HumanEval (Chen et al. 2021), MMLU (Hendrycks et al. 2021), etc.) into the pre-training corpus, causing inflated benchmark scores (rote memorization rather than reasoning). Systematic surveys of automated detection methods for this problem are available in Shi et al. (2023) and Golchin and Surdeanu (2023).
@@ -224,7 +234,10 @@ def ngram_overlap(text: str, benchmark_ngrams: set, n: int = 13) -> float:
 # flag it as suspected contamination and review manually.
 ```
 
-*Listing 2-4: Example of N-gram overlap detection for benchmark contamination. In production, maintain an independent evaluation set fingerprint database and a manual review workflow*
+*Listing 2-4: Example of N-gram overlap detection for benchmark contamination*
+
+In production, maintain an independent evaluation set fingerprint database and a manual review workflow.
+
 **4. Systematic Bias**
 
 Definition: Due to geographic, linguistic, or topical skew in the crawled data sources, the data exhibits systematic knowledge bias related to nationality, gender, race, ideology, and similar dimensions, causing the model to perform unevenly on tasks involving specific groups.
@@ -252,7 +265,10 @@ def check_completeness(sample: dict) -> list:
     return issues
 ```
 
-*Listing 2-5: Example of SFT sample structural completeness checking. In production, add schema validation, field-length distribution checks, and sampling review rules by task type*
+*Listing 2-5: Example of SFT sample structural completeness checking*
+
+In production, add schema validation, field-length distribution checks, and sampling review rules by task type.
+
 **6. Staleness**
 
 Definition: The knowledge base or pre-training corpus is frozen at a certain cutoff date and cannot reflect factual changes occurring after that date. This is particularly high-risk in RAG deployment scenarios.
@@ -277,6 +293,7 @@ def staleness_ratio(docs: list, threshold_days: int = 180) -> float:
 ```
 
 *Listing 2-6: Example of knowledge base staleness detection. In production, set different thresholds by domain, data source, and business priority*
+
 ### 2.3.2 Establishing the Core Metrics Matrix
 
 To quantify defects, this book uniformly adopts five core evaluation metrics:
@@ -302,7 +319,8 @@ A quality assessment framework must ultimately materialize as concrete, engineer
 
 ![Figure 2-3: Automated blocking and governance flow driven by the data scorecard, showing hard gates, soft gates, manual review, and rollback actions](../../images/part1/Yu-Chap02-Fig03.svg)
 
-*Figure 2-3: Automated blocking and governance flow driven by the data scorecard. Source: original illustration from this book. The figure shows how hard gates, soft gates, manual review, and rollback actions collectively block contaminated or degraded data samples*
+*Figure 2-3: Automated blocking and governance flow driven by the data scorecard. Source: original illustration from this book*
+
 ### 2.4.1 Scorecard Design and Implementation
 
 The scorecard is a "data health report" derived from a combination of rule scripts and validation models. Its core design principles are: **objectively reproducible computation, configurable threshold baselines, and action-oriented blocking**. Before officially releasing any version of a training dataset, the scorecard script must be mandatorily triggered, and the evaluation results must be serialized into a standard JSON format and archived. Listing 2-7 gives an example release scorecard schema.
@@ -358,7 +376,10 @@ The scorecard is a "data health report" derived from a combination of rule scrip
 }
 ```
 
-*Listing 2-7: SFT dataset release scorecard JSON example. The schema is illustrative; production environments should calibrate fields, thresholds, and gate decisions by dataset type and risk level*
+*Listing 2-7: SFT dataset release scorecard JSON example*
+
+The schema is illustrative; production environments should calibrate fields, thresholds, and gate decisions by dataset type and risk level.
+
 Listing 2-8 shows a GitHub Actions workflow for triggering the scorecard in CI/CD.
 
 ```yaml
@@ -404,7 +425,10 @@ jobs:
           path: reports/scorecard_*.json
 ```
 
-*Listing 2-8: GitHub Actions example for CI/CD pipeline integration. This snippet demonstrates how quality gates are triggered; production environments should add credential management, log retention, and failed-run rollback strategies*
+*Listing 2-8: GitHub Actions example for CI/CD pipeline integration*
+
+This snippet demonstrates how quality gates are triggered; production environments should add credential management, log retention, and failed-run rollback strategies.
+
 With this integration, every time a data engineer merges a new data batch, the CI pipeline automatically runs the scorecard check. If any hard gate metric exceeds its threshold, the PR merge is automatically blocked until the issue is resolved and the job is resubmitted.
 
 
@@ -485,7 +509,10 @@ def detect_tab_drift(prev_texts, curr_texts, z_threshold=2.0):
     }
 ```
 
-*Listing 2-9: Example of batch-level indentation character drift detection. In production, replace the alert threshold with a statistical threshold based on historical distribution*
+*Listing 2-9: Example of batch-level indentation character drift detection*
+
+In production, replace the alert threshold with a statistical threshold based on historical distribution.
+
 **Complete Debugging Timeline (Case 2)**
 
 The following timeline is also an anonymized composite case. Financial table misalignment, self-referential evaluation sets, and human gold-standard isolation are real engineering risk types; the specific proportions and sample counts do not correspond to any public project.

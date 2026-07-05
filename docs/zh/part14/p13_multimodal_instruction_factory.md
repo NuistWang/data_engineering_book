@@ -35,6 +35,7 @@
 ```
 
 *代码清单P13-1：流程示例*
+
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
 
 ## 核心实现片段
@@ -85,8 +86,9 @@
 
 为了实现流水线作业，工厂被划分为五个核心组件。整体架构如图 P13-1 所示。
 
-![图 P13-1：多模态指令工厂](../../images/part14/Yu-Project13-Fig02-EN.svg)
+![图 P13-1：多模态指令工厂](../../images/part14/Yu-Project13-Fig01-EN.svg)
 *图 P13-1：多模态指令工厂*
+
 1. **种子选择器 (Seed Selector)**：从百亿级海量图像库中，针对性地捞取 OCR 丰富、图表、真实复杂场景三类种子图像。
 2. **指令生成器 (Instruction Generator)**：定义了 6 类复杂的指令模板，并通过 vLLM (Kwon et al. 2023) 调用 Qwen2.5-VL 进行高速生成。
 3. **质量打分器 (Quality Scorer / Self-consistency)**：采用自我一致性（Self-consistency）机制 (Wang et al. 2023)，对于推理类问题进行多次采样验证。
@@ -137,6 +139,7 @@ def select_seeds(dataset_name="laion/laion2B-en", num_samples=5000):
 ```
 
 *代码清单P13-2：Python 实现片段*
+
 ### Step 2: 指令模板设计
 
 不同于固定问题的 LLaVA 数据，本项目需要为大模型定义多样化任务模板，并控制生成目标、输出格式和风险边界。
@@ -166,6 +169,7 @@ def get_random_prompt(task_type):
 ```
 
 *代码清单P13-3：Python 实现片段*
+
 ### Step 3: 使用 vLLM 高速生成指令
 
 借助 `vllm` 的并发吞吐能力，可以将筛选出的图片与指令模板送入基础多模态模型进行批量生成。
@@ -191,6 +195,7 @@ def generate_instructions(seeds, model_path="Qwen/Qwen2.5-VL-7B-Instruct"):
 ```
 
 *代码清单P13-4：Python 实现片段*
+
 ### Step 4: LLM-as-Judge 质量过滤
 
 生成响应往往伴随幻觉，因此需要引入判别器，例如 Qwen2.5-72B-Instruct。由于纯文本 72B 模型无法直接接收图片，本项目采用 **Text-only Evaluation**：让 72B 评判多模态模型生成的“长描述”内部逻辑是否自洽、结构是否严密。
@@ -225,6 +230,7 @@ def score_with_llm_judge(generated_data):
 ```
 
 *代码清单P13-5：Python 实现片段*
+
 ### Step 5: 统一下游格式打包
 
 无论是单图、多图还是视频片段，最终统一按照开源社区（如 ShareGPT）或者特定模型（如 Qwen2.5-VL）的微调格式输出 JSONL。
@@ -250,6 +256,7 @@ def pack_to_qwen_format(scored_data, output_path="./data/mm_sft_final.jsonl"):
 ```
 
 *代码清单P13-6：Python 实现片段*
+
 ## 工程运行与最小复现路径
 
 P13 的代码目录是 `code/zh/project_13_mm_instruction_factory`。与 P11、P14 相比，这个项目更偏“生成式数据工厂”，因此最小复现路径不是跑一个固定 shell 脚本，而是按阶段串联函数：先选择 seeds，再按模板生成指令，随后进行 judge、self-consistency、多语言扩展和格式打包。教学环境中可以先用少量 seed 和 mock judge 走通产物契约，再替换为真实 Qwen2.5-VL 和 Qwen2.5-72B-Instruct。
@@ -273,6 +280,7 @@ pack_to_qwen_format(expanded, "./data/mm_sft_final.jsonl")
 ```
 
 *代码清单P13-7：Python 实现片段*
+
 这段代码说明了工厂的最小闭环，但还不是生产脚本。生产运行应补充四类控制：第一，模型调用需要记录模型路径、temperature、top-p、max tokens 和并发参数；第二，seed 需要记录来源、授权和下载状态；第三，judge 需要保留评分 prompt、阈值和人工校准集；第四，打包前要检查图片链接、conversation 格式和样本去重。
 
 表 P13-3 给出本项目应保留的运行记录。
@@ -394,6 +402,7 @@ Self-consistency 的作用是补充 judge 的盲区。对于复杂推理题，�
 
 
 *表 P13-8：多模态指令工厂人工抽检分层*
+
 | 抽检层 | 样本来源 | 检查重点 |
 | --- | --- | --- |
 | 高分样本 | judge score 最高的一批 | 判断 judge 是否过度奖励长文本 |

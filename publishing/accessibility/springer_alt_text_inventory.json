@@ -20,7 +20,7 @@
   {
     "ID": "ALT-0002",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch01",
     "Chapter / Contribution Title": "Chapter 1: The Data Revolution in the Era of Large Models",
     "Source Markdown": "docs/en/part1/ch01_data_change.md",
@@ -38,7 +38,7 @@
   {
     "ID": "ALT-0003",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch01",
     "Chapter / Contribution Title": "Chapter 1: The Data Revolution in the Era of Large Models",
     "Source Markdown": "docs/en/part1/ch01_data_change.md",
@@ -56,7 +56,7 @@
   {
     "ID": "ALT-0004",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch02",
     "Chapter / Contribution Title": "Chapter 2: LLM Data Lifecycle and Quality Evaluation Framework",
     "Source Markdown": "docs/en/part1/ch02_quality_framework.md",
@@ -74,7 +74,7 @@
   {
     "ID": "ALT-0005",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch02",
     "Chapter / Contribution Title": "Chapter 2: LLM Data Lifecycle and Quality Evaluation Framework",
     "Source Markdown": "docs/en/part1/ch02_quality_framework.md",
@@ -92,7 +92,7 @@
   {
     "ID": "ALT-0006",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch02",
     "Chapter / Contribution Title": "Chapter 2: LLM Data Lifecycle and Quality Evaluation Framework",
     "Source Markdown": "docs/en/part1/ch02_quality_framework.md",
@@ -110,7 +110,7 @@
   {
     "ID": "ALT-0007",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch03",
     "Chapter / Contribution Title": "Chapter 3: AI-Native Data Stack and Cost Governance",
     "Source Markdown": "docs/en/part1/ch03_data_stack.md",
@@ -128,7 +128,7 @@
   {
     "ID": "ALT-0008",
     "Language": "en",
-    "Part / Section": "Part 1: Overview and Infrastructure",
+    "Part / Section": "Part I: Overview and Infrastructure",
     "Unit": "Ch03",
     "Chapter / Contribution Title": "Chapter 3: AI-Native Data Stack and Cost Governance",
     "Source Markdown": "docs/en/part1/ch03_data_stack.md",
@@ -146,7 +146,7 @@
   {
     "ID": "ALT-0009",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch31",
     "Chapter / Contribution Title": "Chapter 31: Architecture and Task Boundaries of Data Engineering Agents",
     "Source Markdown": "docs/en/part10/ch31_agent_architecture.md",
@@ -164,7 +164,7 @@
   {
     "ID": "ALT-0010",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch31",
     "Chapter / Contribution Title": "Chapter 31: Architecture and Task Boundaries of Data Engineering Agents",
     "Source Markdown": "docs/en/part10/ch31_agent_architecture.md",
@@ -182,7 +182,7 @@
   {
     "ID": "ALT-0011",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch32",
     "Chapter / Contribution Title": "Chapter 32: Automated Collection, Parsing, and Cleaning Agents",
     "Source Markdown": "docs/en/part10/ch32_auto_collection_parsing_cleaning.md",
@@ -200,7 +200,7 @@
   {
     "ID": "ALT-0012",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch32",
     "Chapter / Contribution Title": "Chapter 32: Automated Collection, Parsing, and Cleaning Agents",
     "Source Markdown": "docs/en/part10/ch32_auto_collection_parsing_cleaning.md",
@@ -218,7 +218,7 @@
   {
     "ID": "ALT-0013",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch32",
     "Chapter / Contribution Title": "Chapter 32: Automated Collection, Parsing, and Cleaning Agents",
     "Source Markdown": "docs/en/part10/ch32_auto_collection_parsing_cleaning.md",
@@ -236,7 +236,7 @@
   {
     "ID": "ALT-0014",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch33",
     "Chapter / Contribution Title": "Chapter 33: Labeling, Synthesis, and Evaluation Agents",
     "Source Markdown": "docs/en/part10/ch33_labeling_synthesis_evaluation.md",
@@ -254,7 +254,7 @@
   {
     "ID": "ALT-0015",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch33",
     "Chapter / Contribution Title": "Chapter 33: Labeling, Synthesis, and Evaluation Agents",
     "Source Markdown": "docs/en/part10/ch33_labeling_synthesis_evaluation.md",
@@ -272,7 +272,7 @@
   {
     "ID": "ALT-0016",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch34",
     "Chapter / Contribution Title": "Chapter 34: DataOps Agents and Platform Autonomy",
     "Source Markdown": "docs/en/part10/ch34_dataops_agent.md",
@@ -290,7 +290,7 @@
   {
     "ID": "ALT-0017",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch34",
     "Chapter / Contribution Title": "Chapter 34: DataOps Agents and Platform Autonomy",
     "Source Markdown": "docs/en/part10/ch34_dataops_agent.md",
@@ -308,7 +308,7 @@
   {
     "ID": "ALT-0018",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch34",
     "Chapter / Contribution Title": "Chapter 34: DataOps Agents and Platform Autonomy",
     "Source Markdown": "docs/en/part10/ch34_dataops_agent.md",
@@ -326,7 +326,7 @@
   {
     "ID": "ALT-0019",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch35",
     "Chapter / Contribution Title": "Chapter 35: Security, Permissions, and Human-Agent Collaboration",
     "Source Markdown": "docs/en/part10/ch35_security_permission_collaboration.md",
@@ -344,7 +344,7 @@
   {
     "ID": "ALT-0020",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch35",
     "Chapter / Contribution Title": "Chapter 35: Security, Permissions, and Human-Agent Collaboration",
     "Source Markdown": "docs/en/part10/ch35_security_permission_collaboration.md",
@@ -362,7 +362,7 @@
   {
     "ID": "ALT-0021",
     "Language": "en",
-    "Part / Section": "Part 10: Intelligent Data Engineering and Data Engineering Agents",
+    "Part / Section": "Part X: Intelligent Data Engineering and Data Engineering Agents",
     "Unit": "Ch35",
     "Chapter / Contribution Title": "Chapter 35: Security, Permissions, and Human-Agent Collaboration",
     "Source Markdown": "docs/en/part10/ch35_security_permission_collaboration.md",
@@ -380,7 +380,7 @@
   {
     "ID": "ALT-0022",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -398,7 +398,7 @@
   {
     "ID": "ALT-0023",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -416,7 +416,7 @@
   {
     "ID": "ALT-0024",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -434,7 +434,7 @@
   {
     "ID": "ALT-0025",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -452,7 +452,7 @@
   {
     "ID": "ALT-0026",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -470,7 +470,7 @@
   {
     "ID": "ALT-0027",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -488,7 +488,7 @@
   {
     "ID": "ALT-0028",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -506,7 +506,7 @@
   {
     "ID": "ALT-0029",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch36",
     "Chapter / Contribution Title": "Chapter 36: Data Compliance Framework and Governance",
     "Source Markdown": "docs/en/part11/ch36_compliance_framework_and_governance.md",
@@ -524,7 +524,7 @@
   {
     "ID": "ALT-0030",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -542,7 +542,7 @@
   {
     "ID": "ALT-0031",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -560,7 +560,7 @@
   {
     "ID": "ALT-0032",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -578,7 +578,7 @@
   {
     "ID": "ALT-0033",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -596,7 +596,7 @@
   {
     "ID": "ALT-0034",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -614,7 +614,7 @@
   {
     "ID": "ALT-0035",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -632,7 +632,7 @@
   {
     "ID": "ALT-0036",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -650,7 +650,7 @@
   {
     "ID": "ALT-0037",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -668,7 +668,7 @@
   {
     "ID": "ALT-0038",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -686,7 +686,7 @@
   {
     "ID": "ALT-0039",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -704,7 +704,7 @@
   {
     "ID": "ALT-0040",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -722,7 +722,7 @@
   {
     "ID": "ALT-0041",
     "Language": "en",
-    "Part / Section": "Part 11: Privacy Compliance and Data Security",
+    "Part / Section": "Part XI: Privacy Compliance and Data Security",
     "Unit": "Ch37",
     "Chapter / Contribution Title": "Chapter 37: Federated Learning and Privacy-Preserving Technologies",
     "Source Markdown": "docs/en/part11/ch37_federated_learning_and_privacy_preserving_technologies.md",
@@ -740,9 +740,9 @@
   {
     "ID": "ALT-0042",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch38",
-    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers",
+    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering",
     "Source Markdown": "docs/en/part12/ch38_text_corpora_transparent_ledger.md",
     "Line": 235,
     "Figure No.": "1938-01-01T00:00:00",
@@ -758,9 +758,9 @@
   {
     "ID": "ALT-0043",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch38",
-    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers",
+    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering",
     "Source Markdown": "docs/en/part12/ch38_text_corpora_transparent_ledger.md",
     "Line": 245,
     "Figure No.": "1938-02-01T00:00:00",
@@ -776,9 +776,9 @@
   {
     "ID": "ALT-0044",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch38",
-    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers",
+    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering",
     "Source Markdown": "docs/en/part12/ch38_text_corpora_transparent_ledger.md",
     "Line": 514,
     "Figure No.": "1938-03-01T00:00:00",
@@ -794,9 +794,9 @@
   {
     "ID": "ALT-0045",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch38",
-    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering: Open Web, Filtering, Deduplication, and Transparent Ledgers",
+    "Chapter / Contribution Title": "Chapter 38: Text Corpus Data Engineering",
     "Source Markdown": "docs/en/part12/ch38_text_corpora_transparent_ledger.md",
     "Line": 536,
     "Figure No.": "1938-04-01T00:00:00",
@@ -812,9 +812,9 @@
   {
     "ID": "ALT-0046",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch39",
-    "Chapter / Contribution Title": "Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation",
+    "Chapter / Contribution Title": "Chapter 39: Image-Text Data Engineering",
     "Source Markdown": "docs/en/part12/ch39_image_text_candidate_pool_data_engineering.md",
     "Line": 76,
     "Figure No.": "1939-01-01T00:00:00",
@@ -830,9 +830,9 @@
   {
     "ID": "ALT-0047",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch39",
-    "Chapter / Contribution Title": "Chapter 39: Image-Text Data Engineering: Candidate Pool Construction, Multimodal Filtering, and DataComp Evaluation",
+    "Chapter / Contribution Title": "Chapter 39: Image-Text Data Engineering",
     "Source Markdown": "docs/en/part12/ch39_image_text_candidate_pool_data_engineering.md",
     "Line": 197,
     "Figure No.": "1939-02-01T00:00:00",
@@ -848,9 +848,9 @@
   {
     "ID": "ALT-0048",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 187,
     "Figure No.": "1940-01-01T00:00:00",
@@ -866,9 +866,9 @@
   {
     "ID": "ALT-0049",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 268,
     "Figure No.": "1940-02-01T00:00:00",
@@ -884,9 +884,9 @@
   {
     "ID": "ALT-0050",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 286,
     "Figure No.": "1940-03-01T00:00:00",
@@ -902,9 +902,9 @@
   {
     "ID": "ALT-0051",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 564,
     "Figure No.": "1938-04-01T00:00:00",
@@ -920,9 +920,9 @@
   {
     "ID": "ALT-0052",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 585,
     "Figure No.": "1940-05-01T00:00:00",
@@ -938,9 +938,9 @@
   {
     "ID": "ALT-0053",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch40",
-    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering: Structured Extraction, Sparse Tables, and Schema Constraints",
+    "Chapter / Contribution Title": "Chapter 40: Visual Document and Table Data Engineering",
     "Source Markdown": "docs/en/part12/ch40_visual_document_table_data_engineering.md",
     "Line": 639,
     "Figure No.": "1938-06-01T00:00:00",
@@ -956,9 +956,9 @@
   {
     "ID": "ALT-0054",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 70,
     "Figure No.": "1941-01-01T00:00:00",
@@ -974,9 +974,9 @@
   {
     "ID": "ALT-0055",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 80,
     "Figure No.": "1941-02-01T00:00:00",
@@ -992,9 +992,9 @@
   {
     "ID": "ALT-0056",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 90,
     "Figure No.": "1941-03-01T00:00:00",
@@ -1010,9 +1010,9 @@
   {
     "ID": "ALT-0057",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "CH41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 109,
     "Figure No.": "",
@@ -1028,9 +1028,9 @@
   {
     "ID": "ALT-0058",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "CH41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 110,
     "Figure No.": "",
@@ -1046,9 +1046,9 @@
   {
     "ID": "ALT-0059",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "CH41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 111,
     "Figure No.": "",
@@ -1064,9 +1064,9 @@
   {
     "ID": "ALT-0060",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "CH41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 112,
     "Figure No.": "",
@@ -1082,9 +1082,9 @@
   {
     "ID": "ALT-0061",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 159,
     "Figure No.": "1941-05-01T00:00:00",
@@ -1100,9 +1100,9 @@
   {
     "ID": "ALT-0062",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 453,
     "Figure No.": "1941-06-01T00:00:00",
@@ -1118,9 +1118,9 @@
   {
     "ID": "ALT-0063",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 495,
     "Figure No.": "1941-07-01T00:00:00",
@@ -1136,9 +1136,9 @@
   {
     "ID": "ALT-0064",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 572,
     "Figure No.": "1941-08-01T00:00:00",
@@ -1154,9 +1154,9 @@
   {
     "ID": "ALT-0065",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch41",
-    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering: Chart Evidence, Medical Images, and Tool-Call Trajectories",
+    "Chapter / Contribution Title": "Chapter 41: Visual Reasoning Data Engineering",
     "Source Markdown": "docs/en/part12/ch41_visual_reasoning_tool_data_engineering.md",
     "Line": 707,
     "Figure No.": "1941-09-01T00:00:00",
@@ -1172,9 +1172,9 @@
   {
     "ID": "ALT-0066",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch42",
-    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries",
+    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering",
     "Source Markdown": "docs/en/part12/ch42_speech_audio_interaction_data_engineering.md",
     "Line": 70,
     "Figure No.": "1942-01-01T00:00:00",
@@ -1190,9 +1190,9 @@
   {
     "ID": "ALT-0067",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch42",
-    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries",
+    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering",
     "Source Markdown": "docs/en/part12/ch42_speech_audio_interaction_data_engineering.md",
     "Line": 271,
     "Figure No.": "1942-02-01T00:00:00",
@@ -1208,9 +1208,9 @@
   {
     "ID": "ALT-0068",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch42",
-    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering: Interaction Control, Style Labels, and Safety Boundaries",
+    "Chapter / Contribution Title": "Chapter 42: Speech and Audio Data Engineering",
     "Source Markdown": "docs/en/part12/ch42_speech_audio_interaction_data_engineering.md",
     "Line": 365,
     "Figure No.": "1942-03-01T00:00:00",
@@ -1226,9 +1226,9 @@
   {
     "ID": "ALT-0069",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch43",
-    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks",
+    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering",
     "Source Markdown": "docs/en/part12/ch43_reasoning_trace_compression_data_engineering.md",
     "Line": 33,
     "Figure No.": "1943-01-01T00:00:00",
@@ -1244,9 +1244,9 @@
   {
     "ID": "ALT-0070",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch43",
-    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks",
+    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering",
     "Source Markdown": "docs/en/part12/ch43_reasoning_trace_compression_data_engineering.md",
     "Line": 58,
     "Figure No.": "1943-02-01T00:00:00",
@@ -1262,9 +1262,9 @@
   {
     "ID": "ALT-0071",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch43",
-    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks",
+    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering",
     "Source Markdown": "docs/en/part12/ch43_reasoning_trace_compression_data_engineering.md",
     "Line": 183,
     "Figure No.": "1943-03-01T00:00:00",
@@ -1280,9 +1280,9 @@
   {
     "ID": "ALT-0072",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch43",
-    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks",
+    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering",
     "Source Markdown": "docs/en/part12/ch43_reasoning_trace_compression_data_engineering.md",
     "Line": 196,
     "Figure No.": "1943-04-01T00:00:00",
@@ -1298,9 +1298,9 @@
   {
     "ID": "ALT-0073",
     "Language": "en",
-    "Part / Section": "Part 12: Specialized Datasets and Multimodal Data Engineering Practice",
+    "Part / Section": "Part XII: Specialized Datasets and Multimodal Data Engineering Practice",
     "Unit": "Ch43",
-    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering: Long-Chain Compression, Implicit Computation, and Supervision Masks",
+    "Chapter / Contribution Title": "Chapter 43: Reasoning Trace Data Engineering",
     "Source Markdown": "docs/en/part12/ch43_reasoning_trace_compression_data_engineering.md",
     "Line": 354,
     "Figure No.": "1943-05-01T00:00:00",
@@ -1316,7 +1316,7 @@
   {
     "ID": "ALT-0074",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch44",
     "Chapter / Contribution Title": "Chapter 44: LLM Pre-training Data Engineering in Practice",
     "Source Markdown": "docs/en/part13/ch44_pretrain_recipes.md",
@@ -1334,7 +1334,7 @@
   {
     "ID": "ALT-0075",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch44",
     "Chapter / Contribution Title": "Chapter 44: LLM Pre-training Data Engineering in Practice",
     "Source Markdown": "docs/en/part13/ch44_pretrain_recipes.md",
@@ -1352,7 +1352,7 @@
   {
     "ID": "ALT-0076",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch44",
     "Chapter / Contribution Title": "Chapter 44: LLM Pre-training Data Engineering in Practice",
     "Source Markdown": "docs/en/part13/ch44_pretrain_recipes.md",
@@ -1370,7 +1370,7 @@
   {
     "ID": "ALT-0077",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch44",
     "Chapter / Contribution Title": "Chapter 44: LLM Pre-training Data Engineering in Practice",
     "Source Markdown": "docs/en/part13/ch44_pretrain_recipes.md",
@@ -1388,7 +1388,7 @@
   {
     "ID": "ALT-0078",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch44",
     "Chapter / Contribution Title": "Chapter 44: LLM Pre-training Data Engineering in Practice",
     "Source Markdown": "docs/en/part13/ch44_pretrain_recipes.md",
@@ -1406,7 +1406,7 @@
   {
     "ID": "ALT-0079",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch45",
     "Chapter / Contribution Title": "Chapter 45: LLM Post-training Data Engineering: SFT and Preference Alignment",
     "Source Markdown": "docs/en/part13/ch45_posttrain_recipes.md",
@@ -1424,7 +1424,7 @@
   {
     "ID": "ALT-0080",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch45",
     "Chapter / Contribution Title": "Chapter 45: LLM Post-training Data Engineering: SFT and Preference Alignment",
     "Source Markdown": "docs/en/part13/ch45_posttrain_recipes.md",
@@ -1442,7 +1442,7 @@
   {
     "ID": "ALT-0081",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch45",
     "Chapter / Contribution Title": "Chapter 45: LLM Post-training Data Engineering: SFT and Preference Alignment",
     "Source Markdown": "docs/en/part13/ch45_posttrain_recipes.md",
@@ -1460,9 +1460,9 @@
   {
     "ID": "ALT-0082",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch46",
-    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and RL Data Engineering: R1 / QwQ Paradigm",
+    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and Reinforcement Learning Data",
     "Source Markdown": "docs/en/part13/ch46_rl_reasoning_data.md",
     "Line": 73,
     "Figure No.": "1946-01-01T00:00:00",
@@ -1472,15 +1472,15 @@
     "Image Exists": "yes",
     "Dimensions": "1672x941",
     "Format": "svg",
-    "Alt Text for Submission": "The data feedback relationships among cold-start SFT, large-scale RL, rejection sampling, and second-round SFT showing After the second-round SFT, the stronger model becomes, the starting point for, the next RL round, (Policy Model), Stage 1: Cold-Start SFT (Seed Stage).",
-    "Long Description / Review Note": "The figure expands The data feedback relationships among cold-start SFT, large-scale RL, rejection sampling, and second-round SFT into labeled components: After the second-round SFT, the stronger model becomes, the starting point for, the next RL round, (Policy Model), Stage 1: Cold-Start SFT (Seed Stage), Input a small number, (a few thousand), of carefully selected, Long-CoT samples, First Driving Force, Logical Templates, Explicitly mark the <think> tag, and a machine-parsable format. Additional labels include <think>, reasoning process, structured math / code organization, </think>, Stage 4: Second-Round SFT, (Consolidation Stage), Re-mix the selected high-quality, reasoning data with general."
+    "Alt Text for Submission": "The data feedback relationships among cold-start supervised fine-tuning (SFT), large-scale reinforcement learning (RL), rejection sampling, and second-round SFT showing After the second-round SFT, the stronger model becomes, the starting point for, the next reinforcement learning (RL) round, (Policy Model), Stage 1: Cold-Start Supervised Fine-Tuning (SFT) Seed Stage.",
+    "Long Description / Review Note": "The figure expands The data feedback relationships among cold-start supervised fine-tuning (SFT), large-scale reinforcement learning (RL), rejection sampling, and second-round SFT into labeled components: After the second-round SFT, the stronger model becomes, the starting point for, the next reinforcement learning (RL) round, (Policy Model), Stage 1: Cold-Start Supervised Fine-Tuning (SFT) Seed Stage, Input a small number, (a few thousand), of carefully selected, Long-CoT samples, First Driving Force, Logical Templates, Explicitly mark the <think> tag, and a machine-parsable format. Additional labels include <think>, reasoning process, structured math / code organization, </think>, Stage 4: Second-Round Supervised Fine-Tuning (SFT), (Consolidation Stage), Re-mix the selected high-quality, reasoning data with general."
   },
   {
     "ID": "ALT-0083",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch46",
-    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and RL Data Engineering: R1 / QwQ Paradigm",
+    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and Reinforcement Learning Data",
     "Source Markdown": "docs/en/part13/ch46_rl_reasoning_data.md",
     "Line": 180,
     "Figure No.": "1946-02-01T00:00:00",
@@ -1496,9 +1496,9 @@
   {
     "ID": "ALT-0084",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch46",
-    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and RL Data Engineering: R1 / QwQ Paradigm",
+    "Chapter / Contribution Title": "Chapter 46: Reasoning Models and Reinforcement Learning Data",
     "Source Markdown": "docs/en/part13/ch46_rl_reasoning_data.md",
     "Line": 225,
     "Figure No.": "1946-03-01T00:00:00",
@@ -1514,7 +1514,7 @@
   {
     "ID": "ALT-0085",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch47",
     "Chapter / Contribution Title": "Chapter 47: VLM Data Recipes from Pre-training to Visual Alignment",
     "Source Markdown": "docs/en/part13/ch47_vlm_data_recipes.md",
@@ -1532,7 +1532,7 @@
   {
     "ID": "ALT-0086",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch47",
     "Chapter / Contribution Title": "Chapter 47: VLM Data Recipes from Pre-training to Visual Alignment",
     "Source Markdown": "docs/en/part13/ch47_vlm_data_recipes.md",
@@ -1550,7 +1550,7 @@
   {
     "ID": "ALT-0087",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch47",
     "Chapter / Contribution Title": "Chapter 47: VLM Data Recipes from Pre-training to Visual Alignment",
     "Source Markdown": "docs/en/part13/ch47_vlm_data_recipes.md",
@@ -1568,7 +1568,7 @@
   {
     "ID": "ALT-0088",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch47",
     "Chapter / Contribution Title": "Chapter 47: VLM Data Recipes from Pre-training to Visual Alignment",
     "Source Markdown": "docs/en/part13/ch47_vlm_data_recipes.md",
@@ -1586,7 +1586,7 @@
   {
     "ID": "ALT-0089",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch48",
     "Chapter / Contribution Title": "Chapter 48: Multimodal Generative Model Data Engineering: T2I and T2V Pipelines",
     "Source Markdown": "docs/en/part13/ch48_t2i_t2v.md",
@@ -1604,7 +1604,7 @@
   {
     "ID": "ALT-0090",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch48",
     "Chapter / Contribution Title": "Chapter 48: Multimodal Generative Model Data Engineering: T2I and T2V Pipelines",
     "Source Markdown": "docs/en/part13/ch48_t2i_t2v.md",
@@ -1622,7 +1622,7 @@
   {
     "ID": "ALT-0091",
     "Language": "en",
-    "Part / Section": "Part 13: Open-source LLM Data Engineering Recipes and Paradigms",
+    "Part / Section": "Part XIII: Open-source LLM Data Engineering Recipes and Paradigms",
     "Unit": "Ch48",
     "Chapter / Contribution Title": "Chapter 48: Multimodal Generative Model Data Engineering: T2I and T2V Pipelines",
     "Source Markdown": "docs/en/part13/ch48_t2i_t2v.md",
@@ -1640,7 +1640,7 @@
   {
     "ID": "ALT-0092",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1658,7 +1658,7 @@
   {
     "ID": "ALT-0093",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1676,7 +1676,7 @@
   {
     "ID": "ALT-0094",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1694,7 +1694,7 @@
   {
     "ID": "ALT-0095",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1712,7 +1712,7 @@
   {
     "ID": "ALT-0096",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1730,7 +1730,7 @@
   {
     "ID": "ALT-0097",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1748,7 +1748,7 @@
   {
     "ID": "ALT-0098",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1766,7 +1766,7 @@
   {
     "ID": "ALT-0099",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1784,7 +1784,7 @@
   {
     "ID": "ALT-0100",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1802,7 +1802,7 @@
   {
     "ID": "ALT-0101",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1820,7 +1820,7 @@
   {
     "ID": "ALT-0102",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P01",
     "Chapter / Contribution Title": "Project 1: Building a Distributed Mini-C4 Data Pipeline with Ray",
     "Source Markdown": "docs/en/part14/p01_mini_c4.md",
@@ -1838,7 +1838,7 @@
   {
     "ID": "ALT-0103",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1856,7 +1856,7 @@
   {
     "ID": "ALT-0104",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1874,7 +1874,7 @@
   {
     "ID": "ALT-0105",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1892,7 +1892,7 @@
   {
     "ID": "ALT-0106",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1910,7 +1910,7 @@
   {
     "ID": "ALT-0107",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1928,7 +1928,7 @@
   {
     "ID": "ALT-0108",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1946,7 +1946,7 @@
   {
     "ID": "ALT-0109",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1964,7 +1964,7 @@
   {
     "ID": "ALT-0110",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -1982,7 +1982,7 @@
   {
     "ID": "ALT-0111",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2000,7 +2000,7 @@
   {
     "ID": "ALT-0112",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2018,7 +2018,7 @@
   {
     "ID": "ALT-0113",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2036,7 +2036,7 @@
   {
     "ID": "ALT-0114",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2054,7 +2054,7 @@
   {
     "ID": "ALT-0115",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2072,7 +2072,7 @@
   {
     "ID": "ALT-0116",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2090,7 +2090,7 @@
   {
     "ID": "ALT-0117",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2108,7 +2108,7 @@
   {
     "ID": "ALT-0118",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2126,7 +2126,7 @@
   {
     "ID": "ALT-0119",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2144,7 +2144,7 @@
   {
     "ID": "ALT-0120",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2162,7 +2162,7 @@
   {
     "ID": "ALT-0121",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2180,7 +2180,7 @@
   {
     "ID": "ALT-0122",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P02",
     "Chapter / Contribution Title": "Project 2: Vertical-domain Expert SFT for Law",
     "Source Markdown": "docs/en/part14/p02_legal_sft.md",
@@ -2198,7 +2198,7 @@
   {
     "ID": "ALT-0123",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2216,7 +2216,7 @@
   {
     "ID": "ALT-0124",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2234,7 +2234,7 @@
   {
     "ID": "ALT-0125",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2252,7 +2252,7 @@
   {
     "ID": "ALT-0126",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2270,7 +2270,7 @@
   {
     "ID": "ALT-0127",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2288,7 +2288,7 @@
   {
     "ID": "ALT-0128",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2306,7 +2306,7 @@
   {
     "ID": "ALT-0129",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2324,7 +2324,7 @@
   {
     "ID": "ALT-0130",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P03",
     "Chapter / Contribution Title": "Project 3: LLaVA Multimodal Instruction Data Factory",
     "Source Markdown": "docs/en/part14/p03_llava_instruct.md",
@@ -2342,7 +2342,7 @@
   {
     "ID": "ALT-0131",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2360,7 +2360,7 @@
   {
     "ID": "ALT-0132",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2378,7 +2378,7 @@
   {
     "ID": "ALT-0133",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2396,7 +2396,7 @@
   {
     "ID": "ALT-0134",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2414,7 +2414,7 @@
   {
     "ID": "ALT-0135",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2432,7 +2432,7 @@
   {
     "ID": "ALT-0136",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2450,7 +2450,7 @@
   {
     "ID": "ALT-0137",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2468,7 +2468,7 @@
   {
     "ID": "ALT-0138",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2486,7 +2486,7 @@
   {
     "ID": "ALT-0139",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2504,7 +2504,7 @@
   {
     "ID": "ALT-0140",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2522,7 +2522,7 @@
   {
     "ID": "ALT-0141",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P04",
     "Chapter / Contribution Title": "Project 4: Synthetic Math and Code Textbook Factory",
     "Source Markdown": "docs/en/part14/p04_synthetic_textbook.md",
@@ -2540,7 +2540,7 @@
   {
     "ID": "ALT-0142",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2558,7 +2558,7 @@
   {
     "ID": "ALT-0143",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2576,7 +2576,7 @@
   {
     "ID": "ALT-0144",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2594,7 +2594,7 @@
   {
     "ID": "ALT-0145",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2612,7 +2612,7 @@
   {
     "ID": "ALT-0146",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2630,7 +2630,7 @@
   {
     "ID": "ALT-0147",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2648,7 +2648,7 @@
   {
     "ID": "ALT-0148",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2666,7 +2666,7 @@
   {
     "ID": "ALT-0149",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2684,7 +2684,7 @@
   {
     "ID": "ALT-0150",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P05",
     "Chapter / Contribution Title": "Project 5: Multimodal RAG Enterprise Financial Report Assistant",
     "Source Markdown": "docs/en/part14/p05_mm_rag.md",
@@ -2702,9 +2702,9 @@
   {
     "ID": "ALT-0151",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 182,
     "Figure No.": "P06-1",
@@ -2720,9 +2720,9 @@
   {
     "ID": "ALT-0152",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 229,
     "Figure No.": "P06-2",
@@ -2738,9 +2738,9 @@
   {
     "ID": "ALT-0153",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 346,
     "Figure No.": "P06-3",
@@ -2756,9 +2756,9 @@
   {
     "ID": "ALT-0154",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 419,
     "Figure No.": "P06-4",
@@ -2774,9 +2774,9 @@
   {
     "ID": "ALT-0155",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 473,
     "Figure No.": "P06-5",
@@ -2792,9 +2792,9 @@
   {
     "ID": "ALT-0156",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 549,
     "Figure No.": "P06-6",
@@ -2810,9 +2810,9 @@
   {
     "ID": "ALT-0157",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 583,
     "Figure No.": "P06-7",
@@ -2828,9 +2828,9 @@
   {
     "ID": "ALT-0158",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 682,
     "Figure No.": "P06-8",
@@ -2846,9 +2846,9 @@
   {
     "ID": "ALT-0159",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 755,
     "Figure No.": "P06-9",
@@ -2864,9 +2864,9 @@
   {
     "ID": "ALT-0160",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P06",
-    "Chapter / Contribution Title": "Project 6: CoT Reasoning Dataset Construction and PRM Training",
+    "Chapter / Contribution Title": "Project 6: Chain-of-Thought Dataset Construction and Process Reward Model Training",
     "Source Markdown": "docs/en/part14/p06_prm.md",
     "Line": 854,
     "Figure No.": "P06-10",
@@ -2882,7 +2882,7 @@
   {
     "ID": "ALT-0161",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2900,7 +2900,7 @@
   {
     "ID": "ALT-0162",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2918,7 +2918,7 @@
   {
     "ID": "ALT-0163",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2936,7 +2936,7 @@
   {
     "ID": "ALT-0164",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2954,7 +2954,7 @@
   {
     "ID": "ALT-0165",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2972,7 +2972,7 @@
   {
     "ID": "ALT-0166",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -2990,7 +2990,7 @@
   {
     "ID": "ALT-0167",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3008,7 +3008,7 @@
   {
     "ID": "ALT-0168",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3026,7 +3026,7 @@
   {
     "ID": "ALT-0169",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3044,7 +3044,7 @@
   {
     "ID": "ALT-0170",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3062,7 +3062,7 @@
   {
     "ID": "ALT-0171",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3080,7 +3080,7 @@
   {
     "ID": "ALT-0172",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3098,7 +3098,7 @@
   {
     "ID": "ALT-0173",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3116,7 +3116,7 @@
   {
     "ID": "ALT-0174",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P07",
     "Chapter / Contribution Title": "Project 7: Agent Tool-Use Data Factory",
     "Source Markdown": "docs/en/part14/p07_agent_tooluse.md",
@@ -3134,7 +3134,7 @@
   {
     "ID": "ALT-0175",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3152,7 +3152,7 @@
   {
     "ID": "ALT-0176",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3170,7 +3170,7 @@
   {
     "ID": "ALT-0177",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3188,7 +3188,7 @@
   {
     "ID": "ALT-0178",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3206,7 +3206,7 @@
   {
     "ID": "ALT-0179",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3224,7 +3224,7 @@
   {
     "ID": "ALT-0180",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3242,7 +3242,7 @@
   {
     "ID": "ALT-0181",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3260,7 +3260,7 @@
   {
     "ID": "ALT-0182",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3278,7 +3278,7 @@
   {
     "ID": "ALT-0183",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3296,7 +3296,7 @@
   {
     "ID": "ALT-0184",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3314,7 +3314,7 @@
   {
     "ID": "ALT-0185",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P08",
     "Chapter / Contribution Title": "Project 8: Building an Enterprise DataOps Platform",
     "Source Markdown": "docs/en/part14/p08_dataops.md",
@@ -3332,7 +3332,7 @@
   {
     "ID": "ALT-0186",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3350,7 +3350,7 @@
   {
     "ID": "ALT-0187",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3368,7 +3368,7 @@
   {
     "ID": "ALT-0188",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3386,7 +3386,7 @@
   {
     "ID": "ALT-0189",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3404,7 +3404,7 @@
   {
     "ID": "ALT-0190",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3422,7 +3422,7 @@
   {
     "ID": "ALT-0191",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3440,7 +3440,7 @@
   {
     "ID": "ALT-0192",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3458,7 +3458,7 @@
   {
     "ID": "ALT-0193",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3476,7 +3476,7 @@
   {
     "ID": "ALT-0194",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3494,7 +3494,7 @@
   {
     "ID": "ALT-0195",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3512,7 +3512,7 @@
   {
     "ID": "ALT-0196",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3530,7 +3530,7 @@
   {
     "ID": "ALT-0197",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P09",
     "Chapter / Contribution Title": "Project 9: Privacy-preserving Data Pipeline",
     "Source Markdown": "docs/en/part14/p09_privacy_pipeline.md",
@@ -3548,7 +3548,7 @@
   {
     "ID": "ALT-0198",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3566,7 +3566,7 @@
   {
     "ID": "ALT-0199",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3584,7 +3584,7 @@
   {
     "ID": "ALT-0200",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3602,7 +3602,7 @@
   {
     "ID": "ALT-0201",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3620,7 +3620,7 @@
   {
     "ID": "ALT-0202",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3638,7 +3638,7 @@
   {
     "ID": "ALT-0203",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3656,7 +3656,7 @@
   {
     "ID": "ALT-0204",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3674,7 +3674,7 @@
   {
     "ID": "ALT-0205",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3692,7 +3692,7 @@
   {
     "ID": "ALT-0206",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3710,7 +3710,7 @@
   {
     "ID": "ALT-0207",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P10",
     "Chapter / Contribution Title": "Project 10: End-to-End LLM Data Flywheel",
     "Source Markdown": "docs/en/part14/p10_flywheel.md",
@@ -3728,7 +3728,7 @@
   {
     "ID": "ALT-0208",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P11",
     "Chapter / Contribution Title": "Project 11: Reproducing Mini-DeepSeek Pre-training",
     "Source Markdown": "docs/en/part14/p11_mini_deepseek.md",
@@ -3746,7 +3746,7 @@
   {
     "ID": "ALT-0209",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P12",
     "Chapter / Contribution Title": "Project 12: R1 Reasoning Flywheel",
     "Source Markdown": "docs/en/part14/p12_r1_reasoning_flywheel.md",
@@ -3764,7 +3764,7 @@
   {
     "ID": "ALT-0210",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P13",
     "Chapter / Contribution Title": "Project 13: Multimodal Instruction Factory",
     "Source Markdown": "docs/en/part14/p13_multimodal_instruction_factory.md",
@@ -3772,7 +3772,7 @@
     "Figure No.": "2026-01-13T00:00:00",
     "Caption / Figure Title": "Multimodal Instruction Factory",
     "Markdown Alt": "Multimodal Instruction Factory",
-    "Image File": "docs/images/part14/Yu-Project13-Fig02-EN.svg",
+    "Image File": "docs/images/part14/Yu-Project13-Fig01-EN.svg",
     "Image Exists": "yes",
     "Dimensions": "1000x730",
     "Format": "svg",
@@ -3782,7 +3782,7 @@
   {
     "ID": "ALT-0211",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P14",
     "Chapter / Contribution Title": "Project 14: Video Generation Dataset: From Video Source to T2V-ready Data Pipeline",
     "Source Markdown": "docs/en/part14/p14_video_generation.md",
@@ -3800,7 +3800,7 @@
   {
     "ID": "ALT-0212",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P14",
     "Chapter / Contribution Title": "Project 14: Video Generation Dataset: From Video Source to T2V-ready Data Pipeline",
     "Source Markdown": "docs/en/part14/p14_video_generation.md",
@@ -3818,7 +3818,7 @@
   {
     "ID": "ALT-0213",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P14",
     "Chapter / Contribution Title": "Project 14: Video Generation Dataset: From Video Source to T2V-ready Data Pipeline",
     "Source Markdown": "docs/en/part14/p14_video_generation.md",
@@ -3836,9 +3836,9 @@
   {
     "ID": "ALT-0214",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P15",
-    "Chapter / Contribution Title": "Project 15: Building an Enterprise Semantic BI Assistant with DataAgent",
+    "Chapter / Contribution Title": "Project 15: DataAgent Semantic Business Intelligence Assistant",
     "Source Markdown": "docs/en/part14/p15_dataagent_semantic_nl2sql_agent.md",
     "Line": 11,
     "Figure No.": "P15-1",
@@ -3854,9 +3854,9 @@
   {
     "ID": "ALT-0215",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P15",
-    "Chapter / Contribution Title": "Project 15: Building an Enterprise Semantic BI Assistant with DataAgent",
+    "Chapter / Contribution Title": "Project 15: DataAgent Semantic Business Intelligence Assistant",
     "Source Markdown": "docs/en/part14/p15_dataagent_semantic_nl2sql_agent.md",
     "Line": 143,
     "Figure No.": "P15-2",
@@ -3872,9 +3872,9 @@
   {
     "ID": "ALT-0216",
     "Language": "en",
-    "Part / Section": "Part 14: Practical Projects",
+    "Part / Section": "Part XIV: Practical Projects",
     "Unit": "P15",
-    "Chapter / Contribution Title": "Project 15: Building an Enterprise Semantic BI Assistant with DataAgent",
+    "Chapter / Contribution Title": "Project 15: DataAgent Semantic Business Intelligence Assistant",
     "Source Markdown": "docs/en/part14/p15_dataagent_semantic_nl2sql_agent.md",
     "Line": 579,
     "Figure No.": "P15-3",
@@ -3890,7 +3890,7 @@
   {
     "ID": "ALT-0217",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch04",
     "Chapter / Contribution Title": "Chapter 4: Data Sources, Acquisition, and Copyright",
     "Source Markdown": "docs/en/part2/ch04_data_sources.md",
@@ -3908,7 +3908,7 @@
   {
     "ID": "ALT-0218",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch04",
     "Chapter / Contribution Title": "Chapter 4: Data Sources, Acquisition, and Copyright",
     "Source Markdown": "docs/en/part2/ch04_data_sources.md",
@@ -3926,7 +3926,7 @@
   {
     "ID": "ALT-0219",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch05",
     "Chapter / Contribution Title": "Chapter 5: Cleaning, Deduplication, and Decontamination",
     "Source Markdown": "docs/en/part2/ch05_cleaning_dedup.md",
@@ -3944,7 +3944,7 @@
   {
     "ID": "ALT-0220",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch05",
     "Chapter / Contribution Title": "Chapter 5: Cleaning, Deduplication, and Decontamination",
     "Source Markdown": "docs/en/part2/ch05_cleaning_dedup.md",
@@ -3962,7 +3962,7 @@
   {
     "ID": "ALT-0221",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch06",
     "Chapter / Contribution Title": "Chapter 6: Tokenization, Serialization, and Efficient Loading",
     "Source Markdown": "docs/en/part2/ch06_tokenization_loading.md",
@@ -3980,7 +3980,7 @@
   {
     "ID": "ALT-0222",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch06",
     "Chapter / Contribution Title": "Chapter 6: Tokenization, Serialization, and Efficient Loading",
     "Source Markdown": "docs/en/part2/ch06_tokenization_loading.md",
@@ -3998,7 +3998,7 @@
   {
     "ID": "ALT-0223",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch07",
     "Chapter / Contribution Title": "Chapter 7: Data Evaluation, Quality Closed Loop, and Operational Iteration",
     "Source Markdown": "docs/en/part2/ch07_data_operations.md",
@@ -4016,7 +4016,7 @@
   {
     "ID": "ALT-0224",
     "Language": "en",
-    "Part / Section": "Part 2: Text Pre-training Data Engineering",
+    "Part / Section": "Part II: Text Pre-training Data Engineering",
     "Unit": "Ch07",
     "Chapter / Contribution Title": "Chapter 7: Data Evaluation, Quality Closed Loop, and Operational Iteration",
     "Source Markdown": "docs/en/part2/ch07_data_operations.md",
@@ -4034,7 +4034,7 @@
   {
     "ID": "ALT-0225",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch08",
     "Chapter / Contribution Title": "Chapter 8: Image-Text Pair Data Engineering",
     "Source Markdown": "docs/en/part3/ch08_multimodal_image.md",
@@ -4052,7 +4052,7 @@
   {
     "ID": "ALT-0226",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch08",
     "Chapter / Contribution Title": "Chapter 8: Image-Text Pair Data Engineering",
     "Source Markdown": "docs/en/part3/ch08_multimodal_image.md",
@@ -4070,7 +4070,7 @@
   {
     "ID": "ALT-0227",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch08",
     "Chapter / Contribution Title": "Chapter 8: Image-Text Pair Data Engineering",
     "Source Markdown": "docs/en/part3/ch08_multimodal_image.md",
@@ -4088,7 +4088,7 @@
   {
     "ID": "ALT-0228",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch09",
     "Chapter / Contribution Title": "Chapter 9: Re-captioning and Document Understanding",
     "Source Markdown": "docs/en/part3/ch09_recaptioning_ocr.md",
@@ -4106,7 +4106,7 @@
   {
     "ID": "ALT-0229",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch09",
     "Chapter / Contribution Title": "Chapter 9: Re-captioning and Document Understanding",
     "Source Markdown": "docs/en/part3/ch09_recaptioning_ocr.md",
@@ -4124,7 +4124,7 @@
   {
     "ID": "ALT-0230",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch10",
     "Chapter / Contribution Title": "Chapter 10: Video and Audio Data Engineering",
     "Source Markdown": "docs/en/part3/ch10_video_audio.md",
@@ -4142,7 +4142,7 @@
   {
     "ID": "ALT-0231",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch10",
     "Chapter / Contribution Title": "Chapter 10: Video and Audio Data Engineering",
     "Source Markdown": "docs/en/part3/ch10_video_audio.md",
@@ -4160,7 +4160,7 @@
   {
     "ID": "ALT-0232",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch10",
     "Chapter / Contribution Title": "Chapter 10: Video and Audio Data Engineering",
     "Source Markdown": "docs/en/part3/ch10_video_audio.md",
@@ -4178,7 +4178,7 @@
   {
     "ID": "ALT-0233",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch10",
     "Chapter / Contribution Title": "Chapter 10: Video and Audio Data Engineering",
     "Source Markdown": "docs/en/part3/ch10_video_audio.md",
@@ -4196,7 +4196,7 @@
   {
     "ID": "ALT-0234",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch11",
     "Chapter / Contribution Title": "Chapter 11: Cross-modal Alignment and Fusion",
     "Source Markdown": "docs/en/part3/ch11_cross_modal_alignment.md",
@@ -4214,7 +4214,7 @@
   {
     "ID": "ALT-0235",
     "Language": "en",
-    "Part / Section": "Part 3: Multimodal Data Engineering",
+    "Part / Section": "Part III: Multimodal Data Engineering",
     "Unit": "Ch11",
     "Chapter / Contribution Title": "Chapter 11: Cross-modal Alignment and Fusion",
     "Source Markdown": "docs/en/part3/ch11_cross_modal_alignment.md",
@@ -4232,7 +4232,7 @@
   {
     "ID": "ALT-0236",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch12",
     "Chapter / Contribution Title": "Chapter 12: SFT Data Design and Instruction System",
     "Source Markdown": "docs/en/part4/ch12_sft.md",
@@ -4250,7 +4250,7 @@
   {
     "ID": "ALT-0237",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch12",
     "Chapter / Contribution Title": "Chapter 12: SFT Data Design and Instruction System",
     "Source Markdown": "docs/en/part4/ch12_sft.md",
@@ -4268,7 +4268,7 @@
   {
     "ID": "ALT-0238",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch13",
     "Chapter / Contribution Title": "Chapter 13: Preference Data and Reward Signals",
     "Source Markdown": "docs/en/part4/ch13_preference.md",
@@ -4286,7 +4286,7 @@
   {
     "ID": "ALT-0239",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch13",
     "Chapter / Contribution Title": "Chapter 13: Preference Data and Reward Signals",
     "Source Markdown": "docs/en/part4/ch13_preference.md",
@@ -4304,7 +4304,7 @@
   {
     "ID": "ALT-0240",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch14",
     "Chapter / Contribution Title": "Chapter 14: Annotation Platforms, QA Systems, and Data Operations",
     "Source Markdown": "docs/en/part4/ch14_qa.md",
@@ -4322,7 +4322,7 @@
   {
     "ID": "ALT-0241",
     "Language": "en",
-    "Part / Section": "Part 4: Instruction Fine-tuning and Preference Data",
+    "Part / Section": "Part IV: Instruction Fine-tuning and Preference Data",
     "Unit": "Ch14",
     "Chapter / Contribution Title": "Chapter 14: Annotation Platforms, QA Systems, and Data Operations",
     "Source Markdown": "docs/en/part4/ch14_qa.md",
@@ -4340,7 +4340,7 @@
   {
     "ID": "ALT-0242",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch15",
     "Chapter / Contribution Title": "Chapter 15: Synthetic Data Factory: From Seed to Verification",
     "Source Markdown": "docs/en/part5/ch15_data_synthesis.md",
@@ -4358,7 +4358,7 @@
   {
     "ID": "ALT-0243",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch15",
     "Chapter / Contribution Title": "Chapter 15: Synthetic Data Factory: From Seed to Verification",
     "Source Markdown": "docs/en/part5/ch15_data_synthesis.md",
@@ -4376,7 +4376,7 @@
   {
     "ID": "ALT-0244",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch16",
     "Chapter / Contribution Title": "Chapter 16: Knowledge Distillation and Model Collaboration",
     "Source Markdown": "docs/en/part5/ch16_distillation.md",
@@ -4394,7 +4394,7 @@
   {
     "ID": "ALT-0245",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch16",
     "Chapter / Contribution Title": "Chapter 16: Knowledge Distillation and Model Collaboration",
     "Source Markdown": "docs/en/part5/ch16_distillation.md",
@@ -4412,7 +4412,7 @@
   {
     "ID": "ALT-0246",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch17",
     "Chapter / Contribution Title": "Chapter 17: Synthetic Data Quality Control and Model Collapse",
     "Source Markdown": "docs/en/part5/ch17_quality.md",
@@ -4430,7 +4430,7 @@
   {
     "ID": "ALT-0247",
     "Language": "en",
-    "Part / Section": "Part 5: Synthetic Data Engineering",
+    "Part / Section": "Part V: Synthetic Data Engineering",
     "Unit": "Ch17",
     "Chapter / Contribution Title": "Chapter 17: Synthetic Data Quality Control and Model Collapse",
     "Source Markdown": "docs/en/part5/ch17_quality.md",
@@ -4448,7 +4448,7 @@
   {
     "ID": "ALT-0248",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch18",
     "Chapter / Contribution Title": "Chapter 18: Chain-of-Thought and Reasoning Data Engineering",
     "Source Markdown": "docs/en/part6/ch18_cot.md",
@@ -4466,7 +4466,7 @@
   {
     "ID": "ALT-0249",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch18",
     "Chapter / Contribution Title": "Chapter 18: Chain-of-Thought and Reasoning Data Engineering",
     "Source Markdown": "docs/en/part6/ch18_cot.md",
@@ -4484,7 +4484,7 @@
   {
     "ID": "ALT-0250",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch19",
     "Chapter / Contribution Title": "Chapter 19: Tool-Use and Function Calling Data",
     "Source Markdown": "docs/en/part6/ch19_tool.md",
@@ -4502,7 +4502,7 @@
   {
     "ID": "ALT-0251",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch19",
     "Chapter / Contribution Title": "Chapter 19: Tool-Use and Function Calling Data",
     "Source Markdown": "docs/en/part6/ch19_tool.md",
@@ -4520,7 +4520,7 @@
   {
     "ID": "ALT-0252",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch20",
     "Chapter / Contribution Title": "Chapter 20: Agent Memory and Multi-turn Interaction Data",
     "Source Markdown": "docs/en/part6/ch20_agent.md",
@@ -4538,7 +4538,7 @@
   {
     "ID": "ALT-0253",
     "Language": "en",
-    "Part / Section": "Part 6: Reasoning and Agent Data Engineering",
+    "Part / Section": "Part VI: Reasoning and Agent Data Engineering",
     "Unit": "Ch20",
     "Chapter / Contribution Title": "Chapter 20: Agent Memory and Multi-turn Interaction Data",
     "Source Markdown": "docs/en/part6/ch20_agent.md",
@@ -4556,7 +4556,7 @@
   {
     "ID": "ALT-0254",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4574,7 +4574,7 @@
   {
     "ID": "ALT-0255",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4592,7 +4592,7 @@
   {
     "ID": "ALT-0256",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4610,7 +4610,7 @@
   {
     "ID": "ALT-0257",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4628,7 +4628,7 @@
   {
     "ID": "ALT-0258",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4646,7 +4646,7 @@
   {
     "ID": "ALT-0259",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4664,7 +4664,7 @@
   {
     "ID": "ALT-0260",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4682,7 +4682,7 @@
   {
     "ID": "ALT-0261",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4700,7 +4700,7 @@
   {
     "ID": "ALT-0262",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch21",
     "Chapter / Contribution Title": "Chapter 21: RAG Data Pipeline",
     "Source Markdown": "docs/en/part7/ch21_rag_pipeline.md",
@@ -4718,7 +4718,7 @@
   {
     "ID": "ALT-0263",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch22",
     "Chapter / Contribution Title": "Chapter 22: Multimodal RAG and Visual Retrieval",
     "Source Markdown": "docs/en/part7/ch22_multimodal_rag_visual_retrieval.md",
@@ -4736,7 +4736,7 @@
   {
     "ID": "ALT-0264",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch22",
     "Chapter / Contribution Title": "Chapter 22: Multimodal RAG and Visual Retrieval",
     "Source Markdown": "docs/en/part7/ch22_multimodal_rag_visual_retrieval.md",
@@ -4754,7 +4754,7 @@
   {
     "ID": "ALT-0265",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch22",
     "Chapter / Contribution Title": "Chapter 22: Multimodal RAG and Visual Retrieval",
     "Source Markdown": "docs/en/part7/ch22_multimodal_rag_visual_retrieval.md",
@@ -4772,7 +4772,7 @@
   {
     "ID": "ALT-0266",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch22",
     "Chapter / Contribution Title": "Chapter 22: Multimodal RAG and Visual Retrieval",
     "Source Markdown": "docs/en/part7/ch22_multimodal_rag_visual_retrieval.md",
@@ -4790,7 +4790,7 @@
   {
     "ID": "ALT-0267",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch22",
     "Chapter / Contribution Title": "Chapter 22: Multimodal RAG and Visual Retrieval",
     "Source Markdown": "docs/en/part7/ch22_multimodal_rag_visual_retrieval.md",
@@ -4808,7 +4808,7 @@
   {
     "ID": "ALT-0268",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch23",
     "Chapter / Contribution Title": "Chapter 23: Online Feedback Loop and Knowledge Update",
     "Source Markdown": "docs/en/part7/ch23_online_feedback_knowledge_update.md",
@@ -4826,7 +4826,7 @@
   {
     "ID": "ALT-0269",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch23",
     "Chapter / Contribution Title": "Chapter 23: Online Feedback Loop and Knowledge Update",
     "Source Markdown": "docs/en/part7/ch23_online_feedback_knowledge_update.md",
@@ -4844,7 +4844,7 @@
   {
     "ID": "ALT-0270",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch23",
     "Chapter / Contribution Title": "Chapter 23: Online Feedback Loop and Knowledge Update",
     "Source Markdown": "docs/en/part7/ch23_online_feedback_knowledge_update.md",
@@ -4862,7 +4862,7 @@
   {
     "ID": "ALT-0271",
     "Language": "en",
-    "Part / Section": "Part 7: Application-Level Data Engineering",
+    "Part / Section": "Part VII: Application-Level Data Engineering",
     "Unit": "Ch23",
     "Chapter / Contribution Title": "Chapter 23: Online Feedback Loop and Knowledge Update",
     "Source Markdown": "docs/en/part7/ch23_online_feedback_knowledge_update.md",
@@ -4880,7 +4880,7 @@
   {
     "ID": "ALT-0272",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch24",
     "Chapter / Contribution Title": "Chapter 24: DataOps Flywheel and Team Organization",
     "Source Markdown": "docs/en/part8/ch24_dataops_flywheel_team.md",
@@ -4898,7 +4898,7 @@
   {
     "ID": "ALT-0273",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch24",
     "Chapter / Contribution Title": "Chapter 24: DataOps Flywheel and Team Organization",
     "Source Markdown": "docs/en/part8/ch24_dataops_flywheel_team.md",
@@ -4916,7 +4916,7 @@
   {
     "ID": "ALT-0274",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch24",
     "Chapter / Contribution Title": "Chapter 24: DataOps Flywheel and Team Organization",
     "Source Markdown": "docs/en/part8/ch24_dataops_flywheel_team.md",
@@ -4934,7 +4934,7 @@
   {
     "ID": "ALT-0275",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch25",
     "Chapter / Contribution Title": "Chapter 25: Data Version Management and Experiment Tracking",
     "Source Markdown": "docs/en/part8/ch25_data_versioning_experiment_tracking.md",
@@ -4952,7 +4952,7 @@
   {
     "ID": "ALT-0276",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch25",
     "Chapter / Contribution Title": "Chapter 25: Data Version Management and Experiment Tracking",
     "Source Markdown": "docs/en/part8/ch25_data_versioning_experiment_tracking.md",
@@ -4970,7 +4970,7 @@
   {
     "ID": "ALT-0277",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch26",
     "Chapter / Contribution Title": "Chapter 26: Data Platform Observability",
     "Source Markdown": "docs/en/part8/ch26_data_platform_observability.md",
@@ -4988,7 +4988,7 @@
   {
     "ID": "ALT-0278",
     "Language": "en",
-    "Part / Section": "Part 8: Data Operations and Platform Development",
+    "Part / Section": "Part VIII: Data Operations and Platform Development",
     "Unit": "Ch26",
     "Chapter / Contribution Title": "Chapter 26: Data Platform Observability",
     "Source Markdown": "docs/en/part8/ch26_data_platform_observability.md",
@@ -5006,7 +5006,7 @@
   {
     "ID": "ALT-0279",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch27",
     "Chapter / Contribution Title": "Chapter 27: Data Catalogs and Metadata Governance",
     "Source Markdown": "docs/en/part9/ch27_data_catalog_and_metadata_governance.md",
@@ -5024,7 +5024,7 @@
   {
     "ID": "ALT-0280",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch27",
     "Chapter / Contribution Title": "Chapter 27: Data Catalogs and Metadata Governance",
     "Source Markdown": "docs/en/part9/ch27_data_catalog_and_metadata_governance.md",
@@ -5042,7 +5042,7 @@
   {
     "ID": "ALT-0281",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch27",
     "Chapter / Contribution Title": "Chapter 27: Data Catalogs and Metadata Governance",
     "Source Markdown": "docs/en/part9/ch27_data_catalog_and_metadata_governance.md",
@@ -5060,7 +5060,7 @@
   {
     "ID": "ALT-0282",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch27",
     "Chapter / Contribution Title": "Chapter 27: Data Catalogs and Metadata Governance",
     "Source Markdown": "docs/en/part9/ch27_data_catalog_and_metadata_governance.md",
@@ -5078,7 +5078,7 @@
   {
     "ID": "ALT-0283",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch28",
     "Chapter / Contribution Title": "Chapter 28: Data Productization and Data Contracts",
     "Source Markdown": "docs/en/part9/ch28_data_productization_and_data_contracts.md",
@@ -5096,7 +5096,7 @@
   {
     "ID": "ALT-0284",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch28",
     "Chapter / Contribution Title": "Chapter 28: Data Productization and Data Contracts",
     "Source Markdown": "docs/en/part9/ch28_data_productization_and_data_contracts.md",
@@ -5114,7 +5114,7 @@
   {
     "ID": "ALT-0285",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch28",
     "Chapter / Contribution Title": "Chapter 28: Data Productization and Data Contracts",
     "Source Markdown": "docs/en/part9/ch28_data_productization_and_data_contracts.md",
@@ -5132,7 +5132,7 @@
   {
     "ID": "ALT-0286",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch28",
     "Chapter / Contribution Title": "Chapter 28: Data Productization and Data Contracts",
     "Source Markdown": "docs/en/part9/ch28_data_productization_and_data_contracts.md",
@@ -5150,7 +5150,7 @@
   {
     "ID": "ALT-0287",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch29",
     "Chapter / Contribution Title": "Chapter 29: Data Asset Valuation and Reuse Mechanisms",
     "Source Markdown": "docs/en/part9/ch29_data_valuation_and_reuse.md",
@@ -5168,7 +5168,7 @@
   {
     "ID": "ALT-0288",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch29",
     "Chapter / Contribution Title": "Chapter 29: Data Asset Valuation and Reuse Mechanisms",
     "Source Markdown": "docs/en/part9/ch29_data_valuation_and_reuse.md",
@@ -5186,7 +5186,7 @@
   {
     "ID": "ALT-0289",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch29",
     "Chapter / Contribution Title": "Chapter 29: Data Asset Valuation and Reuse Mechanisms",
     "Source Markdown": "docs/en/part9/ch29_data_valuation_and_reuse.md",
@@ -5204,7 +5204,7 @@
   {
     "ID": "ALT-0290",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch30",
     "Chapter / Contribution Title": "Chapter 30: Internal Data Market and Sharing Governance",
     "Source Markdown": "docs/en/part9/ch30_internal_data_market_and_sharing_governance.md",
@@ -5222,7 +5222,7 @@
   {
     "ID": "ALT-0291",
     "Language": "en",
-    "Part / Section": "Part 9: Data Assets, Data Products, and Data Contracts",
+    "Part / Section": "Part IX: Data Assets, Data Products, and Data Contracts",
     "Unit": "Ch30",
     "Chapter / Contribution Title": "Chapter 30: Internal Data Market and Sharing Governance",
     "Source Markdown": "docs/en/part9/ch30_internal_data_market_and_sharing_governance.md",

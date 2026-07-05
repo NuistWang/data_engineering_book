@@ -56,6 +56,7 @@ The divergence between this real problem distribution and the offline evaluation
 Table 23-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-1: Differences Between Offline Evaluation Questions and Online Real Questions*
+
 | Dimension | Offline Evaluation Questions | Online Real Questions | Impact on the System |
 | --- | --- | --- | --- |
 | Expression | Standard terminology, complete structure | Colloquial, abbreviations, aliases common | Affects query understanding and retrieval recall |
@@ -71,6 +72,7 @@ As shown in the comparison in Figure 23-1, in real systems this divergence direc
 ![Figure 23-1: From Offline Evaluation to the Online Real Problem Distribution](../../images/part7/Yu-Chap23-Fig01-EN.svg)
 
 *Figure 23-1: From Offline Evaluation to the Online Real Problem Distribution*
+
 The real problem distribution after deployment also has a clear temporal dimension. Certain questions will surge suddenly in response to new policy releases, new product launches, organizational changes, or external events. For example, after a reimbursement policy is updated, employees will concentrate their questions on the differences between old and new rules; after a new feature launches, customers will concentrate their questions on usage and limitations; after a financial report is published, analysts will concentrate their questions on the reasons behind certain metric changes. Without online question monitoring, it is very difficult to detect these changes in time, let alone drive simultaneous updates to the knowledge base and retrieval strategy. Therefore, production-grade large-model applications must treat online questions as a continuously generated data asset. User questions are not noise—they are the most authentic demand signals the system receives; user failures are not isolated incidents but entry points for system optimization. Only by establishing collection and analysis mechanisms oriented toward the online distribution can a team truly understand the users, scenarios, and boundaries the system serves.
 
 ---
@@ -92,6 +94,7 @@ For example, a user who does not downvote but reformulates the same question thr
 Table 23-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-2: Types and Value of Online Feedback Signals*
+
 | Feedback Type | Typical Source | Problem Reflected | Optimization Actions That Can Be Driven |
 | --- | --- | --- | --- |
 | Explicit positive feedback | Upvotes, adoption, confirmation of helpfulness | Answer likely meets the need | Retain high-quality Q&A samples, reinforce templates |
@@ -127,6 +130,7 @@ The fourth type of degradation comes from organizational responsibility fragment
 Table 23-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-3: Typical Degradation Paths in the Absence of an Online Feedback Mechanism*
+
 | Degradation Source | Specific Manifestation | User-Perceived Effect | Root Cause |
 | --- | --- | --- | --- |
 | Knowledge expiration | Old policies, old interfaces, old processes retrieved | Answers appear reasonable but are actually wrong | No knowledge version updates or expiration governance |
@@ -155,6 +159,7 @@ As shown in Figure 23-2, a complete data flywheel typically comprises six stages
 ![Figure 23-2: The Online Feedback Data Flywheel for Large-Model Applications](../../images/part7/Yu-Chap23-Fig02-EN.svg)
 
 *Figure 23-2: The Online Feedback Data Flywheel for Large-Model Applications*
+
 The key to the data flywheel is not "the higher the degree of automation, the better" but "every type of feedback finds a stable destination." For low-risk, high-frequency problems, automated rules and model-assisted processing can complete routing and backfilling; for high-risk problems, human review, expert annotation, and deployment approval are required. Mature systems typically adopt a "automation + human governance" hybrid model, using automation for scale processing and human judgment for high-risk decisions and quality calibration.
 
 In addition, the data flywheel must be combined with version management. Every backfill should record its source, the triggering problem, the remediation action, the scope of impact, and the evaluation results. Otherwise, teams cannot determine whether a given online performance improvement was driven by a specific batch of data, a specific index adjustment, or a specific strategy change. Without versions, there is no retrospective; without retrospectives, there is no stable iteration.
@@ -206,6 +211,7 @@ Human handoffs are key feedback signals in high-risk or complex tasks. When the 
 Table 23-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-4: Online Feedback Sources and Data Value*
+
 | Feedback Source | Typical Content | Advantages | Limitations | Suitable Downstream Actions |
 | --- | --- | --- | --- | --- |
 | System logs | Query, recalled fragments, context, answer, citations, latency | Complete pipeline, usable for retrospectives | Does not directly express user satisfaction | Error attribution, performance diagnosis, regression evaluation |
@@ -234,6 +240,7 @@ The advantage of implicit feedback is wide coverage. Almost all user behaviors c
 Table 23-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-5: Comparison of Explicit and Implicit Feedback*
+
 | Dimension | Explicit Feedback | Implicit Feedback |
 | --- | --- | --- |
 | Typical form | Upvotes, downvotes, ratings, corrections, comments | Follow-up questions, reformulation, citation clicks, copying, human handoff, abandonment |
@@ -258,6 +265,7 @@ A complete event schema should include at least six categories of information: u
 Table 23-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-6: Core Fields of the Online Feedback Event Schema*
+
 | Field Category | Core Fields | Description |
 | --- | --- | --- |
 | Session information | session_id, turn_id, timestamp, tenant, user_role | Used to reconstruct interaction context and permission scope |
@@ -275,6 +283,7 @@ Figure 23-3 illustrates the corresponding workflow or structure.
 ![Figure 23-3: Online Feedback Event Collection and Routing Pipeline](../../images/part7/Yu-Chap23-Fig03-EN.svg)
 
 *Figure 23-3: Online Feedback Event Collection and Routing Pipeline*
+
 ---
 
 ### 23.2.5 Problem Routing: Missing Knowledge, Retrieval Defects, Generation Defects, and Strategy Defects
@@ -332,6 +341,7 @@ Source validation is the first step in knowledge injection. The system needs to 
 Table 23-7 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-7: Key Checkpoints in the New Knowledge Injection Process*
+
 | Stage | Key Question | Inspection Focus | Common Risks |
 | --- | --- | --- | --- |
 | Source validation | Is the document trustworthy and usable? | Source, permissions, responsible person, approval status | Non-official documents entering the production knowledge base |
@@ -355,6 +365,7 @@ Knowledge conflicts can also be regarded as a data quality problem: when the sam
 Table 23-8 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-8: Strategies for Outdated Knowledge Invalidation and Conflict Governance*
+
 | Problem Type | Typical Manifestation | Data Governance Strategy | System-Side Handling |
 | --- | --- | --- | --- |
 | Temporal invalidation | Temporary notices and quarterly rules still being recalled | Add effective date and expiration date fields | Filter or downweight based on query time |
@@ -383,6 +394,7 @@ Figure 23-4 illustrates the corresponding workflow or structure.
 ![Figure 23-4: Knowledge Update, Gray Release, and Rollback Governance Process](../../images/part7/Yu-Chap23-Fig04-EN.svg)
 
 *Figure 23-4: Knowledge Update, Gray Release, and Rollback Governance Process*
+
 In practice, all three update modes often coexist. The system can allow low-risk content to follow the hot update path, medium-risk content to follow the scheduled update path, and high-risk content to follow the audited update path. This requires the knowledge update platform to have risk classification capabilities: every update request should be automatically or semi-automatically graded based on knowledge type, source, scope of impact, and user group, and then enter the corresponding process. For example, wording optimization of a customer service FAQ can follow the hot update path; version synchronization of a batch of product documents can follow the scheduled update path; content involving contractual liability, financial approval, or medical advice must follow the audited update path. This layered mechanism can strike a balance between efficiency and safety, avoiding both the slowdown of all updates due to inefficient review and the entry of high-risk content into production without inspection.
 
 ---
@@ -430,6 +442,7 @@ Correction rate measures the frequency with which users or human reviewers disco
 Knowledge hit rate measures whether user questions can be matched to valid content in the knowledge base. It focuses on knowledge-level coverage rather than just the recall performance of the retrieval algorithm. If a question has no answer in the knowledge base at all, even if the retrieval system performs normally, a reliable answer cannot be generated. A low knowledge hit rate typically indicates knowledge gaps, documents not ingested, expired documents, missing metadata, or user questions that exceed the system's scope.
 
 *Table 23-9: Core Metrics for the Online Feedback Loop*
+
 | Metric | Primary Meaning | Typical Computation | Primary Problems It Reveals |
 | --- | --- | --- | --- |
 | Online success rate | Whether user questions are effectively resolved | Resolved sessions / total sessions, or combined estimate from explicit and implicit feedback | Unusable answers, poor experience, incomplete tasks |
@@ -458,6 +471,7 @@ Major version upgrade reviews address larger-scope knowledge base updates, index
 Table 23-10 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-10: Operational Cadence for the Online Feedback Loop*
+
 | Operational Mechanism | Frequency | Primary Inputs | Primary Outputs | Participating Roles |
 | --- | --- | --- | --- | --- |
 | Weekly operations meeting | Weekly | Metrics dashboard, top failure sample categories, knowledge update queue | Priority ordering, responsibility assignment, risk escalation | Product, data engineering, algorithm, business content, platform |
@@ -506,6 +520,7 @@ A complete online knowledge update SOP typically includes at least seven stages:
 Table 23-11 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-11: Online Knowledge Update SOP*
+
 | Stage | Input | Key Actions | Output | Acceptance Criteria |
 | --- | --- | --- | --- | --- |
 | Change submission | New documents, change description, feedback samples | Fill in change source, impact scope, and responsible person | Knowledge change record | Change rationale is clear, responsible person is identified |
@@ -532,6 +547,7 @@ This case exposed three data engineering problems: first, the knowledge base lac
 Table 23-12 summarizes the corresponding comparison and engineering considerations.
 
 *Table 23-12: Error Attribution and Remediation Actions for the Knowledge Expiration Case*
+
 | Problem Manifestation | Root Cause Classification | Specific Cause | Remediation Action |
 | --- | --- | --- | --- |
 | System cited old policy version | Knowledge version governance defect | Old document had no expiration status | Add version number, effective date, and expiration date to policy documents |
@@ -627,6 +643,7 @@ print(route_feedback(event))
 ```
 
 *Listing 23-1: Process flow example*
+
 This code embodies an important principle: the value of a feedback sample is not determined solely by whether it was downvoted, but should be judged by multiple signals together. A low-risk question, even if downvoted, may not need immediate attention; a high-risk question, even if it appears only once, may require expert review; if a question appears at high frequency over a short period, it may represent a knowledge gap or systemic retrieval failure.
 
 In production systems, this type of rule is typically further combined with model classifiers. For example, the system can first use rules to filter out clearly high-value samples, then use a classification model to determine their root cause type—such as missing knowledge, retrieval defect, generation defect, strategy defect, or product experience problem. Rules provide interpretability; models provide scalability; the combination is more suitable for complex online environments.

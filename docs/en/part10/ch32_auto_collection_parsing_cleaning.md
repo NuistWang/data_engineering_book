@@ -58,6 +58,7 @@ Figure 32-1 illustrates the corresponding workflow or structure.
 ![Unified architecture for four-source collection agents](../../images/part10/Yu-Chap32-Fig01.svg)
 
 *Figure 32-1: Unified architecture for four-source collection agents*
+
 Although web pages, PDFs, APIs, and repositories use different access methods, agent logic can be unified. The abstraction hides source differences behind adapters in the connection layer. Extraction and structuring share common logic.
 
 **Connection-layer adapters.** Each source type has an adapter responsible for connection setup, authentication, data retrieval, and raw-data caching. The interface is uniform: `connect() -> fetch() -> cache_raw()`. Upper layers do not need to know whether the source is a web page, PDF, or API.
@@ -77,6 +78,7 @@ The first responsibility of a collection agent is **automatic task generation**.
 Table 32-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-1: Collection failure categories and retry strategies*
+
 | Failure type | Detection | Retry strategy | Max retries | After limit |
 | --- | --- | --- | --- | --- |
 | Network timeout | HTTP status or exception | Exponential backoff: 1s, 2s, 4s, 8s | 5 | Mark temporarily unavailable; retry after 1 hour |
@@ -94,6 +96,7 @@ When an agent manages hundreds of sources, scheduling is no longer simple cron e
 Table 32-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-2: Collection scheduling constraints*
+
 | Constraint | Meaning | Example |
 | --- | --- | --- |
 | Frequency limit | Request-rate limit of target website or API | At most 10 requests per second |
@@ -137,6 +140,7 @@ Figure 32-2 illustrates the corresponding workflow or structure.
 ![Parsing exception handling decision flow](../../images/part10/Yu-Chap32-Fig02.svg)
 
 *Figure 32-2: Parsing exception handling decision flow*
+
 ### 32.2.2 Parser Selection and Repair Rule Generation
 
 After parsing failure, the agent should choose among several strategies rather than only repair or skip:
@@ -207,6 +211,7 @@ Sandbox validation is the last defense before rule release. The sandbox should s
 Table 32-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-3: Sandbox validation dimensions and pass conditions*
+
 | Dimension | Check | Pass condition | If failed |
 | --- | --- | --- | --- |
 | Rule match scope | How many rows are affected | Affected rows within expected range, deviation < 20% | Adjust scope |
@@ -223,6 +228,7 @@ The hardest part of quality judgment is not deciding right or wrong. It is knowi
 Table 32-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-4: Quality uncertainty routing*
+
 | Quality dimension | High certainty: auto-pass | Medium certainty: mark and sample review | Low certainty: human review |
 | --- | --- | --- | --- |
 | Format correctness | Regex/constraints match 100% | Match rate 80%-99% | Match rate < 80% |
@@ -251,6 +257,7 @@ Figure 32-3 illustrates the corresponding workflow or structure.
 ![Tiered quality filtering pipeline](../../images/part10/Yu-Chap32-Fig03.svg)
 
 *Figure 32-3: Tiered quality filtering pipeline*
+
 Thresholds should be configurable by business need and data characteristics:
 
 - **Format validation layer:** strict mode. Format mismatch rejects downstream entry.
@@ -263,6 +270,7 @@ Thresholds should be configurable by business need and data characteristics:
 Table 32-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-5: Human review priority and SLA management*
+
 | Priority | Trigger | SLA | Timeout action |
 | --- | --- | --- | --- |
 | P0 | Affects key downstream pipeline, such as model training export | Within 1 hour | Escalate and pause related pipelines |
@@ -285,6 +293,7 @@ A legal AI team transforms its manual collection process into an agent-driven ad
 Table 32-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 32-6: Key Metric Changes*
+
 | Metric | Before: manual | After: agent-assisted | Change |
 | --- | --- | --- | --- |
 | New source onboarding time | 3-5 days | 4-8 hours | -80% |

@@ -112,6 +112,7 @@ if __name__ == "__main__":
 ```
 
 *Listing 16-1: Process flow example*
+
 This pattern is very common in real-world projects. Teams initially tend to place a natural trust in a strong teacher, reasoning that since its overall performance far exceeds the student's, directly saving its outputs must at least be more cost-effective than manually rewriting everything. This reasoning is not entirely wrong, but it skips one critical step of filtering: a strong teacher does not mean it is appropriate learning material for the student on every task and in every expressive form. Teacher models have their own generation habits—sometimes they favor elaboration, sometimes they lean toward over-explanation, and sometimes, to make an answer appear complete, they add tone and structure that the student should not learn. If all of this is retained without filtering, the student learns not only task capability but an entire expressive burden that may not suit its own profile at all.
 
 Therefore, a very important but often overlooked judgment in the distillation pipeline is: which parts of the teacher's output are worth retaining, which should be compressed, which should be deleted, and which should even be rewritten. The teacher model's long chain-of-thought explanations may be illuminating for researchers but are not necessarily beneficial for students; the teacher model's complex rhetoric may seem sophisticated but may not help small models form stable behaviors; the teacher model's confident assertions about boundary cases may improve readability yet may inappropriately fix judgments that should remain uncertain.
@@ -292,6 +293,7 @@ Listing 16-2 provides a JSON data example.
 ```
 
 *Listing 16-2: JSON data example*
+
 Going further, in multi-model collaboration, the judge model plays the role of "system memory." Teachers may change, experts may be swapped out, students may be retrained, but if judge standards can remain relatively stable, the entire sample repository will not experience criterion drift across different cycles. This is especially critical in long-cycle distillation projects. Systems without a stable judge easily end up with samples from the first cycle emphasizing correctness, the second emphasizing expressiveness, and the third emphasizing length compression—leaving the student learning conflicting signals.
 
 ### Filtering Is About Defining Training Boundaries, Not Simply Deleting Samples
@@ -336,6 +338,7 @@ To present common collaboration modes and applicable tasks more clearly, Table 1
 
 
 *Table 16-1: Collaboration Modes and Applicable Tasks*
+
 | Collaboration Mode | Role Configuration | Typical Workflow | Applicable Tasks | Advantages | Risk Points |
 |---|---|---|---|---|---|
 | Single-teacher direct distillation | 1 teacher + 1 student | Teacher generates → rule filtering → student trains | Formatted Q&A, simple classification, template writing | Short pipeline, fast startup, uniform style | Single bias easily inherited |
@@ -349,6 +352,7 @@ In multi-model collaboration engineering implementations, timing and handoff poi
 
 ![Figure 16-1: Multi-Model Collaborative Generation Timing Diagram](../../images/part5/Wang-Chap16-Fig01-EN.svg)
 *Figure 16-1: Multi-Model Collaborative Generation Timing Diagram*
+
 ---
 
 ## 16.3 Structural Design of Distillation Samples
@@ -564,10 +568,12 @@ if __name__ == "__main__":
 ```
 
 *Listing 16-3: Process flow example*
+
 Table 16-2 below presents a distillation returns and costs comparison suitable for helping teams make more systematic decisions. As shown, typical returns and costs differ across dimensions such as inference quality, latency performance, and cost control.
 
 
 *Table 16-2: Distillation Returns and Costs*
+
 | Evaluation Dimension | Typical Returns | Typical Costs | Common Pitfalls | Applicability Judgment |
 |---|---|---|---|---|
 | Inference quality | Improved accuracy, consistency, and style stability | Teacher generation cost, judge evaluation cost | High scores may stem from data leakage or homogeneous validation sets | Suitable for tasks with clear objectives and well-defined evaluation criteria |
@@ -584,6 +590,7 @@ To make the validation pipeline more intuitive, Figure 16-2 illustrates the vali
 ![Figure 16-2: Distillation Sample Validation Flow Diagram](../../images/part5/Wang-Chap16-Fig02-EN.svg)
 
 *Figure 16-2: Distillation Sample Validation Flow Diagram*
+
 ### When to Stop Distillation and Shift to Real Data Supplementation
 
 Distillation is not always worth scaling up indefinitely. One clear signal is when newly added distillation samples can no longer significantly improve key metrics and error patterns increasingly originate from real user distribution, missing real context, or changes in the real tool environment. This indicates that the marginal returns of distillation are declining. Continuing to expand synthetic samples and teacher generation volume at this point typically only makes the training set increasingly "resemble the teacher" without making it increasingly "resemble the user."

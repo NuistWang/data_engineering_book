@@ -57,7 +57,8 @@ Figure 10-1 illustrates the corresponding workflow or structure.
 
 ![Figure 10-1: Distributed audio-video alignment pipeline](../../images/part3/Wang-Chap10-Fig01.svg)
 
-*Figure 10-1: Distributed audio-video alignment pipeline. Raw mixed videos in the video lake are split into visual and acoustic tracks. Visual-frame extractors and acoustic separators extract features independently before the streams meet in a temporal alignment engine, which produces aligned multimodal JSONL samples with closed timestamp constraints. Source: drawn for this book*
+*Figure 10-1: Distributed audio-video alignment pipeline. Source: drawn for this book*
+
 ### 10.2.1 Visual Extraction: Shot-Boundary Detection and Scene Slicing
 
 Before training, very long videos, such as two-hour films, must be cut into clips of 10 to 30 seconds that are logically and visually continuous. Simple fixed-time splitting, such as cutting every 10 seconds, is undesirable because it may cut an action or sentence in half and create semantic incompleteness.
@@ -70,7 +71,8 @@ Figure 10-2 illustrates the corresponding workflow or structure.
 
 ![Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention](../../images/part3/Wang-Chap10-Fig02.svg)
 
-*Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention. The upper track extracts aggregated HSV-channel color-space differences, while the lower track extracts optical-flow pixel displacement to capture subtle motion posture. The two tensor differences flow into dual-threshold triage. When the jump score $\Delta$ exceeds the hard-cut threshold, the engine splits the clip and prevents semantic leakage across scenes. Source: drawn for this book*
+*Figure 10-2: Adaptive shot-boundary detection and semantic leakage prevention. Source: drawn for this book*
+
 2. **Adaptive subsampling**
 
 After slicing, a 20-second shot may be logically continuous but visually almost static. The factory deploys small models to continuously measure the displacement between the current frame and the last retained frame in dense visual features, such as DINOv2 (Oquab et al. 2023) embeddings. Only frames whose Euclidean distance exceeds a preset threshold are retained. A slice that originally contains many adjacent frames is ultimately compressed into a smaller number of key frames. The compression ratio depends on frame rate, motion density, and threshold settings, and should be verified through sampled playback to ensure that key actions were not cut off.
@@ -87,7 +89,8 @@ Figure 10-3 illustrates the corresponding workflow or structure.
 
 ![Figure 10-3: Large-scale ASR extraction and temporal calibration](../../images/part3/Wang-Chap10-Fig03.svg)
 
-*Figure 10-3: Large-scale ASR extraction and temporal calibration. Traditional ASR can suffer cumulative temporal drift and semantic errors, such as mishearing `I love apples.` as `maples.` WhisperX uses VAD slicing, multi-path acoustic decoding, and a DTW phoneme-level forced-alignment matrix for temporal calibration. The bottom shows word tokens aligned with waveform troughs through vertical dashed lines. Source: drawn for this book*
+*Figure 10-3: Large-scale ASR extraction and temporal calibration. Source: drawn for this book*
+
 #### B. Denoiser layer
 
 Not every video has studio-grade isolation. Large amounts of field data contain strong wind noise or mechanical resonance. Demucs (Défossez et al. 2019) and deep-learning source-separation algorithms can separate background music, environmental noise, and vocals from reverberant spectra.
@@ -110,7 +113,8 @@ Figure 10-4 illustrates the corresponding workflow or structure.
 
 ![Figure 10-4: Cross-modal temporal calibration and geometric alignment](../../images/part3/Wang-Chap10-Fig04.svg)
 
-*Figure 10-4: Cross-modal temporal calibration and geometric alignment. The cyan top track is visual key frames, the gray middle track is acoustic features, and the coral bottom track is discrete text tokens. At `t=4.2s`, the temporal lock binds the visual action "raising a cup," waveform features near the trough, and `<start:4.2s> "Water cup"` text into a unified mixed-token pipeline or JSONL sample. Source: drawn for this book*
+*Figure 10-4: Cross-modal temporal calibration and geometric alignment. Source: drawn for this book*
+
 Large teams usually deploy a **multi-modal temporal alignment engine** based on timestamp matrices. Once a front-end recognizer emits coordinate bounds such as `<start:2.1s><end:4.5s>`, code must use floating-point logic to slice the corresponding video frames. The final alignment information is not handed to the model only as video; it is transformed into a structured JSONL sequence with metadata tags and HTML-like multi-track mixed tokens, then passed to the training DataLoader.
 
 ---
@@ -141,7 +145,8 @@ Strict mismatch detection and review are therefore required.
 
 Table 10-1 summarizes the corresponding comparison and engineering considerations.
 
-*Table 10-1: Temporal audio-video data defects and multi-layer detection/remediation strategies. Source: compiled by the authors; detection and remediation strategies are engineering patterns, and thresholds should be calibrated through sampled playback and downstream evaluation*
+*Table 10-1: Temporal audio-video defects and remediation strategies. Source: compiled by the authors*
+
 | Defect type and manifestation | Root cause | Detection and remediation | Severity |
 | :--- | :--- | :--- | :--- |
 | **Severe audio-video mismatch**: a silent forest view while the speech track explains an FPS game. | Incorrect secondary editing or audio track bleeding during automated encoding. | **Compute feature cosine scores with pretrained discriminators**: extract CLIP visual vectors from middle frames and semantic vectors from speech/audio. If cross-modal similarity is below the warning threshold, isolate the segment and discard that time-window label. | P0: must not enter the data lake |
@@ -175,7 +180,8 @@ To decide whether a decompressed video is worth sending to the next stage, we ne
 
 Data engineers need a clear view of unit cost at each layer. Table 10-2 summarizes cost drivers and cost-reduction strategies for long-temporal audio-video processing.
 
-*Table 10-2: Long-temporal audio-video processing cost drivers and cost-reduction strategies. Source: compiled by the authors; cost drivers should be recalculated according to cloud pricing, hardware specifications, concurrency limits, and caching strategies*
+*Table 10-2: Long-temporal audio-video cost drivers and reduction strategies. Source: compiled by the authors*
+
 | Processing stage | Resource profile | Cost drivers | Cost-reduction strategy |
 | :--- | :--- | :--- | :--- |
 | **1. Raw long-stream crawling and block download** | High-bandwidth network and massive object-storage block I/O. | Cross-region traffic, object-storage request count, cache hit rate | Add edge caching gateways and preload fragments to fast NVMe near the GPU to avoid direct reads from slow storage. |
@@ -227,7 +233,10 @@ RuntimeError: Multiprocessing synchronization lock stuck at DataLoader worker 1.
 AVSync_Module: Subtitle timestamp [1.21s] completely drifts out of matched acoustic window bounds.
 ```
 
-*Listing 10-1: S3 concurrent streaming overload error log example. The log content is anonymized; metrics and paths do not correspond to a public incident*
+*Listing 10-1: S3 concurrent streaming overload error log example*
+
+The log content is anonymized; metrics and paths do not correspond to a public incident.
+
 **Root cause and fix**
 
 - **Root cause**: no randomized exponential backoff; all workers request large chunks in the same millisecond.
@@ -249,7 +258,10 @@ cudaMemcpy failed during frame copy: cudaErrorIllegalAddress
 Decoder context invalidated. All queued frames dropped (estimated loss: 2.3TB).
 ```
 
-*Listing 10-2: NVDEC concurrent decoding OOM log example. The log content is anonymized; hardware limits must be based on actual device specifications and stress-test results*
+*Listing 10-2: NVDEC concurrent decoding OOM log example*
+
+The log content is anonymized; hardware limits must be based on actual device specifications and stress-test results.
+
 **Root cause and fix**
 
 - **Root cause**: 4K resolution exceeds the per-instance NVDEC capacity; concurrent decoding has no memory quota isolation.
@@ -270,7 +282,10 @@ Expected anchor: [1823.4s], Model output: [1831.8s]. Delta: +8.4s.
 Alignment quality score: 0.23 (threshold: 0.75). Segment rejected and quarantined.
 ```
 
-*Listing 10-3: WhisperX timestamp drift error log example. The log content is anonymized; drift thresholds should be calibrated through sampled playback and downstream evaluation*
+*Listing 10-3: WhisperX timestamp drift error log example*
+
+The log content is anonymized; drift thresholds should be calibrated through sampled playback and downstream evaluation.
+
 **Root cause and fix**
 
 - **Root cause**: WhisperX uses VAD to slice speech; silence may be skipped incorrectly, causing cumulative timestamp drift. BGM mixing in long videos interferes with VAD decisions.
@@ -292,7 +307,10 @@ torch.nn.Module references retained in embedding cache (est. leak: 2.1 GB/batch)
 Unprocessed queue depth at crash: 3,421 audio segments (est. 68h audio).
 ```
 
-*Listing 10-4: Diarization memory-leak error log example. The log content is anonymized; memory watermarks and batch sizes should be stress-tested according to node configuration*
+*Listing 10-4: Diarization memory-leak error log example*
+
+The log content is anonymized; memory watermarks and batch sizes should be stress-tested according to node configuration.
+
 **Root cause and fix**
 
 - **Root cause**: the pyannote pipeline object is not explicitly destroyed between batches, embedding cache accumulates, and PyTorch graphs are not released.
@@ -312,7 +330,10 @@ Estimated corrupted samples in shard: ~4,200 (approx 12.3GB of aligned multimoda
 DataLoader worker 0: Pipe broken, resetting shard iterator. Skipping shard.
 ```
 
-*Listing 10-5: WebDataset shard corruption error log example. The log content is anonymized; production environments should combine shard write locks, checksums, and retry strategies*
+*Listing 10-5: WebDataset shard corruption error log example*
+
+The log content is anonymized; production environments should combine shard write locks, checksums, and retry strategies.
+
 **Root cause and fix**
 
 - **Root cause**: no write lock or per-shard assignment; multiple processes write to one file, interleaving byte streams.
@@ -322,7 +343,10 @@ DataLoader worker 0: Pipe broken, resetting shard iterator. Skipping shard.
 
 Table 10-3 summarizes the corresponding comparison and engineering considerations.
 
-*Table 10-3: Frequent audio-video pipeline error types and remediation strategies. Source: compiled by the authors; error codes and remediation strategies are anonymized engineering patterns*
+*Table 10-3: Audio-video pipeline error types and remediation strategies. Source: compiled by the authors*
+
+The error codes and remediation strategies summarize anonymized engineering patterns.
+
 | Error code | Error type | Trigger | One-line fix |
 | :--- | :--- | :--- | :--- |
 | TMP_ERR_CODE_1XXX | S3/I/O timeout | Large-scale concurrent streaming without jittered backoff | Add jitter sleep and edge-cache prewarming |

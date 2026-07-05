@@ -1,4 +1,4 @@
-# Chapter 45: LLM Post-Training Data Engineering in Practice: SFT and Preference Alignment
+# Chapter 45: LLM Post-Training Data Engineering
 
 <div class="chapter-authors">Cong Wang; Xin Xu; Wei Huang</div>
 
@@ -65,6 +65,7 @@ Figure 45-1 illustrates the corresponding workflow or structure.
 
 ![Figure 45-1: Schematic of the LLM Three-Stage Post-Training Pipeline](../../images/part13/Wang-Chap45-Fig01.svg)
 *Figure 45-1: Data flow relationships among SFT, Preference Alignment, and Online Continuous Optimization*
+
 From an engineering implementation perspective, the three-stage framework also implies three entirely different modes of data asset management. SFT data resembles a "behavioral template library"—it must be stable, clean, cover common tasks, and maintain a simple field structure. Teams typically build a minimal schema around fields such as `messages`, `instruction`, `input`, `output`, `source`, `license`, and `quality_score`. As long as the schema is stable, SFT data can easily be consumed by different training frameworks and supports cross-version comparisons.
 
 Preference data more closely resembles a "behavioral discrimination library." It cannot only store the final chosen/rejected texts; it should also preserve the candidate generation model, sampling temperature, number of candidates, the annotator or review model, annotation rationale, conflict review outcomes, and tags indicating whether the sample involves safety, factuality, code, mathematics, or tool invocation. Without this metadata, it is very difficult to explain retrospectively why a DPO training run improved or degraded. Many teams, on their first foray into preference data, only retain two responses and a `label` field—and only realize upon encountering preference drift that they lack sufficient information to diagnose the problem.
@@ -88,6 +89,7 @@ When reading Table 45-1, please note the annotation conventions:
 * **[E]**: Estimates derived for pedagogical illustration or engineering approximation; should not be treated as official disclosed figures.
 
 *Table 45-1: Post-Training Data Transparency and Scale of Mainstream Open-Source Models*
+
 | Model / Project | Post-Training Stages | Data Openness | SFT Data Scale | Preference / Reward Data Scale | Key Data Sources | Reproducibility Value |
 | --- | --- | --- | --- | --- | --- | --- |
 | **Tülu-3** | SFT / DPO / RLVR | High | 939K [D] | DPO mixture scale requires item-by-item verification [D] | SFT-Mix, DPO mix, RLVR verifier | Fully open-source recipe reference system; suitable for reproduction and transfer |
@@ -134,6 +136,7 @@ Another notable approach is Magpie. It minimizes dependency on manual seeds by d
 Table 45-2 summarizes the corresponding comparison and engineering considerations.
 
 *Table 45-2: Engineering Comparison of the Three SFT Synthesis Schools*
+
 | School | Seed Dependency | Generation Method | Suitable Tasks | Primary Risk | Quality Control Focus | Representative Material | Relationship to This Chapter |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **Self-Instruct** | Medium | Seed-inspired expansion | General instruction breadth coverage | Templatization, homogeneity | ROUGE deduplication, diversity evaluation, answerability checks | Self-Instruct paper | Foundational synthesis approach |
@@ -144,6 +147,7 @@ Figure 45-2 illustrates the corresponding workflow or structure.
 
 ![Figure 45-2: Pipeline Comparison of the Three SFT Synthesis Schools: Self-Instruct, Evol-Instruct, and Magpie](../../images/part13/Wang-Chap45-Fig02.svg)
 *Figure 45-2: Data entry points, generation methods, and quality control checkpoints for the three SFT synthesis approaches*
+
 Regardless of which synthesis school is adopted, SFT data should never flow directly from the generator into the training set. A more robust approach is to establish four gatekeeping checks. The first is a format gate, which verifies whether multi-turn dialogue roles are complete, whether fields are missing, whether JSON or ChatML is parseable, and whether truncation or garbled text exists. The second is a semantic gate, which checks whether the instruction is genuinely answerable, whether the answer covers the core of the question, and whether there are mismatches, non-sequiturs, or unexplained reasoning leaps. The third is a distribution gate, which checks whether task types, languages, lengths, domains, difficulty levels, and safety categories are overly concentrated. The fourth is a leakage gate, which checks whether any sample is near-duplicate to evaluation sets, benchmark questions, published answers, or internal holdout sets.
 
 These four gates are best implemented as a combination of automated filtering and manual spot-checking. Automated filtering is suitable for handling format errors, duplicates, length anomalies, low-quality templates, sensitive keywords, and obvious safety issues; manual spot-checking is suitable for judging whether instructions are natural, whether answers are genuinely helpful, and whether complex tasks preserve the original intent. In particular, with Evol-Instruct, automated scripts struggle to determine whether "making something more complex" still preserves the original intent. A question that appears more difficult may simply be a corrupted version of the original. Without manual spot-checking or a strong verifier, the model ends up learning many complex but invalid patterns.
@@ -194,6 +198,7 @@ Reinforcement Learning with Verifiable Rewards (RLVR) advances the source of pre
 Table 45-3 summarizes the corresponding comparison and engineering considerations.
 
 *Table 45-3: Different Data Requirements Across Preference Paradigms*
+
 | Paradigm | Core Data Shape | Reward Source | Suitable Tasks | Data Engineering Challenges | Interface with Ch46 |
 | --- | --- | --- | --- | --- | --- |
 | **RLHF** | prompt + multiple candidates + human/AI preference | Human annotation / trained RM | General assistant behavior, complex value alignment | High annotation cost, inter-annotator consistency difficult to guarantee | Provides industrial background for multi-round iteration |
@@ -241,6 +246,7 @@ Figure 45-3 illustrates the corresponding workflow or structure.
 
 ![Figure 45-3: Tülu-3 Three-Stage Data Flow and Scale Schematic](../../images/part13/Wang-Chap45-Fig03.svg)
 *Figure 45-3: Data flow and stage relationships in Tülu-3 from SFT-Mix and DPO mix to RLVR*
+
 When migrating Tülu-3 to a proprietary project, the process can be broken down into four steps. First, categorize the data sources in the public recipe into three types: "directly reusable," "structural reference only," and "must be replaced with domain data." Second, preserve the sequential order of SFT, DPO, and RLVR stages, but adjust the task composition ratio at each stage according to domain-specific risk considerations. Third, document the inputs, outputs, filtering rules, and evaluation sets for each stage in a manifest, rather than only retaining scripts without a means of retrospective review. Fourth, after migration, re-conduct contamination detection and safety boundary assessment, since passing a public recipe does not automatically guarantee suitability for industry-specific contexts.
 
 More specifically, migrating Tülu-3 should not start with "which datasets to download," but with "which control points to replicate." The first control point is SFT-Mix source registration: why each source enters the mixture, what capability it addresses, whether its license permits use, and whether it conflicts with evaluation sets. The second control point is DPO mix preference boundaries: whether the chosen/rejected differential stably reflects factual correctness, safety, conciseness, and instruction-following rather than merely length or tone. The third control point is RLVR verifier version management: rules, unit tests, answer extractors, and format parsers should all carry version numbers; otherwise, the same batch of samples may yield different rewards at different points in time. The fourth control point is post-training evaluation: after each training stage, results should be examined separately across general capability, reasoning, code, safety, and domain tasks, rather than using a single average score that can mask localized degradation.
@@ -269,6 +275,7 @@ This re-integration is still, in essence, reconstructing preference signals or r
 Table 45-4 summarizes the corresponding comparison and engineering considerations.
 
 *Table 45-4: Case Study B: Interpreting Llama-3's Multi-Round RLHF Iteration*
+
 | Iteration Step | Data Input | Processing Action | Data Output | Annotation Convention |
 | --- | --- | --- | --- | --- |
 | Post-SFT initial sampling | Hard prompts, production failure cases | Multi-candidate generation | Candidate responses | Mark as `[I]` when sampling scale lacks a source |
@@ -322,6 +329,7 @@ In post-training, contamination means not only repeated problem statements, but 
 Table 45-5 summarizes the corresponding comparison and engineering considerations.
 
 *Table 45-5: Data Contamination in the Post-Training Phase*
+
 | Contamination Type | Occurrence Location | Typical Symptoms | Inspection Method | Remediation |
 | --- | --- | --- | --- | --- |
 | SFT contamination | Instruction synthesis, data mixing | Model exhibits unusual familiarity with benchmark questions | n-gram / embedding near-duplicate detection | Remove contaminated samples, rebuild split |
@@ -365,6 +373,7 @@ Advancing a full-chain post-training effort requires teams to reserve budget acr
 Table 45-6 summarizes the corresponding comparison and engineering considerations.
 
 *Table 45-6: Implementation Risks, Costs, and Applicability Boundaries*
+
 | Cost Item | Primary Source | Easily Underestimated Component | Downgrade Strategy |
 | --- | --- | --- | --- |
 | Human preference annotation | Chosen/rejected pairs, rankings, attribute scoring | Annotation consistency training and review | Start with a small high-consistency set |

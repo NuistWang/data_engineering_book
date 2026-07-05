@@ -1,4 +1,4 @@
-# 项目六：CoT 推理数据集构建与 PRM 训练
+# 项目六：思维链推理数据集构建与过程奖励模型训练
 
 <div class="chapter-authors">王聪（Cong Wang）；徐鑫（Xin Xu）；王柯（Ke Wang）</div>
 
@@ -46,6 +46,7 @@ CoT；PRM；过程监督；推理轨迹；奖励建模
 ```
 
 *代码清单P06-1：流程或路径示例*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 样本 schema 至少应保留 `id`、`source`、`content_or_payload`、`metadata`、`quality_signals`、`split_or_stage` 与 `audit_trace` 等字段；具体字段由本项目的数据类型、下游任务和验收方式进一步细化。
@@ -188,6 +189,7 @@ CoT；PRM；过程监督；推理轨迹；奖励建模
 
 ![图 P06-1：CoT 与 PRM 数据工厂总览](../../images/part14/p06/Wang-Project06-Fig01.svg)
 *图 P06-1：CoT 与 PRM 数据工厂总览*
+
 ---
 
 ## 4. 整体架构：从种子任务到 PRM 训练资产的过程监督流水线
@@ -236,6 +238,7 @@ CoT；PRM；过程监督；推理轨迹；奖励建模
 
 ![图 P06-2：步骤级验证与训练闭环图](../../images/part14/p06/Wang-Project06-Fig02.svg)
 *图 P06-2：步骤级验证与训练闭环图*
+
 ---
 
 ## 5. 种子任务：任务层作为监督起点
@@ -296,6 +299,7 @@ for index, record in enumerate(gsm8k):
 ```
 
 *代码清单P06-2：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 `task_spec` 则把项目约束写成结构化配置：
@@ -319,6 +323,7 @@ task_spec = {
 ```
 
 *代码清单P06-3：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 项目流程的第一步是 `src/sampler.py`：先采样任务并生成规格，再进入推理轨迹生成。P06 从一开始就把“数据分布”作为需要显式管理的工程对象，而不是交给模型随机性。
@@ -356,6 +361,7 @@ task_spec = {
 
 ![图 P06-3：任务采样与规格生成流程图](../../images/part14/p06/Wang-Project06-Fig03.svg)
 *图 P06-3：任务采样与规格生成流程图*
+
 ---
 
 ## 7. 轨迹生成：positive、negative、repair 的并行构造
@@ -389,6 +395,7 @@ repair_steps.append(
 ```
 
 *代码清单P06-4：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这段实现表明，repair trace 不是单独构造的新题，而是在 negative trace 后显式追加修复步骤。代码任务的实现逻辑也类似，只是错误来自 `mutate_python_code`，验证则依赖后面的单元测试执行。
@@ -431,6 +438,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 ![图 P06-4：三类轨迹关系示意图](../../images/part14/p06/Wang-Project06-Fig04.svg)
 *图 P06-4：三类轨迹关系示意图*
+
 ---
 
 ## 8. Step 切分与 schema：过程监督的最小单位
@@ -486,6 +494,7 @@ repair 轨迹比普通负例更接近真实世界中的推理修正过程。它�
 
 ![图 P06-5：PRM step schema 示意图](../../images/part14/p06/Wang-Project06-Fig05.svg)
 *图 P06-5：PRM step schema 示意图*
+
 ---
 
 ## 9. 自动验证：过程监督的结果校验
@@ -511,6 +520,7 @@ enriched["reward_bucket"] = bucket
 ```
 
 *代码清单P06-5：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 其中，reward bucket 也不是黑盒评分，而是规则可解释的分段函数：
@@ -528,6 +538,7 @@ def reward_bucket(score: float) -> str:
 ```
 
 *代码清单P06-6：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这样写的好处是，验证所依赖的信号、bucket 的来源以及它们之间的关系都变得清楚。
@@ -565,6 +576,7 @@ P06 的中间核心步骤是 `src/validate_and_score.py`，也就是把生成出
 
 ![图 P06-6：步骤验证与结果比对流程图](../../images/part14/p06/Wang-Project06-Fig06.svg)
 *图 P06-6：步骤验证与结果比对流程图*
+
 ---
 
 ## 10. Step 标签设计：过程字段的可操作化
@@ -600,6 +612,7 @@ step label 的价值在于，它把“过程质量”拆成机器可消费的监
 
 ![图 P06-7：step 标签与 process-only signal 示意图](../../images/part14/p06/Wang-Project06-Fig07.svg)
 *图 P06-7：step 标签与 process-only signal 示意图*
+
 ---
 
 ## 11. Reward bucket：分层评分机制
@@ -657,6 +670,7 @@ record = {
 ```
 
 *代码清单P06-7：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 有了这段，正文就会更像工程实现，而不是结果总结。
@@ -700,6 +714,7 @@ P06 的流程中，这一步由 `src/prepare_prm_data.py` 负责。它的意义�
 
 ![图 P06-8：PRM 数据封装与训练接口图](../../images/part14/p06/Wang-Project06-Fig08.svg)
 *图 P06-8：PRM 数据封装与训练接口图*
+
 ---
 
 ## 13. 数据规模与结构：当前工厂的成形信号
@@ -774,6 +789,7 @@ P06 当前 `67.59%` 的整体通过率虽然不高，却真实暴露了 negative
 
 ![图 P06-9：验证通过率与轨迹类型对照图](../../images/part14/p06/Wang-Project06-Fig09.svg)
 *图 P06-9：验证通过率与轨迹类型对照图*
+
 ---
 
 ## 15. 评测与项目检查：自检层
@@ -805,6 +821,7 @@ dataset_checks = [
 ```
 
 *代码清单P06-8：Python 实现片段*
+
 该片段的作用是把上述流程转化为可检查的结构化表示。
 
 这些检查项把“项目检查”落实为可运行的工程约束。
@@ -875,6 +892,7 @@ repair 轨迹看起来很理想，因为它模拟了模型犯错后修复的过�
 
 ![图 P06-10：negative / repair 噪声来源图](../../images/part14/p06/Wang-Project06-Fig10.svg)
 *图 P06-10：negative / repair 噪声来源图*
+
 ---
 
 ## 17. 成本与收益：结构闭环的优先级

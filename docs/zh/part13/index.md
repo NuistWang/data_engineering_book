@@ -14,11 +14,11 @@
 
 ## 本篇目录
 
-- [第44章：LLM 预训练数据工程实战：从配方到落地](ch44_pretrain_recipes.md)
-- [第45章：LLM 后训练数据工程实战：SFT 与偏好对齐](ch45_posttrain_recipes.md)
-- [第46章：推理模型与 RL 数据工程：R1 / QwQ 范式](ch46_rl_reasoning_data.md)
-- [第47章：多模态大模型（VLM）数据配方：从预训练到视觉对齐](ch47_vlm_data_recipes.md)
-- [第48章：多模态生成模型数据工程：T2I 与 T2V 数据流水线](ch48_t2i_t2v.md)
+- [第44章：LLM 预训练数据工程](ch44_pretrain_recipes.md)
+- [第45章：LLM 后训练数据工程](ch45_posttrain_recipes.md)
+- [第46章：推理模型与强化学习数据工程](ch46_rl_reasoning_data.md)
+- [第47章：视觉语言模型数据配方](ch47_vlm_data_recipes.md)
+- [第48章：多模态生成数据工程](ch48_t2i_t2v.md)
 
 ## 配方范式
 

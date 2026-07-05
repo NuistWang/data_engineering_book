@@ -46,6 +46,7 @@ Seed problem → Problem evolution → Solution generation → Code/formula vali
 ```
 
 *Listing P04-1: Process or path example*
+
 The purpose of this snippet is to transform the above flow into an inspectable structured representation.
 
 The sample schema should retain at minimum the fields `id`, `source`, `content_or_payload`, `metadata`, `quality_signals`, `split_or_stage`, and `audit_trace`; specific fields are further refined by the data types, downstream tasks, and acceptance criteria of this project.
@@ -61,6 +62,7 @@ Acceptance metrics include validation pass rate, difficulty distribution, topic 
 Table P04-1 summarizes the corresponding comparison and engineering considerations.
 
 *Table P04-1: Synthetic Textbook Factory Publication Acceptance Table*
+
 | Acceptance Dimension | Metric / Evidence | Publication Review Criteria |
 | --- | --- | --- |
 | Data closed loop | Seed problems, evolved problems, PoT solutions, sandbox logs, and textbook volumes are all traceable | Spot-checked samples must be traceable back to original seeds and validation records |
@@ -87,6 +89,7 @@ Figure P04-1 illustrates the corresponding workflow or structure.
 
 ![Figure P04-1: Synthetic Mathematics and Code Textbook Factory Project Positioning Diagram](../../images/part14/p04/Xu-Project04-Fig01.svg)
 *Figure P04-1: Synthetic Mathematics and Code Textbook Factory Project Positioning Diagram*
+
 General-purpose large language models can already answer many basic mathematics questions and can write reasonably competent Python code, but once we actually treat their outputs as training data, we quickly encounter three problems.
 
 First, **surface correctness is not the same as verifiable correctness**.
@@ -112,6 +115,7 @@ Figure P04-2 illustrates the corresponding workflow or structure.
 
 ![Figure P04-2: P04 Project Objectives and Scope Diagram](../../images/part14/p04/Xu-Project04-Fig02.svg)
 *Figure P04-2: P04 Project Objectives and Scope Diagram*
+
 ### 2.1 Project Objectives
 
 This project focuses on the following four objectives.
@@ -192,6 +196,7 @@ Figure P04-3 illustrates the corresponding workflow or structure.
 
 ![Figure P04-3: P04 Overall Architecture Overview Diagram](../../images/part14/p04/Xu-Project04-Fig03.svg)
 *Figure P04-3: P04 Overall Architecture Overview Diagram*
+
 From an engineering perspective, P04 can be decomposed into three layers.
 
 ### 4.1 Layer 1: Seed and Chapter Planning Layer
@@ -236,6 +241,7 @@ Figure P04-4 illustrates the corresponding workflow or structure.
 
 ![Figure P04-4: Textbook Factory Responsibility Collaboration Diagram](../../images/part14/p04/Xu-Project04-Fig04.svg)
 *Figure P04-4: Textbook Factory Responsibility Collaboration Diagram*
+
 For a textbook factory to operate stably, what matters more than emphasizing individual generation actions is first clearly defining **which responsibility facets must be covered**. At least four categories of responsibility facets need to be made explicit.
 
 ### 5.1 Curriculum Planning and Chapter Design
@@ -282,6 +288,7 @@ Figure P04-5 illustrates the corresponding workflow or structure.
 
 ![Figure P04-5: Mapping from Seed Problems to Chapter Plans](../../images/part14/p04/Xu-Project04-Fig05.svg)
 *Figure P04-5: Mapping from Seed Problems to Chapter Plans*
+
 The most common misconception in synthetic textbook creation is to directly ask a large language model to "please help me generate a mathematics textbook." While this approach is fast, it typically has three problems.
 
 First, problem distribution is uncontrollable. The model will over-generate on patterns it is familiar with, causing many problems to appear different but be structurally isomorphic.
@@ -321,6 +328,7 @@ Figure P04-6 illustrates the corresponding workflow or structure.
 
 ![Figure P04-6: Evol-Instruct Evolution Path Diagram](../../images/part14/p04/Xu-Project04-Fig06.svg)
 *Figure P04-6: Evol-Instruct Evolution Path Diagram*
+
 If we merely restate "how long does it take a train traveling 240 miles" in a different phrasing, the training value does not increase significantly. What the project truly needs is to evolve problems from "single-step calculations" into "multi-constraint, multi-variable, programmatically solvable" questions.
 
 ### 7.1 From Simple Problems to Complex Application Problems
@@ -360,6 +368,7 @@ Figure P04-7 illustrates the corresponding workflow or structure.
 
 ![Figure P04-7: CoT vs. PoT Comparison Diagram](../../images/part14/p04/Xu-Project04-Fig07.svg)
 *Figure P04-7: CoT vs. PoT Comparison Diagram*
+
 ### 8.1 The Value and Limitations of CoT
 
 CoT (Chain of Thought) is certainly valuable for reasoning training; it allows the model to more explicitly surface intermediate thinking. However, the biggest problem with CoT is also very evident:
@@ -401,6 +410,7 @@ Figure P04-8 illustrates the corresponding workflow or structure.
 
 ![Figure P04-8: Generation Pipeline Detail Diagram](../../images/part14/p04/Xu-Project04-Fig08.svg)
 *Figure P04-8: Generation Pipeline Detail Diagram*
+
 The generation pipeline of this project can be understood as two steps.
 
 ### 9.1 Step 1: Problem Evolution
@@ -431,6 +441,7 @@ Figure P04-9 illustrates the corresponding workflow or structure.
 
 ![Figure P04-9: Sandbox Validation Execution Path Diagram](../../images/part14/p04/Xu-Project04-Fig09.svg)
 *Figure P04-9: Sandbox Validation Execution Path Diagram*
+
 In P04, the sandbox is not a supplementary component but the **critical gate** that determines whether data is trustworthy.
 
 ### 10.1 What Happens Without Validation
@@ -477,6 +488,7 @@ Figure P04-10 illustrates the corresponding workflow or structure.
 
 ![Figure P04-10: Textbook Packaging Artifact Relationship Diagram](../../images/part14/p04/Xu-Project04-Fig10.svg)
 *Figure P04-10: Textbook Packaging Artifact Relationship Diagram*
+
 Even after obtaining `verified_textbook.jsonl`, the project should not stop there. Both training and instruction require richer organizational layers.
 
 ### 11.1 A Textbook Is Not a Sample Heap
@@ -521,6 +533,7 @@ Figure P04-11 illustrates the corresponding workflow or structure.
 
 ![Figure P04-11: Training Encapsulation Interface Diagram](../../images/part14/p04/Xu-Project04-Fig11.svg)
 *Figure P04-11: Training Encapsulation Interface Diagram*
+
 One of the final project objectives is to convert textbook assets into data formats that the training side can consume directly.
 
 ### 12.1 What the Training Side Needs

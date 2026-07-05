@@ -744,6 +744,36 @@ def normalize_mermaid_blocks(markdown_text: str) -> str:
     return re.sub(r"```mermaid\s*\n([\s\S]*?)\n```", repl, markdown_text, flags=re.I)
 
 
+def normalize_caption_spacing(markdown_text: str) -> str:
+    """Ensure captions do not merge with following content during Markdown conversion."""
+
+    lines = markdown_text.splitlines(keepends=True)
+    normalized: list[str] = []
+    in_fence = False
+    caption_re = re.compile(r"^\s*\*(?:Figure|Table|Listing|图|表|代码清单|清单)\s*[^:：]+[:：].*\*\s*$")
+
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+        normalized.append(line)
+        if in_fence or not caption_re.match(stripped):
+            continue
+        if index + 1 >= len(lines):
+            continue
+        next_line = lines[index + 1]
+        if next_line.strip():
+            normalized.append("\n")
+
+    return "".join(normalized)
+
+
+def normalize_table_caption_spacing(markdown_text: str) -> str:
+    """Compatibility wrapper for older tests and scripts."""
+
+    return normalize_caption_spacing(markdown_text)
+
+
 def make_markdown_converter() -> markdown.Markdown:
     return markdown.Markdown(
         extensions=[
@@ -795,6 +825,7 @@ def build_book_html(
         )
         text = rewrite_image_paths(text, src)
         text = normalize_mermaid_blocks(text)
+        text = normalize_caption_spacing(text)
         html_body = md.convert(text)
         html_body = transform_section_opening(html_body, item.path)
         md.reset()
